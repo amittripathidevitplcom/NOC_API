@@ -22,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="RAJSSO">
-      <HintPath>..\RJ_NOC_Utility\bin\Debug\net7.0\RAJSSO.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>C:\Users\DevIt\Desktop\Backup\Rishi kapoor new\07042023\FIH_EPR\FIH_EPR\FIH_EPR\FIH_EPR\bin\Release\netcoreapp3.1\System.Drawing.Common.dll</HintPath>
     </Reference>
