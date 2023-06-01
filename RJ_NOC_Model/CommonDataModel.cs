@@ -26,9 +26,66 @@ namespace RJ_NOC_Model
         public int EmployeeID { get; set; }
         public int DID { get; set; }
         public string DocumentName { get; set; }
-        public string DocumentFileName { get; set; }    
-        public string Status { get; set; }  
-        public string ActionRemarks { get; set; }  
+        public string DocumentFileName { get; set; }
+        public string Status { get; set; }
+        public string ActionRemarks { get; set; }
 
     }
+
+
+
+    public class CommonDataModel_DepartmentMasterList
+    {
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
+    }
+    public class CommonDataModel_SchemeListByDepartment
+    {
+        public int SchemeID { get; set; }
+        public int DepatmentID { get; set; }
+        public string SchemeName { get; set; }
+    }
+
+    public class CommonDataModel_ModuleMasterList
+    {
+        public int ModuleID { get; set; }
+        public string ModuleName { get; set; }
+    }
+
+    public class CommonDataModel_SubModuleListByModule
+    {
+           
+        public int SubModuleID { get; set; }
+        public int ModuleID { get; set; }
+        public string SubModuleName { get; set; }
+    }
+
+    public class CommonDataModel_LevelMasterList
+    {
+        public int LevelID { get; set; }
+        public string LevelName { get; set; }
+    }
+
+    public class CommonDataModel_RoleListByLevel
+    {
+          
+        public int RoleID { get; set; }
+        public int LevelID { get; set; }
+        public string RoleName { get; set; }
+    }
+
+    public class CommonDataModel_ActionHeadList
+    {
+        public int ActionHeadID { get; set; }
+        public string ActionHeadName { get; set; }
+    }
+    
+    public class CommonDataModel_ActionListByActionHead
+    {
+        public int ActionID { get; set; }
+        public int ActionHeadID { get; set; }
+        public string ActionName { get; set; }
+    }
+     
+
 }
