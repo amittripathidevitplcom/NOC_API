@@ -27,7 +27,6 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
-      
         [HttpGet("GetDepartmentList")]
         public async Task<OperationResult<List<CommonDataModel_DepartmentMasterList>>> GetDepartmentList()
         {
