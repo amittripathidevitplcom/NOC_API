@@ -1,0 +1,77 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using RJ_NOC_Model;
+using RJ_NOC_Utility;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http;
+using System.IO;
+using Microsoft.AspNetCore.Cors;
+using RJ_NOC_DataAccess;
+using FIH_EPR_DataAccess.Common;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using System.Net;
+
+namespace RJ_NOC_API.Controllers
+{
+    [Route("api/SSOAPI")]
+    [ApiController]
+    public class SSOAPIController : RJ_NOC_ControllerBase
+    {
+        private IConfiguration _configuration;
+        public SSOAPIController(IConfiguration configuration) : base(configuration)
+        {
+            _configuration = configuration;
+        }
+
+        [HttpPost("GetSSOUserLogionDetails")]
+        public async Task<OperationResult<SSOUserDetailData>> GetSSOUserLogionDetails([FromBody]  SSOLandingDataDataModel sSOLandingDataDataModel)
+        {
+            var response = new HttpResponseMessage(HttpStatusCode.Redirect);
+            response.Headers.Location = new Uri("https://www.google.com");
+            string SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
+            string LoginType = CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
+
+            string QueryStringData = "";
+            var result = new OperationResult<SSOUserDetailData>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetSSOUserLogionDetails(SSOID, LoginType, _configuration));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("SSOLogin.GetSSOUserLogionDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+    }
+}
+

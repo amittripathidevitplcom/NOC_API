@@ -1,0 +1,125 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
+using RJ_NOC_API.AuthModels;
+using System.Net;
+using System.Text;
+
+namespace RJ_NOC_API
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            var configuration = builder.Configuration;
+
+            //session time out
+            var sessionTimeOut = TimeSpan.FromMinutes(Convert.ToInt32(configuration["SiteKeys:Session-Time"] ?? "420"));
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddSession(x =>
+            {
+                x.IdleTimeout = sessionTimeOut;
+            });
+
+            /*validate*/
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "WebAPI",
+                    Description = "Product WebAPI"
+                });
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Description = "Bearer Authentication with JWT Token",
+                    Type = SecuritySchemeType.Http
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                                Id = "Bearer",
+                                    Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        new List <string> ()
+                    }
+                });
+            });
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x =>
+            {
+                //x.LoginPath = "/user/userlogin";
+                x.ExpireTimeSpan = sessionTimeOut;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidIssuer = configuration["SiteKeys:Jwt-Issuer"],
+                    ValidAudience = configuration["SiteKeys:Jwt-Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["SiteKeys:Jwt-Secret"])),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true
+                };
+            });
+            builder.Services.AddAuthorization();
+
+           
+            builder.Services.AddCors(option => option.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
+            builder.Services.AddDirectoryBrowser();
+            builder.Services.AddMvc();
+            builder.Services.AddSystemWebAdapters();
+
+            SiteKeys.Configure(configuration.GetSection("SiteKeys"));
+
+
+            // ----------------------------pipeline
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("./v1/swagger.json", "v1"); //originally "./swagger/v1/swagger.json"
+                });
+            }
+
+            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseSession();
+
+            app.UseCookiePolicy();
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.MapControllers();
+            app.UseSystemWebAdapters();
+            app.UseCors();
+            app.Run();
+        }
+    }
+}

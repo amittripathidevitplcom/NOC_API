@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.SystemWebAdapters" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SystemWebAdapters.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SystemWebAdapters.CoreServices" Version="1.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RJ_NOC_Model\RJ_NOC_Model.csproj" />
+    <ProjectReference Include="..\RJ_NOC_Utility\RJ_NOC_Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RAJSSO">
+      <HintPath>..\RJ_NOC_Utility\bin\Debug\net7.0\RAJSSO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>C:\Users\DevIt\Desktop\Backup\Rishi kapoor new\07042023\FIH_EPR\FIH_EPR\FIH_EPR\FIH_EPR\bin\Release\netcoreapp3.1\System.Drawing.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
