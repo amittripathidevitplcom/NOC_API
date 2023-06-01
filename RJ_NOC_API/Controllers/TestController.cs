@@ -11,7 +11,7 @@ namespace RJ_NOC_API.Controllers
     public class TestController : ControllerBase
     {
         [HttpGet]
-        public string Test()
+        public string Test()  
         {
             return "success";
         }
