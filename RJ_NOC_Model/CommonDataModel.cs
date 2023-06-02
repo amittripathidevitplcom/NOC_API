@@ -86,6 +86,35 @@ namespace RJ_NOC_Model
         public int ActionHeadID { get; set; }
         public string ActionName { get; set; }
     }
-     
+
+
+    public class CommonDataModel_DepartmentMaster
+    {
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
+    }
+    public class CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster
+    {
+        public int CollegeID { get; set; }
+        public string CollegeName { get; set; }
+    }
+
+
+    public class CommonDataModel_CourseMaster
+    {
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+    }
+    public class CommonDataModel_SubjectMaster
+    {
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+    }
+
+    public class CommonDataModel_SeatInformationMaster
+    {
+        public int ID { get; set; }
+        public string Value { get; set; }
+    }
 
 }
