@@ -21,19 +21,39 @@ namespace FIH_EPR_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.UploadFilePath();
         }
 
-        public List<CommonDataModel_DocumentMasterList> DocumentMasterList(string DocumentType, int ProjectID)
-        {
-            return UnitOfWork.CommonFuncationRepository.DocumentMasterList(DocumentType, ProjectID);
-        }
+      
 
-        public List<CommonDataModel_EmployeeDocumentList> ProjectWise_EmployeeDocumentList(int ProjectID, int EmployeeID)
+        public List<CommonDataModel_DepartmentMasterList> GetDepartmentList()
         {
-            return UnitOfWork.CommonFuncationRepository.ProjectWise_EmployeeDocumentList(ProjectID, EmployeeID);
+            return UnitOfWork.CommonFuncationRepository.GetDepartmentList();
         }
-
-        public List<DataTable> EmployeeProfileDetails(int EmployeeID)
+        public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.EmployeeProfileDetails(EmployeeID);
+            return UnitOfWork.CommonFuncationRepository.GetSchemeListByDepartment(DepatmentID);
+        }
+        public List<CommonDataModel_ModuleMasterList> GetModuleList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetModuleList();
+        }
+        public List<CommonDataModel_SubModuleListByModule> GetSubModuleListByModule(int ModuleID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSubModuleListByModule(ModuleID);
+        }
+        public List<CommonDataModel_LevelMasterList> GetLevelList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLevelList();
+        }
+        public List<CommonDataModel_RoleListByLevel> GetRoleListByLevel(int LevelID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetRoleListByLevel(LevelID);
+        }
+        public List<CommonDataModel_ActionHeadList> GetActionHeadList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetActionHeadList();
+        }
+        public List<CommonDataModel_ActionListByActionHead> GetActionListByActionHead(int ActionHeadID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetActionListByActionHead(ActionHeadID);
         }
     }
 }

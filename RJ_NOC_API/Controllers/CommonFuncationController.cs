@@ -27,13 +27,13 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("DocumentMasterList/{UserID}/{DocumentType}/{ProjectID}")]
-        public async Task<OperationResult<List<CommonDataModel_DocumentMasterList>>> DocumentMasterList(int UserID, string DocumentType, int ProjectID)
+        [HttpGet("GetDepartmentList")]
+        public async Task<OperationResult<List<CommonDataModel_DepartmentMasterList>>> GetDepartmentList()
         {
-            var result = new OperationResult<List<CommonDataModel_DocumentMasterList>>();
+            var result = new OperationResult<List<CommonDataModel_DepartmentMasterList>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DocumentMasterList(DocumentType, ProjectID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDepartmentList());
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -48,7 +48,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("ProjectMasterController.DocumentMasterList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDepartmentList", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -59,15 +59,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
-
-        [HttpGet("ProjectWise_EmployeeDocumentList/{ProjectID}/{EmployeeID}")]
-        public async Task<OperationResult<List<CommonDataModel_EmployeeDocumentList>>> ProjectWise_EmployeeDocumentList(int ProjectID, int EmployeeID)
+        [HttpGet("GetSchemeListByDepartment/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_SchemeListByDepartment>>> GetSchemeListByDepartment(int DepartmentID)
         {
-            var result = new OperationResult<List<CommonDataModel_EmployeeDocumentList>>();
+            var result = new OperationResult<List<CommonDataModel_SchemeListByDepartment>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.ProjectWise_EmployeeDocumentList(ProjectID, EmployeeID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSchemeListByDepartment(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -82,7 +80,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.ProjectWise_EmployeeDocumentList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSchemeListByDepartment", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -93,15 +91,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
-
-        [HttpGet("EmployeeProfileDetails/{EmployeeID}")]
-        public async Task<OperationResult<List<DataTable>>> EmployeeProfileDetails(int EmployeeID)
+        [HttpGet("GetModuleList")]
+        public async Task<OperationResult<List<CommonDataModel_ModuleMasterList>>> GetModuleList()
         {
-            var result = new OperationResult<List<DataTable>>();
+            var result = new OperationResult<List<CommonDataModel_ModuleMasterList>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.EmployeeProfileDetails(EmployeeID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetModuleList());
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -116,7 +112,166 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.EmployeeProfileDetails", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetModuleList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetSubmoduleListByModule/{ModuleID}")]
+        public async Task<OperationResult<List<CommonDataModel_SubModuleListByModule>>> GetSubModuleListByModule(int ModuleID)
+        {
+            var result = new OperationResult<List<CommonDataModel_SubModuleListByModule>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubModuleListByModule(ModuleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSubmoduleListByModule", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetLevelList")]
+        public async Task<OperationResult<List<CommonDataModel_LevelMasterList>>> GetLevelList()
+        {
+            var result = new OperationResult<List<CommonDataModel_LevelMasterList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetLevelList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetLevelList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetRoleListByLevel/{LevelID}")]
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListByLevel(int LevelID)
+        {
+            var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListByLevel(LevelID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRoleListByLevel", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetActionHeadList")]
+        public async Task<OperationResult<List<CommonDataModel_ActionHeadList>>> GetActionHeadList()
+        {
+            var result = new OperationResult<List<CommonDataModel_ActionHeadList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetActionHeadList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetActionHeadList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetActionListByActionHead/{ActionHeadID}")]
+        public async Task<OperationResult<List<CommonDataModel_ActionListByActionHead>>> GetActionListByActionHead(int ActionHeadID)
+        {
+            var result = new OperationResult<List<CommonDataModel_ActionListByActionHead>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetActionListByActionHead(ActionHeadID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetActionListByActionHead", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

@@ -34,41 +34,98 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return uploadFilePath;
         }
+          
 
-        public List<CommonDataModel_DocumentMasterList> DocumentMasterList(string DocumentType,int ProjectID)
+        public List<CommonDataModel_DepartmentMasterList> GetDepartmentList()
         {
-            string SqlQuery = " Exec USP_DocumentMasterList @DocumentType='"+ DocumentType + "', @ProjectID='" + ProjectID + "' ";
+            string SqlQuery = "exec USP_GetDepartmentList";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.DocumentMasterList");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDepartmentList");
 
-            List<CommonDataModel_DocumentMasterList> dataModels = new List<CommonDataModel_DocumentMasterList>();
+            List<CommonDataModel_DepartmentMasterList> dataModels = new List<CommonDataModel_DepartmentMasterList>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DocumentMasterList>>(JsonDataTable_Data);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DepartmentMasterList>>(JsonDataTable_Data);
+            return dataModels;
+
+        }
+        public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)
+        {
+            string SqlQuery = "exec USP_GetSchemeListByDepartment @DepatmentID=" + DepatmentID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSchemeListByDepartment");
+
+            List<CommonDataModel_SchemeListByDepartment> dataModels = new List<CommonDataModel_SchemeListByDepartment>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SchemeListByDepartment>>(JsonDataTable_Data);
             return dataModels;
         }
 
-        public List<CommonDataModel_EmployeeDocumentList> ProjectWise_EmployeeDocumentList(int ProjectID, int EmployeeID)
+        public List<CommonDataModel_ModuleMasterList> GetModuleList()
         {
-            string SqlQuery = " Exec USP_ProjectWise_EmployeeDocumentList @ProjectID='" + ProjectID + "', @EmployeeID='" + EmployeeID + "' ";
+            string SqlQuery = "exec USP_GetModuleList";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.ProjectWise_EmployeeDocumentList");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetModuleList");
 
-            List<CommonDataModel_EmployeeDocumentList> dataModels = new List<CommonDataModel_EmployeeDocumentList>();
+            List<CommonDataModel_ModuleMasterList> dataModels = new List<CommonDataModel_ModuleMasterList>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_EmployeeDocumentList>>(JsonDataTable_Data);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ModuleMasterList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_SubModuleListByModule> GetSubModuleListByModule(int ModuleID)
+        {
+            string SqlQuery = "exec USP_GetSubmoduleListByModule @ModuleID=" + ModuleID;
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSubModuleListByModule");
+            List<CommonDataModel_SubModuleListByModule> dataModels = new List<CommonDataModel_SubModuleListByModule>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SubModuleListByModule>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_LevelMasterList> GetLevelList()
+        {
+            string SqlQuery = "exec USP_GetLevelList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLevelList");
+
+            List<CommonDataModel_LevelMasterList> dataModels = new List<CommonDataModel_LevelMasterList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LevelMasterList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_RoleListByLevel> GetRoleListByLevel(int LevelID)
+        {
+            string SqlQuery = "exec USP_GetRoleListByLevel @LevelID=" + LevelID;
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRoleListByLevel");
+            List<CommonDataModel_RoleListByLevel> dataModels = new List<CommonDataModel_RoleListByLevel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RoleListByLevel>>(JsonDataTable_Data);
             return dataModels;
         }
 
-        public List<DataTable> EmployeeProfileDetails(int EmployeeID)
+        public List<CommonDataModel_ActionHeadList> GetActionHeadList()
         {
-           string SqlQuery = " exec USP_EmployeeProfileDetails @EmployeeID='"+ EmployeeID + "'";
+            string SqlQuery = "exec USP_GetActionHeadList";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ProjectMaster.GetAllData");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionHeadList");
 
-            List<DataTable> dataModels = new List<DataTable>();
-            DataTable dataModel = new DataTable();
-            dataModel = dataTable;
-            dataModels.Add(dataModel);
+            List<CommonDataModel_ActionHeadList> dataModels = new List<CommonDataModel_ActionHeadList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ActionHeadList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_ActionListByActionHead> GetActionListByActionHead(int ActionHeadID)
+        {
+            string SqlQuery = "exec USP_GetActionListByActionHead @ActionHeadID=" + ActionHeadID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+         
+            List<CommonDataModel_ActionListByActionHead> dataModels = new List<CommonDataModel_ActionListByActionHead>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ActionListByActionHead>>(JsonDataTable_Data);
             return dataModels;
         }
     }

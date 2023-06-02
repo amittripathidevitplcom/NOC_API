@@ -11,9 +11,15 @@ namespace RJ_NOC_DataAccess.Interface
     {
         string UploadFilePath();
 
-        List<CommonDataModel_DocumentMasterList> DocumentMasterList(string DocumentType, int ProjectID);
-        List<CommonDataModel_EmployeeDocumentList> ProjectWise_EmployeeDocumentList(int ProjectID, int EmployeeID);
-        List<DataTable> EmployeeProfileDetails(int EmployeeID);
+        
+        List<CommonDataModel_DepartmentMasterList> GetDepartmentList();
+        List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID);
+        List<CommonDataModel_ModuleMasterList> GetModuleList();
+        List<CommonDataModel_SubModuleListByModule> GetSubModuleListByModule(int ModuleID);
+        List<CommonDataModel_LevelMasterList> GetLevelList();
+        List<CommonDataModel_RoleListByLevel> GetRoleListByLevel(int LevelID);
+        List<CommonDataModel_ActionHeadList> GetActionHeadList();
+        List<CommonDataModel_ActionListByActionHead> GetActionListByActionHead(int ActionHeadID);
     }
 }
 
