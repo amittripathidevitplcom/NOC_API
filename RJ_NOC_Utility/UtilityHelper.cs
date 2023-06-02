@@ -19,6 +19,7 @@ namespace RJ_NOC_Utility
 
         public ICommonFuncation CommonFuncationUtility { get; private set; }
         public IProjectMaster ProjectMasterUtility { get; private set; }
+        public ILegalEntity LegalEntity { get; private set; }
         public IEmployeeLogin EmployeeLoginUtility { get; private set; }
         public IEmployeeDashboard EmployeeDashboardUtility { get; private set; }
         public IUserMaster UserMasterUtility { get; private set; }
@@ -34,6 +35,7 @@ namespace RJ_NOC_Utility
         {
             CommonFuncationUtility = new CommonFuncation(UnitOfWork);
             ProjectMasterUtility = new ProjectMaster(UnitOfWork);
+            LegalEntity = new LegalEntity(UnitOfWork);
             EmployeeLoginUtility = new EmployeeLogin(UnitOfWork);
             EmployeeDashboardUtility = new EmployeeDashboard(UnitOfWork);
             UserMasterUtility = new UserMaster(UnitOfWork);

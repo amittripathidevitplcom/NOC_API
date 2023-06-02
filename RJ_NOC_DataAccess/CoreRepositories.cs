@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_DataAccess.Interface;
 using Microsoft.Extensions.Configuration;
 using FIH_EPR_DataAccess.Common;
+using RJ_NOC_DataAccess.Repositories;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -57,6 +58,12 @@ namespace RJ_NOC_DataAccess.Repository
             get { return menuRepository; }
         }
 
+        private ILegalEntityRepoSitory legalEntityRepoSitory;
+        public ILegalEntityRepoSitory LegalEntityRepoSitory
+        {
+            get { return legalEntityRepoSitory; }
+        }
+
 
 
 
@@ -64,6 +71,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
             projectMasterRepository = new ProjectMasterRepository(commonHelper);
+            legalEntityRepoSitory = new LegalEntityRepository(commonHelper);
             employeeLoginRepository = new EmployeeLoginRepository(commonHelper);
             employeeDashboardRepository = new EmployeeDashboardRepository(commonHelper);
             userMasterRepository = new UserMasterRepository(commonHelper);

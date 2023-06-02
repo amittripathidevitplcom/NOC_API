@@ -10,6 +10,7 @@ namespace RJ_NOC_Utility
     {
         ICommonFuncation CommonFuncationUtility { get; }
         IProjectMaster ProjectMasterUtility { get; }
+        ILegalEntity LegalEntity { get; }
         IEmployeeLogin EmployeeLoginUtility { get; }
         IEmployeeDashboard EmployeeDashboardUtility { get; }
         IUserMaster UserMasterUtility { get; }
