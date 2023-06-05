@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using RJ_NOC_Model;
+using RJ_NOC_Utility.CustomerDomain.Interface;
+using RJ_NOC_DataAccess.Interface;
+using Azure.Core;
+using System.Data;
+
+namespace FIH_EPR_Utility.CustomerDomain
+{
+    public class WorkFlowMaster : UtilityBase, IWorkFlowMaster
+    {
+        public WorkFlowMaster(IRepositories unitOfWork) : base(unitOfWork)
+        {
+        }
+
+        public bool IfExists(int WorkFlowMasterID, int SubModuleID, int RoleID)
+        {
+            return UnitOfWork.WorkFlowMasterRepository.IfExists(WorkFlowMasterID,SubModuleID,RoleID);
+        }
+
+        public bool SaveData(WorkFlowMasterDataModel request)
+        {
+            return UnitOfWork.WorkFlowMasterRepository.SaveData(request);
+        }
+        public List<WorkFlowMasterDataModel> GetWorkFlowMasterList(int WorkFlowMasterID)
+        {
+            return UnitOfWork.WorkFlowMasterRepository.GetWorkFlowMasterList(WorkFlowMasterID);
+        }
+}
+}

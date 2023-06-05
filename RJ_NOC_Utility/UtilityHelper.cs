@@ -25,6 +25,8 @@ namespace RJ_NOC_Utility
         public IUserMaster UserMasterUtility { get; private set; }
         public ISSOAPI SSOAPIUtility { get; private set; }
         public IMenu MenuUtility { get; private set; }
+        public ICourseMaster CourseMasterUtility { get; private set; }
+        public IWorkFlowMaster WorkFlowMasterUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -41,6 +43,8 @@ namespace RJ_NOC_Utility
             UserMasterUtility = new UserMaster(UnitOfWork);
             SSOAPIUtility = new SSOAPI(UnitOfWork);
             MenuUtility = new Menu(UnitOfWork);
+            CourseMasterUtility = new CourseMaster(UnitOfWork);
+            WorkFlowMasterUtility = new WorkFlowMaster(UnitOfWork);
 
         }
     }

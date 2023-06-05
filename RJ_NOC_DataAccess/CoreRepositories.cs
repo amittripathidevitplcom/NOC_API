@@ -19,7 +19,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-          
+
 
         private ICommonFuncationRepository commonFuncationRepository;
         public ICommonFuncationRepository CommonFuncationRepository
@@ -38,20 +38,20 @@ namespace RJ_NOC_DataAccess.Repository
             get { return employeeLoginRepository; }
         }
 
-        
+
         private IEmployeeDashboardRepository employeeDashboardRepository;
         public IEmployeeDashboardRepository EmployeeDashboardRepository
         {
             get { return employeeDashboardRepository; }
         }
-        
-        
+
+
         private IUserMasterRepository userMasterRepository;
         public IUserMasterRepository UserMasterRepository
         {
             get { return userMasterRepository; }
         }
-        
+
         private IMenuRepository menuRepository;
         public IMenuRepository MenuRepository
         {
@@ -62,6 +62,19 @@ namespace RJ_NOC_DataAccess.Repository
         public ILegalEntityRepoSitory LegalEntityRepoSitory
         {
             get { return legalEntityRepoSitory; }
+        }
+
+
+        private ICourseMasterRepository courseMasterRepository;
+        public ICourseMasterRepository CourseMasterRepository
+        {
+            get { return courseMasterRepository; }
+        }
+
+        private IWorkFlowMasterRepository workFlowMasterRepository;
+        public IWorkFlowMasterRepository WorkFlowMasterRepository
+        {
+            get { return workFlowMasterRepository; }
         }
 
 
@@ -76,6 +89,7 @@ namespace RJ_NOC_DataAccess.Repository
             employeeDashboardRepository = new EmployeeDashboardRepository(commonHelper);
             userMasterRepository = new UserMasterRepository(commonHelper);
             menuRepository = new MenuRepository(commonHelper);
+            workFlowMasterRepository = new WorkFlowMasterRepository(commonHelper);
 
 
         }
