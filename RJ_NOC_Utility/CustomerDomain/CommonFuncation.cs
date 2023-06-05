@@ -80,5 +80,10 @@ namespace FIH_EPR_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetSeatInformation_CourseIDWise(CourseID);
         }
+
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID,Type);
+        }
     }
 }

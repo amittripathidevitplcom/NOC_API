@@ -117,4 +117,10 @@ namespace RJ_NOC_Model
         public string Value { get; set; }
     }
 
+    public class CommonDataModel_CommonMasterDepartmentAndTypeWise
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+    }
 }
