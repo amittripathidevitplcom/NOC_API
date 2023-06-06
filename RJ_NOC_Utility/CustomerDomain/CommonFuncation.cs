@@ -80,5 +80,26 @@ namespace FIH_EPR_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetSeatInformation_CourseIDWise(CourseID);
         }
+
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID,Type);
+        }
+        public List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDocumentMasterList_DepartmentAndTypeWise(DepartmentID,Type);
+        }
+        public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandAreaMasterList_DepartmentWise(DepartmentID);
+        }
+        public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandTypeMasterList_DepartmentWise(DepartmentID);
+        }
+        public List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandDoucmentTypeMasterList_DepartmentWise(DepartmentID);
+        }
     }
 }

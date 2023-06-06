@@ -117,4 +117,32 @@ namespace RJ_NOC_Model
         public string Value { get; set; }
     }
 
+    public class CommonDataModel_CommonMasterDepartmentAndTypeWise
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+    }
+
+    public class CommonDataModel_DocumentMasterDepartmentAndTypeWise
+    {
+        public int DID { get; set; }
+        public string DocumentName { get; set; }
+        public string DocumentType { get; set; }
+    } 
+    public class CommonDataModel_LandAreaMasterList_DepartmentWise
+    {
+        public int LandAreaID { get; set; }
+        public string LandAreaName { get; set; }
+    }
+    public class CommonDataModel_LandTypeMasterList_DepartmentWise
+    {
+        public int LandTypeID { get; set; }
+        public string LandTypeName { get; set; }
+    }
+    public class CommonDataModel_LandDocumentTypeMasterList_DepartmentWise
+    {
+        public int LandDocumentTypeID { get; set; }
+        public string LandDocumentTypeName { get; set; }
+    }
 }
