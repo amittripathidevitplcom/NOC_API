@@ -5,7 +5,7 @@ using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
 
-namespace FIH_EPR_Utility.CustomerDomain
+namespace RJ_NOC_Utility.CustomerDomain
 {
     public class Menu : UtilityBase, IMenu
     {

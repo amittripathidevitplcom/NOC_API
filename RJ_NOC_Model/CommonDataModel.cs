@@ -145,4 +145,16 @@ namespace RJ_NOC_Model
         public int LandDocumentTypeID { get; set; }
         public string LandDocumentTypeName { get; set; }
     }
+
+    public class CommonDataModel_DistrictList
+    {
+        public int DistrictID { get; set; }
+        public string DistrictName { get; set; }
+    }
+
+    public class CommonDataModel_StateList
+    {
+        public int StateID { get; set; }
+        public string StateName { get; set; }
+    }
 }

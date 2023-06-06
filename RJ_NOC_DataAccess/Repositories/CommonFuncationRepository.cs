@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using RJ_NOC_DataAccess.Interface;
 using System.Data.SqlClient;
 using System.Data;
-using FIH_EPR_DataAccess.Common;
+using RJ_NOC_DataAccess.Common;
 using Newtonsoft.Json;
 using System.Net.NetworkInformation;
 using System.Xml.Linq;
@@ -21,7 +21,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-         
+
         public string UploadFilePath()
         {
             string uploadFilePath = "";
@@ -34,7 +34,7 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return uploadFilePath;
         }
-          
+
 
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList()
         {
@@ -122,7 +122,7 @@ namespace RJ_NOC_DataAccess.Repository
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
 
-         
+
             List<CommonDataModel_ActionListByActionHead> dataModels = new List<CommonDataModel_ActionListByActionHead>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ActionListByActionHead>>(JsonDataTable_Data);
@@ -144,7 +144,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster> GetCollageList_DepartmentAndSSOIDWise(int DepartmentID, string LoginSSOID, string Type)
         {
-            string SqlQuery = "exec USP_CollageList_DepartmentAndSSOIDWise @DepartmentID='"+ DepartmentID + "',@LoginSSOID='"+ LoginSSOID + "',@Type='"+ Type + "'";
+            string SqlQuery = "exec USP_CollageList_DepartmentAndSSOIDWise @DepartmentID='" + DepartmentID + "',@LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
 
@@ -206,51 +206,60 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<CommonDataModel_DistrictList> GetDistrictList()
+        {
+            string SqlQuery = "exec USP_GetDistrictList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDistrictList");
+
+            List<CommonDataModel_DistrictList> dataModels = new List<CommonDataModel_DistrictList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_StateList> GetStateList()
+        {
+            string SqlQuery = "exec USP_GetState";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetStateList");
+
+            List<CommonDataModel_StateList> dataModels = new List<CommonDataModel_StateList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_StateList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID)
+        {
+            string SqlQuery = "exec USP_GetDistrictListByStateID @StateID=" + StateID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDistrictListByStateID");
+
+            List<CommonDataModel_DistrictList> dataModels = new List<CommonDataModel_DistrictList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
         public List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
-            string SqlQuery = " Exec USP_DocumentMasterList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDocumentMasterList_DepartmentAndTypeWise");
-
-            List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_DocumentMasterDepartmentAndTypeWise>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DocumentMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
-            return dataModels;
+            throw new NotImplementedException();
         }
 
         public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID)
         {
-            string SqlQuery = " Exec USP_LandAreaMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandAreaMasterList_DepartmentWise");
-
-            List<CommonDataModel_LandAreaMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandAreaMasterList_DepartmentWise>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandAreaMasterList_DepartmentWise>>(JsonDataTable_Data);
-            return dataModels;
+            throw new NotImplementedException();
         }
 
         public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID)
         {
-            string SqlQuery = " Exec USP_LandTypeMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandTypeMasterList_DepartmentWise");
-
-            List<CommonDataModel_LandTypeMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandTypeMasterList_DepartmentWise>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandTypeMasterList_DepartmentWise>>(JsonDataTable_Data);
-            return dataModels;
+            throw new NotImplementedException();
         }
+
         public List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID)
         {
-            string SqlQuery = " Exec USP_LandDoucmentTypeMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
-
-            List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise>>(JsonDataTable_Data);
-            return dataModels;
+            throw new NotImplementedException();
         }
     }
 }

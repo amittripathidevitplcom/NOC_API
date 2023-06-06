@@ -8,7 +8,7 @@ using Azure.Core;
 using System.Xml.Linq;
 using System.Data;
 
-namespace FIH_EPR_Utility.CustomerDomain
+namespace RJ_NOC_Utility.CustomerDomain
 {
     public class CommonFuncation : UtilityBase, ICommonFuncation
     {
@@ -27,6 +27,7 @@ namespace FIH_EPR_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDepartmentList();
         }
+       
         public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetSchemeListByDepartment(DepatmentID);
@@ -79,6 +80,23 @@ namespace FIH_EPR_Utility.CustomerDomain
         public List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID)
         {
             return UnitOfWork.CommonFuncationRepository.GetSeatInformation_CourseIDWise(CourseID);
+        }
+
+
+        public List<CommonDataModel_DistrictList> GetDistrictList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDistrictList();
+        }
+
+
+        public List<CommonDataModel_StateList> GetStateList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetStateList();
+        }
+
+        public List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDistrictListByStateID(StateID);
         }
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)

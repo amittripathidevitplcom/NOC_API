@@ -18,6 +18,7 @@ namespace RJ_NOC_Utility
         IMenu MenuUtility { get; }
         ICourseMaster CourseMasterUtility { get; }
         IWorkFlowMaster WorkFlowMasterUtility { get; }
+        ICollegeMaster CollegeMasterUtility { get; }
 
     }
 }

@@ -8,7 +8,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IRepositories
     {
-      
+
         ICommonFuncationRepository CommonFuncationRepository { get; }
         IProjectMasterRepository ProjectMasterRepository { get; }
         ILegalEntityRepoSitory LegalEntityRepoSitory { get; }
@@ -19,5 +19,6 @@ namespace RJ_NOC_DataAccess.Interface
         ICourseMasterRepository CourseMasterRepository { get; }
         IWorkFlowMasterRepository WorkFlowMasterRepository { get; }
          
+        ICollegeMasterRepository CollegeMasterRepository { get; }
     }
 }

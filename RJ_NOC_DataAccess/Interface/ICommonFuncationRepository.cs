@@ -13,6 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         
         List<CommonDataModel_DepartmentMasterList> GetDepartmentList();
+        
         List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID);
         List<CommonDataModel_ModuleMasterList> GetModuleList();
         List<CommonDataModel_SubModuleListByModule> GetSubModuleListByModule(int ModuleID);
@@ -30,6 +31,10 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
+        List<CommonDataModel_DistrictList> GetDistrictList();
+        List<CommonDataModel_StateList> GetStateList();
+        List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID);
+
         List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID);
