@@ -21,7 +21,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.UploadFilePath();
         }
 
-      
+
 
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList()
         {
@@ -54,6 +54,36 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_ActionListByActionHead> GetActionListByActionHead(int ActionHeadID)
         {
             return UnitOfWork.CommonFuncationRepository.GetActionListByActionHead(ActionHeadID);
+        }
+
+        public List<CommonDataModel_DepartmentMaster> GetDepartmentMaster()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDepartmentMaster();
+        }
+
+        public List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster> GetCollageList_DepartmentAndSSOIDWise(int DepartmentID, string LoginSSOID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollageList_DepartmentAndSSOIDWise(DepartmentID, LoginSSOID, Type);
+        }
+
+        public List<CommonDataModel_CourseMaster> GetCourseList_DepartmentIDWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCourseList_DepartmentIDWise(DepartmentID);
+        }
+
+        public List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSubjectList_CourseIDWise(CourseID);
+        }
+
+        public List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSeatInformation_CourseIDWise(CourseID);
+        }
+
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID,Type);
         }
     }
 }

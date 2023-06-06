@@ -19,11 +19,14 @@ namespace RJ_NOC_Utility
 
         public ICommonFuncation CommonFuncationUtility { get; private set; }
         public IProjectMaster ProjectMasterUtility { get; private set; }
+        public ILegalEntity LegalEntity { get; private set; }
         public IEmployeeLogin EmployeeLoginUtility { get; private set; }
         public IEmployeeDashboard EmployeeDashboardUtility { get; private set; }
         public IUserMaster UserMasterUtility { get; private set; }
         public ISSOAPI SSOAPIUtility { get; private set; }
         public IMenu MenuUtility { get; private set; }
+        public ICourseMaster CourseMasterUtility { get; private set; }
+        public IWorkFlowMaster WorkFlowMasterUtility { get; private set; }
         public ICollegeMaster CollegeMasterUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
@@ -35,11 +38,15 @@ namespace RJ_NOC_Utility
         {
             CommonFuncationUtility = new CommonFuncation(UnitOfWork);
             ProjectMasterUtility = new ProjectMaster(UnitOfWork);
+            LegalEntity = new LegalEntity(UnitOfWork);
             EmployeeLoginUtility = new EmployeeLogin(UnitOfWork);
             EmployeeDashboardUtility = new EmployeeDashboard(UnitOfWork);
             UserMasterUtility = new UserMaster(UnitOfWork);
             SSOAPIUtility = new SSOAPI(UnitOfWork);
             MenuUtility = new Menu(UnitOfWork);
+            CourseMasterUtility = new CourseMaster(UnitOfWork);
+            WorkFlowMasterUtility = new WorkFlowMaster(UnitOfWork);
+
             CollegeMasterUtility = new CollegeMaster(UnitOfWork);
         }
     }

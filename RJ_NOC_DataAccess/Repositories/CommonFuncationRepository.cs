@@ -21,7 +21,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-         
+
         public string UploadFilePath()
         {
             string uploadFilePath = "";
@@ -34,7 +34,7 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return uploadFilePath;
         }
-          
+
 
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList()
         {
@@ -122,10 +122,87 @@ namespace RJ_NOC_DataAccess.Repository
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
 
-         
+
             List<CommonDataModel_ActionListByActionHead> dataModels = new List<CommonDataModel_ActionListByActionHead>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ActionListByActionHead>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DepartmentMaster> GetDepartmentMaster()
+        {
+            string SqlQuery = " Exec USP_DepartmentMaster";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+
+            List<CommonDataModel_DepartmentMaster> dataModels = new List<CommonDataModel_DepartmentMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DepartmentMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster> GetCollageList_DepartmentAndSSOIDWise(int DepartmentID, string LoginSSOID, string Type)
+        {
+            string SqlQuery = "exec USP_CollageList_DepartmentAndSSOIDWise @DepartmentID='" + DepartmentID + "',@LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+
+            List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster> dataModels = new List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_CourseMaster> GetCourseList_DepartmentIDWise(int DepartmentID)
+        {
+            string SqlQuery = "exec USP_CourseList_DepartmentIDWise @DepartmentID=" + DepartmentID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+
+            List<CommonDataModel_CourseMaster> dataModels = new List<CommonDataModel_CourseMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CourseMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID)
+        {
+            string SqlQuery = "exec USP_SubjectList_CourseIDWise @CourseID=" + CourseID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+
+            List<CommonDataModel_SubjectMaster> dataModels = new List<CommonDataModel_SubjectMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SubjectMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID)
+        {
+            string SqlQuery = "exec USP_SeatInformationList_CourseIDWise @CourseID=" + CourseID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+
+            List<CommonDataModel_SeatInformationMaster> dataModels = new List<CommonDataModel_SeatInformationMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SeatInformationMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            string SqlQuery = " Exec USP_CommonMasterList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSchemeListByDepartment");
+
+            List<CommonDataModel_CommonMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_CommonMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
     }

@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_DataAccess.Interface;
 using Microsoft.Extensions.Configuration;
 using RJ_NOC_DataAccess.Common;
+using RJ_NOC_DataAccess.Repositories;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -68,15 +69,34 @@ namespace RJ_NOC_DataAccess.Repository
             }
         }
 
+        private ILegalEntityRepoSitory legalEntityRepoSitory;
+        public ILegalEntityRepoSitory LegalEntityRepoSitory
+        {
+            get { return legalEntityRepoSitory; }
+        }
+
+        private ICourseMasterRepository courseMasterRepository;
+        public ICourseMasterRepository CourseMasterRepository
+        {
+            get { return courseMasterRepository; }
+        }
+
+        private IWorkFlowMasterRepository workFlowMasterRepository;
+        public IWorkFlowMasterRepository WorkFlowMasterRepository
+        {
+            get { return workFlowMasterRepository; }
+        }
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
             projectMasterRepository = new ProjectMasterRepository(commonHelper);
+            legalEntityRepoSitory = new LegalEntityRepository(commonHelper);
             employeeLoginRepository = new EmployeeLoginRepository(commonHelper);
             employeeDashboardRepository = new EmployeeDashboardRepository(commonHelper);
             userMasterRepository = new UserMasterRepository(commonHelper);
             menuRepository = new MenuRepository(commonHelper);
+            workFlowMasterRepository = new WorkFlowMasterRepository(commonHelper);
 
 
         }
