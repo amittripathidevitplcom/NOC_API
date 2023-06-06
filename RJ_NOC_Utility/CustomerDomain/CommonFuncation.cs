@@ -27,6 +27,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDepartmentList();
         }
+       
         public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetSchemeListByDepartment(DepatmentID);
@@ -84,6 +85,22 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID,Type);
+        }
+
+        public List<CommonDataModel_DistrictList> GetDistrictList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDistrictList();
+        }
+
+
+        public List<CommonDataModel_StateList> GetStateList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetStateList();
+        }
+
+        public List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDistrictListByStateID(StateID);
         }
     }
 }

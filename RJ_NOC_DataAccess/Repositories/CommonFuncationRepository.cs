@@ -205,5 +205,41 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public List<CommonDataModel_DistrictList> GetDistrictList()
+        {
+            string SqlQuery = "exec USP_GetDistrictList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDistrictList");
+
+            List<CommonDataModel_DistrictList> dataModels = new List<CommonDataModel_DistrictList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_StateList> GetStateList()
+        {
+            string SqlQuery = "exec USP_GetState";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetStateList");
+
+            List<CommonDataModel_StateList> dataModels = new List<CommonDataModel_StateList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_StateList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID)
+        {
+            string SqlQuery = "exec USP_GetDistrictListByStateID @StateID=" + StateID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDistrictListByStateID");
+
+            List<CommonDataModel_DistrictList> dataModels = new List<CommonDataModel_DistrictList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
