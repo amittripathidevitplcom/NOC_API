@@ -7,7 +7,7 @@ using RJ_NOC_Utility;
 using RJ_NOC_DataAccess.Interface;
 using RJ_NOC_DataAccess.Repository;
 using Microsoft.Extensions.Configuration;
-using FIH_EPR_Utility.CustomerDomain;
+using RJ_NOC_Utility.CustomerDomain;
 
 namespace RJ_NOC_Utility
 {
@@ -24,6 +24,7 @@ namespace RJ_NOC_Utility
         public IUserMaster UserMasterUtility { get; private set; }
         public ISSOAPI SSOAPIUtility { get; private set; }
         public IMenu MenuUtility { get; private set; }
+        public ICollegeMaster CollegeMasterUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -39,7 +40,7 @@ namespace RJ_NOC_Utility
             UserMasterUtility = new UserMaster(UnitOfWork);
             SSOAPIUtility = new SSOAPI(UnitOfWork);
             MenuUtility = new Menu(UnitOfWork);
-
+            CollegeMasterUtility = new CollegeMaster(UnitOfWork);
         }
     }
 }

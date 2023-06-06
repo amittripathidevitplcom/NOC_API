@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using RJ_NOC_Model;
-using System.Threading.Tasks;
+﻿using RJ_NOC_Model;
 using RJ_NOC_DataAccess.Interface;
-using System.Data.SqlClient;
 using System.Data;
-using FIH_EPR_DataAccess.Common;
 using Newtonsoft.Json;
-using System.Net.NetworkInformation;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Reflection.PortableExecutable;
-using System.Security.Cryptography;
-using System.Diagnostics;
-using System.Reflection;
-using System.Collections;
-using System.Diagnostics.Metrics;
-using System.Net;
+using RJ_NOC_DataAccess.Common;
 
 namespace RJ_NOC_DataAccess.Repository
 {

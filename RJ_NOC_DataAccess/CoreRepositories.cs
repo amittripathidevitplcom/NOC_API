@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_DataAccess.Interface;
 using Microsoft.Extensions.Configuration;
-using FIH_EPR_DataAccess.Common;
+using RJ_NOC_DataAccess.Common;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -18,7 +18,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-          
+
 
         private ICommonFuncationRepository commonFuncationRepository;
         public ICommonFuncationRepository CommonFuncationRepository
@@ -37,27 +37,36 @@ namespace RJ_NOC_DataAccess.Repository
             get { return employeeLoginRepository; }
         }
 
-        
+
         private IEmployeeDashboardRepository employeeDashboardRepository;
         public IEmployeeDashboardRepository EmployeeDashboardRepository
         {
             get { return employeeDashboardRepository; }
         }
-        
-        
+
+
         private IUserMasterRepository userMasterRepository;
         public IUserMasterRepository UserMasterRepository
         {
             get { return userMasterRepository; }
         }
-        
+
         private IMenuRepository menuRepository;
         public IMenuRepository MenuRepository
         {
             get { return menuRepository; }
         }
 
-
+        private ICollegeMasterRepository _collegeMasterRepository;
+        public ICollegeMasterRepository CollegeMasterRepository
+        {
+            get
+            {
+                if (_collegeMasterRepository == null)
+                    _collegeMasterRepository = new CollegeMasterRepository(CommonHelper);
+                return _collegeMasterRepository;    
+            }
+        }
 
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)

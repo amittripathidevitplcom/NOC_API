@@ -8,7 +8,7 @@ using Azure.Core;
 using System.Xml.Linq;
 using System.Data;
 
-namespace FIH_EPR_Utility.CustomerDomain
+namespace RJ_NOC_Utility.CustomerDomain
 {
     public class CommonFuncation : UtilityBase, ICommonFuncation
     {

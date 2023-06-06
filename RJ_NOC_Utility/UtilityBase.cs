@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_DataAccess.Interface;
 
-namespace FIH_EPR_Utility
+namespace RJ_NOC_Utility
 {
     public class UtilityBase
     {

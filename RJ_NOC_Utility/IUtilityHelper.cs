@@ -15,6 +15,7 @@ namespace RJ_NOC_Utility
         IUserMaster UserMasterUtility { get; }
         ISSOAPI SSOAPIUtility { get; }
         IMenu MenuUtility { get; }
+        ICollegeMaster CollegeMasterUtility { get; }
 
     }
 }
