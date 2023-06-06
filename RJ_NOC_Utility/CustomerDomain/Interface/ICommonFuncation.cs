@@ -12,7 +12,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         
 
         List<CommonDataModel_DepartmentMasterList> GetDepartmentList();
+        
         List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID);
+        
         List<CommonDataModel_ModuleMasterList> GetModuleList();
         List<CommonDataModel_SubModuleListByModule> GetSubModuleListByModule(int ModuleID);
         List<CommonDataModel_LevelMasterList> GetLevelList();
@@ -27,5 +29,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID);
         List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID);
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
+        List<CommonDataModel_DistrictList> GetDistrictList();
+        List<CommonDataModel_StateList> GetStateList();
+        List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID);
     }
 }
