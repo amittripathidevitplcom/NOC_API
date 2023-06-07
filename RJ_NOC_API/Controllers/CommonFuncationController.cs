@@ -440,8 +440,6 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
-
         [HttpGet("GetCommonMasterList_DepartmentAndTypeWise/{DepartmentID}/{Type}")]
         public async Task<OperationResult<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID,string Type)
         {
@@ -505,7 +503,6 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
         
         [HttpGet("GetState")]
         public async Task<OperationResult<List<CommonDataModel_StateList>>> GetState()
@@ -539,7 +536,6 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
         [HttpGet("GetDistrictListByStateID/{StateID}")]
         public async Task<OperationResult<List<CommonDataModel_DistrictList>>> GetDistrictListByStateID(int StateID)
         {
@@ -562,6 +558,294 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSchemeListByDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetDivisionList")]
+        public async Task<OperationResult<List<CommonDataModel_DivisionDDL>>> GetDivisionList()
+        {
+            var result = new OperationResult<List<CommonDataModel_DivisionDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllDivision());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDivisionList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetDistrictByDivsionId/{divisionId}")]
+        public async Task<OperationResult<List<CommonDataModel_DistrictList>>> GetDistrictByDivsionId(int divisionId)
+        {
+            var result = new OperationResult<List<CommonDataModel_DistrictList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDistrictByDivsionId(divisionId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDistrictByDivsionId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetUniversityByDepartmentId/{departmentId}")]
+        public async Task<OperationResult<List<CommonDataModel_UniversityDDL>>> GetUniversityByDepartmentId(int departmentId)
+        {
+            var result = new OperationResult<List<CommonDataModel_UniversityDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUniversityByDepartmentId(departmentId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDistrictByDivsionId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetSuvdivisionByDistrictId/{districtId}")]
+        public async Task<OperationResult<List<CommonDataModel_SuvdivisionDDL>>> GetSuvdivisionByDistrictId(int districtId)
+        {
+            var result = new OperationResult<List<CommonDataModel_SuvdivisionDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSuvdivisionByDistrictId(districtId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSuvdivisionByDistrictId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetTehsilByDistrictId/{districtId}")]
+        public async Task<OperationResult<List<CommonDataModel_TehsilDDL>>> GetTehsilByDistrictId(int districtId)
+        {
+            var result = new OperationResult<List<CommonDataModel_TehsilDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetTehsilByDistrictId(districtId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetTehsilByDistrictId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetPanchyatSamitiByDistrictId/{districtId}")]
+        public async Task<OperationResult<List<CommonDataModel_PanchyatSamitiDDL>>> GetPanchyatSamitiByDistrictId(int districtId)
+        {
+            var result = new OperationResult<List<CommonDataModel_PanchyatSamitiDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetPanchyatSamitiByDistrictId(districtId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetPanchyatSamitiByDistrictId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetParliamentAreaByDistrictId/{districtId}")]
+        public async Task<OperationResult<List<CommonDataModel_ParliamentAreaDDL>>> GetParliamentAreaByDistrictId(int districtId)
+        {
+            var result = new OperationResult<List<CommonDataModel_ParliamentAreaDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetParliamentAreaByDistrictId(districtId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetParliamentAreaByDistrictId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetAssembelyAreaByDistrictId/{districtId}")]
+        public async Task<OperationResult<List<CommonDataModel_AssembelyAreaDDL>>> GetAssembelyAreaByDistrictId(int districtId)
+        {
+            var result = new OperationResult<List<CommonDataModel_AssembelyAreaDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAssembelyAreaByDistrictId(districtId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAssembelyAreaByDistrictId", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpGet("GetAllFinancialYear")]
+        public async Task<OperationResult<List<CommonDataModel_FinancialYearDDL>>> GetAllFinancialYear()
+        {
+            var result = new OperationResult<List<CommonDataModel_FinancialYearDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllFinancialYear());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAllFinancialYear", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
