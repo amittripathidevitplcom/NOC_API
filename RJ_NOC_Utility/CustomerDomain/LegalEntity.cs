@@ -23,7 +23,7 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         public bool SaveData(LegalEntityModel request)
         {
-            throw new NotImplementedException();
+            return UnitOfWork.LegalEntityRepoSitory.SaveData(request);
         }
     }
 }

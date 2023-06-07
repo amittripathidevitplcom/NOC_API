@@ -22,39 +22,30 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                bool IfExits = false;
-                //IfExits = UtilityHelper.ProjectMasterUtility.IfExists(request.ProjectID, request.ProjectName);
-                //if (IfExits == false)
-                //{
                 result.Data = await Task.Run(() => UtilityHelper.LegalEntity.SaveData(request));
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
-                    if (request.EnitityID == 0)
+                    if (request.LegalEntityID == 0)
                     {
-                        //CommonDataAccessHelper.Insert_TrnUserLog(request.EnitityID, "Save", 0, "ProjectMaster");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.LegalEntityID, "Save", 0, "LegalEntity");
                         result.SuccessMessage = "Saved successfully .!";
                     }
                     else
                     {
-                        //CommonDataAccessHelper.Insert_TrnUserLog(request.EnitityID, "Update", request.EnitityID, "ProjectMaster");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.LegalEntityID, "Update", request.LegalEntityID, "LegalEntity");
                         result.SuccessMessage = "Updated successfully .!";
                     }
                 }
                 else
                 {
                     result.State = OperationState.Error;
-                    if (request.EnitityID == 0)
+                    if (request.LegalEntityID == 0)
                         result.ErrorMessage = "There was an error adding data.!";
                     else
                         result.ErrorMessage = "There was an error updating data.!";
                 }
-                //}
-                //else
-                //{
-                //    result.State = OperationState.Warning;
-                //    result.ErrorMessage = request.ProjectName + " is Already Exist, It Can't Not Be Duplicate.!";
-                //}
+
             }
             catch (Exception e)
             {
