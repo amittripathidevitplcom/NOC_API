@@ -134,4 +134,44 @@ namespace RJ_NOC_Model
         public int StateID { get; set; }
         public string StateName { get; set; }
     }
+    public class CommonDataModel_DivisionDDL
+    {
+        public int DivisionID { get; set; }
+        public string DivisionName { get; set; }
+    }
+    public class CommonDataModel_UniversityDDL
+    {
+        public int UniversityID { get; set; }
+        public string UniversityName { get; set; }
+    }
+    public class CommonDataModel_SuvdivisionDDL
+    {
+        public int SuvdivisionID { get; set; }
+        public string SubdivisionName { get; set; }
+    }
+    public class CommonDataModel_TehsilDDL
+    {
+        public int TehsilID { get; set; }
+        public string TehsilName { get; set; }
+    }
+    public class CommonDataModel_PanchyatSamitiDDL
+    {
+        public int PanchyatSamitiID { get; set; }
+        public string PanchyatSamitiName { get; set; }
+    }
+    public class CommonDataModel_ParliamentAreaDDL
+    {
+        public int ParliamentAreaID { get; set; }
+        public string ParliamentAreaName { get; set; }
+    }
+    public class CommonDataModel_AssembelyAreaDDL
+    {
+        public int AssembelyAreaID { get; set; }
+        public string AssembelyAreaName { get; set; }
+    }
+    public class CommonDataModel_FinancialYearDDL
+    {
+        public int FinancialYearID { get; set; }
+        public string FinancialYearName { get; set; }
+    }
 }

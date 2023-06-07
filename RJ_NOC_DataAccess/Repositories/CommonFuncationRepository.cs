@@ -241,5 +241,105 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
             return dataModels;
         }
+        
+        public List<CommonDataModel_DivisionDDL> GetAllDivision()
+        {
+            string SqlQuery = $"exec USP_DivisionMaster @Action='GetAllDivision'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllDivision");
+
+            List<CommonDataModel_DivisionDDL> dataModels = new List<CommonDataModel_DivisionDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DivisionDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_DistrictList> GetDistrictByDivsionId(int divisionId)
+        {
+            string SqlQuery = $"exec USP_DivisionMaster @Action='GetDistrictByDivisionId', @DivisionID={divisionId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDistrictByDivsionId");
+
+            List<CommonDataModel_DistrictList> dataModels = new List<CommonDataModel_DistrictList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId)
+        {
+            string SqlQuery = $"exec USP_UniversityMaster @Action='GetUniversityByDepartmentId', @DepartmentID={departmentId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUniversityByDepartmentId");
+
+            List<CommonDataModel_UniversityDDL> dataModels = new List<CommonDataModel_UniversityDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_UniversityDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_SuvdivisionDDL> GetSuvdivisionByDistrictId(int districtId)
+        {
+            string SqlQuery = $"exec USP_SuvdivisionMaster @Action='GetSubdivisionByDistrictId', @DistrictID={districtId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSuvdivisionByDistrictId");
+
+            List<CommonDataModel_SuvdivisionDDL> dataModels = new List<CommonDataModel_SuvdivisionDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SuvdivisionDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_TehsilDDL> GetTehsilByDistrictId(int districtId)
+        {
+            string SqlQuery = $"exec USP_TehsilMaster @Action='GetTehsilByDistrictId', @DistrictID={districtId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTehsilByDistrictId");
+
+            List<CommonDataModel_TehsilDDL> dataModels = new List<CommonDataModel_TehsilDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_TehsilDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_PanchyatSamitiDDL> GetPanchyatSamitiByDistrictId(int districtId)
+        {
+            string SqlQuery = $"exec USP_PanchyatSamitiMaster @Action='GetPanchyatSamitiByDistrictId', @DistrictID={districtId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetPanchyatSamitiByDistrictId");
+
+            List<CommonDataModel_PanchyatSamitiDDL> dataModels = new List<CommonDataModel_PanchyatSamitiDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_PanchyatSamitiDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_ParliamentAreaDDL> GetParliamentAreaByDistrictId(int districtId)
+        {
+            string SqlQuery = $"exec USP_ParliamentAreaMaster @Action='GetParliamentAreaByDistrictId', @DistrictID={districtId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetParliamentAreaByDistrictId");
+
+            List<CommonDataModel_ParliamentAreaDDL> dataModels = new List<CommonDataModel_ParliamentAreaDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ParliamentAreaDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_AssembelyAreaDDL> GetAssembelyAreaByDistrictId(int districtId)
+        {
+            string SqlQuery = $"exec USP_AssembelyAreaMaster @Action='GetAssembelyAreaByDistrictId', @DistrictID={districtId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAssembelyAreaByDistrictId");
+
+            List<CommonDataModel_AssembelyAreaDDL> dataModels = new List<CommonDataModel_AssembelyAreaDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssembelyAreaDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear()
+        {
+            string SqlQuery = "exec USP_FinancialYearMaster @Action='GetAllFinancialYear'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllFinancialYear");
+
+            List<CommonDataModel_FinancialYearDDL> dataModels = new List<CommonDataModel_FinancialYearDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FinancialYearDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }

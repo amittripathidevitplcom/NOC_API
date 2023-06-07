@@ -34,6 +34,15 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DistrictList> GetDistrictList();
         List<CommonDataModel_StateList> GetStateList();
         List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID);
+        List<CommonDataModel_DistrictList> GetDistrictByDivsionId(int divisionId);
+        List<CommonDataModel_DivisionDDL> GetAllDivision();
+        List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId);
+        List<CommonDataModel_SuvdivisionDDL> GetSuvdivisionByDistrictId(int districtId);
+        List<CommonDataModel_TehsilDDL> GetTehsilByDistrictId(int districtId);
+        List<CommonDataModel_PanchyatSamitiDDL> GetPanchyatSamitiByDistrictId(int districtId);
+        List<CommonDataModel_ParliamentAreaDDL> GetParliamentAreaByDistrictId(int districtId);
+        List<CommonDataModel_AssembelyAreaDDL> GetAssembelyAreaByDistrictId(int districtId);
+        List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear();
     }
 }
 
