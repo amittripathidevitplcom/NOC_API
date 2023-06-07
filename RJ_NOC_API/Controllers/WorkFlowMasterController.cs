@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.IO;
 using Microsoft.AspNetCore.Cors;
 using RJ_NOC_DataAccess;
-using FIH_EPR_DataAccess.Common;
+using RJ_NOC_DataAccess.Common;
 using Microsoft.AspNetCore.Authorization;
 using RJ_NOC_API.AuthModels;
 

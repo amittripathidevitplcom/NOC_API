@@ -6,7 +6,7 @@ using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
 using Azure.Core;
 
-namespace FIH_EPR_Utility.CustomerDomain
+namespace RJ_NOC_Utility.CustomerDomain
 {
     public class EmployeeDashboard : UtilityBase, IEmployeeDashboard
     {

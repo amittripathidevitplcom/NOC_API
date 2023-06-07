@@ -9,7 +9,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 
-namespace FIH_EPR_DataAccess.Common
+namespace RJ_NOC_DataAccess.Common
 {
     public class CommonDataAccessHelper
     {

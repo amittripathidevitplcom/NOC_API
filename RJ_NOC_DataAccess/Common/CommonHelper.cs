@@ -13,7 +13,7 @@ using System.Collections;
 using static System.Diagnostics.Activity;
 using System.Security.Cryptography;
 
-namespace FIH_EPR_DataAccess.Common
+namespace RJ_NOC_DataAccess.Common
 {
     public class CommonHelper
     {

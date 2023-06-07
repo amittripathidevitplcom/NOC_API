@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_DataAccess.Interface;
 using Microsoft.Extensions.Configuration;
-using FIH_EPR_DataAccess.Common;
+using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Repositories;
 
 namespace RJ_NOC_DataAccess.Repository
@@ -58,12 +58,22 @@ namespace RJ_NOC_DataAccess.Repository
             get { return menuRepository; }
         }
 
+        private ICollegeMasterRepository _collegeMasterRepository;
+        public ICollegeMasterRepository CollegeMasterRepository
+        {
+            get
+            {
+                if (_collegeMasterRepository == null)
+                    _collegeMasterRepository = new CollegeMasterRepository(CommonHelper);
+                return _collegeMasterRepository;    
+            }
+        }
+
         private ILegalEntityRepoSitory legalEntityRepoSitory;
         public ILegalEntityRepoSitory LegalEntityRepoSitory
         {
             get { return legalEntityRepoSitory; }
         }
-
 
         private ICourseMasterRepository courseMasterRepository;
         public ICourseMasterRepository CourseMasterRepository
@@ -76,9 +86,6 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return workFlowMasterRepository; }
         }
-
-
-
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {

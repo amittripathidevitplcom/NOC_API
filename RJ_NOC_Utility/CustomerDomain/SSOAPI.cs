@@ -4,7 +4,6 @@ using System.Text;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
-using FIH_EPR_DataAccess.Common;
 using Newtonsoft.Json;
 using System.Data;
 using Azure.Core;
@@ -19,7 +18,7 @@ using System.Net.Http.Headers;
 using System.Configuration;
 using SSOService;
 
-namespace FIH_EPR_Utility.CustomerDomain
+namespace RJ_NOC_Utility.CustomerDomain
 {
     public class SSOAPI : UtilityBase, ISSOAPI
     {
