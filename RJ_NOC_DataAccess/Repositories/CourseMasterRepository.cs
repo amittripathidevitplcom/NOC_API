@@ -28,9 +28,9 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetAllCourse()
+        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID)
         {
-            string SqlQuery = " exec USP_CourseMaster_GetData";
+            string SqlQuery = " exec USP_CourseMaster_GetData @LoginSSOID='" + LoginSSOID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetAllData");
 
@@ -41,9 +41,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CourseMasterDataModel> GetCourseIDWise(int CourseID)
+        public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
-            string SqlQuery = " exec USP_CourseMaster_GetData @CourseID='" + CourseID + "'";
+            string SqlQuery = " exec USP_CourseMaster_GetData @LoginSSOID ='"+ LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetDataIDWise");
 
@@ -57,8 +57,18 @@ namespace RJ_NOC_DataAccess.Repository
         public bool SaveData(CourseMasterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_CourseMaster_IU  ";
-            SqlQuery += " @EmpanelmentType='" + request.EmpanelmentType + "',@CourseID='" + request.CourseID + "',@CourseName='" + request.CourseName + "',@DepartmentName='" + request.DepartmentName + "',@NumberofResources='" + request.NumberofResources + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            string SqlQuery = " exec USP_CollegeWiseCourse_AddUpdate  ";
+
+            SqlQuery += " @CollegeWiseCourseID='" + request.CollegeWiseCourseID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @CourseID='" + request.CourseID + "',";
+            SqlQuery += " @CourseType='" + request.CourseTypeID + "',";
+            SqlQuery += " @Seats='" + request.Seats + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',"; 
+            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails") + "'"; 
+
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
             if (Rows > 0)
                 return true;
@@ -69,19 +79,29 @@ namespace RJ_NOC_DataAccess.Repository
         public bool UpdateData(CourseMasterDataModel request)
         {
 
-            //string IPAddress = CommonHelper.GetVisitorIPAddress();
-            //string SqlQuery = " exec USP_CourseMaster_IU  ";
-            //SqlQuery = " @CourseID='" + request.CourseID + "',@CourseName='" + request.CourseID + "',@DepartmentName='" + request.CourseID + "',@NumberofResources='" + request.CourseID + "',@UserID='" + request.CourseID + "',@IPAddress='" + IPAddress + "'";
-            //int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
-            //if (Rows > 0)
-            //    return true;
-            //else
-            return false;
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CollegeWiseCourse_AddUpdate  ";
+
+            SqlQuery += " @CollegeWiseCourseID='" + request.CollegeWiseCourseID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @CourseID='" + request.CourseID + "',";
+            SqlQuery += " @CourseType='" + request.CourseTypeID + "',";
+            SqlQuery += " @Seats='" + request.Seats + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails") + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
 
-        public bool DeleteData(int CourseID)
+        public bool DeleteData(int CollegeWiseCourseID)
         {
-            string SqlQuery = " Update M_CourseMaster set ActiveStatus=0 , DeleteStatus=1  WHERE CourseID='" + CourseID + "'";
+            string SqlQuery = " Update Trn_CollegeWiseCourse set ActiveStatus=0 , DeleteStatus=1  WHERE CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.Delete");
             if (Rows > 0)
                 return true;
@@ -90,14 +110,14 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public bool IfExists(int CourseID, string CourseName)
         {
-            string SqlQuery = " select CourseName from M_CourseMaster Where CourseName='" + CourseName.Trim() + "'  and CourseID !='" + CourseID + "'  and DeleteStatus=0";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.IfExists");
-            if (dataTable.Rows.Count > 0)
-                return true;
-            else
+            //string SqlQuery = " select CourseName from M_CourseMaster Where CourseName='" + CourseName.Trim() + "'  and CourseID !='" + CourseID + "'  and DeleteStatus=0";
+            //DataTable dataTable = new DataTable();
+            //dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.IfExists");
+            //if (dataTable.Rows.Count > 0)
+            //    return true;
+            //else
                 return false;
         }
-         
+
     }
 }

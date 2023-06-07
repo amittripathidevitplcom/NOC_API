@@ -90,6 +90,7 @@ namespace RJ_NOC_DataAccess.Repository
             userMasterRepository = new UserMasterRepository(commonHelper);
             menuRepository = new MenuRepository(commonHelper);
             workFlowMasterRepository = new WorkFlowMasterRepository(commonHelper);
+            courseMasterRepository = new CourseMasterRepository(commonHelper);
 
 
         }

@@ -31,14 +31,14 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID)
+        [HttpGet("{UserID}/{LoginSSOID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID,string LoginSSOID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "CourseMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourse());
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourse(LoginSSOID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -63,14 +63,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("{CourseID}/{UserID}")]
-        public async Task<OperationResult<List<CourseMasterDataModel>>> GetCourseIDWise(int CourseID, int UserID)
+        [HttpGet("{CollegeWiseCourseID}/{LoginSSOID}/{UserID}")]
+        public async Task<OperationResult<List<CourseMasterDataModel>>> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID, int UserID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CourseID, "CourseMaster");
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CollegeWiseCourseID, "CourseMaster");
             var result = new OperationResult<List<CourseMasterDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetCourseIDWise(CourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetCollegeWiseCourseIDWise(CollegeWiseCourseID, LoginSSOID));
                 if (result.Data.Count > 0)
                 {
 
@@ -85,7 +85,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.GetCourseIDWise", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.GetCollegeWiseCourseIDWise", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -103,38 +103,38 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.CourseName);
-                if (IfExits == false)
-                {
+                //IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CollegeWiseCourseID, request.CourseName);
+                //if (IfExits == false)
+                //{
                     result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.SaveData(request));
                     if (result.Data)
                     {
                         result.State = OperationState.Success;
-                        if (request.CourseID == 0)
+                        if (request.CollegeWiseCourseID == 0)
                         {
                             CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "CourseMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.CourseID, "CourseMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.CollegeWiseCourseID, "CourseMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }
                     else
                     {
                         result.State = OperationState.Error;
-                        if (request.CourseID == 0)
+                        if (request.CollegeWiseCourseID == 0)
                             result.ErrorMessage = "There was an error adding data.!";
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
-                }
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
+                //}
             }
             catch (Exception e)
             {
@@ -150,16 +150,16 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("Delete/{CourseID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int CourseID, int UserID)
+        [HttpPost("Delete/{CollegeWiseCourseID}/{UserID}")]
+        public async Task<OperationResult<bool>> DeleteData(int CollegeWiseCourseID, int UserID)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.DeleteData(CourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.DeleteData(CollegeWiseCourseID));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", CourseID, "CourseMaster");
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", CollegeWiseCourseID, "CourseMaster");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Deleted successfully .!";
                 }

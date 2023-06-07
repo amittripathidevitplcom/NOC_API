@@ -14,13 +14,13 @@ namespace FIH_EPR_Utility.CustomerDomain
         public CourseMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetAllCourse()
+        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID)
         {
-            return UnitOfWork.CourseMasterRepository.GetAllCourse();
+            return UnitOfWork.CourseMasterRepository.GetAllCourse(LoginSSOID);
         }
-        public List<CourseMasterDataModel> GetCourseIDWise(int CourseID)
+        public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
-            return UnitOfWork.CourseMasterRepository.GetCourseIDWise(CourseID);
+            return UnitOfWork.CourseMasterRepository.GetCollegeWiseCourseIDWise(CollegeWiseCourseID,LoginSSOID);
         }
         public bool SaveData(CourseMasterDataModel request)
         {
@@ -30,14 +30,14 @@ namespace FIH_EPR_Utility.CustomerDomain
         {
             return UnitOfWork.CourseMasterRepository.UpdateData(request);
         }
-        public bool DeleteData(int CourseID)
+        public bool DeleteData(int CollegeWiseCourseID)
         {
-            return UnitOfWork.CourseMasterRepository.DeleteData(CourseID);
+            return UnitOfWork.CourseMasterRepository.DeleteData(CollegeWiseCourseID);
         }
         
-        public bool IfExists(int CourseID, string CourseName)
+        public bool IfExists(int CollegeWiseCourseID, string CourseName)
         {
-            return UnitOfWork.CourseMasterRepository.IfExists(CourseID, CourseName);
+            return UnitOfWork.CourseMasterRepository.IfExists(CollegeWiseCourseID, CourseName);
         }
          
     }

@@ -8,11 +8,11 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface ICourseMaster
     {
-        List<CommonDataModel_DataTable> GetAllCourse();
-        List<CourseMasterDataModel> GetCourseIDWise(int CourseID);
+        List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID);
+        List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID);
         bool SaveData(CourseMasterDataModel request);
         bool UpdateData(CourseMasterDataModel request);
-        bool DeleteData(int CourseID);
-        bool IfExists(int CourseID, string CourseName);
+        bool DeleteData(int CollegeWiseCourseID);
+        bool IfExists(int CollegeWiseCourseID, string CourseName);
     }
 }
