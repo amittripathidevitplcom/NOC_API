@@ -19,6 +19,7 @@ namespace RJ_NOC_Utility
         ICourseMaster CourseMasterUtility { get; }
         IWorkFlowMaster WorkFlowMasterUtility { get; }
         ICollegeMaster CollegeMasterUtility { get; }
+        IHospitalMaster HospitalMasterUtility { get; }
 
     }
 }
