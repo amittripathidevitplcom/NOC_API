@@ -98,6 +98,43 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDistrictListByStateID(StateID);
         }
+        
+        public List<CommonDataModel_DivisionDDL> GetAllDivision()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllDivision();
+        }
+        public List<CommonDataModel_DistrictList> GetDistrictByDivsionId(int divisionId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDistrictByDivsionId(divisionId);
+        }
+        public List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetUniversityByDepartmentId(departmentId);
+        }
+        public List<CommonDataModel_SuvdivisionDDL> GetSuvdivisionByDistrictId(int districtId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSuvdivisionByDistrictId(districtId);
+        }
+        public List<CommonDataModel_TehsilDDL> GetTehsilByDistrictId(int districtId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetTehsilByDistrictId(districtId);
+        }
+        public List<CommonDataModel_PanchyatSamitiDDL> GetPanchyatSamitiByDistrictId(int districtId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetPanchyatSamitiByDistrictId(districtId);
+        }
+        public List<CommonDataModel_ParliamentAreaDDL> GetParliamentAreaByDistrictId(int districtId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetParliamentAreaByDistrictId(districtId);
+        }
+        public List<CommonDataModel_AssembelyAreaDDL> GetAssembelyAreaByDistrictId(int districtId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAssembelyAreaByDistrictId(districtId);
+        }
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear();
+        }
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {

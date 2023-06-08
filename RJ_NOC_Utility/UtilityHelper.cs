@@ -28,6 +28,7 @@ namespace RJ_NOC_Utility
         public ICourseMaster CourseMasterUtility { get; private set; }
         public IWorkFlowMaster WorkFlowMasterUtility { get; private set; }
         public ICollegeMaster CollegeMasterUtility { get; private set; }
+        public IHospitalMaster HospitalMasterUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -46,8 +47,8 @@ namespace RJ_NOC_Utility
             MenuUtility = new Menu(UnitOfWork);
             CourseMasterUtility = new CourseMaster(UnitOfWork);
             WorkFlowMasterUtility = new WorkFlowMaster(UnitOfWork);
-
             CollegeMasterUtility = new CollegeMaster(UnitOfWork);
+            HospitalMasterUtility = new HospitalMaster(UnitOfWork);
         }
     }
 }
