@@ -68,6 +68,17 @@ namespace RJ_NOC_DataAccess.Repository
                 return _collegeMasterRepository;    
             }
         }
+        
+        private IHospitalMasterRepository _HospitalMasterRepository;
+        public IHospitalMasterRepository HospitalMasterRepository
+        {
+            get
+            {
+                if (_HospitalMasterRepository == null)
+                    _HospitalMasterRepository = new HospitalMasterRepository(CommonHelper);
+                return _HospitalMasterRepository;    
+            }
+        }
 
         private ILegalEntityRepoSitory legalEntityRepoSitory;
         public ILegalEntityRepoSitory LegalEntityRepoSitory

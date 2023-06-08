@@ -17,8 +17,8 @@ namespace RJ_NOC_DataAccess.Interface
         IUserMasterRepository UserMasterRepository { get; }
         IMenuRepository MenuRepository { get; }
         ICourseMasterRepository CourseMasterRepository { get; }
-        IWorkFlowMasterRepository WorkFlowMasterRepository { get; }
-         
+        IWorkFlowMasterRepository WorkFlowMasterRepository { get; }         
         ICollegeMasterRepository CollegeMasterRepository { get; }
+        IHospitalMasterRepository HospitalMasterRepository { get; }
     }
 }
