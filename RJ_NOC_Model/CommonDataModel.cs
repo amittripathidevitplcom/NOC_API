@@ -157,4 +157,33 @@ namespace RJ_NOC_Model
         public int StateID { get; set; }
         public string StateName { get; set; }
     }
+
+
+    public class CommonDataModel_CollegeWiseCourseList
+    {
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+    }
+
+
+    public class CommonDataModel_CourseRoomSize
+    {
+        public int WidthMin { get; set; }
+        public int LengthMin { get; set; }
+    }
+
+
+    public class CommonDataModel_OtherInformationList_DepartmentAndTypeWise
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+    }
+
+
+    public class CommonDataModel_OtherInformationSize
+    {
+        public int WidthMin { get; set; }
+        public int LengthMin { get; set; }
+    }
 }

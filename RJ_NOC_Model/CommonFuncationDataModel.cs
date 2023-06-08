@@ -41,5 +41,12 @@ namespace RJ_NOC_Model
         public int ModifyBy { get; set; }
         public DateTime ModifyDate { get; set; }
     }
-     
+
+    public class CommonDataModel_QualificationMasterDepartmentAndTypeWise
+    {
+        public int QualificationID { get; set; }
+        public string QualificationName { get; set; }
+        public string Type { get; set; }
+    }
+
 }

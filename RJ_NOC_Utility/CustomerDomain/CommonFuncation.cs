@@ -119,5 +119,30 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetLandDoucmentTypeMasterList_DepartmentWise(DepartmentID);
         }
+
+        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCourseList_CollegeWise(CollegID);
+        }
+
+        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCourseRoomSize(CourseID);
+        }
+
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentAndTypeWise(DepartmentID, Type);
+        }
+
+        public List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID)
+        {
+            return UnitOfWork.CommonFuncationRepository.OtherInformationSize(OtherInformationID);
+        }
+
+        public List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentAndTypeWise(DepartmentID, Type);
+        }
     }
 }

@@ -39,6 +39,12 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID);
+        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID);
+        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
+        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
+        List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
+
+        List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
     }
 }
 

@@ -9,5 +9,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ICollegeMaster
     {
         bool SaveData(CollegeMasterDataModel request);
+        List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID);
     }
 }

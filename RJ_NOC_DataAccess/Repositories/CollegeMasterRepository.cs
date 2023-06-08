@@ -2,6 +2,8 @@
 using RJ_NOC_Model;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Interface;
+using Newtonsoft.Json;
+using System.Data;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -11,8 +13,7 @@ namespace RJ_NOC_DataAccess.Repository
         public CollegeMasterRepository(CommonDataAccessHelper commonHelper)
         {
             _commonHelper = commonHelper;
-        }
-
+        } 
         public bool SaveData(CollegeMasterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -64,6 +65,20 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
+        }
+
+
+        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID)
+        {
+            string SqlQuery = "exec USP_DraftApplicationList @LoginSSOID='"+ LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.DraftApplicationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

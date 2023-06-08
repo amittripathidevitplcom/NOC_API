@@ -288,5 +288,67 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID)
+        {
+            string SqlQuery = " Exec Get_CollegeWiseCourse @CollegeID='"+ CollegID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
+
+            List<CommonDataModel_CollegeWiseCourseList> dataModels = new List<CommonDataModel_CollegeWiseCourseList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
+        {
+            string SqlQuery = " exec USP_CourseRoomSize @CourseID='"+ CourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
+
+            List<CommonDataModel_CourseRoomSize> dataModels = new List<CommonDataModel_CourseRoomSize>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CourseRoomSize>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            string SqlQuery = " Exec USP_OtherInformationList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.OtherInformationList_DepartmentAndTypeWise");
+
+            List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> dataModels = new List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID)
+        {
+            string SqlQuery = " exec USP_OtherInformationSize @OtherInformationID='" + OtherInformationID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.OtherInformationSize");
+
+            List<CommonDataModel_OtherInformationSize> dataModels = new List<CommonDataModel_OtherInformationSize>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OtherInformationSize>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+
+        public List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentAndTypeWise");
+
+            List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_QualificationMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_QualificationMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
     }
 }
