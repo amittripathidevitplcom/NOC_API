@@ -156,5 +156,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetLandDoucmentTypeMasterList_DepartmentWise(DepartmentID);
         }
+        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
+        }
+        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllOccupation();
+        }
     }
 }

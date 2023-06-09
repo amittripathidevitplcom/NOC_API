@@ -197,4 +197,14 @@ namespace RJ_NOC_Model
         public int FinancialYearID { get; set; }
         public string FinancialYearName { get; set; }
     }
+    public class CommonDataModel_DesignationDDL
+    {
+        public int DesignationID { get; set; }
+        public string DesignationName { get; set; }
+    }
+    public class CommonDataModel_OccupationDDL
+    {
+        public int OccupationID { get; set; }
+        public string OccupationName { get; set; }
+    }
 }
