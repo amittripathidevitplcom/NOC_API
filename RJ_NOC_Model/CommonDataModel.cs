@@ -226,4 +226,14 @@ namespace RJ_NOC_Model
         public int WidthMin { get; set; }
         public int LengthMin { get; set; }
     }
+    public class CommonDataModel_DesignationDDL
+    {
+        public int DesignationID { get; set; }
+        public string DesignationName { get; set; }
+    }
+    public class CommonDataModel_OccupationDDL
+    {
+        public int OccupationID { get; set; }
+        public string OccupationName { get; set; }
+    }
 }

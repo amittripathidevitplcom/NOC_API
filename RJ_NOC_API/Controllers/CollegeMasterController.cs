@@ -33,7 +33,7 @@ namespace RJ_NOC_API.Controllers
                     result.State = OperationState.Success;
                     if (request.CollegeID == 0)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "ProjectMaster");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "CollegeMaster");
                         result.SuccessMessage = "Saved successfully .!";
                     }
                 }

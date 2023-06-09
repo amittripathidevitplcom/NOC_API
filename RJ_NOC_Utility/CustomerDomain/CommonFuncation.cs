@@ -181,5 +181,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentAndTypeWise(DepartmentID, Type);
         }
+        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
+        }
+        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllOccupation();
+        }
     }
 }
