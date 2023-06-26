@@ -463,17 +463,6 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
-        {
-            string SqlQuery = "Exec USP_DesignationMaster @Action='GetAllDesignation'";
-            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllDesignation");
-
-
-
-            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DesignationDDL>>(JsonDataTable_Data);
-            return dataModels;
-        }
 
         public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID)
         {
@@ -509,17 +498,6 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_Annexure>>(JsonDataTable_Data);
             return dataModels;
         }
-
-        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
-        {
-            string SqlQuery = "Exec USP_OccupationMaster @Action='GetAllOccupation'";
-            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllOccupation"); 
-
-            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OccupationDDL>>(JsonDataTable_Data);
-            return dataModels;
-        }
-
 
 
         public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID)
@@ -608,5 +586,23 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
+        {
+            string SqlQuery = "Exec USP_DesignationMaster @Action='GetAllDesignation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllDesignation");
+
+            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DesignationDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
+        {
+            string SqlQuery = "Exec USP_OccupationMaster @Action='GetAllOccupation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllOccupation");
+
+            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OccupationDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }

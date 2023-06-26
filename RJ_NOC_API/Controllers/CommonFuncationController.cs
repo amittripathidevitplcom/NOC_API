@@ -990,6 +990,70 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetAllDesignation")]
+        public async Task<OperationResult<List<CommonDataModel_DesignationDDL>>> GetAllDesignation()
+        {
+            var result = new OperationResult<List<CommonDataModel_DesignationDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllDesignation());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAllDesignation", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetAllOccupation")]
+        public async Task<OperationResult<List<CommonDataModel_OccupationDDL>>> GetAllOccupation()
+        {
+            var result = new OperationResult<List<CommonDataModel_OccupationDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllOccupation());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.Occupation", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
 
         [HttpGet("GetCourseRoomSize/{CourseID}")]
@@ -1160,39 +1224,6 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetAllDesignation")]
-        public async Task<OperationResult<List<CommonDataModel_DesignationDDL>>> GetAllDesignation()
-        {
-            var result = new OperationResult<List<CommonDataModel_DesignationDDL>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllDesignation());
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
-                {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAllDesignation", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
-
-
 
         [HttpGet("GetLandAreaMasterList_DepartmentWise/{DepartmentID}/{CollageID}")]
         public async Task<OperationResult<List<CommonDataModel_LandAreaMasterList_DepartmentWise>>> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID)
@@ -1279,38 +1310,6 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAnnexureDataList_DepartmentWise", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
-
-        [HttpGet("GetAllOccupation")]
-        public async Task<OperationResult<List<CommonDataModel_OccupationDDL>>> GetAllOccupation()
-        {
-            var result = new OperationResult<List<CommonDataModel_OccupationDDL>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllOccupation());
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
-                {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.Occupation", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

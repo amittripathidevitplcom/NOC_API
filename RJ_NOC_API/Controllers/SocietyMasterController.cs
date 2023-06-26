@@ -18,6 +18,8 @@ using RJ_NOC_API.AuthModels;
 
 namespace RJ_NOC_API.Controllers
 {
+    //[Authorize]
+    //[CustomeAuthorize]
     [Route("api/SocietyMaster")]
     [ApiController]
     public class SocietyMasterController : RJ_NOC_ControllerBase
@@ -38,7 +40,7 @@ namespace RJ_NOC_API.Controllers
                 //bool IfExits = false;
                 //IfExits = UtilityHelper.SocietyMasterUtility.IfExists(request.SocietyID, request.PersonName);
                 //if (IfExits == false)
-                //{
+            //{
                     result.Data = await Task.Run(() => UtilityHelper.SocietyMasterUtility.SaveData(request));
                     if (result.Data)
                     {
@@ -62,12 +64,12 @@ namespace RJ_NOC_API.Controllers
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
-                //}
+            //}
                 //else
-                //{
+            //{
                     //result.State = OperationState.Warning;
                     //result.ErrorMessage = request.PersonName + " is Already Exist, It Can't Not Be Duplicate.!";
-                //}
+            //}
             }
             catch (Exception e)
             {
@@ -124,7 +126,36 @@ namespace RJ_NOC_API.Controllers
             {
                 result.Data = await Task.Run(() => UtilityHelper.SocietyMasterUtility.GetSocietyByID(SocietyID));
                 if (result.Data.Count > 0)
-                {
+        {
+            //var result = new OperationResult<bool>();
+
+            //try
+            //{
+            //    SocietyMasterDataModel request = Newtonsoft.Json.JsonConvert.DeserializeObject<SocietyMasterDataModel>(json);
+            //    result.Data = await Task.Run(() => UtilityHelper.SocietyMasterUtility.SaveData(request));
+            //    if (result.Data)
+            //    {
+            //        result.State = OperationState.Success;
+            //        if (request.SocietyID == 0)
+            //        {
+            //            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "SocietyMaster");
+            //            result.SuccessMessage = "Saved successfully .!";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        result.State = OperationState.Error;
+            //        if (request.SocietyID == 0)
+            //            result.ErrorMessage = "There was an error adding data.!";
+            //        else
+            //            result.ErrorMessage = "There was an error updating data.!";
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    CommonDataAccessHelper.Insert_ErrorLog("SocietyMasterController.SaveData", ex.ToString());
+            //    result.State = OperationState.Error;
+            //    result.ErrorMessage = ex.Message.ToString();
 
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Data load successfully .!";
@@ -178,6 +209,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-       
+
     }
 }
+

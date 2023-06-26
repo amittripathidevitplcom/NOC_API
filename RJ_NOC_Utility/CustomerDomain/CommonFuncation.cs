@@ -190,11 +190,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetBuildingUploadDetails();
         }
-
-        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
-        {
-            return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
-        }
         public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID)
         {
             return UnitOfWork.CommonFuncationRepository.GetLandAreaMasterList_DepartmentWise(DepartmentID, CollageID);
@@ -208,11 +203,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAnnexureDataList_DepartmentWise(DepartmentID, LandDocumentTypeID, LandConvertedID);
         }
-        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
-        {
-            return UnitOfWork.CommonFuncationRepository.GetAllOccupation();
-        }
-
         public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentWise(DepartmentID);
@@ -235,6 +225,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID)
         {
             return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID);
+        }
+        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
+        }
+        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllOccupation();
         }
     }
 }
