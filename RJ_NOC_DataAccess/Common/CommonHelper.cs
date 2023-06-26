@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using System.Collections;
 using static System.Diagnostics.Activity;
 using System.Security.Cryptography;
+using System.Net;
+using RJ_NOC_Model;
 
 namespace RJ_NOC_DataAccess.Common
 {
@@ -68,11 +70,11 @@ namespace RJ_NOC_DataAccess.Common
             return visitorIPAddress;
         }
 
-        public static string GetDetailsTableQry(object request,string HashTableName)
+        public static string GetDetailsTableQry(object request, string HashTableName)
         {
             var result = ((IEnumerable)request).Cast<object>().ToList();
 
-            string CandidateInfo_Str = " select * INTO ##"+ HashTableName + " from ( select  ";
+            string CandidateInfo_Str = " select * INTO ##" + HashTableName + " from ( select  ";
             int countRows = 1;
             foreach (object item in result)
             {
@@ -154,5 +156,60 @@ namespace RJ_NOC_DataAccess.Common
             Encoding encoding1 = Encoding.UTF8;
             return encoding1.GetString(memStream.ToArray());
         }
+
+        public static string SendSMS(SMSConfigurationSetting sMSConfigurationSetting, string MobileNo, string Message, string TemplateID)
+        {
+            string RetrunValue = "";
+            try
+            {
+                UNOCSMSDataModel Model = new UNOCSMSDataModel();
+                Model.MobileNo = MobileNo;
+                Model.ServiceName = sMSConfigurationSetting.ServiceName;
+                Model.UniqueID = sMSConfigurationSetting.UniqueID;
+                Model.Message = Message;
+                var response = string.Empty;
+                WebRequest request = (HttpWebRequest)WebRequest.Create(sMSConfigurationSetting.SMSUrl + "?client_id=" + sMSConfigurationSetting.SmsClientID);
+                request.ContentType = "application/json";
+                request.Method = "POST";
+                request.Headers.Add("username", sMSConfigurationSetting.SMSUserName);
+                request.Headers.Add("password", sMSConfigurationSetting.SMSPassWord);
+                var inputJsonSer = System.Text.Json.JsonSerializer.Serialize(Model);
+
+
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(inputJsonSer);
+                    streamWriter.Flush();
+                }
+                var httpResponse = (HttpWebResponse)request.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    response = streamReader.ReadToEnd();
+                }
+                RetrunValue = response.ToString();
+            }
+            catch (Exception ex)
+            {
+                //return new ServiceResponse() { data = "", IsSuccess = false, Message = "Success" };
+            }
+            return RetrunValue;
+
+
+
+        }
+
+
+        public static T ConvertDataTable<T>(DataTable dt)
+        {
+            var json = JsonConvert.SerializeObject(dt);
+            if (typeof(T).Name != "List`1")
+            {
+                json = json.TrimStart('[').TrimEnd(']');
+            }
+            var obj = JsonConvert.DeserializeObject<T>(json);
+            return obj;
+        }
+
     }
 }

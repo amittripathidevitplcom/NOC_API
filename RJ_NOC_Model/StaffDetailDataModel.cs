@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RJ_NOC_Model
+{
+    public class StaffDetailDataModel
+    {
+        public int StaffDetailID { get; set; }
+        public string TeachingType { get; set; }
+        public string SubjectName { get; set; }
+        public string RoleName { get; set; }
+        public int SubjectID { get; set; }
+        public string PersonName { get; set; }
+        public int RoleID { get; set; }
+        public string MobileNo { get; set; }
+        public string Email { get; set; }
+        public int HighestQualification { get; set; }
+        public string? HighestQualificationName { get; set; }
+        public int NumberofExperience { get; set; }
+        public string AadhaarNo { get; set; }
+        public string DateOfBirth { get; set; }
+        public string DateOfAppointment { get; set; }
+        public string DateOfJoining { get; set; }
+        public string SpecializationSubject { get; set; }
+        public string RoleMapping { get; set; }
+        public int Salary { get; set; }
+        public string StaffStatus { get; set; }
+        public string PFDeduction { get; set; }
+        public string UANNumber { get; set; }
+        public string ResearchGuide { get; set; }
+        public int? ProfessionalQualificationID { get; set; }
+        public string? StreamSubject { get; set; }
+        public string? UniversityBoardInstitutionName { get; set; }
+        public int? PassingYearID { get; set; }
+        public int? Marks { get; set; }
+        public string ProfilePhoto { get; set; }
+        public string AadhaarCard { get; set; }
+        public string PANCard { get; set; }
+        public string ExperienceCertificate { get; set; }
+
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails { get; set; }
+    }
+
+    public class EducationalQualificationDetails_StaffDetail
+    {
+        public int EducationalQualificationID { get; set; }
+        public int ProfessionalQualificationID { get; set; }
+        public string ProfessionalQualification { get; set; }
+        public string StreamSubject { get; set; }
+        public string UniversityBoardInstitutionName { get; set; }
+        public int PassingYearID { get; set; }
+        public string PassingYear { get; set; }
+        public int Marks { get; set; }
+        public string UploadDocument { get; set; }
+    }
+}

@@ -43,14 +43,43 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
-            string SqlQuery = " exec USP_CourseMaster_GetData @LoginSSOID ='"+ LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetDataIDWise");
+            string SqlQuery = " exec USP_CourseMaster_GetData @LoginSSOID ='" + LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "CourseMaster.GetDataIDWise");
 
-            List<CourseMasterDataModel> dataModels = new List<CourseMasterDataModel>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CourseMasterDataModel>>(JsonDataTable_Data);
-            return dataModels;
+            //List<CourseMasterDataModel> dataModels = new List<CourseMasterDataModel>();
+            //string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            //dataModels = JsonConvert.DeserializeObject<List<CourseMasterDataModel>>(JsonDataTable_Data);
+            //return dataModels;
+
+
+
+            List<CourseMasterDataModel> listdataModels = new List<CourseMasterDataModel>();
+
+            CourseMasterDataModel dataModels = new CourseMasterDataModel();
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+
+                dataModels.CollegeWiseCourseID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeWiseCourseID"]);
+                dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
+                dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
+                dataModels.CourseID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseID"]);
+                dataModels.CourseTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseTypeID"]);
+                dataModels.Seats = Convert.ToInt32(dataSet.Tables[0].Rows[0]["Seats"]);
+                dataModels.UserID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["UserID"]);
+                dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
+                dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
+
+
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                List<CourseMasterDataModel_SubjectDetails> SaleDataModel_Item = JsonConvert.DeserializeObject<List<CourseMasterDataModel_SubjectDetails>>(JsonDataTable_Data);
+                dataModels.SelectedSubjectDetails = SaleDataModel_Item;
+                listdataModels.Add(dataModels);
+            }
+
+            return listdataModels;
+
+
 
         }
 
@@ -66,8 +95,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @CourseType='" + request.CourseTypeID + "',";
             SqlQuery += " @Seats='" + request.Seats + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
-            SqlQuery += " @IPAddress='" + IPAddress + "',"; 
-            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails") + "'"; 
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails") + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
             if (Rows > 0)
@@ -116,7 +145,7 @@ namespace RJ_NOC_DataAccess.Repository
             //if (dataTable.Rows.Count > 0)
             //    return true;
             //else
-                return false;
+            return false;
         }
 
     }

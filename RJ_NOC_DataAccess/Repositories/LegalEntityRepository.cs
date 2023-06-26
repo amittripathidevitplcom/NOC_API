@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RJ_NOC_DataAccess.Repositories
 {
-    public class LegalEntityRepository : ILegalEntityRepoSitory
+    public class LegalEntityRepository : ILegalEntityRepository
     {
         private CommonDataAccessHelper _commonHelper;
         public LegalEntityRepository(CommonDataAccessHelper commonHelper)
@@ -30,13 +30,27 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-
+        public bool IfExists(int LegalEntityID, string RegistrationNo)
+        {
+            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LegalEntity.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
         public bool SaveData(LegalEntityModel request)
         {
+            string MemberDetail_Str = request.MemberDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.MemberDetails, "Temp_MemberDetail_LegalEntity") : "";
+            string InstituteDetail_Str = request.InstituteDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.InstituteDetails, "Temp_InstituteDetail_LegalEntity") : "";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_LegalEntity_IU  ";
-            //SqlQuery += " @EmpanelmentType='" + request.EmpanelmentType + "',@ProjectID='" + request.ProjectID + "',@ProjectName='" + request.ProjectName + "',@DepartmentName='" + request.DepartmentName + "',@NumberofResources='" + request.NumberofResources + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
-            int Rows = 1;//_commonHelper.NonQuerry(SqlQuery, "LegalEntity.SaveData");
+            string SqlQuery = " exec USP_SaveLegalEntity_IU  ";
+            SqlQuery += "@LegalEntityID='" + request.LegalEntityID + "',@IsLegalEntity='" + request.IsLegalEntity + "',@SSOID='" + request.SSOID + "',@RegistrationNo='" + request.RegistrationNo + "',@PresidentMobileNo='" + request.PresidentMobileNo + "',@PresidentEmail='" + request.PresidentEmail + "',@SocietyName='" + request.SocietyName + "',";
+            SqlQuery += "@SocietyPresentStatus='" + request.SocietyPresentStatus + "',@StateID='" + request.StateID + "',@DistrictID='" + request.DistrictID + "',@RegisteredActID='" + request.RegisteredActID + "',@SocietyRegistrationDate='" + request.SocietyRegistrationDate + "',@ElectionPresentManagementCommitteeDate='" + request.ElectionPresentManagementCommitteeDate + "',@SocietyRegisteredAddress='" + request.SocietyRegisteredAddress + "',@Pincode='" + request.Pincode + "',@IsOtherInstitution='" + request.IsOtherInstitution + "',";
+            SqlQuery += "@IsWomenMembers='" + request.IsWomenMembers + "',@IsDateOfElection='" + request.IsDateOfElection + "',@ManagementCommitteeCertified='" + request.ManagementCommitteeCertified + "',@PresidentAadhaarNumber='" + request.PresidentAadhaarNumber + "',@SocietyPANNumber='" + request.SocietyPANNumber + "',@TrustLogoDoc='" + request.TrustLogoDoc + "',@TrusteeMemberProofDoc='" + request.TrusteeMemberProofDoc + "',@PresidentAadhaarProofDoc='" + request.PresidentAadhaarProofDoc + "',@SocietyPanProofDoc='" + request.SocietyPanProofDoc + "',";
+            SqlQuery += "@MemberDetail_Str='" + MemberDetail_Str + "',@InstituteDetail_Str='" + InstituteDetail_Str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "LegalEntity.SaveData");
             if (Rows > 0)
                 return true;
             else
