@@ -30,12 +30,13 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public bool SaveData(HostelDataModel request)
         {
-            string HostelDetail_Str =request.HostelDetails.Count>0? CommonHelper.GetDetailsTableQry(request.HostelDetails, "Temp_HostelDetail_Hostel"):"";
+            string ipAddress = CommonHelper.GetVisitorIPAddress();
+            string HostelDetail_Str = request.HostelDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.HostelDetails, "Temp_HostelDetail_Hostel") : "";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveHostelDetail_IU  ";
-            SqlQuery += "@HostelDetailID='"+request.HostelDetailID+"',@IsHostelCampus='"+request.IsHostelCampus+"',@HostelName='"+request.HostelName+"',@AddressLine1='"+request.AddressLine1+"',@AddressLine2='"+request.AddressLine2+"',@IsRuralUrban='"+request.IsRuralUrban+"',@DivisionId='"+request.DivisionID+"',@DistrictID='"+request.DistrictID+"',@TehsilID='"+request.TehsilID+"',@PanchayatSamitiID='"+request.PanchayatSamitiID+"',";
-            SqlQuery += "@CityTownVillage='"+request.CityTownVillage+"',@Pincode='"+request.Pincode+"',@ContactPersonName='"+request.ContactPersonName+"',@ContactPersonNo='"+request.ContactPersonNo+"',";
-            SqlQuery += "@DistanceOfCollege='"+request.DistanceOfCollege+"',@HostelType='"+request.HostelType+"',@OwnerName='"+request.OwnerName+"',@OwnerContactNo='"+request.OwnerContactNo+"',@FromDate='"+request.FromDate+"',@ToDate='"+request.ToDate+"',@RentDocument='"+request.RentDocument+ "',@DepartmentID='" + request.DepartmentID+ "',@CollegeID='" + request.CollegeID + "',";
+            SqlQuery += "@HostelCategoryID='" + request.HostelCategoryID + "',@HostelDetailID = '"+request.HostelDetailID+"',@IsHostelCampus = '"+request.IsHostelCampus+"',@HostelName = '"+request.HostelName+"',@AddressLine1 = '"+request.AddressLine1+"',@AddressLine2 = '"+request.AddressLine2+"',@IsRuralUrban = '"+request.IsRuralUrban+"',@DivisionId = '"+request.DivisionID+"',@DistrictID = '"+request.DistrictID+"',@TehsilID = '"+request.TehsilID+"',@PanchayatSamitiID = '"+request.PanchayatSamitiID+"',";
+            SqlQuery += "@CityTownVillage='" + request.CityTownVillage + "',@Pincode='" + request.Pincode + "',@ContactPersonName='" + request.ContactPersonName + "',@ContactPersonNo='" + request.ContactPersonNo + "',";
+            SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',";
             SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "HostelDetail.SaveData");
             if (Rows > 0)
@@ -60,6 +61,7 @@ namespace RJ_NOC_DataAccess.Repositories
             {
                 if (dataSet.Tables[0].Rows.Count > 0)
                 {
+                    dataModels.HostelCategoryID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["HostelCategoryID"]);
                     dataModels.HostelDetailID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["HostelDetailID"]);
                     dataModels.IsHostelCampus = dataSet.Tables[0].Rows[0]["IsHostelCampus"].ToString();
                     dataModels.HostelName = dataSet.Tables[0].Rows[0]["HostelName"].ToString();
