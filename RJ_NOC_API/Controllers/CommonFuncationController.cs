@@ -958,13 +958,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetCourseList_CollegeWise/{CollegID}")]
-        public async Task<OperationResult<List<CommonDataModel_CollegeWiseCourseList>>> GetCourseList_CollegeWise(int CollegID)
+        [HttpGet("GetCourseList_CollegeWise/{CollegID}/{CourseType}")]
+        public async Task<OperationResult<List<CommonDataModel_CollegeWiseCourseList>>> GetCourseList_CollegeWise(int CollegID, int CourseType = 0)
         {
             var result = new OperationResult<List<CommonDataModel_CollegeWiseCourseList>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseList_CollegeWise(CollegID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseList_CollegeWise(CollegID, CourseType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

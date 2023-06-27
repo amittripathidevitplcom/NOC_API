@@ -17,14 +17,14 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<BuildingDetailsDataModelList>>> GetAllBuildingDetailsList(int UserID)
+        [HttpGet("GetAllBuildingDetailsList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<BuildingDetailsDataModelList>>> GetAllBuildingDetailsList(int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "BuildingDetailsMasterService");
             var result = new OperationResult<List<BuildingDetailsDataModelList>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.BuildingDetailsMasterUtility.GetAllBuildingDetailsList());
+                result.Data = await Task.Run(() => UtilityHelper.BuildingDetailsMasterUtility.GetAllBuildingDetailsList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -49,7 +49,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("{SchoolBuildingDetailsID}/{UserID}")]        
+        [HttpGet("GetBuildingDetailsIDWise/{SchoolBuildingDetailsID}/{UserID}")]        
         public async Task<OperationResult<List<BuildingDetailsDataModelList>>> GetBuildingDetailsIDWise(int SchoolBuildingDetailsID, int UserID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", SchoolBuildingDetailsID, "BuildingDetailsMasterService");

@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IBuildingDetailsMasterRepository
     {
-        List<BuildingDetailsDataModelList> GetAllBuildingDetailsList();
+        List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID);
         List<BuildingDetailsDataModelList> GetBuildingDetailsIDWise(int SchoolBuildingDetailsID);
         bool SaveData(BuildingDetailsDataModel request);
         bool DeleteData(int SchoolBuildingDetailsID);

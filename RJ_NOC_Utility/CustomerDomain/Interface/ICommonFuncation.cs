@@ -50,7 +50,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DesignationDDL> GetAllDesignation();
         List<CommonDataModel_OccupationDDL> GetAllOccupation();
 
-        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID);
+        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, int CourseType);
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
