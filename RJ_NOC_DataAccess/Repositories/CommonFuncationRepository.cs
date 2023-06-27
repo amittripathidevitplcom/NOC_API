@@ -604,5 +604,19 @@ namespace RJ_NOC_DataAccess.Repository
             var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OccupationDDL>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID)
+        {
+            string SqlQuery = " exec USP_GetCollegeBasicDetails @CollegeID='"+ CollegID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeBasicDetails");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
+

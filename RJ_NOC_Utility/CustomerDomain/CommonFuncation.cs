@@ -234,5 +234,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAllOccupation();
         }
+
+        public List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeBasicDetails(CollegID);
+        }
     }
 }

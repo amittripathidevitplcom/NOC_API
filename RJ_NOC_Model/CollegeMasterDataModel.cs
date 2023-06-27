@@ -18,7 +18,9 @@ namespace RJ_NOC_Model
         public string? AISHECode { get; set; }
         public int CollegeMedium { get; set; }
         public int UniversityID { get; set; }
-        public long MobileNumber { get; set; }
+        public string? MobileNumber { get; set; }
+        public string? CollegeLandlineNumber { get; set; }
+        //public string? MobileNumber { get; set; }
         public string Email { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -36,8 +38,8 @@ namespace RJ_NOC_Model
         public int Pincode { get; set; }
         public string? WebsiteLink { get; set; }
         public int GCD_DesignationID { get; set; }
-        public long? GCD_MobileNumber { get; set; }
-        public long? GCD_LandlineNumber { get; set; }
+        public string? GCD_MobileNumber { get; set; }
+        public string? GCD_LandlineNumber { get; set; }
         public string? TGC_Latitude { get; set; }
         public string? TGC_Longitude { get; set; }
         public int CreatedBy { get; set; }
@@ -54,7 +56,8 @@ namespace RJ_NOC_Model
         public int CollegeDetailsID { get; set; }//foreign key of M_CollegeMaster
         public string NameOfPerson { get; set; }
         public int DesignationID { get; set; }
-        public long MobileNumber { get; set; }
+        public string? DesignationName { get; set; }
+        public string? MobileNumber { get; set; }
         public string EmailAddress { get; set; }
     }
     public class NearestGovernmentHospitalsDataModel
