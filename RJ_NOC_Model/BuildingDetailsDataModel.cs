@@ -8,6 +8,7 @@ namespace RJ_NOC_Model
 {
     public class BuildingDetailsDataModel
     {
+        public int CollegeID { get; set; }
         public int SchoolBuildingDetailsID { get; set; }
         public int BuildingTypeID { get; set; }
         public string? BuildingTypeName { get; set; }
