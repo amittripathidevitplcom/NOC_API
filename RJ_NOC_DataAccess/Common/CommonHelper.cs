@@ -83,7 +83,7 @@ namespace RJ_NOC_DataAccess.Common
                 {
                     var Key = property.Name;
                     var Value = property.GetValue(item, null);
-                    CandidateInfo_Str += "''" + AvoidSQLInjection_Char(Value.ToString()) + "'' as ''" + Key + "'',";
+                    CandidateInfo_Str += "''" + AvoidSQLInjection_Char(Value?.ToString()) + "'' as ''" + Key + "'',";
                 }
                 if (CandidateInfo_Str != "")
                 {
@@ -103,9 +103,9 @@ namespace RJ_NOC_DataAccess.Common
 
         public static string AvoidSQLInjection_Char(string str)
         {
-            str = str.Trim();
-            str = str.Replace("'", "");
-            str = str.Replace("==", "=");
+            str = str?.Trim();
+            str = str?.Replace("'", "");
+            str = str?.Replace("==", "=");
             return str;
         }
 
