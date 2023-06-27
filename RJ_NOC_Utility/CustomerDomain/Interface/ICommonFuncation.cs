@@ -72,6 +72,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID);
+        List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
 
     }
 

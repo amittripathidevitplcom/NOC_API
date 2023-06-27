@@ -33,6 +33,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@CollegeMedium='{0}',", request.CollegeMedium);
             sb.AppendFormat("@UniversityID='{0}',", request.UniversityID);
             sb.AppendFormat("@MobileNumber='{0}',", request.MobileNumber);
+            sb.AppendFormat("@CollegeLandlineNumber='{0}',", request.CollegeLandlineNumber);
             sb.AppendFormat("@Email='{0}',", request.Email);
             sb.AppendFormat("@AddressLine1='{0}',", request.AddressLine1);
             sb.AppendFormat("@AddressLine2='{0}',", request.AddressLine2);
