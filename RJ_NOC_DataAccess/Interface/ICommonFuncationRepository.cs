@@ -48,6 +48,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID);
        
         List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID);
+        List<CommonDataModel_DesignationDDL> GetAllDesignation();
+        List<CommonDataModel_OccupationDDL> GetAllOccupation();
         List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID);
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
@@ -57,14 +59,11 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_BuildingType> GetBuildingTypeCheck();
         List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails();
 
-        List<CommonDataModel_DesignationDDL> GetAllDesignation();
-
 
         List<CommonDataModel_TermAndCondition> GetTermAndConditionList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_Annexure> GetAnnexureDataList_DepartmentWise(int DepartmentID, int LandDocumentTypeID, int LandConvertedID);
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID);
 
-        List<CommonDataModel_OccupationDDL> GetAllOccupation();
 
         List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID);
 
