@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IRoomDetailsRepository
     {
-        List<RoomDetailsDataModels> GetRoomDetailAllList();
+        List<RoomDetailsDataModels> GetRoomDetailAllList(int CollageID);
         List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID);
         bool SaveData(RoomDetailsDataModel request);
         bool DeleteData(int CollegeWiseRoomID);
