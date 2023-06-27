@@ -17,13 +17,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         public AcademicInformationDetails(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList()
+        public List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList(int CollegeID)
         {
-            return UnitOfWork.AcademicInformationDetailsRepository.GetAcademicInformationDetailAllList();
+            return UnitOfWork.AcademicInformationDetailsRepository.GetAcademicInformationDetailAllList(CollegeID);
         }
-        public List<AcademicInformationDetailsDataModel> GetAcademicInformationDetailByID(int AcademicInformationID)
+        public List<AcademicInformationDetailsDataModel> GetAcademicInformationDetailByID(int AcademicInformationID, int CollegeID)
         {
-            return UnitOfWork.AcademicInformationDetailsRepository.GetAcademicInformationDetailByID(AcademicInformationID);
+            return UnitOfWork.AcademicInformationDetailsRepository.GetAcademicInformationDetailByID(AcademicInformationID, CollegeID);
         }
         public bool SaveData(AcademicInformationDetailsDataModel request)
         {

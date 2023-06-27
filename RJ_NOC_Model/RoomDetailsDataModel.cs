@@ -14,6 +14,7 @@ namespace RJ_NOC_Model
     public class RoomDetailsDataModel
     {
         public int CollegeWiseRoomID { get; set; }
+        public int CollegeID { get; set; }
         public int CourseID { get; set; }
         public int DepartmentID { get; set; }
         public decimal Width { get; set; }

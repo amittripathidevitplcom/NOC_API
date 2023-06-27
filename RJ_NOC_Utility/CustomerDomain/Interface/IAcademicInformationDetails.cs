@@ -10,8 +10,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IAcademicInformationDetails
     {
-        List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList();
-        List<AcademicInformationDetailsDataModel> GetAcademicInformationDetailByID(int AcademicInformationID);
+        List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList(int CollegeID);
+        List<AcademicInformationDetailsDataModel> GetAcademicInformationDetailByID(int AcademicInformationID, int CollegeID);
         bool SaveData(AcademicInformationDetailsDataModel request);
         bool DeleteData(int AcademicInformationID);
     }

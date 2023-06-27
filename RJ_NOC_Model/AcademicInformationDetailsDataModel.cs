@@ -14,6 +14,7 @@ namespace RJ_NOC_Model
     public class AcademicInformationDetailsDataModel
     {
         public int AcademicInformationID { get; set; }
+        public int CollegeID { get; set; }
         public int YearID { get; set; }
         public string YearValue { get; set; }
         public int CourseID { get; set; }

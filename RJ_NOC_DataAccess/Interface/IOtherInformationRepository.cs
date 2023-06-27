@@ -10,8 +10,8 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IOtherInformationRepository
     {
-        List<OtherInformationDataModels> GetOtherInformationAllList();
-        List<OtherInformationDataModel> GetOtherInformationByID(int CollegeWiseOtherInfoID);
+        List<OtherInformationDataModels> GetOtherInformationAllList(int CollegeID);
+        List<OtherInformationDataModel> GetOtherInformationByID(int CollegeWiseOtherInfoID, int CollegeID);
         bool SaveData(OtherInformationDataModel request);
         bool DeleteData(int CollegeWiseOtherInfoID);
     }

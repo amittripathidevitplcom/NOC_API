@@ -73,14 +73,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetOtherInformationAllList/{UserID}")]
-        public async Task<OperationResult<List<OtherInformationDataModels>>> GetOtherInformationAllList(int UserID)
+        [HttpGet("GetOtherInformationAllList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<OtherInformationDataModels>>> GetOtherInformationAllList(int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "OtherInformation");
             var result = new OperationResult<List<OtherInformationDataModels>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetOtherInformationAllList());
+                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetOtherInformationAllList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -105,14 +105,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetOtherInformationByID/{CollegeWiseOtherInfoID}/{UserID}")]
-        public async Task<OperationResult<List<OtherInformationDataModel>>> GetOtherInformationByID(int CollegeWiseOtherInfoID, int UserID)
+        [HttpGet("GetOtherInformationByID/{CollegeWiseOtherInfoID}/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<OtherInformationDataModel>>> GetOtherInformationByID(int CollegeWiseOtherInfoID, int UserID, int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CollegeWiseOtherInfoID, "OtherInformation");
             var result = new OperationResult<List<OtherInformationDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetOtherInformationByID(CollegeWiseOtherInfoID));
+                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetOtherInformationByID(CollegeWiseOtherInfoID, CollegeID));
                 if (result.Data.Count > 0)
                 {
 

@@ -22,7 +22,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_College_RoomDetails_IU  ";
-            SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "'";
+            SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "RoomDetails.SaveData");
             if (Rows > 0)
                 return true;
@@ -30,9 +30,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollageID)
+        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollageID='"+ CollageID + "'";
+            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollegeID='"+ CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RoomDetails.GetRoomDetailAllList");
 
@@ -45,9 +45,9 @@ namespace RJ_NOC_DataAccess.Repositories
 
         }
 
-        public List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID)
+        public List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID,int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollegeWiseRoomID='" + CollegeWiseRoomID + "'";
+            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollegeWiseRoomID='" + CollegeWiseRoomID + "',@CollegeID='"+ CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RoomDetails.GetRoomDetailsByID");
 
