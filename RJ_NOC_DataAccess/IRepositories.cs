@@ -8,10 +8,9 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IRepositories
     {
-
         ICommonFuncationRepository CommonFuncationRepository { get; }
         IProjectMasterRepository ProjectMasterRepository { get; }
-        ILegalEntityRepoSitory LegalEntityRepoSitory { get; }
+        ILegalEntityRepository LegalEntityRepository { get; }
         IEmployeeLoginRepository EmployeeLoginRepository { get; }
         IEmployeeDashboardRepository EmployeeDashboardRepository { get; }
         IUserMasterRepository UserMasterRepository { get; }
@@ -20,5 +19,29 @@ namespace RJ_NOC_DataAccess.Interface
         IWorkFlowMasterRepository WorkFlowMasterRepository { get; }         
         ICollegeMasterRepository CollegeMasterRepository { get; }
         IHospitalMasterRepository HospitalMasterRepository { get; }
+        ISMSMailRepository SMSMailRepository { get; }
+        IParliamentAreaMasterRepository ParliamentAreaMasterRepository { get; }
+        ICommonMasterRepository CommonMasterRepository { get; }
+        IAssemblyAreaMasterRepository AssemblyAreaMasterRepository { get; }
+        IUniversityMasterRepository UniversityMasterRepository { get; }
+        ILandAreaSituatedMasterRepository LandAreaSituatedMasterRepository { get; }
+        IFacilitiesMasterRepository FacilitiesMasterRepository { get; }
+        ISubjectMasterRepository SubjectMasterRepository { get; }
+        IQualificationMasterRepository QualificationMasterRepository { get; }
+        IDocumentMasterRepository DocumentMasterRepository { get; }
+        IAddRoleMasterRepository AddRoleMasterRepository { get; }
+        IStaffDetailRepository StaffDetailRepository { get; }
+        IHostelDetailRepository HostelDetailRepository { get; }
+        ISocietyMasterRepository SocietyMasterRepository { get; }
+        IFacilityDetailsRepository FacilityDetailsRepository { get; }
+        IAcademicInformationDetailsRepository AcademicInformationDetailsRepository { get; }
+        ILandDetailsRepository LandDetailsRepository { get; }
+        IRoomDetailsRepository RoomDetailsRepository { get; }
+        IOtherInformationRepository OtherInformationRepository { get; }
+        ICollegeDocumentRepository CollegeDocumentRepository { get; }
+        IOldNOCDetailRepository OldNOCDetailRepository { get; }
+        IBuildingDetailsMasterRepository BuildingDetailsMasterRepository { get; }
+        ISSOAPIRepository SSOAPIRepository { get; }
+        ITrusteeGeneralInfoMasterRepository TrusteeGeneralInfoMasterRepository { get; }
     }
 }

@@ -65,10 +65,10 @@ namespace RJ_NOC_DataAccess.Repository
             {
                 if (_collegeMasterRepository == null)
                     _collegeMasterRepository = new CollegeMasterRepository(CommonHelper);
-                return _collegeMasterRepository;    
+                return _collegeMasterRepository;
             }
         }
-        
+
         private IHospitalMasterRepository _HospitalMasterRepository;
         public IHospitalMasterRepository HospitalMasterRepository
         {
@@ -76,14 +76,14 @@ namespace RJ_NOC_DataAccess.Repository
             {
                 if (_HospitalMasterRepository == null)
                     _HospitalMasterRepository = new HospitalMasterRepository(CommonHelper);
-                return _HospitalMasterRepository;    
+                return _HospitalMasterRepository;
             }
         }
 
-        private ILegalEntityRepoSitory legalEntityRepoSitory;
-        public ILegalEntityRepoSitory LegalEntityRepoSitory
+        private ILegalEntityRepository legalEntityRepository;
+        public ILegalEntityRepository LegalEntityRepository
         {
-            get { return legalEntityRepoSitory; }
+            get { return legalEntityRepository; }
         }
 
         private ICourseMasterRepository courseMasterRepository;
@@ -97,18 +97,178 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return workFlowMasterRepository; }
         }
+        private ISMSMailRepository sMSMailRepository;
+        public ISMSMailRepository SMSMailRepository
+        {
+            get { return sMSMailRepository; }
+        }
+
+        private IParliamentAreaMasterRepository parliamentAreaMasterRepository;
+        public IParliamentAreaMasterRepository ParliamentAreaMasterRepository
+        {
+            get { return parliamentAreaMasterRepository; }
+        }
+        private ICommonMasterRepository commonMasterRepository;
+        public ICommonMasterRepository CommonMasterRepository
+        {
+            get { return commonMasterRepository; }
+        }
+        private IAssemblyAreaMasterRepository assemblyAreaMasterRepository;
+        public IAssemblyAreaMasterRepository AssemblyAreaMasterRepository
+        {
+            get { return assemblyAreaMasterRepository; }
+        }
+
+        private IUniversityMasterRepository universityMasterRepository;
+        public IUniversityMasterRepository UniversityMasterRepository
+        {
+            get { return universityMasterRepository; }
+        }
+        private ILandAreaSituatedMasterRepository landAreaSituatedMasterRepository;
+        public ILandAreaSituatedMasterRepository LandAreaSituatedMasterRepository
+        {
+            get { return landAreaSituatedMasterRepository; }
+        }
+        private IFacilitiesMasterRepository facilitiesMasterRepository;
+        public IFacilitiesMasterRepository FacilitiesMasterRepository
+        {
+            get { return facilitiesMasterRepository; }
+        }
+        private ISubjectMasterRepository subjectMasterRepository;
+        public ISubjectMasterRepository SubjectMasterRepository
+        {
+            get { return subjectMasterRepository; }
+        }
+        private IQualificationMasterRepository qualificationMasterRepository;
+        public IQualificationMasterRepository QualificationMasterRepository
+        {
+            get { return qualificationMasterRepository; }
+        }
+
+        private IDocumentMasterRepository documentMasterRepository;
+        public IDocumentMasterRepository DocumentMasterRepository
+        {
+            get { return documentMasterRepository; }
+        }
+        private IAddRoleMasterRepository addRoleMasterRepository;
+        public IAddRoleMasterRepository AddRoleMasterRepository
+        {
+            get { return addRoleMasterRepository; }
+        }
+
+
+        private IStaffDetailRepository staffDetailRepository;
+        public IStaffDetailRepository StaffDetailRepository
+        {
+            get { return staffDetailRepository; }
+        }
+
+        private IHostelDetailRepository hostelDetailRepository;
+        public IHostelDetailRepository HostelDetailRepository
+        {
+            get { return hostelDetailRepository; }
+        }
+        private ISocietyMasterRepository societyMasterRepository;
+        public ISocietyMasterRepository SocietyMasterRepository
+        {
+            get { return societyMasterRepository; }
+        }
+        private IFacilityDetailsRepository facilityDetailsRepository;
+        public IFacilityDetailsRepository FacilityDetailsRepository
+        {
+            get { return facilityDetailsRepository; }
+        }
+        private IAcademicInformationDetailsRepository academicInformationDetailsRepository;
+        public IAcademicInformationDetailsRepository AcademicInformationDetailsRepository
+        {
+            get { return academicInformationDetailsRepository; }
+        }
+
+
+        private ILandDetailsRepository landDetailsRepository;
+        public ILandDetailsRepository LandDetailsRepository
+        {
+            get { return landDetailsRepository; }
+        }
+        private IRoomDetailsRepository roomDetailsRepository;
+        public IRoomDetailsRepository RoomDetailsRepository
+        {
+            get { return roomDetailsRepository; }
+        }
+        private IOtherInformationRepository otherInformationRepository;
+        public IOtherInformationRepository OtherInformationRepository
+        {
+            get { return otherInformationRepository; }
+        }
+
+        private ICollegeDocumentRepository collegeDocumentRepository;
+        public ICollegeDocumentRepository CollegeDocumentRepository
+        {
+            get { return collegeDocumentRepository; }
+        }
+
+        private IOldNOCDetailRepository oldNOCDetailRepository;
+        public IOldNOCDetailRepository OldNOCDetailRepository
+        {
+            get { return oldNOCDetailRepository; }
+        }
+        private IBuildingDetailsMasterRepository buildingDetailsMasterRepository;
+        public IBuildingDetailsMasterRepository BuildingDetailsMasterRepository
+        {
+            get { return buildingDetailsMasterRepository; }
+        }
+         private ISSOAPIRepository sSOAPIRepository;
+        public ISSOAPIRepository SSOAPIRepository
+        {
+            get { return sSOAPIRepository; }
+        }
+        private ITrusteeGeneralInfoMasterRepository _TrusteeGeneralInfoMasterRepository;
+        public ITrusteeGeneralInfoMasterRepository TrusteeGeneralInfoMasterRepository
+        {
+            get
+            {
+                if (_TrusteeGeneralInfoMasterRepository == null)
+                    _TrusteeGeneralInfoMasterRepository = new TrusteeGeneralInfoMasterRepository(CommonHelper);
+                return _TrusteeGeneralInfoMasterRepository;
+            }
+        }
+         
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
             projectMasterRepository = new ProjectMasterRepository(commonHelper);
-            legalEntityRepoSitory = new LegalEntityRepository(commonHelper);
+            legalEntityRepository = new LegalEntityRepository(commonHelper);
             employeeLoginRepository = new EmployeeLoginRepository(commonHelper);
             employeeDashboardRepository = new EmployeeDashboardRepository(commonHelper);
             userMasterRepository = new UserMasterRepository(commonHelper);
             menuRepository = new MenuRepository(commonHelper);
             workFlowMasterRepository = new WorkFlowMasterRepository(commonHelper);
             courseMasterRepository = new CourseMasterRepository(commonHelper);
+            sMSMailRepository = new SMSMailRepository(commonHelper);
+            parliamentAreaMasterRepository = new ParliamentAreaMasterRepository(commonHelper);
+            commonMasterRepository = new CommonMasterRepository(commonHelper);
+            assemblyAreaMasterRepository = new AssemblyAreaMasterRepository(commonHelper);
+            universityMasterRepository = new UniversityMasterRepository(commonHelper);
+            landAreaSituatedMasterRepository = new LandAreaSituatedMasterRepository(commonHelper);
+            facilitiesMasterRepository = new FacilitiesMasterRepository(commonHelper);
+            qualificationMasterRepository = new QualificationMasterRepository(commonHelper);
+            facilitiesMasterRepository = new FacilitiesMasterRepository(commonHelper);
+            subjectMasterRepository = new SubjectMasterRepository(commonHelper);
+            documentMasterRepository = new DocumentMasterRepository(commonHelper);
+            addRoleMasterRepository = new AddRoleMasterRepository(commonHelper);
+            hostelDetailRepository = new HostelDetailRepository(commonHelper);
+            staffDetailRepository = new StaffDetailRepository(commonHelper);
+            societyMasterRepository = new SocietyMasterRepository(commonHelper);
+            facilityDetailsRepository = new FacilityDetailsRepository(commonHelper);
+            academicInformationDetailsRepository = new AcademicInformationDetailsRepository(commonHelper);
+            landDetailsRepository = new LandDetailsRepository(commonHelper);
+            roomDetailsRepository = new RoomDetailsRepository(commonHelper);
+            otherInformationRepository = new OtherInformationRepository(commonHelper);
+            collegeDocumentRepository = new CollegeDocumentRepository(commonHelper);
+            oldNOCDetailRepository = new OldNOCDetailRepository(commonHelper);
+            buildingDetailsMasterRepository = new BuildingDetailsMasterRepository(commonHelper);
+            sSOAPIRepository = new SSOAPIRepository(commonHelper);
 
 
         }

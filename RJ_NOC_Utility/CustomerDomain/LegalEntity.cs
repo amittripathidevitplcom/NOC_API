@@ -20,10 +20,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             throw new NotImplementedException();
         }
-
+        public bool IfExists(int LegalEntityID, string RegistrationNo)
+        {
+            return UnitOfWork.LegalEntityRepository.IfExists(LegalEntityID, RegistrationNo);
+        }
         public bool SaveData(LegalEntityModel request)
         {
-            return UnitOfWork.LegalEntityRepoSitory.SaveData(request);
+            return UnitOfWork.LegalEntityRepository.SaveData(request);
         }
     }
 }

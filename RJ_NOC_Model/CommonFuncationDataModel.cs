@@ -49,4 +49,80 @@ namespace RJ_NOC_Model
         public string Type { get; set; }
     }
 
+    public class CommonDataModel_BuildingType
+    {
+        public int BuildingTypeID { get; set; }
+        public string BuildingTypeName { get; set; }
+    }
+    public class CommonDataModel_BuildingUploadDoc
+    {
+        public int DID { get; set; }
+        public string DocumentType { get; set; }
+        public string DocumentName { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
+        public string Dis_FileName { get; set; }
+        public bool IsMandatory { get; set; }
+    }
+
+    //public class CommonDataModel_CommonMasterDepartmentAndTypeWise
+    //{
+    //    public int ID { get; set; }
+    //    public string Name { get; set; }
+    //    public string Type { get; set; }
+    //    public string Code { get; set; }
+    //}
+
+    public class CommonDataModel_TermAndCondition
+    {
+        public int AID { get; set; }
+        public int TermAndConditionID { get; set; }
+        public string TermAndConditionName { get; set; }
+    }
+    public class CommonDataModel_Annexure
+    {
+        public int AID { get; set; }
+        public int AnnexureID { get; set; }
+        public string AnnexureName { get; set; }
+        public int DepartmentID { get; set; }
+        public int LandDocumentTypeID { get; set; }
+        public int LandConversionID { get; set; }
+
+
+    }
+
+    public class CommonDataModel_OccupationDDL
+    {
+        public int OccupationID { get; set; }
+        public string OccupationName { get; set; }
+    }
+
+    public class CommonDataModel_QualificationMasterDepartmentWise
+    {
+        public int QualificationID { get; set; }
+        public string QualificationName { get; set; }
+        public string Type { get; set; }
+        public int IsDocCompulsory { get; set; }
+    }
+
+    public class CommonDataModel_CollegeWiseSubject
+    {
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+    }
+
+    public class CommonDataModel_FacilitesMasterDepartmentAndTypeWise
+    {
+        public int FID { get; set; }
+        public string FacilitiesName { get; set; }
+        public int MinSize { get; set; }
+        public string Unit { get; set; }
+    }
+    public class CommonDataModel_DashBoard
+    {
+        public int TotalCollege { get; set; }
+        public int TotalDraftApplication { get; set; }
+        public int NOCIssued { get; set; }
+        public int PendingNOC { get; set; }
+    }
 }

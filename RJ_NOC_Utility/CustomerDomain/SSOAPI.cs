@@ -26,6 +26,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
+        public List<CommonDataModel_DataTable> Check_SSOIDWise_LegalEntity(string SSOID)
+        {
+            return UnitOfWork.SSOAPIRepository.Check_SSOIDWise_LegalEntity(SSOID);
+        }
+
         public async Task<SSOUserDetailData> GetSSOUserLogionDetails(string SSOID, string LoginType, IConfiguration _configuration)
         {
 

@@ -18,6 +18,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Data.OleDb;
 using RJ_NOC_API.Controllers;
+using RJ_NOC_DataAccess.Common;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -204,6 +205,7 @@ namespace RJ_NOC_API.Controllers
 
                         List<UploadFileWithPathDataModel> uploadFileDataModels = new List<UploadFileWithPathDataModel>();
                         UploadFileWithPathDataModel uploadFileDataModel = new UploadFileWithPathDataModel();
+                        uploadFileDataModel.Dis_FileName = fileName;
                         uploadFileDataModel.FileName = FileName;
                         uploadFileDataModel.FilePath = FilePath;
                         uploadFileDataModels.Add(uploadFileDataModel);
@@ -316,7 +318,52 @@ namespace RJ_NOC_API.Controllers
             }
 
         }
-       
+
+        [HttpPost("DeleteDocument")]
+        public async Task<OperationResult<bool>> DeleteDocument([FromBody] string path)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(path))
+                    {
+                        return false;
+                    }
+                    var arr = path.Split("/");
+                    var filePath = Path.Combine(Path.GetFullPath("ImageFile"), arr[arr.Length - 1]);
+                    if (!System.IO.File.Exists(filePath))
+                    {
+                        return false;
+                    }
+                    System.IO.File.Delete(filePath);
+                    return true;
+                });
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No file found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("UploadFile.DeleteDocument", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 
