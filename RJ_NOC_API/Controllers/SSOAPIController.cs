@@ -72,6 +72,73 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpGet("Check_SSOIDWise_LegalEntity/{SSOID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> Check_SSOIDWise_LegalEntity(string SSOID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.Check_SSOIDWise_LegalEntity(SSOID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.Check_SSOIDWise_LegalEntity", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("CheckMappingSSOID/{SSOID}")]
+        public async Task<OperationResult<SSOUserDetailData>> CheckMappingSSOID(string SSOID)
+        {
+            var result = new OperationResult<SSOUserDetailData>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetSSOUserLogionDetails(SSOID, "", _configuration));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("SSOAPI.CheckMappingSSOID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
     }
 }
 

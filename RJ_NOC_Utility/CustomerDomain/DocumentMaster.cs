@@ -7,8 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using Azure.Core;
+
 namespace RJ_NOC_Utility.CustomerDomain
 {
     public class DocumentMaster : UtilityBase, IDocumentMaster

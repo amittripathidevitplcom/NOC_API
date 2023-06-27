@@ -8,6 +8,11 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IHospitalMaster
     {
+        bool DeleteData(int hospitalId, int modifiedBy);
+        HospitalMasterDataModel GetData(int hospitalId);
+        List<HospitalMasterDataModel> GetDataList(int collegeId);
         List<HospitalAreaValidation> GetHospitalAreaValidation();
+        bool IsSuperSpecialtyHospital(int collegeId);
+        bool SaveData(HospitalMasterDataModel request);
     }
 }

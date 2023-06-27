@@ -21,7 +21,7 @@ namespace RJ_NOC_DataAccess.Repositories
         public bool SaveData(RoomDetailsDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_Trn_School_RoomDetails_IU  ";
+            string SqlQuery = " exec USP_Trn_College_RoomDetails_IU  ";
             SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "RoomDetails.SaveData");
             if (Rows > 0)
@@ -32,7 +32,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<RoomDetailsDataModels> GetRoomDetailAllList()
         {
-            string SqlQuery = " exec USP_Trn_School_RoomDetails_GetData";
+            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RoomDetails.GetRoomDetailAllList");
 
@@ -47,7 +47,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID)
         {
-            string SqlQuery = " exec USP_Trn_School_RoomDetails_GetData @CollegeWiseRoomID='" + CollegeWiseRoomID + "'";
+            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollegeWiseRoomID='" + CollegeWiseRoomID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RoomDetails.GetRoomDetailsByID");
 
@@ -60,7 +60,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public bool DeleteData(int CollegeWiseRoomID)
         {
-            string SqlQuery = " Update Trn_School_RoomDetails set ActiveStatus=0 , DeleteStatus=1  WHERE CollegeWiseRoomID='" + CollegeWiseRoomID + "'";
+            string SqlQuery = " Update Trn_College_RoomDetails set ActiveStatus=0 , DeleteStatus=1  WHERE CollegeWiseRoomID='" + CollegeWiseRoomID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "RoomDetails.DeleteData");
             if (Rows > 0)
                 return true;

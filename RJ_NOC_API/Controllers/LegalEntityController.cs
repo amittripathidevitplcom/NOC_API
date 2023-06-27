@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_Model;
+using RJ_NOC_Utility.CustomerDomain;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -45,11 +46,43 @@ namespace RJ_NOC_API.Controllers
                     else
                         result.ErrorMessage = "There was an error updating data.!";
                 }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("LegalEntityController.SaveData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("CheckDuplicate")]
+        public async Task<OperationResult<bool>> CheckDuplicate(LegalEntityDuplicateCheckDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                bool IfExits = false;
+                IfExits = await Task.Run(() => UtilityHelper.LegalEntity.IfExists(request.LegalEntityID, request.RegistrationNo));
+                if (IfExits == false)
+                {
+                    result.State = OperationState.Success;
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = request.RegistrationNo + " is Already Exist, It Can't Not Be Duplicate.!";
+                }
 
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("ProjectMasterController.SaveData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("LegalEntityController.SaveData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
 

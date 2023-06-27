@@ -19,22 +19,58 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet("GetData/{CollegeId}")]
+        public async Task<OperationResult<CollegeMasterDataModel>> GetData(int collegeId)
+        {
+            var result = new OperationResult<CollegeMasterDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.GetCollegeById(collegeId));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.GetData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
         [HttpPost("SaveData")]
-        public async Task<OperationResult<bool>> SaveData([FromForm] IFormFile file, [FromForm] string json)
+        public async Task<OperationResult<bool>> SaveData([FromBody] CollegeMasterDataModel request)
         {
             var result = new OperationResult<bool>();
 
             try
             {
-                CollegeMasterDataModel request = Newtonsoft.Json.JsonConvert.DeserializeObject<CollegeMasterDataModel>(json);
                 result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.SaveData(request));
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
                     if (request.CollegeID == 0)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "ProjectMaster");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "CollegeMaster");
                         result.SuccessMessage = "Saved successfully .!";
+                    }
+                    else
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "CollegeMaster");
+                        result.SuccessMessage = "Updateed successfully .!";
                     }
                 }
                 else
@@ -55,9 +91,6 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-
-
 
         [HttpGet("DraftApplicationList/{LoginSSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> DraftApplicationList(string LoginSSOID)
@@ -80,13 +113,72 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.DraftApplicationList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.DraftApplicationList", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
             finally
             {
                 // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("DeleteData/{CollegeId}/{modifiedBy}")]
+        public async Task<OperationResult<bool>> DeleteData(int CollegeId, int modifiedBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.DeleteData(CollegeId, modifiedBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(modifiedBy, "Delete", 0, "CollegeMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error deleting data.!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(modifiedBy, "Delete", 0, "CollegeMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.DeleteData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+
+            }
+            return result;
+        }
+
+        [HttpPost("MapSSOIDInCollege/{CollegeId}/{modifiedBy}/{SSOID}")]
+        public async Task<OperationResult<bool>> MapSSOIDInCollege(int CollegeId, int modifiedBy, string SSOID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.MapSSOIDInCollege(CollegeId, modifiedBy, SSOID));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "SSOID mapped successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(modifiedBy, "MapSSOID", 0, "CollegeMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error mapping SSOID .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(modifiedBy, "MapSSOID", 0, "CollegeMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.MapSSOIDInCollege", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+
             }
             return result;
         }

@@ -30,7 +30,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<CommonDataModel_DataTable> GetLandDetailsList(int SelectedCollageID, int LandDetailID)
         {
-            string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + ",' @LandDetailID='" + LandDetailID + "'";
+            string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LandDetails.GetLandDetailsList");
 
@@ -40,9 +40,9 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID)
+        public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID,int CollageID)
         {
-            string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "'";
+            string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "',@SelectedCollageID='"+ CollageID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
             List<LandDetailsDataModel> listdataModels = new List<LandDetailsDataModel>();
@@ -76,7 +76,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
-                    List<LandDetailDocumentDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LandDetailDocumentDataModel>>(JsonDataTable_Data);
+                    List<CommonDataModel_BuildingUploadDoc> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
                     dataModels.LandDetailDocument = LandDetailDataModel_Item;
                     listdataModels.Add(dataModels);
                 }

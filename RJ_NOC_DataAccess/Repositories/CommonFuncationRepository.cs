@@ -319,17 +319,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ParliamentAreaDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_AssembelyAreaDDL> GetAssembelyAreaByDistrictId(int districtId)
-        {
-            string SqlQuery = $"exec USP_AssembelyAreaMaster @Action='GetAssembelyAreaByDistrictId', @DistrictID={districtId}";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAssembelyAreaByDistrictId");
-
-            List<CommonDataModel_AssembelyAreaDDL> dataModels = new List<CommonDataModel_AssembelyAreaDDL>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssembelyAreaDDL>>(JsonDataTable_Data);
-            return dataModels;
-        }
+       
         public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear()
         {
             string SqlQuery = "exec USP_FinancialYearMaster @Action='GetAllFinancialYear'";
@@ -366,17 +356,17 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID)
-        {
-            string SqlQuery = " Exec USP_LandTypeMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandTypeMasterList_DepartmentWise");
+        //public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID)
+        //{
+        //    string SqlQuery = " Exec USP_LandTypeMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
+        //    DataTable dataTable = new DataTable();
+        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandTypeMasterList_DepartmentWise");
 
-            List<CommonDataModel_LandTypeMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandTypeMasterList_DepartmentWise>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandTypeMasterList_DepartmentWise>>(JsonDataTable_Data);
-            return dataModels;
-        }
+        //    List<CommonDataModel_LandTypeMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandTypeMasterList_DepartmentWise>();
+        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+        //    dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandTypeMasterList_DepartmentWise>>(JsonDataTable_Data);
+        //    return dataModels;
+        //}
         public List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID)
         {
             string SqlQuery = " Exec USP_LandDoucmentTypeMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
@@ -438,17 +428,181 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
-        {
-            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentAndTypeWise");
+        //public List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        //{
+        //    string SqlQuery = " Exec USP_QualificationMasterList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
+        //    DataTable dataTable = new DataTable();
+        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentAndTypeWise");
 
-            List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_QualificationMasterDepartmentAndTypeWise>();
+        //    List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_QualificationMasterDepartmentAndTypeWise>();
+        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+        //    dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_QualificationMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+        //    return dataModels;
+        //}
+
+
+        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck()
+        {
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingtype'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingTypeCheck");
+
+            List<CommonDataModel_BuildingType> dataModels = new List<CommonDataModel_BuildingType>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_QualificationMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingType>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails()
+        {
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingUploadDetails");
+
+            List<CommonDataModel_BuildingUploadDoc> dataModels = new List<CommonDataModel_BuildingUploadDoc>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
             return dataModels;
         }
 
+        public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID)
+        {
+            string SqlQuery = " Exec USP_LandAreaMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@CollageID='" + CollageID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandAreaMasterList_DepartmentWise");
+
+            List<CommonDataModel_LandAreaMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandAreaMasterList_DepartmentWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandAreaMasterList_DepartmentWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_TermAndCondition> GetTermAndConditionList_DepartmentWise(int departmentId)
+        {
+            string SqlQuery = $"exec USP_TermAndConditionList_DepartmentWiseMaster @DepartmentID={departmentId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTermAndConditionList_DepartmentWise");
+
+            List<CommonDataModel_TermAndCondition> dataModels = new List<CommonDataModel_TermAndCondition>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_TermAndCondition>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_Annexure> GetAnnexureDataList_DepartmentWise(int DepartmentID, int LandDocumentTypeID, int LandConvertedID)
+        {
+            string SqlQuery = $"exec USP_AnnexureList_DepartmentWiseMaster  @DepartmentID='" + DepartmentID.ToString() + "',@LandDocumentTypeID='" + LandDocumentTypeID.ToString() + "',@LandConvertedID='" + LandConvertedID.ToString() + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAnnexureDataList_DepartmentWise");
+
+            List<CommonDataModel_Annexure> dataModels = new List<CommonDataModel_Annexure>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_Annexure>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID)
+        {
+            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentWise");
+
+            List<CommonDataModel_QualificationMasterDepartmentWise> dataModels = new List<CommonDataModel_QualificationMasterDepartmentWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_QualificationMasterDepartmentWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+
+
+        public List<CommonDataModel_CollegeWiseSubject> GetCollegeWiseSubjectList(int CollegeID)
+        {
+            string SqlQuery = " Exec USP_CollegeWiseSubject @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeWiseSubjectList");
+
+            List<CommonDataModel_CollegeWiseSubject> dataModels = new List<CommonDataModel_CollegeWiseSubject>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseSubject>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            string SqlQuery = " Exec USP_FacilitiesMaster_GetList @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetFacilitiesMasterList_DepartmentAndTypeWise");
+
+            List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
+        {
+            string SqlQuery = " Exec USP_FacilitiesMaster_GetList @FacilitieID='" + FacilitieID.ToString() + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetFacilitesMinSize");
+
+            List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+
+        public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type)
+        {
+            string SqlQuery = " Exec USP_LandTypeMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandTypeMasterList_DepartmentAndLandConvertWise");
+
+
+
+            List<CommonDataModel_LandTypeMasterList_DepartmentWise> dataModels = new List<CommonDataModel_LandTypeMasterList_DepartmentWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandTypeMasterList_DepartmentWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_AssemblyAreaDDL> GetAssembelyAreaByDistrictId(int districtId)
+        {
+            string SqlQuery = $"exec USP_AssemblyAreaMaster @Action='GetAssembelyAreaByDistrictId', @DistrictID={districtId}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAssembelyAreaByDistrictId");
+
+            List<CommonDataModel_AssemblyAreaDDL> dataModels = new List<CommonDataModel_AssemblyAreaDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssemblyAreaDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID)
+        {
+            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "'";
+            List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DashBoard>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
+        {
+            string SqlQuery = "Exec USP_DesignationMaster @Action='GetAllDesignation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllDesignation");
+
+            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DesignationDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
+        {
+            string SqlQuery = "Exec USP_OccupationMaster @Action='GetAllOccupation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllOccupation");
+
+            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OccupationDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }

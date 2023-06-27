@@ -10,8 +10,8 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IFacilityDetailsRepository
     {
-        List<FacilityDetailsDataModels> GetFacilityDetailAllList();
-        List<FacilityDetailsDataModel> GetfacilityDetailsByID(int FacilityDetailID);
+        List<FacilityDetailsDataModels> GetFacilityDetailAllList(int CollegeID);
+        List<FacilityDetailsDataModel> GetfacilityDetailsByID(int FacilityDetailID, int CollegeID);
         bool SaveData(FacilityDetailsDataModel request);
         bool DeleteData(int FacilityDetailID);
     }

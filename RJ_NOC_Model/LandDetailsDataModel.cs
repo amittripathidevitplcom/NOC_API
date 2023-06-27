@@ -26,14 +26,14 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
-        public List<LandDetailDocumentDataModel> LandDetailDocument { get; set; }
+        public List<CommonDataModel_BuildingUploadDoc> LandDetailDocument { get; set; }
     }
-    public class LandDetailDocumentDataModel
-    {
-        public int DID { get; set; }
-        public string DocumentName { get; set; }
-        public string SelectedFileName { get; set; }
-        public string SelectedFilePath { get; set; }
-    }
+    //public class LandDetailDocumentDataModel:document
+    //{
+    //    //public int DID { get; set; }
+    //    //public string DocumentName { get; set; }
+    //    //public string SelectedFileName { get; set; }
+    //    //public string SelectedFilePath { get; set; }
+    //}
 }
 

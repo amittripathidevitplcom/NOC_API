@@ -27,7 +27,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDepartmentList();
         }
-       
+
         public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetSchemeListByDepartment(DepatmentID);
@@ -98,7 +98,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDistrictListByStateID(StateID);
         }
-        
+
         public List<CommonDataModel_DivisionDDL> GetAllDivision()
         {
             return UnitOfWork.CommonFuncationRepository.GetAllDivision();
@@ -127,7 +127,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetParliamentAreaByDistrictId(districtId);
         }
-        public List<CommonDataModel_AssembelyAreaDDL> GetAssembelyAreaByDistrictId(int districtId)
+        public List<CommonDataModel_AssemblyAreaDDL> GetAssembelyAreaByDistrictId(int districtId)
         {
             return UnitOfWork.CommonFuncationRepository.GetAssembelyAreaByDistrictId(districtId);
         }
@@ -138,19 +138,19 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID,Type);
+            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID, Type);
         }
         public List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetDocumentMasterList_DepartmentAndTypeWise(DepartmentID,Type);
+            return UnitOfWork.CommonFuncationRepository.GetDocumentMasterList_DepartmentAndTypeWise(DepartmentID, Type);
         }
         public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetLandAreaMasterList_DepartmentWise(DepartmentID);
         }
-        public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentWise(int DepartmentID)
+        public List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetLandTypeMasterList_DepartmentWise(DepartmentID);
+            return UnitOfWork.CommonFuncationRepository.GetLandTypeMasterList_DepartmentAndLandConvertWise(DepartmentID, Type);
         }
         public List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID)
         {
@@ -177,9 +177,62 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.OtherInformationSize(OtherInformationID);
         }
 
-        public List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        //public List<CommonDataModel_QualificationMasterDepartmentAndTypeWise> GetQualificationMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        //{
+        //    return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentAndTypeWise(DepartmentID, Type);
+        //}
+
+        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck()
         {
-            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentAndTypeWise(DepartmentID, Type);
+            return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck();
+        }
+        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetBuildingUploadDetails();
+        }
+        public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandAreaMasterList_DepartmentWise(DepartmentID, CollageID);
+        }
+
+        public List<CommonDataModel_TermAndCondition> GetTermAndConditionList_DepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetTermAndConditionList_DepartmentWise(DepartmentID);
+        }
+        public List<CommonDataModel_Annexure> GetAnnexureDataList_DepartmentWise(int DepartmentID, int LandDocumentTypeID, int LandConvertedID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAnnexureDataList_DepartmentWise(DepartmentID, LandDocumentTypeID, LandConvertedID);
+        }
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentWise(DepartmentID);
+        }
+
+
+        public List<CommonDataModel_CollegeWiseSubject> GetCollegeWiseSubjectList(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWiseSubjectList(CollegeID);
+        }
+        public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentAndTypeWise(DepartmentID, Type);
+        }
+        public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
+        }
+
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID);
+        }
+        public List<CommonDataModel_DesignationDDL> GetAllDesignation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
+        }
+        public List<CommonDataModel_OccupationDDL> GetAllOccupation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllOccupation();
         }
     }
 }

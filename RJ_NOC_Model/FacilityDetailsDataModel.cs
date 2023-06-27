@@ -13,6 +13,7 @@ namespace RJ_NOC_Model
     }
     public class FacilityDetailsDataModel
     {     
+        public int CollegeID { get; set; }
         public int FacilityDetailID { get; set; }
         public int FacilitiesID { get; set; }
         public string FacilitiesUrl { get; set; }

@@ -30,7 +30,7 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("{SelectedCollageID}/{LandDetailID}")]
+        [HttpGet("GetAllLandDetails/{SelectedCollageID}/{LandDetailID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetLandDetailsList(int SelectedCollageID,int LandDetailID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetLandDetailsList", 0, "LandDetails");
@@ -63,14 +63,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("{LandDetailID}")]
-        public async Task<OperationResult<List<LandDetailsDataModel>>> GetLandDetailsIDWise(int LandDetailID)
+        [HttpGet("GetAllLandDetailsIDWise/{LandDetailID}/{CollegeID}")]
+        public async Task<OperationResult<List<LandDetailsDataModel>>> GetLandDetailsIDWise(int LandDetailID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "FetchData_IDWise", LandDetailID, "LandDetails");
             var result = new OperationResult<List<LandDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.LandDetailsUtility.GetLandDetailsIDWise(LandDetailID));
+                result.Data = await Task.Run(() => UtilityHelper.LandDetailsUtility.GetLandDetailsIDWise(LandDetailID, CollegeID));
                 if (result.Data.Count > 0)
                 {
 
@@ -103,10 +103,10 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                bool IfExits = false;
-                IfExits = UtilityHelper.LandDetailsUtility.IfExists(request.LandDetailID, request.LandAreaID, request.CollegeID);
-                if (IfExits == false)
-                {
+                //bool IfExits = false;
+                //IfExits = UtilityHelper.LandDetailsUtility.IfExists(request.LandDetailID, request.LandAreaID, request.CollegeID);
+                //if (IfExits == false)
+                //{
                     result.Data = await Task.Run(() => UtilityHelper.LandDetailsUtility.SaveData(request));
                     if (result.Data)
                     {
@@ -130,13 +130,13 @@ namespace RJ_NOC_API.Controllers
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                     result.ErrorMessage =  "Entry Already Exist, It Can't Not Be Duplicate.!";
-                    // result.ErrorMessage = request.QualificationName + " is Already Exist, It Can't Not Be Duplicate.!";
-                }
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //     result.ErrorMessage =  "Entry Already Exist, It Can't Not Be Duplicate.!";
+                //    // result.ErrorMessage = request.QualificationName + " is Already Exist, It Can't Not Be Duplicate.!";
+                //}
             }
             catch (Exception e)
             {

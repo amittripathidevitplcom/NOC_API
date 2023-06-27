@@ -18,9 +18,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.LandDetailsRepository.GetLandDetailsList(SelectedCollageID, LandDetailID);
         }
-        public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID)
+        public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID, int CollageID)
         {
-            return UnitOfWork.LandDetailsRepository.GetLandDetailsIDWise(LandDetailID);
+            return UnitOfWork.LandDetailsRepository.GetLandDetailsIDWise(LandDetailID, CollageID);
         }
         public bool SaveData(LandDetailsDataModel request)
         {

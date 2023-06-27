@@ -122,6 +122,7 @@ namespace RJ_NOC_Model
         public int ID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
+        public string Code { get; set; }
     }
 
     public class CommonDataModel_DocumentMasterDepartmentAndTypeWise
@@ -129,6 +130,9 @@ namespace RJ_NOC_Model
         public int DID { get; set; }
         public string DocumentName { get; set; }
         public string DocumentType { get; set; }
+        public bool IsMandatory { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
     } 
     public class CommonDataModel_LandAreaMasterList_DepartmentWise
     {
@@ -187,10 +191,10 @@ namespace RJ_NOC_Model
         public int ParliamentAreaID { get; set; }
         public string ParliamentAreaName { get; set; }
     }
-    public class CommonDataModel_AssembelyAreaDDL
+    public class CommonDataModel_AssemblyAreaDDL
     {
-        public int AssembelyAreaID { get; set; }
-        public string AssembelyAreaName { get; set; }
+        public int AssemblyAreaID { get; set; }
+        public string AssemblyAreaName { get; set; }
     }
     public class CommonDataModel_FinancialYearDDL
     {
@@ -225,5 +229,10 @@ namespace RJ_NOC_Model
     {
         public int WidthMin { get; set; }
         public int LengthMin { get; set; }
+    }
+    public class CommonDataModel_DesignationDDL
+    {
+        public int DesignationID { get; set; }
+        public string DesignationName { get; set; }
     }
 }

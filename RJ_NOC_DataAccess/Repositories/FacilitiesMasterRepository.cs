@@ -42,7 +42,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_M_FacilitiesMasterInsert";
-            SqlQuery += " @FID='" + request.FID + "',@DepartmentID='" + request.DepartmentID + "',@FacilitiesName='" + request.FacilitiesName + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @FID='" + request.FID + "',@DepartmentID='" + request.DepartmentID + "',@FacilitiesName='" + request.FacilitiesName + "',@MinSize='" + request.MinSize + "',@Unit='" + request.Unit + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "FacilitiesMaser.SaveData");
             if (Rows > 0)
                 return true;

@@ -8,6 +8,7 @@ using RJ_NOC_DataAccess.Interface;
 using RJ_NOC_DataAccess.Repository;
 using Microsoft.Extensions.Configuration;
 using RJ_NOC_Utility.CustomerDomain;
+using RJ_NOC_DataAccess.Repositories;
 
 namespace RJ_NOC_Utility
 {
@@ -29,6 +30,42 @@ namespace RJ_NOC_Utility
         public IWorkFlowMaster WorkFlowMasterUtility { get; private set; }
         public ICollegeMaster CollegeMasterUtility { get; private set; }
         public IHospitalMaster HospitalMasterUtility { get; private set; }
+        public ISMSMail SMSMailUtility { get; private set; }
+        public IParliamentAreaMaster ParliamentAreaMasterUtility { get; private set; }
+        public ICommonMaster CommonMasterUtility { get; private set; }
+        public IAssemblyAreaMaster AssemblyAreaMasterUtility { get; private set; }
+        public IUniversityMaster UniversityMasterUtility { get; private set; }
+        public ILandAreaSituatedMaster LandAreaSituatedMasterUtility { get; private set; }
+        public IFacilitiesMaster FacilitiesMasterUtility { get; private set; }
+        public ISubjectMaster SubjectMasterUtility { get; private set; }
+         
+
+        public IQualificationMaster QualificationMasterUtility { get; private set; }
+        public IDocumentMaster DocumentMasterUtility { get; private set; }
+        public IAddRoleMaster AddRoleMasterUtility { get; private set; }
+        public IStaffDetail StaffDetailUtility { get; private set; }
+        public IHostelDetail HostelDetailUtility { get; private set; }
+
+        public ISocietyMaster SocietyMasterUtility { get; private set; }
+        public IFacilityDetails FacilityDetailsUtility { get; private set; }
+        public IAcademicInformationDetails AcademicInformationDetailsUtility { get; private set; }
+        public ILandDetails LandDetailsUtility { get; private set; }
+
+        public IRoomDetails RoomDetailsUtility { get; private set; }
+        public IOtherInformation OtherInformationUtility { get; private set; }
+        public ICollegeDocument CollegeDocumentUtility { get; private set; }
+        public IOldNOCDetail OldNOCDetailUtility { get; private set; }
+
+        public IBuildingDetailsMaster BuildingDetailsMasterUtility { get; private set; }
+
+
+        public ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; private set; }
+        
+
+
+
+
+
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -49,6 +86,31 @@ namespace RJ_NOC_Utility
             WorkFlowMasterUtility = new WorkFlowMaster(UnitOfWork);
             CollegeMasterUtility = new CollegeMaster(UnitOfWork);
             HospitalMasterUtility = new HospitalMaster(UnitOfWork);
+            SMSMailUtility = new SMSMail(UnitOfWork);
+
+            ParliamentAreaMasterUtility = new ParliamentAreaMaster(UnitOfWork);
+            CommonMasterUtility = new CommonMaster(UnitOfWork);
+            AssemblyAreaMasterUtility = new AssemblyAreaMaster(UnitOfWork);
+
+            UniversityMasterUtility = new UniversityMaster(UnitOfWork);
+            LandAreaSituatedMasterUtility = new LandAreaSituatedMaster(UnitOfWork);
+            FacilitiesMasterUtility = new FacilitiesMaster(UnitOfWork);
+            SubjectMasterUtility = new SubjectMaster(UnitOfWork);
+            QualificationMasterUtility = new QualificationMaster(UnitOfWork);
+            DocumentMasterUtility = new DocumentMaster(UnitOfWork);
+            AddRoleMasterUtility = new AddRoleMaster(UnitOfWork);
+            StaffDetailUtility = new StaffDetail(UnitOfWork);
+            HostelDetailUtility = new HostelDetail(UnitOfWork);
+            SocietyMasterUtility = new SocietyMaster(UnitOfWork);
+            FacilityDetailsUtility = new FacilityDetails(UnitOfWork);
+            AcademicInformationDetailsUtility = new AcademicInformationDetails(UnitOfWork);
+            LandDetailsUtility = new LandDetails(UnitOfWork);
+            RoomDetailsUtility = new RoomDetails(UnitOfWork);
+            OtherInformationUtility = new OtherInformation(UnitOfWork);
+            CollegeDocumentUtility = new CollegeDocument(UnitOfWork);
+            OldNOCDetailUtility = new OldNOCDetail(UnitOfWork);
+            BuildingDetailsMasterUtility = new BuildingDetailsMaster(UnitOfWork);
+            TrusteeGeneralInfoMasterUtility = new TrusteeGeneralInfoMaster(UnitOfWork);
         }
     }
 }

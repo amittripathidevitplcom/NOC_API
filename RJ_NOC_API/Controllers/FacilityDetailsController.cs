@@ -73,14 +73,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetFacilityDetailAllList/{UserID}")]
-        public async Task<OperationResult<List<FacilityDetailsDataModels>>> GetFacilityDetailAllList(int UserID)
+        [HttpGet("GetFacilityDetailAllList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<FacilityDetailsDataModels>>> GetFacilityDetailAllList(int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "FacilityDetails");
             var result = new OperationResult<List<FacilityDetailsDataModels>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.FacilityDetailsUtility.GetFacilityDetailAllList());
+                result.Data = await Task.Run(() => UtilityHelper.FacilityDetailsUtility.GetFacilityDetailAllList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -105,14 +105,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetfacilityDetailsByID/{FacilityDetailID}/{UserID}")]
-        public async Task<OperationResult<List<FacilityDetailsDataModel>>> GetfacilityDetailsByID(int FacilityDetailID, int UserID)
+        [HttpGet("GetfacilityDetailsByID/{FacilityDetailID}/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<FacilityDetailsDataModel>>> GetfacilityDetailsByID(int FacilityDetailID, int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", FacilityDetailID, "FacilityDetails");
             var result = new OperationResult<List<FacilityDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.FacilityDetailsUtility.GetfacilityDetailsByID(FacilityDetailID));
+                result.Data = await Task.Run(() => UtilityHelper.FacilityDetailsUtility.GetfacilityDetailsByID(FacilityDetailID, CollegeID));
                 if (result.Data.Count > 0)
                 {
 

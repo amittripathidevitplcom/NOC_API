@@ -52,7 +52,7 @@ namespace RJ_NOC_DataAccess.Repository
             {
                 SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
                 mSConfigurationSetting = this.GetConfigurationSetting();
-                MessageBody = MessageBody.Replace("#OTP#", "123456");
+                MessageBody = MessageBody.Replace("{#OTP#}", "123456");
                 CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
             }
             return MessageBody;

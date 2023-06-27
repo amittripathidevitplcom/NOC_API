@@ -65,6 +65,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataSet;
             dataModels.Add(dataModel);
             return dataModels;
+
+
+
         }
         public List<BuildingDetailsDataModelList> GetBuildingDetailsIDWise(int SchoolBuildingDetailsID)
         {
@@ -112,7 +115,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public bool IfExists(int SchoolBuildingDetailsID, string OwnerName)
         {
-            string SqlQuery = " select OwnerName from Trn_SchoolBuildingDetails Where OwnerName='" + OwnerName.Trim() + "'  and SchoolBuildingDetailsID !='" + SchoolBuildingDetailsID + "'  and DeleteStatus=0";
+            string SqlQuery = " select OwnerName from Trn_School_BuildingDetails Where OwnerName='" + OwnerName.Trim() + "'  and SchoolBuildingDetailsID !='" + SchoolBuildingDetailsID + "'  and DeleteStatus=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "BuildingDetailsMasterService.IfExists");
             if (dataTable.Rows.Count > 0)
