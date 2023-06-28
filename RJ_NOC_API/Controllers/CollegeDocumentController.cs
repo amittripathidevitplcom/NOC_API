@@ -63,6 +63,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost]
         public async Task<OperationResult<bool>> SaveData(CollegeDocumentDataModel request)
         {
             var result = new OperationResult<bool>();

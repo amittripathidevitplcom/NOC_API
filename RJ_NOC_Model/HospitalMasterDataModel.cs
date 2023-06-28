@@ -124,6 +124,24 @@ namespace RJ_NOC_Model
         public int CreatedBy { get; set; }
         public int ModifyBy { get; set; }
         public string? IPAddress { get; set; }
+
+        //Added by Deepak 27062023
+        public string? DivisionName { get; set; }
+        public string? DistrictName { get; set; }
+        public string? TehsilName { get; set; }
+        public string? PanchyatSamitiName { get; set; }
+        public string? ManageDivisionName { get; set; }
+        public string? ManageDistrictName { get; set; }
+        public string? ManageTehsilName { get; set; }
+        public string? ManagePanchyatSamitiName { get; set; }
+        public string? OwnerDivisionName { get; set; }
+        public string? OwnerDistrictName { get; set; }
+        public string? OwnerTehsilName { get; set; }
+        public string? OwnerPanchyatSamitiName { get; set; }
+        public string? OtherDivisionName { get; set; }
+        public string? OtherDistrictName { get; set; }
+        public string? OtherTehsilName { get; set; }
+        public string? OtherPanchyatSamitiName { get; set; }
     }
     public class HospitalAreaValidation
     {
