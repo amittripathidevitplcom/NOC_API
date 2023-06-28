@@ -31,13 +31,14 @@ namespace RJ_NOC_DataAccess.Repositories
         //}
         public bool SaveData(StaffDetailDataModel request)
         {
-            string EducationalQualificationDetail_Str = request.EducationalQualificationDetails.Count>0? CommonHelper.GetDetailsTableQry(request.EducationalQualificationDetails, "Temp_EducationalQualificationDetail_StaffDetail") :"";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string EducationalQualificationDetail_Str = request.EducationalQualificationDetails.Count>0? CommonHelper.GetDetailsTableQry(request.EducationalQualificationDetails, "Temp_EducationalQualificationDetail_StaffDetail") :"";
             string SqlQuery = " exec USP_SaveStaffDetail_IU  ";
             SqlQuery += "@StaffDetailID='"+request.StaffDetailID+"',@TeachingType='"+request.TeachingType+"',@SubjectID='"+request.SubjectID+"',@PersonName='"+request.PersonName+"',@RoleID='"+request.RoleID+"',@MobileNo='"+request.MobileNo+"',@Email='"+request.Email+"',";
             SqlQuery += "@HighestQualification='"+request.HighestQualification+"',@NumberofExperience='"+request.NumberofExperience+"',@AadhaarNo='"+request.AadhaarNo+"',@DateOfBirth='"+request.DateOfBirth+"',@DateOfAppointment='"+request.DateOfAppointment+"',@DateOfJoining='"+request.DateOfJoining+"',";
             SqlQuery += "@SpecializationSubject='"+request.SpecializationSubject+"',@RoleMapping='"+request.RoleMapping+"',@Salary='"+request.Salary+"',@StaffStatus='"+request.StaffStatus+"',@PFDeduction='"+request.PFDeduction+"',@UANNumber='"+request.UANNumber+"',@ResearchGuide='"+request.ResearchGuide+"',";
-            SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "'";
+            SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StaffDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -81,14 +82,25 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.UANNumber = dataSet.Tables[0].Rows[0]["UANNumber"].ToString();
                     dataModels.ResearchGuide = dataSet.Tables[0].Rows[0]["ResearchGuide"].ToString();
                     dataModels.ProfilePhoto = dataSet.Tables[0].Rows[0]["ProfilePhoto"].ToString();
+                    dataModels.ProfilePhotoPath = dataSet.Tables[0].Rows[0]["ProfilePhotoPath"].ToString();
+                    dataModels.ProfilePhoto_Dis_FileName = dataSet.Tables[0].Rows[0]["ProfilePhoto_Dis_FileName"].ToString();
                     dataModels.AadhaarCard = dataSet.Tables[0].Rows[0]["AadhaarCard"].ToString();
+                    dataModels.AadhaarCardPath = dataSet.Tables[0].Rows[0]["AadhaarCardPath"].ToString();
+                    dataModels.AadhaarCard_Dis_FileName = dataSet.Tables[0].Rows[0]["AadhaarCard_Dis_FileName"].ToString();
                     dataModels.PANCard = dataSet.Tables[0].Rows[0]["PANCard"].ToString();
+                    dataModels.PANCardPath = dataSet.Tables[0].Rows[0]["PANCardPath"].ToString();
+                    dataModels.PANCard_Dis_FileName = dataSet.Tables[0].Rows[0]["PANCard_Dis_FileName"].ToString();
                     dataModels.ExperienceCertificate = dataSet.Tables[0].Rows[0]["ExperienceCertificate"].ToString();
+                    dataModels.ExperienceCertificatePath = dataSet.Tables[0].Rows[0]["ExperienceCertificatePath"].ToString();
+                    dataModels.ExperienceCertificate_Dis_FileName = dataSet.Tables[0].Rows[0]["ExperienceCertificate_Dis_FileName"].ToString();
                     dataModels.RoleID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RoleID"]);
                     dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
                     dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
                     dataModels.Salary = Convert.ToInt32(dataSet.Tables[0].Rows[0]["Salary"]);
                     dataModels.RoleName = dataSet.Tables[0].Rows[0]["RoleName"].ToString();
+                    dataModels.CreatedBy = Convert.ToInt32( dataSet.Tables[0].Rows[0]["CreatedBy"]);
+                    dataModels.ModifyBy = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ModifyBy"]);
+                    dataModels.IPAddress = dataSet.Tables[0].Rows[0]["IPAddress"].ToString();
                     dataModels.HighestQualificationName = dataSet.Tables[0].Rows[0]["HighestQualificationName"].ToString();
 
 
