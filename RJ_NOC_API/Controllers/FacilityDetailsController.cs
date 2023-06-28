@@ -27,6 +27,7 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
+
         [HttpPost("SaveData")]
         public async Task<OperationResult<bool>> SaveData([FromBody] FacilityDetailsDataModel request)
         {

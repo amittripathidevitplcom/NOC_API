@@ -320,19 +320,14 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DeleteDocument")]
-        public async Task<OperationResult<bool>> DeleteDocument([FromBody] string path)
+        public async Task<OperationResult<bool>> DeleteDocument([FromBody] string path)//filename
         {
             var result = new OperationResult<bool>();
             try
             {
                 result.Data = await Task.Run(() =>
                 {
-                    if (string.IsNullOrWhiteSpace(path))
-                    {
-                        return false;
-                    }
-                    var arr = path.Split("/");
-                    var filePath = Path.Combine(Path.GetFullPath("ImageFile"), arr[arr.Length - 1]);
+                    var filePath = Path.Combine(Path.GetFullPath("ImageFile"), path);
                     if (!System.IO.File.Exists(filePath))
                     {
                         return false;
