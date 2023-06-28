@@ -70,6 +70,8 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.NOCReceivedDate = dataSet.Tables[0].Rows[i]["NOCReceivedDate"].ToString();
                     dataModels.NOCExpireDate = dataSet.Tables[0].Rows[i]["NOCExpireDate"].ToString();
                     dataModels.UploadNOCDoc = dataSet.Tables[0].Rows[i]["UploadNOCDoc"].ToString();
+                    dataModels.UploadNOCDocPath = dataSet.Tables[0].Rows[i]["UploadNOCDocPath"].ToString();
+                    dataModels.Dis_FileName = dataSet.Tables[0].Rows[i]["Dis_FileName"].ToString();
                     dataModels.Remark = dataSet.Tables[0].Rows[i]["Remark"].ToString();
                     dataModels.CollegeName = dataSet.Tables[0].Rows[i]["CollegeName"].ToString();
                     dataModels.CourseName = dataSet.Tables[0].Rows[i]["CourseName"].ToString();
@@ -104,6 +106,8 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.NOCReceivedDate = dataSet.Tables[0].Rows[0]["NOCReceivedDate"].ToString();
                     dataModels.NOCExpireDate = dataSet.Tables[0].Rows[0]["NOCExpireDate"].ToString();
                     dataModels.UploadNOCDoc = dataSet.Tables[0].Rows[0]["UploadNOCDoc"].ToString();
+                    dataModels.UploadNOCDocPath = dataSet.Tables[0].Rows[0]["UploadNOCDocPath"].ToString();
+                    dataModels.Dis_FileName = dataSet.Tables[0].Rows[0]["Dis_FileName"].ToString();
                     dataModels.Remark = dataSet.Tables[0].Rows[0]["Remark"].ToString();
                     dataModels.CollegeName = dataSet.Tables[0].Rows[0]["CollegeName"].ToString();
                     dataModels.CourseName = dataSet.Tables[0].Rows[0]["CourseName"].ToString();
