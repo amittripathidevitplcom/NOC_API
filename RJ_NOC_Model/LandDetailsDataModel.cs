@@ -27,6 +27,9 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public List<CommonDataModel_BuildingUploadDoc> LandDetailDocument { get; set; }
+        //Add by Deepak 28062023
+        public string? LandTypeName { get; set; }
+        public string? Code { get; set; }
     }
     //public class LandDetailDocumentDataModel:document
     //{
