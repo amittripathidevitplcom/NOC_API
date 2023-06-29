@@ -8,7 +8,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IBuildingDetailsMaster
     {
-        List<BuildingDetailsDataModelList> GetAllBuildingDetailsList();
+        List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID);
         List<BuildingDetailsDataModelList> GetBuildingDetailsIDWise(int SchoolBuildingDetailsID);
         bool SaveData(BuildingDetailsDataModel buildingdetails);
         bool DeleteData(int SchoolBuildingDetailsID);

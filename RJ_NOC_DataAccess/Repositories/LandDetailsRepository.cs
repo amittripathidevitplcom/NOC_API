@@ -74,7 +74,9 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.IsConvereted = dataSet.Tables[0].Rows[0]["IsConvereted"].ToString();
                     dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
                     dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
-
+                    //Add by Deepak
+                    dataModels.LandTypeName = dataSet.Tables[0].Rows[0]["LandTypeName"].ToString();
+                    dataModels.Code = dataSet.Tables[0].Rows[0]["Code"].ToString();
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<CommonDataModel_BuildingUploadDoc> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
                     dataModels.LandDetailDocument = LandDetailDataModel_Item;

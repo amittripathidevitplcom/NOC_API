@@ -8,6 +8,7 @@ namespace RJ_NOC_Model
 {
     public class HostelDataModel
     {
+        public int HostelCategoryID { get; set; }
         public int HostelDetailID { get; set; }
         public string IsHostelCampus { get; set; }
         public string HostelName { get; set; }
@@ -31,6 +32,9 @@ namespace RJ_NOC_Model
         public int Pincode { get; set; }
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
+        
+        public int CreatedBy { get; set; }
+        public int ModifyBy { get; set; }
 
         public string? DivisionName { get; set; }
         public string? DistrictName { get; set; }
@@ -45,11 +49,12 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int DepartmentID { get; set; }
         public int Width { get; set; }
+        public int NoOf { get; set; }
         public int Length { get; set; }
         public int StudentCapacity { get; set; }
         public string ImageFileName { get; set; }
+        public string ImageFilePath { get; set; }
+        public string Dis_FileName { get; set; }
         public string? CourseName { get; set; }
-        public bool ActiveStatus { get; set; }
-        public bool DeleteStatus { get; set; }
     }
 }

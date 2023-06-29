@@ -10,8 +10,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IRoomDetails
     {
-        List<RoomDetailsDataModels> GetRoomDetailAllList();
-        List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID);
+        List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID);
+        List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID, int CollegeID);
         bool SaveData(RoomDetailsDataModel request);
         bool DeleteData(int CollegeWiseRoomID);
     }

@@ -73,14 +73,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetAcademicInformationDetailAllList/{UserID}")]
-        public async Task<OperationResult<List<AcademicInformationDetailsDataModels>>> GetAcademicInformationDetailAllList(int UserID)
+        [HttpGet("GetAcademicInformationDetailAllList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<AcademicInformationDetailsDataModels>>> GetAcademicInformationDetailAllList(int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "AcademicInformationDetails");
             var result = new OperationResult<List<AcademicInformationDetailsDataModels>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AcademicInformationDetailsUtility.GetAcademicInformationDetailAllList());
+                result.Data = await Task.Run(() => UtilityHelper.AcademicInformationDetailsUtility.GetAcademicInformationDetailAllList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -105,14 +105,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetAcademicInformationDetailByID/{AcademicInformationID}/{UserID}")]
-        public async Task<OperationResult<List<AcademicInformationDetailsDataModel>>> GetAcademicInformationDetailByID(int AcademicInformationID, int UserID)
+        [HttpGet("GetAcademicInformationDetailByID/{AcademicInformationID}/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<AcademicInformationDetailsDataModel>>> GetAcademicInformationDetailByID(int AcademicInformationID, int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", AcademicInformationID, "AcademicInformationDetails");
             var result = new OperationResult<List<AcademicInformationDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AcademicInformationDetailsUtility.GetAcademicInformationDetailByID(AcademicInformationID));
+                result.Data = await Task.Run(() => UtilityHelper.AcademicInformationDetailsUtility.GetAcademicInformationDetailByID(AcademicInformationID, CollegeID));
                 if (result.Data.Count > 0)
                 {
 

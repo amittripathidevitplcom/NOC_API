@@ -50,7 +50,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_DesignationDDL> GetAllDesignation();
         List<CommonDataModel_OccupationDDL> GetAllOccupation();
-        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID);
+        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID,int CourseType);
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
@@ -74,7 +74,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type);
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID);
-
+        List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
     }
 }
 

@@ -73,14 +73,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetRoomDetailAllList/{UserID}")]
-        public async Task<OperationResult<List<RoomDetailsDataModels>>> GetRoomDetailAllList(int UserID)
+        [HttpGet("GetRoomDetailAllList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<RoomDetailsDataModels>>> GetRoomDetailAllList(int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "RoomDetails");
             var result = new OperationResult<List<RoomDetailsDataModels>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailAllList());
+                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailAllList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -106,13 +106,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetRoomDetailsByID/{CollegeWiseRoomID}/{UserID}")]
-        public async Task<OperationResult<List<RoomDetailsDataModel>>> GetRoomDetailsByID(int CollegeWiseRoomID, int UserID)
+        public async Task<OperationResult<List<RoomDetailsDataModel>>> GetRoomDetailsByID(int CollegeWiseRoomID, int UserID, int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CollegeWiseRoomID, "RoomDetails");
             var result = new OperationResult<List<RoomDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailsByID(CollegeWiseRoomID));
+                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailsByID(CollegeWiseRoomID,CollegeID));
                 if (result.Data.Count > 0)
                 {
 
@@ -137,7 +137,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpPost("Delete/{CollegeWiseRoomID}/{UserID}")]
+        [HttpPost("Delete/{CollegeWiseRoomID}/{UserID}/{CollegeID}")]
         public async Task<OperationResult<bool>> DeleteData(int CollegeWiseRoomID, int UserID)
         {
             var result = new OperationResult<bool>();

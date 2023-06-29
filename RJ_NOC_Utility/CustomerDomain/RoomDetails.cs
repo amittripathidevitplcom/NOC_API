@@ -17,13 +17,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         public RoomDetails(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<RoomDetailsDataModels> GetRoomDetailAllList()
+        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID)
         {
-            return UnitOfWork.RoomDetailsRepository.GetRoomDetailAllList();
+            return UnitOfWork.RoomDetailsRepository.GetRoomDetailAllList(CollegeID);
         }
-        public List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID)
+        public List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID, int CollegeID)
         {
-            return UnitOfWork.RoomDetailsRepository.GetRoomDetailsByID(CollegeWiseRoomID);
+            return UnitOfWork.RoomDetailsRepository.GetRoomDetailsByID(CollegeWiseRoomID, CollegeID);
         }
         public bool SaveData(RoomDetailsDataModel request)
         {

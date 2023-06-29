@@ -21,6 +21,7 @@ namespace RJ_NOC_DataAccess.Repository
             string BuildingDetail_Document_Str = CommonHelper.GetDetailsTableQry(buildingdetails.lstBuildingDocDetails, "Temp_School_BuildingDetails_Document");
             string SqlQuery = " exec USP_Trn_School_BuildingDetails_IU";
 
+            SqlQuery += " @CollegeID='" + buildingdetails.CollegeID + "',";
             SqlQuery += " @SchoolBuildingDetailsID='" + buildingdetails.SchoolBuildingDetailsID + "',";
             SqlQuery += " @BuildingTypeID='" + buildingdetails.BuildingTypeID + "',";
             SqlQuery += " @OwnerName='" + buildingdetails.OwnerName + "',";
@@ -54,9 +55,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public List<BuildingDetailsDataModelList> GetAllBuildingDetailsList()
+        public List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_School_BuildingDetails_GetData";
+            string SqlQuery = $" exec USP_Trn_School_BuildingDetails_GetData @CollegeID={CollegeID}";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "BuildingDetailsMasterService.GetAllBuildingDetailsList");
 

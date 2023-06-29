@@ -14,6 +14,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
+
         public bool SaveData(CollegeMasterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -33,6 +34,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@CollegeMedium='{0}',", request.CollegeMedium);
             sb.AppendFormat("@UniversityID='{0}',", request.UniversityID);
             sb.AppendFormat("@MobileNumber='{0}',", request.MobileNumber);
+            sb.AppendFormat("@CollegeLandlineNumber='{0}',", request.CollegeLandlineNumber);
             sb.AppendFormat("@Email='{0}',", request.Email);
             sb.AppendFormat("@AddressLine1='{0}',", request.AddressLine1);
             sb.AppendFormat("@AddressLine2='{0}',", request.AddressLine2);
@@ -86,6 +88,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
         public CollegeMasterDataModel GetCollegeById(int collegeId)
         {
             string SqlQuery = $"exec USP_CollegeMaster @CollegeID={collegeId},@Action='GetCollegeById'";
@@ -122,6 +125,7 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
         public bool MapSSOIDInCollege(int CollegeId, int modifiedBy, string ssoId)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
