@@ -10,6 +10,10 @@ namespace RJ_NOC_Model
     {
         public DataTable data { get; set; }
     }
+    public class CommonDataModel_DataSet
+    {
+        public DataSet data { get; set; }
+    }
 
     public class CommonDataModel_DocumentMasterList
     {

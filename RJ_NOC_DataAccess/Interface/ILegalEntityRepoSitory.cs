@@ -12,5 +12,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetAllProject();
         bool IfExists(int LegalEntityID, string RegistrationNo);
         bool SaveData(LegalEntityModel request);
+        List<LegalEntityListModel> GetLegalEntityList();
+        List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID);
     }
 }

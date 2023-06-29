@@ -134,6 +134,17 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
+        public List<CommonDataModel_DataSet> ViewTotalCollegeDataByID(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetCollegeData_Preview @CollegeID = '" + CollegeID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "CollegeMaster.GetAllData");
 
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
