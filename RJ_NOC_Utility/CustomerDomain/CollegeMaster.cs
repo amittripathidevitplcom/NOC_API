@@ -32,5 +32,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.MapSSOIDInCollege(CollegeId, modifiedBy, ssoId);
         }
+        public List<CommonDataModel_DataSet> ViewTotalCollegeDataByID(int CollegeID)
+        {
+            return UnitOfWork.CollegeMasterRepository.ViewTotalCollegeDataByID(CollegeID);
+        }
     }
 }

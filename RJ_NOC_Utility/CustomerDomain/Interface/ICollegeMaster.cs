@@ -13,5 +13,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         CollegeMasterDataModel GetCollegeById(int collegeId);
         bool DeleteData(int CollegeId, int modifiedBy);
         bool MapSSOIDInCollege(int CollegeId, int modifiedBy, string ssoId);
+        List<CommonDataModel_DataSet> ViewTotalCollegeDataByID(int CollegeID);
     }
 }
