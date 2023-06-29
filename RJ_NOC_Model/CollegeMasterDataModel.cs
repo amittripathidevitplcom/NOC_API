@@ -9,6 +9,8 @@ namespace RJ_NOC_Model
         public int DepartmentID { get; set; }
         public int CollegeStatusID { get; set; }
         public string CollegeLogo { get; set; }
+        public string CollegeLogoPath { get; set; }
+        public string CollegeLogo_Dis_FileName { get; set; }
         public int PresentCollegeStatusID { get; set; }
         public int CollegeTypeID { get; set; }
         public int CollegeLevelID { get; set; }
@@ -18,8 +20,8 @@ namespace RJ_NOC_Model
         public string? AISHECode { get; set; }
         public int CollegeMedium { get; set; }
         public int UniversityID { get; set; }
-        public string? MobileNumber { get; set; }
-        public string? CollegeLandlineNumber { get; set; }
+        public string MobileNumber { get; set; }
+        public string CollegeLandlineNumber { get; set; }
         //public string? MobileNumber { get; set; }
         public string Email { get; set; }
         public string AddressLine1 { get; set; }
@@ -57,7 +59,7 @@ namespace RJ_NOC_Model
         public string NameOfPerson { get; set; }
         public int DesignationID { get; set; }
         public string? DesignationName { get; set; }
-        public string? MobileNumber { get; set; }
+        public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
     }
     public class NearestGovernmentHospitalsDataModel
@@ -67,14 +69,21 @@ namespace RJ_NOC_Model
         public string HospitalName { get; set; }
         public string HospitalRegNo { get; set; }
         public string HospitalDocument { get; set; }
+        public string HospitalDocumentPath { get; set; }
+        public string HospitalDocument_Dis_FileName { get; set; }
         public int HospitalDistance { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public int RuralUrban { get; set; }
+        public string? RuralUrbanName { get; set; }
         public int DivisionID { get; set; }
+        public string? DivisionName { get; set; }
         public int DistrictID { get; set; }
+        public string? DistrictName { get; set; }
         public int TehsilID { get; set; }
+        public string? TehsilName { get; set; }
         public int PanchayatSamitiID { get; set; }
+        public string? PanchayatSamitiName { get; set; }
         public string CityTownVillage { get; set; }
         public int Pincode { get; set; }
     }
