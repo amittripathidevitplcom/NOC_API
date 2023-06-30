@@ -238,6 +238,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeBasicDetails(CollegID);
+        }    
+        public List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetTabFieldByTabName(TabName);
         }
     }
 }

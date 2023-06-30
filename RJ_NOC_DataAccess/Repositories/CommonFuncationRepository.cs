@@ -617,6 +617,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName)
+        {
+            string SqlQuery = " Exec USP_GetTabFieldByTabName @TabName='" + TabName + "'";
+            List<CommonDataModel_TabField> dataModels = new List<CommonDataModel_TabField>();
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTabFieldByTabName");
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_TabField>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
     }
 }
 
