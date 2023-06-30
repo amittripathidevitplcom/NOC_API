@@ -56,5 +56,29 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+        public List<LegalEntityListModel> GetLegalEntityList()
+        {
+            string SqlQuery = " exec USP_GetLegalEntity_Preview";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
+
+            List<LegalEntityListModel> dataModels = new List<LegalEntityListModel>();
+            LegalEntityListModel dataModel = new LegalEntityListModel();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID)
+        {
+            string SqlQuery = " exec USP_GetLegalEntity_Preview @LegalEntityID = '" + LegalEntityID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
+
+            List<LegalEntityListModel> dataModels = new List<LegalEntityListModel>();
+            LegalEntityListModel dataModel = new LegalEntityListModel();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

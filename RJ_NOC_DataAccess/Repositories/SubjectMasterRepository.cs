@@ -52,7 +52,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_M_SubjectMasterInsert";
-            SqlQuery += " @SubjectID='" + request.SubjectID + "',@DepartmentID='" + request.DepartmentID + "',@CourseID='" + request.CourseID + "',@SubjectName='" + request.SubjectName + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @SubjectID='" + request.SubjectID + "',@DepartmentID='" + request.DepartmentID + "',@CourseID='" + request.CourseID + "',@SubjectName='" + request.SubjectName + "',@ActiveStatus='"+request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "SubjectMasterService.SaveData");
             if (Rows > 0)
                 return true;

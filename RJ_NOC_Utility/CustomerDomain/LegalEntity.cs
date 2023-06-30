@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Core;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -27,6 +28,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveData(LegalEntityModel request)
         {
             return UnitOfWork.LegalEntityRepository.SaveData(request);
+        }
+        public List<LegalEntityListModel> GetLegalEntityList()
+        {
+            return UnitOfWork.LegalEntityRepository.GetLegalEntityList();
+        }
+        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID)
+        {
+            return UnitOfWork.LegalEntityRepository.ViewlegalEntityDataByID(LegalEntityID);
         }
     }
 }

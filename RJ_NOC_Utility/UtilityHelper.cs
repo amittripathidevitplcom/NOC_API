@@ -38,7 +38,7 @@ namespace RJ_NOC_Utility
         public ILandAreaSituatedMaster LandAreaSituatedMasterUtility { get; private set; }
         public IFacilitiesMaster FacilitiesMasterUtility { get; private set; }
         public ISubjectMaster SubjectMasterUtility { get; private set; }
-         
+
 
         public IQualificationMaster QualificationMasterUtility { get; private set; }
         public IDocumentMaster DocumentMasterUtility { get; private set; }
@@ -60,7 +60,9 @@ namespace RJ_NOC_Utility
 
 
         public ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; private set; }
-        
+        public IApplyNOC ApplyNOCUtility { get; private set; }
+        public IPayment PaymentUtility { get; private set; }
+
 
 
 
@@ -111,6 +113,8 @@ namespace RJ_NOC_Utility
             OldNOCDetailUtility = new OldNOCDetail(UnitOfWork);
             BuildingDetailsMasterUtility = new BuildingDetailsMaster(UnitOfWork);
             TrusteeGeneralInfoMasterUtility = new TrusteeGeneralInfoMaster(UnitOfWork);
+            ApplyNOCUtility = new ApplyNOC(UnitOfWork);
+            PaymentUtility = new Payment(UnitOfWork);
         }
     }
 }

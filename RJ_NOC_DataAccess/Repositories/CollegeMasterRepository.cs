@@ -14,6 +14,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
+
         public bool SaveData(CollegeMasterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -87,6 +88,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
         public CollegeMasterDataModel GetCollegeById(int collegeId)
         {
             string SqlQuery = $"exec USP_CollegeMaster @CollegeID={collegeId},@Action='GetCollegeById'";
@@ -123,6 +125,7 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
         public bool MapSSOIDInCollege(int CollegeId, int modifiedBy, string ssoId)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -135,6 +138,17 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
+        public List<CommonDataModel_DataSet> ViewTotalCollegeDataByID(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetCollegeData_Preview @CollegeID = '" + CollegeID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "CollegeMaster.GetAllData");
 
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

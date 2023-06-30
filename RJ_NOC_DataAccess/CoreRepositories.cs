@@ -232,7 +232,16 @@ namespace RJ_NOC_DataAccess.Repository
                 return _TrusteeGeneralInfoMasterRepository;
             }
         }
-         
+        private IApplyNOCRepository applyNOCRepository;
+        public IApplyNOCRepository ApplyNOCRepository
+        {
+            get { return applyNOCRepository; }
+        }
+        private IPaymentRepository paymentRepository;
+        public IPaymentRepository PaymentRepository
+        {
+            get { return paymentRepository; }
+        }
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -269,6 +278,8 @@ namespace RJ_NOC_DataAccess.Repository
             oldNOCDetailRepository = new OldNOCDetailRepository(commonHelper);
             buildingDetailsMasterRepository = new BuildingDetailsMasterRepository(commonHelper);
             sSOAPIRepository = new SSOAPIRepository(commonHelper);
+            applyNOCRepository = new ApplyNOCRepository(commonHelper);
+            paymentRepository = new PaymentRepository(commonHelper);
 
 
         }

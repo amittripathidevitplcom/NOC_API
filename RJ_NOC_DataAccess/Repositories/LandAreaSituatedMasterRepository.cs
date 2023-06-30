@@ -64,7 +64,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_LandAreaSituatedMasterInsert";
-            SqlQuery += " @LandAreaID='" + request.LandAreaID + "',@StateID='" + request.StateID + "',@DistrictID='" + request.DistrictID+ "',@DepartmentID='" + request.DepartmentID + "',@LandAreaName='" + request.LandAreaName + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @LandAreaID='" + request.LandAreaID + "',@StateID='" + request.StateID + "',@DistrictID='" + request.DistrictID+ "',@DepartmentID='" + request.DepartmentID + "',@LandAreaName='" + request.LandAreaName + "',@ActiveStatus='" + request.ActiveStatus + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LandAreaSituatedMaster.SaveData");
             if (Rows > 0)
                 return true;

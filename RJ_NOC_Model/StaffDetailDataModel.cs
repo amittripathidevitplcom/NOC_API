@@ -37,9 +37,21 @@ namespace RJ_NOC_Model
         public int? PassingYearID { get; set; }
         public int? Marks { get; set; }
         public string ProfilePhoto { get; set; }
+        public string? ProfilePhotoPath { get; set; }
+        public string? ProfilePhoto_Dis_FileName { get; set; }
         public string AadhaarCard { get; set; }
+        public string? AadhaarCardPath { get; set; }
+        public string? AadhaarCard_Dis_FileName  { get; set; }
         public string PANCard { get; set; }
+        public string? PANCardPath { get; set; }
+        public string? PANCard_Dis_FileName  { get; set; }
         public string ExperienceCertificate { get; set; }
+        public string? ExperienceCertificatePath { get; set; }
+        public string? ExperienceCertificate_Dis_FileName { get; set; }
+
+        public int CreatedBy { get; set; }
+        public int ModifyBy { get; set; }
+        public string? IPAddress { get; set; }
 
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
@@ -50,12 +62,14 @@ namespace RJ_NOC_Model
     {
         public int EducationalQualificationID { get; set; }
         public int ProfessionalQualificationID { get; set; }
-        public string ProfessionalQualification { get; set; }
+        public string? ProfessionalQualification { get; set; }
         public string StreamSubject { get; set; }
         public string UniversityBoardInstitutionName { get; set; }
         public int PassingYearID { get; set; }
         public string PassingYear { get; set; }
         public int Marks { get; set; }
         public string UploadDocument { get; set; }
+        public string? UploadDocumentPath { get; set; }
+        public string? UploadDocument_Dis_FileName { get; set; }
     }
 }

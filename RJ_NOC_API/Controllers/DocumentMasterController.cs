@@ -34,7 +34,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.ProjectMasterUtility.IfExists(request.DocumentMasterID, request.DocumentName);
+                IfExits = UtilityHelper.DocumentMasterUtility.IfExists(request.DocumentMasterID, request.DocumentName);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.DocumentMasterUtility.SaveData(request));

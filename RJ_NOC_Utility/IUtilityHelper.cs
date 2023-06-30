@@ -46,5 +46,7 @@ namespace RJ_NOC_Utility
         IBuildingDetailsMaster BuildingDetailsMasterUtility { get; }
 
           ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; }
+          IApplyNOC ApplyNOCUtility { get; }
+          IPayment PaymentUtility { get; }
     }
 }

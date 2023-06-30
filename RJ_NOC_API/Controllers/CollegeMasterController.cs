@@ -183,6 +183,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("ViewTotalCollegeDataByID/{CollegeID}/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> ViewTotalCollegeDataByID(int CollegeID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", CollegeID, "CollegeMaster");
+            var result = new OperationResult<List<CommonDataModel_DataSet>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.ViewTotalCollegeDataByID(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.ViewTotalCollegeDataByID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 
