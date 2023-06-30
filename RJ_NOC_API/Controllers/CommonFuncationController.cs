@@ -1585,6 +1585,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost("DraftFinalSubmit/{CollegeID}/{IsDraftSubmited}")]
+        public async Task<OperationResult<bool>> DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DraftFinalSubmit(CollegeID, IsDraftSubmited));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(IsDraftSubmited, "DraftFinalSubmit", CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Draft Final Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.DraftFinalSubmit", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
 
