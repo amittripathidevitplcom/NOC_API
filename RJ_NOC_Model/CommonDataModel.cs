@@ -238,5 +238,11 @@ namespace RJ_NOC_Model
     {
         public int DesignationID { get; set; }
         public string DesignationName { get; set; }
+    }    
+    public class CommonDataModel_TabField
+    {
+        public int TabFieldID { get; set; }
+        public string TabName { get; set; }
+        public string FieldName { get; set; }
     }
 }
