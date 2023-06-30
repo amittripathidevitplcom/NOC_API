@@ -629,6 +629,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_Trn_DraftFinalSubmit";
+            SqlQuery += " @CollegeID='" + CollegeID + "',@IsDraftSubmited='" + IsDraftSubmited +"'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.DraftFinalSubmit");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
 

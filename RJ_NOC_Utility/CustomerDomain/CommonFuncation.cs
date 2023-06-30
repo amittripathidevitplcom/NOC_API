@@ -243,5 +243,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.CheckTabsEntry(CollegID);
         }
+        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        {
+            return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(CollegeID, IsDraftSubmited);
+        }
     }
 }

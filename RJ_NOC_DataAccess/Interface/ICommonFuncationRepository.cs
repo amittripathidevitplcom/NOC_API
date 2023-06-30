@@ -76,6 +76,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
+        bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
     }
 }
 
