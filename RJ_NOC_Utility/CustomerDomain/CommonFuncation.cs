@@ -239,5 +239,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeBasicDetails(CollegID);
         }
+        public List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.CheckTabsEntry(CollegID);
+        }
     }
 }
