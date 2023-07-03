@@ -11,5 +11,6 @@ namespace RJ_NOC_DataAccess.Interface
     {
         List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID);
         bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType);
+        bool DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp);
     }
 }

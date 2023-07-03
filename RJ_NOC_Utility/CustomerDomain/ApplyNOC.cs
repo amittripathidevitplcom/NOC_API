@@ -25,5 +25,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.DocumentScrutiny( ApplyNOCID,  RoleID,  UserID,  ActionType);
         }
+        public bool DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp)
+        {
+            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny_Temp(DocumentScrutiny_Temp);
+        }
     }
 }

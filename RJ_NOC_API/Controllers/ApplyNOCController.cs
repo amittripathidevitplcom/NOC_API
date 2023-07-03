@@ -79,5 +79,36 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost("DocumentScrutiny_Temp")]
+        public async Task<OperationResult<bool>> DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny_Temp(DocumentScrutiny_Temp));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(DocumentScrutiny_Temp.DocumentScrutinyID, "DocumentScrutiny_Temp", 0, "ApplyNOC");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = DocumentScrutiny_Temp.ActionType + " successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error revert application";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.DocumentScrutiny_Temp", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
