@@ -60,6 +60,8 @@ namespace RJ_NOC_Utility
 
 
         public ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; private set; }
+        public ICreateUser CreateUserUtility { get; private set; }
+
         public IApplyNOC ApplyNOCUtility { get; private set; }
         public IPayment PaymentUtility { get; private set; }
 
@@ -113,6 +115,7 @@ namespace RJ_NOC_Utility
             OldNOCDetailUtility = new OldNOCDetail(UnitOfWork);
             BuildingDetailsMasterUtility = new BuildingDetailsMaster(UnitOfWork);
             TrusteeGeneralInfoMasterUtility = new TrusteeGeneralInfoMaster(UnitOfWork);
+            CreateUserUtility = new CreateUser(UnitOfWork);
             ApplyNOCUtility = new ApplyNOC(UnitOfWork);
             PaymentUtility = new Payment(UnitOfWork);
         }

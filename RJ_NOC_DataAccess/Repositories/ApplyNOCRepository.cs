@@ -20,12 +20,37 @@ namespace RJ_NOC_DataAccess.Repositories
             _commonHelper = commonHelper;
         }
 
-        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType)
+        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID    )
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@ActionType='" + ActionType + "'";
+            SqlQuery += "@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@ActionType='" + ActionType + "',@DepartmentID='"+DepartmentID+"'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool SaveDocumentScrutiny(DocumentScrutinyDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string DocumentScrutiny_TempDetail_Str =request.DocumentScrutinyDetail.Count>0? CommonHelper.GetDetailsTableQry(request.DocumentScrutinyDetail, "Temp_Trn_DocumentScrutiny_Temp_Details") :"";
+            string SqlQuery = " exec USP_Trn_DocumentScrutiny_Temp_IU";
+
+            SqlQuery += " @DocumentScrutinyID='" + request.DocumentScrutinyID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @RoleID='" + request.RoleID + "',";
+            SqlQuery += " @ActionID='" + request.ActionID + "',";
+            SqlQuery += " @Remark='" + request.Remark + "',";
+            SqlQuery += " @TabName='" + request.TabName + "',";
+            SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',";
+            SqlQuery += " @ActionType='" + request.ActionType + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @DocumentScrutiny_TempDetail_Str='" + DocumentScrutiny_TempDetail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveDocumentScrutiny");
             if (Rows > 0)
                 return true;
             else
@@ -40,6 +65,67 @@ namespace RJ_NOC_DataAccess.Repositories
             List<ApplyNOCDataModel> listdataModels = new List<ApplyNOCDataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNOCDataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
+        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetDocumentScrutinyData_TabNameCollegeWise @TabName='" + TabName + "',@CollegeID='"+ CollegeID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetDocumentScrutinyData_TabNameCollegeWise");
+            List<DocumentScrutinyDataModel> listdataModels = new List<DocumentScrutinyDataModel>();
+            DocumentScrutinyDataModel dataModels = new DocumentScrutinyDataModel();
+            if (dataSet != null)
+            {
+                if (TabName == "All")
+                {
+                    for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                    {
+                        dataModels = new DocumentScrutinyDataModel();
+                        dataModels.DocumentScrutinyDetail = new List<DocumentScrutinyDetail_DocumentScrutinyDataModel>();
+                        dataModels.DocumentScrutinyID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["DocumentScrutinyID"]);
+                        dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["DepartmentID"]);
+                        dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["CollegeID"]);
+                        dataModels.UserID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["UserID"]);
+                        dataModels.RoleID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["RoleID"]);
+                        dataModels.ActionID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["ActionID"]);
+                        dataModels.TabName = dataSet.Tables[0].Rows[i]["TabName"].ToString();
+                        dataModels.Remark = dataSet.Tables[0].Rows[i]["Remark"].ToString();
+                        for (int j = 0; j < dataSet.Tables[1].Rows.Count; j++)
+                        {
+                            if (Convert.ToInt32(dataSet.Tables[1].Rows[j]["DocumentScrutinyID"]) == Convert.ToInt32(dataSet.Tables[0].Rows[i]["DocumentScrutinyID"]))
+                            {
+                                DocumentScrutinyDetail_DocumentScrutinyDataModel detailDataModel = new DocumentScrutinyDetail_DocumentScrutinyDataModel();
+                                detailDataModel.DocumentScrutinyDetailID = Convert.ToInt32(dataSet.Tables[1].Rows[j]["DocumentScrutinyDetailID"]);
+                                detailDataModel.DocumentScrutinyID = Convert.ToInt32(dataSet.Tables[1].Rows[j]["DocumentScrutinyID"]);
+                                detailDataModel.TabFieldID = Convert.ToInt32(dataSet.Tables[1].Rows[j]["TabFieldID"]);
+                                detailDataModel.TabFieldName = dataSet.Tables[1].Rows[j]["TabFieldName"].ToString();
+                                dataModels.DocumentScrutinyDetail.Add(detailDataModel);
+                            }
+                        }
+                        listdataModels.Add(dataModels);
+                    }
+                }
+                else
+                {
+                    if (dataSet.Tables[0].Rows.Count > 0)
+                    {
+                        dataModels.DocumentScrutinyDetail = new List<DocumentScrutinyDetail_DocumentScrutinyDataModel>();
+                        dataModels.DocumentScrutinyID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DocumentScrutinyID"]);
+                        dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
+                        dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
+                        dataModels.UserID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["UserID"]);
+                        dataModels.RoleID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RoleID"]);
+                        dataModels.ActionID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ActionID"]);
+                        dataModels.TabName = dataSet.Tables[0].Rows[0]["TabName"].ToString();
+                        dataModels.Remark = dataSet.Tables[0].Rows[0]["Remark"].ToString();
+
+                        string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                        List<DocumentScrutinyDetail_DocumentScrutinyDataModel> DocumentScrutinyDetail_DocumentScrutinyDataModel_Item = JsonConvert.DeserializeObject<List<DocumentScrutinyDetail_DocumentScrutinyDataModel>>(JsonDataTable_Data);
+                        dataModels.DocumentScrutinyDetail = DocumentScrutinyDetail_DocumentScrutinyDataModel_Item;
+                        listdataModels.Add(dataModels);
+                    }
+                }
+            }
             return listdataModels;
         }
 

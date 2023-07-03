@@ -617,6 +617,29 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_RoleListByLevel> GetRoleList()
+        {
+            string SqlQuery = "exec USP_GetRoleList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRoleList");
+
+            List<CommonDataModel_RoleListByLevel> dataModels = new List<CommonDataModel_RoleListByLevel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RoleListByLevel>>(JsonDataTable_Data);
+            return dataModels;
+
+        }
+        public List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID)
+        {
+            string SqlQuery = " exec USP_GetDistrictByStateID @StateID='" + StateID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.Load_StateWise_DistrictMaster");
+
+            List<CommonDataModel_DistrictList> dataModels = new List<CommonDataModel_DistrictList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName)
         {

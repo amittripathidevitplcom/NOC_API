@@ -9,9 +9,6 @@ namespace RJ_NOC_Model
     {
         public int WorkFlowMasterID { get; set; }
         public int DepartmentID { get; set; }
-        public int SchemeID { get; set; }
-        public int ModuleID { get; set; }
-        public int SubModuleID { get; set; }
         public int RoleLevelID { get; set; }
         public int RoleID { get; set; }
         public int UserID { get; set; }

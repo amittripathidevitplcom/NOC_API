@@ -1652,5 +1652,68 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetRoleList")]
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleList()
+        {
+            var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRoleList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("Load_StateWise_DistrictMaster/{StateID}")]
+        public async Task<OperationResult<List<CommonDataModel_DistrictList>>> Load_StateWise_DistrictMaster(int StateID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DistrictList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.Load_StateWise_DistrictMaster(StateID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.Load_StateWise_DistrictMaster", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
