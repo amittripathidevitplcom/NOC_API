@@ -48,5 +48,6 @@ namespace RJ_NOC_Utility
           ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; }
           IApplyNOC ApplyNOCUtility { get; }
           IPayment PaymentUtility { get; }
+        IGeoTagging GeoTaggingUtility { get; }
     }
 }

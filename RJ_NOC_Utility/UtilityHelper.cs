@@ -62,6 +62,7 @@ namespace RJ_NOC_Utility
         public ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; private set; }
         public IApplyNOC ApplyNOCUtility { get; private set; }
         public IPayment PaymentUtility { get; private set; }
+        public IGeoTagging GeoTaggingUtility { get; private set; }
 
 
 
@@ -115,6 +116,7 @@ namespace RJ_NOC_Utility
             TrusteeGeneralInfoMasterUtility = new TrusteeGeneralInfoMaster(UnitOfWork);
             ApplyNOCUtility = new ApplyNOC(UnitOfWork);
             PaymentUtility = new Payment(UnitOfWork);
+            GeoTaggingUtility = new GeoTagging(UnitOfWork);
         }
     }
 }

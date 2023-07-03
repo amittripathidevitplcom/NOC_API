@@ -45,5 +45,6 @@ namespace RJ_NOC_DataAccess.Interface
         ITrusteeGeneralInfoMasterRepository TrusteeGeneralInfoMasterRepository { get; }
         IApplyNOCRepository ApplyNOCRepository { get; }
         IPaymentRepository PaymentRepository { get; }
+        IGeoTaggingRepository GeoTaggingRepository { get; }
     }
 }
