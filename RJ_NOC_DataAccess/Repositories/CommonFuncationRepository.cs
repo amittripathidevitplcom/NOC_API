@@ -617,6 +617,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName)
+        {
+            string SqlQuery = " Exec USP_GetTabFieldByTabName @TabName='" + TabName + "'";
+            List<CommonDataModel_TabField> dataModels = new List<CommonDataModel_TabField>();
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTabFieldByTabName");
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_TabField>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
         public List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID)
         {
             string SqlQuery = " exec USP_CheckTabsEntry @CollegeID='" + CollegID + "'";
@@ -628,6 +640,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_Trn_DraftFinalSubmit";
+            SqlQuery += " @CollegeID='" + CollegeID + "',@IsDraftSubmited='" + IsDraftSubmited +"'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.DraftFinalSubmit");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -73,7 +73,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
+        List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
+        bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
 
     }
 

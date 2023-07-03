@@ -1585,6 +1585,72 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost("DraftFinalSubmit/{CollegeID}/{IsDraftSubmited}")]
+        public async Task<OperationResult<bool>> DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DraftFinalSubmit(CollegeID, IsDraftSubmited));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(IsDraftSubmited, "DraftFinalSubmit", CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Draft Final Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.DraftFinalSubmit", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+
+        [HttpGet("GetTabFieldByTabName/{TabName}")]
+        public async Task<OperationResult<List<CommonDataModel_TabField>>> GetTabFieldByTabName(string TabName)
+        {
+            var result = new OperationResult<List<CommonDataModel_TabField>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetTabFieldByTabName(TabName));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetTabFieldByTabName", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }

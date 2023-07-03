@@ -75,7 +75,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type);
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
+        List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
+        bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
     }
 }
 
