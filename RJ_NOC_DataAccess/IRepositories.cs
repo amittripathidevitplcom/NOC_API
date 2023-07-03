@@ -46,5 +46,6 @@ namespace RJ_NOC_DataAccess.Interface
         ICreateUserRepository CreateUserRepository { get; }
         IApplyNOCRepository ApplyNOCRepository { get; }
         IPaymentRepository PaymentRepository { get; }
+        IGeoTaggingRepository GeoTaggingRepository { get; }
     }
 }

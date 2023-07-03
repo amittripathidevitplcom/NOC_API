@@ -247,6 +247,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return paymentRepository; }
         }
+        private IGeoTaggingRepository geoTaggingRepository;
+        public IGeoTaggingRepository GeoTaggingRepository
+        {
+            get { return geoTaggingRepository; }
+        }
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -286,7 +291,7 @@ namespace RJ_NOC_DataAccess.Repository
             createUserRepository = new CreateUserRepository(commonHelper);
             applyNOCRepository = new ApplyNOCRepository(commonHelper);
             paymentRepository = new PaymentRepository(commonHelper);
-
+            geoTaggingRepository = new GeoTaggingRepository(commonHelper);
 
         }
     }

@@ -69,5 +69,20 @@ namespace RJ_NOC_API.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        protected async Task<string> CreateGeoTaggingAuthentication(GeoTaggingDataModel model)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.PrimarySid,Convert.ToString(model.UserID)),
+                    new Claim(ClaimTypes.GivenName,model.UserName)
+                };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme
+                , new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties());
+
+            return GenrateJwtToken(claims);
+        }
     }
 }

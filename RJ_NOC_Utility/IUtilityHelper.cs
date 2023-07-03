@@ -49,5 +49,6 @@ namespace RJ_NOC_Utility
           ICreateUser CreateUserUtility { get; }
           IApplyNOC ApplyNOCUtility { get; }
           IPayment PaymentUtility { get; }
+        IGeoTagging GeoTaggingUtility { get; }
     }
 }

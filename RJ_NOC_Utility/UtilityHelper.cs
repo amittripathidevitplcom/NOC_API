@@ -64,6 +64,7 @@ namespace RJ_NOC_Utility
 
         public IApplyNOC ApplyNOCUtility { get; private set; }
         public IPayment PaymentUtility { get; private set; }
+        public IGeoTagging GeoTaggingUtility { get; private set; }
 
 
 
@@ -118,6 +119,7 @@ namespace RJ_NOC_Utility
             CreateUserUtility = new CreateUser(UnitOfWork);
             ApplyNOCUtility = new ApplyNOC(UnitOfWork);
             PaymentUtility = new Payment(UnitOfWork);
+            GeoTaggingUtility = new GeoTagging(UnitOfWork);
         }
     }
 }
