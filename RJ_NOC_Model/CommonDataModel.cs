@@ -243,6 +243,6 @@ namespace RJ_NOC_Model
     {
         public int TabFieldID { get; set; }
         public string TabName { get; set; }
-        public string FieldName { get; set; }
+        public string TabFieldName { get; set; }
     }
 }

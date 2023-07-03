@@ -21,13 +21,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetApplyNOCApplicationListByRole(RoleID);
         }
-        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType)
+        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny( ApplyNOCID,  RoleID,  UserID,  ActionType);
+            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny( ApplyNOCID,  RoleID,  UserID,  ActionType, DepartmentID);
         }
-        public bool DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp)
+        public bool SaveDocumentScrutiny(DocumentScrutinyDataModel request)
         {
-            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny_Temp(DocumentScrutiny_Temp);
+            return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutiny(request);
+        }      
+        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetDocumentScrutinyData_TabNameCollegeWise(TabName,CollegeID);
         }
     }
 }
