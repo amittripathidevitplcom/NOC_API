@@ -239,5 +239,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeBasicDetails(CollegID);
         }
+        public List<CommonDataModel_RoleListByLevel> GetRoleList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetRoleList();
+        }
+        public List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID)
+        {
+            return UnitOfWork.CommonFuncationRepository.Load_StateWise_DistrictMaster(StateID);
+        }
     }
 }

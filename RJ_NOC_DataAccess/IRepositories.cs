@@ -43,5 +43,6 @@ namespace RJ_NOC_DataAccess.Interface
         IBuildingDetailsMasterRepository BuildingDetailsMasterRepository { get; }
         ISSOAPIRepository SSOAPIRepository { get; }
         ITrusteeGeneralInfoMasterRepository TrusteeGeneralInfoMasterRepository { get; }
+        ICreateUserRepository CreateUserRepository { get; }
     }
 }

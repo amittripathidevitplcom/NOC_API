@@ -79,7 +79,7 @@ namespace RJ_NOC_Model
         public int ActionHeadID { get; set; }
         public string ActionHeadName { get; set; }
     }
-    
+
     public class CommonDataModel_ActionListByActionHead
     {
         public int ActionID { get; set; }

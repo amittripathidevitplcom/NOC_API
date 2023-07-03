@@ -60,7 +60,8 @@ namespace RJ_NOC_Utility
 
 
         public ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; private set; }
-        
+        public ICreateUser CreateUserUtility { get; private set; }
+
 
 
 
@@ -111,6 +112,7 @@ namespace RJ_NOC_Utility
             OldNOCDetailUtility = new OldNOCDetail(UnitOfWork);
             BuildingDetailsMasterUtility = new BuildingDetailsMaster(UnitOfWork);
             TrusteeGeneralInfoMasterUtility = new TrusteeGeneralInfoMaster(UnitOfWork);
+            CreateUserUtility = new CreateUser(UnitOfWork);
         }
     }
 }

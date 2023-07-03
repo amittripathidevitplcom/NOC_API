@@ -232,7 +232,11 @@ namespace RJ_NOC_DataAccess.Repository
                 return _TrusteeGeneralInfoMasterRepository;
             }
         }
-         
+        private ICreateUserRepository createUserRepository;
+        public ICreateUserRepository CreateUserRepository
+        {
+            get { return createUserRepository; }
+        }
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -269,6 +273,7 @@ namespace RJ_NOC_DataAccess.Repository
             oldNOCDetailRepository = new OldNOCDetailRepository(commonHelper);
             buildingDetailsMasterRepository = new BuildingDetailsMasterRepository(commonHelper);
             sSOAPIRepository = new SSOAPIRepository(commonHelper);
+            createUserRepository = new CreateUserRepository(commonHelper);
 
 
         }

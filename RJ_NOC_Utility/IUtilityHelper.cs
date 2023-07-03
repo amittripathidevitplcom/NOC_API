@@ -46,5 +46,6 @@ namespace RJ_NOC_Utility
         IBuildingDetailsMaster BuildingDetailsMasterUtility { get; }
 
           ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; }
+          ICreateUser CreateUserUtility { get; }
     }
 }
