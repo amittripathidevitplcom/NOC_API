@@ -125,5 +125,6 @@ namespace RJ_NOC_Model
         public int NOCIssued { get; set; }
         public int PendingNOC { get; set; }
         public int TotalLegalEntity { get; set; }
+        public int TotalRevertApplication { get; set; }
     }
 }
