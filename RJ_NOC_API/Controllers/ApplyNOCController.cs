@@ -48,13 +48,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpPost("DocumentScrutiny/{ApplyNOCID}/{RoleID}/{UserID}/{ActionType}")]
-        public async Task<OperationResult<bool>> DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType)
+        [HttpPost("DocumentScrutiny/{ApplyNOCID}/{RoleID}/{UserID}/{ActionType}/{DepartmentID}")]
+        public async Task<OperationResult<bool>> DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType,int DepartmentID)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny(ApplyNOCID,RoleID, UserID,ActionType));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny(ApplyNOCID,RoleID, UserID,ActionType, DepartmentID));
                 if (result.Data)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(UserID, "DocumentScrutiny", ApplyNOCID, "ApplyNOC");
@@ -79,18 +79,18 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpPost("DocumentScrutiny_Temp")]
-        public async Task<OperationResult<bool>> DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp)
+        [HttpPost("SaveDocumentScrutiny")]
+        public async Task<OperationResult<bool>> SaveDocumentScrutiny(DocumentScrutinyDataModel request)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny_Temp(DocumentScrutiny_Temp));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDocumentScrutiny(request));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(DocumentScrutiny_Temp.DocumentScrutinyID, "DocumentScrutiny_Temp", 0, "ApplyNOC");
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.DocumentScrutinyID, "DocumentScrutiny_Temp", 0, "ApplyNOC");
                     result.State = OperationState.Success;
-                    result.SuccessMessage = DocumentScrutiny_Temp.ActionType + " successfully .!";
+                    result.SuccessMessage = request.ActionType + " successfully .!";
                 }
                 else
                 {
@@ -107,6 +107,38 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetDocumentScrutinyData_TabNameCollegeWise/{TabName}/{CollegeID}")]
+        public async Task<OperationResult<List<DocumentScrutinyDataModel>>> GetDocumentScrutinyData_TabNameCollegeWise(string TabName,int CollegeID)
+        {
+            var result = new OperationResult<List<DocumentScrutinyDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetDocumentScrutinyData_TabNameCollegeWise(TabName,CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetDocumentScrutinyData_TabNameCollegeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
             }
             return result;
         }

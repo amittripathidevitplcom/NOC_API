@@ -10,7 +10,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IApplyNOC
     {
         List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID);
-        bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType);
-        bool DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp);
+        bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType,int DepartmentID);
+        bool SaveDocumentScrutiny(DocumentScrutinyDataModel request);
+        List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID);
     }
 }

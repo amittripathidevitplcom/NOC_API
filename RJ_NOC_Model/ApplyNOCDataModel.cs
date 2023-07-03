@@ -15,7 +15,7 @@ namespace RJ_NOC_Model
         public string CollegeName { get; set; }
     }
 
-    public class DocumentScrutiny_TempDataModel
+    public class DocumentScrutinyDataModel
     {
         public int DocumentScrutinyID { get; set; }
         public int DepartmentID { get; set; }
@@ -26,14 +26,14 @@ namespace RJ_NOC_Model
         public string Remark { get; set; }
         public string TabName { get; set; }
         public int ApplyNOCID { get; set; }
-        public string ActionType { get; set; }
-        public List<DocumentScrutinyDetail_DocumentScrutiny_TempDataModel> DocumentScrutiny_TempDetail { get; set; }
+        public string? ActionType { get; set; }
+        public List<DocumentScrutinyDetail_DocumentScrutinyDataModel> DocumentScrutinyDetail { get; set; }
     }
-    public class DocumentScrutinyDetail_DocumentScrutiny_TempDataModel
+    public class DocumentScrutinyDetail_DocumentScrutinyDataModel
     {
         public int DocumentScrutinyDetailID { get; set; }
         public int DocumentScrutinyID { get; set; }
         public int TabFieldID { get; set; }
-        public string TabFieldName { get; set; }
+        public string? TabFieldName { get; set; }
 }
 }
