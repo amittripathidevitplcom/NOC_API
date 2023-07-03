@@ -31,6 +31,31 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+        public bool DocumentScrutiny_Temp(DocumentScrutiny_TempDataModel DocumentScrutiny_Temp)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string DocumentScrutiny_TempDetail_Str = CommonHelper.GetDetailsTableQry(DocumentScrutiny_Temp.DocumentScrutiny_TempDetail, "Temp_Trn_DocumentScrutiny_Temp_Details");
+            string SqlQuery = " exec USP_Trn_DocumentScrutiny_Temp_IU";
+
+            SqlQuery += " @DocumentScrutinyID='" + DocumentScrutiny_Temp.DocumentScrutinyID + "',";
+            SqlQuery += " @DepartmentID='" + DocumentScrutiny_Temp.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + DocumentScrutiny_Temp.CollegeID + "',";
+            SqlQuery += " @UserID='" + DocumentScrutiny_Temp.UserID + "',";
+            SqlQuery += " @RoleID='" + DocumentScrutiny_Temp.RoleID + "',";
+            SqlQuery += " @ActionID='" + DocumentScrutiny_Temp.ActionID + "',";
+            SqlQuery += " @Remark='" + DocumentScrutiny_Temp.Remark + "',";
+            SqlQuery += " @TabName='" + DocumentScrutiny_Temp.TabName + "',";
+            SqlQuery += " @ApplyNOCID='" + DocumentScrutiny_Temp.ApplyNOCID + "',";
+            SqlQuery += " @ActionType='" + DocumentScrutiny_Temp.ActionType + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @DocumentScrutiny_TempDetail_Str='" + DocumentScrutiny_TempDetail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny_Temp");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
 
         public List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID)
         {
