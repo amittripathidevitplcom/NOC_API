@@ -29,9 +29,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutiny(request);
         }      
-        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID)
+        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID, int RoleID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetDocumentScrutinyData_TabNameCollegeWise(TabName,CollegeID);
+            return UnitOfWork.ApplyNOCRepository.GetDocumentScrutinyData_TabNameCollegeWise(TabName,CollegeID, RoleID);
         }
     }
 }
