@@ -66,10 +66,18 @@ namespace RJ_NOC_Utility
         public IPayment PaymentUtility { get; private set; }
         public IGeoTagging GeoTaggingUtility { get; private set; }
 
-
-
-
-
+        private IApplyNocParameterMaster _ApplyNocParameterMasterUtility;
+        public IApplyNocParameterMaster ApplyNocParameterMasterUtility 
+        {
+            get
+            {
+                if(_ApplyNocParameterMasterUtility == null)
+                {
+                    _ApplyNocParameterMasterUtility = new ApplyNocParameterMaster(UnitOfWork);
+                }
+                return _ApplyNocParameterMasterUtility;
+            }
+        }
 
 
         public UtilityHelper(IConfiguration configuration)

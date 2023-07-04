@@ -253,6 +253,19 @@ namespace RJ_NOC_DataAccess.Repository
             get { return geoTaggingRepository; }
         }
 
+        private IApplyNocParameterMasterRepository _ApplyNocParameterMasterRepository;
+        public IApplyNocParameterMasterRepository ApplyNocParameterMasterRepository
+        {
+            get
+            {
+                if (_ApplyNocParameterMasterRepository == null)
+                {
+                    _ApplyNocParameterMasterRepository = new ApplyNocParameterMasterRepository(CommonHelper);
+                }
+                return _ApplyNocParameterMasterRepository;
+            }
+        }
+
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
