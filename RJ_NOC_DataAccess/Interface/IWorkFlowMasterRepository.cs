@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     public interface IWorkFlowMasterRepository
     {
         bool SaveData(WorkFlowMasterDataModel request);
-        bool IfExists(int WorkFlowMasterID, int RoleID);
+        bool IfExists(int WorkFlowMasterID, int RoleID, int DepartmentID);
         List<WorkFlowMasterDataModel> GetWorkFlowMasterList(int WorkFlowMasterID);
     }
 
