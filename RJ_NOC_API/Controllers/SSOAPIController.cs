@@ -71,9 +71,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-
-
+        
         [HttpGet("Check_SSOIDWise_LegalEntity/{SSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> Check_SSOIDWise_LegalEntity(string SSOID)
         {
@@ -105,6 +103,8 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
         [HttpGet("CheckMappingSSOID/{SSOID}")]
         public async Task<OperationResult<SSOUserDetailData>> CheckMappingSSOID(string SSOID)
         {

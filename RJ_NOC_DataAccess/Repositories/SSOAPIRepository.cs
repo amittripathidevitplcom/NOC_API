@@ -21,8 +21,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetDepartmentByCourse");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DataTable>>(JsonDataTable_Data);
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
 

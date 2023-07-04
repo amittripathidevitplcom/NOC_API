@@ -73,7 +73,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
 
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type);
-        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID);
+        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID);

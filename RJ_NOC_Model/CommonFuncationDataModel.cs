@@ -126,5 +126,10 @@ namespace RJ_NOC_Model
         public int PendingNOC { get; set; }
         public int TotalLegalEntity { get; set; }
         public int TotalRevertApplication { get; set; }
+
+
+        public int Clerk_Pending { get; set; }
+        public int Clerk_Reverted { get; set; }
+        public int Clerk_Completed { get; set; }
     }
 }

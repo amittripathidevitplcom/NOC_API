@@ -575,9 +575,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssemblyAreaDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID)
         {
-            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "'";
+            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='"+ DepartmentID + "',@RoleID='" + RoleID + "'";
             List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");

@@ -1486,13 +1486,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetDashboardDataSSOWise/{SSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID)
+        [HttpGet("GetDashboardDataSSOWise/{SSOID}/{DepartmentID}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID,int DepartmentID,int RoleID )
         {
             var result = new OperationResult<List<CommonDataModel_DashBoard>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashboardDataSSOWise(SSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
