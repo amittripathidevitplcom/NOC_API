@@ -675,6 +675,17 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int LevelID)
+        {
+            string SqlQuery = "exec USP_GetRoleListByLevelID @LevelID=" + LevelID;
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRoleListByLevelID");
+            List<CommonDataModel_RoleListByLevel> dataModels = new List<CommonDataModel_RoleListByLevel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RoleListByLevel>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

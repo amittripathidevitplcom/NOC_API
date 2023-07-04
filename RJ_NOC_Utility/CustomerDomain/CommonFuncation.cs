@@ -259,5 +259,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.Load_StateWise_DistrictMaster(StateID);
         }
+        public List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int LevelID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetRoleListByLevelID(LevelID);
+        }
     }
 }

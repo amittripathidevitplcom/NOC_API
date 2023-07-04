@@ -71,9 +71,6 @@ namespace RJ_NOC_DataAccess.Repository
                     dataModels.WorkFlowMasterID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["WorkFlowMasterID"]);
                     dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
                     dataModels.DepartmentName = dataSet.Tables[0].Rows[0]["DepartmentName"].ToString();
-                    dataModels.SchemeName = dataSet.Tables[0].Rows[0]["SchemeName"].ToString();
-                    dataModels.ModuleName = dataSet.Tables[0].Rows[0]["ModuleName"].ToString();
-                    dataModels.SubModuleName = dataSet.Tables[0].Rows[0]["SubModuleName"].ToString();
                     dataModels.RoleLevelID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RoleLevelID"]);
                     dataModels.RoleLevelName = dataSet.Tables[0].Rows[0]["RoleLevelName"].ToString();
                     dataModels.RoleID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RoleID"]);
