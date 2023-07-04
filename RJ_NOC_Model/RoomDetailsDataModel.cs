@@ -22,6 +22,7 @@ namespace RJ_NOC_Model
         public int StudentCapacity { get; set; }
         public string ImageFileName { get; set; }
         public string ImageFilePath { get; set; }
+        public string? Image_Dis_FileName { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int UserID { get; set; }
