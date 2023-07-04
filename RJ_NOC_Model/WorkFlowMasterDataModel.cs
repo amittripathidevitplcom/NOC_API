@@ -15,9 +15,6 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public string DepartmentName { get; set; }
-        public string SchemeName { get; set; }
-        public string ModuleName { get; set; }
-        public string SubModuleName { get; set; }
         public string RoleLevelName { get; set; }
         public string RoleName { get; set; }
         public List<WorkFlowMasterDetail> WorkFlowMasterDetailList { get; set; }
