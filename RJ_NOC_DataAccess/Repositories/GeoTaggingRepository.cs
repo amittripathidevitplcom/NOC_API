@@ -28,16 +28,30 @@ namespace RJ_NOC_DataAccess.Repositories
             _commonHelper = commonHelper;
         }
 
-        public List<GeoTaggingDataModel> AppCollegeSSOLogin(string LoginSSOID)
-        {
-            string SqlQuery = " exec USP_AppSSOLogin @LoginSSOID='" + LoginSSOID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.ChkSSOLogin");
+        //public List<GeoTaggingDataModels> AppCollegeSSOLogin(string LoginSSOID)
+        //{
+        //    string SqlQuery = " exec USP_AppSSOLogin @LoginSSOID='" + LoginSSOID + "'";
+        //    DataTable dataTable = new DataTable();
+        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.GetAllData");
 
-            List<GeoTaggingDataModel> dataModels = new List<GeoTaggingDataModel>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<GeoTaggingDataModel>>(JsonDataTable_Data);
+        //    List<GeoTaggingDataModels> dataModels = new List<GeoTaggingDataModels>();
+        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+        //    dataModels = JsonConvert.DeserializeObject<List<GeoTaggingDataModels>>(JsonDataTable_Data);
+        //    return dataModels;
+        //}
+        public List<GeoTaggingDataModels> AppCollegeSSOLogin(string LoginSSOID)
+        {
+            string SqlQuery = " exec USP_AppSSOLogin @LoginSSOID = '" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.AppCollegeSSOLogin");
+
+            List<GeoTaggingDataModels> dataModels = new List<GeoTaggingDataModels>();
+            GeoTaggingDataModels dataModel = new GeoTaggingDataModels();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
+
+
         }
         public List<GeoTaggingDataModels> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
         {

@@ -57,39 +57,71 @@ namespace RJ_NOC_API.Controllers
 
 
 
+        //[HttpPost("AppCollegeSSOLogin/{LoginSSOID}")]
+        //public async Task<OperationResult<List<GeoTaggingDataModels>>> AppCollegeSSOLogin(string LoginSSOID)
+        //{
+        //    var result = new OperationResult<List<GeoTaggingDataModels>>();
+        //    try
+        //    {
+        //        result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppCollegeSSOLogin(LoginSSOID));
+        //        if (result.Data.Count > 0)
+        //        {
+        //            //result.Data[0].Token = await CreateGeoTaggingAuthentication(new GeoTaggingDataModels
+        //            //{
+        //            //    UserID = result.Data[0].UserID,
+        //            //    UserName = result.Data[0].UserName
+        //            //});
+        //            //HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
+        //            result.State = OperationState.Success;
+        //            result.SuccessMessage = "Login successfully .!";
+        //        }
+        //        else
+        //        {
+        //            result.State = OperationState.Error;
+        //            result.ErrorMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        CommonDataAccessHelper.Insert_ErrorLog("GeoTaggingController.GeoTagging", e.ToString());
+        //        result.State = OperationState.Error;
+        //        result.ErrorMessage = e.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        //UnitOfWork.Dispose();
+        //    }
+        //    return result;
+        //}
         [HttpPost("AppCollegeSSOLogin/{LoginSSOID}")]
-        public async Task<OperationResult<List<GeoTaggingDataModel>>> AppCollegeSSOLogin(string LoginSSOID)
+        public async Task<OperationResult<List<GeoTaggingDataModels>>> AppCollegeSSOLogin(string LoginSSOID)
         {
-            var result = new OperationResult<List<GeoTaggingDataModel>>();
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "GeoTagging");
+            var result = new OperationResult<List<GeoTaggingDataModels>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppCollegeSSOLogin(LoginSSOID));
+                result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
-                    result.Data[0].Token = await CreateGeoTaggingAuthentication(new GeoTaggingDataModel
-                    {
-                        UserID = result.Data[0].UserID,
-                        UserName = result.Data[0].UserName
-                    });
-                    HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Login successfully .!";
                 }
                 else
                 {
-                    result.State = OperationState.Error;
-                    result.ErrorMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("GeoTaggingController.GeoTagging", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("GeoTaggingController.AppCollegeSSOLogin", ex.ToString());
                 result.State = OperationState.Error;
-                result.ErrorMessage = e.Message.ToString();
+                result.ErrorMessage = ex.Message.ToString();
             }
             finally
             {
-                //UnitOfWork.Dispose();
+                // UnitOfWork.Dispose();
             }
             return result;
         }

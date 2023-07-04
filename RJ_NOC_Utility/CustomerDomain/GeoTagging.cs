@@ -12,7 +12,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public GeoTagging(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        List<GeoTaggingDataModel> IGeoTagging.AppCollegeSSOLogin(string LoginSSOID)
+        List<GeoTaggingDataModels> IGeoTagging.AppCollegeSSOLogin(string LoginSSOID)
         {
             return UnitOfWork.GeoTaggingRepository.AppCollegeSSOLogin(LoginSSOID);
         }
