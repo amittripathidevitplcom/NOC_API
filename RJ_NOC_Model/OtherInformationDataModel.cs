@@ -21,8 +21,10 @@ namespace RJ_NOC_Model
         public decimal Length { get; set; }
         public string ImageFileName { get; set; }
         public string ImageFilePath { get; set; }
+        public string? Image_Dis_FileName { get; set; }
         public string BookImageFileName { get; set; }
         public string BookImageFilePath { get; set; }
+        public string? BookImage_Dis_FileName { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int NoofBooks { get; set; }
