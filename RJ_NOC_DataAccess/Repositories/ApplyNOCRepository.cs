@@ -67,9 +67,9 @@ namespace RJ_NOC_DataAccess.Repositories
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNOCDataModel>>(JsonDataTable_Data);
             return listdataModels;
         }
-        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID)
+        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID,int RoleID)
         {
-            string SqlQuery = " exec USP_GetDocumentScrutinyData_TabNameCollegeWise @TabName='" + TabName + "',@CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_GetDocumentScrutinyData_TabNameCollegeWise @TabName='" + TabName + "',@CollegeID='"+ CollegeID + "',@RoleID='"+ RoleID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetDocumentScrutinyData_TabNameCollegeWise");
             List<DocumentScrutinyDataModel> listdataModels = new List<DocumentScrutinyDataModel>();

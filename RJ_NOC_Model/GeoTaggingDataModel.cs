@@ -10,7 +10,7 @@ namespace RJ_NOC_Model
 {
     public class GeoTaggingDataModels
     {
-        public DataTable data { get; set; }
+        public DataTable data { get; set; }       
     }
     public class GeoTaggingDataModel
     {
@@ -28,6 +28,7 @@ namespace RJ_NOC_Model
         public bool IsGeoTagging { get; set; }
         public int CreatedBy { get; set; }
         public int ModifyBy { get; set; }
+
     }
     
 }
