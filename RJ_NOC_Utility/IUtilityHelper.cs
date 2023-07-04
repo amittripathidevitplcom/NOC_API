@@ -45,10 +45,11 @@ namespace RJ_NOC_Utility
         IOldNOCDetail OldNOCDetailUtility { get; }
         IBuildingDetailsMaster BuildingDetailsMasterUtility { get; }
 
-          ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; }
-          ICreateUser CreateUserUtility { get; }
-          IApplyNOC ApplyNOCUtility { get; }
-          IPayment PaymentUtility { get; }
+        ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; }
+        IApplyNOC ApplyNOCUtility { get; }
+        IPayment PaymentUtility { get; }
+        IApplyNocParameterMaster ApplyNocParameterMasterUtility { get; }
+        ICreateUser CreateUserUtility { get; }
         IGeoTagging GeoTaggingUtility { get; }
     }
 }
