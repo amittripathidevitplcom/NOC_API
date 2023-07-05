@@ -46,10 +46,11 @@ namespace RJ_NOC_Utility
         IBuildingDetailsMaster BuildingDetailsMasterUtility { get; }
 
         ITrusteeGeneralInfoMaster TrusteeGeneralInfoMasterUtility { get; }
+        ICreateUser CreateUserUtility { get; }
         IApplyNOC ApplyNOCUtility { get; }
         IPayment PaymentUtility { get; }
         IApplyNocParameterMaster ApplyNocParameterMasterUtility { get; }
-        ICreateUser CreateUserUtility { get; }
         IGeoTagging GeoTaggingUtility { get; }
+        ICommitteeMaster CommitteeMasterUtility { get; }
     }
 }
