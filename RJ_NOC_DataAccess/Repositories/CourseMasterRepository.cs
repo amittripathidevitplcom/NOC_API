@@ -137,15 +137,15 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int CourseID, string CourseName)
+        public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID)
         {
-            //string SqlQuery = " select CourseName from M_CourseMaster Where CourseName='" + CourseName.Trim() + "'  and CourseID !='" + CourseID + "'  and DeleteStatus=0";
-            //DataTable dataTable = new DataTable();
-            //dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.IfExists");
-            //if (dataTable.Rows.Count > 0)
-            //    return true;
-            //else
-            return false;
+            string query = $"select top 1 AID from Trn_CollegeWiseCourse where DepartmentID={DepartmentID} and CollegeID={CollegeID} and CollegeWiseCourseID<>{CollegeWiseCourseID} and CourseID={CourseID} and DeleteStatus=0";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(query, "CourseMaster.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
         }
 
     }
