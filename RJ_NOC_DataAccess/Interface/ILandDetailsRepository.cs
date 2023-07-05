@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface ILandDetailsRepository
     {
-        List<CommonDataModel_DataTable> GetLandDetailsList(int SelectedCollageID,int  LandDetailID);
+        List<CommonDataModel_DataSet> GetLandDetailsList(int SelectedCollageID,int  LandDetailID);
         List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID, int CollageID);
         bool SaveData(LandDetailsDataModel request);
         bool DeleteData(int LandDetailID);
