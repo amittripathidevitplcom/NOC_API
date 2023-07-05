@@ -84,6 +84,8 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.FromDate = dataSet.Tables[0].Rows[0]["FromDate"].ToString();
                     dataModels.ToDate = dataSet.Tables[0].Rows[0]["ToDate"].ToString();
                     dataModels.RentDocument = dataSet.Tables[0].Rows[0]["RentDocument"].ToString();
+                    dataModels.RentDocumentPath = dataSet.Tables[0].Rows[0]["RentDocumentPath"].ToString();
+                    dataModels.RentDocument_Dis_FileName = dataSet.Tables[0].Rows[0]["RentDocument_Dis_FileName"].ToString();
                     dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
                     dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
 

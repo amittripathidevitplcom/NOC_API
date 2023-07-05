@@ -18,6 +18,8 @@ namespace RJ_NOC_Model
         public string OwnerName { get; set; }
         public string OwnerContactNo { get; set; }
         public string RentDocument { get; set; }
+        public string? RentDocumentPath { get; set; }
+        public string? RentDocument_Dis_FileName { get; set; }
         public string ContactPersonNo { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
@@ -53,8 +55,8 @@ namespace RJ_NOC_Model
         public int Length { get; set; }
         public int StudentCapacity { get; set; }
         public string ImageFileName { get; set; }
-        public string ImageFilePath { get; set; }
-        public string Dis_FileName { get; set; }
+        public string? ImageFilePath { get; set; }
+        public string? Dis_FileName { get; set; }
         public string? CourseName { get; set; }
     }
 }
