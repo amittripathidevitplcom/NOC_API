@@ -28,15 +28,15 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetLandDetailsList(int SelectedCollageID, int LandDetailID)
+        public List<CommonDataModel_DataSet> GetLandDetailsList(int SelectedCollageID, int LandDetailID)
         {
             string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LandDetails.GetLandDetailsList");
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LandDetails.GetLandDetailsList");
 
-            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
-            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
-            dataModel.data = dataTable;
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
             dataModels.Add(dataModel);
             return dataModels;
         }
