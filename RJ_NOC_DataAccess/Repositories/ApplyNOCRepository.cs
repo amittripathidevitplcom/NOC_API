@@ -20,11 +20,11 @@ namespace RJ_NOC_DataAccess.Repositories
             _commonHelper = commonHelper;
         }
 
-        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID    )
+        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@ActionType='" + ActionType + "',@DepartmentID='"+DepartmentID+"'";
+            SqlQuery += "@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@ActionType='" + ActionType + "',@DepartmentID='" + DepartmentID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
             if (Rows > 0)
                 return true;
@@ -34,7 +34,7 @@ namespace RJ_NOC_DataAccess.Repositories
         public bool SaveDocumentScrutiny(DocumentScrutinyDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string DocumentScrutiny_TempDetail_Str =request.DocumentScrutinyDetail.Count>0? CommonHelper.GetDetailsTableQry(request.DocumentScrutinyDetail, "Temp_Trn_DocumentScrutiny_Temp_Details") :"";
+            string DocumentScrutiny_TempDetail_Str = request.DocumentScrutinyDetail.Count > 0 ? CommonHelper.GetDetailsTableQry(request.DocumentScrutinyDetail, "Temp_Trn_DocumentScrutiny_Temp_Details") : "";
             string SqlQuery = " exec USP_Trn_DocumentScrutiny_Temp_IU";
 
             SqlQuery += " @DocumentScrutinyID='" + request.DocumentScrutinyID + "',";
@@ -67,9 +67,9 @@ namespace RJ_NOC_DataAccess.Repositories
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNOCDataModel>>(JsonDataTable_Data);
             return listdataModels;
         }
-        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID,int RoleID)
+        public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID, int RoleID)
         {
-            string SqlQuery = " exec USP_GetDocumentScrutinyData_TabNameCollegeWise @TabName='" + TabName + "',@CollegeID='"+ CollegeID + "',@RoleID='"+ RoleID + "'";
+            string SqlQuery = " exec USP_GetDocumentScrutinyData_TabNameCollegeWise @TabName='" + TabName + "',@CollegeID='" + CollegeID + "',@RoleID='" + RoleID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetDocumentScrutinyData_TabNameCollegeWise");
             List<DocumentScrutinyDataModel> listdataModels = new List<DocumentScrutinyDataModel>();
@@ -128,6 +128,42 @@ namespace RJ_NOC_DataAccess.Repositories
             }
             return listdataModels;
         }
+        public List<ApplyNocParameterDataModel> GetRevertApplyNOCApplicationDepartmentRoleWise(int DepartmentID, int RoleID)
+        {
+            string SqlQuery = " exec USP_GetRevertApplyNOCApplicationDepartmentRoleWise @RoleID='" + RoleID + "',@DepartmentID='" + DepartmentID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetRevertApplyNOCApplicationDepartmentRoleWise");
+            List<ApplyNocParameterDataModel> listdataModels = new List<ApplyNocParameterDataModel>();
+            ApplyNocParameterDataModel dataModels = new ApplyNocParameterDataModel();
+            if (dataSet != null)
+            {
+                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                {
+                    dataModels = new ApplyNocParameterDataModel();
+                    dataModels.ApplyNocParameterMasterListDataModel = new List<ApplyNocParameterMasterListDataModel>();
 
+                    dataModels.ApplyNocID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["ApplyNocApplicationID"]);
+                    dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["DepartmentID"]);
+                    dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["CollegeID"]);
+                    dataModels.ApplicationTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["ApplicationTypeID"]);
+                    dataModels.TotalFeeAmount = Convert.ToDecimal(dataSet.Tables[0].Rows[i]["TotalFeeAmount"]);
+                    dataModels.ApplicationStatus = Convert.ToInt32(dataSet.Tables[0].Rows[i]["ApplicationStatus"]);
+                    dataModels.ApplicationTypeName = dataSet.Tables[0].Rows[i]["ApplicationTypeName"].ToString();
+                    for (int j = 0; j < dataSet.Tables[1].Rows.Count; j++)
+                    {
+                        if (Convert.ToInt32(dataSet.Tables[1].Rows[j]["ApplyNocApplicationID"]) == Convert.ToInt32(dataSet.Tables[0].Rows[i]["ApplyNocApplicationID"]))
+                        {
+                            ApplyNocParameterMasterListDataModel detailDataModel = new ApplyNocParameterMasterListDataModel();
+                            detailDataModel.ApplyNocID = Convert.ToInt32(dataSet.Tables[1].Rows[j]["ApplyNocApplicationID"]);
+                            detailDataModel.ApplyNocFor = dataSet.Tables[1].Rows[j]["ApplyNocFor"].ToString();
+                            dataModels.ApplyNocParameterMasterListDataModel.Add(detailDataModel);
+                        }
+                    }
+                    listdataModels.Add(dataModels);
+
+                }
+            }
+            return listdataModels;
+        }
     }
 }

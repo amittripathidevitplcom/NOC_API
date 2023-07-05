@@ -142,5 +142,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpGet("GetRevertApplyNOCApplicationDepartmentRoleWise/{DepartmentID}/{RoleID}")]
+        public async Task<OperationResult<List<ApplyNocParameterDataModel>>> GetRevertApplyNOCApplicationDepartmentRoleWise(int DepartmentID, int RoleID)
+        {
+            var result = new OperationResult<List<ApplyNocParameterDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetRevertApplyNOCApplicationDepartmentRoleWise(DepartmentID, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetDocumentScrutinyData_TabNameCollegeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
