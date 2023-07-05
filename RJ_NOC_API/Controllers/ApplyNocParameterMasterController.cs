@@ -62,7 +62,7 @@ namespace RJ_NOC_API.Controllers
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
-                    if (request.CollegeID == 0)
+                    if (request.ApplyNocApplicationID == 0)
                     {
                         CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "ApplyNocParameterMaster");
                         result.SuccessMessage = "Saved successfully .!";
@@ -76,7 +76,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Error;
-                    if (request.CollegeID == 0)
+                    if (request.ApplyNocApplicationID == 0)
                         result.ErrorMessage = "There was an error adding data.!";
                     else
                         result.ErrorMessage = "There was an error updating data.!";

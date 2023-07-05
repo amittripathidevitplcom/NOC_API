@@ -80,49 +80,61 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
 
-            // child
+            // put ''value'' for child string values
+            // child            
             StringBuilder sb1 = new StringBuilder();
             sb1.Append("select * into ##ApplyNocParameterDetailList from(");
             foreach (var item in request.ApplyNocParameterMasterListDataModel.Where(x => x.IsChecked == true))
             {
-                sb1.AppendFormat("ApplyNocParameterDetailID={0},", 0);
-                sb1.AppendFormat("ApplyNocApplicationID={0},", 0);
-                sb1.AppendFormat("ApplyNocParameterID={0},", item.ApplyNocID);
-                sb1.AppendFormat("ApplyNocFor='{0}',", item.ApplyNocFor);
-                sb1.AppendFormat("FeeAmount={0},", item.FeeAmount);
-                sb1.Append("union all");
+                sb1.Append(" select");
+                sb1.AppendFormat(" ApplyNocParameterDetailID={0},", 0);
+                sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                sb1.AppendFormat(" ApplyNocFor=''{0}'',", item.ApplyNocFor);
+                sb1.AppendFormat(" FeeAmount={0}", item.FeeAmount);
+                sb1.Append(" union all");
             }
-            sb1.Append(") as t");
-            sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString().ReplaceLineEndings("union all"));
+            sb1.Length = sb1.Length - 9;// remove union all
+            sb1.Append(" ) as t");
+            sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString());
 
             // child
             sb1 = new StringBuilder();
-            sb1.AppendLine("select * into ##ApplyNocApplicationDetailList from(");
-            foreach (var item in request.ApplyNocParameterMasterList_TNOCExtension.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
+            sb1.Append("select * into ##ApplyNocApplicationDetailList from(");
+            if (request.ApplyNocParameterMasterList_TNOCExtension != null)
             {
-                foreach (var item1 in item.ApplyNocParameterSubjectList)
+                foreach (var item in request.ApplyNocParameterMasterList_TNOCExtension.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
                 {
-                    sb1.AppendLine("select");
-                    sb1.AppendFormat("ApplyNocApplicationDetailID={0},", 0);
-                    sb1.AppendFormat("ApplyNocApplicationID={0},", 0);
-                    sb1.AppendFormat("CourseID={0},", item.CourseID);
-                    sb1.AppendFormat("SubjectID='{0}',", item1.SubjectID);
-                    sb1.AppendFormat("CheckedStatus={0}", 1);
-                    sb1.AppendLine("union all");
+                    foreach (var item1 in item.ApplyNocParameterSubjectList)
+                    {
+                        sb1.Append(" select");
+                        sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                        sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                        sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                        sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                        sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                        sb1.AppendFormat(" CheckedStatus={0}", 1);
+                        sb1.Append(" union all");
+                    }
                 }
             }
-            foreach (var item in request.ApplyNocParameterMasterList_AdditionOfNewSeats60.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
+            if (request.ApplyNocParameterMasterList_AdditionOfNewSeats60 != null)
             {
-                sb1.AppendLine("select");
-                sb1.AppendFormat("ApplyNocApplicationDetailID={0},", 0);
-                sb1.AppendFormat("ApplyNocApplicationID={0},", 0);
-                sb1.AppendFormat("CourseID={0},", item.CourseID);
-                sb1.AppendFormat("SubjectID='{0}',", 0);
-                sb1.AppendFormat("CheckedStatus={0}", 1);
-                sb1.AppendLine("union all");
+                foreach (var item in request.ApplyNocParameterMasterList_AdditionOfNewSeats60.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
+                {
+                    sb1.Append(" select");
+                    sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                    sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                    sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                    sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                    sb1.AppendFormat(" SubjectID={0},", 0);
+                    sb1.AppendFormat(" CheckedStatus={0}", 1);
+                    sb1.Append(" union all");
+                }                              
             }
-            sb1.AppendLine(") as t");
-            sb.AppendFormat("@ApplyNocApplicationDetailList='{0}',", sb1.ToString().ReplaceLineEndings("union all"));
+            sb1.Length = sb1.Length - 9;// remove union all  
+            sb1.Append(" ) as t");
+            sb.AppendFormat("@ApplyNocApplicationDetailList='{0}',", sb1.ToString());
 
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");

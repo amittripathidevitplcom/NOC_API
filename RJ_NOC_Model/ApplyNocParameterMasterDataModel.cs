@@ -9,6 +9,7 @@ namespace RJ_NOC_Model
     }
     public class ApplyNocParameterDataModel
     {
+        public int ApplyNocApplicationID { get; set; }
         public int ApplyNocID { get; set; }
         public int DepartmentID { get; set; }
         public string ApplyNocFor { get; set; }
@@ -23,8 +24,8 @@ namespace RJ_NOC_Model
         public string? IPAddress { get; set; }
 
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
-        public ApplyNocParameterMaster_TNOCExtensionDataModel ApplyNocParameterMasterList_TNOCExtension { get; set; }
-        public ApplyNocParameterMaster_AdditionOfNewSeats60DataModel ApplyNocParameterMasterList_AdditionOfNewSeats60 { get; set; }
+        public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
+        public ApplyNocParameterMaster_AdditionOfNewSeats60DataModel? ApplyNocParameterMasterList_AdditionOfNewSeats60 { get; set; }
     }
     public class ApplyNocParameterMaster_ddl
     {
@@ -50,7 +51,7 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public string CourseName { get; set; }
         public bool IsChecked { get; set; } = false;
-        public List<ApplyNocParameterSubjectDataModel> ApplyNocParameterSubjectList { get; set; }
+        public List<ApplyNocParameterSubjectDataModel>? ApplyNocParameterSubjectList { get; set; }
     }
     public class ApplyNocParameterSubjectDataModel
     {
