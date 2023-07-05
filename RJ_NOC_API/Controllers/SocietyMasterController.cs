@@ -85,14 +85,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetSocietyAllList/{UserID}")]
-        public async Task<OperationResult<List<SocietyMasterDataModels>>> GetSocietyAllList(int UserID)
+        [HttpGet("GetSocietyAllList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<SocietyMasterDataModels>>> GetSocietyAllList(int UserID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "SocietyMaster");
             var result = new OperationResult<List<SocietyMasterDataModels>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SocietyMasterUtility.GetSocietyAllList());
+                result.Data = await Task.Run(() => UtilityHelper.SocietyMasterUtility.GetSocietyAllList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

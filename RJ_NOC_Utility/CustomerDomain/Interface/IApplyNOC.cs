@@ -13,5 +13,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType,int DepartmentID);
         bool SaveDocumentScrutiny(DocumentScrutinyDataModel request);
         List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID, int RoleID);
+        List<ApplyNocParameterDataModel> GetRevertApplyNOCApplicationDepartmentRoleWise(int DepartmentID, int RoleID);
     }
 }

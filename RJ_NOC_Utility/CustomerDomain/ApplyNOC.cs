@@ -23,15 +23,19 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny( ApplyNOCID,  RoleID,  UserID,  ActionType, DepartmentID);
+            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny(ApplyNOCID, RoleID, UserID, ActionType, DepartmentID);
         }
         public bool SaveDocumentScrutiny(DocumentScrutinyDataModel request)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutiny(request);
-        }      
+        }
         public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID, int RoleID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetDocumentScrutinyData_TabNameCollegeWise(TabName,CollegeID, RoleID);
+            return UnitOfWork.ApplyNOCRepository.GetDocumentScrutinyData_TabNameCollegeWise(TabName, CollegeID, RoleID);
+        }
+        public List<ApplyNocParameterDataModel> GetRevertApplyNOCApplicationDepartmentRoleWise(int DepartmentID, int RoleID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetRevertApplyNOCApplicationDepartmentRoleWise(DepartmentID, RoleID);
         }
     }
 }
