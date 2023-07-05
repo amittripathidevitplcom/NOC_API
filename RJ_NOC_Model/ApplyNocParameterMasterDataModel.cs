@@ -20,6 +20,7 @@ namespace RJ_NOC_Model
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
         public int CreatedBy { get; set; }
+        public int? ApplicationStatus { get; set; }
         public int ModifyBy { get; set; }
         public string? IPAddress { get; set; }
 
