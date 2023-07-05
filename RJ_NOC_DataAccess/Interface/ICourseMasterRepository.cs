@@ -14,7 +14,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(CourseMasterDataModel request);
         bool UpdateData(CourseMasterDataModel request);
         bool DeleteData(int CollegeWiseCourseID);
-        bool IfExists(int CollegeWiseCourseID, string CourseName); 
+        bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID); 
     }
 
 }

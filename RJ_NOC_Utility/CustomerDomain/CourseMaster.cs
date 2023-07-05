@@ -35,9 +35,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CourseMasterRepository.DeleteData(CollegeWiseCourseID);
         }
         
-        public bool IfExists(int CollegeWiseCourseID, string CourseName)
+        public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID)
         {
-            return UnitOfWork.CourseMasterRepository.IfExists(CollegeWiseCourseID, CourseName);
+            return UnitOfWork.CourseMasterRepository.IfExists(CourseID, DepartmentID, CollegeWiseCourseID, CollegeID);
         }
          
     }

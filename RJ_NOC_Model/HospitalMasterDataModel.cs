@@ -22,60 +22,60 @@ namespace RJ_NOC_Model
         public string ManageByPhone { get; set; }
         public string OwnerName { get; set; }
         public string OwnerPhone { get; set; }
-        public int MedicalBeds { get; set; }
-        public int SurgicalBeds { get; set; }
-        public int ObstAndGynaecologyBeds { get; set; }
-        public int PediatricsBeds { get; set; }
-        public int OrthoBeds { get; set; }
-        public int OccupancyPercentegeBeds { get; set; }
-        public int AffiliationPsychiatricBeds { get; set; }
+        public int? MedicalBeds { get; set; }
+        public int? SurgicalBeds { get; set; }
+        public int? ObstAndGynaecologyBeds { get; set; }
+        public int? PediatricsBeds { get; set; }
+        public int? OrthoBeds { get; set; }
+        public int? OccupancyPercentegeBeds { get; set; }
+        public int? AffiliationPsychiatricBeds { get; set; }
         public int? ParentHospitalRelatedToOtherID { get; set; }
         public string? InstitutionName { get; set; }
         public string? OrganizationPhone { get; set; }
 
-        public int CardioThoracicTotalBeds { get; set; }
-        public int CardioThoracicCCUBeds { get; set; }
-        public int CardioThoracicICCUBeds { get; set; }
-        public int CardioThoracicICUBeds { get; set; }
-        public int CriticalCareNursingTotalBeds { get; set; }
-        public int CriticalCareNursingCCBeds { get; set; }
-        public int CriticalCareNursingICUBeds { get; set; }
-        public int MidwiferyNursingTotalBeds { get; set; }
-        public int MotherNeonatalUnitsBeds { get; set; }
-        public int DeliveriesPerYear { get; set; }
-        public int LevelIINeonatalBeds { get; set; }
-        public int LevelIIINeonatalBeds { get; set; }
-        public int NeuroScienceNursingTotalBeds { get; set; }
-        public int OncologyNursingTotalBeds { get; set; }
-        public int OncologyNursingMedicalBeds { get; set; }
-        public int OncologyNurSingsurgicalBeds { get; set; }
-        public int OncologyNursingChemotherapyBeds { get; set; }
-        public int OncologyNursingRadiotherapyBeds { get; set; }
-        public int OncologyNursingPalliativeBeds { get; set; }
-        public int OncologyNursingDiagnosticBeds { get; set; }
-        public int OrthopaedicRehabilitationNursingTotalBeds { get; set; }
-        public int OrthopaedicRehabilitationNursingOrthopaedicBeds { get; set; }
-        public int OrthopaedicRehabilitationNursingRehabilitationBeds { get; set; }
-        public int PsychiatricNursingTotalBeds { get; set; }
-        public int PsychiatricNursingAcuteBeds { get; set; }
-        public int PsychiatricNursingChronicBeds { get; set; }
-        public int PsychiatricNursingAdultBeds { get; set; }
-        public int PsychiatricNursingChildBeds { get; set; }
-        public int PsychiatricNursingDeAddictionBeds { get; set; }
-        public int NeonatalNursingTotalBeds { get; set; }
-        public int NeonatalNursingLevelIIOrIIINICUBeds { get; set; }
-        public int NeonatalNursingNICUBeds { get; set; }
-        public int OperationRoomNursingTotalBeds { get; set; }
-        public int OperationRoomNursingGeneralSurgeryBeds { get; set; }
-        public int OperationRoomNursingPediatricBeds { get; set; }
-        public int OperationRoomNursingCardiothoracicBeds { get; set; }
-        public int OperationRoomNursingGynaeAndObstetricalBeds { get; set; }
-        public int OperationRoomNursingOrthopaedicsBeds { get; set; }
-        public int OperationRoomNursingOphthalmicBeds { get; set; }
-        public int OperationRoomNursingENTAndNeuroBeds { get; set; }
-        public int EmergencyAndDisasterNursingTotalBeds { get; set; }
-        public int EmergencyAndDisasterNursingICUBeds { get; set; }
-        public int EmergencyAndDisasterNursingEmergencylBeds { get; set; }
+        public int? CardioThoracicTotalBeds { get; set; }
+        public int? CardioThoracicCCUBeds { get; set; }
+        public int? CardioThoracicICCUBeds { get; set; }
+        public int? CardioThoracicICUBeds { get; set; }
+        public int? CriticalCareNursingTotalBeds { get; set; }
+        public int? CriticalCareNursingCCBeds { get; set; }
+        public int? CriticalCareNursingICUBeds { get; set; }
+        public int? MidwiferyNursingTotalBeds { get; set; }
+        public int? MotherNeonatalUnitsBeds { get; set; }
+        public int? DeliveriesPerYear { get; set; }
+        public int? LevelIINeonatalBeds { get; set; }
+        public int? LevelIIINeonatalBeds { get; set; }
+        public int? NeuroScienceNursingTotalBeds { get; set; }
+        public int? OncologyNursingTotalBeds { get; set; }
+        public int? OncologyNursingMedicalBeds { get; set; }
+        public int? OncologyNurSingsurgicalBeds { get; set; }
+        public int? OncologyNursingChemotherapyBeds { get; set; }
+        public int? OncologyNursingRadiotherapyBeds { get; set; }
+        public int? OncologyNursingPalliativeBeds { get; set; }
+        public int? OncologyNursingDiagnosticBeds { get; set; }
+        public int? OrthopaedicRehabilitationNursingTotalBeds { get; set; }
+        public int? OrthopaedicRehabilitationNursingOrthopaedicBeds { get; set; }
+        public int? OrthopaedicRehabilitationNursingRehabilitationBeds { get; set; }
+        public int? PsychiatricNursingTotalBeds { get; set; }
+        public int? PsychiatricNursingAcuteBeds { get; set; }
+        public int? PsychiatricNursingChronicBeds { get; set; }
+        public int? PsychiatricNursingAdultBeds { get; set; }
+        public int? PsychiatricNursingChildBeds { get; set; }
+        public int? PsychiatricNursingDeAddictionBeds { get; set; }
+        public int? NeonatalNursingTotalBeds { get; set; }
+        public int? NeonatalNursingLevelIIOrIIINICUBeds { get; set; }
+        public int? NeonatalNursingNICUBeds { get; set; }
+        public int? OperationRoomNursingTotalBeds { get; set; }
+        public int? OperationRoomNursingGeneralSurgeryBeds { get; set; }
+        public int? OperationRoomNursingPediatricBeds { get; set; }
+        public int? OperationRoomNursingCardiothoracicBeds { get; set; }
+        public int? OperationRoomNursingGynaeAndObstetricalBeds { get; set; }
+        public int? OperationRoomNursingOrthopaedicsBeds { get; set; }
+        public int? OperationRoomNursingOphthalmicBeds { get; set; }
+        public int? OperationRoomNursingENTAndNeuroBeds { get; set; }
+        public int? EmergencyAndDisasterNursingTotalBeds { get; set; }
+        public int? EmergencyAndDisasterNursingICUBeds { get; set; }
+        public int? EmergencyAndDisasterNursingEmergencylBeds { get; set; }
 
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }

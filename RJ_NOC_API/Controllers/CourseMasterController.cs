@@ -32,7 +32,7 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
         [HttpGet("{UserID}/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID,string LoginSSOID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID, string LoginSSOID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "CourseMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
@@ -103,9 +103,9 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                //IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CollegeWiseCourseID, request.CourseName);
-                //if (IfExits == false)
-                //{
+                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID);
+                if (IfExits == false)
+                {
                     result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.SaveData(request));
                     if (result.Data)
                     {
@@ -129,12 +129,12 @@ namespace RJ_NOC_API.Controllers
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
-                //}
-                //else
-                //{
-                //    result.State = OperationState.Warning;
-                //    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
-                //}
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "This course is Already Exist, It Can't Not Be Duplicate.!";
+                }
             }
             catch (Exception e)
             {
