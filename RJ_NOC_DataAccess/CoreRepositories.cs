@@ -265,6 +265,12 @@ namespace RJ_NOC_DataAccess.Repository
                 return _ApplyNocParameterMasterRepository;
             }
         }
+        //private IScurtenyComitteeRepository scurtenyComitteeRepository;
+        //public IScurtenyComitteeRepository ScurtenyComitteeRepository
+        //{
+        //    get { return scurtenyComitteeRepository; }
+        //}
+        
 
         private ICommitteeMasterRepository committeeMasterRepository;
         public ICommitteeMasterRepository CommitteeMasterRepository
@@ -311,6 +317,7 @@ namespace RJ_NOC_DataAccess.Repository
             paymentRepository = new PaymentRepository(commonHelper);
             geoTaggingRepository = new GeoTaggingRepository(commonHelper);
             committeeMasterRepository = new CommitteeMasterRepository(commonHelper);
+            //scurtenyComitteeRepository = new ScurtenyComitteeRepository(commonHelper);
 
         }
     }
