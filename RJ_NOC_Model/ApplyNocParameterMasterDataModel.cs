@@ -67,4 +67,15 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterCourseDataModel> ApplyNocParameterCourseList { get; set; }
     }
 
+    // application details
+    public class ApplyNocApplicationListDataModel
+    {
+        public int ApplyNocApplicationID { get; set; }
+        public int CollegeID { get; set; }
+        public string? CollegeName { get; set; }
+        public int ApplicationTypeID { get; set; }
+        public string? ApplicationTypeName { get; set; }
+        public decimal TotalFeeAmount { get; set; }
+
+    }
 }
