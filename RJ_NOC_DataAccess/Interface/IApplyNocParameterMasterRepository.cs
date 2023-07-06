@@ -8,6 +8,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IApplyNocParameterMasterRepository
     {
+        DataTable GetApplyNocApplicationList();
         DataSet GetApplyNocForByParameter(int CollegeID, string ApplyNocFor);
         DataTable GetApplyNocParameterMaster(int CollegeID);
         bool SaveApplyNocApplication(string query);

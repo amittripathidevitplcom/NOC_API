@@ -141,5 +141,16 @@ namespace RJ_NOC_Utility.CustomerDomain
             // execute
             return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNocApplication(sb.ToString());
         }
+
+        public List<ApplyNocApplicationListDataModel> GetApplyNocApplicationList()
+        {
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList();
+            List<ApplyNocApplicationListDataModel> model = new List<ApplyNocApplicationListDataModel>();
+            if (dt != null)
+            {
+                model = CommonHelper.ConvertDataTable<List<ApplyNocApplicationListDataModel>>(dt);
+            }
+            return model;
+        }
     }
 }
