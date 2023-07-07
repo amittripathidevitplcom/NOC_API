@@ -30,9 +30,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<SocietyMasterDataModels> GetSocietyAllList()
+        public List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID)
         {
-            string SqlQuery = " exec USP_SocietyMaster_GetData";
+            string SqlQuery = " exec USP_SocietyMaster_GetData @CollegeID='"+CollegeID+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SocietyMaster.GetSocietyAllList");
 

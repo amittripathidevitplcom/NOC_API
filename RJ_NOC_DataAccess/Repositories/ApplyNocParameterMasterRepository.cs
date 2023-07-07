@@ -37,5 +37,12 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        
+        public DataTable GetApplyNocApplicationList()
+        {
+            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList'";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationList");
+            return dt;
+        }
     }
 }

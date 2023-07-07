@@ -48,5 +48,6 @@ namespace RJ_NOC_DataAccess.Interface
         IPaymentRepository PaymentRepository { get; }
         IApplyNocParameterMasterRepository ApplyNocParameterMasterRepository { get; }
         IGeoTaggingRepository GeoTaggingRepository { get; }
+        ICommitteeMasterRepository CommitteeMasterRepository { get; }
     }
 }

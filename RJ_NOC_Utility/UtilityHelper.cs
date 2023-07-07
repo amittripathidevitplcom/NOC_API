@@ -78,6 +78,10 @@ namespace RJ_NOC_Utility
                 return _ApplyNocParameterMasterUtility;
             }
         }
+        public ICommitteeMaster CommitteeMasterUtility { get; private set; }
+
+
+
 
 
         public UtilityHelper(IConfiguration configuration)
@@ -128,6 +132,7 @@ namespace RJ_NOC_Utility
             ApplyNOCUtility = new ApplyNOC(UnitOfWork);
             PaymentUtility = new Payment(UnitOfWork);
             GeoTaggingUtility = new GeoTagging(UnitOfWork);
+            CommitteeMasterUtility = new CommitteeMaster(UnitOfWork);
         }
     }
 }

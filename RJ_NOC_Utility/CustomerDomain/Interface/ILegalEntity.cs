@@ -14,5 +14,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(LegalEntityModel request);
         List<LegalEntityListModel> GetLegalEntityList();
         List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID);
+        List<LegalEntityListModel> GetLegalEntityBySSOID(string SSOID);
     }
 }

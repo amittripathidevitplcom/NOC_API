@@ -62,7 +62,7 @@ namespace RJ_NOC_API.Controllers
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
-                    if (request.CollegeID == 0)
+                    if (request.ApplyNocApplicationID == 0)
                     {
                         CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "ApplyNocParameterMaster");
                         result.SuccessMessage = "Saved successfully .!";
@@ -76,7 +76,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Error;
-                    if (request.CollegeID == 0)
+                    if (request.ApplyNocApplicationID == 0)
                         result.ErrorMessage = "There was an error adding data.!";
                     else
                         result.ErrorMessage = "There was an error updating data.!";
@@ -146,6 +146,38 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.GetApplyNocFor_TNOCExtension", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNocApplicationList")]
+        public async Task<OperationResult<List<ApplyNocApplicationListDataModel>>> GetApplyNocApplicationList()
+        {
+            var result = new OperationResult<List<ApplyNocApplicationListDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList());
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.GetApplyNocApplicationList", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
