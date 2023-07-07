@@ -7,9 +7,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IGeoTagging
     {
-        List<GeoTaggingDataModels> AppCollegeSSOLogin(string LoginSSOID);
-        List<GeoTaggingDataModels> GetAPPApplicationCollegeList(string LoginSSOID, string Type);
-        List<GeoTaggingDataModels> GetAPPApplicationCollege_DashboardCount(string LoginSSOID);
+        List<CommonDataModel_DataTable> AppCollegeSSOLogin(string LoginSSOID);
+        List<CommonDataModel_DataTable> GetAPPApplicationCollegeList(string LoginSSOID, string Type);
+        List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID);
         bool SaveData(GeoTaggingDataModel request);
     }
 }

@@ -39,40 +39,42 @@ namespace RJ_NOC_DataAccess.Repositories
         //    dataModels = JsonConvert.DeserializeObject<List<GeoTaggingDataModels>>(JsonDataTable_Data);
         //    return dataModels;
         //}
-        public List<GeoTaggingDataModels> AppCollegeSSOLogin(string LoginSSOID)
+        public List<CommonDataModel_DataTable> AppCollegeSSOLogin(string LoginSSOID)
         {
             string SqlQuery = " exec USP_AppSSOLogin @LoginSSOID = '" + LoginSSOID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.AppCollegeSSOLogin");
 
-            List<GeoTaggingDataModels> dataModels = new List<GeoTaggingDataModels>();
-            GeoTaggingDataModels dataModel = new GeoTaggingDataModels();
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
 
 
         }
-        public List<GeoTaggingDataModels> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        public List<CommonDataModel_DataTable> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
         {
             string SqlQuery = " exec USP_APPApplicationCollegeList @LoginSSOID='" + LoginSSOID + "',@Type='"+ Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.GetDataList");
 
-            List<GeoTaggingDataModels> dataModels = new List<GeoTaggingDataModels>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<GeoTaggingDataModels>>(JsonDataTable_Data);
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<GeoTaggingDataModels> GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        public List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
         {
             string SqlQuery = " exec USP_APPApplicationCollege_DashboardCount @LoginSSOID='" + LoginSSOID + "'";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.DashboardCount");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.GetAPPApplicationCollege_DashboardCount");
 
-            List<GeoTaggingDataModels> dataModels = new List<GeoTaggingDataModels>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<GeoTaggingDataModels>>(JsonDataTable_Data);
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
         public bool SaveData(GeoTaggingDataModel request)
