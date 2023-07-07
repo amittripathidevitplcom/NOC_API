@@ -236,7 +236,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetApplyNocFDRDetails/{ApplyNocFDRID}/{ApplyNocID}")]
-        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> GetApplyNocFDRDetails(int ApplyNocFDRID,int ApplyNocID)
+        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID)
         {
             var result = new OperationResult<List<ApplyNocFDRDetailsDataModel>>();
             try
