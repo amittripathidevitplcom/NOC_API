@@ -22,7 +22,7 @@ namespace RJ_NOC_Model
         public int RoleID { get; set; }
         public int ApplyNOCID { get; set; }
         public string TabName { get; set; }
-        public string Remark { get; set; }
+        public string FinalRemark { get; set; }
         public List<DocumentScrutinyList_DataModel> DocumentScrutinyDetail { get; set; }
 
     }
@@ -37,5 +37,6 @@ namespace RJ_NOC_Model
         public string Action { get; set; }
         public string? Remark { get; set; }
         public int TabRowID { get; set; }
+        public string? SubTabName { get; set; }
     }
 }

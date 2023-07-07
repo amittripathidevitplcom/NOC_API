@@ -12,15 +12,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         public GeoTagging(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        List<GeoTaggingDataModels> IGeoTagging.AppCollegeSSOLogin(string LoginSSOID)
+        List<CommonDataModel_DataTable> IGeoTagging.AppCollegeSSOLogin(string LoginSSOID)
         {
             return UnitOfWork.GeoTaggingRepository.AppCollegeSSOLogin(LoginSSOID);
         }
-        List<GeoTaggingDataModels> IGeoTagging.GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollegeList(string LoginSSOID, string Type)
         {
             return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollegeList(LoginSSOID, Type);
         }
-        List<GeoTaggingDataModels> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
         {
             return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollege_DashboardCount(LoginSSOID);
         }

@@ -12,6 +12,12 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         ApplyNocParameterMaster_AdditionOfNewSeats60DataModel GetApplyNocFor_AdditionOfNewSeats60(int CollegeID, string ApplyNocFor);
         List<ApplyNocParameterMaster_ddl> GetApplyNocParameterMaster(int CollegeID);
         bool SaveApplyNocApplication(ApplyNocParameterDataModel request);
-        List<ApplyNocApplicationListDataModel> GetApplyNocApplicationList();
+        List<ApplyNocApplicationDataModel> GetApplyNocApplicationList();
+        ApplyNocApplicationDataModel GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID);
+        bool DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy);
+        List<ApplyNocFDRDetailsDataModel> GetApplyNoc_FDRMasterByCollegeID(int CollegeID);
+        bool SaveApplyNoc_FDRMasterDetail(ApplyNocFDRDetailsDataModel request);
+        List<ApplyNocFDRDetailsDataModel> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID);
+
     }
 }
