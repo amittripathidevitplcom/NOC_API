@@ -12,5 +12,8 @@ namespace RJ_NOC_DataAccess.Interface
         DataSet GetApplyNocForByParameter(int CollegeID, string ApplyNocFor);
         DataTable GetApplyNocParameterMaster(int CollegeID);
         bool SaveApplyNocApplication(string query);
+        DataTable GetApplyNoc_FDRMasterByCollegeID(int CollegeID);
+        bool SaveApplyNoc_FDRMasterDetail(ApplyNocFDRDetailsDataModel request);
+        DataTable GetApplyNocFDRDetails(int ApplyNocFDRID,int ApplyNocID);
     }
 }

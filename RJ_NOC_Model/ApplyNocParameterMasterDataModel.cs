@@ -66,6 +66,28 @@ namespace RJ_NOC_Model
     {
         public List<ApplyNocParameterCourseDataModel> ApplyNocParameterCourseList { get; set; }
     }
+    public class ApplyNocFDRDetailsDataModel
+    {
+        public int ApplyNocFDRID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int CollegeID { get; set; }
+        public string CollegeName { get; set; }
+        public string CourseType { get; set; }
+        public string CollegeType { get; set; }
+        public int DepartmentID { get; set; }
+        public decimal Amount { get; set; }
+        public string BankName { get; set; }
+        public string BranchName { get; set; }
+        public string IFSCCode { get; set; }
+        public int FDRNumber { get; set; }
+        public decimal FDRAmount { get; set; }
+        public string FDRDate { get; set; }
+        public string PeriodOfFDR { get; set; }
+        public bool IsFDRSubmited { get; set; }
+        public string FDRDocument { get; set; }
+        public string FDRDocumentPath { get; set; }
+        public string FDRDocument_Dis_FileName { get; set; }
+    }
 
     // application details
     public class ApplyNocApplicationListDataModel

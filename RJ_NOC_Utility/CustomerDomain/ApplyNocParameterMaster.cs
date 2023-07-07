@@ -141,6 +141,30 @@ namespace RJ_NOC_Utility.CustomerDomain
             // execute
             return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNocApplication(sb.ToString());
         }
+        public List<ApplyNocFDRDetailsDataModel> GetApplyNoc_FDRMasterByCollegeID(int CollegeID)
+        {
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNoc_FDRMasterByCollegeID(CollegeID);
+            List<ApplyNocFDRDetailsDataModel> model = new List<ApplyNocFDRDetailsDataModel>();
+            if (dt != null)
+            {
+                model = CommonHelper.ConvertDataTable<List<ApplyNocFDRDetailsDataModel>>(dt);
+            }
+            return model;
+        }
+        public bool SaveApplyNoc_FDRMasterDetail(ApplyNocFDRDetailsDataModel request)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNoc_FDRMasterDetail(request);
+        }
+        public List<ApplyNocFDRDetailsDataModel> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID)
+        {
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocFDRDetails(ApplyNocFDRID, ApplyNocID);
+            List<ApplyNocFDRDetailsDataModel> model = new List<ApplyNocFDRDetailsDataModel>();
+            if (dt != null)
+            {
+                model = CommonHelper.ConvertDataTable<List<ApplyNocFDRDetailsDataModel>>(dt);
+            }
+            return model;
+        }
 
         public List<ApplyNocApplicationListDataModel> GetApplyNocApplicationList()
         {
