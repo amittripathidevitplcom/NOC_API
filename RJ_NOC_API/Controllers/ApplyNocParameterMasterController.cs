@@ -4,6 +4,7 @@ using RJ_NOC_Model;
 using RJ_NOC_API.AuthModels;
 using RJ_NOC_DataAccess.Common;
 using Microsoft.AspNetCore.Http;
+using Azure.Core;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -266,9 +267,9 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetApplyNocApplicationList")]
-        public async Task<OperationResult<List<ApplyNocApplicationListDataModel>>> GetApplyNocApplicationList()
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationList()
         {
-            var result = new OperationResult<List<ApplyNocApplicationListDataModel>>();
+            var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList());
@@ -287,6 +288,71 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.GetApplyNocApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNocApplicationByApplicationID/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<ApplyNocApplicationDataModel>> GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<ApplyNocApplicationDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationByApplicationID(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.ApplyNocApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("DeleteApplyNocApplicationByApplicationID/{ApplyNocApplicationID}/{ModifyBy}")]
+        public async Task<OperationResult<bool>> DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.DeleteApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error deleting data.!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.DeleteApplyNocApplicationByApplicationID", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

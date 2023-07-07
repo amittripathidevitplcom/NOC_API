@@ -75,7 +75,6 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@CollegeID={0},", request.CollegeID);
             sb.AppendFormat("@ApplicationTypeID={0},", request.ApplicationTypeID);
             sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount);
-            sb.AppendFormat("@ApplicationStatus={0},", 1);
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
@@ -130,7 +129,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                     sb1.AppendFormat(" SubjectID={0},", 0);
                     sb1.AppendFormat(" CheckedStatus={0}", 1);
                     sb1.Append(" union all");
-                }                              
+                }
             }
             sb1.Length = sb1.Length - 9;// remove union all  
             sb1.Append(" ) as t");
@@ -166,15 +165,51 @@ namespace RJ_NOC_Utility.CustomerDomain
             return model;
         }
 
-        public List<ApplyNocApplicationListDataModel> GetApplyNocApplicationList()
+        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationList()
         {
             var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList();
-            List<ApplyNocApplicationListDataModel> model = new List<ApplyNocApplicationListDataModel>();
+            List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
             if (dt != null)
             {
-                model = CommonHelper.ConvertDataTable<List<ApplyNocApplicationListDataModel>>(dt);
+                model = CommonHelper.ConvertDataTable<List<ApplyNocApplicationDataModel>>(dt);
             }
             return model;
+        }
+
+        public ApplyNocApplicationDataModel GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)
+        {
+            var ds = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationByApplicationID(ApplyNocApplicationID);
+            ApplyNocApplicationDataModel model = new ApplyNocApplicationDataModel();
+            if (ds != null && ds.Tables.Count >= 3)
+            {
+                // trn application
+                model = CommonHelper.ConvertDataTable<ApplyNocApplicationDataModel>(ds.Tables[0]);
+                // trn parameter
+                model.ApplyNocApplicationParameterList = CommonHelper.ConvertDataTable<List<ApplyNocApplicationParameterDataModel>>(ds.Tables[1]);
+                // trn application detail
+                var trnApplicationDetail = CommonHelper.ConvertDataTable<List<ApplyNocApplicationDetailDataModel>>(ds.Tables[2]);
+                // map
+                model.ApplyNocApplicationParameterList.ForEach(c =>
+                {
+                    c.ApplyNocApplicationDetailList = trnApplicationDetail.Where(s => s.ApplyNocParameterID == c.ApplyNocParameterID)
+                    .Select(sd => new ApplyNocApplicationDetailDataModel
+                    {
+                        ApplyNocApplicationID = sd.ApplyNocApplicationID,
+                        ApplyNocParameterID = sd.ApplyNocParameterID,
+                        CourseID = sd.CourseID,
+                        CourseName = sd.CourseName,
+                        SubjectID = sd.SubjectID,
+                        SubjectName = sd.SubjectName,
+                    }).ToList();
+                });
+            }
+            return model;
+        }
+
+        public bool DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            return UnitOfWork.ApplyNocParameterMasterRepository.DeleteApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy, IPAddress);
         }
     }
 }
