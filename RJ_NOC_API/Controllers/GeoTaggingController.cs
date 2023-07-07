@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain;
 using System.Net;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RJ_NOC_API.Controllers
 {
     [Route("api/GeoTagging")]
     [ApiController]
-    public class GeoTaggingController :  RJ_NOC_ControllerBase
+    public class GeoTaggingController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
         public GeoTaggingController(IConfiguration configuration) : base(configuration)
@@ -101,16 +102,24 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppCollegeSSOLogin(LoginSSOID));
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                result.State = OperationState.Success;                
+                if (result.Data[0].data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Login successfully .!";
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Login successfully  .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
+                    }
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.SuccessMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
+                    result.SuccessMessage = "No record found.!";
                 }
             }
             catch (Exception ex)
@@ -135,10 +144,18 @@ namespace RJ_NOC_API.Controllers
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.GetAPPApplicationCollegeList(LoginSSOID, Type));
                 result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                if (result.Data[0].data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
                 }
                 else
                 {
@@ -167,10 +184,18 @@ namespace RJ_NOC_API.Controllers
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.GetAPPApplicationCollege_DashboardCount(LoginSSOID));
                 result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                if (result.Data[0].data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
                 }
                 else
                 {
