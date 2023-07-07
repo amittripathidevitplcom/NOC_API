@@ -49,5 +49,6 @@ namespace RJ_NOC_DataAccess.Interface
         IApplyNocParameterMasterRepository ApplyNocParameterMasterRepository { get; }
         IGeoTaggingRepository GeoTaggingRepository { get; }
         ICommitteeMasterRepository CommitteeMasterRepository { get; }
+        IMedicalDocumentScrutinyRepository MedicalDocumentScrutinyRepository { get; }
     }
 }

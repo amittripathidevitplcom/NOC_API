@@ -30,7 +30,12 @@ namespace RJ_NOC_Model
         //Add by Deepak 28062023
         public string? LandTypeName { get; set; }
         public string? Code { get; set; }
+        public string Action { get; set; }
+           public string Remark { get; set; }
+
+
     }
+
     //public class LandDetailDocumentDataModel:document
     //{
     //    //public int DID { get; set; }

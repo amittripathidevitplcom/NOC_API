@@ -52,5 +52,6 @@ namespace RJ_NOC_Utility
         IApplyNocParameterMaster ApplyNocParameterMasterUtility { get; }
         IGeoTagging GeoTaggingUtility { get; }
         ICommitteeMaster CommitteeMasterUtility { get; }
+        IMedicalDocumentScrutiny MedicalDocumentScrutinyUtility { get; }
     }
 }

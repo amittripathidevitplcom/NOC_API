@@ -252,6 +252,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return geoTaggingRepository; }
         }
+        private IMedicalDocumentScrutinyRepository medicalDocumentScrutinyRepository;
+        public IMedicalDocumentScrutinyRepository MedicalDocumentScrutinyRepository
+        {
+            get { return medicalDocumentScrutinyRepository; }
+        }
 
         private IApplyNocParameterMasterRepository _ApplyNocParameterMasterRepository;
         public IApplyNocParameterMasterRepository ApplyNocParameterMasterRepository
@@ -317,6 +322,7 @@ namespace RJ_NOC_DataAccess.Repository
             paymentRepository = new PaymentRepository(commonHelper);
             geoTaggingRepository = new GeoTaggingRepository(commonHelper);
             committeeMasterRepository = new CommitteeMasterRepository(commonHelper);
+            medicalDocumentScrutinyRepository = new MedicalDocumentScrutinyRepository(commonHelper);
             //scurtenyComitteeRepository = new ScurtenyComitteeRepository(commonHelper);
 
         }
