@@ -211,5 +211,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             return UnitOfWork.ApplyNocParameterMasterRepository.DeleteApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy, IPAddress);
         }
+
+        public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID);
+        }
     }
 }

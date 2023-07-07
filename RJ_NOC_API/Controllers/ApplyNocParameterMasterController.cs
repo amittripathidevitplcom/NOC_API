@@ -236,7 +236,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetApplyNocFDRDetails/{ApplyNocFDRID}/{ApplyNocID}")]
-        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> GetApplyNocFDRDetails(int ApplyNocFDRID,int ApplyNocID)
+        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID)
         {
             var result = new OperationResult<List<ApplyNocFDRDetailsDataModel>>();
             try
@@ -353,6 +353,38 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.DeleteApplyNocApplicationByApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNocPaymentHistoryApplicationID/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.ApplyNocApplicationID", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

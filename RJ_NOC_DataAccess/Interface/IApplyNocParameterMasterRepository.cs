@@ -17,5 +17,6 @@ namespace RJ_NOC_DataAccess.Interface
         DataTable GetApplyNoc_FDRMasterByCollegeID(int CollegeID);
         bool SaveApplyNoc_FDRMasterDetail(ApplyNocFDRDetailsDataModel request);
         DataTable GetApplyNocFDRDetails(int ApplyNocFDRID,int ApplyNocID);
+        List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID);
     }
 }
