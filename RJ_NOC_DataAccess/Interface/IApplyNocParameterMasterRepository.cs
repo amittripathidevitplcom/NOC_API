@@ -8,6 +8,8 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IApplyNocParameterMasterRepository
     {
+        bool DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy, string IpAddress);
+        DataSet GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID);
         DataTable GetApplyNocApplicationList();
         DataSet GetApplyNocForByParameter(int CollegeID, string ApplyNocFor);
         DataTable GetApplyNocParameterMaster(int CollegeID);

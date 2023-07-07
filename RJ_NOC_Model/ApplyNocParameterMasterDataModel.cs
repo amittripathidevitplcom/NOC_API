@@ -68,7 +68,7 @@ namespace RJ_NOC_Model
     }
 
     // application details
-    public class ApplyNocApplicationListDataModel
+    public class ApplyNocApplicationDataModel
     {
         public int ApplyNocApplicationID { get; set; }
         public int CollegeID { get; set; }
@@ -76,6 +76,31 @@ namespace RJ_NOC_Model
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
+        public bool? ApplicationStatus { get; set; }
+        public bool? IsFinalSubmit { get; set; }
+        public bool? IsSaveFDR { get; set; }
+        public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
     }
+
+    public class ApplyNocApplicationParameterDataModel
+    {
+        public int ApplyNocParameterDetailID { get; set; }
+        public int ApplyNocApplicationID { get; set; }
+        public int ApplyNocParameterID { get; set; }
+        public string ApplyNocFor { get; set; }
+        public decimal FeeAmount { get; set; }
+        public List<ApplyNocApplicationDetailDataModel> ApplyNocApplicationDetailList { get; set; }
+    }
+    public class ApplyNocApplicationDetailDataModel
+    {
+        public int ApplyNocApplicationID { get; set; }
+        public int ApplyNocParameterID { get; set; }
+        public int? CourseID { get; set; }
+        public string? CourseName { get; set; }
+        public string? SubjectID { get; set; }
+        public string? SubjectName { get; set; }
+
+    }
+
 }
