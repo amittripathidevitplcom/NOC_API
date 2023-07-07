@@ -40,7 +40,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @DocumentScrutinyID=0,";
             SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',";
             SqlQuery += " @TabName='" + request.TabName + "',";
-            SqlQuery += " @Remark='" + request.Remark + "',";
+            SqlQuery += " @Remark='" + request.FinalRemark + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @CollegeID='" + request.CollegeID + "',";
             SqlQuery += " @RoleID='" + request.RoleID + "',";
