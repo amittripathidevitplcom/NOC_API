@@ -37,5 +37,6 @@ namespace RJ_NOC_Model
         public string Action { get; set; }
         public string? Remark { get; set; }
         public int TabRowID { get; set; }
+        public string? SubTabName { get; set; }
     }
 }
