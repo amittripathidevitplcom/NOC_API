@@ -91,6 +91,21 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
             }
         }
+
+        public bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy, string IpAddress)
+        {
+            string SqlQuery = $"exec USP_Trn_ApplyNocApplication @action='FinalSubmitApplyNocApplicationTrnByApplicationID',@ApplyNocApplicationID={ApplyNocApplicationID},@IPAddress='{IpAddress}',@ModifyBy={ModifyBy}";
+            var rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNocParameterMaster.DeleteApplyNocApplicationByApplicationID");
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
         {
             string SqlQuery = $"exec USP_Trn_GetApplyNocPaymentHistory @ApplyNocApplicationID={ApplyNocApplicationID}";
