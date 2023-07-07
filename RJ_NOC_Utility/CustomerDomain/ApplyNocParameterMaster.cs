@@ -211,5 +211,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             return UnitOfWork.ApplyNocParameterMasterRepository.DeleteApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy, IPAddress);
         }
+        public bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            return UnitOfWork.ApplyNocParameterMasterRepository.FinalSubmitApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy, IPAddress);
+        }
     }
 }

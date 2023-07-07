@@ -18,6 +18,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<ApplyNocFDRDetailsDataModel> GetApplyNoc_FDRMasterByCollegeID(int CollegeID);
         bool SaveApplyNoc_FDRMasterDetail(ApplyNocFDRDetailsDataModel request);
         List<ApplyNocFDRDetailsDataModel> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID);
-
+        bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy);
     }
 }

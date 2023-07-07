@@ -363,6 +363,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("FinalSubmitApplyNocApplicationByApplicationID/{ApplyNocApplicationID}/{ModifyBy}")]
+        public async Task<OperationResult<bool>> FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.FinalSubmitApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Final Submitted successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error in final submit.!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.FinalSubmitApplyNocApplicationByApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 
