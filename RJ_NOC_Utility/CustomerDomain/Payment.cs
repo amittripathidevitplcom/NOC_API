@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID)
         {
-            return UnitOfWork.PaymentRepository.SendRequest(PRN,AMOUNT,PURPOSE,USERNAME,USERMOBILE,USEREMAIL);
+            return UnitOfWork.PaymentRepository.SendRequest(PRN,AMOUNT,PURPOSE,USERNAME,USERMOBILE,USEREMAIL, ApplyNocApplicationID);
         }
         public PaymentResponse GetResponse(string STATUS, string ENCDATA)
         {
@@ -31,7 +31,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.PaymentRepository.SaveData(response);
         }
 
-        public List<ResponseParameters> GetPaymentListIDWise(int TransactionID)
+        public List<ResponseParameters> GetPaymentListIDWise(string TransactionID)
         {
             return UnitOfWork.PaymentRepository.GetPaymentListIDWise(TransactionID);
         }

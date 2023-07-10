@@ -28,7 +28,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
         #region "RPP PAYMENT SECTION"
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID)
         {
             string REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             string CHECKSUM = MD5HASHING(MERCHANTCODE + "|" + PRN + "|" + AMOUNT + "|" + CHECKSUMKEY);
@@ -49,7 +49,7 @@ namespace RJ_NOC_DataAccess.Repositories
                 USERNAME = USERNAME,
                 USERMOBILE = USERMOBILE,
                 USEREMAIL = USEREMAIL,
-                UDF1 = "PARAM1",
+                UDF1 = ApplyNocApplicationID,
                 UDF2 = "PARAM2",
                 UDF3 = "PARAM3",
                 OFFICECODE = "",
@@ -176,7 +176,7 @@ namespace RJ_NOC_DataAccess.Repositories
                 "@Amount='" + request.RESPONSEPARAMETERS.AMOUNT + "',@MerchantCode='" + request.RESPONSEPARAMETERS.MERCHANTCODE + "',@PaymentAmount='" + request.RESPONSEPARAMETERS.PAYMENTAMOUNT + "'," +
                 "@PaymentMode='" + request.RESPONSEPARAMETERS.PAYMENTMODE + "'" + ",@PaymentModeBID='" + request.RESPONSEPARAMETERS.PAYMENTMODEBID + "'" + ",@PaymentModeTimeStamp='" + request.RESPONSEPARAMETERS.PAYMENTMODETIMESTAMP + "'" +
                 ",@ReqTimeStamp='" + request.RESPONSEPARAMETERS.REQTIMESTAMP + "',@ResponseCode='" + request.RESPONSEPARAMETERS.RESPONSECODE + "',@RPPTXNID='" + request.RESPONSEPARAMETERS.RPPTXNID + "'," +
-                "@STATUS='" + request.RESPONSEPARAMETERS.STATUS + "',@UDF1='" + request.RESPONSEPARAMETERS.UDF1 + "',@UDF2='" + request.RESPONSEPARAMETERS.UDF2 + "'" ; 
+                "@STATUS='" + request.RESPONSEPARAMETERS.STATUS + "',@UDF1='" + request.RESPONSEPARAMETERS.UDF1 + "',@UDF2='" + request.RESPONSEPARAMETERS.UDF2 + "',@RESPONSEJSON='" + request.RESPONSEJSON+ "'"; 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.SaveData");
             if (Rows > 0)
                 return true;
@@ -184,9 +184,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
       
-        public List<ResponseParameters> GetPaymentListIDWise(int TransactionID)
+        public List<ResponseParameters> GetPaymentListIDWise(string TransactionID)
         {
-            string SqlQuery = " exec USP_PaymentTransaction_GetData @ID='" + TransactionID + "' ,@Key= 'ViewRecord' ";
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @PRNNO='" + TransactionID + "' ,@Key= 'ViewRecord' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
 

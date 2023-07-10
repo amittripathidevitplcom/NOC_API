@@ -29,7 +29,7 @@ namespace RJ_NOC_API.Controllers
             string PRN = "PRN" + rnd.Next(100000, 999999);
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL));
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID));
                 if (result.Data!=null)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "PaymentRequest", 0, "Payment");
@@ -71,13 +71,21 @@ namespace RJ_NOC_API.Controllers
 
                     if (UtilityHelper.PaymentUtility.SaveData(result.Data))
                     {
-                        if (result.Data.RESPONSEPARAMETERS.STATUS.ToLower() == "Success".ToLower())
+                        if (result.Data.CHECKSUMVALID)
                         {
-                            result.State = OperationState.Success;
-                            result.SuccessMessage = "Data load successfully .!";
-                            return Redirect(string.Format("http://localhost:4200/paymentsuccess/{0}", result.Data.RESPONSEPARAMETERS.PRN));
+
+                            if (result.Data.RESPONSEPARAMETERS.STATUS.ToLower() == "Success".ToLower())
+                            {
+                                result.State = OperationState.Success;
+                                result.SuccessMessage = "Data load successfully .!";
+                                return Redirect(string.Format("http://localhost:4200/paymentsuccess/{0}", result.Data.RESPONSEPARAMETERS.PRN));
+                            }
+                            else
+                            {
+                                return Redirect(string.Format("http://localhost:4200/paymentfailed/{0}", result.Data.RESPONSEPARAMETERS.PRN));
+                            }
                         }
-                        else 
+                        else
                         {
                             return Redirect(string.Format("http://localhost:4200/paymentfailed/{0}", result.Data.RESPONSEPARAMETERS.PRN));
                         }
@@ -110,7 +118,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetTransactionDetails/{TransID}")]
-        public async Task<OperationResult<List<ResponseParameters>>> GetTransactionDetails(int TransID)
+        public async Task<OperationResult<List<ResponseParameters>>> GetTransactionDetails(string TransID)
         {
             var result = new OperationResult<List<ResponseParameters>>();
             try
