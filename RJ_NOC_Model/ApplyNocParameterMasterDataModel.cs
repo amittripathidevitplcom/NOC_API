@@ -96,6 +96,7 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public string? CollegeName { get; set; }
         public string? CollegeMobileNo { get; set; }
+        public string? CollegeEmail { get; set; }
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
