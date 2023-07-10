@@ -5,7 +5,7 @@ using RJ_NOC_Model;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
-
+using System.Data;
 
 namespace RJ_NOC_DataAccess.Repositories
 {
@@ -20,10 +20,14 @@ namespace RJ_NOC_DataAccess.Repositories
         const string MERCHANTCODE = "testMerchant2";
         const string CHECKSUMKEY = "WFsdaY28Pf";
         const string ENCRYPTIONKEY = "9759E1886FB5766DA58FF17FF8DD4";
-        const string SUCCESSURL = "http://localhost:50263/Payment/PaymentResponse";
-        const string FAILUREURL = "http://localhost:50263/Payment/PaymentResponse";
-        const string CANCELURL = "http://localhost:50263/Payment/PaymentResponse";
+        const string SUCCESSURL = "http://localhost:62778/api/Payment/PaymentResponse";
+        //const string FAILUREURL = "http://localhost:4200/paymentsuccess";
 
+        const string FAILUREURL = "http://localhost:62778/api/Payment/PaymentResponse";
+        const string CANCELURL = "http://localhost:62778/api/Payment/PaymentResponse";
+
+
+        #region "RPP PAYMENT SECTION"
         public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL)
         {
             string REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
@@ -70,7 +74,7 @@ namespace RJ_NOC_DataAccess.Repositories
             return PAYMENTREQUEST;
         }
         private static readonly Encoding encoding = Encoding.UTF8;
-        public  PaymentResponse GetResponse(string STATUS, string ENCDATA)
+        public PaymentResponse GetResponse(string STATUS, string ENCDATA)
         {
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
             string RESPONSEJSON = AESDecrypt(ENCDATA, ENCRYPTIONKEY);
@@ -107,9 +111,6 @@ namespace RJ_NOC_DataAccess.Repositories
 
             return PAYMENTRESPONSE;
         }
-
-
-
         public static string AESEncrypt(string textToEncrypt, string encryptionKey)
         {
             try
@@ -130,7 +131,6 @@ namespace RJ_NOC_DataAccess.Repositories
                 throw new Exception("Error encrypting: " + e.Message);
             }
         }
-
         public static string AESDecrypt(string textToDecrypt, string encryptionKey)
         {
             try
@@ -151,9 +151,6 @@ namespace RJ_NOC_DataAccess.Repositories
                 throw new Exception("Error decrypting: " + e.Message);
             }
         }
-
-
-
         public static string MD5HASHING(string input)
         {
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
@@ -167,6 +164,36 @@ namespace RJ_NOC_DataAccess.Repositories
                 }
                 return sb.ToString();
             }
+        }
+        #endregion
+
+
+        public bool SaveData(PaymentResponse request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CreatePaymentTransation";
+            SqlQuery += " @PaymentStatus='" + request.STATUS + "',@CheckSumValid='" + request.CHECKSUMVALID + "',@PRNNO='" + request.RESPONSEPARAMETERS.PRN + "',@CheckSum='" + request.RESPONSEPARAMETERS.CHECKSUM + "'," +
+                "@Amount='" + request.RESPONSEPARAMETERS.AMOUNT + "',@MerchantCode='" + request.RESPONSEPARAMETERS.MERCHANTCODE + "',@PaymentAmount='" + request.RESPONSEPARAMETERS.PAYMENTAMOUNT + "'," +
+                "@PaymentMode='" + request.RESPONSEPARAMETERS.PAYMENTMODE + "'" + ",@PaymentModeBID='" + request.RESPONSEPARAMETERS.PAYMENTMODEBID + "'" + ",@PaymentModeTimeStamp='" + request.RESPONSEPARAMETERS.PAYMENTMODETIMESTAMP + "'" +
+                ",@ReqTimeStamp='" + request.RESPONSEPARAMETERS.REQTIMESTAMP + "',@ResponseCode='" + request.RESPONSEPARAMETERS.RESPONSECODE + "',@RPPTXNID='" + request.RESPONSEPARAMETERS.RPPTXNID + "'," +
+                "@STATUS='" + request.RESPONSEPARAMETERS.STATUS + "',@UDF1='" + request.RESPONSEPARAMETERS.UDF1 + "',@UDF2='" + request.RESPONSEPARAMETERS.UDF2 + "'" ; 
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+      
+        public List<ResponseParameters> GetPaymentListIDWise(int TransactionID)
+        {
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @ID='" + TransactionID + "' ,@Key= 'ViewRecord' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
+
+            List<ResponseParameters> dataModels = new List<ResponseParameters>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
+            return dataModels;
         }
     }
 }

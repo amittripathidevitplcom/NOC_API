@@ -25,5 +25,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.GetResponse(STATUS, ENCDATA);
         }
+
+        public bool SaveData(PaymentResponse response)
+        {
+            return UnitOfWork.PaymentRepository.SaveData(response);
+        }
+
+        public List<ResponseParameters> GetPaymentListIDWise(int TransactionID)
+        {
+            return UnitOfWork.PaymentRepository.GetPaymentListIDWise(TransactionID);
+        }
     }
 }

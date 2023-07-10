@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain;
+using Azure.Core;
+using Newtonsoft.Json;
+using System.Data;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -51,20 +54,35 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("PaymentResponse")]
-        public async Task<OperationResult<PaymentResponse>> PaymentResponse()
+
+      //  public IActionResult Task<OperationResult<PaymentResponse>> PaymentResponse()
+        [HttpPost("PaymentResponse")] //IActionResult
+        public IActionResult  PaymentResponse()
         {
             string STATUS = Request.Form["STATUS"];
             string ENCDATA = Request.Form["ENCDATA"];
             var result = new OperationResult<PaymentResponse>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetResponse(STATUS, ENCDATA));
+                result.Data = UtilityHelper.PaymentUtility.GetResponse(STATUS, ENCDATA);
                 result.State = OperationState.Success;
-                if (result.Data!=null)
+                if (result.Data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+
+                    if (UtilityHelper.PaymentUtility.SaveData(result.Data))
+                    {
+                        if (result.Data.RESPONSEPARAMETERS.STATUS.ToLower() == "Success".ToLower())
+                        {
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "Data load successfully .!";
+                            return Redirect(string.Format("http://localhost:4200/paymentsuccess/{0}", result.Data.RESPONSEPARAMETERS.PRN));
+                        }
+                        else 
+                        {
+                            return Redirect(string.Format("http://localhost:4200/paymentfailed/{0}", result.Data.RESPONSEPARAMETERS.PRN));
+                        }
+                    }
+                   
                 }
                 else
                 {
@@ -80,11 +98,48 @@ namespace RJ_NOC_API.Controllers
             }
             finally
             {
+                //UnitOfWork.Dispose();
+            }
+            return Redirect("http://localhost:4200/paymentsuccess");
+
+            //return result;
+        }
+
+
+
+
+
+        [HttpGet("GetTransactionDetails/{TransID}")]
+        public async Task<OperationResult<List<ResponseParameters>>> GetTransactionDetails(int TransID)
+        {
+            var result = new OperationResult<List<ResponseParameters>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPaymentListIDWise(TransID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
                 // UnitOfWork.Dispose();
             }
             return result;
         }
-
 
     }
 }
