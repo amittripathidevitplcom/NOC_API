@@ -66,7 +66,11 @@ namespace RJ_NOC_Utility
         public IPayment PaymentUtility { get; private set; }
         public IGeoTagging GeoTaggingUtility { get; private set; }
 
+        public IMedicalDocumentScrutiny MedicalDocumentScrutinyUtility { get; private set; }
+
+
         private IApplyNocParameterMaster _ApplyNocParameterMasterUtility;
+      
         public IApplyNocParameterMaster ApplyNocParameterMasterUtility 
         {
             get
@@ -79,9 +83,6 @@ namespace RJ_NOC_Utility
             }
         }
         public ICommitteeMaster CommitteeMasterUtility { get; private set; }
-
-
-
 
 
         public UtilityHelper(IConfiguration configuration)
@@ -133,6 +134,7 @@ namespace RJ_NOC_Utility
             PaymentUtility = new Payment(UnitOfWork);
             GeoTaggingUtility = new GeoTagging(UnitOfWork);
             CommitteeMasterUtility = new CommitteeMaster(UnitOfWork);
+            MedicalDocumentScrutinyUtility = new MedicalDocumentScrutiny(UnitOfWork);
         }
     }
 }

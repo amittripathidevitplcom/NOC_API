@@ -14,11 +14,11 @@ namespace RJ_NOC_Model
     }
     public class GeoTaggingDataModel
     {
-        public int UserID { get; set; }
-        public string LoginSSOID { get; set; }
-        public string UserName { get; set; }
-        public string Token { get; set; }
-        public string Type { get; set; }
+        //public int UserID { get; set; }
+        //public string LoginSSOID { get; set; }
+        //public string UserName { get; set; }
+        //public string Token { get; set; }
+        //public string Type { get; set; }
         public int CollegeID { get; set; }
         public int DepartmentID { get; set; }       
         public string Image1 { get; set; }

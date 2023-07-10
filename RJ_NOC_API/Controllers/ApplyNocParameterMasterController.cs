@@ -4,6 +4,7 @@ using RJ_NOC_Model;
 using RJ_NOC_API.AuthModels;
 using RJ_NOC_DataAccess.Common;
 using Microsoft.AspNetCore.Http;
+using Azure.Core;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -123,7 +124,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        
+
         [HttpGet("GetApplyNocFor_AdditionOfNewSeats60/{CollegeID}/{ApplyNocFor}")]
         public async Task<OperationResult<ApplyNocParameterMaster_AdditionOfNewSeats60DataModel>> GetApplyNocFor_AdditionOfNewSeats60(int CollegeID, string ApplyNocFor)
         {
@@ -146,6 +147,277 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.GetApplyNocFor_TNOCExtension", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNoc_FDRMasterByCollegeID/{CollegeID}")]
+        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> GetCommitteeMasterList(int CollegeID)
+        {
+            var result = new OperationResult<List<ApplyNocFDRDetailsDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNoc_FDRMasterByCollegeID(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommitteeMasterController.GetCommitteeMasterList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("SaveApplyNoc_FDRMasterDetail")]
+        public async Task<OperationResult<bool>> SaveApplyNoc_FDRMasterDetail(ApplyNocFDRDetailsDataModel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.SaveApplyNoc_FDRMasterDetail(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    if (request.ApplyNocFDRID == 0)
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "CommitteeMaster");
+                        result.SuccessMessage = "Saved successfully .!";
+                    }
+                    else
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.ApplyNocFDRID, "CommitteeMaster");
+                        result.SuccessMessage = "Updated successfully .!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    if (request.ApplyNocFDRID == 0)
+                        result.ErrorMessage = "There was an error adding data.!";
+                    else
+                        result.ErrorMessage = "There was an error updating data.!";
+                }
+
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.SaveApplyNoc_FDRMasterDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetApplyNocFDRDetails/{ApplyNocFDRID}/{ApplyNocID}")]
+        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID)
+        {
+            var result = new OperationResult<List<ApplyNocFDRDetailsDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocFDRDetails(ApplyNocFDRID, ApplyNocID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommitteeMasterController.GetCommitteeMasterList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetApplyNocApplicationList")]
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationList()
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList());
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.GetApplyNocApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNocApplicationByApplicationID/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<ApplyNocApplicationDataModel>> GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<ApplyNocApplicationDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationByApplicationID(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.ApplyNocApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("DeleteApplyNocApplicationByApplicationID/{ApplyNocApplicationID}/{ModifyBy}")]
+        public async Task<OperationResult<bool>> DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.DeleteApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error deleting data.!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.DeleteApplyNocApplicationByApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("FinalSubmitApplyNocApplicationByApplicationID/{ApplyNocApplicationID}/{ModifyBy}")]
+        public async Task<OperationResult<bool>> FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.FinalSubmitApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Final Submitted successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error in final submit.!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.FinalSubmitApplyNocApplicationByApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNocPaymentHistoryApplicationID/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.ApplyNocApplicationID", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

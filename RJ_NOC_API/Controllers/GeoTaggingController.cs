@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain;
 using System.Net;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RJ_NOC_API.Controllers
 {
     [Route("api/GeoTagging")]
     [ApiController]
-    public class GeoTaggingController :  RJ_NOC_ControllerBase
+    public class GeoTaggingController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
         public GeoTaggingController(IConfiguration configuration) : base(configuration)
@@ -54,63 +55,32 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-
-
-        //[HttpPost("AppCollegeSSOLogin/{LoginSSOID}")]
-        //public async Task<OperationResult<List<GeoTaggingDataModels>>> AppCollegeSSOLogin(string LoginSSOID)
-        //{
-        //    var result = new OperationResult<List<GeoTaggingDataModels>>();
-        //    try
-        //    {
-        //        result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppCollegeSSOLogin(LoginSSOID));
-        //        if (result.Data.Count > 0)
-        //        {
-        //            //result.Data[0].Token = await CreateGeoTaggingAuthentication(new GeoTaggingDataModels
-        //            //{
-        //            //    UserID = result.Data[0].UserID,
-        //            //    UserName = result.Data[0].UserName
-        //            //});
-        //            //HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
-        //            result.State = OperationState.Success;
-        //            result.SuccessMessage = "Login successfully .!";
-        //        }
-        //        else
-        //        {
-        //            result.State = OperationState.Error;
-        //            result.ErrorMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        CommonDataAccessHelper.Insert_ErrorLog("GeoTaggingController.GeoTagging", e.ToString());
-        //        result.State = OperationState.Error;
-        //        result.ErrorMessage = e.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        //UnitOfWork.Dispose();
-        //    }
-        //    return result;
-        //}
         [HttpPost("AppCollegeSSOLogin/{LoginSSOID}")]
-        public async Task<OperationResult<List<GeoTaggingDataModels>>> AppCollegeSSOLogin(string LoginSSOID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> AppCollegeSSOLogin(string LoginSSOID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "GeoTagging");
-            var result = new OperationResult<List<GeoTaggingDataModels>>();
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppCollegeSSOLogin(LoginSSOID));
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                result.State = OperationState.Success;                
+                if (result.Data[0].data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Login successfully .!";
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Login successfully  .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
+                    }
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.SuccessMessage = "SSO ID not registered, Please enter valid  SSO ID.!";
+                    result.SuccessMessage = "No record found.!";
                 }
             }
             catch (Exception ex)
@@ -127,18 +97,26 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetAPPApplicationCollegeList/{LoginSSOID}/{Type}")]
-        public async Task<OperationResult<List<GeoTaggingDataModels>>> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "GeoTagging");
-            var result = new OperationResult<List<GeoTaggingDataModels>>();
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.GetAPPApplicationCollegeList(LoginSSOID, Type));
                 result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                if (result.Data[0].data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
                 }
                 else
                 {
@@ -159,18 +137,26 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetAPPApplicationCollege_DashboardCount/{LoginSSOID}")]
-        public async Task<OperationResult<List<GeoTaggingDataModels>>> GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetDashboardCount", 0, "GeoTagging");
-            var result = new OperationResult<List<GeoTaggingDataModels>>();
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.GetAPPApplicationCollege_DashboardCount(LoginSSOID));
                 result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                if (result.Data[0].data != null)
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
                 }
                 else
                 {
@@ -209,7 +195,7 @@ namespace RJ_NOC_API.Controllers
                     else
                     {
                         CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "GeoTagging");
-                        result.SuccessMessage = "Updateed successfully .!";
+                        result.SuccessMessage = "Updated successfully .!";
                     }
                 }
                 else

@@ -239,9 +239,10 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetActionHeadList", ex.ToString());
                 result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
+                result.ErrorMessage = ex.ToString();
+                //CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetActionHeadList", ex.ToString());
+
             }
             finally
             {
@@ -1487,7 +1488,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetDashboardDataSSOWise/{SSOID}/{DepartmentID}/{RoleID}")]
-        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID,int DepartmentID,int RoleID )
+        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID)
         {
             var result = new OperationResult<List<CommonDataModel_DashBoard>>();
             try
@@ -1552,8 +1553,8 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
-        } 
-        
+        }
+
         [HttpGet("CheckTabsEntry/{CollegID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckTabsEntry(int CollegID)
         {

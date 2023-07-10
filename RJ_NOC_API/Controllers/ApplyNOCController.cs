@@ -88,9 +88,9 @@ namespace RJ_NOC_API.Controllers
                 result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDocumentScrutiny(request));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(request.DocumentScrutinyID, "DocumentScrutiny_Temp", 0, "ApplyNOC");
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.ApplyNOCID, "SaveDocumentScrutiny", 0, "ApplyNOC");
                     result.State = OperationState.Success;
-                    result.SuccessMessage = request.ActionType + " successfully .!";
+                    result.SuccessMessage ="save successfully .!";
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.DocumentScrutiny_Temp", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.SaveDocumentScrutiny", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
