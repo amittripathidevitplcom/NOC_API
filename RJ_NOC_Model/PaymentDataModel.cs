@@ -78,5 +78,7 @@ namespace RJ_NOC_Model
         public string USERNAME { get; set; }
         public string USERMOBILE { get; set; }
         public string USEREMAIL { get; set; }
+        public string ApplyNocApplicationID { get; set; }
+
     }
 }
