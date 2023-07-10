@@ -184,9 +184,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
       
-        public List<ResponseParameters> GetPaymentListIDWise(int TransactionID)
+        public List<ResponseParameters> GetPaymentListIDWise(string TransactionID)
         {
-            string SqlQuery = " exec USP_PaymentTransaction_GetData @ID='" + TransactionID + "' ,@Key= 'ViewRecord' ";
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @PRNNO='" + TransactionID + "' ,@Key= 'ViewRecord' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
 

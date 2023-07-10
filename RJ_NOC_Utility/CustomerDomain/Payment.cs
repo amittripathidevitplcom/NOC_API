@@ -31,7 +31,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.PaymentRepository.SaveData(response);
         }
 
-        public List<ResponseParameters> GetPaymentListIDWise(int TransactionID)
+        public List<ResponseParameters> GetPaymentListIDWise(string TransactionID)
         {
             return UnitOfWork.PaymentRepository.GetPaymentListIDWise(TransactionID);
         }

@@ -118,7 +118,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetTransactionDetails/{TransID}")]
-        public async Task<OperationResult<List<ResponseParameters>>> GetTransactionDetails(int TransID)
+        public async Task<OperationResult<List<ResponseParameters>>> GetTransactionDetails(string TransID)
         {
             var result = new OperationResult<List<ResponseParameters>>();
             try
