@@ -185,14 +185,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetDocumentScrutinyReportCompleted/{RoleId}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDocumentScrutinyReportCompleted(int RoleId)
+        [HttpGet("GetDocumentScrutinyReportCompleted/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDocumentScrutinyReportCompleted(int UserID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetDocumentScrutinyReportCompleted", 0, "MedicalMasterController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.GetDocumentScrutinyReportCompleted(RoleId));
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.GetDocumentScrutinyReportCompleted(UserID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
