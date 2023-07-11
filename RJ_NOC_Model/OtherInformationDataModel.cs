@@ -32,5 +32,6 @@ namespace RJ_NOC_Model
 
         public string? Action { get; set; }
         public string? Remark { get; set; }
+        public string? CourseName { get; set; }
     }
 }
