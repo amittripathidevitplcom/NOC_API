@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     public interface IMedicalDocumentScrutinyRepository
     {
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID);
-
+        List<CommonDataModel_DataTable> GetDocumentScrutinyReportCompleted(int RoleId);
     }
 
 }

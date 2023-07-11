@@ -8,6 +8,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IMedicalDocumentScrutiny
     {
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID);
-
+        List<CommonDataModel_DataTable> GetDocumentScrutinyReportCompleted(int RoleId);
     }
 }
