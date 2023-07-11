@@ -48,8 +48,8 @@ namespace RJ_NOC_DataAccess.Repository
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveApplyNoc_FDRMasterDetail @ApplyNocFDRID='" + request.ApplyNocFDRID + "',@ApplyNocID='" + request.ApplyNocID + "',";
             SqlQuery += "@CollegeID = '" + request.CollegeID + "',@BankName = '" + request.BankName + "',@BranchName = '" + request.BranchName + "',@IFSCCode = '" + request.IFSCCode + "',";
-            SqlQuery += "@FDRNumber = '" + request.FDRNumber + "',@FDRAmount = '" + request.FDRAmount + "',@FDRDate = '" + request.FDRDate + "',@PeriodOfFDR = '" + request.PeriodOfFDR + "',"; 
-           SqlQuery += "@IsFDRSubmited = '" + request.IsFDRSubmited + "',@FDRDocument = '" + request.FDRDocument + "',@IPAddress = '" + IPAddress + "'";
+            SqlQuery += "@FDRNumber = '" + request.FDRNumber + "',@FDRAmount = '" + request.FDRAmount + "',@FDRDate = '" + request.FDRDate + "',@PeriodOfFDR = '" + request.PeriodOfFDR + "',";
+            SqlQuery += "@IsFDRSubmited = '" + request.IsFDRSubmited + "',@FDRDocument = '" + request.FDRDocument + "',@IPAddress = '" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveData");
             if (Rows > 0)
                 return true;
@@ -62,7 +62,7 @@ namespace RJ_NOC_DataAccess.Repository
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocFDRDetails");
             return dt;
         }
-        
+
 
         public DataTable GetApplyNocApplicationList()
         {
@@ -91,5 +91,32 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
             }
         }
+
+        public bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy, string IpAddress)
+        {
+            string SqlQuery = $"exec USP_Trn_ApplyNocApplication @action='FinalSubmitApplyNocApplicationTrnByApplicationID',@ApplyNocApplicationID={ApplyNocApplicationID},@IPAddress='{IpAddress}',@ModifyBy={ModifyBy}";
+            var rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNocParameterMaster.DeleteApplyNocApplicationByApplicationID");
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            string SqlQuery = $"exec USP_Trn_GetApplyNocPaymentHistory @ApplyNocApplicationID={ApplyNocApplicationID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocPaymentHistoryApplicationID");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
     }
 }
