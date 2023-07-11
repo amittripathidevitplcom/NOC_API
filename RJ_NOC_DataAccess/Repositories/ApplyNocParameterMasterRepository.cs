@@ -64,9 +64,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public DataTable GetApplyNocApplicationList()
+        public DataTable GetApplyNocApplicationList(string SSOID)
         {
-            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList'";
+            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList',@SSOID='"+ SSOID + "'";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationList");
             return dt;
         }

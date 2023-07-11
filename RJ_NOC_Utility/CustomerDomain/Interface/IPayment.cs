@@ -9,10 +9,13 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IPayment
     {
-        PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID);
-        PaymentResponse GetResponse(string STATUS, string ENCDATA);
+        PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID,PaymentGatewayDataModel model);
+        PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel model);
         bool SaveData(PaymentResponse request);
         List<ResponseParameters> GetPaymentListIDWise(string TransactionID);
+
+        //payment PaymentGatewayDataModel
+        PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel Model);
 
 
     }

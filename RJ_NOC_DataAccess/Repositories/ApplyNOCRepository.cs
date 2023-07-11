@@ -20,11 +20,11 @@ namespace RJ_NOC_DataAccess.Repositories
             _commonHelper = commonHelper;
         }
 
-        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID)
+        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID, string Remark)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@ActionType='" + ActionType + "',@DepartmentID='" + DepartmentID + "'";
+            SqlQuery += "@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@ActionType='" + ActionType + "',@DepartmentID='" + DepartmentID + "',@Remark='"+Remark+"'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
             if (Rows > 0)
                 return true;

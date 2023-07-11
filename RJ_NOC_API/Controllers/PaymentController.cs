@@ -24,13 +24,18 @@ namespace RJ_NOC_API.Controllers
         [HttpPost("PaymentRequest")]
         public async Task<OperationResult<PaymentRequest>> PaymentRequest(RequestDetails request)
         {
+
+            PaymentGatewayDataModel Model = new PaymentGatewayDataModel();
+            Model.PaymentGateway = (int)enmPaymentGatway.RPP;
+            var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(Model);
+
             var result = new OperationResult<PaymentRequest>();
             Random rnd = new Random();
             string PRN = "PRN" + rnd.Next(100000, 999999);
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID));
-                if (result.Data!=null)
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID, data));
+                if (result.Data != null)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "PaymentRequest", 0, "Payment");
                     result.State = OperationState.Success;
@@ -55,42 +60,43 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-      //  public IActionResult Task<OperationResult<PaymentResponse>> PaymentResponse()
+        //  public IActionResult Task<OperationResult<PaymentResponse>> PaymentResponse()
         [HttpPost("PaymentResponse")] //IActionResult
-        public IActionResult  PaymentResponse()
+        public IActionResult PaymentResponse()
         {
+            PaymentGatewayDataModel Model = new PaymentGatewayDataModel();
+            Model.PaymentGateway = (int)enmPaymentGatway.RPP;
+            var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(Model);
+
+            string RetrunUrL = "";
             string STATUS = Request.Form["STATUS"];
             string ENCDATA = Request.Form["ENCDATA"];
             var result = new OperationResult<PaymentResponse>();
             try
             {
-                result.Data = UtilityHelper.PaymentUtility.GetResponse(STATUS, ENCDATA);
+                result.Data = UtilityHelper.PaymentUtility.GetResponse(STATUS, ENCDATA, data);
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
-
-                    if (UtilityHelper.PaymentUtility.SaveData(result.Data))
+                    UtilityHelper.PaymentUtility.SaveData(result.Data);
+                    if (result.Data.CHECKSUMVALID)
                     {
-                        if (result.Data.CHECKSUMVALID)
-                        {
 
-                            if (result.Data.RESPONSEPARAMETERS.STATUS.ToLower() == "Success".ToLower())
-                            {
-                                result.State = OperationState.Success;
-                                result.SuccessMessage = "Data load successfully .!";
-                                return Redirect(string.Format("http://localhost:4200/paymentsuccess/{0}", result.Data.RESPONSEPARAMETERS.PRN));
-                            }
-                            else
-                            {
-                                return Redirect(string.Format("http://localhost:4200/paymentfailed/{0}", result.Data.RESPONSEPARAMETERS.PRN));
-                            }
+                        if (result.Data.RESPONSEPARAMETERS.STATUS.ToLower() == "Success".ToLower())
+                        {
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "Data load successfully .!";
+                            RetrunUrL = string.Format("{0}{1}", data.RedirectURL, result.Data.RESPONSEPARAMETERS.PRN);
                         }
                         else
                         {
-                            return Redirect(string.Format("http://localhost:4200/paymentfailed/{0}", result.Data.RESPONSEPARAMETERS.PRN));
+                            RetrunUrL = string.Format("{0}{1}", data.RedirectURL, result.Data.RESPONSEPARAMETERS.PRN);
                         }
                     }
-                   
+                    else
+                    {
+                        RetrunUrL = string.Format("{0}{1}", data.RedirectURL, result.Data.RESPONSEPARAMETERS.PRN);
+                    }
                 }
                 else
                 {
@@ -103,12 +109,16 @@ namespace RJ_NOC_API.Controllers
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.PaymentResponse", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
+                RetrunUrL = string.Format("{0}/{1}", data.FailureURL, result.Data.RESPONSEPARAMETERS.PRN);
+
             }
             finally
             {
                 //UnitOfWork.Dispose();
+
             }
-            return Redirect("http://localhost:4200/paymentsuccess");
+            return Redirect(RetrunUrL);
+            // return Redirect("http://localhost:4200/paymentsuccess");
 
             //return result;
         }

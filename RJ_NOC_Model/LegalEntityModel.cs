@@ -10,7 +10,7 @@ namespace RJ_NOC_Model
     public class LegalEntityModel
     {
         public int LegalEntityID { get; set; }
-        public int IsLegalEntity { get; set; }
+        public string IsLegalEntity { get; set; }
         public string SSOID { get; set; }
         public string RegistrationNo { get; set; }
         public string PresidentMobileNo { get; set; }
@@ -46,6 +46,12 @@ namespace RJ_NOC_Model
         public List<LegalEntityMemberDetailsDataModel> MemberDetails { get; set; }
         public List<LegalEntityInstituteDetailsDataModel> InstituteDetails { get; set; }
 
+
+        public string? SocietyPresentStatusName { get; set; }
+        public string? StateName_English { get; set; }
+        public string? District_Eng { get; set; }
+        public string? RegisteredAct { get; set; }
+
     }
 
     public class LegalEntityMemberDetailsDataModel
@@ -63,6 +69,8 @@ namespace RJ_NOC_Model
         public string MemberSignature { get; set; }
         public string Dis_MemberSignatureName { get; set; }
         public string MemberSignaturePath { get; set; }
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
         
     }
 
@@ -76,6 +84,9 @@ namespace RJ_NOC_Model
         public string InstituteContactNumber { get; set; }
         public int StateID { get; set; }
         public string StateName { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
     public class LegalEntityDuplicateCheckDataModel
     {

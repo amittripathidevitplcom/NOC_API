@@ -266,13 +266,13 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetApplyNocApplicationList")]
-        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationList()
+        [HttpGet("GetApplyNocApplicationList/{SSOID}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationList(string SSOID)
         {
             var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList());
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList(SSOID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {

@@ -78,6 +78,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
+            sb.AppendFormat("@SSOID='{0}',", request.SSOID);
 
             // put ''value'' for child string values
             // child            
@@ -165,9 +166,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return model;
         }
 
-        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationList()
+        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationList(string SSOID)
         {
-            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList();
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID);
             List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
             if (dt != null)
             {

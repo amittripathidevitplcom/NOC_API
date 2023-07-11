@@ -36,6 +36,7 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
 
-
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
 }

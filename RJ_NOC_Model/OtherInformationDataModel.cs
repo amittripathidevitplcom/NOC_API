@@ -29,5 +29,8 @@ namespace RJ_NOC_Model
         public bool DeleteStatus { get; set; }
         public int NoofBooks { get; set; }
         public int UserID { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
 }
