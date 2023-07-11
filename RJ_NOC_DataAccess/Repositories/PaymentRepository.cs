@@ -17,35 +17,36 @@ namespace RJ_NOC_DataAccess.Repositories
             _commonHelper = commonHelper;
         }
 
-        const string MERCHANTCODE = "testMerchant2";
-        const string CHECKSUMKEY = "WFsdaY28Pf";
-        const string ENCRYPTIONKEY = "9759E1886FB5766DA58FF17FF8DD4";
-        const string SUCCESSURL = "http://localhost:62778/api/Payment/PaymentResponse";
-        //const string FAILUREURL = "http://localhost:4200/paymentsuccess";
+        //const string MERCHANTCODE = "testMerchant2";
+        //const string CHECKSUMKEY = "WFsdaY28Pf";
+        //const string ENCRYPTIONKEY = "9759E1886FB5766DA58FF17FF8DD4";
+        //const string SUCCESSURL = "http://localhost:62778/api/Payment/PaymentResponse";
+        ////const string FAILUREURL = "http://localhost:4200/paymentsuccess";
 
-        const string FAILUREURL = "http://localhost:62778/api/Payment/PaymentResponse";
-        const string CANCELURL = "http://localhost:62778/api/Payment/PaymentResponse";
+        //const string FAILUREURL = "http://localhost:62778/api/Payment/PaymentResponse";
+        //const string CANCELURL = "http://localhost:62778/api/Payment/PaymentResponse";
 
 
         #region "RPP PAYMENT SECTION"
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID, PaymentGatewayDataModel Model)
         {
             string REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            string CHECKSUM = MD5HASHING(MERCHANTCODE + "|" + PRN + "|" + AMOUNT + "|" + CHECKSUMKEY);
+            //string CHECKSUM = MD5HASHING(MERCHANTCODE + "|" + PRN + "|" + AMOUNT + "|" + CHECKSUMKEY);
+            string CHECKSUM = MD5HASHING(Model.MerchantCode + "|" + PRN + "|" + AMOUNT + "|" + Model.CheckSumKey);
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
 
 
 
             RequestParameters REQUESTPARAMS = new RequestParameters
             {
-                MERCHANTCODE = MERCHANTCODE,
+                MERCHANTCODE = Model.MerchantCode, //MERCHANTCODE,
                 PRN = PRN,
                 REQTIMESTAMP = REQTIMESTAMP,
                 PURPOSE = PURPOSE,
                 AMOUNT = AMOUNT,
-                SUCCESSURL = SUCCESSURL,
-                FAILUREURL = FAILUREURL,
-                CANCELURL = CANCELURL,
+                SUCCESSURL = Model.SuccessURL,// SUCCESSURL,
+                FAILUREURL = Model.SuccessURL, //FAILUREURL,
+                CANCELURL = Model.CencelURL, //CANCELURL,
                 USERNAME = USERNAME,
                 USERMOBILE = USERMOBILE,
                 USEREMAIL = USEREMAIL,
@@ -60,10 +61,10 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
             string REQUESTJSON = JsonConvert.SerializeObject(REQUESTPARAMS);
-            string ENCDATA = AESEncrypt(REQUESTJSON, ENCRYPTIONKEY);
+            string ENCDATA = AESEncrypt(REQUESTJSON, Model.ENCRYPTIONKEY);
             PaymentRequest PAYMENTREQUEST = new PaymentRequest
             {
-                MERCHANTCODE = MERCHANTCODE,
+                MERCHANTCODE = Model.MerchantCode,
                 REQUESTJSON = REQUESTJSON,
                 REQUESTPARAMETERS = REQUESTPARAMS,
                 ENCDATA = ENCDATA
@@ -74,12 +75,12 @@ namespace RJ_NOC_DataAccess.Repositories
             return PAYMENTREQUEST;
         }
         private static readonly Encoding encoding = Encoding.UTF8;
-        public PaymentResponse GetResponse(string STATUS, string ENCDATA)
+        public PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel Model)
         {
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
-            string RESPONSEJSON = AESDecrypt(ENCDATA, ENCRYPTIONKEY);
+            string RESPONSEJSON = AESDecrypt(ENCDATA, Model.ENCRYPTIONKEY);
             ResponseParameters RESPONSEPARAMS = JsonConvert.DeserializeObject<ResponseParameters>(RESPONSEJSON);
-            string CHECKSUM = MD5HASHING(MERCHANTCODE + "|" + RESPONSEPARAMS.PRN + "|" + RESPONSEPARAMS.RPPTXNID + "|" + RESPONSEPARAMS.PAYMENTAMOUNT + "|" + CHECKSUMKEY);
+            string CHECKSUM = MD5HASHING(Model.MerchantCode + "|" + RESPONSEPARAMS.PRN + "|" + RESPONSEPARAMS.RPPTXNID + "|" + RESPONSEPARAMS.PAYMENTAMOUNT + "|" + Model.CheckSumKey);
 
 
 
@@ -194,6 +195,29 @@ namespace RJ_NOC_DataAccess.Repositories
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
             return dataModels;
+        }
+
+        //gete payment gateway details
+        public PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel model)
+        {
+            string SqlQuery = " exec USP_PaymentGateway_GetData @PaymentGateway='" + model.PaymentGateway + "' ,@Key= 'GetRecord' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
+
+           List< PaymentGatewayDataModel> dataModels = new List<PaymentGatewayDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<PaymentGatewayDataModel>>(JsonDataTable_Data);
+
+            if (dataModels.Count > 0)
+            {
+                var record = dataModels.FirstOrDefault();
+                if (record != null)
+                {
+                    model = record;
+                }
+            }
+
+            return model;
         }
     }
 }
