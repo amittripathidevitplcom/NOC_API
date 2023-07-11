@@ -23,6 +23,7 @@ namespace RJ_NOC_Model
         public int? ApplicationStatus { get; set; }
         public int ModifyBy { get; set; }
         public string? IPAddress { get; set; }
+        public string? SSOID { get; set; }
 
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
