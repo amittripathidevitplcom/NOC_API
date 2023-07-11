@@ -42,8 +42,8 @@ namespace RJ_NOC_DataAccess.Common
                 }
                 catch (Exception ex)
                 {
-                    CommonDataAccessHelper.Insert_ErrorLog(FuncationName, ex.ToString());
-                    throw null;
+                    throw new Exception(ex + "sqlConnectionStaring" + sqlConnectionStaring);
+                    //CommonDataAccessHelper.Insert_ErrorLog(FuncationName, ex.ToString());
                 }
                 finally
                 {
