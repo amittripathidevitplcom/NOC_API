@@ -21,9 +21,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetApplyNOCApplicationListByRole(RoleID);
         }
-        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID)
+        public bool DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType, int DepartmentID, string Remark)
         {
-            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny(ApplyNOCID, RoleID, UserID, ActionType, DepartmentID);
+            return UnitOfWork.ApplyNOCRepository.DocumentScrutiny(ApplyNOCID, RoleID, UserID, ActionType, DepartmentID,Remark);
         }
         public bool SaveDocumentScrutiny(DocumentScrutinyDataModel request)
         {

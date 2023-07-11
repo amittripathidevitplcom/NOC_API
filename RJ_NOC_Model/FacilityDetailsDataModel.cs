@@ -30,5 +30,6 @@ namespace RJ_NOC_Model
         public string? IPAddress { get; set; }
         public string? Action { get; set; }
         public string? Remark { get; set; }
+        public string FacilitiesName { get; set; }
     }
 }

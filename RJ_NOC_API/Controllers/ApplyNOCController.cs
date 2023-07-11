@@ -48,18 +48,18 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpPost("DocumentScrutiny/{ApplyNOCID}/{RoleID}/{UserID}/{ActionType}/{DepartmentID}")]
-        public async Task<OperationResult<bool>> DocumentScrutiny(int ApplyNOCID, int RoleID, int UserID, string ActionType,int DepartmentID)
+        [HttpPost("DocumentScrutiny")]
+        public async Task<OperationResult<bool>> DocumentScrutiny(DocumentScrutinySave_DataModel request)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny(ApplyNOCID,RoleID, UserID,ActionType, DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny(request.ApplyNOCID, request.RoleID, request.UserID, request.ActionType, request.DepartmentID,request.Remark));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "DocumentScrutiny", ApplyNOCID, "ApplyNOC");
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "DocumentScrutiny", request.ApplyNOCID, "ApplyNOC");
                     result.State = OperationState.Success;
-                    result.SuccessMessage = ActionType+" successfully .!";
+                    result.SuccessMessage = request.ActionType +" successfully .!";
                 }
                 else
                 {
