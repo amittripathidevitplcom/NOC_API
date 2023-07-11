@@ -37,6 +37,8 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
         public List<DocuemntBuildingDetailsDataModel> lstBuildingDocDetails { get; set; }
 
     }
