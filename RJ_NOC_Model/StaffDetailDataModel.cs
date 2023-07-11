@@ -55,6 +55,8 @@ namespace RJ_NOC_Model
 
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
         public List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails { get; set; }
     }
 
