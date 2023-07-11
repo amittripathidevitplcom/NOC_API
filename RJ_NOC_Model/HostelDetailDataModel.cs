@@ -43,6 +43,9 @@ namespace RJ_NOC_Model
         public string? TehsilName { get; set; }
         public string? PanchyatSamitiName { get; set; }
         public List<HostelDetailsDataModel_Hostel> HostelDetails { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
 
     public class HostelDetailsDataModel_Hostel

@@ -142,6 +142,9 @@ namespace RJ_NOC_Model
         public string? OtherDistrictName { get; set; }
         public string? OtherTehsilName { get; set; }
         public string? OtherPanchyatSamitiName { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
     public class HospitalAreaValidation
     {

@@ -27,5 +27,8 @@ namespace RJ_NOC_Model
         public int FailedStudent { get; set; }
         public int OtherStudent { get; set; }
         public int UserID { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
 }
