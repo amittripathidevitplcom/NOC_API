@@ -71,5 +71,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_OldNOCDetails(CollageID, RoleID, ApplyNOCID);
         }
 
+        public List<CommonDataModel_DataTable> GetDocumentScrutinyReportCompleted(int RoleId)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.GetDocumentScrutinyReportCompleted(RoleId);
+        }
+
     }
 }
