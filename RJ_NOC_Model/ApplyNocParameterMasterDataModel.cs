@@ -95,12 +95,15 @@ namespace RJ_NOC_Model
         public int ApplyNocApplicationID { get; set; }
         public int CollegeID { get; set; }
         public string? CollegeName { get; set; }
+        public string? CollegeMobileNo { get; set; }
+        public string? CollegeEmail { get; set; }
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
         public bool? ApplicationStatus { get; set; }
         public bool? IsFinalSubmit { get; set; }
         public bool? IsSaveFDR { get; set; }
+        public bool? IsMakePayment { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
     }

@@ -28,5 +28,7 @@ namespace RJ_NOC_Model
         public int? CreatedBy { get; set; }
         public int? ModifyBy { get; set; }
         public string? IPAddress { get; set; }
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
 }
