@@ -376,7 +376,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> GetDocumentScrutinyReportCompleted(int RoleId)
         {
-            string SqlQuery = " exec USP_GetDocumentScrutinyCompletedReport @RoleId ='" + RoleId + "'";
+            string SqlQuery = " exec USP_GetDocumentScrutinyCompletedReport @UserID ='" + RoleId + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.GetDocumentScrutinyReportCompleted");
 
