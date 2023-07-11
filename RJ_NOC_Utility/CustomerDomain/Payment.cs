@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Azure.Core;
+using System.Reflection;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -17,13 +18,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID,PaymentGatewayDataModel Model)
         {
-            return UnitOfWork.PaymentRepository.SendRequest(PRN,AMOUNT,PURPOSE,USERNAME,USERMOBILE,USEREMAIL, ApplyNocApplicationID);
+            return UnitOfWork.PaymentRepository.SendRequest(PRN,AMOUNT,PURPOSE,USERNAME,USERMOBILE,USEREMAIL, ApplyNocApplicationID,Model);
         }
-        public PaymentResponse GetResponse(string STATUS, string ENCDATA)
+        public PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel Model)
         {
-            return UnitOfWork.PaymentRepository.GetResponse(STATUS, ENCDATA);
+            return UnitOfWork.PaymentRepository.GetResponse(STATUS, ENCDATA, Model);
         }
 
         public bool SaveData(PaymentResponse response)
@@ -35,5 +36,12 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.GetPaymentListIDWise(TransactionID);
         }
+
+        public PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel model)
+        {
+            return UnitOfWork.PaymentRepository.GetpaymentGatewayDetails(model);
+        }
+
+
     }
 }
