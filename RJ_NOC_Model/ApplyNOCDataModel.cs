@@ -16,6 +16,7 @@ namespace RJ_NOC_Model
     }
     public class DocumentScrutinyDataModel
     {
+
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
         public int UserID { get; set; }
@@ -38,5 +39,15 @@ namespace RJ_NOC_Model
         public string? Remark { get; set; }
         public int TabRowID { get; set; }
         public string? SubTabName { get; set; }
+    }
+
+    public class DocumentScrutinySave_DataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public int RoleID { get; set; }
+        public int UserID { get; set; }
+        public string ActionType { get; set; }
+        public int DepartmentID { get; set; }
+        public string? Remark { get; set; }
     }
 }
