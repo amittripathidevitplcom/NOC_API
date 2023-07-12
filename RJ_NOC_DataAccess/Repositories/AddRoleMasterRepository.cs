@@ -69,5 +69,20 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
+
+        public bool SaveUserRoleRight(List<UserRoleRightsDataModel> request)
+        {
+            string UserRoleRight_Str = request.Count>0? CommonHelper.GetDetailsTableQry(request, "Temp_M_UserRoleRights") :"";
+            int RoleID = 0;
+            RoleID= request.Count > 0? request.First().RoleID : 0;
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_UserRoleRight_IU";
+            SqlQuery += " @RoleID='" + RoleID + "', @UserRoleRight_Str='"+ UserRoleRight_Str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "AddRoleMaster.SaveUserRoleRight");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

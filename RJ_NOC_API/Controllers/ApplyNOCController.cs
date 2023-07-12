@@ -95,7 +95,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error revert application";
+                    result.ErrorMessage = "There was an error save document scrutiny";
                 }
             }
             catch (Exception e)
