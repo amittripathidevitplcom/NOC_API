@@ -14,6 +14,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool DeleteData(int RoleID);
         bool IfExists(int RoleID, string RoleName);
 
-
+        bool SaveUserRoleRight(List<UserRoleRightsDataModel> request);
     }
 }

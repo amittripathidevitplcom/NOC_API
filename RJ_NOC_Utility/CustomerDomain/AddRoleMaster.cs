@@ -34,6 +34,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.AddRoleMasterRepository.IfExists(RoleID, RoleName);
         }
+        public bool SaveUserRoleRight(List<UserRoleRightsDataModel> request)
+        {
+            return UnitOfWork.AddRoleMasterRepository.SaveUserRoleRight(request);
+        }
 
 
     }

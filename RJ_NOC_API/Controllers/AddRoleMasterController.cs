@@ -63,7 +63,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("{RoleID}/{UserID}")]
-        public async Task<OperationResult<List<AddRoleMasterDataModel>>> GetByID(int RoleID , int UserID)
+        public async Task<OperationResult<List<AddRoleMasterDataModel>>> GetByID(int RoleID, int UserID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", RoleID, "AddRoleMaster");
             var result = new OperationResult<List<AddRoleMasterDataModel>>();
@@ -103,7 +103,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.AddRoleMasterUtility.IfExists(request.RoleID,request.RoleName);
+                IfExits = UtilityHelper.AddRoleMasterUtility.IfExists(request.RoleID, request.RoleName);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.AddRoleMasterUtility.SaveData(request));
@@ -151,7 +151,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("Delete/{RoleID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int RoleID,int UserID)
+        public async Task<OperationResult<bool>> DeleteData(int RoleID, int UserID)
         {
             var result = new OperationResult<bool>();
             try
@@ -174,6 +174,41 @@ namespace RJ_NOC_API.Controllers
                 CommonDataAccessHelper.Insert_ErrorLog("AddRoleMaster.DeleteData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("SaveUserRoleRight")]
+        public async Task<OperationResult<bool>> SaveUserRoleRight(List<UserRoleRightsDataModel> request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AddRoleMasterUtility.SaveUserRoleRight(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "AddRoleMaster");
+                    result.SuccessMessage = "Saved successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AddRoleMaster.SaveUserRoleRight", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
             }
             finally
             {

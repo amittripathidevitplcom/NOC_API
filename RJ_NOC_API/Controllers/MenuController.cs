@@ -243,6 +243,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("GetAllMenuUserRoleRightsRoleWise/{RoleID}")]
+        public async Task<OperationResult<List<UserRoleRightsDataModel>>> GetAllMenuUserRoleRightsRoleWise(int RoleID)
+        {
+            var result = new OperationResult<List<UserRoleRightsDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MenuUtility.GetAllMenuUserRoleRightsRoleWise(RoleID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 
