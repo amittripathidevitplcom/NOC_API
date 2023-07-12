@@ -58,6 +58,7 @@ namespace RJ_NOC_Model
         public RequestParameters REQUESTPARAMETERS { get; set; }
         public string REQUESTJSON { get; set; }
         public string ENCDATA { get; set; }
+        public string PaymentRequestURL { get; set; }
     }
 
 
@@ -69,6 +70,8 @@ namespace RJ_NOC_Model
         public string STATUS { get; set; }
         public string ENCDATA { get; set; }
         public bool CHECKSUMVALID { get; set; }
+        public string PaymentRequestURL { get; set; }
+       
     }
 
     public class RequestDetails

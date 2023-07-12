@@ -67,7 +67,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 MERCHANTCODE = Model.MerchantCode,
                 REQUESTJSON = REQUESTJSON,
                 REQUESTPARAMETERS = REQUESTPARAMS,
-                ENCDATA = ENCDATA
+                ENCDATA = ENCDATA,
+                PaymentRequestURL=Model.PaymentRequestURL
+               
             };
 
 
