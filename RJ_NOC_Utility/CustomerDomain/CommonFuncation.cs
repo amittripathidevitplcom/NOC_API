@@ -263,5 +263,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetRoleListByLevelID(LevelID);
         }
+        public List<CommonDataModel_CommitteeList> GetCommitteeList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCommitteeList();
+        }
     }
 }

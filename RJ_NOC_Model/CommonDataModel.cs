@@ -69,7 +69,11 @@ namespace RJ_NOC_Model
         public int LevelID { get; set; }
         public string LevelName { get; set; }
     }
-
+    public class CommonDataModel_CommitteeList
+    {
+        public int CommitteeID { get; set; }
+        public string CommitteeName { get; set; }
+    }
     public class CommonDataModel_RoleListByLevel
     {
           
