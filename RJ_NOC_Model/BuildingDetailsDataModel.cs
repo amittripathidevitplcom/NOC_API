@@ -78,6 +78,7 @@ namespace RJ_NOC_Model
         public string DocumentName { get; set; }
         public string FilePath { get; set; }
         public string FileName { get; set; }
+        public string Dis_FileName { get; set; }
         public bool Isfile { get; set; }
 
     }
