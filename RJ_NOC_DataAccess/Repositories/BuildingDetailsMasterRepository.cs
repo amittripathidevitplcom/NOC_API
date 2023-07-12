@@ -44,6 +44,20 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @OrderDate='" + buildingdetails.OrderDate + "',";
             SqlQuery += " @ExpiringOn='" + buildingdetails.ExpiringOn + "',";
             SqlQuery += " @PWDNOCFileUpload='" + buildingdetails.PWDNOCFileUpload + "',";
+
+            SqlQuery += " @TotalProjectCost='" + buildingdetails.TotalProjectCost + "',";
+            SqlQuery += " @TotalProjectCostFileUpload='" + buildingdetails.TotalProjectCostFileUpload + "',";
+            SqlQuery += " @SourceCostAmount='" + buildingdetails.SourceCostAmount + "',";
+            SqlQuery += " @SourceCostAmountFileUpload='" + buildingdetails.SourceCostAmountFileUpload + "',";
+            SqlQuery += " @AmountDeposited='" + buildingdetails.AmountDeposited + "',";
+            SqlQuery += " @AmountDepositedFileUpload='" + buildingdetails.AmountDepositedFileUpload + "',";
+            SqlQuery += " @OtherFixedAssetsAndSecurities='" + buildingdetails.OtherFixedAssetsAndSecurities + "',";
+            SqlQuery += " @OtherFixedAssetsAndSecuritiesFileUpload='" + buildingdetails.OtherFixedAssetsAndSecuritiesFileUpload + "',";
+            SqlQuery += " @GATEYearBalanceSecret='" + buildingdetails.GATEYearBalanceSecret + "',";
+            SqlQuery += " @GATEYearBalanceSecretFileUpload='" + buildingdetails.GATEYearBalanceSecretFileUpload + "',";
+            SqlQuery += " @OtherFinancialResources='" + buildingdetails.OtherFinancialResources + "',";
+            SqlQuery += " @OtherFinancialResourcesFileUpload='" + buildingdetails.OtherFinancialResourcesFileUpload + "',";
+
             SqlQuery += " @ContactNo='" + buildingdetails.ContactNo + "',";
             SqlQuery += " @UserID='" + buildingdetails.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
