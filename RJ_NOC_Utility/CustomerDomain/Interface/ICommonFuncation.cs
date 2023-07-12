@@ -79,6 +79,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
         bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
         List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int LevelID);
+        List<CommonDataModel_GetConnectionString> GetConnectionString();
     }
 
 }

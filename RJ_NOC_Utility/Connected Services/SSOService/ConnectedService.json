@@ -13,9 +13,6 @@
     "references": [
       "Azure.Core, {Azure.Core, 1.25.0}",
       "Azure.Identity, {Azure.Identity, 1.7.0}",
-      "D:\\RJ_NOC\\RJ_NOC_API\\RJ_NOC_Utility\\bin\\Debug\\net7.0\\RAJSSO.dll",
-      "D:\\RJ_NOC\\RJ_NOC_API\\RJ_NOC_Utility\\bin\\Debug\\net7.0\\RJ_NOC_DataAccess.dll",
-      "D:\\RJ_NOC\\RJ_NOC_API\\RJ_NOC_Utility\\bin\\Debug\\net7.0\\RJ_NOC_Model.dll",
       "Microsoft.Bcl.AsyncInterfaces, {Microsoft.Bcl.AsyncInterfaces, 1.1.1}",
       "Microsoft.Data.SqlClient, {Microsoft.Data.SqlClient, 5.1.1}",
       "Microsoft.Extensions.Configuration, {Microsoft.Extensions.Configuration, 7.0.0}",

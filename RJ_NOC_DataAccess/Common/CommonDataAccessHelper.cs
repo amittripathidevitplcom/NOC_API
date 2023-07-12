@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+ 
 
 namespace RJ_NOC_DataAccess.Common
 {
@@ -15,6 +16,7 @@ namespace RJ_NOC_DataAccess.Common
     {
         //private IConfiguration _configuration { get; }
         private static IConfiguration _configuration;
+       // string sqlConnectionStaring1 = "";
         string sqlConnectionStaring = "";
         static string sqlConnectionStaringSys = "";
         public CommonDataAccessHelper(IConfiguration configuration)
@@ -22,10 +24,24 @@ namespace RJ_NOC_DataAccess.Common
             _configuration = configuration;
             sqlConnectionStaring = _configuration.GetConnectionString("DefaultConnection");
             sqlConnectionStaringSys = _configuration.GetConnectionString("DefaultConnection");
+
+            //sqlConnectionStaring = AppSetting.ConnectionString;
+            //sqlConnectionStaringSys = AppSetting.ConnectionString;
         }
+
+
+        public void GetConnectionstr(ref string ConnectionString1, ref string ConnectionString2, ref string ConnectionString3)
+        {
+             ConnectionString1 = AppSetting.GetConnectionString();
+             ConnectionString2 = sqlConnectionStaring;
+            //ConnectionString3 = sqlConnectionStaring1; 
+            ConnectionString3 = ""; ; 
+        }
+
 
         public DataTable Fill_DataTable(string SqlQuery,string FuncationName="")
         {
+            //string Connectionstr = AppSetting.GetConnectionString();
             using (SqlConnection con = new SqlConnection(sqlConnectionStaring))
             {
                 try
@@ -42,8 +58,10 @@ namespace RJ_NOC_DataAccess.Common
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex + "sqlConnectionStaring" + sqlConnectionStaring);
-                    //CommonDataAccessHelper.Insert_ErrorLog(FuncationName, ex.ToString());
+                    CommonDataAccessHelper.Insert_ErrorLog(FuncationName, ex.ToString());
+                    throw new Exception(ex.ToString());
+                    
+                    //throw;
                 }
                 finally
                 {

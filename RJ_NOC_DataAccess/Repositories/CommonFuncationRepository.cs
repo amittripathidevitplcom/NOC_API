@@ -577,7 +577,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID)
         {
-            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='"+ DepartmentID + "',@RoleID='" + RoleID + "'";
+            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "'";
             List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
@@ -668,7 +668,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_DraftFinalSubmit";
-            SqlQuery += " @CollegeID='" + CollegeID + "',@IsDraftSubmited='" + IsDraftSubmited +"'";
+            SqlQuery += " @CollegeID='" + CollegeID + "',@IsDraftSubmited='" + IsDraftSubmited + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.DraftFinalSubmit");
             if (Rows > 0)
                 return true;
@@ -684,6 +684,23 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_RoleListByLevel> dataModels = new List<CommonDataModel_RoleListByLevel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RoleListByLevel>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_GetConnectionString> GetConnectionString()
+        {
+
+            string ConnectionString1 = "";
+            string ConnectionString2 = "";
+            string ConnectionString3 = "";
+
+            _commonHelper.GetConnectionstr(ref ConnectionString1, ref ConnectionString2, ref ConnectionString3);
+            List<CommonDataModel_GetConnectionString> dataModels = new List<CommonDataModel_GetConnectionString>();
+            CommonDataModel_GetConnectionString common = new CommonDataModel_GetConnectionString();
+            common.ConnectionString1 = ConnectionString1;
+            common.ConnectionString2 = ConnectionString2;
+            common.ConnectionString3 = ConnectionString3;
+            dataModels.Add(common);
             return dataModels;
         }
     }

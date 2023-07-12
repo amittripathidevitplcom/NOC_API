@@ -245,4 +245,11 @@ namespace RJ_NOC_Model
         public string TabName { get; set; }
         public string TabFieldName { get; set; }
     }
+
+    public class CommonDataModel_GetConnectionString
+    {
+        public string ConnectionString1 { get; set; }
+        public string ConnectionString2 { get; set; }
+        public string ConnectionString3 { get; set; }
+    }
 }

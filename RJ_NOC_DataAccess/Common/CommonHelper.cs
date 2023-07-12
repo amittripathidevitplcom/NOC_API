@@ -26,8 +26,10 @@ namespace RJ_NOC_DataAccess.Common
         public CommonHelper(IConfiguration configuration)
         {
             _configuration = configuration;
-            sqlConnectionStaring = _configuration.GetConnectionString("DefaultConnection");
-            sqlConnectionStaringSys = _configuration.GetConnectionString("DefaultConnection");
+            //sqlConnectionStaring = _configuration.GetConnectionString("DefaultConnection");
+            sqlConnectionStaring = AppSetting.ConnectionString;
+            sqlConnectionStaringSys = AppSetting.ConnectionString;
+            //sqlConnectionStaringSys = _configuration.GetConnectionString("DefaultConnection");
         }
         public static string ConvertDataTable(DataTable dt)
         {

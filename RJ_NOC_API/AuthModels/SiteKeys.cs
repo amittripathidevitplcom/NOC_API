@@ -12,5 +12,6 @@
         public static string JWTAudience => _configurationSection["Jwt-Audience"];
         public static string JWTSecret => _configurationSection["Jwt-Secret"];
         public static int SessionTime => Convert.ToInt32(_configurationSection["Session-Time"] ?? "30");
+         
     }
 }

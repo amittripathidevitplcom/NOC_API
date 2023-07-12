@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using RJ_NOC_API.AuthModels;
+using RJ_NOC_DataAccess;
 using System.Net;
 using System.Text;
 
@@ -23,7 +24,7 @@ namespace RJ_NOC_API
             // Add services to the container.
             var configuration = builder.Configuration;
 
-
+            configuration.AddJsonFile("appsettings.json").AddEnvironmentVariables();
 
             //session time out
             var sessionTimeOut = TimeSpan.FromMinutes(Convert.ToInt32(configuration["SiteKeys:Session-Time"] ?? "420"));
@@ -109,6 +110,7 @@ namespace RJ_NOC_API
 
 
             SiteKeys.Configure(configuration.GetSection("SiteKeys"));
+            AppSetting.Configure(configuration.GetConnectionString("DefaultConnection"), configuration.GetSection("SiteKeys"));
 
 
 

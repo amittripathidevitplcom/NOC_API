@@ -263,5 +263,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetRoleListByLevelID(LevelID);
         }
+
+        public List<CommonDataModel_GetConnectionString> GetConnectionString()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetConnectionString();
+        }
     }
 }
