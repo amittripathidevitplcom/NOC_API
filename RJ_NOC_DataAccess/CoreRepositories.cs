@@ -282,6 +282,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return committeeMasterRepository; }
         }
+        private IRNCCheckListMasterRepository rNCCheckListMasterRepository;
+        public IRNCCheckListMasterRepository RNCCheckListMasterRepository
+        {
+            get { return rNCCheckListMasterRepository; }
+        }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -324,6 +329,7 @@ namespace RJ_NOC_DataAccess.Repository
             committeeMasterRepository = new CommitteeMasterRepository(commonHelper);
             medicalDocumentScrutinyRepository = new MedicalDocumentScrutinyRepository(commonHelper);
             //scurtenyComitteeRepository = new ScurtenyComitteeRepository(commonHelper);
+            rNCCheckListMasterRepository = new RNCCheckListMasterRepository(commonHelper);
 
         }
     }
