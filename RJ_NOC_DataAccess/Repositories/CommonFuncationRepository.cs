@@ -686,6 +686,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RoleListByLevel>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_CommitteeList> GetCommitteeList()
+        {
+            string SqlQuery = "exec USP_GetCommitteeList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCommitteeList");
+
+            List<CommonDataModel_CommitteeList> dataModels = new List<CommonDataModel_CommitteeList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommitteeList>>(JsonDataTable_Data);
+            return dataModels;
+
+        }
 
         public List<CommonDataModel_GetConnectionString> GetConnectionString()
         {

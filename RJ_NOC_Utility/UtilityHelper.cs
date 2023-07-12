@@ -83,7 +83,7 @@ namespace RJ_NOC_Utility
             }
         }
         public ICommitteeMaster CommitteeMasterUtility { get; private set; }
-
+        public IRNCCheckListMaster RNCCheckListMasterUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -135,6 +135,7 @@ namespace RJ_NOC_Utility
             GeoTaggingUtility = new GeoTagging(UnitOfWork);
             CommitteeMasterUtility = new CommitteeMaster(UnitOfWork);
             MedicalDocumentScrutinyUtility = new MedicalDocumentScrutiny(UnitOfWork);
+            RNCCheckListMasterUtility = new RNCCheckListMaster(UnitOfWork);
         }
     }
 }

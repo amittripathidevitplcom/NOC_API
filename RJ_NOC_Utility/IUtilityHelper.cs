@@ -53,5 +53,6 @@ namespace RJ_NOC_Utility
         IGeoTagging GeoTaggingUtility { get; }
         ICommitteeMaster CommitteeMasterUtility { get; }
         IMedicalDocumentScrutiny MedicalDocumentScrutinyUtility { get; }
+        IRNCCheckListMaster RNCCheckListMasterUtility { get; }
     }
 }

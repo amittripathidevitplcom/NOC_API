@@ -18,6 +18,8 @@ namespace RJ_NOC_Model
         public string? DepartmentName { get; set; }
         public int RoleID { get; set; }
         public string? RoleName { get; set; }
+        public int CommitteeID { get; set; }
+        public string CommitteeName { get; set; }
         public string MemberType { get; set; }
         public int StateID { get; set; }
         public string? StateName { get; set; }

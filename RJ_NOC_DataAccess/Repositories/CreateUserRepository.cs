@@ -66,6 +66,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @DesignationID='" + request.DesignationID + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @RoleID='" + request.RoleID + "',";
+            SqlQuery += " @CommitteeID='" + request.CommitteeID + "',";
             SqlQuery += " @MemberType='" + request.MemberType + "',";
             SqlQuery += " @StateID='" + request.StateID + "',";
             SqlQuery += " @DistrictID='" + request.DistrictID + "',";
