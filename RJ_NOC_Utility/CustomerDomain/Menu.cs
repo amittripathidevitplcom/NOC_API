@@ -42,6 +42,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MenuRepository.IfExists(AccountID, GroupName);
         }
+        public List<UserRoleRightsDataModel> GetAllMenuUserRoleRightsRoleWise(int RoleID)
+        {
+            return UnitOfWork.MenuRepository.GetAllMenuUserRoleRightsRoleWise(RoleID);
+        }
 
     }
 }

@@ -29,7 +29,7 @@ namespace RJ_NOC_DataAccess.Repository
         public List<MenuDataModel_List> GetAllMenu()
         {
            // string SqlQuery = " select * from V#AllMenuList order by MenuName asc";
-            string SqlQuery = " exec USP_AllMenuList ";
+            string SqlQuery = " exec P_WebMenuRight ''";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery);
 
@@ -118,6 +118,19 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
+        }
+
+
+        public List<UserRoleRightsDataModel> GetAllMenuUserRoleRightsRoleWise(int RoleID)
+        {
+            // string SqlQuery = " select * from V#AllMenuList order by MenuName asc";
+            string SqlQuery = " exec P_WebMenuRight '',@RoleID='"+RoleID+"'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery);
+            List<UserRoleRightsDataModel> dataModels = new List<UserRoleRightsDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<UserRoleRightsDataModel>>(JsonDataTable_Data);
+            return dataModels;
         }
 
     }

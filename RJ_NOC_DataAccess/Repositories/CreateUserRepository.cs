@@ -63,7 +63,6 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @MobileNumber='" + request.MobileNumber + "',";
             SqlQuery += " @EmailAddress='" + request.EmailAddress + "',";
             SqlQuery += " @Name='" + request.Name + "',";
-            SqlQuery += " @DesignationID='" + request.DesignationID + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @RoleID='" + request.RoleID + "',";
             SqlQuery += " @CommitteeID='" + request.CommitteeID + "',";

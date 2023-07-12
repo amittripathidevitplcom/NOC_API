@@ -18,6 +18,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool DeleteData(int AccountID);
 
         bool IfExists(int AccountID, string GroupName);
+        List<UserRoleRightsDataModel> GetAllMenuUserRoleRightsRoleWise(int RoleID);
     }
 
 }

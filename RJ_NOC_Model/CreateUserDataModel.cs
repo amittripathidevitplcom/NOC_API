@@ -12,8 +12,6 @@ namespace RJ_NOC_Model
         public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
         public string Name { get; set; }
-        public int DesignationID { get; set; }
-        public string? DesignationName { get; set; }
         public int DepartmentID { get; set; }
         public string? DepartmentName { get; set; }
         public int RoleID { get; set; }
