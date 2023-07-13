@@ -13,9 +13,9 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public bool FileUpload { get; set; }
         public string? IsFileUpload { get; set; }
+        public string? DepartmentName_English { get; set; }
         public bool ActiveStatus { get; set; }
-        public bool DeleteStatus { get; set; }
-
+        public bool DeleteStatus { get; set; } 
     }
 
 }

@@ -40,7 +40,10 @@ namespace RJ_NOC_API.Controllers
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
             string SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
-            string LoginType = CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
+            string LoginType = "CITIZEN";//CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
+
+            //string SSOID =  sSOLandingDataDataModel.Username;
+            //string LoginType = sSOLandingDataDataModel.LoginType;
 
             string QueryStringData = "";
             var result = new OperationResult<SSOUserDetailData>();
@@ -75,6 +78,7 @@ namespace RJ_NOC_API.Controllers
         [HttpGet("Check_SSOIDWise_LegalEntity/{SSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> Check_SSOIDWise_LegalEntity(string SSOID)
         {
+            
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
