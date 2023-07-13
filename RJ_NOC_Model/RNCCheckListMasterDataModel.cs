@@ -9,6 +9,7 @@ namespace RJ_NOC_Model
     {
         public int RNCCheckListID { get; set; }
         public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
         public string RNCCheckListName { get; set; }
         public int UserID { get; set; }
         public bool FileUpload { get; set; }
