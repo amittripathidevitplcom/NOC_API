@@ -159,5 +159,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpGet("EmitraPayment")]
+        public string EmitraPayment(object Response = null)
+        {
+            return "";
+        }
+
     }
 }
