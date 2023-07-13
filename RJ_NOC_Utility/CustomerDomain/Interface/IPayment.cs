@@ -17,6 +17,11 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         //payment PaymentGatewayDataModel
         PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel Model);
 
+        List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID);
+
+
+
+
 
     }
 }

@@ -17,5 +17,7 @@ namespace RJ_NOC_DataAccess.Interface
         //payment gaeway
         PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel Model);
 
+        List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID);
+
     }
 }
