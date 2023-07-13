@@ -42,6 +42,13 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.PaymentRepository.GetpaymentGatewayDetails(model);
         }
 
+        public List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID )
+        {
+            return UnitOfWork.PaymentRepository.GetPreviewPaymentDetails(ApplyNocApplicationID);
+        }
+
+    
+
 
     }
 }

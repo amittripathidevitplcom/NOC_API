@@ -715,6 +715,29 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(common);
             return dataModels;
         }
+
+        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval()
+        {
+            string SqlQuery = "exec USP_CommonDataList @Key='GetUserRole'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRoleListForApporval");
+            List<CommonDataModel_RoleListByLevel> dataModels = new List<CommonDataModel_RoleListByLevel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RoleListByLevel>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID)
+        {
+            string SqlQuery = "exec USP_CommonDataList @Key='GetUserDetailsByRoleID',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUserDetailsByRoleID");
+            List<CreateUserDataModel> dataModels = new List<CreateUserDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CreateUserDataModel>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

@@ -81,6 +81,11 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int LevelID);
         List<CommonDataModel_GetConnectionString> GetConnectionString();
         List<CommonDataModel_CommitteeList> GetCommitteeList();
+
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval();
+        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
+
+
     }
 
 }
