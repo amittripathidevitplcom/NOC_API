@@ -273,9 +273,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetCommitteeList();
         }
 
-        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval()
+        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval();
+            return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval(RoleID);
         }
 
         public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID)

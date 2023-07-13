@@ -15,10 +15,14 @@ namespace RJ_NOC_Model
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string FireNOCFileUpload { get; set; }
+        public string? Dis_FireNOCFileUpload { get; set; }
+        public string? FireNOCFileUploadPath { get; set; }
         public string OrderNo { get; set; }
         public string OrderDate { get; set; }
         public string ExpiringOn { get; set; }
         public string PWDNOCFileUpload { get; set; }
+        public string? Dis_PWDNOCFileUpload { get; set; }
+        public string? PWDNOCFileUploadPath { get; set; }
         public string? OtherFileUpload { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -34,6 +38,8 @@ namespace RJ_NOC_Model
         public string OwnBuildingOrderNo { get; set; }
         public string OwnBuildingOrderDate { get; set; }
         public string OwnBuildingFileUpload { get; set; }
+        public string? Dis_OwnBuildingFileUpload { get; set; }
+        public string? OwnBuildingFileUploadPath { get; set; }
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
@@ -42,28 +48,28 @@ namespace RJ_NOC_Model
 
         public string TotalProjectCost { get; set; }
         public string TotalProjectCostFileUpload { get; set; }
-        public string Dis_TotalProjectCostFileUpload { get; set; }
-        public string TotalProjectCostFileUploadPath { get; set; }
+        public string? Dis_TotalProjectCostFileUpload { get; set; }
+        public string? TotalProjectCostFileUploadPath { get; set; }
         public string SourceCostAmount { get; set; }
         public string SourceCostAmountFileUpload { get; set; }
-        public string Dis_SourceCostAmountFileUpload { get; set; }
-        public string SourceCostAmountFileUploadPath { get; set; }
+        public string? Dis_SourceCostAmountFileUpload { get; set; }
+        public string? SourceCostAmountFileUploadPath { get; set; }
         public string AmountDeposited { get; set; }
         public string AmountDepositedFileUpload { get; set; }
-        public string Dis_AmountDepositedFileUpload { get; set; }
-        public string AmountDepositedFileUploadPath { get; set; }
+        public string? Dis_AmountDepositedFileUpload { get; set; }
+        public string? AmountDepositedFileUploadPath { get; set; }
         public string OtherFixedAssetsAndSecurities { get; set; }
         public string OtherFixedAssetsAndSecuritiesFileUpload { get; set; }
-        public string Dis_OtherFixedAssetsAndSecuritiesFileUpload { get; set; }
-        public string OtherFixedAssetsAndSecuritiesFileUploadPath { get; set; }
+        public string? Dis_OtherFixedAssetsAndSecuritiesFileUpload { get; set; }
+        public string? OtherFixedAssetsAndSecuritiesFileUploadPath { get; set; }
         public string GATEYearBalanceSecret { get; set; }
         public string GATEYearBalanceSecretFileUpload { get; set; }
-        public string Dis_GATEYearBalanceSecretFileUpload { get; set; }
-        public string GATEYearBalanceSecretFileUploadPath { get; set; }
+        public string? Dis_GATEYearBalanceSecretFileUpload { get; set; }
+        public string? GATEYearBalanceSecretFileUploadPath { get; set; }
         public string OtherFinancialResources { get; set; }
         public string OtherFinancialResourcesFileUpload { get; set; }
-        public string Dis_OtherFinancialResourcesFileUpload { get; set; }
-        public string OtherFinancialResourcesFileUploadPath { get; set; }
+        public string? Dis_OtherFinancialResourcesFileUpload { get; set; }
+        public string? OtherFinancialResourcesFileUploadPath { get; set; }
         public List<DocuemntBuildingDetailsDataModel> lstBuildingDocDetails { get; set; }
 
     }

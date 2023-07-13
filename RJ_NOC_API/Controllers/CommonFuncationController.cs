@@ -1814,13 +1814,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetRoleListForApporval")]
-        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval()
+        [HttpGet("GetRoleListForApporval/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID)
         {
             var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListForApporval());
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListForApporval(RoleID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

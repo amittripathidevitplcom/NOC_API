@@ -87,7 +87,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_CommitteeList> GetCommitteeList();
 
         //Roles
-        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval();
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID);
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
 
 

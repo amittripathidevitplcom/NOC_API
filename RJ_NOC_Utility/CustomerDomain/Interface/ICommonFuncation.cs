@@ -82,7 +82,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_GetConnectionString> GetConnectionString();
         List<CommonDataModel_CommitteeList> GetCommitteeList();
 
-        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval();
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID);
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
 
 

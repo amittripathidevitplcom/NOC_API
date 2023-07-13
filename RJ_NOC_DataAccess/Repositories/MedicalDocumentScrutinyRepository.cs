@@ -320,24 +320,37 @@ namespace RJ_NOC_DataAccess.Repository
             List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity>();
             MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity();
 
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            List<LegalEntityModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LegalEntityModel>> (JsonDataTable_Data);
-            dataModels.legalEntity = LandDetailDataModel_Item.FirstOrDefault();
+            if (dataSet != null)
+            {
+                if (dataSet.Tables[0].Rows.Count > 0)
+                {
+                    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+                    List<LegalEntityModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LegalEntityModel>>(JsonDataTable_Data);
+                    dataModels.legalEntity = LandDetailDataModel_Item.FirstOrDefault();
 
-            string JsonDataTable_Member = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
-            List<LegalEntityMemberDetailsDataModel> LandDetailDataModel_Member = JsonConvert.DeserializeObject<List<LegalEntityMemberDetailsDataModel>>(JsonDataTable_Member);
-            dataModels.legalEntity.MemberDetails = LandDetailDataModel_Member;
+                    if (dataSet.Tables[1].Rows.Count > 0)
+                    {
+                        string JsonDataTable_Member = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                        List<LegalEntityMemberDetailsDataModel> LandDetailDataModel_Member = JsonConvert.DeserializeObject<List<LegalEntityMemberDetailsDataModel>>(JsonDataTable_Member);
+                        dataModels.legalEntity.MemberDetails = LandDetailDataModel_Member;
+                    }
+                    if (dataSet.Tables[2].Rows.Count > 0)
+                    {
+                        string JsonDataTable_Institute = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
+                        List<LegalEntityInstituteDetailsDataModel> LandDetailDataModel_Institute = JsonConvert.DeserializeObject<List<LegalEntityInstituteDetailsDataModel>>(JsonDataTable_Institute);
+                        dataModels.legalEntity.InstituteDetails = LandDetailDataModel_Institute;
+                    }
+                }
+                if (dataSet.Tables[3].Rows.Count > 0)
+                {
+                    List<DataTable> dataModel = new List<DataTable>();
+                    dataModel.Add(dataSet.Tables[3]);
+                    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+                }
 
-            string JsonDataTable_Institute = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
-            List<LegalEntityInstituteDetailsDataModel> LandDetailDataModel_Institute = JsonConvert.DeserializeObject<List<LegalEntityInstituteDetailsDataModel>>(JsonDataTable_Institute);
-            dataModels.legalEntity.InstituteDetails = LandDetailDataModel_Institute;
 
-            List<DataTable> dataModel = new List<DataTable>();
-            dataModel.Add(dataSet.Tables[3]);
-            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
-
-
-            listdataModels.Add(dataModels);
+                listdataModels.Add(dataModels);
+            }
 
             return listdataModels;
         }
