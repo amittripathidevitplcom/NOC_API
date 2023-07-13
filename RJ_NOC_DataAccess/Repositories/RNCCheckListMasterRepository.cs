@@ -31,7 +31,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string SqlQuery = " exec USP_GetRNCCheckListMasterData @RNCCheckListID='" + RNCCheckListID + "'";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RNCCheckListMaster.GetByID");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RNCCheckListMaster.GetByRNCCheckListID");
 
             List<RNCCheckListMasterDataModel> dataModels = new List<RNCCheckListMasterDataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
