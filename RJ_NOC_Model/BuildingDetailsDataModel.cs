@@ -15,10 +15,14 @@ namespace RJ_NOC_Model
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string FireNOCFileUpload { get; set; }
+        public string Dis_FireNOCFileUpload { get; set; }
+        public string FireNOCFileUploadPath { get; set; }
         public string OrderNo { get; set; }
         public string OrderDate { get; set; }
         public string ExpiringOn { get; set; }
         public string PWDNOCFileUpload { get; set; }
+        public string Dis_PWDNOCFileUpload { get; set; }
+        public string PWDNOCFileUploadPath { get; set; }
         public string? OtherFileUpload { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -34,6 +38,8 @@ namespace RJ_NOC_Model
         public string OwnBuildingOrderNo { get; set; }
         public string OwnBuildingOrderDate { get; set; }
         public string OwnBuildingFileUpload { get; set; }
+        public string Dis_OwnBuildingFileUpload { get; set; }
+        public string OwnBuildingFileUploadPath { get; set; }
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
