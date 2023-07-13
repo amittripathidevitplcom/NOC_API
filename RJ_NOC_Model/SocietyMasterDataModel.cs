@@ -26,11 +26,21 @@ namespace RJ_NOC_Model
         public string Gender { get; set; }
         public string PANNo { get; set; }
         public string PANCard { get; set; }
+        public string? Dis_PANCard { get; set; }
+        public string? PANCardPath { get; set; }
         public string AadhaarNo { get; set; }
         public string AadhaarCard { get; set; }
+        public string? Dis_AadhaarCard { get; set; }
+        public string? AadhaarCardPath { get; set; }
         public string SignatureDoc { get; set; }
+        public string? Dis_SignatureDoc { get; set; }
+        public string? SignatureDocPath { get; set; }
         public string ProfilePhoto { get; set; }
+        public string? Dis_ProfilePhoto { get; set; }
+        public string? ProfilePhotoPath { get; set; }
         public string AuthorizedDocument { get; set; }
+        public string? Dis_AuthorizedDocument { get; set; }
+        public string? AuthorizedDocumentPath { get; set; }
         public bool IsPrimary { get; set; }
         public bool IsAuthorized { get; set; }
         public bool ActiveStatus { get; set; }
