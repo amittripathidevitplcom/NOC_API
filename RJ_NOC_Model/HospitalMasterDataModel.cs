@@ -119,7 +119,11 @@ namespace RJ_NOC_Model
 
         public int? AffiliatedHospitalAffiliationToOtherID { get; set; }
         public string? ParentNotDocument { get; set; }
+        public string? Dis_ParentNotDocument { get; set; }
+        public string? ParentNotDocumentPath { get; set; }
         public string? ConsentForm { get; set; }
+        public string? Dis_ConsentForm { get; set; }
+        public string? ConsentFormPath { get; set; }
 
         public int CreatedBy { get; set; }
         public int ModifyBy { get; set; }
