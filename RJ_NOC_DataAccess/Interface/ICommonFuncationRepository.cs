@@ -81,6 +81,12 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
         bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
         List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int RoleID);
+
+        //Roles
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval();
+        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
+
+
     }
 }
 

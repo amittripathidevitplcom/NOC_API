@@ -132,5 +132,7 @@ namespace RJ_NOC_Model
         public int Clerk_Pending { get; set; }
         public int Clerk_Reverted { get; set; }
         public int Clerk_Completed { get; set; }
+        public int secretary_Pending { get; set; }
+        public int secretary_Completed { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace RJ_NOC_Model
         public string OFFICECODE { get; set; }
         public string REVENUEHEAD { get; set; }
         public string CHECKSUM { get; set; }
+        public string CreatedDate { get; set; }
     }
 
 
@@ -48,6 +49,7 @@ namespace RJ_NOC_Model
         public string UDF2 { get; set; }
         public string UDF3 { get; set; }
         public string CHECKSUM { get; set; }
+        public string CreatedDate { get; set; }
     }
 
 

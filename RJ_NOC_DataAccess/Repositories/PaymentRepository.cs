@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 using System.Data;
+using System.Transactions;
 
 namespace RJ_NOC_DataAccess.Repositories
 {
@@ -220,6 +221,18 @@ namespace RJ_NOC_DataAccess.Repositories
             }
 
             return model;
+        }
+
+        public List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID)
+        {
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @ApplyNocApplicationID='" + ApplyNocApplicationID + "' ,@Key= 'GetPreviewPaymentDetails' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
+
+            List<ResponseParameters> dataModels = new List<ResponseParameters>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
+            return dataModels;
         }
     }
 }

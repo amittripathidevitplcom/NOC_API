@@ -159,5 +159,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpGet("GetPreviewPaymentDetails/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<List<ResponseParameters>>> GetPreviewPaymentDetails(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<List<ResponseParameters>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetPreviewPaymentDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
