@@ -11,7 +11,11 @@ namespace RJ_NOC_Model
         public int TrusteeGeneralInfoID { get; set; }
         public int LegalEntityID { get; set; }
         public string SocietyRegistrationDocument { get; set; }
+        public string? Dis_SocietyRegistrationDocument { get; set; }
+        public string? SocietyRegistrationDocumentPath { get; set; }
         public string SocietyLogo { get; set; }
+        public string? Dis_SocietyLogo { get; set; }
+        public string? SocietyLogoPath { get; set; }
         public string DateOfElectionOfPresentManagementCommittee { get; set; }
         public int? WomenMembersOfManagementCommitteeID { get; set; }
         public int? DateOfElectionOfManagementCommitteeID { get; set; }
