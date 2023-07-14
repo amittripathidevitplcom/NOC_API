@@ -54,7 +54,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny(request.ApplyNOCID, request.RoleID, request.UserID, request.ActionType, request.DepartmentID,request.Remark));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DocumentScrutiny(request));
                 if (result.Data)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "DocumentScrutiny", request.ApplyNOCID, "ApplyNOC");
