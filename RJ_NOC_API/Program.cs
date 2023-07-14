@@ -99,6 +99,12 @@ namespace RJ_NOC_API
 
 
             builder.Services.AddCors(option => option.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
+            builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            }));
+
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
@@ -152,14 +158,15 @@ namespace RJ_NOC_API
 
             app.UseCookiePolicy();
             app.UseRouting();
-
+            app.UseCors();
+            app.UseCors("corsapp");
 
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
             app.UseSystemWebAdapters();
-            app.UseCors();
+            
             app.Run();
         }
     }
