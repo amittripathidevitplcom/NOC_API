@@ -313,7 +313,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity> DocumentScrutiny_LegalEntity(string SSOID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_LegalEntity @SSOID=" + SSOID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_LegalEntity @SSOID='" + SSOID + "',@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_LegalEntity");
 
