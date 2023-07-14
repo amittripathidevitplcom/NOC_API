@@ -222,9 +222,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
         }
 
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID,int UserID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID);
+            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID);
         }
         public List<CommonDataModel_DesignationDDL> GetAllDesignation()
         {

@@ -71,7 +71,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
-        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID,int RoleID);
+        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID,int RoleID, int UserID )  ;
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID);
