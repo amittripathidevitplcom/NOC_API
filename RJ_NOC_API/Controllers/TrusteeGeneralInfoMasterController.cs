@@ -41,7 +41,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("TrusteeGeneralInfoMasterController.GetData", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("TrusteeGeneralInfoMasterController.GetDataOfLegalEntity", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

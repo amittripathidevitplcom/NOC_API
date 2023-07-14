@@ -81,13 +81,15 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public LegalEntityDataModel GetDataOfLegalEntity(string ssoId)
         {
-            string SqlQuery = $"exec USP_TrusteeGeneralInfoMaster @SSOID={ssoId},@Action='GetLegalEntityBySsoId'";
+            string SqlQuery = $"exec USP_TrusteeGeneralInfoMaster @SSOID='" + ssoId + "',@Action='GetLegalEntityBySsoId'";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "TrusteeGeneralInfoMaster.GetDataOfLegalEntity");
 
+            List<LegalEntityDataModel> legalEntityDataModel1 = new List<LegalEntityDataModel>();
             LegalEntityDataModel legalEntityDataModel = new LegalEntityDataModel();
             if (dt != null)
             {
-                legalEntityDataModel = CommonHelper.ConvertDataTable<LegalEntityDataModel>(dt);
+                legalEntityDataModel1 = CommonHelper.ConvertDataTable<List<LegalEntityDataModel>>(dt);
+                legalEntityDataModel = legalEntityDataModel1.FirstOrDefault();
             }
             return legalEntityDataModel;
         }
