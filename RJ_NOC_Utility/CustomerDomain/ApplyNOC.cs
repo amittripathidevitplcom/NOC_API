@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID)
+        public List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID, int UserID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplyNOCApplicationListByRole(RoleID);
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCApplicationListByRole(RoleID, UserID);
         }
         public bool DocumentScrutiny(DocumentScrutinySave_DataModel request)
         {
