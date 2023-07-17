@@ -157,7 +157,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetLandDoucmentTypeMasterList_DepartmentWise(DepartmentID);
         }
 
-        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID,int CourseType)
+        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, int CourseType)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseList_CollegeWise(CollegID, CourseType);
         }
@@ -222,7 +222,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
         }
 
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID,int UserID)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID)
         {
             return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID);
         }
@@ -238,7 +238,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeBasicDetails(CollegID);
-        }    
+        }
         public List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName)
         {
             return UnitOfWork.CommonFuncationRepository.GetTabFieldByTabName(TabName);
@@ -281,6 +281,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID)
         {
             return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID);
+        }
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace RJ_NOC_API.Controllers
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "DocumentScrutiny", request.ApplyNOCID, "ApplyNOC");
                     result.State = OperationState.Success;
-                    result.SuccessMessage = request.ActionType +" successfully .!";
+                    result.SuccessMessage = "Save successfully .!";
                 }
                 else
                 {

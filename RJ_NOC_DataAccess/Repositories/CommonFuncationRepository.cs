@@ -738,6 +738,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CreateUserDataModel>>(JsonDataTable_Data);
             return dataModels;
         }
+
+
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID)
+        {
+            string SqlQuery = "exec USP_GetWorkFlowActionListByRole @RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.USP_GetWorkFlowActionListByRole");
+            List<CommonDataModel_WorkFlowActionsByRole> dataModels = new List<CommonDataModel_WorkFlowActionsByRole>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_WorkFlowActionsByRole>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

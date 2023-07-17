@@ -46,7 +46,7 @@ namespace RJ_NOC_Model
         public int ApplyNOCID { get; set; }
         public int RoleID { get; set; }
         public int UserID { get; set; }
-        public string ActionType { get; set; }
+        public int ActionID { get; set; }
         public int DepartmentID { get; set; }
         public string? Remark { get; set; }
         public int NextRoleID { get; set; }
