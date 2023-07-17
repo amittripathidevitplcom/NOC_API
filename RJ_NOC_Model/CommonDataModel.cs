@@ -257,5 +257,14 @@ namespace RJ_NOC_Model
         public string ConnectionString3 { get; set; }
     }
 
-   
+    public class CommonDataModel_WorkFlowActionsByRole
+    {
+
+        public int RoleID { get; set; }
+        public int NextRoleID { get; set; }
+        public string RoleName { get; set; }
+        public string ActionName { get; set; }
+        public int ActionID { get; set; }
+    }
+
 }
