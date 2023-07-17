@@ -15,6 +15,8 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
+
+
         [HttpGet("GetApplyNOCApplicationListByRole/{RoleID}/{UserID}")]
         public async Task<OperationResult<List<ApplyNOCDataModel>>> GetApplyNOCApplicationListByRole(int RoleID, int UserID)
         {

@@ -718,7 +718,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID)
         {
-            string SqlQuery = "exec USP_CommonDataList @Key='GetUserRole',@RoleID='" + RoleID + "'";
+            string SqlQuery = "exec USP_ActionDataList @RoleID='" + RoleID + "'";
             DataTable dataTable = new DataTable();
 
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRoleListForApporval");
