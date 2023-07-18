@@ -267,4 +267,13 @@ namespace RJ_NOC_Model
         public int ActionID { get; set; }
     }
 
+    public class CommonDataModel_RNCCheckListData
+    {
+
+        public int RNCCheckListID { get; set; }
+        public int DepartmentID { get; set; }
+        public string RNCCheckListName { get; set; }
+        public bool FileUpload { get; set; }
+    }
+
 }

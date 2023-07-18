@@ -90,6 +90,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID);
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
         List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID);
+        List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type,int DepartmentID);
 
 
     }

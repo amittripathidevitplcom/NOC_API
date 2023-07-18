@@ -311,13 +311,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("DocumentScrutiny_LegalEntity/{SSOID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity>>> DocumentScrutiny_LegalEntity(string SSOID, int RoleID, int ApplyNOCID)
+        [HttpPost("DocumentScrutiny_LegalEntity/{CollegeID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity>>> DocumentScrutiny_LegalEntity(int CollegeID, int RoleID, int ApplyNOCID)
         {
             var result = new OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLegalEntity>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.DocumentScrutiny_LegalEntity(SSOID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.DocumentScrutiny_LegalEntity(CollegeID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;

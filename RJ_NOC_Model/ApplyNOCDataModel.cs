@@ -52,4 +52,13 @@ namespace RJ_NOC_Model
         public int NextRoleID { get; set; }
         public int NextUserID { get; set; }
     }
+
+    public class CommiteeInspection_RNCCheckList_DataModel
+    {
+        public int RNCCheckListID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public int CreatedBy { get; set; }
+        public string? FileUploadName { get; set; }
+
+    }
 }

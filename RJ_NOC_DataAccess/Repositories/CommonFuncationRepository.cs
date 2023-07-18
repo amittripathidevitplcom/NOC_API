@@ -751,6 +751,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_WorkFlowActionsByRole>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
+        {
+            string SqlQuery = "exec USP_GetRNCCheckListByTypeDepartment @Type='"+Type+ "' ,@DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRNCCheckListByTypeDepartment");
+            List<CommonDataModel_RNCCheckListData> dataModels = new List<CommonDataModel_RNCCheckListData>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RNCCheckListData>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

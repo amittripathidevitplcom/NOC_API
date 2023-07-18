@@ -86,6 +86,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
 
         List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID);
+        List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID);
     }
 
 }

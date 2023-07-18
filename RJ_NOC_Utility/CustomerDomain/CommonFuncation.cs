@@ -286,5 +286,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID);
         }
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetRNCCheckListByTypeDepartment(Type, DepartmentID);
+        }
     }
 }

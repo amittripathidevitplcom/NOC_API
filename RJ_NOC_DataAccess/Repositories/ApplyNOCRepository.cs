@@ -162,5 +162,18 @@ namespace RJ_NOC_DataAccess.Repositories
             }
             return listdataModels;
         }
+
+        public bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            string CommiteeInspection_RNCCheckList = request.Count>0? CommonHelper.GetDetailsTableQry(request, "Temp_CommiteeInspection_RNCCheckList") :"";
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveCommiteeInspection_RNCCheckList @CommiteeInspection_RNCCheckList='" + CommiteeInspection_RNCCheckList + "'";
+            
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveCommiteeInspectionRNCCheckList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

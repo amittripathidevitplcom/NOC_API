@@ -37,5 +37,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetRevertApplyNOCApplicationDepartmentRoleWise(DepartmentID, RoleID);
         }
+        public bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveCommiteeInspectionRNCCheckList(request);
+        }
     }
 }
