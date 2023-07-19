@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IKVM" Version="8.6.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.SystemWebAdapters" Version="1.1.0" />
@@ -14,6 +15,11 @@
     <PackageReference Include="Microsoft.AspNetCore.SystemWebAdapters.CoreServices" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.10.*" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="4.10.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.10.*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EncryptDecrypt3DES">
+      <HintPath>bin\EncryptDecrypt3DES.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core">
+      <HintPath>bin\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.SwingAWT">
+      <HintPath>bin\IKVM.OpenJDK.SwingAWT.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>C:\Users\DevIt\Desktop\Backup\Rishi kapoor new\07042023\FIH_EPR\FIH_EPR\FIH_EPR\FIH_EPR\bin\Release\netcoreapp3.1\System.Drawing.Common.dll</HintPath>
     </Reference>

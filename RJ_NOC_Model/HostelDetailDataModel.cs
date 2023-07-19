@@ -38,6 +38,7 @@ namespace RJ_NOC_Model
         public int CreatedBy { get; set; }
         public int ModifyBy { get; set; }
 
+        
         public string? DivisionName { get; set; }
         public string? DistrictName { get; set; }
         public string? TehsilName { get; set; }
@@ -46,6 +47,9 @@ namespace RJ_NOC_Model
 
         public string? Action { get; set; }
         public string? Remark { get; set; }
+        public string HostelCategory { get; set; }
+
+
     }
 
     public class HostelDetailsDataModel_Hostel

@@ -131,6 +131,46 @@ namespace RJ_NOC_DataAccess.Common
             return Rows;
 
         }
+
+        public int ExecuteScalar(string SqlQuery, string FuncationName = "")
+        {
+            object Rows = 0;
+            DataTable dt = new DataTable();
+            SqlTransaction transaction = null;
+            using (var conn = new SqlConnection(sqlConnectionStaring))
+            {
+                try
+                {
+                    conn.Open();
+                    //string Qry = "BEGIN TRY BEGIN TRANSACTION " + SqlQuery + " COMMIT TRANSACTION END TRY BEGIN CATCH IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION END CATCH";
+                    string Qry = SqlQuery;
+                    transaction = conn.BeginTransaction("createOrder");
+                    using (var cmd = new SqlCommand(Qry, conn))
+                    {
+                        cmd.Transaction = transaction;
+                        Rows = cmd.ExecuteScalar();
+                        if (Rows != null)
+                        {
+                           Rows=Convert.ToInt32(Rows);
+                        }
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    CommonDataAccessHelper.Insert_ErrorLog(FuncationName, ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return Convert.ToInt32(Rows);
+
+        }
+
+
         public static int NonQuerrySys(string SqlQuery)
         {
             int Rows = 0;

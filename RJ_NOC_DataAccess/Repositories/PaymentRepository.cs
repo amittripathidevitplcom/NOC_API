@@ -234,5 +234,74 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
             return dataModels;
         }
+
+
+
+
+
+
+        #region "Emitra Payment Section"
+        public EmitraRequestDetails EmitraSendPaymentRequest(EmitraRequestDetails Model)
+        {
+
+
+            return Model;
+        }
+
+        public EmitraRequstParameters GetEmitraServiceDetails(EmitraRequestDetails model)
+        {
+            EmitraRequstParameters objData = new EmitraRequstParameters(); 
+            string SqlQuery = " exec USP_GetEmitraServiceDetails @ServiceId='" + model.ServiceID + "',@IsKiosk='" + model.IsKiosk + "' , @Key= 'GetServiceDetails' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetEmitraServiceDetails");
+
+            List<EmitraRequstParameters> dataModels = new List<EmitraRequstParameters>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<EmitraRequstParameters>>(JsonDataTable_Data);
+
+            if (dataModels.Count > 0)
+            {
+                var record = dataModels.FirstOrDefault();
+                if (record != null)
+                {
+                    objData = record;
+                }
+            }
+            return objData;
+        }
+
+
+        public EmitraTransactions CreateAddEmitraTransation(EmitraTransactions request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_InsertEmitraTransactions";
+            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@ApplicationNo='" + request.ApplicationNo + "',@KioskID='" + request.KioskID + "',@ReceiptNo='" + request.ReceiptNo + "'," +
+                "@TokenNo='" + request.TokenNo + "',@RequestStatus='" + request.RequestStatus + "',@StatusMsg='" + request.StatusMsg + "'," +
+                "@RequestString='" + request.RequestString + "'" + ",@ResponseString='" + request.ResponseString + "'" + ",@ActId='" + request.ActId + "'" +
+                ",@SSOID='" + request.SSOID + "',@CreatedIP='" + IPAddress + "',@ServiceID='" + request.ServiceID + "'," +
+                "@key='" + request.key + "'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "PaymentRepository.CreateAddEmitraTransation");
+            if (Rows > 0)
+                request.TransactionId = Rows;
+            else
+                request.TransactionId = 0;
+            return request;
+        }
+
+        public bool UpdateEmitraPaymentStatus(EmitraResponseParameters request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_InsertEmitraTransactions";
+            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@TokenNo='" + request.RECEIPTNO + "',@StatusMsg='" + request.RESPONSEMESSAGE + "',@ResponseString='" + JsonConvert.SerializeObject(request) + "',@ReceiptNo='" + request.RECEIPTNO + "'," +
+                "@key='UpdateEmitraPaymentStatus'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.UpdateEmitraPaymentStatus");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+
     }
 }

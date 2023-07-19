@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RJ_NOC_Model
 {
@@ -73,7 +74,7 @@ namespace RJ_NOC_Model
         public string ENCDATA { get; set; }
         public bool CHECKSUMVALID { get; set; }
         public string PaymentRequestURL { get; set; }
-       
+
     }
 
     public class RequestDetails
@@ -86,4 +87,160 @@ namespace RJ_NOC_Model
         public string ApplyNocApplicationID { get; set; }
 
     }
+
+    #region "EMITRA MODAL"
+    public class EmitraRequstParameters
+    {
+        public string MERCHANTCODE { get; set; }
+        public string REQUESTID { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string SERVICEID { get; set; }
+        public string SUBSERVICEID { get; set; }
+        public string REVENUEHEAD { get; set; }
+        public string CONSUMERKEY { get; set; }
+        public string CONSUMERNAME { get; set; }
+        public string COMMTYPE { get; set; }
+        public string SSOID { get; set; }
+        public string OFFICECODE { get; set; }
+        public string SSOTOKEN { get; set; }
+        public string CHECKSUM { get; set; }
+        public bool IsKiosk { get; set; }
+        public string ServiceName { get; set; }
+
+        public string CHECKSUMKEY { get; set; }
+        public string REDIRECTURL { get; set; }
+        public string EncryptionKey { get; set; }
+        public string ServiceURL { get; set; }
+
+        public string AMOUNT { get; set; }
+
+        public string PRN { get; set; }
+
+        public string SUCCESSURL { get; set; }
+        public string FAILUREURL { get; set; }
+        public string USERNAME { get; set; }
+        public string USERMOBILE { get; set; }
+
+        public string USEREMAIL { get; set; }
+
+
+        public string UDF1 { get; set; }
+        public string UDF2 { get; set; }
+
+        public string WebServiceURL { get; set; }
+    }
+
+
+    public class PGRequest
+    {
+        public string MERCHANTCODE { get; set; }
+        public string PRN { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string AMOUNT { get; set; }
+        public string SUCCESSURL { get; set; }
+        public string FAILUREURL { get; set; }
+        public string USERNAME { get; set; }
+        public string USERMOBILE { get; set; }
+        public string USEREMAIL { get; set; }
+        public string UDF1 { get; set; }
+        public string UDF2 { get; set; }
+        public string SERVICEID { get; set; }
+        public string OFFICECODE { get; set; }
+        public string REVENUEHEAD { get; set; }
+        public string COMMTYPE { get; set; }
+        public string CHECKSUM { get; set; }
+
+        public string commissionAmount { get; set; }
+    }
+
+
+
+
+    public class EmitraResponseParameters
+    {
+        public string MERCHANTCODE { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string PRN { get; set; }
+        public string AMOUNT { get; set; }
+        public string PAIDAMOUNT { get; set; }
+        public string SERVICEID { get; set; }
+        public string TRANSACTIONID { get; set; }
+        public string RECEIPTNO { get; set; }
+        public string EMITRATIMESTAMP { get; set; }
+        public string STATUS { get; set; }
+        public string PAYMENTMODE { get; set; }
+        public string PAYMENTMODEBID { get; set; }
+        public string PAYMENTMODETIMESTAMP { get; set; }
+        public string RESPONSECODE { get; set; }
+        public string RESPONSEMESSAGE { get; set; }
+        public string UDF1 { get; set; }
+        public string UDF2 { get; set; }
+        public string CHECKSUM { get; set; }
+
+        public string ApplicationIdEnc { get; set; }
+    }
+
+    public class EmitraRequestDetails
+    {
+
+        public string AppRequestID { get; set; }
+        public string ServiceID { get; set; }
+        public string NocApplicationIdEnc { get; set; }
+        public decimal Amount { get; set; }
+
+        public string UserName { get; set; }
+        public string MobileNo { get; set; }
+
+        public string RegistrationNo { get; set; }
+
+        public string SsoID { get; set; }
+
+        public string RESPONSEJSON { get; set; }
+        public string STATUS { get; set; }
+        public string ENCDATA { get; set; }
+        public string PaymentRequestURL { get; set; }
+        public string MERCHANTCODE { get; set; }
+        public bool IsKiosk { get; set; }
+
+
+
+
+    }
+
+    public class EmitraTransactions
+    {
+         public int TransactionId { get; set; } 
+        public string ApplicationIdEnc { get; set; }
+
+        public string ApplicationNo { get; set; }
+
+        public string KioskID { get; set; }
+
+        public string ReceiptNo { get; set; }
+
+        public string TokenNo { get; set; }
+        public string RequestStatus { get; set; }
+
+        public string StatusMsg { get; set; }
+
+        public string RequestString { get; set; }
+
+        public string ResponseString { get; set; }
+
+        public int ActId { get; set; }
+        public string SSOID { get; set; }
+        public int CreatedBy { get; set; }
+        public string CreatedIP { get; set; }
+        public string ServiceID { get; set; }
+        public decimal Amount { get; set; }
+
+        public string key { get;set; }
+
+
+
+
+    }
+
+
+    #endregion
 }

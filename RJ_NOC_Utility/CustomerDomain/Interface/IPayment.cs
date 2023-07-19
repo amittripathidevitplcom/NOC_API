@@ -20,8 +20,12 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID);
 
 
+        //Emitra Section
+        EmitraRequstParameters GetEmitraServiceDetails(EmitraRequestDetails Model);
+        EmitraRequestDetails EmitraSendPaymentRequest(EmitraRequestDetails Model);
+        EmitraTransactions CreateAddEmitraTransation(EmitraTransactions request);
 
-
+        bool UpdateEmitraPaymentStatus(EmitraResponseParameters request);
 
     }
 }

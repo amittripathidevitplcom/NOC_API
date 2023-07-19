@@ -47,7 +47,32 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.PaymentRepository.GetPreviewPaymentDetails(ApplyNocApplicationID);
         }
 
-    
+
+        #region "Emitra Section"
+        public EmitraRequstParameters GetEmitraServiceDetails(EmitraRequestDetails model)
+        {
+            return UnitOfWork.PaymentRepository.GetEmitraServiceDetails(model);
+        }
+
+        public EmitraRequestDetails EmitraSendPaymentRequest(EmitraRequestDetails model)
+        {
+            return UnitOfWork.PaymentRepository.EmitraSendPaymentRequest(model);
+        }
+
+        public EmitraTransactions CreateAddEmitraTransation(EmitraTransactions request)
+        {
+            return UnitOfWork.PaymentRepository.CreateAddEmitraTransation(request);
+        }
+
+        public bool UpdateEmitraPaymentStatus(EmitraResponseParameters request)
+        {
+            return UnitOfWork.PaymentRepository.UpdateEmitraPaymentStatus(request);
+        }
+        #endregion
+
+
+
+
 
 
     }

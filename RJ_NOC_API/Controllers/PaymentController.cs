@@ -6,6 +6,18 @@ using RJ_NOC_Utility.CustomerDomain;
 using Azure.Core;
 using Newtonsoft.Json;
 using System.Data;
+using System.Text;
+using System.Security.Cryptography;
+using javax.swing.text;
+using sun.security.krb5;
+
+using java.lang;
+using java.security;
+using EmitraEmitraEncrytDecryptClient;
+using System.Xml.Linq;
+using System.Threading.Tasks;
+using java.awt;
+using sun.security.jca;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -47,7 +59,7 @@ namespace RJ_NOC_API.Controllers
                     result.ErrorMessage = "There was an error payment.!";
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.PaymentRequest", e.ToString());
                 result.State = OperationState.Error;
@@ -104,7 +116,7 @@ namespace RJ_NOC_API.Controllers
                     result.SuccessMessage = "No record found.!";
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.PaymentResponse", ex.ToString());
                 result.State = OperationState.Error;
@@ -146,7 +158,7 @@ namespace RJ_NOC_API.Controllers
                     result.SuccessMessage = "No record found.!";
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionDetails", ex.ToString());
                 result.State = OperationState.Error;
@@ -161,10 +173,63 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("EmitraPayment")]
-        public string EmitraPayment(object Response = null)
+        [HttpPost("EmitraPayment")]
+        public async Task<EmitraRequestDetails> EmitraPayment(EmitraRequestDetails Model)
         {
-            return "";
+            try
+            {
+                var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
+                EmitraTransactions objEmitra = new EmitraTransactions();
+                objEmitra.key = "InsertDetails";
+                var result = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
+                PGRequest data = new PGRequest();
+                if (result.TransactionId > 0)
+                {
+
+                    data.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
+                    //data.PRN = "NOC" + result.TransactionId;
+
+                    Random rnd = new Random();
+                    data.PRN = "PRN" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+
+                    data.REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    data.AMOUNT = Convert.ToString(Model.Amount);
+                    data.SUCCESSURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.NocApplicationIdEnc) + "&ServiceID=" + Model.ServiceID + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("NO");
+                    data.FAILUREURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.NocApplicationIdEnc) + "&ServiceID=" + Model.ServiceID + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("YES");
+                    data.USERNAME = Model.UserName; ;
+                    data.USERMOBILE = Model.MobileNo;
+                    data.COMMTYPE = EmitraServiceDetail.COMMTYPE;
+                    data.OFFICECODE = EmitraServiceDetail.OFFICECODE;
+                    data.REVENUEHEAD = EmitraServiceDetail.REVENUEHEAD.Replace("##", Model.Amount.ToString());
+                    data.SERVICEID = EmitraServiceDetail.SERVICEID;
+                    data.UDF1 = Model.RegistrationNo;
+                    data.UDF2 = Model.SsoID;
+                    data.USEREMAIL = "";
+                    data.CHECKSUM = PaymentEncriptionDec.CreateMD5(data.PRN + "|" + data.AMOUNT + "|" + EmitraServiceDetail.CHECKSUMKEY);
+                    data.commissionAmount = "0";
+                    // data.ServiceURL = EmitraServiceDetail.ServiceURL;
+                    //string datad=  "?strdata=" + JsonConvert.SerializeObject(data) + "&enckey=" + EmitraServiceDetail.EncryptionKey;
+
+                    EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration endpointConfiguration = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration();
+                    EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient emitraencsev = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient(endpointConfiguration, EmitraServiceDetail.WebServiceURL);
+                    EmitraEncryptStringResponse response = await emitraencsev.EmitraEncryptStringAsync(EmitraServiceDetail.EncryptionKey, JsonConvert.SerializeObject(data));
+
+                    Model.ENCDATA = response.Body.EmitraEncryptStringResult;
+                    Model.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
+                    Model.PaymentRequestURL = EmitraServiceDetail.ServiceURL;
+                    Model.ServiceID = EmitraServiceDetail.SERVICEID;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPayment", ex.ToString());
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+
+            return Model;
         }
 
 
@@ -187,7 +252,7 @@ namespace RJ_NOC_API.Controllers
                     result.SuccessMessage = "No record found.!";
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetPreviewPaymentDetails", ex.ToString());
                 result.State = OperationState.Error;
@@ -200,5 +265,49 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpPost("EmitraPaymentResponse")] //IActionResult
+        public async Task<ActionResult> EmitraPaymentResponse(string UniquerequestId = "", string ApplicationIdEnc = "", string IsFailed = "")
+        {
+
+
+            UniquerequestId = UniquerequestId.Replace(' ', '+');
+            UniquerequestId = UniquerequestId.Replace(' ', '+');
+            UniquerequestId = UniquerequestId.Replace(' ', '+');
+
+            ApplicationIdEnc = ApplicationIdEnc.Replace(' ', '+');
+            ApplicationIdEnc = ApplicationIdEnc.Replace(' ', '+');
+            ApplicationIdEnc = ApplicationIdEnc.Replace(' ', '+');
+
+            IsFailed = IsFailed.Replace(' ', '+');
+            IsFailed = IsFailed.Replace(' ', '+');
+            IsFailed = IsFailed.Replace(' ', '+');
+
+            //ServiceID = ServiceID.Replace(' ', '+');
+            //ServiceID = ServiceID.Replace(' ', '+');
+            //ServiceID = ServiceID.Replace(' ', '+');
+
+
+            var data = Convert.ToString(Request.Form["encData"]);
+            var RetrunUrL = "";
+            var vIsFailed = PaymentEncriptionDec.EmitraDecrypt(IsFailed);
+
+            EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration endpointConfiguration = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration();
+            EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient emitraencsev = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient(endpointConfiguration, "https://localhost:44319/EmitraEncrytDecrypt.asmx");
+            EmitraDecriptStringResponse response = await emitraencsev.EmitraDecriptStringAsync("EmitraNew@2016", data);
+
+            var Data = JsonConvert.DeserializeObject<EmitraResponseParameters>(response.Body.EmitraDecriptStringResult);
+
+            if (vIsFailed == "NO")
+            {
+                RetrunUrL = "http://localhost:4200/emitrapaymentsuccess";
+            }
+            else
+            {
+                RetrunUrL = "http://localhost:4200/emitrapaymentfail";
+            }
+            //return response;
+            return new RedirectResult(RetrunUrL);
+        }
     }
 }
