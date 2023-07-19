@@ -103,6 +103,7 @@ namespace RJ_NOC_Model
         public string QualificationName { get; set; }
         public string Type { get; set; }
         public int IsDocCompulsory { get; set; }
+        public int Orderby { get; set; }
     }
 
     public class CommonDataModel_CollegeWiseSubject
