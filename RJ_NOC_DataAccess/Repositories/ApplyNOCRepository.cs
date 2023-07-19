@@ -24,7 +24,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionType='" + request.ActionType + "',@DepartmentID='" + request.DepartmentID + "',@Remark='"+ request.Remark +"'";
+            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='"+ request.Remark +"'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
             if (Rows > 0)
                 return true;
@@ -161,6 +161,19 @@ namespace RJ_NOC_DataAccess.Repositories
                 }
             }
             return listdataModels;
+        }
+
+        public bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            string CommiteeInspection_RNCCheckList = request.Count>0? CommonHelper.GetDetailsTableQry(request, "Temp_CommiteeInspection_RNCCheckList") :"";
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveCommiteeInspection_RNCCheckList @CommiteeInspection_RNCCheckList='" + CommiteeInspection_RNCCheckList + "'";
+            
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveCommiteeInspectionRNCCheckList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

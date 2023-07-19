@@ -57,6 +57,11 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public string? Action { get; set; }
         public string? Remark { get; set; }
+
+        public string? C_Action { get; set; }
+        public string? C_Remark { get; set; }
+        public string? S_Action { get; set; }
+        public string? S_Remark { get; set; }
         public List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails { get; set; }
     }
 

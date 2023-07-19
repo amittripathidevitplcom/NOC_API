@@ -15,6 +15,8 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
+
+
         [HttpGet("GetApplyNOCApplicationListByRole/{RoleID}/{UserID}")]
         public async Task<OperationResult<List<ApplyNOCDataModel>>> GetApplyNOCApplicationListByRole(int RoleID, int UserID)
         {
@@ -59,7 +61,7 @@ namespace RJ_NOC_API.Controllers
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "DocumentScrutiny", request.ApplyNOCID, "ApplyNOC");
                     result.State = OperationState.Success;
-                    result.SuccessMessage = request.ActionType +" successfully .!";
+                    result.SuccessMessage = "Save successfully .!";
                 }
                 else
                 {
@@ -173,6 +175,38 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("SaveCommiteeInspectionRNCCheckList")]
+        public async Task<OperationResult<bool>> SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveCommiteeInspectionRNCCheckList(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.FirstOrDefault().CreatedBy, "SaveCommiteeInspectionRNCCheckList", 0, "ApplyNOC");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save Commitee Inspection";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.SaveCommiteeInspectionRNCCheckList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
             }
             return result;
         }

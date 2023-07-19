@@ -1879,6 +1879,68 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetWorkFlowActionListByRole/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID)
+        {
+            var result = new OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetWorkFlowActionListByRole", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
+        [HttpGet("GetRNCCheckListByTypeDepartment/{Type}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_RNCCheckListData>>> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_RNCCheckListData>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRNCCheckListByTypeDepartment(Type,DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRNCCheckListByTypeDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -130,7 +130,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public bool DeleteData(int LandDetailID)
         {
-            string SqlQuery = " Update Trn_LandInformation set ActiveStatus=0 , DeleteStatus=1  WHERE LandDetailID='" + LandDetailID + "'";
+            string SqlQuery = " Update Trn_CollegeLandInformation set ActiveStatus=0 , DeleteStatus=1  WHERE LandDetailID='" + LandDetailID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.Delete");
             if (Rows > 0)
                 return true;
@@ -139,7 +139,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public bool IfExists(int LandDetailID, int LandAreaID, int CollegeID)
         {
-            string SqlQuery = " select LandDetailID from Trn_LandInformation Where CollegeID='" + CollegeID + "'  and LandAreaID ='" + LandAreaID + "' and LandDetailID !='" + LandDetailID + "' and DeleteStatus=0";
+            string SqlQuery = " select LandDetailID from Trn_CollegeLandInformation Where CollegeID='" + CollegeID + "'  and LandAreaID ='" + LandAreaID + "' and LandDetailID !='" + LandDetailID + "' and DeleteStatus=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LandDetails.IfExists");
             if (dataTable.Rows.Count > 0)

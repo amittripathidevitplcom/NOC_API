@@ -72,6 +72,12 @@ namespace RJ_NOC_Model
         public string? OtherFinancialResourcesFileUploadPath { get; set; }
         public List<DocuemntBuildingDetailsDataModel> lstBuildingDocDetails { get; set; }
 
+
+        public string? C_Action { get; set; }
+        public string? C_Remark { get; set; }
+        public string? S_Action { get; set; }
+        public string? S_Remark { get; set; }
+
     }
     public class BuildingDetailsDataModelList
     {
