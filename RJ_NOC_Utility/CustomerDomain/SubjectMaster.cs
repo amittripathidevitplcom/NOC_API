@@ -36,7 +36,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         
         public bool IfExists(int SubjectID, string SubjectName)
         {
-            return UnitOfWork.UniversityMasterRepository.IfExists(SubjectID, SubjectName);
+            return UnitOfWork.SubjectMasterRepository.IfExists(SubjectID, SubjectName);
         }
 
        
