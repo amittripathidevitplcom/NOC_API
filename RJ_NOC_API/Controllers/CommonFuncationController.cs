@@ -1942,6 +1942,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        
+        [HttpGet("GetApplicationTrail_DepartmentApplicationWise/{ApplicationID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_ApplicationTrail>>> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_ApplicationTrail>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetApplicationTrail_DepartmentApplicationWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("GetCourseList_ByCourseLevelIDWise/{CourseLevelID}")]
         public async Task<OperationResult<List<CommonDataModel_CourseMaster>>> GetCourseList_ByCourseLevelIDWise(int CourseLevelID)
         {
