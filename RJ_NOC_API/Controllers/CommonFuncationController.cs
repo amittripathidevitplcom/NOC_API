@@ -1879,13 +1879,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetWorkFlowActionListByRole/{RoleID}")]
-        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID)
+        [HttpGet("GetWorkFlowActionListByRole/{RoleID}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type)
         {
             var result = new OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

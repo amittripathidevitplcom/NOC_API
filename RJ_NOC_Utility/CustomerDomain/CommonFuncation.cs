@@ -282,9 +282,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID);
         }
-        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID)
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID);
+            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID,Type);
         }
         public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
         {

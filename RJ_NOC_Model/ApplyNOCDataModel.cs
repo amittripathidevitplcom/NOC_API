@@ -52,6 +52,7 @@ namespace RJ_NOC_Model
         public string? Remark { get; set; }
         public int NextRoleID { get; set; }
         public int NextUserID { get; set; }
+        public int NextActionID { get; set; }
     }
 
     public class CommiteeInspection_RNCCheckList_DataModel
