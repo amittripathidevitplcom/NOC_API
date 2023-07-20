@@ -93,6 +93,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type,int DepartmentID);
         List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
 
+        List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID);
 
     }
 }

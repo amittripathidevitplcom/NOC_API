@@ -292,7 +292,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return animalMasterRepository; }
         }
-
+        private IStreamMasterRepository streamMasterRepository;
+        public IStreamMasterRepository StreamMasterRepository
+        {
+            get { return streamMasterRepository; }
+        }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -337,6 +341,7 @@ namespace RJ_NOC_DataAccess.Repository
             //scurtenyComitteeRepository = new ScurtenyComitteeRepository(commonHelper);
             rNCCheckListMasterRepository = new RNCCheckListMasterRepository(commonHelper);
             animalMasterRepository = new AnimalMasterRepository(commonHelper);
+            streamMasterRepository = new StreamMasterRepository(commonHelper);
 
         }
     }

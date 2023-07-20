@@ -294,5 +294,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID);
         }
+        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCourseList_ByCourseLevelIDWise(CourseLevelID);
+        }
     }
 }
