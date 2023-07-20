@@ -1942,5 +1942,36 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetCourseList_ByCourseLevelIDWise/{CourseLevelID}")]
+        public async Task<OperationResult<List<CommonDataModel_CourseMaster>>> GetCourseList_ByCourseLevelIDWise(int CourseLevelID)
+        {
+            var result = new OperationResult<List<CommonDataModel_CourseMaster>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseList_ByCourseLevelIDWise(CourseLevelID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetCourseList_ByCourseLevelIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

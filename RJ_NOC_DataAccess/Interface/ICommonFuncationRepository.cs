@@ -91,7 +91,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
         List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type,int DepartmentID);
-
+        List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID);
 
     }
 }

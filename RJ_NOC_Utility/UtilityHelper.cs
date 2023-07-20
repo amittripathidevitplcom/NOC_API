@@ -86,6 +86,7 @@ namespace RJ_NOC_Utility
         public IRNCCheckListMaster RNCCheckListMasterUtility { get; private set; }
 
         public IAnimalMaster AnimalMasterUtility { get; private set; }
+        public IStreamMaster StreamMasterUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -139,6 +140,7 @@ namespace RJ_NOC_Utility
             MedicalDocumentScrutinyUtility = new MedicalDocumentScrutiny(UnitOfWork);
             RNCCheckListMasterUtility = new RNCCheckListMaster(UnitOfWork);
             AnimalMasterUtility = new AnimalMaster(UnitOfWork);
+            StreamMasterUtility = new StreamMaster(UnitOfWork);
         }
     }
 }
