@@ -276,4 +276,19 @@ namespace RJ_NOC_Model
         public bool FileUpload { get; set; }
     }
 
+    public class CommonDataModel_ApplicationTrail
+    {
+        public int NOCWorkFlowID { get; set; }
+        public int DepartmentID { get; set; }
+        public int ActionID { get; set; }
+        public string Remark { get; set; }
+        public string ActionDate { get; set; }
+        public string ActionName { get; set; }
+        public string ActionUser { get; set; }
+        public string RoleName { get; set; }
+        public string ActionUserSSOID { get; set; }
+        public string NextRoleName { get; set; }
+        public string NextUserName { get; set; }
+    }
+
 }
