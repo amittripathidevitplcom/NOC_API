@@ -399,5 +399,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public int CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
+        {
+            int Result = 0;
+            string SqlQuery = " exec USP_CheckDocumentScrutinyTabsData @ApplyNOCID ='" + ApplyNOCID + "',@RoleID ='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.CheckDocumentScrutinyTabsData");
+            if(dataTable!=null && dataTable.Rows.Count>0)
+            {
+                Result= Convert.ToInt32(dataTable.Rows[0]["TotalTabCount"].ToString());
+            }
+            return Result;
+        }
     }
 }

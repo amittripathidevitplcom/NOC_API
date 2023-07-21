@@ -75,6 +75,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.GetDocumentScrutinyReportCompleted(UserID);
         }
+        public int CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
+        }
 
     }
 }

@@ -493,6 +493,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}")]
+        public async Task<OperationResult<int>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID)
+        {
+            //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
+            var result = new OperationResult<int>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID,RoleID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.CheckDocumentScrutinyTabsData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 
