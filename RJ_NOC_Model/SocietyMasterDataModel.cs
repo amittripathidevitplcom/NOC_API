@@ -16,8 +16,11 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public int SocietyID { get; set; }
         public int CollegeID { get; set; }
+        public string CollegeNameEn { get; set; }
         public int DesignationID { get; set; }
+        public string DesignationName { get; set; }
         public int OccupationID { get; set; }
+        public string OccupationName { get; set; }
         public String Educationists { get; set; }
         public string PersonName { get; set; }
         public string FatherName { get; set; }
