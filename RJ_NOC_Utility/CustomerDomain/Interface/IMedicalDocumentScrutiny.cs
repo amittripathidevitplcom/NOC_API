@@ -22,7 +22,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<MedicalDocumentScrutinyDataModel_DocumentStaffDetails> DocumentScrutiny_StaffDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<MedicalDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID);
 
-        List<CommonDataModel_DataTable> GetDocumentScrutinyReportCompleted(int UserID);
         int CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID);
     }
 }

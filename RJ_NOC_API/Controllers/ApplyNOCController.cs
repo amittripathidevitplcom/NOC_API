@@ -210,5 +210,106 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("GetApplyNOCRejectedReport/{UserID}/{ActionName}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCRejectedReport(int UserID,string ActionName)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetApplyNOCRejectedReport", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCRejectedReport(UserID, ActionName));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetApplyNOCRejectedReport", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetApplyNOCCompletedReport/{UserID}/{ActionName}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCCompletedReport(int UserID, string ActionName)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetApplyNOCCompletedReport", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCCompletedReport(UserID, ActionName));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetApplyNOCCompletedReport", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetPendingMedicalApplications/{RoleID}/{UserID}/{ActionName}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPendingMedicalApplications(int RoleID,int UserID, string ActionName)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetPendingMedicalApplications", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetPendingMedicalApplications(RoleID,UserID, ActionName));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetPendingMedicalApplications", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
