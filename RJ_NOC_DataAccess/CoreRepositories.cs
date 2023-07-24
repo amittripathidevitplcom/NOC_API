@@ -304,6 +304,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return streamMasterRepository; }
         }
+        private IVeterinaryHospitalRepository veterinaryHospitalRepository;
+        public IVeterinaryHospitalRepository VeterinaryHospitalRepository
+        {
+            get { return veterinaryHospitalRepository; }
+        }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -349,6 +354,7 @@ namespace RJ_NOC_DataAccess.Repository
             rNCCheckListMasterRepository = new RNCCheckListMasterRepository(commonHelper);
             animalMasterRepository = new AnimalMasterRepository(commonHelper);
             streamMasterRepository = new StreamMasterRepository(commonHelper);
+            veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
             streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);   
 
         }
