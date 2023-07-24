@@ -9,6 +9,7 @@ namespace RJ_NOC_Model
     public class ApplyNOCDataModel
     {
         public int ApplyNOCID { get; set; }
+        public string ApplicationNo { get; set; }
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
         public string DepartmentName { get; set; }
@@ -51,6 +52,7 @@ namespace RJ_NOC_Model
         public string? Remark { get; set; }
         public int NextRoleID { get; set; }
         public int NextUserID { get; set; }
+        public int NextActionID { get; set; }
     }
 
     public class CommiteeInspection_RNCCheckList_DataModel

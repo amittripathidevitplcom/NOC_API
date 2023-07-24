@@ -54,6 +54,8 @@ namespace RJ_NOC_Utility
         ICommitteeMaster CommitteeMasterUtility { get; }
         IMedicalDocumentScrutiny MedicalDocumentScrutinyUtility { get; }
         IRNCCheckListMaster RNCCheckListMasterUtility { get; }
+        IAnimalMaster AnimalMasterUtility { get; }
+        IStreamMaster StreamMasterUtility { get; }
         IStreamSubjectMaster StreamSubjectMaster { get; }
 
 

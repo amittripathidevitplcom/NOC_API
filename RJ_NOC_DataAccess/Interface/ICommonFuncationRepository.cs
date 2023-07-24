@@ -89,10 +89,12 @@ namespace RJ_NOC_DataAccess.Interface
         //Roles
         List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID);
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
-        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID);
+        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type,int DepartmentID);
+        List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
         List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID);
 
+        List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID);
 
     }
 }

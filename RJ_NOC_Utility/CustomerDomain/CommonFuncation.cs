@@ -282,13 +282,21 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID);
         }
-        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID)
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID);
+            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID,Type);
         }
         public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetRNCCheckListByTypeDepartment(Type, DepartmentID);
+        }
+        public List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID);
+        }
+        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCourseList_ByCourseLevelIDWise(CourseLevelID);
         }
 
         public List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID)

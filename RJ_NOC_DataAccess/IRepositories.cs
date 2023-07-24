@@ -51,6 +51,8 @@ namespace RJ_NOC_DataAccess.Interface
         ICommitteeMasterRepository CommitteeMasterRepository { get; }
         IMedicalDocumentScrutinyRepository MedicalDocumentScrutinyRepository { get; }
         IRNCCheckListMasterRepository RNCCheckListMasterRepository { get; }
+        IAnimalMasterRepository AnimalMasterRepository { get; }
+        IStreamMasterRepository StreamMasterRepository { get; }
 
         IStreamSubjectMappingDetailsRepository StreamSubjectMappingDetailsRepository { get; }
 

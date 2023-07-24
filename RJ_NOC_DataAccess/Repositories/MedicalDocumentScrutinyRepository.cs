@@ -387,17 +387,17 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
-        public List<CommonDataModel_DataTable> GetDocumentScrutinyReportCompleted(int UserID)
+        public int CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
         {
-            string SqlQuery = " exec USP_GetDocumentScrutinyCompletedReport @UserID ='" + UserID + "'";
+            int Result = 0;
+            string SqlQuery = " exec USP_CheckDocumentScrutinyTabsData @ApplyNOCID ='" + ApplyNOCID + "',@RoleID ='" + RoleID + "'";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.GetDocumentScrutinyReportCompleted");
-
-            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
-            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
-            dataModel.data = dataTable;
-            dataModels.Add(dataModel);
-            return dataModels;
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.CheckDocumentScrutinyTabsData");
+            if(dataTable!=null && dataTable.Rows.Count>0)
+            {
+                Result= Convert.ToInt32(dataTable.Rows[0]["TotalTabCount"].ToString());
+            }
+            return Result;
         }
     }
 }

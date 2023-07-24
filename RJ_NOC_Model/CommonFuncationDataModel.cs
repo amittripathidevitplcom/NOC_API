@@ -132,12 +132,14 @@ namespace RJ_NOC_Model
 
         public int Clerk_Pending { get; set; }
         public int Clerk_Reverted { get; set; }
+        public int Clerk_Rejected { get; set; }
         public int Clerk_Completed { get; set; }
 
 
         //secretar Counts
         public int secretary_Pending { get; set; }
         public int secretary_Completed { get; set; }
+        public int secretary_Rejected { get; set; }
         public int secretary_Revert { get; set; }
         public int ScrutinyCommittee_Forward { get; set; }
         public int RegistratCommittee_Forward { get; set; }
@@ -148,12 +150,14 @@ namespace RJ_NOC_Model
         //Section Officer Count
         public int SectionOffs_Pending { get; set; }
         public int SectionOffs_Revert { get; set; }
+        public int SectionOffs_Rejected { get; set; }
         public int SectionOffs_Completed { get; set; }
 
 
         //AssistantSecretary Count
         public int AssistantSecretary_Pending { get; set; }
         public int AssistantSecretary_Revert { get; set; }
+        public int AssistantSecretary_Rejected { get; set; }
         public int AssistantSecretary_Completed { get; set; }
 
 
@@ -161,6 +165,7 @@ namespace RJ_NOC_Model
         //JointSecretary Pending
         public int JointSecretary_Pending { get; set; }
         public int JointSecretary_Revert { get; set; }
+        public int JointSecretary_Rejected { get; set; }
         public int JointSecretary_Completed { get; set; }
         public int JointSecretary_ReleaseNOCPending { get; set; }
 
@@ -169,11 +174,13 @@ namespace RJ_NOC_Model
         //JointSecretary Pending
         public int ScrutinyCommittee_Pending { get; set; }
         public int ScrutinyCommittee_Revert { get; set; }
+        public int ScrutinyCommittee_Rejected { get; set; }
         public int ScrutinyCommittee_Completed { get; set; }
 
         // Registrat Committe
         public int RegistratCommittee_Pending { get; set; }
         public int RegistratCommittee_Revert { get; set; }
+        public int RegistratCommittee_Rejected { get; set; }
         public int RegistratCommittee_Completed { get; set; }
 
     }

@@ -24,7 +24,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='"+ request.Remark +"'";
+            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='" + request.Remark + "',@NextActionID='" + request.NextActionID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
             if (Rows > 0)
                 return true;
@@ -165,15 +165,54 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
         {
-            string CommiteeInspection_RNCCheckList = request.Count>0? CommonHelper.GetDetailsTableQry(request, "Temp_CommiteeInspection_RNCCheckList") :"";
+            string CommiteeInspection_RNCCheckList = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_CommiteeInspection_RNCCheckList") : "";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveCommiteeInspection_RNCCheckList @CommiteeInspection_RNCCheckList='" + CommiteeInspection_RNCCheckList + "'";
-            
+
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveCommiteeInspectionRNCCheckList");
             if (Rows > 0)
                 return true;
             else
                 return false;
+        }
+
+
+        public List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName)
+        {
+            string SqlQuery = " exec USP_GetApplyNOCRejectedReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplyNOCRejectedReport");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName)
+        {
+            string SqlQuery = " exec USP_GetApplyNOCCompletedReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplyNOCCompletedReport");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
+        {
+            string SqlQuery = " exec USP_GetPendingMedicalApplications @RoleID ='" + RoleID + "',@UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetPendingMedicalApplications");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

@@ -740,9 +740,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID)
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID,string Type)
         {
-            string SqlQuery = "exec USP_GetWorkFlowActionListByRole @RoleID='" + RoleID + "'";
+            string SqlQuery = "exec USP_GetWorkFlowActionListByRole @RoleID='" + RoleID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
 
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.USP_GetWorkFlowActionListByRole");
@@ -763,6 +763,30 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RNCCheckListData>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
+        {
+            string SqlQuery = "exec USP_GetApplicationTrail_DepartmentApplicationWise @ApplicationID='" + ApplicationID + "' ,@DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetApplicationTrail_DepartmentApplicationWise");
+            List<CommonDataModel_ApplicationTrail> dataModels = new List<CommonDataModel_ApplicationTrail>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ApplicationTrail>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID)
+        {
+            string SqlQuery = "exec USP_CourseList_ByCourseLevelIDWise @CourseLevelID=" + CourseLevelID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
+
+
+            List<CommonDataModel_CourseMaster> dataModels = new List<CommonDataModel_CourseMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CourseMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
 
         public List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID)
         {
