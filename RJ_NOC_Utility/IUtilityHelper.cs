@@ -56,5 +56,6 @@ namespace RJ_NOC_Utility
         IRNCCheckListMaster RNCCheckListMasterUtility { get; }
         IAnimalMaster AnimalMasterUtility { get; }
         IStreamMaster StreamMasterUtility { get; }
+        IVeterinaryHospital VeterinaryHospitalUtility { get; }
     }
 }

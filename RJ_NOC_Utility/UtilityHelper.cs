@@ -87,6 +87,7 @@ namespace RJ_NOC_Utility
 
         public IAnimalMaster AnimalMasterUtility { get; private set; }
         public IStreamMaster StreamMasterUtility { get; private set; }
+        public IVeterinaryHospital VeterinaryHospitalUtility { get; private set; }
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -141,6 +142,7 @@ namespace RJ_NOC_Utility
             RNCCheckListMasterUtility = new RNCCheckListMaster(UnitOfWork);
             AnimalMasterUtility = new AnimalMaster(UnitOfWork);
             StreamMasterUtility = new StreamMaster(UnitOfWork);
+            VeterinaryHospitalUtility = new VeterinaryHospital(UnitOfWork);
         }
     }
 }
