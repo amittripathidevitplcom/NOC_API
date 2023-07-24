@@ -59,5 +59,6 @@ namespace RJ_NOC_Utility
         IStreamSubjectMaster StreamSubjectMaster { get; }
 
 
+        IVeterinaryHospital VeterinaryHospitalUtility { get; }
     }
 }
