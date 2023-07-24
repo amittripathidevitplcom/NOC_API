@@ -19,18 +19,18 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("GetSSOUserLogionDetails")]
-        public async Task<OperationResult<SSOUserDetailData>> GetSSOUserLogionDetails([FromBody] SSOLandingDataDataModel sSOLandingDataDataModel)
+        public async Task<OperationResult<SSOUserDetailData>> AppLogin(SSOLandingDataDataModel sSOLandingDataDataModel)
         {
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
-            string SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
-            string LoginType = CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
-
-            string QueryStringData = "";
             var result = new OperationResult<SSOUserDetailData>();
+
+            bool IsSSOAuthentication = false;
+
+            IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel, _configuration);
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetSSOUserLogionDetails(SSOID, LoginType, _configuration));
+                result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppLogin(sSOLandingDataDataModel, _configuration));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -55,6 +55,10 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        
+
         [HttpPost("AppCollegeSSOLogin/{LoginSSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> AppCollegeSSOLogin(string LoginSSOID)
         {

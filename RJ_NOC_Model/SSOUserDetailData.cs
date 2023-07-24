@@ -47,6 +47,7 @@ namespace RJ_NOC_Model
     {
         public string Username { get; set; }
         public string LoginType { get; set; }
+        public string Password { get; set; }
     } 
 }
 
