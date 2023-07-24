@@ -68,6 +68,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.UpdateEmitraPaymentStatus(request);
         }
+
+        public List<CommonDataModel_DataTable> GetEmitraTransactionDetails(string TransactionID)
+        {
+            return UnitOfWork.PaymentRepository.GetEmitraTransactionDetails(TransactionID);
+        }
         #endregion
 
 

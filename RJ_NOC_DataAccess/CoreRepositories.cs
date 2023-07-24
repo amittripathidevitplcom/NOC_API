@@ -287,6 +287,13 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return rNCCheckListMasterRepository; }
         }
+
+        private IStreamSubjectMappingDetailsRepository streamsubjectmappingdetailsrepository;
+        public IStreamSubjectMappingDetailsRepository StreamSubjectMappingDetailsRepository
+        {
+            get { return streamsubjectmappingdetailsrepository; }
+        }
+
         private IAnimalMasterRepository animalMasterRepository;
         public IAnimalMasterRepository AnimalMasterRepository
         {
@@ -342,6 +349,7 @@ namespace RJ_NOC_DataAccess.Repository
             rNCCheckListMasterRepository = new RNCCheckListMasterRepository(commonHelper);
             animalMasterRepository = new AnimalMasterRepository(commonHelper);
             streamMasterRepository = new StreamMasterRepository(commonHelper);
+            streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);   
 
         }
     }
