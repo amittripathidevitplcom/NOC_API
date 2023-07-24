@@ -97,7 +97,21 @@ namespace RJ_NOC_Model
         public int DepartmentID { get; set; }
         public string ApplicationNo { get; set; }
         public int CollegeID { get; set; }
+        //College Add Detail
         public string? CollegeName { get; set; }
+        public string? SocietyName { get; set; }
+        public string? DepartmentName { get; set; }
+        public string? CollegeStatus { get; set; }
+        public string? CollegeType { get; set; }
+        public string? CollegeMedium { get; set; }
+        public string? UniversityName { get; set; }
+        public string? CollegeMobileNumber { get; set; }
+        public string? CollegeLandlineNumber { get; set; }
+        public string? FullAddress { get; set; }
+        public string? CreateDate { get; set; }
+        public string? GeoTagging { get; set; }
+        public string? CollegeRegistrationNo { get; set; }
+
         public string? CollegeMobileNo { get; set; }
         public string? CollegeEmail { get; set; }
         public int ApplicationTypeID { get; set; }
@@ -107,6 +121,10 @@ namespace RJ_NOC_Model
         public bool? IsFinalSubmit { get; set; }
         public bool? IsSaveFDR { get; set; }
         public bool? IsMakePayment { get; set; }
+
+        public decimal ApplicationFeeAmount { get; set; }
+        public int ServiceId { get; set; }
+      
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
     }

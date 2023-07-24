@@ -8,6 +8,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IGeoTaggingRepository
     {
+        //SSOUserDetailData AppLogin(SSOLandingDataDataModel sSOLandingDataDataModel);
         List<CommonDataModel_DataTable> AppCollegeSSOLogin(string LoginSSOID);
         List<CommonDataModel_DataTable> GetAPPApplicationCollegeList(string LoginSSOID, string Type);
         List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID);

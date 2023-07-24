@@ -2005,5 +2005,44 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpGet("GetStreamList_CourseIDWise/{DepartmentID}/{CourseLevelID}/{CourseID}")]
+        public async Task<OperationResult<List<CommonDataModel_Stream>>> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID,int CourseID)
+        {
+            var result = new OperationResult<List<CommonDataModel_Stream>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetStreamList_CourseIDWise( DepartmentID, CourseLevelID, CourseID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRNCCheckListByTypeDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+
+
     }
 }

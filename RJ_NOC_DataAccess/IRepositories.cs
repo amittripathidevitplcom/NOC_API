@@ -53,5 +53,10 @@ namespace RJ_NOC_DataAccess.Interface
         IRNCCheckListMasterRepository RNCCheckListMasterRepository { get; }
         IAnimalMasterRepository AnimalMasterRepository { get; }
         IStreamMasterRepository StreamMasterRepository { get; }
+
+        IStreamSubjectMappingDetailsRepository StreamSubjectMappingDetailsRepository { get; }
+        IVeterinaryHospitalRepository VeterinaryHospitalRepository { get; }
+
+
     }
 }

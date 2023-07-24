@@ -787,6 +787,17 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+
+        public List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID)
+        {
+            string SqlQuery = "exec USP_CommonDataList @Key='GetStreamListCourseIDWise',@DepartmentID='" + DepartmentID + "',@CourseLevelID='" + CourseLevelID + "',@CourseID='" + CourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetStreamList_CourseIDWise");
+            List<CommonDataModel_Stream> dataModels = new List<CommonDataModel_Stream>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_Stream>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

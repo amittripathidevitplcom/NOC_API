@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using RJ_NOC_Model;
+using static RJ_NOC_Model.VeterinaryHospitalDataModel;
+
+namespace RJ_NOC_Utility.CustomerDomain.Interface
+{
+    public interface IVeterinaryHospital
+    {
+        List<AnimalDataModel_AnimalList> GetAnimalMasterList();
+        List<VeterinaryHospitalDataModelList> GetAllVeterinaryHospitalList(int CollegeID);
+        VeterinaryHospitalDataModel GetVeterinaryHospitalByIDWise(int VeterinaryHospitalID);
+        bool SaveData(VeterinaryHospitalDataModel request);
+        bool DeleteData(int VeterinaryHospitalID);
+       
+    }
+}
