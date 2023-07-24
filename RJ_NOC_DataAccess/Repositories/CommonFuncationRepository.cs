@@ -774,9 +774,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ApplicationTrail>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID)
+        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID,int DepartmentID)
         {
-            string SqlQuery = "exec USP_CourseList_ByCourseLevelIDWise @CourseLevelID=" + CourseLevelID;
+            string SqlQuery = "exec USP_CourseList_ByCourseLevelIDWise @CourseLevelID='" + CourseLevelID + "' ,@DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActionListByActionHead");
 

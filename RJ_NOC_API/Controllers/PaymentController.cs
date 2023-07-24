@@ -245,10 +245,13 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpPost("EmitraPayment")]
-        public async Task<EmitraRequestDetails> EmitraPayment(EmitraRequestDetails Model)
+        public async Task<OperationResult<EmitraRequestDetails>> EmitraPayment(EmitraRequestDetails Model)
         {
+            var requestDetailsModel = new OperationResult<EmitraRequestDetails>();
             try
             {
+               
+
                 var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
                 EmitraTransactions objEmitra = new EmitraTransactions();
                 objEmitra.key = "InsertDetails";
@@ -304,15 +307,23 @@ namespace RJ_NOC_API.Controllers
 
                     }
 
-
                     Model.ENCDATA = response.Body.EmitraEncryptStringResult;
                     Model.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
                     Model.PaymentRequestURL = EmitraServiceDetail.ServiceURL;
                     Model.ServiceID = EmitraServiceDetail.SERVICEID;
+                    Model.IsSucccess = true;
+
+                    requestDetailsModel.Data = Model;
+                    requestDetailsModel.State = OperationState.Success;
+                    requestDetailsModel.SuccessMessage = "successfully .!";
+
                 }
             }
             catch (System.Exception ex)
             {
+                requestDetailsModel.Data = Model;
+                requestDetailsModel.State = OperationState.Error;
+                requestDetailsModel.ErrorMessage = "Something went wrong please try again.!";
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPayment", ex.ToString());
             }
             finally
@@ -320,7 +331,7 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
 
-            return Model;
+            return requestDetailsModel;
         }
 
 
