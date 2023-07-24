@@ -19,5 +19,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID,string ActionName);
         List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName);
         List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName);
+        List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetApplyNOCApplicationType(int CollegeID);
     }
 }

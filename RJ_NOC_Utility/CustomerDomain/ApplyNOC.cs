@@ -53,5 +53,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetPendingMedicalApplications(RoleID, UserID,ActionName);
         }
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetApplyNOCApplicationType(int CollegeID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCApplicationType(CollegeID);
+        }
     }
 }
