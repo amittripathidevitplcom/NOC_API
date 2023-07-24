@@ -25,6 +25,8 @@ namespace RJ_NOC_DataAccess.Interface
         EmitraRequestDetails EmitraSendPaymentRequest(EmitraRequestDetails Model);
         EmitraTransactions CreateAddEmitraTransation(EmitraTransactions request);
         bool UpdateEmitraPaymentStatus(EmitraResponseParameters request);
+        List<CommonDataModel_DataTable> GetEmitraTransactionDetails(string TransactionID);
+        
 
     }
 }

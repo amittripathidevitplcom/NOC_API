@@ -171,13 +171,17 @@ namespace RJ_NOC_Model
         public int ScrutinyCommittee_Revert { get; set; }
         public int ScrutinyCommittee_Completed { get; set; }
 
-
         // Registrat Committe
         public int RegistratCommittee_Pending { get; set; }
         public int RegistratCommittee_Revert { get; set; }
         public int RegistratCommittee_Completed { get; set; }
 
+    }
 
-
+    public class CommonDataModel_Stream
+    {
+        public int AID { get; set; }
+        public int StreamMasterID { get; set; }
+        public string StreamName { get; set; }
     }
 }

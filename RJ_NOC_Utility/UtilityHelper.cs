@@ -85,6 +85,8 @@ namespace RJ_NOC_Utility
         public ICommitteeMaster CommitteeMasterUtility { get; private set; }
         public IRNCCheckListMaster RNCCheckListMasterUtility { get; private set; }
 
+        public IStreamSubjectMaster StreamSubjectMaster { get; private set; }
+
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -136,6 +138,7 @@ namespace RJ_NOC_Utility
             CommitteeMasterUtility = new CommitteeMaster(UnitOfWork);
             MedicalDocumentScrutinyUtility = new MedicalDocumentScrutiny(UnitOfWork);
             RNCCheckListMasterUtility = new RNCCheckListMaster(UnitOfWork);
+            StreamSubjectMaster = new  StreamSubjectMaster(UnitOfWork);
         }
     }
 }

@@ -128,9 +128,10 @@ namespace RJ_NOC_Model
         public string UDF2 { get; set; }
 
         public string WebServiceURL { get; set; }
+        public string SuccessFailedURL { get; set; }
     }
 
-
+    [Serializable()]
     public class PGRequest
     {
         public string MERCHANTCODE { get; set; }
@@ -149,8 +150,12 @@ namespace RJ_NOC_Model
         public string REVENUEHEAD { get; set; }
         public string COMMTYPE { get; set; }
         public string CHECKSUM { get; set; }
+        public string ApplicationIdEnc { get; set; }
+        public string UniquerequestId { get; set; }
 
-        public string commissionAmount { get; set; }
+      
+
+    
     }
 
 
@@ -178,6 +183,9 @@ namespace RJ_NOC_Model
         public string CHECKSUM { get; set; }
 
         public string ApplicationIdEnc { get; set; }
+        public string UniquerequestId { get; set; }
+
+        public string ResponseString { get; set; }
     }
 
     public class EmitraRequestDetails
@@ -185,7 +193,7 @@ namespace RJ_NOC_Model
 
         public string AppRequestID { get; set; }
         public string ServiceID { get; set; }
-        public string NocApplicationIdEnc { get; set; }
+        public string ApplicationIdEnc { get; set; }
         public decimal Amount { get; set; }
 
         public string UserName { get; set; }
@@ -203,6 +211,9 @@ namespace RJ_NOC_Model
         public bool IsKiosk { get; set; }
 
 
+
+
+  
 
 
     }
@@ -233,8 +244,9 @@ namespace RJ_NOC_Model
         public string CreatedIP { get; set; }
         public string ServiceID { get; set; }
         public decimal Amount { get; set; }
-
         public string key { get;set; }
+
+        public string PRN { get; set; }
 
 
 

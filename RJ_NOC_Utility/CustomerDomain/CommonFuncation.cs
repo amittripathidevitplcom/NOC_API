@@ -290,5 +290,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetRNCCheckListByTypeDepartment(Type, DepartmentID);
         }
+
+        public List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetStreamList_CourseIDWise(DepartmentID, CourseLevelID, CourseID);
+        }
     }
 }

@@ -287,6 +287,13 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return rNCCheckListMasterRepository; }
         }
+
+        private IStreamSubjectMappingDetailsRepository streamsubjectmappingdetailsrepository;
+        public IStreamSubjectMappingDetailsRepository StreamSubjectMappingDetailsRepository
+        {
+            get { return streamsubjectmappingdetailsrepository; }
+        }
+
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -330,6 +337,7 @@ namespace RJ_NOC_DataAccess.Repository
             medicalDocumentScrutinyRepository = new MedicalDocumentScrutinyRepository(commonHelper);
             //scurtenyComitteeRepository = new ScurtenyComitteeRepository(commonHelper);
             rNCCheckListMasterRepository = new RNCCheckListMasterRepository(commonHelper);
+            streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);   
 
         }
     }

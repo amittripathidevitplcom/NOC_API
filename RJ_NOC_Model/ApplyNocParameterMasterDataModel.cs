@@ -105,6 +105,10 @@ namespace RJ_NOC_Model
         public bool? IsFinalSubmit { get; set; }
         public bool? IsSaveFDR { get; set; }
         public bool? IsMakePayment { get; set; }
+
+        public decimal ApplicationFeeAmount { get; set; }
+        public int ServiceId { get; set; }
+        public string ApplicationNo { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
     }
