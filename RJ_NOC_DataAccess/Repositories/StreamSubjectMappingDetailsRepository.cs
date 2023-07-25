@@ -97,5 +97,16 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+        public bool IfExists(StreamSubjectMappingDetailDataModel model)
+        {
+            string SqlQuery = " select StreamMappingID from M_StreamSubjectMappingDetails Where StreamID='" + model.StreamID + "' and CourseID ='" + model.CourseID + "'and CourseLevelID ='" + model.CourseLevelID + "'  and DeleteStatus=0";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamSubjectMappingDetails.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

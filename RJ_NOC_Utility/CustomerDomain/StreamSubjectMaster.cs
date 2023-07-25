@@ -33,10 +33,17 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.StreamSubjectMappingDetailsRepository.GetStreamIDWise(StreamMappingID,LoginSSOID);
         }
 
+        public bool IfExists(StreamSubjectMappingDetailDataModel Model)
+        {
+            return UnitOfWork.StreamSubjectMappingDetailsRepository.IfExists(Model);
+        }
+
         public bool SaveData(StreamSubjectMappingDetailDataModel request)
         {
             return UnitOfWork.StreamSubjectMappingDetailsRepository.SaveData(request);   
         }
+
+
 
     }
 }
