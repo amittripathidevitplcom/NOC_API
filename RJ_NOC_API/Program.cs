@@ -98,11 +98,11 @@ namespace RJ_NOC_API
 
 
 
-            builder.Services.AddCors(option => option.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            //builder.Services.AddCors(option => option.AddPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
             {
-                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins("http://172.22.33.75:1006", "http://172.22.33.75:1111").AllowAnyMethod().AllowAnyHeader();
             }));
 
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -124,20 +124,13 @@ namespace RJ_NOC_API
             // ----------------------------pipeline
             var app = builder.Build();
 
-
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("./v1/swagger.json", "v1"); //originally "./swagger/v1/swagger.json"
-                });
+                app.UseDeveloperExceptionPage();
             }
 
-
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
@@ -151,22 +144,20 @@ namespace RJ_NOC_API
                             Path.Combine(Directory.GetCurrentDirectory(), "ImageFile")),
                 RequestPath = "/ImageFile"
             });
-            app.UseHttpsRedirection();
             app.UseSession();
-
-
-
             app.UseCookiePolicy();
             app.UseRouting();
-            app.UseCors();
-            app.UseCors("corsapp");
-
-
+            app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            //app.UseCors("corsapp");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
             app.UseSystemWebAdapters();
-            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); //originally "./swagger/v1/swagger.json"
+            });
             app.Run();
         }
     }
