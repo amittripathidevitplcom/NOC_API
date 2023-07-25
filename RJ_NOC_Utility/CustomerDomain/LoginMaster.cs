@@ -14,7 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         List<LoginMasterDataModel> ILoginMaster.Login(string UserName, string Password)
         {
-            return UnitOfWork.LoginMasterRepository.Login(UserName, Password);
+            return UnitOfWork.LoginMasterRepository.Login(UserName, Password); 
         }
     }
 }

@@ -8,6 +8,5 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ILoginMaster
     {
         List<LoginMasterDataModel> Login(string UserName, string Password);
-
     }
 }

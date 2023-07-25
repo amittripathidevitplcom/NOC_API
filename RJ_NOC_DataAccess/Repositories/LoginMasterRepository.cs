@@ -27,7 +27,6 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-
         public List<LoginMasterDataModel> Login(string UserName, string Password)
         {
             string SqlQuery = " exec USP_UsersLogin @LoginID='" + UserName + "',@Password='"+ Password + "'";

@@ -57,7 +57,7 @@ namespace RJ_NOC_Utility
         IAnimalMaster AnimalMasterUtility { get; }
         IStreamMaster StreamMasterUtility { get; }
         IStreamSubjectMaster StreamSubjectMaster { get; }
-        ILoginMaster LoginMasterUtility { get; }
+        ILoginMaster LoginMasterUtility { get; } 
 
         IVeterinaryHospital VeterinaryHospitalUtility { get; }
     }
