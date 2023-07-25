@@ -24,17 +24,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveData(StreamMasterDataModel request)
         {
             return UnitOfWork.StreamMasterRepository.SaveData(request);
-        }       
+        }
         public bool DeleteData(int StreamMasterID)
         {
             return UnitOfWork.StreamMasterRepository.DeleteData(StreamMasterID);
         }
-        
-        public bool IfExists(int StreamMasterID, int DepartmentID, string StreamName)
+
+        public bool IfExists(int StreamMasterID, int CourseLevelID, int CourseID, int DepartmentID, string StreamName)
         {
-            return UnitOfWork.StreamMasterRepository.IfExists(StreamMasterID, DepartmentID, StreamName);
+            return UnitOfWork.StreamMasterRepository.IfExists(StreamMasterID, CourseLevelID, CourseID, DepartmentID, StreamName);
         }
 
-       
+
     }
 }

@@ -11,7 +11,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<StreamMasterDataModel> GetByID(int StreamMasterID);
         bool SaveData(StreamMasterDataModel request);       
         bool DeleteData(int StreamMasterID);
-        bool IfExists(int StreamMasterID, int DepartmentID, string StreamName);
+        bool IfExists(int StreamMasterID, int CourseLevelID, int CourseID, int DepartmentID, string StreamName);
 
 
     }

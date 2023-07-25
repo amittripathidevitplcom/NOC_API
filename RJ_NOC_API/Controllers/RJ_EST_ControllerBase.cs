@@ -34,7 +34,7 @@ namespace RJ_NOC_API.Controllers
 
         public CustomPrincipal CustomPrincipal => new CustomPrincipal(HttpContext.User);
 
-        protected async Task<string> CreateAuthentication(UserMasterDataModel model)
+        protected async Task<string> CreateAuthentication(LoginMasterDataModel model)
         {
             var claims = new List<Claim>
                 {
