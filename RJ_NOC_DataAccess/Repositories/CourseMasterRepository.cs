@@ -145,7 +145,7 @@ namespace RJ_NOC_DataAccess.Repository
 
             if (DepartmentID == 3)
             {
-                query = $"select top 1 AID from Trn_CollegeWiseCourse where DepartmentID={DepartmentID} and CollegeID={CollegeID} and CollegeWiseCourseID<>{CollegeWiseCourseID} and CourseID={CourseID} and CourseID={StreamMasterID}  and DeleteStatus=0";
+                query = $"select top 1 AID from Trn_CollegeWiseCourse where DepartmentID={DepartmentID} and CollegeID={CollegeID} and CollegeWiseCourseID<>{CollegeWiseCourseID} and CourseID={CourseID} and StreamMasterID={StreamMasterID}  and DeleteStatus=0";
             }
             else
             {
