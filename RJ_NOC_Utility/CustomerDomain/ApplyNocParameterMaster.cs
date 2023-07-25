@@ -60,8 +60,14 @@ namespace RJ_NOC_Utility.CustomerDomain
             {
                 if (ds.Tables.Count >= 2)
                 {
-                    model = CommonHelper.ConvertDataTable<ApplyNocParameterMaster_AdditionOfNewSeats60DataModel>(ds.Tables[0]);
-                    model.ApplyNocParameterCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterCourseDataModel>>(ds.Tables[1]);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        model = CommonHelper.ConvertDataTable<ApplyNocParameterMaster_AdditionOfNewSeats60DataModel>(ds.Tables[0]);
+                    }
+                    if (ds.Tables[1].Rows.Count > 0)
+                    {
+                        model.ApplyNocParameterCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterCourseDataModel>>(ds.Tables[1]);
+                    }
                 }
             }
             return model;

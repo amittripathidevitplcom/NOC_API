@@ -23,31 +23,31 @@ using RJ_NOC_DataAccess.Common;
 
 namespace RJ_NOC_API.Controllers
 {
-    [Route("api/UserMaster")]
+    [Route("api/LoginMaster")]
     [ApiController]
-    public class UserMasterController : RJ_NOC_ControllerBase
+    public class LoginMasterController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
-        public UserMasterController(IConfiguration configuration) : base(configuration)
+        public LoginMasterController(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
 
-        [HttpPost("Login/{LoginID}/{Password}")]
-        public async Task<OperationResult<List<UserMasterDataModel>>> Login(string LoginID, string Password)
+        [HttpPost("Login/{UserName}/{Password}")]
+        public async Task<OperationResult<List<LoginMasterDataModel>>> Login(string UserName, string Password)
         {
-            var result = new OperationResult<List<UserMasterDataModel>>();
+            var result = new OperationResult<List<LoginMasterDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.UserMasterUtility.Login(LoginID, Password));
+                result.Data = await Task.Run(() => UtilityHelper.LoginMasterUtility.Login(UserName, Password));
                 if (result.Data.Count > 0)
                 {
-                    //result.Data[0].Token = await CreateAuthentication(new UserMasterDataModel
-                    //{
-                    //    UserID = result.Data[0].UserID,
-                    //    UserName = result.Data[0].UserName
-                    //});
-                    //HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
+                    result.Data[0].Token = await CreateAuthentication(new LoginMasterDataModel
+                    {
+                        UserID = result.Data[0].UserID,
+                        UserName = result.Data[0].UserName
+                    });
+                    HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Login successfully .!";
                 }
@@ -59,7 +59,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("UserMasterController.UserMaster", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("LoginMasterController.LoginMaster", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
