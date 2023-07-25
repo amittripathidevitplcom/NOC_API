@@ -91,7 +91,7 @@ namespace RJ_NOC_Utility
         public IStreamMaster StreamMasterUtility { get; private set; }
         public IVeterinaryHospital VeterinaryHospitalUtility { get; private set; }
 
-        public ILoginMaster LoginMasterUtility { get; private set; }
+        public ILoginMaster LoginMasterUtility { get; private set; } 
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);

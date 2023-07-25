@@ -361,7 +361,7 @@ namespace RJ_NOC_DataAccess.Repository
             animalMasterRepository = new AnimalMasterRepository(commonHelper);
             streamMasterRepository = new StreamMasterRepository(commonHelper);
             
-            loginMasterRepository = new LoginMasterRepository(commonHelper);
+            loginMasterRepository = new LoginMasterRepository(commonHelper); 
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
             streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);   
 

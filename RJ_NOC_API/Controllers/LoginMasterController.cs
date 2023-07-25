@@ -42,12 +42,12 @@ namespace RJ_NOC_API.Controllers
                 result.Data = await Task.Run(() => UtilityHelper.LoginMasterUtility.Login(UserName, Password));
                 if (result.Data.Count > 0)
                 {
-                    result.Data[0].Token = await CreateAuthentication(new LoginMasterDataModel
-                    {
-                        UserID = result.Data[0].UserID,
-                        UserName = result.Data[0].UserName
-                    });
-                    HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
+                    //result.Data[0].Token = await CreateAuthentication(new LoginMasterDataModel
+                    //{
+                    //    UserID = result.Data[0].UserID,
+                    //    UserName = result.Data[0].UserName
+                    //});
+                    //HttpContext.Session.SetString("jwttoken", result.Data[0].Token);
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Login successfully .!";
                 }
