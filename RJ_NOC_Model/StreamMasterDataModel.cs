@@ -19,6 +19,18 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public string? ActiveDeactive { get; set; }
         public bool DeleteStatus { get; set; }
+        public List<CourseSubjectMappingListData> SubjectDetails { get; set; }
+    }
+
+
+
+    public class CourseSubjectMappingListData
+    {
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+        public bool IsChecked { get; set; }
+        public bool ActiveStatus { get; set; }
+        public int StreamMappingID { get; set; }
     }
 
 }

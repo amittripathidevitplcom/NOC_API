@@ -3,6 +3,7 @@ using RJ_NOC_DataAccess.Interface;
 using System.Data;
 using Newtonsoft.Json;
 using RJ_NOC_DataAccess.Common;
+using System.Reflection;
 
 
 namespace RJ_NOC_DataAccess.Repository
@@ -16,7 +17,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> GetAllStreamList()
         {
-            string SqlQuery = " exec USP_GetStreamMasterData";
+            string SqlQuery = "exec USP_GetStreamMasterData @Key='GetmappingList'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamMaster.GetAllStreamList");
 
@@ -26,22 +27,61 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
         public List<StreamMasterDataModel> GetByID(int StreamMasterID)
         {
-            string SqlQuery = " exec USP_GetStreamMasterData @StreamMasterID='" + StreamMasterID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamMaster.GetByID");
+            string SqlQuery = " exec USP_GetStreamMasterData @Key='GetDetails',@StreamMasterID='" + StreamMasterID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "StreamMaster.GetByID");
 
-            List<StreamMasterDataModel> dataModels = new List<StreamMasterDataModel>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<StreamMasterDataModel>>(JsonDataTable_Data);
-            return dataModels;
+            List<StreamMasterDataModel> listdataModels = new List<StreamMasterDataModel>();
+
+            StreamMasterDataModel dataModels = new StreamMasterDataModel();
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                dataModels.StreamMasterID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["StreamMasterID"]);
+                dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
+                dataModels.CourseLevelID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseLevelID"]);
+                dataModels.CourseID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseID"]);
+                dataModels.StreamName = dataSet.Tables[0].Rows[0]["StreamName"].ToString();
+
+
+                dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
+
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                List<CourseSubjectMappingListData> SubDataModel_Item = JsonConvert.DeserializeObject<List<CourseSubjectMappingListData>>(JsonDataTable_Data);
+                dataModels.SubjectDetails = SubDataModel_Item;
+                listdataModels.Add(dataModels);
+            }
+
+            return listdataModels;
+
         }
+
+        //public List<StreamMasterDataModel> GetByID(int StreamMasterID)
+        //{
+        //    string SqlQuery = " exec USP_GetStreamMasterData @StreamMasterID='" + StreamMasterID + "'";
+        //    DataTable dataTable = new DataTable();
+        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamMaster.GetByID");
+
+        //    List<StreamMasterDataModel> dataModels = new List<StreamMasterDataModel>();
+        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+        //    dataModels = JsonConvert.DeserializeObject<List<StreamMasterDataModel>>(JsonDataTable_Data);
+        //    return dataModels;
+        //}
         public bool SaveData(StreamMasterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_StreamMaster_AddUpdate";
-            SqlQuery += " @StreamMasterID='" + request.StreamMasterID + "',@DepartmentID='" + request.DepartmentID + "',@CourseLevelID='" + request.CourseLevelID + "',@CourseID='" + request.CourseID + "',@StreamName='" + request.StreamName + "',@ActiveStatus='" + request.ActiveStatus + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @StreamMasterID='" + request.StreamMasterID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
+            SqlQuery += " @CourseID='" + request.CourseID + "',";
+            SqlQuery += " @StreamName='" + request.StreamName + "',";
+            SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SubjectDetails.Where(f => f.IsChecked), "CollegeWiseCourse_SubjectDetails") + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StreamMaster.SaveData");
             if (Rows > 0)
                 return true;
@@ -57,9 +97,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int StreamMasterID, int DepartmentID, string StreamName)
+        public bool IfExists(int StreamMasterID, int CourseLevelID, int CourseID, int DepartmentID, string StreamName)
         {
-            string SqlQuery = " USP_IfExistsStreamMaster @StreamMasterID='" + StreamMasterID + "',@DepartmentID = '" + DepartmentID + "',@StreamName='" + StreamName + "' ";
+            string SqlQuery = " USP_IfExistsStreamMaster @StreamMasterID='" + StreamMasterID + "',@CourseLevelID = '" + CourseLevelID + "',@CourseID = '" + CourseID + "',@DepartmentID = '" + DepartmentID + "',@StreamName='" + StreamName + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamMaster.IfExists");
             if (dataTable.Rows.Count > 0)
