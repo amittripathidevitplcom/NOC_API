@@ -2041,8 +2041,36 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-
-
-
+        [HttpGet("GetSubjectList_StreamIDWise/{StreamID}")]
+        public async Task<OperationResult<List<CommonDataModel_SubjectMaster>>> GetSubjectList_StreamIDWise(int StreamID)
+        {
+            var result = new OperationResult<List<CommonDataModel_SubjectMaster>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubjectList_StreamIDWise(StreamID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSubjectList_StreamIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

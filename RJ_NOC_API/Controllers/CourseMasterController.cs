@@ -103,7 +103,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID);
+                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID,request.StreamID);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.SaveData(request));

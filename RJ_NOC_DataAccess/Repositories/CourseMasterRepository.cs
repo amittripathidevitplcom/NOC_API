@@ -69,7 +69,8 @@ namespace RJ_NOC_DataAccess.Repository
                 dataModels.UserID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["UserID"]);
                 dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
                 dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
-
+                dataModels.CourseLevelID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseLevelID"]);
+                dataModels.StreamID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["StreamMasterID"]);
 
                 string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                 List<CourseMasterDataModel_SubjectDetails> SaleDataModel_Item = JsonConvert.DeserializeObject<List<CourseMasterDataModel_SubjectDetails>>(JsonDataTable_Data);
@@ -138,9 +139,19 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID)
+        public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID,int StreamMasterID)
         {
-            string query = $"select top 1 AID from Trn_CollegeWiseCourse where DepartmentID={DepartmentID} and CollegeID={CollegeID} and CollegeWiseCourseID<>{CollegeWiseCourseID} and CourseID={CourseID} and DeleteStatus=0";
+            string query = string.Empty;
+
+            if (DepartmentID == 3)
+            {
+                query = $"select top 1 AID from Trn_CollegeWiseCourse where DepartmentID={DepartmentID} and CollegeID={CollegeID} and CollegeWiseCourseID<>{CollegeWiseCourseID} and CourseID={CourseID} and CourseID={StreamMasterID}  and DeleteStatus=0";
+            }
+            else
+            {
+                query = $"select top 1 AID from Trn_CollegeWiseCourse where DepartmentID={DepartmentID} and CollegeID={CollegeID} and CollegeWiseCourseID<>{CollegeWiseCourseID} and CourseID={CourseID} and DeleteStatus=0";
+            }
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(query, "CourseMaster.IfExists");
             if (dataTable.Rows.Count > 0)

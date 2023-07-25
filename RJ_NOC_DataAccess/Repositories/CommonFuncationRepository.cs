@@ -798,6 +798,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_Stream>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID)
+        {
+            string SqlQuery = "exec USP_GetSubjectList_StreamIDWise @StreamID=" + StreamID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSubjectList_StreamIDWise");
+
+            List<CommonDataModel_SubjectMaster> dataModels = new List<CommonDataModel_SubjectMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SubjectMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 
