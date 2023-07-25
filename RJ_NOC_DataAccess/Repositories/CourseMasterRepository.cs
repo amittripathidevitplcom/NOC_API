@@ -88,7 +88,6 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_CollegeWiseCourse_AddUpdate  ";
-
             SqlQuery += " @CollegeWiseCourseID='" + request.CollegeWiseCourseID + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @CollegeID='" + request.CollegeID + "',";
