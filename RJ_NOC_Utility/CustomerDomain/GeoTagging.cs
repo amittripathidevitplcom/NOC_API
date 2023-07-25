@@ -45,36 +45,19 @@ namespace RJ_NOC_Utility.CustomerDomain
         //}
 
 
-        public async Task<bool> SSOAuthentication(SSOLandingDataDataModel sSOLandingDataDataModel, IConfiguration _configuration)
+        public async Task<bool> SSOAuthentication(SSOLandingDataDataModel sSOLandingDataDataModel)
         {
-            SSOUserDetailData ssoInfo = new SSOUserDetailData();
-            string BaseUrl = _configuration["SSOLoginDetils:SSOBaseUrl"].ToString();
-            string AppName = _configuration["SSOLoginDetils:AppName"].ToString();
-            string WebServiceUser = _configuration["SSOLoginDetils:WebServiceUser"].ToString();
-            string WebServicePwd = _configuration["SSOLoginDetils:WebServicePwd"].ToString();
-
+            bool strResult = false; 
             try
             {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("/SSO/SSOAuthenticationJSON" + sSOLandingDataDataModel.Username + "/" + sSOLandingDataDataModel.Password + "/"+ WebServiceUser + "/" + WebServicePwd);
-                    if (Res.IsSuccessStatusCode)
-                    {
-                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-                        ssoInfo = JsonConvert.DeserializeObject<SSOUserDetailData>(EmpResponse);
-                    }
-                    else
-                    { }
-                }
+                    SSOWSSoapClient sSOService = new SSOWSSoapClient(SSOWSSoapClient.EndpointConfiguration.SSOWSSoap);
+                    strResult = await sSOService.SSOAuthenticationAsync(sSOLandingDataDataModel.Username.ToString(), sSOLandingDataDataModel.Password.ToString());
             }
             catch (Exception ex)
             {
-                //return new ServiceResponse() { data = "", IsSuccess = false, Message = "Success" };
+                return strResult;
             }
-            return true;
+            return strResult;
         }
 
 

@@ -23,24 +23,30 @@ namespace RJ_NOC_API.Controllers
         {
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
-            var result = new OperationResult<SSOUserDetailData>();
-
-            bool IsSSOAuthentication = false;
-
-            IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel, _configuration);
+            var result = new OperationResult<SSOUserDetailData>(); 
+            bool IsSSOAuthentication = false; 
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppLogin(sSOLandingDataDataModel, _configuration));
-                result.State = OperationState.Success;
-                if (result.Data != null)
+                IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+                if (IsSSOAuthentication == true)
                 {
+                    result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppLogin(sSOLandingDataDataModel,  _configuration));
                     result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    if (result.Data != null)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
+                    result.SuccessMessage = "Please enter valid username or password.!";
                 }
             }
             catch (Exception ex)
@@ -55,10 +61,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-
-        
-
+         
         [HttpPost("AppCollegeSSOLogin/{LoginSSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> AppCollegeSSOLogin(string LoginSSOID)
         {
@@ -67,7 +70,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppCollegeSSOLogin(LoginSSOID));
-                result.State = OperationState.Success;                
+                result.State = OperationState.Success;
                 if (result.Data[0].data != null)
                 {
                     if (result.Data[0].data.Rows.Count > 0)
