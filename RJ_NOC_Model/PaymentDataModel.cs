@@ -209,11 +209,7 @@ namespace RJ_NOC_Model
         public string PaymentRequestURL { get; set; }
         public string MERCHANTCODE { get; set; }
         public bool IsKiosk { get; set; }
-
-
-
-
-  
+        public bool IsSucccess { get; set; }
 
 
     }

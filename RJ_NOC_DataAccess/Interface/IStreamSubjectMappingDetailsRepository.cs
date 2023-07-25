@@ -13,6 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetAllStream(StreamSubjectMappingDetailDataModel Model);
         bool DeleteData(int StreamMappingID);
         List<StreamSubjectMappingDetailDataModel> GetStreamIDWise(int StreamMappingID, string LoginSSOID);
+        bool IfExists(StreamSubjectMappingDetailDataModel Model);
 
     }
 }

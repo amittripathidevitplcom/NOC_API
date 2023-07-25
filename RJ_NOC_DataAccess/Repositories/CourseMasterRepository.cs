@@ -96,8 +96,9 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @Seats='" + request.Seats + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
+            SqlQuery += " @StreamID='" + request.StreamID + "',";
             SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails") + "'";
-
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
             if (Rows > 0)
                 return true;
