@@ -35,31 +35,46 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("GetSSOUserLogionDetails")]
-        public async Task<OperationResult<SSOUserDetailData>> GetSSOUserLogionDetails([FromBody]  SSOLandingDataDataModel sSOLandingDataDataModel)
+        public async Task<OperationResult<SSOUserDetailData>> GetSSOUserLogionDetails([FromBody] SSOLandingDataDataModel sSOLandingDataDataModel)
         {
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
             //string SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
             string LoginType = "CITIZEN";//CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
 
-            string SSOID =  sSOLandingDataDataModel.Username;
+            string SSOID = sSOLandingDataDataModel.Username;
             //string LoginType = sSOLandingDataDataModel.LoginType;
 
             string QueryStringData = "";
             var result = new OperationResult<SSOUserDetailData>();
+            bool IsSSOAuthentication = false;
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetSSOUserLogionDetails(SSOID, LoginType, _configuration));
-                result.State = OperationState.Success;
-                if (result.Data != null)
+                IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+                if (sSOLandingDataDataModel.LoginType.ToString() == "-999")
                 {
+                    IsSSOAuthentication = true;
+                }
+                if (IsSSOAuthentication == true)
+                {
+
+                    result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetSSOUserLogionDetails(SSOID, LoginType, _configuration));
                     result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    if (result.Data != null)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
+                    result.SuccessMessage = "Please enter valid username or password.!";
                 }
             }
             catch (Exception ex)
@@ -74,11 +89,11 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        
+
         [HttpGet("Check_SSOIDWise_LegalEntity/{SSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> Check_SSOIDWise_LegalEntity(string SSOID)
         {
-            
+
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
