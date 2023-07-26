@@ -2041,13 +2041,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetSubjectList_StreamIDWise/{StreamID}")]
-        public async Task<OperationResult<List<CommonDataModel_SubjectMaster>>> GetSubjectList_StreamIDWise(int StreamID)
+        [HttpGet("GetSubjectList_StreamIDWise/{StreamID}/{DepartmentID}/{CourseLevelID}/{CourseID}")]
+        public async Task<OperationResult<List<CommonDataModel_SubjectMaster>>> GetSubjectList_StreamIDWise(int StreamID, int DepartmentID, int CourseLevelID, int CourseID)
         {
             var result = new OperationResult<List<CommonDataModel_SubjectMaster>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubjectList_StreamIDWise(StreamID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubjectList_StreamIDWise(StreamID,DepartmentID,CourseLevelID,CourseID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
