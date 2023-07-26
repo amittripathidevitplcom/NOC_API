@@ -13,7 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<FacilitiesMasterDataModel> GetFacilitiesIDWise(int FID);
         bool SaveData(FacilitiesMasterDataModel request);       
         bool DeleteData(int FID);
-        bool IfExists(int FID, string FacilitiesName);
+        bool IfExists(int FID,int DepartmentID, string FacilitiesName);
       
 
     }

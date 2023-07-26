@@ -28,9 +28,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<StreamMasterDataModel> GetByID(int StreamMasterID)
+        public List<StreamMasterDataModel> GetByID(int StreamMappingID)
         {
-            string SqlQuery = " exec USP_GetStreamMasterData @Key='GetDetails',@StreamMasterID='" + StreamMasterID + "'";
+            string SqlQuery = " exec USP_GetStreamMasterData @Key='GetDetails',@StreamMappingID='" + StreamMappingID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "StreamMaster.GetByID");
 
@@ -39,11 +39,12 @@ namespace RJ_NOC_DataAccess.Repository
             StreamMasterDataModel dataModels = new StreamMasterDataModel();
             if (dataSet.Tables[0].Rows.Count > 0)
             {
-                dataModels.StreamMasterID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["StreamMasterID"]);
+                dataModels.StreamMappingID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["StreamMappingID"]);
                 dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
                 dataModels.CourseLevelID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseLevelID"]);
                 dataModels.CourseID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseID"]);
-                dataModels.StreamName = dataSet.Tables[0].Rows[0]["StreamName"].ToString();
+                dataModels.StreamID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["StreamID"]);
+                //dataModels.StreamName = dataSet.Tables[0].Rows[0]["StreamName"].ToString();
 
 
                 dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
@@ -73,11 +74,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_StreamMaster_AddUpdate";
-            SqlQuery += " @StreamMasterID='" + request.StreamMasterID + "',";
+            SqlQuery += " @StreamMappingID='" + request.StreamMappingID + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
             SqlQuery += " @CourseID='" + request.CourseID + "',";
-            SqlQuery += " @StreamName='" + request.StreamName + "',";
+            SqlQuery += " @StreamID='" + request.StreamID + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
@@ -88,18 +89,18 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool DeleteData(int StreamMasterID)
+        public bool DeleteData(int StreamMappingID)
         {
-            string SqlQuery = "exec USP_DeleteStreamMaster @StreamMasterID='" + StreamMasterID + "'";
+            string SqlQuery = "exec USP_DeleteStreamMaster @StreamMappingID='" + StreamMappingID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StreamMaster.Delete");
             if (Rows > 0)
                 return true;
             else
                 return false;
         }
-        public bool IfExists(int StreamMasterID, int CourseLevelID, int CourseID, int DepartmentID, string StreamName)
+        public bool IfExists(int StreamMappingID, int CourseLevelID, int CourseID, int DepartmentID, int StreamID)
         {
-            string SqlQuery = " USP_IfExistsStreamMaster @StreamMasterID='" + StreamMasterID + "',@CourseLevelID = '" + CourseLevelID + "',@CourseID = '" + CourseID + "',@DepartmentID = '" + DepartmentID + "',@StreamName='" + StreamName + "' ";
+            string SqlQuery = " USP_IfExistsStreamMaster @StreamMappingID='" + StreamMappingID + "',@CourseLevelID = '" + CourseLevelID + "',@CourseID = '" + CourseID + "',@DepartmentID = '" + DepartmentID + "',@StreamID='" + StreamID + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamMaster.IfExists");
             if (dataTable.Rows.Count > 0)

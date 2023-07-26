@@ -478,7 +478,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_TermAndCondition> GetTermAndConditionList_DepartmentWise(int departmentId)
         {
-            string SqlQuery = $"exec USP_TermAndConditionList_DepartmentWiseMaster @DepartmentID={departmentId}";
+            string SqlQuery = $"exec GetTermAndConditionList_DepartmentWise @DepartmentID={departmentId}";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTermAndConditionList_DepartmentWise");
 

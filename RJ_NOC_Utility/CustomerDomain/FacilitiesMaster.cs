@@ -30,9 +30,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.FacilitiesMasterRepository.DeleteData(FID);
         }
         
-        public bool IfExists(int FID, string FacilitiesName)
+        public bool IfExists(int FID,int DepartmentID, string FacilitiesName)
         {
-            return UnitOfWork.FacilitiesMasterRepository.IfExists(FID, FacilitiesName);
+            return UnitOfWork.FacilitiesMasterRepository.IfExists(FID, DepartmentID, FacilitiesName);
         }
 
        

@@ -90,7 +90,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.FacilitiesMasterUtility.IfExists(request.FID, request.FacilitiesName);
+                IfExits = UtilityHelper.FacilitiesMasterUtility.IfExists(request.FID,request.DepartmentID, request.FacilitiesName);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.FacilitiesMasterUtility.SaveData(request));
