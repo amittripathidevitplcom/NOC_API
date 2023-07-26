@@ -10,10 +10,10 @@ namespace RJ_NOC_DataAccess.Interface
     public interface IStreamMasterRepository
     {
         List<CommonDataModel_DataTable> GetAllStreamList();
-        List<StreamMasterDataModel> GetByID(int StreamMasterID);
+        List<StreamMasterDataModel> GetByID(int StreamMappingID);
         bool SaveData(StreamMasterDataModel request);       
-        bool DeleteData(int StreamMasterID);
-        bool IfExists(int StreamMasterID, int CourseLevelID, int CourseID, int DepartmentID, string StreamName);
+        bool DeleteData(int StreamMappingID);
+        bool IfExists(int StreamMappingID, int CourseLevelID, int CourseID, int DepartmentID, int StreamID);
       
 
     }

@@ -303,9 +303,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetStreamList_CourseIDWise(DepartmentID, CourseLevelID, CourseID);
         }
-        public List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID)
+        public List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID, int DepartmentID, int CourseLevelID, int CourseID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetSubjectList_StreamIDWise(StreamID);
+            return UnitOfWork.CommonFuncationRepository.GetSubjectList_StreamIDWise(StreamID, DepartmentID, CourseLevelID, CourseID);
         }
     }
 }

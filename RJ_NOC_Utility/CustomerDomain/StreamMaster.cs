@@ -17,22 +17,22 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StreamMasterRepository.GetAllStreamList();
         }
-        public List<StreamMasterDataModel> GetByID(int StreamMasterID)
+        public List<StreamMasterDataModel> GetByID(int StreamMappingID)
         {
-            return UnitOfWork.StreamMasterRepository.GetByID(StreamMasterID);
+            return UnitOfWork.StreamMasterRepository.GetByID(StreamMappingID);
         }
         public bool SaveData(StreamMasterDataModel request)
         {
             return UnitOfWork.StreamMasterRepository.SaveData(request);
         }
-        public bool DeleteData(int StreamMasterID)
+        public bool DeleteData(int StreamMappingID)
         {
-            return UnitOfWork.StreamMasterRepository.DeleteData(StreamMasterID);
+            return UnitOfWork.StreamMasterRepository.DeleteData(StreamMappingID);
         }
 
-        public bool IfExists(int StreamMasterID, int CourseLevelID, int CourseID, int DepartmentID, string StreamName)
+        public bool IfExists(int StreamMappingID, int CourseLevelID, int CourseID, int DepartmentID, int StreamID)
         {
-            return UnitOfWork.StreamMasterRepository.IfExists(StreamMasterID, CourseLevelID, CourseID, DepartmentID, StreamName);
+            return UnitOfWork.StreamMasterRepository.IfExists(StreamMappingID, CourseLevelID, CourseID, DepartmentID, StreamID);
         }
 
 

@@ -335,13 +335,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetPreviewPaymentDetails/{ApplyNocApplicationID}")]
-        public async Task<OperationResult<List<ResponseParameters>>> GetPreviewPaymentDetails(int ApplyNocApplicationID)
+        [HttpGet("GetPreviewPaymentDetails/{CollegeID}")]
+        public async Task<OperationResult<List<ResponseParameters>>> GetPreviewPaymentDetails(int CollegeID)
         {
             var result = new OperationResult<List<ResponseParameters>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(ApplyNocApplicationID));
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
