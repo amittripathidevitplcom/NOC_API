@@ -39,6 +39,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<LoginMasterDataModel>>();
             try
             {
+
                 result.Data = await Task.Run(() => UtilityHelper.LoginMasterUtility.Login(UserName, Password));
                 if (result.Data.Count > 0)
                 {
