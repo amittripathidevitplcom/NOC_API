@@ -140,8 +140,21 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             sb1.Length = sb1.Length - 9;// remove union all  
             sb1.Append(" ) as t");
-            sb.AppendFormat("@ApplyNocApplicationDetailList='{0}',", sb1.ToString());
 
+            // child
+            sb1 = new StringBuilder();
+            sb1.Append("select * into ##ApplyNocApplicationChangeInNameDetailList from(");
+            if (request.ApplyNocParameterMasterList_ChangeInNameOfCollege != null)
+            {
+                sb1.Append(" select");
+                sb1.AppendFormat(" ChangeInNameID={0},", 0);
+                sb1.AppendFormat(" NewName_Eng=''{0}'',", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.NewNameEnglish);
+                sb1.AppendFormat(" NewName_Hi=''{0}'',", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.NewNameHindi);
+                sb1.AppendFormat(" DocumentName=''{0}''", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.DocumentName);
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationChangeInNameDetailList='{0}',", sb1.ToString());
+
+            }
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");
             // execute

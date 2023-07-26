@@ -28,6 +28,12 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
         public ApplyNocParameterMaster_AdditionOfNewSeats60DataModel? ApplyNocParameterMasterList_AdditionOfNewSeats60 { get; set; }
+
+        public ApplyNocParameterMasterList_ChangeInNameOfCollege? ApplyNocParameterMasterList_ChangeInNameOfCollege { get; set; }
+        public ApplyNocParameterMasterList_ChangeInPlaceOfCollege? ApplyNocParameterMasterList_ChangeInPlaceOfCollege { get; set; }
+        public ApplyNocParameterMasterList_ChangeInGirlstoCoed? ApplyNocParameterMasterList_ChangeInGirlstoCoed { get; set; }
+        public ApplyNocParameterMasterList_ChangeInCollegeManagement? ApplyNocParameterMasterList_ChangeInCollegeManagement { get; set; }
+        public ApplyNocParameterMasterList_MergerCollege? ApplyNocParameterMasterList_MergerCollege { get; set; }
     }
     public class ApplyNocParameterMaster_ddl
     {
@@ -124,7 +130,7 @@ namespace RJ_NOC_Model
 
         public decimal ApplicationFeeAmount { get; set; }
         public int ServiceId { get; set; }
-      
+
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
     }
@@ -149,4 +155,93 @@ namespace RJ_NOC_Model
 
     }
 
+    public class ApplyNocParameterMasterList_ChangeInNameOfCollege
+    {
+        public int ApplyNocID { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string NewNameEnglish { get; set; }
+        public string NewNameHindi { get; set; }
+        public string Dis_DocumentName { get; set; }
+        public string DocumentName { get; set; }
+        public string DocumentPath { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ChangeInPlaceOfCollege
+    {
+        public int ApplyNocID { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string PlaceName { get; set; }
+        public string Dis_DocumentName { get; set; }
+        public string DocumentName { get; set; }
+        public string DocumentPath { get; set; }
+        public string Dis_PlaceDocumentName { get; set; }
+        public string PlaceDocumentName { get; set; }
+        public string PlaceDocumentPath { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ChangeInGirlstoCoed
+    {
+        public int ApplyNocID { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string Dis_ConsentManagementDocument { get; set; }
+        public string ConsentManagementDocument { get; set; }
+        public string ConsentManagementDocumentPath { get; set; }
+        public string Dis_ConsentStudentDocument { get; set; }
+        public string ConsentStudentDocument { get; set; }
+        public string ConsentStudentDocumentPath { get; set; }
+    }
+    public class ApplyNocParameterMasterList_ChangeInCollegeManagement
+    {
+        public int ApplyNocID { get; set; }
+        public string NewSocietyName { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string Dis_DocumentName { get; set; }
+        public string DocumentName { get; set; }
+        public string DocumentPath { get; set; }
+        public string Dis_AnnexureDocument { get; set; }
+        public string AnnexureDocument { get; set; }
+        public string AnnexureDocumentPath { get; set; }
+    }
+    public class ApplyNocParameterMasterList_MergerCollege
+    {
+        public int ApplyNocID { get; set; }
+        public decimal FeeAmount { get; set; }
+
+        public string Dis_SocietyProposal { get; set; }
+        public string SocietyProposal { get; set; }
+        public string SocietyProposalPath { get; set; }
+        public string Dis_AllNOC { get; set; }
+        public string AllNOC { get; set; }
+        public string AllNOCPath { get; set; }
+        public string Dis_UniversityAffiliation { get; set; }
+        public string UniversityAffiliation { get; set; }
+        public string UniversityAffiliationPath { get; set; }
+        public string Dis_NOCAffiliationUniversity { get; set; }
+        public string NOCAffiliationUniversity { get; set; }
+        public string NOCAffiliationUniversityPath { get; set; }
+        public string Dis_ConsentAffidavit { get; set; }
+        public string ConsentAffidavit { get; set; }
+        public string ConsentAffidavitPath { get; set; }
+        public string Dis_OtherAllNOC { get; set; }
+        public string OtherAllNOC { get; set; }
+        public string OtherAllNOCPath { get; set; }
+        public string Dis_OtherUniversityAffiliation { get; set; }
+        public string OtherUniversityAffiliation { get; set; }
+        public string OtherUniversityAffiliationPath { get; set; }
+        public string Dis_OtherNOCAffiliationUniversity { get; set; }
+        public string OtherNOCAffiliationUniversity { get; set; }
+        public string OtherNOCAffiliationUniversityPath { get; set; }
+        public string Dis_OtherConsentAffidavit { get; set; }
+        public string OtherConsentAffidavit { get; set; }
+        public string OtherConsentAffidavitPath { get; set; }
+        public string Dis_LandTitleCertificate { get; set; }
+        public string LandTitleCertificate { get; set; }
+        public string LandTitleCertificatePath { get; set; }
+        public string Dis_BuildingBluePrint { get; set; }
+        public string BuildingBluePrint { get; set; }
+        public string BuildingBluePrintPath { get; set; }
+        public string Dis_StaffInformation { get; set; }
+        public string StaffInformation { get; set; }
+        public string StaffInformationPath { get; set; }
+    }
 }
