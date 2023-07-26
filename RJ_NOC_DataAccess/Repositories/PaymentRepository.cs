@@ -223,9 +223,9 @@ namespace RJ_NOC_DataAccess.Repositories
             return model;
         }
 
-        public List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID)
+        public List<ResponseParameters> GetPreviewPaymentDetails(int CollegeID)
         {
-            string SqlQuery = " exec USP_PaymentTransaction_GetData @ApplyNocApplicationID='" + ApplyNocApplicationID + "' ,@Key= 'GetPreviewPaymentDetails' ";
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @CollegeID='" + CollegeID + "' ,@Key= 'GetPreviewPaymentDetails' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
 
