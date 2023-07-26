@@ -48,14 +48,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("{StreamMasterID}/{UserID}")]
-        public async Task<OperationResult<List<StreamMasterDataModel>>> GetByID(int StreamMasterID, int UserID)
+        [HttpGet("{StreamMappingID}/{UserID}")]
+        public async Task<OperationResult<List<StreamMasterDataModel>>> GetByID(int StreamMappingID, int UserID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", StreamMasterID, "StreamMaster");
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", StreamMappingID, "StreamMaster");
             var result = new OperationResult<List<StreamMasterDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.GetByID(StreamMasterID));
+                result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.GetByID(StreamMappingID));
                 if (result.Data.Count > 0)
                 {
 
@@ -87,28 +87,28 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.StreamMasterUtility.IfExists(request.StreamMasterID, request.DepartmentID,request.CourseLevelID,request.CourseID,request.StreamName);
+                IfExits = UtilityHelper.StreamMasterUtility.IfExists(request.StreamMappingID, request.DepartmentID,request.CourseLevelID,request.CourseID,request.StreamID);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.SaveData(request));
                     if (result.Data)
                     {
                         result.State = OperationState.Success;
-                        if (request.StreamMasterID == 0)
+                        if (request.StreamMappingID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.StreamMasterID, "Save", 0, "StreamMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.StreamMappingID, "Save", 0, "StreamMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.StreamMasterID, "Update", request.StreamMasterID, "StreamMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.StreamMappingID, "Update", request.StreamMappingID, "StreamMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }
                     else
                     {
                         result.State = OperationState.Error;
-                        if (request.StreamMasterID == 0)
+                        if (request.StreamMappingID == 0)
                             result.ErrorMessage = "There was an error adding data.!";
                         else
                             result.ErrorMessage = "There was an error updating data.!";
@@ -134,16 +134,16 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("Delete/{StreamMasterID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int StreamMasterID, int UserID)
+        [HttpPost("Delete/{StreamMappingID}/{UserID}")]
+        public async Task<OperationResult<bool>> DeleteData(int StreamMappingID, int UserID)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.DeleteData(StreamMasterID));
+                result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.DeleteData(StreamMappingID));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", StreamMasterID, "StreamMaster");
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", StreamMappingID, "StreamMaster");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Deleted successfully .!";
                 }

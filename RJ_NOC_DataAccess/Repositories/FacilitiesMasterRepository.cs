@@ -14,7 +14,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        
+
         public List<FacilitiesMasterDataModel_list> GetAllFacilitiesList()
         {
             string SqlQuery = " exec USP_GetFacilitiesMasterAllList";
@@ -42,7 +42,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_M_FacilitiesMasterInsert";
-            SqlQuery += " @FID='" + request.FID + "',@DepartmentID='" + request.DepartmentID + "',@FacilitiesName='" + request.FacilitiesName + "',@MinSize='" + request.MinSize + "',@Unit='" + request.Unit + "',@UserID='" + request.UserID + "',@ActiveStatus='"+request.ActiveStatus+"',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @FID='" + request.FID + "',@DepartmentID='" + request.DepartmentID + "',@FacilitiesName='" + request.FacilitiesName + "',@MinSize='" + request.MinSize + "',@Unit='" + request.Unit + "',@UserID='" + request.UserID + "',@ActiveStatus='" + request.ActiveStatus + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "FacilitiesMaser.SaveData");
             if (Rows > 0)
                 return true;
@@ -58,9 +58,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int FID, string FacilitiesName)
+        public bool IfExists(int FID, int DepartmentID, string FacilitiesName)
         {
-            string SqlQuery = " select FacilitiesName from M_FacilitiesMaster Where FacilitiesName='" + FacilitiesName.Trim() + "'  and FID !='" + FID + "'  and DeleteStatus=0";
+            string SqlQuery = " select FacilitiesName from M_FacilitiesMaster Where FacilitiesName='" + FacilitiesName.Trim() + "' and DepartmentID = '" + DepartmentID + "'  and FID !='" + FID + "'  and DeleteStatus=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "FacilitiesMaser.IfExists");
             if (dataTable.Rows.Count > 0)
@@ -68,6 +68,6 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-      
+
     }
 }
