@@ -20,5 +20,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName);
         List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName);
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetApplyNOCApplicationType(int CollegeID);
+        List<CommonDataModel_DataTable> GeneratePDFForJointSecretary(int ApplyNOCID);
+        bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark);
     }
 }
