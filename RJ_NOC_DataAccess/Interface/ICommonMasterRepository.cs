@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface ICommonMasterRepository
     {
-        List<CommonDataModel_DataTable> GetCommonMasterList();
+        List<CommonDataModel_DataTable> GetCommonMasterList(int DepartmentID);
         List<CommonMasterDataModel> GetCommonMasterIDWise(int ID);
         bool SaveData(CommonMasterDataModel request);
         bool DeleteData(int ID);

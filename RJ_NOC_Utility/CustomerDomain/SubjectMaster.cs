@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.SubjectMasterRepository.GetDepartmentByCourse(DepartmentID);
         }
-        public List<SubjectMasterDataModel_list> GetAllSubjectList()
+        public List<SubjectMasterDataModel_list> GetAllSubjectList(int DepartmentID)
         {
-            return UnitOfWork.SubjectMasterRepository.GetAllSubjectList();
+            return UnitOfWork.SubjectMasterRepository.GetAllSubjectList(DepartmentID);
         }
         public List<SubjectMasterDataModel> GetSubjectIDWise(int SubjectID)
         {

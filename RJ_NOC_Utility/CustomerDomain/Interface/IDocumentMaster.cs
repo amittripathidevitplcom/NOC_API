@@ -10,7 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IDocumentMaster
     {
-        List<CommonDataModel_DataTable> GetAllDocument();
+        List<CommonDataModel_DataTable> GetAllDocument(int DepartmentID);
         List<DocumentMasterDataModel> GetDocumentMasterIDWise(int DocumentMasterID);
         bool SaveData(DocumentMasterDataModel request);
         bool UpdateData(DocumentMasterDataModel request);

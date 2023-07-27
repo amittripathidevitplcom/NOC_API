@@ -80,14 +80,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<LandAreaSituatedMasterDataModel_list>>> GetAllLandAreaSituatedList(int UserID)
+        [HttpGet("GetAllLandAreaSituatedList/{UserID}/{DepartmentID}")]
+        public async Task<OperationResult<List<LandAreaSituatedMasterDataModel_list>>> GetAllLandAreaSituatedList(int UserID,int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "LandAreaSituatedMaster");
             var result = new OperationResult<List<LandAreaSituatedMasterDataModel_list>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.LandAreaSituatedMasterUtility.GetAllLandAreaSituatedList());
+                result.Data = await Task.Run(() => UtilityHelper.LandAreaSituatedMasterUtility.GetAllLandAreaSituatedList(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

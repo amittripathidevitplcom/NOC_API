@@ -8,7 +8,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IFacilitiesMaster
     {
         
-        List<FacilitiesMasterDataModel_list> GetAllFacilitiesList();
+        List<FacilitiesMasterDataModel_list> GetAllFacilitiesList(int DepartmentID);
         List<FacilitiesMasterDataModel> GetFacilitiesIDWise(int FID);
         bool SaveData(FacilitiesMasterDataModel request);       
         bool DeleteData(int FID);

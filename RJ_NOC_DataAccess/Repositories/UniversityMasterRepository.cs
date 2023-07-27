@@ -15,9 +15,10 @@ namespace RJ_NOC_DataAccess.Repository
             _commonHelper = commonHelper;
         }
         
-        public List<UniversityasterDataModel_list> GetAllUniversityList()
+        public List<UniversityasterDataModel_list> GetAllUniversityList(int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetUniversityList";
+            string SqlQuery = " exec USP_GetUniversityList @DepartmentID='" + DepartmentID + "'";
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "UiversityMaster.GetAllUniversityList");
 

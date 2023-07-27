@@ -15,9 +15,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CreateUser(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetUserList()
+        public List<CommonDataModel_DataTable> GetUserList(int DepartmentID)
         {
-            return UnitOfWork.CreateUserRepository.GetUserList();
+            return UnitOfWork.CreateUserRepository.GetUserList(DepartmentID);
         }
         public List<CreateUserDataModel> GetUserByIDWise(int UId)
         {
@@ -27,7 +27,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CreateUserRepository.SaveData(request);
         }
-
         public bool DeleteData(int UId)
         {
             return UnitOfWork.CreateUserRepository.DeleteData(UId);

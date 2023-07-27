@@ -16,14 +16,14 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<UniversityasterDataModel_list>>> GetAllUniversityList(int UserID)
+        [HttpGet("GetAllUniversityList/{UserID}/{DepartmentID}")]
+        public async Task<OperationResult<List<UniversityasterDataModel_list>>> GetAllUniversityList(int UserID,int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "UiversityMaster");
             var result = new OperationResult<List<UniversityasterDataModel_list>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.UniversityMasterUtility.GetAllUniversityList());
+                result.Data = await Task.Run(() => UtilityHelper.UniversityMasterUtility.GetAllUniversityList(DepartmentID ));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

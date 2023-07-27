@@ -37,7 +37,7 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
         
-        public List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList()
+        public List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList(int DepartmentID)
         {
             string SqlQuery = " exec USP_GetLandAreaSituatedAllList";
             DataTable dataTable = new DataTable();

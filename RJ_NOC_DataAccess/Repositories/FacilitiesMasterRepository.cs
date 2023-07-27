@@ -3,6 +3,7 @@ using RJ_NOC_DataAccess.Interface;
 using System.Data;
 using Newtonsoft.Json;
 using RJ_NOC_DataAccess.Common;
+using System.Security.Cryptography;
 
 
 namespace RJ_NOC_DataAccess.Repository
@@ -15,9 +16,9 @@ namespace RJ_NOC_DataAccess.Repository
             _commonHelper = commonHelper;
         }
 
-        public List<FacilitiesMasterDataModel_list> GetAllFacilitiesList()
+        public List<FacilitiesMasterDataModel_list> GetAllFacilitiesList(int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetFacilitiesMasterAllList";
+            string SqlQuery = " exec USP_GetFacilitiesMasterAllList @DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "FacilitiesMaser.GetAllFacilitiesList");
 

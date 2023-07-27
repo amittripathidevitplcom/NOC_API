@@ -47,14 +47,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<SubjectMasterDataModel_list>>> GetAllSubjectList(int UserID)
+        [HttpGet("GetAllSubjectList/{UserID}/{DepartmentID}")]
+        public async Task<OperationResult<List<SubjectMasterDataModel_list>>> GetAllSubjectList(int UserID,int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "SubjectMasterService");
             var result = new OperationResult<List<SubjectMasterDataModel_list>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetAllSubjectList());
+                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetAllSubjectList(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

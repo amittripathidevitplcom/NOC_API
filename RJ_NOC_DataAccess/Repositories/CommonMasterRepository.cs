@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Collections;
 using System.Diagnostics.Metrics;
 using System.Net;
+using Azure.Core;
 
 namespace RJ_NOC_DataAccess.Repositories
 {
@@ -28,9 +29,10 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetCommonMasterList()
+        public List<CommonDataModel_DataTable> GetCommonMasterList(int DepartmentID)
         {
             string SqlQuery = " exec USP_CommonMaster_GetData";
+            SqlQuery += " @DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonMaster.GetCommonMasterList");
 

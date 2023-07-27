@@ -31,9 +31,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<CommonDataModel_DataTable> GetAllDocument()
+        public List<CommonDataModel_DataTable> GetAllDocument(int DepartmentID)
         {
-            string SqlQuery = " exec USP_DocumentMaster_GetData";
+            string SqlQuery = " exec USP_DocumentMaster_GetData @DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DocumentMaster.GetAllData");
 

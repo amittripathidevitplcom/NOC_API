@@ -13,9 +13,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public UniversityMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }       
-        public List<UniversityasterDataModel_list> GetAllUniversityList()
+        public List<UniversityasterDataModel_list> GetAllUniversityList(int DepartmentID)
         {
-            return UnitOfWork.UniversityMasterRepository.GetAllUniversityList();
+            return UnitOfWork.UniversityMasterRepository.GetAllUniversityList(DepartmentID);
         }
         public List<UniversityasterDataModel> GetUniversityIDWise(int UniversityID)
         {

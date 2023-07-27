@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface ICreateUserRepository
     {
-        List<CommonDataModel_DataTable> GetUserList();
+        List<CommonDataModel_DataTable> GetUserList(int DepartmentID);
         List<CreateUserDataModel> GetUserByIDWise(int UId);
         bool SaveData(CreateUserDataModel request);
         bool DeleteData(int UId);

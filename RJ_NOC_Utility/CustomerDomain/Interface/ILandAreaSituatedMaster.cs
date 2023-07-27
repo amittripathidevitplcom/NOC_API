@@ -10,7 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 		
 		List<LandAreaSituated_DistrictList> GetDistrictList();
 		List<LandAreaSituatedModel_StateList> GetStateList();
-		List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList();
+		List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList(int DepartmentID);
         List<LandAreaSituatedMasterDataModel> GetLandAreaSituatedIDWise(int LandAreaID);
         bool SaveData(LandAreaSituatedMasterDataModel request);       
         bool DeleteData(int LandAreaID);

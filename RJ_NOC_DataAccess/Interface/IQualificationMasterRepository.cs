@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IQualificationMasterRepository
     {
-        List<CommonDataModel_DataTable> GetQualificationMasterList();
+        List<CommonDataModel_DataTable> GetQualificationMasterList(int DepratmentID);
         List<QualificationMasterDataModel> GetQualificationMasterIDWise(int QualificationID);
         bool SaveData(QualificationMasterDataModel request);
         bool DeleteData(int QualificationID);

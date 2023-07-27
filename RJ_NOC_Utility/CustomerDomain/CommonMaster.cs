@@ -14,9 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CommonMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetCommonMasterList()
+        public List<CommonDataModel_DataTable> GetCommonMasterList(int DepartmentID)
         {
-            return UnitOfWork.CommonMasterRepository.GetCommonMasterList();
+            return UnitOfWork.CommonMasterRepository.GetCommonMasterList(DepartmentID);
         }
         public List<CommonMasterDataModel> GetCommonMasterIDWise(int ID)
         {

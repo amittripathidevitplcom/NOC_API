@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ICreateUser
     {
 
-        List<CommonDataModel_DataTable> GetUserList();
+        List<CommonDataModel_DataTable> GetUserList(int DepartmentID);
         List<CreateUserDataModel> GetUserByIDWise(int UId);
         bool SaveData(CreateUserDataModel request);
         bool DeleteData(int UId);

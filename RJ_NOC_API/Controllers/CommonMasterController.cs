@@ -30,14 +30,14 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCommonMasterList()
+        [HttpGet("GetCommonMasterList/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCommonMasterList(int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "CommonMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonMasterUtility.GetCommonMasterList());
+                result.Data = await Task.Run(() => UtilityHelper.CommonMasterUtility.GetCommonMasterList(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     public interface ISubjectMasterRepository
     {
         List<CourseList> GetDepartmentByCourse(int DepartmentID);
-        List<SubjectMasterDataModel_list> GetAllSubjectList();
+        List<SubjectMasterDataModel_list> GetAllSubjectList(int SubjectID);
         List<SubjectMasterDataModel> GetSubjectIDWise(int SubjectID);
         bool SaveData(SubjectMasterDataModel request);       
         bool DeleteData(int SubjectID);

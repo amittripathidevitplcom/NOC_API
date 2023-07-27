@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IQualificationMaster
     {
 
-        List<CommonDataModel_DataTable> GetQualificationMasterList();
+        List<CommonDataModel_DataTable> GetQualificationMasterList(int DepartmentID);
         List<QualificationMasterDataModel> GetQualificationMasterIDWise(int QualificationID);
         bool SaveData(QualificationMasterDataModel request);
         bool DeleteData(int QualificationID);

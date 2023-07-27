@@ -81,14 +81,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllDocument(int UserID)
+        [HttpGet("GetAllDocument/{UserID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllDocument(int UserID,int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DocumentMasterUtility.GetAllDocument());
+                result.Data = await Task.Run(() => UtilityHelper.DocumentMasterUtility.GetAllDocument(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

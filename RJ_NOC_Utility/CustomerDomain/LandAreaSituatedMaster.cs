@@ -21,9 +21,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.LandAreaSituatedMasterRepository.GetStateList();
         }
-        public List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList()
+        public List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList(int DepartmentID)
         {
-            return UnitOfWork.LandAreaSituatedMasterRepository.GetAllLandAreaSituatedList();
+            return UnitOfWork.LandAreaSituatedMasterRepository.GetAllLandAreaSituatedList(DepartmentID);
         }
         public List<LandAreaSituatedMasterDataModel> GetLandAreaSituatedIDWise(int LandAreaID)
         {

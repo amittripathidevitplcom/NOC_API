@@ -13,9 +13,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public FacilitiesMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }       
-        public List<FacilitiesMasterDataModel_list> GetAllFacilitiesList()
+        public List<FacilitiesMasterDataModel_list> GetAllFacilitiesList(int DepartmentID)
         {
-            return UnitOfWork.FacilitiesMasterRepository.GetAllFacilitiesList();
+            return UnitOfWork.FacilitiesMasterRepository.GetAllFacilitiesList(DepartmentID);
         }
         public List<FacilitiesMasterDataModel> GetFacilitiesIDWise(int UniversityID)
         {

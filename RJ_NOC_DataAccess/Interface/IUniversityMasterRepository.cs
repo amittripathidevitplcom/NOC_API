@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IUniversityMasterRepository
     {
-        List<UniversityasterDataModel_list> GetAllUniversityList();
+        List<UniversityasterDataModel_list> GetAllUniversityList(int DepartmentID);
         List<UniversityasterDataModel> GetUniversityIDWise(int UniversityID);
         bool SaveData(UniversityasterDataModel request);       
         bool DeleteData(int UniversityID);

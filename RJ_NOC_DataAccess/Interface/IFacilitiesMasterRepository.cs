@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IFacilitiesMasterRepository
     {
-        List<FacilitiesMasterDataModel_list> GetAllFacilitiesList();
+        List<FacilitiesMasterDataModel_list> GetAllFacilitiesList(int DepartmentID);
         List<FacilitiesMasterDataModel> GetFacilitiesIDWise(int FID);
         bool SaveData(FacilitiesMasterDataModel request);       
         bool DeleteData(int FID);

@@ -14,9 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public QualificationMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetQualificationMasterList()
+        public List<CommonDataModel_DataTable> GetQualificationMasterList(int DepartmentID)
         {
-            return UnitOfWork.QualificationMasterRepository.GetQualificationMasterList();
+            return UnitOfWork.QualificationMasterRepository.GetQualificationMasterList(DepartmentID);
         }
         public List<QualificationMasterDataModel> GetQualificationMasterIDWise(int QualificationID)
         {

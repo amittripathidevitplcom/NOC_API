@@ -28,12 +28,13 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetUserList()
+        public List<CommonDataModel_DataTable> GetUserList(int DepartmentID )
         {
             string SqlQuery = " exec USP_CreateUser_GetData";
+            SqlQuery += " @DepartmentID='" + DepartmentID + "'";
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CreateUser.GetUserList");
-
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;

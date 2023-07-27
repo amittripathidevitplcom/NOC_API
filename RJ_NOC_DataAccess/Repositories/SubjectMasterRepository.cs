@@ -25,9 +25,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CourseList>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<SubjectMasterDataModel_list> GetAllSubjectList()
+        public List<SubjectMasterDataModel_list> GetAllSubjectList(int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetAllSubjectList";
+            string SqlQuery = " exec USP_GetAllSubjectList @DepartmentID=" + DepartmentID;
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetAllSubjectList");
 

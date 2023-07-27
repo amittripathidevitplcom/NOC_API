@@ -15,9 +15,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public DocumentMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetAllDocument()
+        public List<CommonDataModel_DataTable> GetAllDocument(int DepartmentID)
         {
-            return UnitOfWork.DocumentMasterRepository.GetAllDocument();
+            return UnitOfWork.DocumentMasterRepository.GetAllDocument(DepartmentID);
         }
         public List<DocumentMasterDataModel> GetDocumentMasterIDWise(int DocumentMasterID)
         {

@@ -28,9 +28,9 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetQualificationMasterList()
+        public List<CommonDataModel_DataTable> GetQualificationMasterList(int DepartmentID)
         {
-            string SqlQuery = " exec USP_QualificationMaster_GetData";
+            string SqlQuery = " exec USP_QualificationMaster_GetData  @DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "QualificationMaster.GetQualificationMasterList");
 
