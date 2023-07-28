@@ -377,6 +377,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetAddCourseList_DepartmentIDWise/{DepartmentID}/{CourseLevelID}")]
+        public async Task<OperationResult<List<CommonDataModel_CourseMaster>>> GetAddCourseList_DepartmentIDWise(int DepartmentID, int CourseLevelID)
+        {
+            var result = new OperationResult<List<CommonDataModel_CourseMaster>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAddCourseList_DepartmentIDWise(DepartmentID, CourseLevelID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAddCourseList_DepartmentIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("GetSubjectList_CourseIDWise/{CourseID}")]
         public async Task<OperationResult<List<CommonDataModel_SubjectMaster>>> GetSubjectList_CourseIDWise(int CourseID)
         {

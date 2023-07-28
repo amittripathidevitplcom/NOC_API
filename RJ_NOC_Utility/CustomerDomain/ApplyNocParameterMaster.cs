@@ -33,21 +33,34 @@ namespace RJ_NOC_Utility.CustomerDomain
             {
                 if (ds.Tables.Count >= 3)
                 {
-                    model = CommonHelper.ConvertDataTable<ApplyNocParameterMaster_TNOCExtensionDataModel>(ds.Tables[0]);
-                    model.ApplyNocParameterCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterCourseDataModel>>(ds.Tables[1]);
-                    var subjectlist = CommonHelper.ConvertDataTable<List<ApplyNocParameterSubjectDataModel>>(ds.Tables[2]);
-                    // map
-                    model.ApplyNocParameterCourseList.ForEach(c =>
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
-                        c.ApplyNocParameterSubjectList = subjectlist.Where(s => s.CourseID == c.CourseID)
-                        .Select(sd => new ApplyNocParameterSubjectDataModel
+                        model = CommonHelper.ConvertDataTable<ApplyNocParameterMaster_TNOCExtensionDataModel>(ds.Tables[0]);
+                    }
+                    if (ds.Tables[1].Rows.Count > 0)
+                    {
+                        model.ApplyNocParameterCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterCourseDataModel>>(ds.Tables[1]);
+                    }
+                    if (ds.Tables[2].Rows.Count > 0)
+                    {
+                        var subjectlist = CommonHelper.ConvertDataTable<List<ApplyNocParameterSubjectDataModel>>(ds.Tables[2]);
+                        // map
+                        model.ApplyNocParameterCourseList.ForEach(c =>
                         {
-                            ApplyNocID = sd.CourseID,
-                            CourseID = sd.CourseID,
-                            SubjectID = sd.SubjectID,
-                            SubjectName = sd.SubjectName,
-                        }).ToList();
-                    });
+                            c.ApplyNocParameterSubjectList = subjectlist.Where(s => s.CourseID == c.CourseID)
+                            .Select(sd => new ApplyNocParameterSubjectDataModel
+                            {
+                                ApplyNocID = sd.CourseID,
+                                CourseID = sd.CourseID,
+                                SubjectID = sd.SubjectID,
+                                SubjectName = sd.SubjectName,
+                            }).ToList();
+                        });
+                    }
+                    //model = CommonHelper.ConvertDataTable<ApplyNocParameterMaster_TNOCExtensionDataModel>(ds.Tables[0]);
+                    //model.ApplyNocParameterCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterCourseDataModel>>(ds.Tables[1]);
+                    //var subjectlist = CommonHelper.ConvertDataTable<List<ApplyNocParameterSubjectDataModel>>(ds.Tables[2]);
+                    
                 }
             }
             return model;
