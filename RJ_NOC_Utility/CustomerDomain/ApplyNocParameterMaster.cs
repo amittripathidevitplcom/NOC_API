@@ -141,7 +141,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb1.Length = sb1.Length - 9;// remove union all  
             sb1.Append(" ) as t");
 
-            // child
+            // child Change Name Data
             sb1 = new StringBuilder();
             sb1.Append("select * into ##ApplyNocApplicationChangeInNameDetailList from(");
             if (request.ApplyNocParameterMasterList_ChangeInNameOfCollege != null)
@@ -153,8 +153,77 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb1.AppendFormat(" DocumentName=''{0}''", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.DocumentName);
                 sb1.Append(" ) as t");
                 sb.AppendFormat("@ApplyNocApplicationChangeInNameDetailList='{0}',", sb1.ToString());
-
             }
+            //Change Place Detail
+            sb1 = new StringBuilder();
+            sb1.Append("select * into ##ApplyNocApplicationChangeInPlaceDetailList from(");
+            if (request.ApplyNocParameterMasterList_ChangeInPlaceOfCollege != null)
+            {
+                sb1.Append(" select");
+                sb1.AppendFormat(" ChangeInPlaceID={0},", 0);
+                sb1.AppendFormat(" PlaceName=''{0}'',", request.ApplyNocParameterMasterList_ChangeInPlaceOfCollege.PlaceName);
+                sb1.AppendFormat(" DocumentName=''{0}'',", request.ApplyNocParameterMasterList_ChangeInPlaceOfCollege.DocumentName);
+                sb1.AppendFormat(" PlaceDocumentName=''{0}''", request.ApplyNocParameterMasterList_ChangeInPlaceOfCollege.PlaceDocumentName);
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationChangeInPlaceDetailList='{0}',", sb1.ToString());
+            }
+
+            // Girls Co Education
+            sb1 = new StringBuilder();
+            sb1.Append("select * into ##ApplyNocApplicationChangeInGirlsCOEDDetailList from(");
+            if (request.ApplyNocParameterMasterList_ChangeInGirlstoCoed != null)
+            {
+                sb1.Append(" select");
+                sb1.AppendFormat(" ChangeInGirlsCoedID={0},", 0);
+                sb1.AppendFormat(" ConsentManagementDocument=''{0}'',", request.ApplyNocParameterMasterList_ChangeInGirlstoCoed.ConsentManagementDocument);
+                sb1.AppendFormat(" ConsentStudentDocument=''{0}''", request.ApplyNocParameterMasterList_ChangeInGirlstoCoed.ConsentStudentDocument);
+
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationChangeInGirlsCOEDDetailList='{0}',", sb1.ToString());
+            }
+
+            //Merger Details
+            sb1 = new StringBuilder();
+            sb1.Append("select * into ##ApplyNocApplicationChangeInMergerDetailList from(");
+            if (request.ApplyNocParameterMasterList_MergerCollege != null)
+            {
+                sb1.Append(" select");
+                sb1.AppendFormat(" ChangesInMergerID={0},", 0);
+                sb1.AppendFormat(" SocietyProposal=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.SocietyProposal);
+                sb1.AppendFormat(" AllNOC=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.AllNOC);
+                sb1.AppendFormat(" UniversityAffiliation=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.UniversityAffiliation);
+
+                sb1.AppendFormat(" NOCAffiliationUniversity=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.NOCAffiliationUniversity);
+                sb1.AppendFormat(" ConsentAffidavit=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.ConsentAffidavit);
+                sb1.AppendFormat(" OtherAllNOC=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.OtherAllNOC);
+
+                sb1.AppendFormat(" OtherUniversityAffiliation=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.OtherUniversityAffiliation);
+                sb1.AppendFormat(" OtherNOCAffiliationUniversity=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.OtherNOCAffiliationUniversity);
+                sb1.AppendFormat(" OtherConsentAffidavit=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.OtherConsentAffidavit);
+
+                sb1.AppendFormat(" LandTitleCertificate=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.LandTitleCertificate);
+                sb1.AppendFormat(" BuildingBluePrint=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.BuildingBluePrint);
+                sb1.AppendFormat(" StaffInformation=''{0}''", request.ApplyNocParameterMasterList_MergerCollege.StaffInformation);
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationChangeInMergerDetailList='{0}',", sb1.ToString());
+            }
+
+
+            // Girls Co Education
+            sb1 = new StringBuilder();
+            sb1.Append("select * into ##ApplyNocApplicationChangeInCollegeManagementDetailList from(");
+            if (request.ApplyNocParameterMasterList_ChangeInCollegeManagement != null)
+            {
+                sb1.Append(" select");
+                sb1.AppendFormat(" ChangeInManagementID={0},", 0);
+                sb1.AppendFormat(" NewSocietyName=''{0}'',", request.ApplyNocParameterMasterList_ChangeInCollegeManagement.NewSocietyName);
+                sb1.AppendFormat(" DocumentName=''{0}'',", request.ApplyNocParameterMasterList_ChangeInCollegeManagement.DocumentName);
+                sb1.AppendFormat(" AnnexureDocument=''{0}''", request.ApplyNocParameterMasterList_ChangeInCollegeManagement.AnnexureDocument);
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationChangeInCollegeManagementDetailList='{0}',", sb1.ToString());
+            }
+
+
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");
             // execute

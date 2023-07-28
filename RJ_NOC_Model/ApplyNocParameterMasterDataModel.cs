@@ -210,12 +210,15 @@ namespace RJ_NOC_Model
         public string Dis_SocietyProposal { get; set; }
         public string SocietyProposal { get; set; }
         public string SocietyProposalPath { get; set; }
+
         public string Dis_AllNOC { get; set; }
         public string AllNOC { get; set; }
         public string AllNOCPath { get; set; }
+
         public string Dis_UniversityAffiliation { get; set; }
         public string UniversityAffiliation { get; set; }
         public string UniversityAffiliationPath { get; set; }
+
         public string Dis_NOCAffiliationUniversity { get; set; }
         public string NOCAffiliationUniversity { get; set; }
         public string NOCAffiliationUniversityPath { get; set; }

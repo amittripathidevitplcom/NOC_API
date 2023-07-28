@@ -56,7 +56,6 @@ namespace RJ_NOC_API.Controllers
         public async Task<OperationResult<bool>> SaveApplyNocApplication([FromBody] ApplyNocParameterDataModel request)
         {
             var result = new OperationResult<bool>();
-
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.SaveApplyNocApplication(request));
