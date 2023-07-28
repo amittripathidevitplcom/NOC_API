@@ -25,6 +25,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DepartmentMaster> GetDepartmentMaster();
         List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster> GetCollageList_DepartmentAndSSOIDWise(int DepartmentID, string LoginSSOID, string Type);
+        List<CommonDataModel_CourseMaster> GetAddCourseList_DepartmentIDWise(int DepartmentID,int CourseLevelID);
         List<CommonDataModel_CourseMaster> GetCourseList_DepartmentIDWise(int DepartmentID);
         List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID);
         List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID);

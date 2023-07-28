@@ -167,6 +167,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CourseMaster>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_CourseMaster> GetAddCourseList_DepartmentIDWise(int DepartmentID, int CourseLevelID)
+        {
+            string SqlQuery = "exec USP_CourseList_DepartmentIDWise @DepartmentID='" + DepartmentID + "',@CourseLevelID='" + CourseLevelID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAddActionListByActionHead");
+
+
+            List<CommonDataModel_CourseMaster> dataModels = new List<CommonDataModel_CourseMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CourseMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID)
         {
@@ -478,7 +490,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_TermAndCondition> GetTermAndConditionList_DepartmentWise(int departmentId)
         {
-            string SqlQuery = $"exec GetTermAndConditionList_DepartmentWise @DepartmentID={departmentId}";
+            string SqlQuery = $"exec USP_TermAndConditionList_DepartmentWiseMaster @DepartmentID={departmentId}";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTermAndConditionList_DepartmentWise");
 
