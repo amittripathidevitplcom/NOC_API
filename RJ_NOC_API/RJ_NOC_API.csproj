@@ -37,6 +37,15 @@
     <Reference Include="IKVM.OpenJDK.SwingAWT">
       <HintPath>bin\IKVM.OpenJDK.SwingAWT.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\RJ_NOC_Utility\Commondll\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>Commondll\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>Commondll\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing.Common">
       <HintPath>C:\Users\DevIt\Desktop\Backup\Rishi kapoor new\07042023\FIH_EPR\FIH_EPR\FIH_EPR\FIH_EPR\bin\Release\netcoreapp3.1\System.Drawing.Common.dll</HintPath>
     </Reference>
