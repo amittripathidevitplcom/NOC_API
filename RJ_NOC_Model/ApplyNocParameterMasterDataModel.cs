@@ -31,6 +31,7 @@ namespace RJ_NOC_Model
 
         public ApplyNocParameterMasterList_ChangeInNameOfCollege? ApplyNocParameterMasterList_ChangeInNameOfCollege { get; set; }
         public ApplyNocParameterMasterList_ChangeInPlaceOfCollege? ApplyNocParameterMasterList_ChangeInPlaceOfCollege { get; set; }
+        public ApplyNocParameterMasterList_ChangeInCoedtoGirls? ApplyNocParameterMasterList_ChangeInCoedtoGirls { get; set; }
         public ApplyNocParameterMasterList_ChangeInGirlstoCoed? ApplyNocParameterMasterList_ChangeInGirlstoCoed { get; set; }
         public ApplyNocParameterMasterList_ChangeInCollegeManagement? ApplyNocParameterMasterList_ChangeInCollegeManagement { get; set; }
         public ApplyNocParameterMasterList_MergerCollege? ApplyNocParameterMasterList_MergerCollege { get; set; }
@@ -178,7 +179,14 @@ namespace RJ_NOC_Model
         public string PlaceDocumentName { get; set; }
         public string PlaceDocumentPath { get; set; }
     }
-
+    public class ApplyNocParameterMasterList_ChangeInCoedtoGirls
+    {
+        public int ApplyNocID { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string Dis_ConsentManagementDocument { get; set; }
+        public string ConsentManagementDocument { get; set; }
+        public string ConsentManagementDocumentPath { get; set; }
+    }
     public class ApplyNocParameterMasterList_ChangeInGirlstoCoed
     {
         public int ApplyNocID { get; set; }

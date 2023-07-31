@@ -181,6 +181,19 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb.AppendFormat("@ApplyNocApplicationChangeInPlaceDetailList='{0}',", sb1.ToString());
             }
 
+            // Co Education to Girls 
+            sb1 = new StringBuilder();
+            sb1.Append("select * into ##ApplyNocApplicationChangeInCOEDtoGirlsDetailList from(");
+            if (request.ApplyNocParameterMasterList_ChangeInCoedtoGirls != null)
+            {
+                sb1.Append(" select ");
+                sb1.AppendFormat("ChangeInCoedGirlsID={0},", 0);
+                sb1.AppendFormat("ConsentManagementDocument=''{0}''", request.ApplyNocParameterMasterList_ChangeInCoedtoGirls.ConsentManagementDocument);
+
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationChangeInCOEDtoGirlsDetailList='{0}',", sb1.ToString());
+            }
+
             // Girls Co Education
             sb1 = new StringBuilder();
             sb1.Append("select * into ##ApplyNocApplicationChangeInGirlsCOEDDetailList from(");
