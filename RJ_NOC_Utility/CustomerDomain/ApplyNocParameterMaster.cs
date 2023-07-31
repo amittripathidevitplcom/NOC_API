@@ -153,7 +153,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             sb1.Length = sb1.Length - 9;// remove union all  
             sb1.Append(" ) as t");
-
+            sb.AppendFormat("@ApplyNocApplicationDetailList='{0}',", sb1.ToString());
             // child Change Name Data
             sb1 = new StringBuilder();
             sb1.Append("select * into ##ApplyNocApplicationChangeInNameDetailList from(");
