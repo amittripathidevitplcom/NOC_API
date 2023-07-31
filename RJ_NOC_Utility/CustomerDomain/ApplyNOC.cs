@@ -65,5 +65,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark);
         }
+        public int CheckAppliedNOCCollegeWise(int CollegeID)
+        {
+            return UnitOfWork.ApplyNOCRepository.CheckAppliedNOCCollegeWise(CollegeID);
+        }
     }
 }

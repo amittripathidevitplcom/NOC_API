@@ -513,6 +513,40 @@ namespace RJ_NOC_API.Controllers
 
         }
 
+
+
+        [HttpGet("CheckAppliedNOCCollegeWise/{CollegeID}")]
+        public async Task<OperationResult<int>> CheckAppliedNOCCollegeWise(int CollegeID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "CheckAppliedNOCCollegeWise", 0, "ApplyNOCController");
+            var result = new OperationResult<int>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.CheckAppliedNOCCollegeWise(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data!=null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.CheckAppliedNOCCollegeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 
 }

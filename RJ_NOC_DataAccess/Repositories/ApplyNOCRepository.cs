@@ -248,5 +248,18 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+        public int CheckAppliedNOCCollegeWise(int CollegeID)
+        {
+            int Result = -1;
+            string SqlQuery = " exec USP_CheckAppliedNOC_CollegeWise @CollegeID='" + CollegeID + "'";
+            DataTable dt = new DataTable();
+            dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.CheckAppliedNOCCollegeWise");
+            if(dt!=null && dt.Rows.Count>0)
+            {
+                Result = Convert.ToInt32(dt.Rows[0]["TotalAppliedNOC"]);
+            }
+            return Result;
+        }
     }
 }
