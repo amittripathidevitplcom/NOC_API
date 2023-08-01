@@ -22,7 +22,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_College_FacilityDetails_IU  ";
-            SqlQuery += " @CollegeID='" + request.CollegeID + "',@FacilityDetailID='" + request.FacilityDetailID + "',@FacilitiesID='" + request.FacilitiesID + "',@FacilitiesUrl='" + request.FacilitiesUrl + "',@MinSize='" + request.MinSize + "',@CreatedBy='" + request.CreatedBy + "',@ModifyBy='" + request.ModifyBy + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',@FacilityDetailID='" + request.FacilityDetailID + "',@FacilitiesID='" + request.FacilitiesID + "',@NoOf='" + request.NoOf + "',@FacilitiesUrl='" + request.FacilitiesUrl + "',@MinSize='" + request.MinSize + "',@CreatedBy='" + request.CreatedBy + "',@ModifyBy='" + request.ModifyBy + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "FacilityDetails.SaveData");
             if (Rows > 0)
                 return true;

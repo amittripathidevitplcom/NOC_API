@@ -143,6 +143,7 @@ namespace RJ_NOC_DataAccess.Repository
 
             sb.AppendFormat("@PollutionUnitID='{0}',", request.PollutionUnitID);
             sb.AppendFormat("@PollutionCertificate='{0}',", request.PollutionCertificate);
+            sb.AppendFormat("@HospitalStatus='{0}',", request.HospitalStatus);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
 

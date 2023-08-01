@@ -12,6 +12,8 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public string SubjectName { get; set; }
         public int UserID { get; set; }
+        public string? Predical { get; set; }
+        public bool IsPredical { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
     }
