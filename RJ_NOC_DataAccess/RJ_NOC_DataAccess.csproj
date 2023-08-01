@@ -18,4 +18,10 @@
     <ProjectReference Include="..\RJ_NOC_Model\RJ_NOC_Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\RJ_NOC_API\Commondll\itextsharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
