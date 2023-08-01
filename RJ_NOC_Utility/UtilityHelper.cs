@@ -7,7 +7,7 @@ using RJ_NOC_Utility;
 using RJ_NOC_DataAccess.Interface;
 using RJ_NOC_DataAccess.Repository;
 using Microsoft.Extensions.Configuration;
-using RJ_NOC_Utility.CustomerDomain;
+
 using RJ_NOC_DataAccess.Repositories;
 
 namespace RJ_NOC_Utility
@@ -91,7 +91,9 @@ namespace RJ_NOC_Utility
         public IStreamMaster StreamMasterUtility { get; private set; }
         public IVeterinaryHospital VeterinaryHospitalUtility { get; private set; }
 
-        public ILoginMaster LoginMasterUtility { get; private set; } 
+        public ILoginMaster LoginMasterUtility { get; private set; }
+
+        public IAadharService AadharServiceUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -148,6 +150,7 @@ namespace RJ_NOC_Utility
             StreamSubjectMaster = new  StreamSubjectMaster(UnitOfWork);
             VeterinaryHospitalUtility = new VeterinaryHospital(UnitOfWork);
             LoginMasterUtility = new LoginMaster(UnitOfWork);
+            AadharServiceUtility = new AadharService(UnitOfWork);
         }
     }
 }

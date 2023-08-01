@@ -311,5 +311,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetSubjectList_StreamIDWise(StreamID, DepartmentID, CourseLevelID, CourseID);
         }
+
+        public List<CommonDataModel_DataTable> GetCollegeWiseCourseList(int CollegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWiseCourseList(CollegID);
+        }
+        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWiseCourseIDSubjectList(CollegeWiseCourseID);
+        }
     }
 }

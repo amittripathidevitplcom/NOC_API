@@ -94,6 +94,13 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID);
         List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID, int DepartmentID, int CourseLevelID, int CourseID);
 
+        List<CommonDataModel_DataTable> GetCollegeWiseCourseList(int CollegID);
+        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID);
+
+
+      
+
+
     }
 
 }

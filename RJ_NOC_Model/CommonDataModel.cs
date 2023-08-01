@@ -294,4 +294,13 @@ namespace RJ_NOC_Model
         public string NextUserName { get; set; }
     }
 
+    public class CommonDataModel_AadharDataModel
+    { 
+        public string AadharNo { get; set; }
+        public string TransactionID { get; set; }
+        public string OTP { get; set; }
+        public int Status { get; set; }
+
+    }
+
 }
