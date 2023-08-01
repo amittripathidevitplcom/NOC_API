@@ -97,6 +97,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetCollegeWiseCourseList(int CollegID);
         List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID);
 
+
+      
+
+
     }
 
 }
