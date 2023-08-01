@@ -140,6 +140,9 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@ModifyBy='{0}',", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
 
+
+            sb.AppendFormat("@PollutionUnitID='{0}',", request.PollutionUnitID);
+            sb.AppendFormat("@PollutionCertificate='{0}',", request.PollutionCertificate);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
 
