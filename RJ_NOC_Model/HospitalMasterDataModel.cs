@@ -160,6 +160,8 @@ namespace RJ_NOC_Model
 
         public string? Dis_PollutionCertificate { get; set; }
         public string? PollutionCertificatePath { get; set; }
+
+        public string HospitalStatus { get; set; }
     }
     public class HospitalAreaValidation
     {
