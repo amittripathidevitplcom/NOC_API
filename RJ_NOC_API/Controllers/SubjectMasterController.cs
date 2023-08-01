@@ -118,7 +118,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.SubjectMasterUtility.IfExists(request.SubjectID, request.SubjectName);
+                IfExits = UtilityHelper.SubjectMasterUtility.IfExists(request.DepartmentID,request.SubjectID, request.SubjectName);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.SaveData(request));
