@@ -38,6 +38,11 @@ namespace RJ_NOC_Model
         public string SourceIrrigation { get; set; }
         public bool ActiveStatus { get; set; }
 
+        public string DivisionName { get; set; }
+        public string DistrictName { get; set; }
+        public string TehsilName { get; set; }
+        public string PanchayatSamitiName { get; set; }
+
         public string Action { get; set; }
         public string Remark { get; set; }
     }
