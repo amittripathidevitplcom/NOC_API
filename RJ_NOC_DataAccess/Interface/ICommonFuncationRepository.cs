@@ -105,8 +105,10 @@ namespace RJ_NOC_DataAccess.Interface
 
         //streamMaster
         List<CommonDataModel_DataTable> GetStreamMasterList(int DepartmetntID);
+        List<CommonDataModel_DataTable> GetMappedStreamListByID(int DepartmetntID);
 
 
+        List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID);
     }
 }
 

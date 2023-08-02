@@ -324,5 +324,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetStreamMasterList(DepartmentID);
         }
+        public List<CommonDataModel_DataTable> GetMappedStreamListByID(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMappedStreamListByID(DepartmentID);
+        }
+        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID);
+        }
     }
 }
