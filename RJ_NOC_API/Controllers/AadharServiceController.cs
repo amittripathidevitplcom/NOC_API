@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Bcpg;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_Model;
+using RJ_NOC_Utility.CustomerDomain;
 using System.Data;
 using System.Net;
 
@@ -66,7 +67,7 @@ namespace RJ_NOC_API.Controllers
             return urldt;
         }
 
-     
+
 
         [HttpPost("ValidateAadharOTP")]
         public DataTable ValidateAadharOTP(CommonDataModel_AadharDataModel Model)
@@ -94,7 +95,8 @@ namespace RJ_NOC_API.Controllers
                 {
                     urldt.Rows.Add(new Object[]{
                                 "success",0,
-                                dt.Rows[0][0].ToString() });
+                                CommonHelper.ConvertDataTable(dt)
+                });
                 }
             }
             catch (Exception ex)
