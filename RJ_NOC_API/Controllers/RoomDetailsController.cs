@@ -34,8 +34,11 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
+                bool IfExits = false;
+                IfExits = UtilityHelper.RoomDetailsUtility.IfExists(request.DepartmentID, request.CollegeID, request.CourseID,request.CollegeWiseRoomID);
+                if (IfExits == false)
+                {
+                    result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
@@ -57,6 +60,12 @@ namespace RJ_NOC_API.Controllers
                         result.ErrorMessage = "There was an error adding data.!";
                     else
                         result.ErrorMessage = "There was an error updating data.!";
+                }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
                 }
 
             }
@@ -137,7 +146,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpPost("Delete/{CollegeWiseRoomID}/{UserID}/{CollegeID}")]
+        [HttpPost("Delete/{CollegeWiseRoomID}/{UserID}")]
         public async Task<OperationResult<bool>> DeleteData(int CollegeWiseRoomID, int UserID)
         {
             var result = new OperationResult<bool>();

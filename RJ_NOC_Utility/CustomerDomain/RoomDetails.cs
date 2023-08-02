@@ -34,5 +34,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.RoomDetailsRepository.DeleteData(CollegeWiseRoomID);
         }
+
+        public bool IfExists(int DepartmentID, int CollegeID, int CourseID,int CollegeWiseRoomID)
+        {
+            return UnitOfWork.RoomDetailsRepository.IfExists(DepartmentID, CollegeID, CourseID, CollegeWiseRoomID);
+        }
     }
 }
