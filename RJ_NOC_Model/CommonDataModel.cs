@@ -240,6 +240,8 @@ namespace RJ_NOC_Model
     {
         public int WidthMin { get; set; }
         public int LengthMin { get; set; }
+        public int NoOfRooms { get; set; }
+
     }
     public class CommonDataModel_DesignationDDL
     {
