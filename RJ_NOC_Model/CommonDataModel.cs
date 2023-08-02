@@ -299,7 +299,8 @@ namespace RJ_NOC_Model
         public string AadharNo { get; set; }
         public string TransactionNo { get; set; }
         public string OTP { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
 
     }
 

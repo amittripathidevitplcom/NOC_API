@@ -156,8 +156,6 @@ namespace RJ_NOC_Utility.CustomerDomain
             dt.Rows.Add(new Object[] { _txnid });
             return dt;
         }
-
-
         public static DataTable ValidateOTP(string txn, string adhar, string otp, IConfiguration _configuration)
         {
 
@@ -297,7 +295,6 @@ namespace RJ_NOC_Utility.CustomerDomain
             return dtb;
         }
 
-
         public static string GetEncryptedPIDXmlNew(string pidXml, string certPath, string ts, ref string certExpiryDate, ref string encSessionKey, ref string encHmac)
         {
             ENCRYPTER enc = new ENCRYPTER(certPath);
@@ -313,7 +310,6 @@ namespace RJ_NOC_Utility.CustomerDomain
             certExpiryDate = enc.getCertificateIdentifier();
             return Convert.ToBase64String(encPidXmlBytes);
         }
-
         public static DataTable ConvertListToDataTable(List<string[]> list)
         {
             // New table.
@@ -378,13 +374,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         #endregion
 
-
-
     }
-
-
-
-
-
 
 }
