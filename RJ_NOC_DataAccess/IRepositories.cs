@@ -57,6 +57,7 @@ namespace RJ_NOC_DataAccess.Interface
         IStreamSubjectMappingDetailsRepository StreamSubjectMappingDetailsRepository { get; }
         IVeterinaryHospitalRepository VeterinaryHospitalRepository { get; }
 
-        ILoginMasterRepository LoginMasterRepository { get; } 
+        ILoginMasterRepository LoginMasterRepository { get; }
+        IFarmLandDetailsRepository FarmLandDetailsRepository { get; }
     }
 }
