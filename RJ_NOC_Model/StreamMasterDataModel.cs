@@ -20,7 +20,8 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public string? ActiveDeactive { get; set; }
         public bool DeleteStatus { get; set; }
-        public List<CourseSubjectMappingListData> SubjectDetails { get; set; }
+        public int CourseMappingID { get; set; }
+        public List<StreamCourseMappingDetails> CourseDetails { get; set; }
     }
 
 
@@ -33,5 +34,15 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public int StreamMappingID { get; set; }
     }
+
+    public class StreamCourseMappingDetails
+    {
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+        public bool IsChecked { get; set; }
+        public bool ActiveStatus { get; set; }
+        public int CourseMappingID { get; set; }
+    }
+
 
 }

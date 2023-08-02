@@ -90,7 +90,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @StreamID='" + request.StreamID + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
-            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails.Where(f=>f.IsChecked), "CollegeWiseCourse_SubjectDetails") + "'";
+            SqlQuery += " @StreamCourseMappingDetails='" + CommonHelper.GetDetailsTableQry(request.StreamCourseMappingDetails.Where(f=>f.IsChecked), "StreamCourseMappingDetails") + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StreamSubjectMappingDetails.SaveData");
             if (Rows > 0)
                 return true;
