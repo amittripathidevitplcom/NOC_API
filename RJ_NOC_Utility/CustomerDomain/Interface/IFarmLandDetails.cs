@@ -1,0 +1,19 @@
+﻿using RJ_NOC_Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RJ_NOC_Utility.CustomerDomain.Interface
+{
+    public interface IFarmLandDetails
+    {
+        List<CommonDataModel_DataTable> GetAllFarmLandDetails();
+        bool IfExists(int FarmLandDetailsID);
+        bool SaveData(FarmLandDetailsModel request);
+        List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId);
+        FarmLandDetailsModel ViewFarmLandDetailsListByID(int FarmLandDetailsID);
+        bool DeleteData(int FarmLandDetailsID);
+    }
+}

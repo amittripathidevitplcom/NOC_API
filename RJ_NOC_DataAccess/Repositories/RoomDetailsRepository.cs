@@ -22,7 +22,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_College_RoomDetails_IU  ";
-            SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "'";
+            SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "',@NoOfRooms='" + request.NoOfRooms + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "RoomDetails.SaveData");
             if (Rows > 0)
                 return true;
@@ -67,5 +67,17 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+        public bool IfExists(int DepartmentID, int CollegeID, int CourseID, int CollegeWiseRoomID)
+        {
+            string SqlQuery = " select CourseID from Trn_College_RoomDetails Where DepartmentID='"+ DepartmentID + "' and  CollegeID='"+ CollegeID + "' and CourseID='"+ CourseID + "' and   DeleteStatus=0  and CollegeWiseRoomID !='"+ CollegeWiseRoomID + "' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
+         
     }
 }

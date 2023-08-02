@@ -1,77 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using RJ_NOC_Model;
-using RJ_NOC_Utility;
-using Microsoft.AspNetCore.Http;
-using System.Net.Http;
-using System.IO;
-using Microsoft.AspNetCore.Cors;
-using RJ_NOC_DataAccess;
 using RJ_NOC_DataAccess.Common;
-using RJ_NOC_API.AuthModels;
+using RJ_NOC_Model;
 
 namespace RJ_NOC_API.Controllers
 {
-    [Route("api/RoomDetails")]
+    [Route("api/FarmLandDetails")]
     [ApiController]
-    public class RoomDetailsController : RJ_NOC_ControllerBase
+    public class FarmLandDetailsController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
-        public RoomDetailsController(IConfiguration configuration) : base(configuration)
+        public FarmLandDetailsController(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
         [HttpPost("SaveData")]
-        public async Task<OperationResult<bool>> SaveData([FromBody] RoomDetailsDataModel request)
+        public async Task<OperationResult<bool>> SaveData(FarmLandDetailsModel request)
         {
             var result = new OperationResult<bool>();
 
             try
             {
-                bool IfExits = false;
-                IfExits = UtilityHelper.RoomDetailsUtility.IfExists(request.DepartmentID, request.CollegeID, request.CourseID,request.CollegeWiseRoomID);
-                if (IfExits == false)
-                {
-                    result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
+                result.Data = await Task.Run(() => UtilityHelper.FarmLandDetailsUtility.SaveData(request));
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
-                    if (request.CollegeWiseRoomID == 0)
+                    if (request.FarmLandDetailID == 0)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "RoomDetails");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.FarmLandDetailID, "Save", 0, "FarmLandDetails");
                         result.SuccessMessage = "Saved successfully .!";
                     }
                     else
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.CollegeWiseRoomID, "RoomDetails");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.FarmLandDetailID, "Update", request.FarmLandDetailID, "FarmLandDetails");
                         result.SuccessMessage = "Updated successfully .!";
                     }
                 }
                 else
                 {
                     result.State = OperationState.Error;
-                    if (request.CollegeWiseRoomID == 0)
+                    if (request.FarmLandDetailID == 0)
                         result.ErrorMessage = "There was an error adding data.!";
                     else
                         result.ErrorMessage = "There was an error updating data.!";
                 }
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
-                }
-
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RoomDetailsController.SaveData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("FarmLandDetailsController.SaveData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
 
@@ -82,14 +57,15 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetRoomDetailAllList/{UserID}/{CollegeID}")]
-        public async Task<OperationResult<List<RoomDetailsDataModels>>> GetRoomDetailAllList(int UserID,int CollegeID)
+
+        [HttpGet("GetAllFarmLandDetalsListByCollegeID/{CollegeID}")]
+        public async Task<OperationResult<List<FarmLandDetailsListModel>>> GetAllFarmLandDetalsListByCollegeID(int CollegeID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "RoomDetails");
-            var result = new OperationResult<List<RoomDetailsDataModels>>();
+            CommonDataAccessHelper.Insert_TrnUserLog(CollegeID, "GetAllData", 0, " FarmLandDetails");
+            var result = new OperationResult<List<FarmLandDetailsListModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailAllList(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.FarmLandDetailsUtility.GetFarmLandDetailsList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -104,7 +80,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RoomDetailsController.GetRoomDetailAllList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("FarmLandDetailsController.GetAllFarmLandDetalsListByCollegeID", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -114,15 +90,17 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetRoomDetailsByID/{CollegeWiseRoomID}/{UserID}")]
-        public async Task<OperationResult<List<RoomDetailsDataModel>>> GetRoomDetailsByID(int CollegeWiseRoomID, int UserID, int CollegeID)
+
+        [HttpGet("GetFarmLandDetalsByID/{FarmLandDetailsID}")]
+        public async Task<OperationResult<FarmLandDetailsModel>> GetFarmLandDetalsByID(int FarmLandDetailsID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CollegeWiseRoomID, "RoomDetails");
-            var result = new OperationResult<List<RoomDetailsDataModel>>();
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "FetchData_IDWise", FarmLandDetailsID, " FarmLandDetails");
+            var result = new OperationResult<FarmLandDetailsModel>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailsByID(CollegeWiseRoomID,CollegeID));
-                if (result.Data.Count > 0)
+                result.Data = await Task.Run(() => UtilityHelper.FarmLandDetailsUtility.ViewFarmLandDetailsListByID(FarmLandDetailsID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
                 {
 
                     result.State = OperationState.Success;
@@ -136,7 +114,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RoomDetailsController.GetRoomDetailsByID", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("FarmLandDetailsController.GetFarmLandDetalsByID", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -146,16 +124,17 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpPost("Delete/{CollegeWiseRoomID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int CollegeWiseRoomID, int UserID)
+
+        [HttpPost("Delete/{FarmLandDetailsID}")]
+        public async Task<OperationResult<bool>> DeleteData(int FarmLandDetailsID)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.DeleteData(CollegeWiseRoomID));
+                result.Data = await Task.Run(() => UtilityHelper.FarmLandDetailsUtility.DeleteData(FarmLandDetailsID));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", CollegeWiseRoomID, "RoomDetails");
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "Delete", FarmLandDetailsID, "FarmLandDetails");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Deleted successfully .!";
                 }
@@ -167,7 +146,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RoomDetailsController.DeleteData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("FarmLandDetailsController.DeleteData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
