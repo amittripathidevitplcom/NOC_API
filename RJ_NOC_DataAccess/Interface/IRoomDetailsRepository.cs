@@ -14,5 +14,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID,int CollegeID);
         bool SaveData(RoomDetailsDataModel request);
         bool DeleteData(int CollegeWiseRoomID);
+        bool IfExists(int DepartmentID, int CollegeID, int CourseID,int CollegeWiseRoomID);
     }
 }

@@ -17,6 +17,7 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public int CourseID { get; set; }
         public int DepartmentID { get; set; }
+        public int? NoOfRooms { get; set; }
         public decimal Width { get; set; }
         public decimal Length { get; set; }
         public int StudentCapacity { get; set; }
