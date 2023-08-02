@@ -94,6 +94,9 @@ namespace RJ_NOC_Utility
         public ILoginMaster LoginMasterUtility { get; private set; }
 
         public IAadharService AadharServiceUtility { get; private set; }
+        public IFarmLandDetails FarmLandDetailsUtility { get; private set; }
+
+
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -151,6 +154,7 @@ namespace RJ_NOC_Utility
             VeterinaryHospitalUtility = new VeterinaryHospital(UnitOfWork);
             LoginMasterUtility = new LoginMaster(UnitOfWork);
             AadharServiceUtility = new AadharService(UnitOfWork);
+            FarmLandDetailsUtility = new FarmLandDetails(UnitOfWork);
         }
     }
 }

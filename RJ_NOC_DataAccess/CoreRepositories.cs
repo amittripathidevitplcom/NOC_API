@@ -315,6 +315,13 @@ namespace RJ_NOC_DataAccess.Repository
             get { return loginMasterRepository; }
         }
 
+        private IFarmLandDetailsRepository farmLandDetailsRepository;
+        public IFarmLandDetailsRepository FarmLandDetailsRepository
+        {
+            get { return farmLandDetailsRepository; }
+        }
+
+
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -363,7 +370,8 @@ namespace RJ_NOC_DataAccess.Repository
             
             loginMasterRepository = new LoginMasterRepository(commonHelper); 
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
-            streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);   
+            streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);
+            farmLandDetailsRepository = new  FarmLandDetailsRepositories(commonHelper);
 
         }
     }
