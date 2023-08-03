@@ -34,9 +34,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.SubjectMasterRepository.DeleteData(SubjectID);
         }
         
-        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName)
+        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName, int CourseID)
         {
-            return UnitOfWork.SubjectMasterRepository.IfExists(DepartmentID, SubjectID, SubjectName);
+            return UnitOfWork.SubjectMasterRepository.IfExists(DepartmentID, SubjectID, SubjectName, CourseID);
         }
 
        

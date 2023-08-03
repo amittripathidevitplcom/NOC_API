@@ -14,7 +14,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<SubjectMasterDataModel> GetSubjectIDWise(int SubjectID);
         bool SaveData(SubjectMasterDataModel request);       
         bool DeleteData(int SubjectID);
-        bool IfExists(int DepartmentID,int SubjectID, string SubjectName);
+        bool IfExists(int DepartmentID,int SubjectID, string SubjectName, int CourseID);
       
 
     }

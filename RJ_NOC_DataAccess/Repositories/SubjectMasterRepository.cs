@@ -68,9 +68,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName)
+        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName,int CourseID)
         {
-            string SqlQuery = " select SubjectName from M_SubjectMaster Where DepartmentID = '"+ DepartmentID + "' and SubjectName='" + SubjectName.Trim() + "'  and SubjectID !='" + SubjectID + "'  and DeleteStatus=0";
+            string SqlQuery = " select SubjectName from M_SubjectMaster Where DepartmentID = '"+ DepartmentID + "' and CourseID='"+ CourseID + "' and SubjectName='" + SubjectName.Trim() + "'  and SubjectID !='" + SubjectID + "'  and DeleteStatus=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.IfExists");
             if (dataTable.Rows.Count > 0)

@@ -39,7 +39,7 @@ namespace RJ_NOC_DataAccess.Repository
         
         public List<LandAreaSituatedMasterDataModel_list> GetAllLandAreaSituatedList(int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetLandAreaSituatedAllList";
+            string SqlQuery = " exec USP_GetLandAreaSituatedAllList @DepartmentID='"+ DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LandAreaSituatedMaster.GetAllLandAreaSituatedList");
 
