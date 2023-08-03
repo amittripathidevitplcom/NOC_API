@@ -68,9 +68,9 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID)
+        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID,string SSOID)
         {
-            string SqlQuery = " exec USP_GetLegalEntity_Preview @LegalEntityID = '" + LegalEntityID + "'";
+            string SqlQuery = " exec USP_GetLegalEntity_Preview @LegalEntityID = '" + LegalEntityID + "',@SSOID='" + SSOID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
 
