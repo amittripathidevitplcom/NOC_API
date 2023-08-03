@@ -62,5 +62,6 @@ namespace RJ_NOC_Utility
         IVeterinaryHospital VeterinaryHospitalUtility { get; }
         IAadharService AadharServiceUtility { get; }
         IFarmLandDetails FarmLandDetailsUtility { get; }
+        IParamedicalHospital ParamedicalHospitalUtility { get; }
     }
 }

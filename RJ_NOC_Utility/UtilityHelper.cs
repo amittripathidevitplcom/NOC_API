@@ -96,6 +96,8 @@ namespace RJ_NOC_Utility
         public IAadharService AadharServiceUtility { get; private set; }
         public IFarmLandDetails FarmLandDetailsUtility { get; private set; }
 
+        public IParamedicalHospital ParamedicalHospitalUtility { get; private set; }
+
 
         public UtilityHelper(IConfiguration configuration)
         {
@@ -155,6 +157,7 @@ namespace RJ_NOC_Utility
             LoginMasterUtility = new LoginMaster(UnitOfWork);
             AadharServiceUtility = new AadharService(UnitOfWork);
             FarmLandDetailsUtility = new FarmLandDetails(UnitOfWork);
+            ParamedicalHospitalUtility = new ParamedicalHospital(UnitOfWork);
         }
     }
 }

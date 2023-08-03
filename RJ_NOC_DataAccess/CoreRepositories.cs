@@ -320,7 +320,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return farmLandDetailsRepository; }
         }
-
+        private IParamedicalHospitalRepository paramedicalHospitalRepository;
+        public IParamedicalHospitalRepository ParamedicalHospitalRepository
+        {
+            get { return paramedicalHospitalRepository; }
+        }
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -372,6 +376,7 @@ namespace RJ_NOC_DataAccess.Repository
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
             streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);
             farmLandDetailsRepository = new  FarmLandDetailsRepositories(commonHelper);
+            paramedicalHospitalRepository = new  ParamedicalHospitalRepository(commonHelper);
 
         }
     }
