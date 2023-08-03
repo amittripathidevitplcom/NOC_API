@@ -59,6 +59,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         ILoginMasterRepository LoginMasterRepository { get; }
         IFarmLandDetailsRepository FarmLandDetailsRepository { get; }
+        IAddCourseMasterRepository AddCourseMasterRepository { get; }
 
         IParamedicalHospitalRepository ParamedicalHospitalRepository { get; }
     }

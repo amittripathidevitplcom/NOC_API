@@ -7,54 +7,23 @@ using Microsoft.AspNetCore.Http;
 
 namespace RJ_NOC_API.Controllers
 {
-    [Route("api/SubjectMasterService")]
+    [Route("api/AddCourseMaster")]
     [ApiController]
-    public class SubjectMasterController : RJ_NOC_ControllerBase
+    public class AddCourseMasterController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
-        public SubjectMasterController(IConfiguration configuration) : base(configuration)
+        public AddCourseMasterController(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
-        [HttpGet("GetDepartmentByCourse/{DepartmentID}")]        
-        public async Task<OperationResult<List<CourseList>>> GetDepartmentByCourse(int DepartmentID)
-        {
-            var result = new OperationResult<List<CourseList>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetDepartmentByCourse(DepartmentID));
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
-                {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.GetDepartmentByCourse", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
-        [HttpGet("GetAllSubjectList/{UserID}/{DepartmentID}")]
-        public async Task<OperationResult<List<SubjectMasterDataModel_list>>> GetAllSubjectList(int UserID,int DepartmentID)
+        [HttpGet("GetAllCourseList/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourseList(int UserID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "SubjectMasterService");
-            var result = new OperationResult<List<SubjectMasterDataModel_list>>();
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetAllSubjectList(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.AddCourseMasterUtility.GetAllCourseList());
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -69,7 +38,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.GetAllSubjectList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AddCourseMasterController.GetAllCourseList", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -79,14 +48,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("{SubjectID}/{UserID}")]
-        public async Task<OperationResult<List<SubjectMasterDataModel>>> GetSubjectIDWise(int SubjectID, int UserID)
+        [HttpGet("GetCourseIDWise/{CourseID}/{UserID}")]
+        public async Task<OperationResult<List<AddCourseMasterDataModel>>> GetCourseIDWise(int CourseID,int UserID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise",SubjectID, "SubjectMasterService");
-            var result = new OperationResult<List<SubjectMasterDataModel>>();
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CourseID, "SubjectMasterService");
+            var result = new OperationResult<List<AddCourseMasterDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetSubjectIDWise(SubjectID));
+                result.Data = await Task.Run(() => UtilityHelper.AddCourseMasterUtility.GetCourseIDWise(CourseID));
                 if (result.Data.Count > 0)
                 {
 
@@ -101,7 +70,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.GetSubjectIDWise", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AddCourseMasterController.GetCourseIDWise", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -112,34 +81,34 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpPost]
-        public async Task<OperationResult<bool>> SaveData(SubjectMasterDataModel request)
+        public async Task<OperationResult<bool>> SaveData(AddCourseMasterDataModel request)
         {
             var result = new OperationResult<bool>();
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.SubjectMasterUtility.IfExists(request.DepartmentID,request.SubjectID, request.SubjectName,request.CourseID);
+                IfExits = UtilityHelper.AddCourseMasterUtility.IfExists(request.DepartmentID,request.CourseID, request.CourseName);
                 if (IfExits == false)
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.SaveData(request));
+                    result.Data = await Task.Run(() => UtilityHelper.AddCourseMasterUtility.SaveData(request));
                     if (result.Data)
                     {
                         result.State = OperationState.Success;
-                        if (request.SubjectID == 0)
+                        if (request.CourseID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.SubjectID, "Save", 0, "SubjectMasterService");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.CourseID, "Save", 0, "AddCourseMasterService");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.SubjectID, "Update", request.SubjectID, "SubjectMasterService");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.CourseID, "Update", request.CourseID, "AddCourseMasterService");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }
                     else
                     {
                         result.State = OperationState.Error;
-                        if (request.SubjectID == 0)
+                        if (request.CourseID == 0)
                             result.ErrorMessage = "There was an error adding data.!";
                         else
                             result.ErrorMessage = "There was an error updating data.!";
@@ -148,12 +117,12 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = request.SubjectName + " is Already Exist, It Can't Not Be Duplicate.!";
+                    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
                 }
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.SaveData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AddCourseMasterController.SaveData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
 
@@ -165,16 +134,16 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("Delete/{SubjectID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int SubjectID, int UserID)
+        [HttpPost("Delete/{CourseID}/{UserID}")]
+        public async Task<OperationResult<bool>> DeleteData(int CourseID, int UserID)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.DeleteData(SubjectID));
+                result.Data = await Task.Run(() => UtilityHelper.AddCourseMasterUtility.DeleteData(CourseID));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", SubjectID, "SubjectMasterService");
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", CourseID, "AddCourseMasterService");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Deleted successfully .!";
                 }
@@ -186,7 +155,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.DeleteData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AddCourseMasterController.DeleteData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }

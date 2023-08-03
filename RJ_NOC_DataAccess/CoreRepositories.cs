@@ -320,6 +320,14 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return farmLandDetailsRepository; }
         }
+
+        private IAddCourseMasterRepository addCourseMasterRepository;
+        public IAddCourseMasterRepository AddCourseMasterRepository
+        {
+            get { return addCourseMasterRepository; }
+        }
+
+
         private IParamedicalHospitalRepository paramedicalHospitalRepository;
         public IParamedicalHospitalRepository ParamedicalHospitalRepository
         {
@@ -376,6 +384,7 @@ namespace RJ_NOC_DataAccess.Repository
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
             streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);
             farmLandDetailsRepository = new  FarmLandDetailsRepositories(commonHelper);
+            addCourseMasterRepository = new AddCourseMasterRepository(commonHelper);
             paramedicalHospitalRepository = new  ParamedicalHospitalRepository(commonHelper);
 
         }
