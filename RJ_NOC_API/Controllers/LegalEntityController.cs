@@ -93,14 +93,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetLegalEntityList/{UserID}")]
-        public async Task<OperationResult<List<LegalEntityListModel>>> GetLegalEntityList(int UserID)
+        [HttpGet("GetLegalEntityList/{UserID}/{SSOID}")]
+        public async Task<OperationResult<List<LegalEntityListModel>>> GetLegalEntityList(int UserID,string SSOID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "LegalEntity");
             var result = new OperationResult<List<LegalEntityListModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.LegalEntity.GetLegalEntityList());
+                result.Data = await Task.Run(() => UtilityHelper.LegalEntity.GetLegalEntityList(SSOID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

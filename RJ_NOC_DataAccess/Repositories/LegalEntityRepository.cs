@@ -56,9 +56,9 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public List<LegalEntityListModel> GetLegalEntityList()
+        public List<LegalEntityListModel> GetLegalEntityList(string SSOID)
         {
-            string SqlQuery = " exec USP_GetLegalEntity_Preview";
+            string SqlQuery = " exec USP_GetLegalEntity_Preview @SSOID='"+ SSOID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
 
