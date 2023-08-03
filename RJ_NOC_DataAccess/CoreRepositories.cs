@@ -321,6 +321,13 @@ namespace RJ_NOC_DataAccess.Repository
             get { return farmLandDetailsRepository; }
         }
 
+        private IAddCourseMasterRepository addCourseMasterRepository;
+        public IAddCourseMasterRepository AddCourseMasterRepository
+        {
+            get { return addCourseMasterRepository; }
+        }
+
+
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -372,7 +379,7 @@ namespace RJ_NOC_DataAccess.Repository
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
             streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);
             farmLandDetailsRepository = new  FarmLandDetailsRepositories(commonHelper);
-
+            addCourseMasterRepository = new AddCourseMasterRepository(commonHelper);
         }
     }
 }
