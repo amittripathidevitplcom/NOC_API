@@ -13,7 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool IfExists(int LegalEntityID, string RegistrationNo);
         bool SaveData(LegalEntityModel request);
         List<LegalEntityListModel> GetLegalEntityList(string SSOID);
-        List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID);
+        List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID,string SSOID);
         List<LegalEntityListModel> GetLegalEntityBySSOID(string SSOID);
     }
 }

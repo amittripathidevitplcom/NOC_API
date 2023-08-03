@@ -33,9 +33,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.LegalEntityRepository.GetLegalEntityList(SSOID);
         }
-        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID)
+        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID,string SSOID)
         {
-            return UnitOfWork.LegalEntityRepository.ViewlegalEntityDataByID(LegalEntityID);
+            return UnitOfWork.LegalEntityRepository.ViewlegalEntityDataByID(LegalEntityID, SSOID);
         }
         public List<LegalEntityListModel> GetLegalEntityBySSOID(string SSOID)
         {
