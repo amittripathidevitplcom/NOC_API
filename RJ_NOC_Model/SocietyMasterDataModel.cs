@@ -56,5 +56,8 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
+
+        public string? S_IsPrimary { get; set; }
+        public string? S_IsAuthorized { get; set; }
     }
 }
