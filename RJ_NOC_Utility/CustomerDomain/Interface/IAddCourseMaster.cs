@@ -7,7 +7,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IAddCourseMaster
     {
-        List<CommonDataModel_DataTable> GetAllCourseList();
+        List<CommonDataModel_DataTable> GetAllCourseList(int DepartmentID);
         List<AddCourseMasterDataModel> GetCourseIDWise(int CourseID);
         bool SaveData(AddCourseMasterDataModel request);       
         bool DeleteData(int SubjectID);

@@ -16,7 +16,7 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public int CourseID { get; set; }
         public string Class { get; set; }
-        public string ClassName { get; set; }
+        public string? ClassName { get; set; }
         public string Section { get; set; }
         public int SCBoysCount { get; set; }
         public int SCGirlsCount { get; set; }
