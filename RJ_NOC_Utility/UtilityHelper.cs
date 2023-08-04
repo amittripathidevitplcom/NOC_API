@@ -96,7 +96,7 @@ namespace RJ_NOC_Utility
         public IAadharService AadharServiceUtility { get; private set; }
         public IFarmLandDetails FarmLandDetailsUtility { get; private set; }
 
-
+        public IClassWiseStudentDetails ClassWiseStudentDetailsUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -155,6 +155,7 @@ namespace RJ_NOC_Utility
             LoginMasterUtility = new LoginMaster(UnitOfWork);
             AadharServiceUtility = new AadharService(UnitOfWork);
             FarmLandDetailsUtility = new FarmLandDetails(UnitOfWork);
+            ClassWiseStudentDetailsUtility = new ClassWiseStudentDetails(UnitOfWork);
         }
     }
 }

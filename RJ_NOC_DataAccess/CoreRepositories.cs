@@ -322,6 +322,12 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
+        private IClassWiseStudentDetailsRepository classwisestudentdetailsrepository;
+        public IClassWiseStudentDetailsRepository ClassWiseStudentDetailsRepository
+        {
+            get { return classwisestudentdetailsrepository; }
+        }
+
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -372,6 +378,7 @@ namespace RJ_NOC_DataAccess.Repository
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
             streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);
             farmLandDetailsRepository = new  FarmLandDetailsRepositories(commonHelper);
+            classwisestudentdetailsrepository = new  ClassWiseStudentDetailsRepository(commonHelper);
 
         }
     }
