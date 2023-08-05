@@ -22,7 +22,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_College_RoomDetails_IU  ";
-            SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "',@NoOfRooms='" + request.NoOfRooms + "'";
+            SqlQuery += " @CollegeWiseRoomID='" + request.CollegeWiseRoomID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@StudentCapacity='" + request.StudentCapacity + "',@NoOfLab='" + request.NoOfLab + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "',@NoOfRooms='" + request.NoOfRooms + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "RoomDetails.SaveData");
             if (Rows > 0)
                 return true;

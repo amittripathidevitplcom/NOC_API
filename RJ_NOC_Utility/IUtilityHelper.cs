@@ -64,5 +64,8 @@ namespace RJ_NOC_Utility
         IFarmLandDetails FarmLandDetailsUtility { get; }
         IAddCourseMaster AddCourseMasterUtility { get; }
         IParamedicalHospital ParamedicalHospitalUtility { get; }
+
+        IClassWiseStudentDetails ClassWiseStudentDetailsUtility { get; }
+
     }
 }

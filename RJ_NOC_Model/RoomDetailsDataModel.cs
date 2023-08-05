@@ -21,6 +21,7 @@ namespace RJ_NOC_Model
         public decimal Width { get; set; }
         public decimal Length { get; set; }
         public int StudentCapacity { get; set; }
+        public int NoOfLab { get; set; }
         public string ImageFileName { get; set; }
         public string ImageFilePath { get; set; }
         public string? Image_Dis_FileName { get; set; }

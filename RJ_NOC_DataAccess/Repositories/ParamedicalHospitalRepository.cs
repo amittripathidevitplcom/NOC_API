@@ -14,13 +14,19 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-
+        public List<HospitalAreaValidation> GetHospitalAreaValidation()
+        {
+            string SqlQuery = "exec USP_HospitalMaster @Action='GetAllHospitalAreaValidation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ParamedicalHospital.GetHospitalAreaValidation");
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            var dataModels = JsonConvert.DeserializeObject<List<HospitalAreaValidation>>(JsonDataTable_Data);
+            return dataModels;
+        }
         public bool SaveData(ParamedicalHospitalDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-
+            string ParamedicalHospitalBedValidationList_Str= request.ParamedicalHospitalBedValidation.Count > 0 ? CommonHelper.GetDetailsTableQry(request.ParamedicalHospitalBedValidation, "Temp_Bed_ParamedicalHospital") : "";
             StringBuilder sb = new StringBuilder();
-
             sb.AppendFormat("@HospitalID='{0}',", request.HospitalID);
             sb.AppendFormat("@CollegeID='{0}',", request.CollegeID);
             sb.AppendFormat("@ParentHospitalID='{0}',", request.ParentHospitalID);
@@ -125,13 +131,12 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@ModifyBy='{0}',", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
 
-
+            sb.AppendFormat("@Action='{0}',", "SaveHospitalData");
             sb.AppendFormat("@PollutionUnitID='{0}',", request.PollutionUnitID);
             sb.AppendFormat("@PollutionCertificate='{0}',", request.PollutionCertificate);
             sb.AppendFormat("@HospitalStatus='{0}',", request.HospitalStatus);
             sb.AppendFormat("@CityPopulation='{0}',", request.CityPopulation);
-            // action
-            sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
+            sb.AppendFormat("@ParamedicalHospitalBedValidationList_Str='{0}'", ParamedicalHospitalBedValidationList_Str);
 
             string SqlQuery = $" exec USP_ParamedicalHospital_IU  {sb.ToString()}";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ParamedicalHospital.SaveData");
@@ -140,6 +145,57 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-       
+        public ParamedicalHospitalDataModel GetData(int hospitalId)
+        {
+            string SqlQuery = $"exec USP_ParamedicalHospital_IU @HospitalID={hospitalId},@Action='GetHospitalById'";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "ParamedicalHospital.GetData");
+
+            ParamedicalHospitalDataModel hospitalMasterDataModel = new ParamedicalHospitalDataModel();
+            if (dt != null)
+            {
+                hospitalMasterDataModel = CommonHelper.ConvertDataTable<ParamedicalHospitalDataModel>(dt);
+            }
+
+            return hospitalMasterDataModel;
+        }
+
+        public List<ParamedicalHospitalDataModel> GetDataList(int collegeId)
+        {
+            string SqlQuery = $"exec USP_ParamedicalHospital_IU @CollegeID={collegeId},@Action='GetHospitalByCollegeId'";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "ParamedicalHospital.GetDataList");
+
+            List<ParamedicalHospitalDataModel> hospitalMasterDataList = new List<ParamedicalHospitalDataModel>();
+            if (dt != null)
+            {
+                hospitalMasterDataList = CommonHelper.ConvertDataTable<List<ParamedicalHospitalDataModel>>(dt);
+            }
+
+            return hospitalMasterDataList;
+        }
+
+        public bool DeleteData(int hospitalId, int modifiedBy)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_ParamedicalHospital_IU @Action='DeleteHospitalById',@ModifyBy={modifiedBy},@HospitalID={hospitalId},@IPAddress='{IPAddress}'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ParamedicalHospital.DeleteData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<ParamedicalHospitalBedValidation> GetParamedicalHospitalBedValidation(int CollegeID, int HospitalID)
+        {
+            List <ParamedicalHospitalBedValidation> dataModels =new List<ParamedicalHospitalBedValidation> ();
+            string SqlQuery = "exec USP_GetParamedicalHospitalBedValidation @CollegeID='"+CollegeID+ "',@HospitalID='"+ HospitalID + "'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ParamedicalHospital.GetParamedicalHospitalBedValidation");
+            if (dataTable != null && dataTable.Rows.Count > 0)
+            {
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+                 dataModels = JsonConvert.DeserializeObject<List<ParamedicalHospitalBedValidation>>(JsonDataTable_Data);
+            }
+            return dataModels;
+        }
     }
 }

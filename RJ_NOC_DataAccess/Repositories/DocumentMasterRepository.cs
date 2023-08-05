@@ -73,7 +73,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public bool DeleteData(int DocumentMasterID)
         {
-            string SqlQuery = " Update M_DocumentMaster set ActiveStatus=0 ,IsCompulsory=0, DeleteStatus=1  WHERE DID='" + DocumentMasterID + "'";
+            string SqlQuery = " Update M_DocumentMaster set ActiveStatus=0 ,IsMandatory=0, DeleteStatus=1  WHERE DID='" + DocumentMasterID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentMaster.Delete");
             if (Rows > 0)
                 return true;

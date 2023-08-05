@@ -14,9 +14,9 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetAllCourseList()
+        public List<CommonDataModel_DataTable> GetAllCourseList(int DepartmentID)
         {
-            string SqlQuery = "exec USP_AddCourseMaster_GetData ";
+            string SqlQuery = "exec USP_AddCourseMaster_GetData @DepartmentID='"+DepartmentID+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AddCourseMasterService.GetAllCourseList");
 
@@ -41,7 +41,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_USP_AddCourseMaster_AddUpdate";
-            SqlQuery += " @CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@CourseLevelID='" + request.CourseLevelID + "',@CourseName='" + request.CourseName+ "',@Duration='" + request.Duration + "',@NoOfRooms='" + request.NoOfRooms + "',@CourseDurationType='" + request.CourseDurationType + "',";
+            SqlQuery += " @CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@CollegeLevel='" + request.CollegeLevel + "',@CourseLevelID='" + request.CourseLevelID + "',@CourseName='" + request.CourseName+ "',@Duration='" + request.Duration + "',@NoOfRooms='" + request.NoOfRooms + "',@CourseDurationType='" + request.CourseDurationType + "',";
             SqlQuery += "@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "AddCourseMasterService.SaveData");
             if (Rows > 0)
