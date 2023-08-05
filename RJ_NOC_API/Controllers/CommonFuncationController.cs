@@ -2136,13 +2136,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetCollegeWiseCourseIDSubjectList/{CollegeWiseCourseID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID)
+        [HttpGet("GetCollegeWiseCourseIDSubjectList/{CollegeID}/{CollegeWiseCourseID}/{ViewMode}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCollegeWiseCourseIDSubjectList(int CollegeID,int CollegeWiseCourseID,string ViewMode)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeWiseCourseIDSubjectList(CollegeWiseCourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeWiseCourseIDSubjectList(CollegeID,CollegeWiseCourseID, ViewMode));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

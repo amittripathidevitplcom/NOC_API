@@ -35,11 +35,14 @@ namespace RJ_NOC_Model
         public ApplyNocParameterMasterList_ChangeInGirlstoCoed? ApplyNocParameterMasterList_ChangeInGirlstoCoed { get; set; }
         public ApplyNocParameterMasterList_ChangeInCollegeManagement? ApplyNocParameterMasterList_ChangeInCollegeManagement { get; set; }
         public ApplyNocParameterMasterList_MergerCollege? ApplyNocParameterMasterList_MergerCollege { get; set; }
+        public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_NewCourse { get; set; }
+        public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_NewCourseSubject { get; set; }
     }
     public class ApplyNocParameterMaster_ddl
     {
         public int ApplyNocID { get; set; }
         public string ApplyNocFor { get; set; }
+        public string ApplyNocCode { get; set; }
         public decimal FeeAmount { get; set; }
         public bool IsChecked { get; set; } = false;
     }
@@ -59,6 +62,7 @@ namespace RJ_NOC_Model
         public int ApplyNocID { get; set; }
         public int CourseID { get; set; }
         public string CourseName { get; set; }
+        public string? CollegeLevel { get; set; }
         public bool IsChecked { get; set; } = false;
         public List<ApplyNocParameterSubjectDataModel>? ApplyNocParameterSubjectList { get; set; }
     }
@@ -254,5 +258,15 @@ namespace RJ_NOC_Model
         public string Dis_StaffInformation { get; set; }
         public string StaffInformation { get; set; }
         public string StaffInformationPath { get; set; }
+    }
+
+    public class ApplyNocParameterFeesDataModel
+    {
+        public string strCollegeLevel { get; set; }
+        public string CollegeLevel { get; set; }
+        public decimal FeeAmount { get; set; }
+        public int ApplyNocFeeID { get; }
+
+
     }
 }

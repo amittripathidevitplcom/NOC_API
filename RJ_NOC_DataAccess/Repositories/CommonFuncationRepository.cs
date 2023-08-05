@@ -833,9 +833,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID)
+        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode)
         {
-            string SqlQuery = " exec USP_CollegeWiseCourseSubjectGet @ViewMode='GetCollegeWiseCourseIDSubjectList',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
+            string SqlQuery = " exec USP_CollegeWiseCourseSubjectGet @CollegeID='" + CollegeID + "',@ViewMode='"+ ViewMode + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeWiseCourseIDSubjectList");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

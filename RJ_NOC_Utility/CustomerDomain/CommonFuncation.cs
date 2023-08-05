@@ -316,9 +316,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeWiseCourseList(CollegID);
         }
-        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID)
+        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCollegeWiseCourseIDSubjectList(CollegeWiseCourseID);
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWiseCourseIDSubjectList(CollegeID, CollegeWiseCourseID, ViewMode);
         }
         public List<CommonDataModel_DataTable> GetStreamMasterList(int DepartmentID)
         {

@@ -101,7 +101,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         //subject
         List<CommonDataModel_DataTable> GetCollegeWiseCourseList(int CollegID);
-        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID);
+        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode);
 
         //streamMaster
         List<CommonDataModel_DataTable> GetStreamMasterList(int DepartmetntID);
