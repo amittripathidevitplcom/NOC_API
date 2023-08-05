@@ -276,9 +276,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DistrictList>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId)
+        public List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId, int IsLaw)
         {
-            string SqlQuery = $"exec USP_UniversityMaster @Action='GetUniversityByDepartmentId', @DepartmentID={departmentId}";
+            string SqlQuery = $"exec USP_UniversityMaster @Action='GetUniversityByDepartmentId', @DepartmentID={departmentId},@IsLaw={IsLaw}";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUniversityByDepartmentId");
 

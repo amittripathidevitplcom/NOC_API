@@ -665,13 +665,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetUniversityByDepartmentId/{departmentId}")]
-        public async Task<OperationResult<List<CommonDataModel_UniversityDDL>>> GetUniversityByDepartmentId(int departmentId)
+        [HttpGet("GetUniversityByDepartmentId/{departmentId}/{IsLaw}")]
+        public async Task<OperationResult<List<CommonDataModel_UniversityDDL>>> GetUniversityByDepartmentId(int departmentId,int IsLaw)
         {
             var result = new OperationResult<List<CommonDataModel_UniversityDDL>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUniversityByDepartmentId(departmentId));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUniversityByDepartmentId(departmentId, IsLaw));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

@@ -65,7 +65,10 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@NAACAccreditedCertificate='{0}',", request.NAACAccreditedCertificate);
             // child
             sb.AppendFormat("@ContactDetailsList='{0}',", CommonHelper.GetDetailsTableQry(request.ContactDetailsList, "ContactDetailsList"));
-            sb.AppendFormat("@NearestGovernmentHospitalsList='{0}',", CommonHelper.GetDetailsTableQry(request.NearestGovernmentHospitalsList, "NearestGovernmentHospitalsList"));
+            if (request.NearestGovernmentHospitalsList.Count > 0)
+            {
+                sb.AppendFormat("@NearestGovernmentHospitalsList='{0}',", CommonHelper.GetDetailsTableQry(request.NearestGovernmentHospitalsList, "NearestGovernmentHospitalsList"));
+            }
             // action
             sb.AppendFormat("@Action='{0}'", "SaveCollegeData");
 
