@@ -17,7 +17,7 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public string Class { get; set; }
         public string? ClassName { get; set; }
-        public string Section { get; set; }
+        public string? Section { get; set; }
         public int SCBoysCount { get; set; }
         public int SCGirlsCount { get; set; }
         public int STBoysCount { get; set; }
@@ -31,6 +31,7 @@ namespace RJ_NOC_Model
         public int EWSGirlsCount { get; set; }
         public int EWSBoysCount { get; set; }
         public int TotalGirls { get; set; }
+
         public int TotalBoys { get; set; }
         public int Total { get; set; }
         public int OFTotalMinorityBoys { get; set; }

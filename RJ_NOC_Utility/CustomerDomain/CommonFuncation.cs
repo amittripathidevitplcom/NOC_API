@@ -111,9 +111,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDistrictByDivsionId(divisionId);
         }
-        public List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId)
+        public List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId,int IsLaw)
         {
-            return UnitOfWork.CommonFuncationRepository.GetUniversityByDepartmentId(departmentId);
+            return UnitOfWork.CommonFuncationRepository.GetUniversityByDepartmentId(departmentId, IsLaw);
         }
         public List<CommonDataModel_SuvdivisionDDL> GetSuvdivisionByDistrictId(int districtId)
         {

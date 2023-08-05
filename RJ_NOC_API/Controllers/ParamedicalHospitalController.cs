@@ -25,7 +25,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<HospitalAreaValidation>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.HospitalMasterUtility.GetHospitalAreaValidation());
+                result.Data = await Task.Run(() => UtilityHelper.ParamedicalHospitalUtility.GetHospitalAreaValidation());
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -39,7 +39,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("HospitalMasterController.GetHospitalAreaValidation", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("ParamedicalHospitalController.GetHospitalAreaValidation", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
 
@@ -87,6 +87,101 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetDataList/{collegeId}")]
+        public async Task<OperationResult<List<ParamedicalHospitalDataModel>>> GetDataList(int collegeId)
+        {
+            var result = new OperationResult<List<ParamedicalHospitalDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ParamedicalHospitalUtility.GetDataList(collegeId));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ParamedicalHospitalController.GetDataList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetData/{hospitalId}")]
+        public async Task<OperationResult<ParamedicalHospitalDataModel>> GetData(int hospitalId)
+        {
+            var result = new OperationResult<ParamedicalHospitalDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ParamedicalHospitalUtility.GetData(hospitalId));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ParamedicalHospitalController.GetData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetParamedicalHospitalBedValidation/{CollegeID}/{HospitalID}")]
+        public async Task<OperationResult<List<ParamedicalHospitalBedValidation>>> GetParamedicalHospitalBedValidation(int CollegeID, int HospitalID)
+        {
+            var result = new OperationResult<List<ParamedicalHospitalBedValidation>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ParamedicalHospitalUtility.GetParamedicalHospitalBedValidation(CollegeID,HospitalID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ParamedicalHospitalController.GetParamedicalHospitalBedValidation", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

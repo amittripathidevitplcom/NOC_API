@@ -36,7 +36,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID);
         List<CommonDataModel_DivisionDDL> GetAllDivision();
         List<CommonDataModel_DistrictList> GetDistrictByDivsionId(int divisionId);
-        List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId);
+        List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId, int IsLaw);
         List<CommonDataModel_SuvdivisionDDL> GetSuvdivisionByDistrictId(int districtId);
         List<CommonDataModel_TehsilDDL> GetTehsilByDistrictId(int districtId);
         List<CommonDataModel_PanchyatSamitiDDL> GetPanchyatSamitiByDistrictId(int districtId);

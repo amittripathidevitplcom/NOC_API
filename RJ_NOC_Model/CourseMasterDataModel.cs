@@ -13,6 +13,7 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int CourseTypeID { get; set; }
         public int Seats { get; set; }
+        public int NoOfEnrolledStudents { get;set; }
 
         public List<CourseMasterDataModel_SubjectDetails> SelectedSubjectDetails { get; set; }
         public int UserID { get; set; }

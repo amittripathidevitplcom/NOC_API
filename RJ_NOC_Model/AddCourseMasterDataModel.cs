@@ -10,6 +10,7 @@ namespace RJ_NOC_Model
 
         public int CourseID { get; set; }
         public int DepartmentID { get; set; }
+        public int CollegeLevel { get; set; }
         public int CourseLevelID { get; set; }
         public string? CourseLevel { get; set; }
         public string CourseName { get; set; }
