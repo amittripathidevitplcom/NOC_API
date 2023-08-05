@@ -14,9 +14,9 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetAllCourseList()
+        public List<CommonDataModel_DataTable> GetAllCourseList(int DepartmentID)
         {
-            string SqlQuery = "exec USP_AddCourseMaster_GetData ";
+            string SqlQuery = "exec USP_AddCourseMaster_GetData @DepartmentID='"+DepartmentID+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AddCourseMasterService.GetAllCourseList");
 

@@ -62,5 +62,6 @@ namespace RJ_NOC_DataAccess.Interface
         IAddCourseMasterRepository AddCourseMasterRepository { get; }
 
         IParamedicalHospitalRepository ParamedicalHospitalRepository { get; }
+        IClassWiseStudentDetailsRepository ClassWiseStudentDetailsRepository { get; }
     }
 }
