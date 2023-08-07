@@ -2269,7 +2269,36 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
-
+        [HttpGet("GetLandSqureMeterMappingDetails_DepartmentWise/{DepartmentID}/{CollageID}/{LandAreaId}")]
+        public async Task<OperationResult<List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise>>> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
+        {
+            var result = new OperationResult<List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetLandSqureMeterMappingDetails_DepartmentWise(DepartmentID, CollageID, LandAreaId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetLandSqureMeterMappingDetails_DepartmentWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

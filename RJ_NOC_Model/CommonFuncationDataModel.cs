@@ -62,6 +62,8 @@ namespace RJ_NOC_Model
         public string FileName { get; set; }
         public string FilePath { get; set; }
         public string Dis_FileName { get; set; }
+        public string SampleDocument { get; set; }
+        public string DisplayName { get; set; }
         public bool IsMandatory { get; set; }
     }
 
