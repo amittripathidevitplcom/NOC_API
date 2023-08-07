@@ -94,13 +94,16 @@ namespace RJ_NOC_Utility.CustomerDomain
 
             decimal dNewCourseFees = 0;
             decimal dNewSubjectFees = 0;
+
             decimal dNewCoursePGFees = 0;
             decimal dNewCourseUGFees = 0;
 
+            decimal dNewSubjectPGFees = 0;
+            decimal dNewSubjectUGFees = 0;
+
             if (request.ApplyNocParameterMasterList_NewCourse != null)
             {
-                obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterListDataModel.Where(x => x.ApplyNocFor == "New Course").Select(s => s.ApplyNocID).FirstOrDefault());
-                
+                obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterList_NewCourse.ApplyNocID);
                 
                 dNewCoursePGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount:0;
                 dNewCourseUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount:0;
@@ -122,6 +125,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
             {
+                obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocID);
+                dNewSubjectPGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null ? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount : 0;
+                dNewSubjectUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null ? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount : 0;
+
                 foreach (var item in request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocParameterCourseList)
                 {
                     foreach (var subjects in item.ApplyNocParameterSubjectList)
@@ -130,11 +137,11 @@ namespace RJ_NOC_Utility.CustomerDomain
                         {
                             if (item.CollegeLevel == "UG")
                             {
-                                dNewSubjectFees += 50000;
+                                dNewSubjectFees += dNewSubjectUGFees;
                             }
                             else if (item.CollegeLevel == "PG")
                             {
-                                dNewSubjectFees += 30000;
+                                dNewSubjectFees += dNewSubjectPGFees;
                             }
                         }
                     }
@@ -142,10 +149,11 @@ namespace RJ_NOC_Utility.CustomerDomain
                 }
             }
 
+            
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID={0},", request.CollegeID);
             sb.AppendFormat("@ApplicationTypeID={0},", request.ApplicationTypeID);
-            sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees);
+            sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees + dNewSubjectFees);
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
@@ -317,6 +325,7 @@ namespace RJ_NOC_Utility.CustomerDomain
 
 
 
+            //Dec New Course Subject
             if (request.ApplyNocParameterMasterList_NewCourse != null)
             {
                 sb1 = new StringBuilder();
@@ -329,7 +338,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                         {
                             sb1.Append(" select");
                             sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
-                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_NewCourse.ApplyNocID);
                             sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                             sb1.AppendFormat(" CourseID={0},", item.CourseID);
                             sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
@@ -354,7 +363,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                         {
                             sb1.Append(" select");
                             sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
-                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocID);
                             sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                             sb1.AppendFormat(" CourseID={0},", item.CourseID);
                             sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
