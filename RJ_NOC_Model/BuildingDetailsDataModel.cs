@@ -40,6 +40,9 @@ namespace RJ_NOC_Model
         public string OwnBuildingFileUpload { get; set; }
         public string? Dis_OwnBuildingFileUpload { get; set; }
         public string? OwnBuildingFileUploadPath { get; set; }
+        public string RentAgreementFileUpload { get; set; }
+        public string? Dis_RentAgreementFileUpload { get; set; }
+        public string? RentAgreementFileUploadPath { get; set; }
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }

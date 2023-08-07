@@ -464,9 +464,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingType>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails()
+        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
-            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype'";
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype',@DepartmentID='"+ DepartmentId + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingUploadDetails");
 
