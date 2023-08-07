@@ -332,5 +332,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID);
         }
+
+        public List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandSqureMeterMappingDetails_DepartmentWise(DepartmentID, CollageID, LandAreaId);
+        }
     }
 }

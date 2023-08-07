@@ -102,6 +102,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetMappedStreamListByID(int DepartmetntID);
         List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID);
 
+        List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId);
+
     }
 
 }

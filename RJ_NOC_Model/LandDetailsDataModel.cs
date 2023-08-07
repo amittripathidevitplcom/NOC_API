@@ -16,6 +16,7 @@ namespace RJ_NOC_Model
         public string LandDocumentTypeName { get; set; }
         public int LandConvertedID { get; set; }
         public int LandTypeID { get; set; }
+        public int LandArea { get; set; }
         public string KhasraNumber { get; set; }
         public string LandOwnerName { get; set; }
         public int BuildingHostelQuartersRoadArea { get; set; }

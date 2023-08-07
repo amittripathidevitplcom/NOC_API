@@ -42,5 +42,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.SocietyMasterRepository.IfExists(SocietyID, PersonName);
         }
+
+        public List<CommonDataModel_DataTable> Check30Female(int CollegeID)
+        {
+            return UnitOfWork.SocietyMasterRepository.Check30Female(CollegeID);
+        }
     }
 }

@@ -40,9 +40,9 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID,int CollageID)
+        public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID, int CollageID)
         {
-            string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "',@SelectedCollageID='"+ CollageID + "'";
+            string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "',@SelectedCollageID='" + CollageID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
             List<LandDetailsDataModel> listdataModels = new List<LandDetailsDataModel>();
@@ -66,6 +66,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.LandConvertedID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandConvertedID"]);
                     dataModels.LandTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandTypeID"]);
                     dataModels.KhasraNumber = dataSet.Tables[0].Rows[0]["KhasraNumber"].ToString();
+                    dataModels.LandArea = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandArea"]);
                     dataModels.LandOwnerName = dataSet.Tables[0].Rows[0]["LandOwnerName"].ToString();
                     dataModels.BuildingHostelQuartersRoadArea = Convert.ToInt32(dataSet.Tables[0].Rows[0]["BuildingHostelQuartersRoadArea"]);
                     dataModels.LandConversionOrderDate = dataSet.Tables[0].Rows[0]["LandConversionOrderDate"].ToString();
@@ -112,6 +113,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @LandTypeID='" + request.LandTypeID + "',";
             SqlQuery += " @KhasraNumber='" + request.KhasraNumber + "',";
             SqlQuery += " @LandOwnerName='" + request.LandOwnerName + "',";
+            SqlQuery += " @LandArea='" + request.LandArea + "',";
             SqlQuery += " @BuildingHostelQuartersRoadArea='" + request.BuildingHostelQuartersRoadArea + "',";
             SqlQuery += " @LandConversionOrderDate='" + request.LandConversionOrderDate + "',";
             SqlQuery += " @AffidavitDate='" + request.AffidavitDate + "',";
