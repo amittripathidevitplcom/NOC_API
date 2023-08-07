@@ -66,7 +66,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public DataTable GetApplyNocApplicationList(string SSOID)
         {
-            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList',@SSOID='"+ SSOID + "'";
+            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList',@SSOID='" + SSOID + "'";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationList");
             return dt;
         }
@@ -118,5 +118,16 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+
+        public List<ApplyNocParameterFeesDataModel> GetDCECourseSubjectFees(int ApplyNOCParameterID)
+        {
+            string SqlQuery = $"exec USP_GetDCECourseSubjectFees @ApplyNOCParameterID={ApplyNOCParameterID}";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetApplyNOCApplicationListByRole");
+            List<ApplyNocParameterFeesDataModel> listdataModels = new List<ApplyNocParameterFeesDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocParameterFeesDataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
     }
 }

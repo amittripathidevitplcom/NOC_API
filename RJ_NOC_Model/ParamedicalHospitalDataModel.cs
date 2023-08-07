@@ -148,13 +148,24 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
-
         public string PollutionUnitID { get; set; }
         public string PollutionCertificate { get; set; }
-
         public string? Dis_PollutionCertificate { get; set; }
         public string? PollutionCertificatePath { get; set; }
-
         public string HospitalStatus { get; set; }
+
+        public List<ParamedicalHospitalBedValidation> ParamedicalHospitalBedValidation { get;set;}
+    }
+
+    public class ParamedicalHospitalBedValidation
+    {
+        public int ID { get; set; }
+        public int CourseID { get; set; }
+        public int Istextordropdown { get; set; }
+        public string ColumnName { get; set; }
+        public int Ismandatory { get; set; }
+        public int MinValue { get; set; }
+        public int MaxValue { get; set; }
+        public int? ColumnValue { get; set; }
     }
 }
