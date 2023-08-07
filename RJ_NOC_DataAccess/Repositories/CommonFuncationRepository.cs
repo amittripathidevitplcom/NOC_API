@@ -833,9 +833,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID)
+        public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode)
         {
-            string SqlQuery = " exec USP_CollegeWiseCourseSubjectGet @ViewMode='GetCollegeWiseCourseIDSubjectList',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
+            string SqlQuery = " exec USP_CollegeWiseCourseSubjectGet @CollegeID='" + CollegeID + "',@ViewMode='"+ ViewMode + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeWiseCourseIDSubjectList");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -879,7 +879,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-       
+
+        public List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
+        {
+            string SqlQuery = "exec USP_GetLandSqureMeterMappingDetails  @DepartmentID='" + DepartmentID + "', @CollegeID = '" + CollageID + "', @LandAreaID = '" + LandAreaId + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandSqureMeterMappingDetails_DepartmentWise");
+
+            List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> dataModels = new List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
     }
 }
 

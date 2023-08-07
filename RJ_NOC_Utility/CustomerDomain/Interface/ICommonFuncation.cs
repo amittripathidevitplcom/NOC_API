@@ -95,12 +95,14 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID, int DepartmentID, int CourseLevelID, int CourseID);
 
         List<CommonDataModel_DataTable> GetCollegeWiseCourseList(int CollegID);
-        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID);
+        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode);
 
         List<CommonDataModel_DataTable> GetStreamMasterList(int DepartmetntID);
 
         List<CommonDataModel_DataTable> GetMappedStreamListByID(int DepartmetntID);
         List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID);
+
+        List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId);
 
     }
 

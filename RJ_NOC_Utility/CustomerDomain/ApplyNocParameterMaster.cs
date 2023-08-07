@@ -5,6 +5,7 @@ using Azure.Core;
 using RJ_NOC_DataAccess.Common;
 using System.Data;
 using System.Text;
+using System.Collections.Generic;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -60,7 +61,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                     //model = CommonHelper.ConvertDataTable<ApplyNocParameterMaster_TNOCExtensionDataModel>(ds.Tables[0]);
                     //model.ApplyNocParameterCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterCourseDataModel>>(ds.Tables[1]);
                     //var subjectlist = CommonHelper.ConvertDataTable<List<ApplyNocParameterSubjectDataModel>>(ds.Tables[2]);
-                    
+
                 }
             }
             return model;
@@ -89,15 +90,69 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveApplyNocApplication(ApplyNocParameterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
+            List<ApplyNocParameterFeesDataModel> obj = new List<ApplyNocParameterFeesDataModel>();
+
+            decimal dNewCourseFees = 0;
+            decimal dNewSubjectFees = 0;
+            decimal dNewCoursePGFees = 0;
+            decimal dNewCourseUGFees = 0;
+
+            if (request.ApplyNocParameterMasterList_NewCourse != null)
+            {
+                obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterListDataModel.Where(x => x.ApplyNocFor == "New Course").Select(s => s.ApplyNocID).FirstOrDefault());
+                
+                
+                dNewCoursePGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount:0;
+                dNewCourseUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount:0;
+                
+                foreach (var item in request.ApplyNocParameterMasterList_NewCourse.ApplyNocParameterCourseList)
+                {
+                    if (item.CollegeLevel != null)
+                    {
+                        if (item.CollegeLevel == "UG")
+                        {
+                            dNewCourseFees += dNewCourseUGFees;
+                        }
+                        else if (item.CollegeLevel == "PG")
+                        {
+                            dNewCourseFees += dNewCoursePGFees;
+                        }
+                    }
+                }
+            }
+            if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
+            {
+                foreach (var item in request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocParameterCourseList)
+                {
+                    foreach (var subjects in item.ApplyNocParameterSubjectList)
+                    {
+                        if (item.CollegeLevel != null)
+                        {
+                            if (item.CollegeLevel == "UG")
+                            {
+                                dNewSubjectFees += 50000;
+                            }
+                            else if (item.CollegeLevel == "PG")
+                            {
+                                dNewSubjectFees += 30000;
+                            }
+                        }
+                    }
+
+                }
+            }
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID={0},", request.CollegeID);
             sb.AppendFormat("@ApplicationTypeID={0},", request.ApplicationTypeID);
-            sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount);
+            sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees);
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
             sb.AppendFormat("@SSOID='{0}',", request.SSOID);
+
+
+
 
             // put ''value'' for child string values
             // child            
@@ -117,48 +172,54 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb1.Append(" ) as t");
             sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString());
 
-            // child
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationDetailList from(");
-            if (request.ApplyNocParameterMasterList_TNOCExtension != null)
+            if (request.ApplyNocParameterMasterList_TNOCExtension != null || request.ApplyNocParameterMasterList_AdditionOfNewSeats60 != null)
             {
-                foreach (var item in request.ApplyNocParameterMasterList_TNOCExtension.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
+                // child
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationDetailList from(");
+                if (request.ApplyNocParameterMasterList_TNOCExtension != null)
                 {
-                    foreach (var item1 in item.ApplyNocParameterSubjectList)
+                    foreach (var item in request.ApplyNocParameterMasterList_TNOCExtension.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
+                    {
+                        foreach (var item1 in item.ApplyNocParameterSubjectList)
+                        {
+                            sb1.Append(" select");
+                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                            sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                            sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                            sb1.AppendFormat(" CheckedStatus={0}", 1);
+                            sb1.Append(" union all");
+                        }
+                    }
+                }
+                if (request.ApplyNocParameterMasterList_AdditionOfNewSeats60 != null)
+                {
+                    foreach (var item in request.ApplyNocParameterMasterList_AdditionOfNewSeats60.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
                     {
                         sb1.Append(" select");
                         sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
                         sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
                         sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                         sb1.AppendFormat(" CourseID={0},", item.CourseID);
-                        sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                        sb1.AppendFormat(" SubjectID={0},", 0);
                         sb1.AppendFormat(" CheckedStatus={0}", 1);
                         sb1.Append(" union all");
                     }
                 }
+                sb1.Length = sb1.Length - 9;// remove union all  
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocApplicationDetailList='{0}',", sb1.ToString());
             }
-            if (request.ApplyNocParameterMasterList_AdditionOfNewSeats60 != null)
-            {
-                foreach (var item in request.ApplyNocParameterMasterList_AdditionOfNewSeats60.ApplyNocParameterCourseList.Where(x => x.IsChecked == true))
-                {
-                    sb1.Append(" select");
-                    sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
-                    sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
-                    sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
-                    sb1.AppendFormat(" CourseID={0},", item.CourseID);
-                    sb1.AppendFormat(" SubjectID={0},", 0);
-                    sb1.AppendFormat(" CheckedStatus={0}", 1);
-                    sb1.Append(" union all");
-                }
-            }
-            sb1.Length = sb1.Length - 9;// remove union all  
-            sb1.Append(" ) as t");
-            sb.AppendFormat("@ApplyNocApplicationDetailList='{0}',", sb1.ToString());
+
+
             // child Change Name Data
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationChangeInNameDetailList from(");
+
             if (request.ApplyNocParameterMasterList_ChangeInNameOfCollege != null)
             {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationChangeInNameDetailList from(");
                 sb1.Append(" select");
                 sb1.AppendFormat(" ChangeInNameID={0},", 0);
                 sb1.AppendFormat(" NewName_Eng=''{0}'',", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.NewNameEnglish);
@@ -168,10 +229,11 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb.AppendFormat("@ApplyNocApplicationChangeInNameDetailList='{0}',", sb1.ToString());
             }
             //Change Place Detail
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationChangeInPlaceDetailList from(");
+
             if (request.ApplyNocParameterMasterList_ChangeInPlaceOfCollege != null)
             {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationChangeInPlaceDetailList from(");
                 sb1.Append(" select");
                 sb1.AppendFormat(" ChangeInPlaceID={0},", 0);
                 sb1.AppendFormat(" PlaceName=''{0}'',", request.ApplyNocParameterMasterList_ChangeInPlaceOfCollege.PlaceName);
@@ -182,10 +244,11 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
 
             // Co Education to Girls 
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationChangeInCOEDtoGirlsDetailList from(");
+
             if (request.ApplyNocParameterMasterList_ChangeInCoedtoGirls != null)
             {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationChangeInCOEDtoGirlsDetailList from(");
                 sb1.Append(" select ");
                 sb1.AppendFormat("ChangeInCoedGirlsID={0},", 0);
                 sb1.AppendFormat("ConsentManagementDocument=''{0}''", request.ApplyNocParameterMasterList_ChangeInCoedtoGirls.ConsentManagementDocument);
@@ -195,10 +258,11 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
 
             // Girls Co Education
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationChangeInGirlsCOEDDetailList from(");
+
             if (request.ApplyNocParameterMasterList_ChangeInGirlstoCoed != null)
             {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationChangeInGirlsCOEDDetailList from(");
                 sb1.Append(" select");
                 sb1.AppendFormat(" ChangeInGirlsCoedID={0},", 0);
                 sb1.AppendFormat(" ConsentManagementDocument=''{0}'',", request.ApplyNocParameterMasterList_ChangeInGirlstoCoed.ConsentManagementDocument);
@@ -209,10 +273,11 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
 
             //Merger Details
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationChangeInMergerDetailList from(");
+
             if (request.ApplyNocParameterMasterList_MergerCollege != null)
             {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationChangeInMergerDetailList from(");
                 sb1.Append(" select");
                 sb1.AppendFormat(" ChangesInMergerID={0},", 0);
                 sb1.AppendFormat(" SocietyProposal=''{0}'',", request.ApplyNocParameterMasterList_MergerCollege.SocietyProposal);
@@ -236,10 +301,11 @@ namespace RJ_NOC_Utility.CustomerDomain
 
 
             // Girls Co Education
-            sb1 = new StringBuilder();
-            sb1.Append("select * into ##ApplyNocApplicationChangeInCollegeManagementDetailList from(");
+
             if (request.ApplyNocParameterMasterList_ChangeInCollegeManagement != null)
             {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocApplicationChangeInCollegeManagementDetailList from(");
                 sb1.Append(" select");
                 sb1.AppendFormat(" ChangeInManagementID={0},", 0);
                 sb1.AppendFormat(" NewSocietyName=''{0}'',", request.ApplyNocParameterMasterList_ChangeInCollegeManagement.NewSocietyName);
@@ -250,6 +316,57 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
 
 
+
+            if (request.ApplyNocParameterMasterList_NewCourse != null)
+            {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocParameterMasterList_NewCourse from(");
+                if (request.ApplyNocParameterMasterList_NewCourse != null)
+                {
+                    foreach (var item in request.ApplyNocParameterMasterList_NewCourse.ApplyNocParameterCourseList)
+                    {
+                        foreach (var item1 in item.ApplyNocParameterSubjectList)
+                        {
+                            sb1.Append(" select");
+                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                            sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                            sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                            sb1.AppendFormat(" CheckedStatus={0}", 1);
+                            sb1.Append(" union all");
+                        }
+                    }
+                }
+                sb1.Length = sb1.Length - 9;// remove union all  
+                sb1.Append(" ) as t ");
+                sb.AppendFormat("@ApplyNocParameterMasterList_NewCourse='{0}',", sb1.ToString());
+            }
+            if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
+            {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocParameterMasterList_NewCourseSubject from(");
+                if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
+                {
+                    foreach (var item in request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocParameterCourseList)
+                    {
+                        foreach (var item1 in item.ApplyNocParameterSubjectList)
+                        {
+                            sb1.Append(" select");
+                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                            sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                            sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                            sb1.AppendFormat(" CheckedStatus={0}", 1);
+                            sb1.Append(" union all");
+                        }
+                    }
+                }
+                sb1.Length = sb1.Length - 9;// remove union all  
+                sb1.Append(" ) as t ");
+                sb.AppendFormat("@ApplyNocParameterMasterList_NewCourseSubject='{0}',", sb1.ToString());
+            }
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");
             // execute
@@ -336,5 +453,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID);
         }
+
+
+
+
+
     }
 }

@@ -101,7 +101,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         //subject
         List<CommonDataModel_DataTable> GetCollegeWiseCourseList(int CollegID);
-        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeWiseCourseID);
+        List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode);
 
         //streamMaster
         List<CommonDataModel_DataTable> GetStreamMasterList(int DepartmetntID);
@@ -109,6 +109,8 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID);
+
+        List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId);
     }
 }
 
