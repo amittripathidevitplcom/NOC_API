@@ -143,6 +143,8 @@ namespace RJ_NOC_Model
         public bool IsMandatory { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
+        public string SampleDocument { get; set; }
+        public string DisplayName { get; set; }
     } 
     public class CommonDataModel_LandAreaMasterList_DepartmentWise
     {
@@ -305,6 +307,18 @@ namespace RJ_NOC_Model
         public string Status { get; set; }
         public string Message { get; set; }
 
+    }
+
+    public class CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise
+    {
+        public int LandAreaID { get; set; }
+        public string LandAreaName { get; set; }
+        public int FinancialYearID { get; set; }
+        public string FinancialYearName { get; set; }
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
+        public int RequiredSquareMeter { get; set; }
+        public string AreaType { get; set; }
     }
 
 }

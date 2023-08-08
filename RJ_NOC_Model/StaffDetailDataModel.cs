@@ -35,7 +35,7 @@ namespace RJ_NOC_Model
         public string? StreamSubject { get; set; }
         public string? UniversityBoardInstitutionName { get; set; }
         public int? PassingYearID { get; set; }
-        public int? Marks { get; set; }
+        public string Marks { get; set; }
         public string ProfilePhoto { get; set; }
         public string? ProfilePhotoPath { get; set; }
         public string? ProfilePhoto_Dis_FileName { get; set; }
@@ -74,7 +74,7 @@ namespace RJ_NOC_Model
         public string UniversityBoardInstitutionName { get; set; }
         public int PassingYearID { get; set; }
         public string PassingYear { get; set; }
-        public int Marks { get; set; }
+        public string Marks { get; set; }
         public string UploadDocument { get; set; }
         public string? UploadDocumentPath { get; set; }
         public string? UploadDocument_Dis_FileName { get; set; }

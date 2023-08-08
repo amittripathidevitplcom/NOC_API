@@ -94,58 +94,67 @@ namespace RJ_NOC_Utility.CustomerDomain
 
             decimal dNewCourseFees = 0;
             decimal dNewSubjectFees = 0;
+
             decimal dNewCoursePGFees = 0;
             decimal dNewCourseUGFees = 0;
 
-            if (request.ApplyNocParameterMasterList_NewCourse != null)
-            {
-                obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterListDataModel.Where(x => x.ApplyNocFor == "New Course").Select(s => s.ApplyNocID).FirstOrDefault());
-                
-                
-                dNewCoursePGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount:0;
-                dNewCourseUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount:0;
-                
-                foreach (var item in request.ApplyNocParameterMasterList_NewCourse.ApplyNocParameterCourseList)
-                {
-                    if (item.CollegeLevel != null)
-                    {
-                        if (item.CollegeLevel == "UG")
-                        {
-                            dNewCourseFees += dNewCourseUGFees;
-                        }
-                        else if (item.CollegeLevel == "PG")
-                        {
-                            dNewCourseFees += dNewCoursePGFees;
-                        }
-                    }
-                }
-            }
-            if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
-            {
-                foreach (var item in request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocParameterCourseList)
-                {
-                    foreach (var subjects in item.ApplyNocParameterSubjectList)
-                    {
-                        if (item.CollegeLevel != null)
-                        {
-                            if (item.CollegeLevel == "UG")
-                            {
-                                dNewSubjectFees += 50000;
-                            }
-                            else if (item.CollegeLevel == "PG")
-                            {
-                                dNewSubjectFees += 30000;
-                            }
-                        }
-                    }
+            decimal dNewSubjectPGFees = 0;
+            decimal dNewSubjectUGFees = 0;
 
-                }
-            }
+            //if (request.ApplyNocParameterMasterList_NewCourse != null)
+            //{
+            //    obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterList_NewCourse.ApplyNocID);
+                
+            //    dNewCoursePGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount:0;
+            //    dNewCourseUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount:0;
+                
+            //    foreach (var item in request.ApplyNocParameterMasterList_NewCourse.ApplyNocParameterCourseList)
+            //    {
+            //        if (item.CollegeLevel != null)
+            //        {
+            //            if (item.CollegeLevel == "UG")
+            //            {
+            //                dNewCourseFees += dNewCourseUGFees;
+            //            }
+            //            else if (item.CollegeLevel == "PG")
+            //            {
+            //                dNewCourseFees += dNewCoursePGFees;
+            //            }
+            //        }
+            //    }
+            //}
 
+            //if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
+            //{
+            //    obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocID);
+            //    dNewSubjectPGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null ? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount : 0;
+            //    dNewSubjectUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null ? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount : 0;
+
+            //    foreach (var item in request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocParameterCourseList)
+            //    {
+            //        foreach (var subjects in item.ApplyNocParameterSubjectList)
+            //        {
+            //            if (item.CollegeLevel != null)
+            //            {
+            //                if (item.CollegeLevel == "UG")
+            //                {
+            //                    dNewSubjectFees += dNewSubjectUGFees;
+            //                }
+            //                else if (item.CollegeLevel == "PG")
+            //                {
+            //                    dNewSubjectFees += dNewSubjectPGFees;
+            //                }
+            //            }
+            //        }
+
+            //    }
+            //}
+
+            
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID={0},", request.CollegeID);
             sb.AppendFormat("@ApplicationTypeID={0},", request.ApplicationTypeID);
-            sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees);
+            sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees + dNewSubjectFees);
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
@@ -157,6 +166,8 @@ namespace RJ_NOC_Utility.CustomerDomain
             // put ''value'' for child string values
             // child            
             StringBuilder sb1 = new StringBuilder();
+
+
             sb1.Append("select * into ##ApplyNocParameterDetailList from(");
             foreach (var item in request.ApplyNocParameterMasterListDataModel.Where(x => x.IsChecked == true))
             {
@@ -165,12 +176,35 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                 sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
                 sb1.AppendFormat(" ApplyNocFor=''{0}'',", item.ApplyNocFor);
-                sb1.AppendFormat(" FeeAmount={0}", item.FeeAmount);
+                if (item.ApplyNocCode == "DEC_NewCourse")
+                {
+                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_NewCourse.FeeAmount);
+                }
+                else if(item.ApplyNocCode == "DEC_TNOCExtOfSubject")
+                {
+                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_TNOCExtOfSubject.FeeAmount);
+                }
+                else if (item.ApplyNocCode == "DEC_NewSubject")
+                {
+                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_NewCourseSubject.FeeAmount);
+                }
+                else if (item.ApplyNocCode == "DEC_PNOCSubject")
+                {
+                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_PNOCOfSubject.FeeAmount);
+                }
+                else
+                {
+                    sb1.AppendFormat(" FeeAmount={0}", item.FeeAmount);
+                }
                 sb1.Append(" union all");
             }
             sb1.Length = sb1.Length - 9;// remove union all
             sb1.Append(" ) as t");
             sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString());
+
+
+
+
 
             if (request.ApplyNocParameterMasterList_TNOCExtension != null || request.ApplyNocParameterMasterList_AdditionOfNewSeats60 != null)
             {
@@ -317,6 +351,7 @@ namespace RJ_NOC_Utility.CustomerDomain
 
 
 
+            //Dec New Course Subject
             if (request.ApplyNocParameterMasterList_NewCourse != null)
             {
                 sb1 = new StringBuilder();
@@ -329,7 +364,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                         {
                             sb1.Append(" select");
                             sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
-                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_NewCourse.ApplyNocID);
                             sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                             sb1.AppendFormat(" CourseID={0},", item.CourseID);
                             sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
@@ -342,6 +377,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb1.Append(" ) as t ");
                 sb.AppendFormat("@ApplyNocParameterMasterList_NewCourse='{0}',", sb1.ToString());
             }
+
             if (request.ApplyNocParameterMasterList_NewCourseSubject != null)
             {
                 sb1 = new StringBuilder();
@@ -354,7 +390,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                         {
                             sb1.Append(" select");
                             sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
-                            sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_NewCourseSubject.ApplyNocID);
                             sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                             sb1.AppendFormat(" CourseID={0},", item.CourseID);
                             sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
@@ -367,6 +403,67 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb1.Append(" ) as t ");
                 sb.AppendFormat("@ApplyNocParameterMasterList_NewCourseSubject='{0}',", sb1.ToString());
             }
+
+
+            //DEC TNOC OF SUBJECT
+            if (request.ApplyNocParameterMasterList_TNOCExtOfSubject != null)
+            {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocParameterMasterList_TNOCExtOfSubject from(");
+                if (request.ApplyNocParameterMasterList_TNOCExtOfSubject != null)
+                {
+                    foreach (var item in request.ApplyNocParameterMasterList_TNOCExtOfSubject.ApplyNocParameterCourseList)
+                    {
+                        foreach (var item1 in item.ApplyNocParameterSubjectList)
+                        {
+                            sb1.Append(" select");
+                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_TNOCExtOfSubject.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                            sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                            sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                            sb1.AppendFormat(" CheckedStatus={0}", 1);
+                            sb1.Append(" union all");
+                        }
+                    }
+                }
+                sb1.Length = sb1.Length - 9;// remove union all  
+                sb1.Append(" ) as t ");
+                sb.AppendFormat("@ApplyNocParameterMasterList_TNOCExtOfSubject='{0}',", sb1.ToString());
+            }
+
+
+            //DEC TNOC OF SUBJECT
+            if (request.ApplyNocParameterMasterList_PNOCOfSubject != null)
+            {
+                sb1 = new StringBuilder();
+                sb1.Append("select * into ##ApplyNocParameterMasterList_PNOCOfSubject from(");
+                if (request.ApplyNocParameterMasterList_PNOCOfSubject != null)
+                {
+                    foreach (var item in request.ApplyNocParameterMasterList_PNOCOfSubject.ApplyNocParameterCourseList)
+                    {
+                        foreach (var item1 in item.ApplyNocParameterSubjectList)
+                        {
+                            sb1.Append(" select");
+                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_PNOCOfSubject.ApplyNocID);
+                            sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                            sb1.AppendFormat(" CourseID={0},", item.CourseID);
+                            sb1.AppendFormat(" SubjectID={0},", item1.SubjectID);
+                            sb1.AppendFormat(" CheckedStatus={0}", 1);
+                            sb1.Append(" union all");
+                        }
+                    }
+                }
+                sb1.Length = sb1.Length - 9;// remove union all  
+                sb1.Append(" ) as t ");
+                sb.AppendFormat("@ApplyNocParameterMasterList_PNOCOfSubject='{0}',", sb1.ToString());
+            }
+
+            //@ApplyNocParameterMasterList_TNOCExtOfSubject text = '',
+            //@ApplyNocParameterMasterList_PNOCOfSubject  text = '',
+
+
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");
             // execute

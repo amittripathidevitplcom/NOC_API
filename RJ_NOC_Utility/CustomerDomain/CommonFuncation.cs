@@ -190,9 +190,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck();
         }
-        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails()
+        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
-            return UnitOfWork.CommonFuncationRepository.GetBuildingUploadDetails();
+            return UnitOfWork.CommonFuncationRepository.GetBuildingUploadDetails(DepartmentId);
         }
         public List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID)
         {
@@ -331,6 +331,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID);
+        }
+
+        public List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandSqureMeterMappingDetails_DepartmentWise(DepartmentID, CollageID, LandAreaId);
         }
     }
 }

@@ -37,6 +37,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @OwnBuildingOrderNo='" + buildingdetails.OwnBuildingOrderNo + "',";
             SqlQuery += " @OwnBuildingOrderDate='" + buildingdetails.OwnBuildingOrderDate + "',";
             SqlQuery += " @OwnBuildingFileUpload='" + buildingdetails.OwnBuildingFileUpload + "',";
+            SqlQuery += " @RentAgreementFileUpload='" + buildingdetails.RentAgreementFileUpload + "',";
             SqlQuery += " @FromDate='" + buildingdetails.FromDate + "',";
             SqlQuery += " @ToDate='" + buildingdetails.ToDate + "',";
             SqlQuery += " @FireNOCFileUpload='" + buildingdetails.FireNOCFileUpload + "',";

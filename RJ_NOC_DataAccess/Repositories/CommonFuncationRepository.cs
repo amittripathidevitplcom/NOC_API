@@ -464,9 +464,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingType>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails()
+        public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
-            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype'";
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype',@DepartmentID='"+ DepartmentId + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingUploadDetails");
 
@@ -879,7 +879,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-       
+
+        public List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
+        {
+            string SqlQuery = "exec USP_GetLandSqureMeterMappingDetails  @DepartmentID='" + DepartmentID + "', @CollegeID = '" + CollageID + "', @LandAreaID = '" + LandAreaId + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandSqureMeterMappingDetails_DepartmentWise");
+
+            List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> dataModels = new List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
     }
 }
 

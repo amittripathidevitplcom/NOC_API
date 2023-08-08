@@ -16,5 +16,6 @@ namespace RJ_NOC_DataAccess.Interface
         bool UpdateData(SocietyMasterDataModel request);
         bool DeleteData(int SocietyID);
         bool IfExists(int SocietyID, string PersonName);
+        List<CommonDataModel_DataTable> Check30Female(int CollegeID);
     }
 }

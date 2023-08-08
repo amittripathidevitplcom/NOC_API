@@ -11,7 +11,7 @@ using RJ_NOC_DataAccess.Common;
 
 namespace RJ_NOC_DataAccess.Repositories
 {
-    public class SocietyMasterRepository :ISocietyMasterRepository
+    public class SocietyMasterRepository : ISocietyMasterRepository
     {
         private CommonDataAccessHelper _commonHelper;
         public SocietyMasterRepository(CommonDataAccessHelper commonHelper)
@@ -90,5 +90,21 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
+
+
+
+     
+        public List<CommonDataModel_DataTable> Check30Female(int CollegeID)
+        {
+            string SqlQuery = " exec USP_Check30Female @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SocietyMaster.Check30Female");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
