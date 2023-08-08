@@ -152,6 +152,8 @@ namespace RJ_NOC_Model
         public int ApplyNocApplicationID { get; set; }
         public int ApplyNocParameterID { get; set; }
         public string ApplyNocFor { get; set; }
+
+        public string? ParameterCode { get; set; }
         public decimal FeeAmount { get; set; }
         public List<ApplyNocApplicationDetailDataModel> ApplyNocApplicationDetailList { get; set; }
     }
