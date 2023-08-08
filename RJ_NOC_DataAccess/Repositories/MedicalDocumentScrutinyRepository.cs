@@ -399,5 +399,29 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return Result;
         }
+
+        public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail> DocumentScrutiny_ParamedicalHospitalDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_ParamedicalHospitalDetail @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_ParamedicalHospitalDetail");
+
+            List<MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail>();
+            MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail();
+
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<ParamedicalHospitalDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<ParamedicalHospitalDataModel>>(JsonDataTable_Data);
+            dataModels.HospitalDetails = LandDetailDataModel_Item;
+
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
     }
 }
