@@ -37,6 +37,9 @@ namespace RJ_NOC_Model
         public ApplyNocParameterMasterList_MergerCollege? ApplyNocParameterMasterList_MergerCollege { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_NewCourse { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_NewCourseSubject { get; set; }
+
+        public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtOfSubject { get; set; }
+        public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_PNOCOfSubject { get; set; }
     }
     public class ApplyNocParameterMaster_ddl
     {
@@ -51,6 +54,9 @@ namespace RJ_NOC_Model
         public int ApplyNocID { get; set; }
         public string ApplyNocFor { get; set; }
         public decimal FeeAmount { get; set; }
+        public string? ParameterCode { get; set; }
+        public string? ApplyNocCode { get; set; }
+        
         public bool IsChecked { get; set; } = false;
     }
     public class ApplyNocParameterMaster_TNOCExtensionDataModel : ApplyNocParameterMasterListDataModel
