@@ -463,10 +463,10 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}")]
-        public async Task<OperationResult<int>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
-            var result = new OperationResult<int>();
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID,RoleID));

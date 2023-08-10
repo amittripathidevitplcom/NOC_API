@@ -75,7 +75,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_ParamedicalHospitalDetail(CollageID, RoleID, ApplyNOCID);
         }
 
-        public int CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
+        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
         }
