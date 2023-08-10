@@ -427,6 +427,40 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpGet("GetApplicationPaymentHistoryApplicationID/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplicationPaymentHistoryApplicationID(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("GetApplicationPaymentHistoryApplicationID.ApplyNocApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

@@ -129,5 +129,17 @@ namespace RJ_NOC_DataAccess.Repository
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNocParameterFeesDataModel>>(JsonDataTable_Data);
             return listdataModels;
         }
+
+        public List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            string SqlQuery = $"exec USP_GetEmitraTransactionDetails @Key='GetApplicationPaymentHistoryApplicationID', @ApplyNocApplicationID={ApplyNocApplicationID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocPaymentHistoryApplicationID");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

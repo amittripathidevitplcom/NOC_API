@@ -551,6 +551,11 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID);
         }
 
+        public List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.GetApplicationPaymentHistoryApplicationID(ApplyNocApplicationID);
+        }
+
 
 
 

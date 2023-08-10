@@ -20,5 +20,6 @@ namespace RJ_NOC_DataAccess.Interface
         bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy, string IpAddress);
         List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<ApplyNocParameterFeesDataModel> GetDCECourseSubjectFees(int ApplyNOCParameterID);
+        List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
     }
 }
