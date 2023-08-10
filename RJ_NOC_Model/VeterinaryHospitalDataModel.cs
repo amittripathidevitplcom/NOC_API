@@ -35,7 +35,19 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public int DepartmentID { get; set; }
         public string SSOID { get; set; }
+        public string District_Eng { get; set; }
+        public string Division_English { get; set; }
+        public string TehsilName { get; set; }
+        public string PanchyatSamitiName { get; set; }
         public List<AnimalDataModel> AnimalDetails { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remarks { get; set; }
+
+        public string? C_Action { get; set; }
+        public string? C_Remark { get; set; }
+        public string? S_Action { get; set; }
+        public string? S_Remark { get; set; }
 
     }   
     public class AnimalDataModel
