@@ -136,6 +136,7 @@ namespace RJ_NOC_Model
         public decimal TotalFeeAmount { get; set; }
         public bool? ApplicationStatus { get; set; }
         public bool? IsFinalSubmit { get; set; }
+        public bool? IsMakePayment_ApplicationFee { get; set; }
         public bool? IsSaveFDR { get; set; }
         public bool? IsMakePayment { get; set; }
 
