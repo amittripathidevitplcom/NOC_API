@@ -18,6 +18,7 @@ using System.Xml.Linq;
 using System.Threading.Tasks;
 using java.awt;
 using sun.security.jca;
+using System.Net;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -253,6 +254,7 @@ namespace RJ_NOC_API.Controllers
                
 
                 var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
+                 
                 EmitraTransactions objEmitra = new EmitraTransactions();
                 objEmitra.key = "InsertDetails";
                 objEmitra.ApplicationIdEnc = Model.ApplicationIdEnc;
@@ -286,6 +288,11 @@ namespace RJ_NOC_API.Controllers
                     //string datad=  "?strdata=" + JsonConvert.SerializeObject(data) + "&enckey=" + EmitraServiceDetail.EncryptionKey;
 
                     EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration endpointConfiguration = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration();
+
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
                     EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient emitraencsev = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient(endpointConfiguration, EmitraServiceDetail.WebServiceURL);
                     EmitraEncryptStringResponse response = await emitraencsev.EmitraEncryptStringAsync(EmitraServiceDetail.EncryptionKey, JsonConvert.SerializeObject(data));
 
@@ -323,7 +330,7 @@ namespace RJ_NOC_API.Controllers
             {
                 requestDetailsModel.Data = Model;
                 requestDetailsModel.State = OperationState.Error;
-                requestDetailsModel.ErrorMessage = "Something went wrong please try again.!";
+                requestDetailsModel.ErrorMessage = ex.Message.ToString();
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPayment", ex.ToString());
             }
             finally
