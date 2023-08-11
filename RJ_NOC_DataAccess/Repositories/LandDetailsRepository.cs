@@ -78,6 +78,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     //Add by Deepak
                     dataModels.LandTypeName = dataSet.Tables[0].Rows[0]["LandTypeName"].ToString();
                     dataModels.Code = dataSet.Tables[0].Rows[0]["Code"].ToString();
+                    dataModels.AreaType = dataSet.Tables[0].Rows[0]["AreaType"].ToString();
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<CommonDataModel_BuildingUploadDoc> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
                     dataModels.LandDetailDocument = LandDetailDataModel_Item;
