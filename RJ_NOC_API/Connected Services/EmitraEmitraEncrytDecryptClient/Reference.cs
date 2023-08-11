@@ -366,7 +366,7 @@ namespace EmitraEmitraEncrytDecryptClient
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;
                 result.AllowCookies = true;
-                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.None;
                 return result;
             }
             if ((endpointConfiguration == EndpointConfiguration.EmitraEncrytDecryptSoap12))

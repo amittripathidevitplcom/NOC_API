@@ -463,10 +463,10 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}")]
-        public async Task<OperationResult<int>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
-            var result = new OperationResult<int>();
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID,RoleID));
@@ -495,7 +495,97 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("DocumentScrutiny_ParamedicalHospitalDetail/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail>>> DocumentScrutiny_ParamedicalHospitalDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.DocumentScrutiny_ParamedicalHospitalDetail(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_ParamedicalHospitalDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
+        [HttpPost("DocumentScrutiny_VeterinaryHospital/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital>>> DocumentScrutiny_VeterinaryHospital(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.DocumentScrutiny_VeterinaryHospital(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_VeterinaryHospital", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("DocumentScrutiny_FarmLandDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails>>> DocumentScrutiny_FarmLandDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.DocumentScrutiny_FarmLandDetails(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_FarmLandDetails", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
     }

@@ -29,7 +29,12 @@ namespace RJ_NOC_Model
     {
         public List<HospitalMasterDataModel> HospitalDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
-    }   
+    }
+    public class MedicalDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail
+    {
+        public List<ParamedicalHospitalDataModel> HospitalDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
     public class MedicalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation
     {
         public List<AcademicInformationDetailsDataModel> AcademicInformations { get; set; }
@@ -79,7 +84,16 @@ namespace RJ_NOC_Model
         public List<OldNocDetailsDataModel> OldNOCDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
-
+    public class MedicalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital
+    {
+        public List<VeterinaryHospitalDataModel> VeterinaryHospitals { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
+    public class MedicalDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails
+    {
+        public List<FarmLandDetailsModel> FarmLandDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
 
     //public class DocumentScrutiny_Action
     //{
