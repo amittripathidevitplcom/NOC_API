@@ -67,5 +67,7 @@ namespace RJ_NOC_Utility
 
         IClassWiseStudentDetails ClassWiseStudentDetailsUtility { get; }
 
+        IAnimalDocumentScrutiny AnimalDocumentScrutinyUtility { get; }
+
     }
 }
