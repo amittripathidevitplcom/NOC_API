@@ -79,6 +79,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
         }
+        public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital> DocumentScrutiny_VeterinaryHospital(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_VeterinaryHospital(CollageID, RoleID, ApplyNOCID);
+        }
+        public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails> DocumentScrutiny_FarmLandDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_FarmLandDetails(CollageID, RoleID, ApplyNOCID);
+        }
 
     }
 }

@@ -131,6 +131,11 @@ namespace RJ_NOC_Model
         public int TotalRevertApplication { get; set; }
         public int TotalApplyNocApplication { get; set; }
 
+        // Common use All Department
+        public int Pending { get; set; }
+        public int Revert { get; set; }
+        public int Rejected { get; set; }
+        public int Completed { get; set; }
 
         public int Clerk_Pending { get; set; }
         public int Clerk_Reverted { get; set; }
@@ -184,6 +189,9 @@ namespace RJ_NOC_Model
         public int RegistratCommittee_Revert { get; set; }
         public int RegistratCommittee_Rejected { get; set; }
         public int RegistratCommittee_Completed { get; set; }
+
+
+        
 
     }
 
