@@ -41,5 +41,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.LegalEntityRepository.GetLegalEntityBySSOID(SSOID);
         }
+        public bool CheckExistsLegalEntity(string SSOID, int RoleID)
+        {
+            return UnitOfWork.LegalEntityRepository.CheckExistsLegalEntity(SSOID,RoleID);
+        }
     }
 }
