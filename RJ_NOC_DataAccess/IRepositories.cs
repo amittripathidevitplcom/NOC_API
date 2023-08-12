@@ -63,5 +63,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         IParamedicalHospitalRepository ParamedicalHospitalRepository { get; }
         IClassWiseStudentDetailsRepository ClassWiseStudentDetailsRepository { get; }
+
+        IDepartmentOfCollegeDocumentScrutinyRepository DepartmentOfCollegeDocumentScrutinyRepository { get; }
     }
 }

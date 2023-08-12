@@ -340,6 +340,13 @@ namespace RJ_NOC_DataAccess.Repository
             get { return classwisestudentdetailsrepository; }
         }
 
+        private IDepartmentOfCollegeDocumentScrutinyRepository departmentofcollegedocumentscrutinyrepository;
+        public IDepartmentOfCollegeDocumentScrutinyRepository DepartmentOfCollegeDocumentScrutinyRepository
+        {
+            get { return departmentofcollegedocumentscrutinyrepository; }
+        }
+
+
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -393,6 +400,7 @@ namespace RJ_NOC_DataAccess.Repository
             addCourseMasterRepository = new AddCourseMasterRepository(commonHelper);
             paramedicalHospitalRepository = new  ParamedicalHospitalRepository(commonHelper);
             classwisestudentdetailsrepository = new  ClassWiseStudentDetailsRepository(commonHelper);
+            departmentofcollegedocumentscrutinyrepository = new DepartmentOfCollegeDocumentScrutinyRepository(commonHelper);
 
         }
     }

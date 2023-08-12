@@ -185,6 +185,14 @@ namespace RJ_NOC_Model
         public int RegistratCommittee_Rejected { get; set; }
         public int RegistratCommittee_Completed { get; set; }
 
+
+        //Dec Data Modal
+        public int Nodal_Pending { get; set; }
+        public int Nodal_Reverted { get; set; }
+        public int Nodal_Rejected { get; set; }
+        public int Nodal_Completed { get; set; }
+
+
     }
 
     public class CommonDataModel_Stream
