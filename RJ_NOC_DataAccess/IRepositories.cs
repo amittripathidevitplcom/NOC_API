@@ -65,5 +65,7 @@ namespace RJ_NOC_DataAccess.Interface
         IClassWiseStudentDetailsRepository ClassWiseStudentDetailsRepository { get; }
 
         IAnimalDocumentScrutinyRepository AnimalDocumentScrutinyRepository { get; }
+
+        IDepartmentOfCollegeDocumentScrutinyRepository DepartmentOfCollegeDocumentScrutinyRepository { get; }
     }
 }

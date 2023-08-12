@@ -48,7 +48,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_SaveLegalEntity_IU  ";
             SqlQuery += "@LegalEntityID='" + request.LegalEntityID + "',@IsLegalEntity='" + request.IsLegalEntity + "',@SSOID='" + request.SSOID + "',@RegistrationNo='" + request.RegistrationNo + "',@PresidentMobileNo='" + request.PresidentMobileNo + "',@PresidentEmail='" + request.PresidentEmail + "',@SocietyName='" + request.SocietyName + "',";
             SqlQuery += "@SocietyPresentStatus='" + request.SocietyPresentStatus + "',@StateID='" + request.StateID + "',@DistrictID='" + request.DistrictID + "',@RegisteredActID='" + request.RegisteredActID + "',@SocietyRegistrationDate='" + request.SocietyRegistrationDate + "',@ElectionPresentManagementCommitteeDate='" + request.ElectionPresentManagementCommitteeDate + "',@SocietyRegisteredAddress='" + request.SocietyRegisteredAddress + "',@Pincode='" + request.Pincode + "',@IsOtherInstitution='" + request.IsOtherInstitution + "',";
-            SqlQuery += "@IsWomenMembers='" + request.IsWomenMembers + "',@IsDateOfElection='" + request.IsDateOfElection + "',@ManagementCommitteeCertified='" + request.ManagementCommitteeCertified + "',@SocietyPANNumber='" + request.SocietyPANNumber + "',@TrustLogoDoc='" + request.TrustLogoDoc + "',@TrusteeMemberProofDoc='" + request.TrusteeMemberProofDoc + "',@SocietyPanProofDoc='" + request.SocietyPanProofDoc + "',";
+            SqlQuery += "@IsWomenMembers='" + request.IsWomenMembers + "',@IsDateOfElection='" + request.IsDateOfElection + "',@ManagementCommitteeCertified='" + request.ManagementCommitteeCertified + "',@SocietyPANNumber='" + request.SocietyPANNumber + "',@TrustLogoDoc='" + request.TrustLogoDoc + "',@TrusteeMemberProofDoc='" + request.TrusteeMemberProofDoc + "',@SocietyPanProofDoc='" + request.SocietyPanProofDoc + "',@RegisteredActName='" + request.RegisteredActName + "',";
             SqlQuery += "@MemberDetail_Str='" + MemberDetail_Str + "',@InstituteDetail_Str='" + InstituteDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LegalEntity.SaveData");
             if (Rows > 0)
@@ -91,6 +91,17 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModel.data = dataSet;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+        public bool CheckExistsLegalEntity(string SSOID, int RoleID)
+        {
+            string SqlQuery = " USP_CheckExistsLegalEntity @SSOID='" + SSOID + "',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LegalEntity.CheckExistsLegalEntity");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
