@@ -189,5 +189,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("CheckExistsLegalEntity")]
+        public async Task<OperationResult<bool>> CheckExistsLegalEntity(LegalEntitySSODuplicateCheckDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                bool IfExits = false;
+                IfExits = await Task.Run(() => UtilityHelper.LegalEntity.CheckExistsLegalEntity(request.SSOID, request.RoleID));
+                if (IfExits == false)
+                {
+                    result.State = OperationState.Success;
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = request.SSOID + " is Already Exist, It Can't Not Be Duplicate.!";
+                }
+
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("LegalEntityController.CheckExistsLegalEntity", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -104,6 +104,11 @@ namespace RJ_NOC_Model
         public int LegalEntityID { get; set; }
         public string RegistrationNo { get; set; }
     }
+    public class LegalEntitySSODuplicateCheckDataModel
+    {
+        public int RoleID { get; set; }
+        public string SSOID { get; set; }
+    }
     public class LegalEntityListModel
     {
         public DataSet data { get; set; }

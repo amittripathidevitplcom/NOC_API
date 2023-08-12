@@ -43,8 +43,12 @@ namespace RJ_NOC_Model
         public string TehsilName { get; set; }
         public string PanchayatSamitiName { get; set; }
 
-        public string Action { get; set; }
-        public string Remark { get; set; }
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
+        public string? C_Action { get; set; }
+        public string? C_Remark { get; set; }
+        public string? S_Action { get; set; }
+        public string? S_Remark { get; set; }
     }
 
     public class FarmLandDetailsListModel
