@@ -75,166 +75,166 @@ namespace RJ_NOC_DataAccess.Repositories
         }
 
 
-        //public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_LandDetails @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+        public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_LandDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
 
-        //    List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails>();
-        //    MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails();
+            List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails>();
+            AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails();
 
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<LandDetailsDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LandDetailsDataModel>>(JsonDataTable_Data);
-        //    dataModels.LandDetails = LandDetailDataModel_Item;
-
-
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<LandDetailsDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LandDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.LandDetails = LandDetailDataModel_Item;
 
 
-        //    listdataModels.Add(dataModels);
-
-        //    return listdataModels;
-        //}
-        //public List<MedicalDocumentScrutinyDataModel_DocumentFacilityDetail> DocumentScrutiny_FacilityDetail(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_FacilityDetails @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
-
-        //    List<MedicalDocumentScrutinyDataModel_DocumentFacilityDetail> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentFacilityDetail>();
-        //    MedicalDocumentScrutinyDataModel_DocumentFacilityDetail dataModels = new MedicalDocumentScrutinyDataModel_DocumentFacilityDetail();
-
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<FacilityDetailsDataModel> FacilityDetailsDataModel_Item = JsonConvert.DeserializeObject<List<FacilityDetailsDataModel>>(JsonDataTable_Data);
-        //    dataModels.FacilityDetails = FacilityDetailsDataModel_Item;
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
 
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
+        public List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail> DocumentScrutiny_FacilityDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_FacilityDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+
+            List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail>();
+            AnimalDocumentScrutinyDataModel_DocumentFacilityDetail dataModels = new AnimalDocumentScrutinyDataModel_DocumentFacilityDetail();
+
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<FacilityDetailsDataModel> FacilityDetailsDataModel_Item = JsonConvert.DeserializeObject<List<FacilityDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.FacilityDetails = FacilityDetailsDataModel_Item;
 
 
-        //    listdataModels.Add(dataModels);
-
-        //    return listdataModels;
-        //}
-        //public List<MedicalDocumentScrutinyDataModel_DocumentRoomDetails> DocumentScrutiny_RoomDetail(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_RoomDetails @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
-
-        //    List<MedicalDocumentScrutinyDataModel_DocumentRoomDetails> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentRoomDetails>();
-        //    MedicalDocumentScrutinyDataModel_DocumentRoomDetails dataModels = new MedicalDocumentScrutinyDataModel_DocumentRoomDetails();
-
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<RoomDetailsDataModel> RoomDetailsDataModel_Item = JsonConvert.DeserializeObject<List<RoomDetailsDataModel>>(JsonDataTable_Data);
-        //    dataModels.RoomDetails = RoomDetailsDataModel_Item;
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
 
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
+        public List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails> DocumentScrutiny_RoomDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_RoomDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+
+            List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails>();
+            AnimalDocumentScrutinyDataModel_DocumentRoomDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentRoomDetails();
+            //List<DataTable> RoomDetailsDataModel_Item = new List<DataTable>();
+
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<RoomDetailsDataModel> BuildingDetailsDataModel_Item = JsonConvert.DeserializeObject<List<RoomDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.RoomDetails = BuildingDetailsDataModel_Item;
 
 
-        //    listdataModels.Add(dataModels);
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
-        //    return listdataModels;
-        //}
-        //public List<MedicalDocumentScrutinyDataModel_DocumentBuildingDetails> DocumentScrutiny_BuildingDetails(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_BuildingDetails @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            listdataModels.Add(dataModels);
 
-        //    List<MedicalDocumentScrutinyDataModel_DocumentBuildingDetails> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentBuildingDetails>();
-        //    MedicalDocumentScrutinyDataModel_DocumentBuildingDetails dataModels = new MedicalDocumentScrutinyDataModel_DocumentBuildingDetails();
+            return listdataModels;
+        }
+        public List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails> DocumentScrutiny_BuildingDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_BuildingDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
 
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<BuildingDetailsDataModel> BuildingDetailsDataModel_Item = JsonConvert.DeserializeObject<List<BuildingDetailsDataModel>>(JsonDataTable_Data);
-        //    dataModels.BuildingDetails = BuildingDetailsDataModel_Item;
+            List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails>();
+            AnimalDocumentScrutinyDataModel_DocumentBuildingDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentBuildingDetails();
 
-
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
-
-
-        //    listdataModels.Add(dataModels);
-
-        //    return listdataModels;
-        //}
-        //public List<MedicalDocumentScrutinyDataModel_DocumentStaffDetails> DocumentScrutiny_StaffDetails(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_StaffDetails @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
-
-        //    List<MedicalDocumentScrutinyDataModel_DocumentStaffDetails> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentStaffDetails>();
-        //    MedicalDocumentScrutinyDataModel_DocumentStaffDetails dataModels = new MedicalDocumentScrutinyDataModel_DocumentStaffDetails();
-
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<StaffDetailDataModel> StaffDetailsDataModel_Item = JsonConvert.DeserializeObject<List<StaffDetailDataModel>>(JsonDataTable_Data);
-        //    dataModels.StaffDetails = StaffDetailsDataModel_Item;
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<BuildingDetailsDataModel> BuildingDetailsDataModel_Item = JsonConvert.DeserializeObject<List<BuildingDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.BuildingDetails = BuildingDetailsDataModel_Item;
 
 
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
 
-        //    listdataModels.Add(dataModels);
+            listdataModels.Add(dataModels);
 
-        //    return listdataModels;
-        //}
-        //public List<MedicalDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_OldNOCDetails @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            return listdataModels;
+        }
+        public List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails> DocumentScrutiny_StaffDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_StaffDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
 
-        //    List<MedicalDocumentScrutinyDataModel_DocumentOldNOCDetails> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentOldNOCDetails>();
-        //    MedicalDocumentScrutinyDataModel_DocumentOldNOCDetails dataModels = new MedicalDocumentScrutinyDataModel_DocumentOldNOCDetails();
+            List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails>();
+            AnimalDocumentScrutinyDataModel_DocumentStaffDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentStaffDetails();
 
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<OldNocDetailsDataModel> OldNOCDetailsDataModel_Item = JsonConvert.DeserializeObject<List<OldNocDetailsDataModel>>(JsonDataTable_Data);
-        //    dataModels.OldNOCDetails = OldNOCDetailsDataModel_Item;
-
-
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<StaffDetailDataModel> StaffDetailsDataModel_Item = JsonConvert.DeserializeObject<List<StaffDetailDataModel>>(JsonDataTable_Data);
+            dataModels.StaffDetails = StaffDetailsDataModel_Item;
 
 
-        //    listdataModels.Add(dataModels);
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
-        //    return listdataModels;
-        //}
 
-        //public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDocument> DocumentScrutiny_CollegeDocument(int DepartmentID, int CollageID, int RoleID, int ApplyNOCID, string Type)
-        //{
-        //    string SP_Name = Type == "Other Document" ? "USP_DocumentScrutiny_OtherDocument" : "USP_DocumentScrutiny_RequiredDocument";
-        //    string SqlQuery = " exec " + SP_Name + " @DepartmentID=" + DepartmentID + ",@CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + ",@DocumentType='" + Type + "'";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutinyRepository.DocumentScrutiny_CollegeDocument");
+            listdataModels.Add(dataModels);
 
-        //    List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDocument> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDocument>();
-        //    MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDocument dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDocument();
+            return listdataModels;
+        }
+        public List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_OldNOCDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
 
-        //    List<DataTable> CollegeDocumentDataModel_Item = new List<DataTable>();
-        //    CollegeDocumentDataModel_Item.Add(dataSet.Tables[0]);
-        //    dataModels.CollegeDocument = CollegeDocumentDataModel_Item;
+            List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails>();
+            AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails();
 
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
-        //    listdataModels.Add(dataModels);
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<OldNocDetailsDataModel> OldNOCDetailsDataModel_Item = JsonConvert.DeserializeObject<List<OldNocDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.OldNOCDetails = OldNOCDetailsDataModel_Item;
 
-        //    return listdataModels;
-        //}
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
+
+        public List<AnimalDocuemntScrutinyCommonModel> DocumentScrutiny_CollegeDocument(int DepartmentID, int CollageID, int RoleID, int ApplyNOCID, string Type)
+        {
+            string SP_Name = Type == "Other Document" ? "USP_DocumentScrutiny_OtherDocument_AH" : "USP_DocumentScrutiny_RequiredDocument_AH";
+            string SqlQuery = " exec " + SP_Name + " @DepartmentID=" + DepartmentID + ",@CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + ",@DocumentType='" + Type + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutinyRepository.DocumentScrutiny_CollegeDocument");
+
+            List<AnimalDocuemntScrutinyCommonModel> listdataModels = new List<AnimalDocuemntScrutinyCommonModel>();
+            AnimalDocuemntScrutinyCommonModel dataModels = new AnimalDocuemntScrutinyCommonModel();
+
+            List<DataTable> CollegeDocumentDataModel_Item = new List<DataTable>();
+            CollegeDocumentDataModel_Item.Add(dataSet.Tables[0]);
+            dataModels.lstDatatable = CollegeDocumentDataModel_Item;
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.lstFinalRemarkList = dataModel;
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
 
         //public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation> DocumentScrutiny_OtherInformation(int CollageID, int RoleID, int ApplyNOCID)
         //{
@@ -309,54 +309,53 @@ namespace RJ_NOC_DataAccess.Repositories
         //    return listdataModels;
         //}
 
-        //public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> DocumentScrutiny_AcademicInformation(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_AcademicInformation @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_AcademicInformation");
+        public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> DocumentScrutiny_AcademicInformation(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_AcademicInformation_AH @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_AcademicInformation");
 
-        //    List<MedicalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>();
-        //    MedicalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation();
+            List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>();
+            AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation();
 
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<AcademicInformationDetailsDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<AcademicInformationDetailsDataModel>>(JsonDataTable_Data);
-        //    dataModels.AcademicInformations = LandDetailDataModel_Item;
-
-
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<AcademicInformationDetailsDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<AcademicInformationDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.AcademicInformations = LandDetailDataModel_Item;
 
 
-        //    listdataModels.Add(dataModels);
-
-        //    return listdataModels;
-        //}
-
-        //public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
-        //{
-        //    string SqlQuery = " exec USP_DocumentScrutiny_CollegeManagementSociety @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
-        //    DataSet dataSet = new DataSet();
-        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety");
-
-        //    List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>();
-        //    MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety();
-
-        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-        //    List<SocietyMasterDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<SocietyMasterDataModel>>(JsonDataTable_Data);
-        //    dataModels.CollegeManagementSocietys = LandDetailDataModel_Item;
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
 
-        //    List<DataTable> dataModel = new List<DataTable>();
-        //    dataModel.Add(dataSet.Tables[1]);
-        //    dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
+
+        public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_CollegeManagementSociety_AH @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety");
+
+            List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>();
+            AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety();
+
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<SocietyMasterDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<SocietyMasterDataModel>>(JsonDataTable_Data);
+            dataModels.CollegeManagementSocietys = LandDetailDataModel_Item;
 
 
-        //    listdataModels.Add(dataModels);
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
-        //    return listdataModels;
-        //}
 
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
 
         public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail> DocumentScrutiny_CollegeDetail(int CollegeID, int RoleID, int ApplyNOCID)
         {
@@ -389,5 +388,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
             return listdataModels;
         }
+
+
     }
 }
