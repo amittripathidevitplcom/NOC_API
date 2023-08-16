@@ -1,4 +1,5 @@
-﻿using RJ_NOC_DataAccess.Interface;
+﻿using Azure.Core;
+using RJ_NOC_DataAccess.Interface;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using System;
@@ -20,9 +21,19 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails(CollegeID);
         }
 
+        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.GetSubjectWiseStudenetDetails(CollegeID);
+        }
+
         public bool SaveData(PostClassWiseStudentDetailsDataModel request)
         {
             return UnitOfWork.ClassWiseStudentDetailsRepository.SaveData(request);
+        }
+
+        public bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel model)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.SaveDataSubjectWise(model);
         }
     }
 }

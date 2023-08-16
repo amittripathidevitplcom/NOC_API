@@ -531,6 +531,15 @@ namespace RJ_NOC_Utility.CustomerDomain
                         SubjectName = sd.SubjectName,
                     }).ToList();
                 });
+                //
+           
+                model.ChangeInNameOfCollegeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInNameOfCollege>>(ds.Tables[3]);
+                model.ChangeInPlaceOfCollegeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInPlaceOfCollege>>(ds.Tables[4]);
+                model.ChangeInCoedtoGirlsList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInCoedtoGirls>>(ds.Tables[5]);
+                model.ChangeInGirlstoCoedList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInGirlstoCoed>>(ds.Tables[6]);
+                model.MergerCollegeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_MergerCollege>>(ds.Tables[7]);
+                model.ChangeInCollegeManagementList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInCollegeManagement>>(ds.Tables[8]);
+
             }
             return model;
         }
