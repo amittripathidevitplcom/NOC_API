@@ -102,7 +102,7 @@ namespace RJ_NOC_API
 
             builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
             {
-                builder.WithOrigins("http://172.22.33.75:1006", "http://172.22.33.75:1111").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins("http://172.22.33.75:80", "http://172.22.33.75:81", "http://172.22.33.75").AllowAnyMethod().AllowAnyHeader();
             }));
 
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
