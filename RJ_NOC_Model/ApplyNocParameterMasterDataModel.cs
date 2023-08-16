@@ -56,7 +56,7 @@ namespace RJ_NOC_Model
         public decimal FeeAmount { get; set; }
         public string? ParameterCode { get; set; }
         public string? ApplyNocCode { get; set; }
-        
+
         public bool IsChecked { get; set; } = false;
     }
     public class ApplyNocParameterMaster_TNOCExtensionDataModel : ApplyNocParameterMasterListDataModel
@@ -145,6 +145,17 @@ namespace RJ_NOC_Model
 
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
+
+
+        //dec extra tables
+        public List<ApplyNocParameterMasterList_ChangeInNameOfCollege>? ChangeInNameOfCollegeList { get; set; }
+        public List<ApplyNocParameterMasterList_ChangeInPlaceOfCollege>? ChangeInPlaceOfCollegeList { get; set; }
+        public List<ApplyNocParameterMasterList_ChangeInCoedtoGirls>? ChangeInCoedtoGirlsList { get; set; }
+        public List<ApplyNocParameterMasterList_ChangeInGirlstoCoed>? ChangeInGirlstoCoedList { get; set; }
+        public List<ApplyNocParameterMasterList_ChangeInCollegeManagement>? ChangeInCollegeManagementList { get; set; }
+        public List<ApplyNocParameterMasterList_MergerCollege>? MergerCollegeList { get; set; }
+
+
     }
 
     public class ApplyNocApplicationParameterDataModel
@@ -157,6 +168,10 @@ namespace RJ_NOC_Model
         public string? ParameterCode { get; set; }
         public decimal FeeAmount { get; set; }
         public List<ApplyNocApplicationDetailDataModel> ApplyNocApplicationDetailList { get; set; }
+
+
+
+
     }
     public class ApplyNocApplicationDetailDataModel
     {

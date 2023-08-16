@@ -11,5 +11,13 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     {
         List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID);
         bool SaveData(PostClassWiseStudentDetailsDataModel request);
+
+
+        //Save
+        List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID);
+        bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel model);
+
+
+
     }
 }
