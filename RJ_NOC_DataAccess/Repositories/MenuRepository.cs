@@ -42,6 +42,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
          public List<MenuDataModel_List> GetUserWiseMenu(int UserID)
         {
+            
             string SqlQuery = " exec Usp_MenuUserWise @UserID="+ UserID + "";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery);

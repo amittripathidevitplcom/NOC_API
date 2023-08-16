@@ -16,7 +16,19 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> Check_SSOIDWise_LegalEntity(string SSOID)
         {
-            string SqlQuery = " exec USP_Check_SSOIDWise_LegalEntity @SSOID='"+ SSOID + "'";
+            string SqlQuery = " exec c @SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetDepartmentByCourse");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetUserRoleList(string SSOID)
+        {
+            string SqlQuery = " exec USP_GetUserRole @SSOID='" + SSOID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetDepartmentByCourse");
 
