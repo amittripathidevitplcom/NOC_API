@@ -20,7 +20,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID)
         {
-            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStuduectDetails',@CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStudentDetails',@CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails");
             List<ClassWiseStudentDetailsDataModel> dataModels = new List<ClassWiseStudentDetailsDataModel>();
@@ -60,7 +60,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID)
         {
-            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStuduectDetailsSubjectWise',@CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStudentDetailsSubjectWise',@CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetSubjetWiseStudenetDetails");
             List<SubjectWiseStatisticsDetailsDataModel> dataModels = new List<SubjectWiseStatisticsDetailsDataModel>();
