@@ -161,7 +161,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetLandDoucmentTypeMasterList_DepartmentWise(DepartmentID);
         }
 
-        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, int CourseType)
+        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseList_CollegeWise(CollegID, CourseType);
         }

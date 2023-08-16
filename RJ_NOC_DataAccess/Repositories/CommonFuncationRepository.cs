@@ -391,9 +391,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, int CourseType)
+        public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType)
         {
-            string SqlQuery = $" Exec Get_CollegeWiseCourse @CollegeID={CollegID},@CourseType={CourseType}";
+            string SqlQuery = $" Exec Get_CollegeWiseCourse @CollegeID={CollegID},@CourseType='"+ CourseType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
 
