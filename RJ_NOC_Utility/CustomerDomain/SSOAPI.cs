@@ -30,6 +30,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.SSOAPIRepository.Check_SSOIDWise_LegalEntity(SSOID);
         }
+        public List<CommonDataModel_DataTable> GetUserRoleList(string SSOID)
+        {
+            return UnitOfWork.SSOAPIRepository.GetUserRoleList(SSOID);
+        }
 
         public async Task<SSOUserDetailData> GetSSOUserLogionDetails(string SSOID, string LoginType, IConfiguration _configuration)
         {

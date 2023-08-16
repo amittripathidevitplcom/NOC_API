@@ -22,6 +22,7 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using RJ_NOC_DataAccess.Common;
 
+
 namespace RJ_NOC_API.Controllers
 {
     [Route("api/SSOAPI")]
@@ -39,7 +40,17 @@ namespace RJ_NOC_API.Controllers
         {
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
-            string SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
+
+            string SSOID = "";
+            if (sSOLandingDataDataModel.LoginType.ToString() != "0")
+            {
+                  SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
+            }
+            else
+            {
+                  SSOID = sSOLandingDataDataModel.Username;
+            }
+           
             string LoginType = "CITIZEN";//CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
 
             //string SSOID = sSOLandingDataDataModel.Username;
@@ -157,6 +168,39 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+
+        [HttpGet("GetUserRoleList/{SSOID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetUserRoleList(string SSOID)
+        {
+
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetUserRoleList(SSOID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.Check_SSOIDWise_LegalEntity", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }
