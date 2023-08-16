@@ -59,5 +59,12 @@ namespace RJ_NOC_Model
 
         public string? S_IsPrimary { get; set; }
         public string? S_IsAuthorized { get; set; }
+
+        public string EducationProof { get; set; }
+        public string? Dis_EducationProof { get; set; }
+        public string? EducationProofPath { get; set; }
+        public string ConsentLetter { get; set; }
+        public string? Dis_ConsentLetter { get; set; }
+        public string? ConsentLetterPath { get; set; }
     }
 }
