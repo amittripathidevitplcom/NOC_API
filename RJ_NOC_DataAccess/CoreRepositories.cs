@@ -345,6 +345,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return animalDocumentScrutinyRepository; }
         }
+        private IAgricultureDocumentScrutinyRepository agricultureDocumentScrutinyRepository;
+        public IAgricultureDocumentScrutinyRepository AgricultureDocumentScrutinyRepository
+        {
+            get { return agricultureDocumentScrutinyRepository; }
+        }
 
         private IDepartmentOfCollegeDocumentScrutinyRepository departmentofcollegedocumentscrutinyrepository;
         public IDepartmentOfCollegeDocumentScrutinyRepository DepartmentOfCollegeDocumentScrutinyRepository
@@ -407,6 +412,7 @@ namespace RJ_NOC_DataAccess.Repository
             paramedicalHospitalRepository = new  ParamedicalHospitalRepository(commonHelper);
             classwisestudentdetailsrepository = new  ClassWiseStudentDetailsRepository(commonHelper);
             animalDocumentScrutinyRepository = new AnimalDocumentScrutinyRepository(commonHelper);
+            agricultureDocumentScrutinyRepository = new AgricultureDocumentScrutinyRepository(commonHelper);
             departmentofcollegedocumentscrutinyrepository = new DepartmentOfCollegeDocumentScrutinyRepository(commonHelper);
 
         }
