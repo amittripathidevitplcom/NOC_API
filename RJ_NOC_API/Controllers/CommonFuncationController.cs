@@ -991,7 +991,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetCourseList_CollegeWise/{CollegID}/{CourseType}")]
-        public async Task<OperationResult<List<CommonDataModel_CollegeWiseCourseList>>> GetCourseList_CollegeWise(int CollegID, int CourseType = 0)
+        public async Task<OperationResult<List<CommonDataModel_CollegeWiseCourseList>>> GetCourseList_CollegeWise(int CollegID, string CourseType ="All")
         {
             var result = new OperationResult<List<CommonDataModel_CollegeWiseCourseList>>();
             try
