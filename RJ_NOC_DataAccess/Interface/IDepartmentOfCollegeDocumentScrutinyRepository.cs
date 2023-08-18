@@ -26,6 +26,13 @@ namespace RJ_NOC_DataAccess.Interface
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID);
 
+
+        //get list
+        List<ApplyNOCDataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID);
+
+       
+
+
         List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request);
     }
 

@@ -32,5 +32,20 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommitteeMasterRepository.DeleteCommitteeData(CommitteeMasterID);
         }
+
+        public bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel ListData)
+        {
+            return UnitOfWork.CommitteeMasterRepository.SaveApplicationCommitteeData(ListData);
+        }
+
+        public bool DeleteApplicationCommittee(int CommitteeMemberID)
+        {
+            return UnitOfWork.CommitteeMasterRepository.DeleteCommitteeData(CommitteeMemberID);
+        }
+
+        public List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID)
+        {
+            return UnitOfWork.CommitteeMasterRepository.GetApplicationCommitteeList(ApplyNocApplicationID);
+        }
     }
 }
