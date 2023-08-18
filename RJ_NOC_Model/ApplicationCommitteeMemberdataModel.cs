@@ -18,6 +18,7 @@ namespace RJ_NOC_Model
         public bool? IsPrimaryMember { get; set; }
         public bool? ActiveStatus { get; set; }
         public bool? DeleteStatus { get; set; }
+        public string? AadhaarNo { get; set; }
     }
 
     public class PostApplicationCommitteeMemberdataModel
