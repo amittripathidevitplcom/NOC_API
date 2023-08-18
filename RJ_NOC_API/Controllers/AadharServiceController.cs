@@ -7,6 +7,7 @@ using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain;
 using System.Data;
 using System.Net;
+using System.Xml;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -108,5 +109,57 @@ namespace RJ_NOC_API.Controllers
             }
             return urldt;
         }
+
+
+
+        [HttpPost("GetAadharByVID")]
+        public DataTable GetAadharByVID(CommonDataModel_AadharDataModel Model)
+        {
+            var urldt = new System.Data.DataTable("tableName");
+            // create fields
+            urldt.Columns.Add("message", typeof(string));
+            urldt.Columns.Add("status", typeof(int));
+            urldt.Columns.Add("data", typeof(string));
+            try
+            {
+                string strResult = UtilityHelper.AadharServiceUtility.GetAadharByVID(Model, _configuration);
+                if (!string.IsNullOrEmpty(strResult))
+                {
+                    if (strResult.Contains("NO"))
+                    {
+                        urldt.Rows.Add(new Object[]{
+                                "Failed",1,
+                                strResult });
+
+                    }
+                    else
+                    {
+                        //create table
+                        urldt.Rows.Add(new Object[]{
+                                "success",0,
+                                strResult });
+                    }
+                }
+                else 
+                {
+                    //create table
+                    urldt.Rows.Add(new Object[]{
+                                "Failed",1,
+                                "something went wrong" });
+
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("GetAadharByVID.SaveData", ex.ToString());
+                urldt.Rows.Add(new Object[]{
+                                "Please try again",1,
+                               ex.Message
+                                });
+            }
+            return urldt;
+        }
+
+
     }
 }

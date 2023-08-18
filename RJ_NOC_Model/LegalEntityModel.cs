@@ -20,7 +20,7 @@ namespace RJ_NOC_Model
         public int StateID { get; set; }
         public int DistrictID { get; set; }
         public int RegisteredActID { get; set; }
-        public string RegisteredActName { get; set; }
+        public string? RegisteredActName { get; set; }
         public string SocietyRegistrationDate { get; set; }
         public string ElectionPresentManagementCommitteeDate { get; set; }
         public string SocietyRegisteredAddress { get; set; }
@@ -34,7 +34,7 @@ namespace RJ_NOC_Model
         public string IsOtherInstitution { get; set; }
         public string IsWomenMembers { get; set; }
         public string IsDateOfElection { get; set; }
-        public string ManagementCommitteeCertified { get; set; }        
+        public string ManagementCommitteeCertified { get; set; }
         public string SocietyPANNumber { get; set; }
         public string Dis_SocietyPanProofDocName { get; set; }
         public string SocietyPanProofDocPath { get; set; }
@@ -72,7 +72,9 @@ namespace RJ_NOC_Model
         public string PresidentAadhaarProofDocPath { get; set; }
         public string PresidentAadhaarProofDoc { get; set; }
 
-
+        public bool ActiveStatus { get; set; }
+        public bool DeleteStatus { get; set; }
+        public bool IsDeleted { get; set; }
         public string? C_Action { get; set; }
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
@@ -98,6 +100,9 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
+        public bool ActiveStatus { get; set; }
+        public bool DeleteStatus { get; set; }
+        public bool IsDeleted { get; set; }
     }
     public class LegalEntityDuplicateCheckDataModel
     {

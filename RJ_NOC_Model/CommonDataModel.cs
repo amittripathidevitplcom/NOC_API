@@ -306,6 +306,7 @@ namespace RJ_NOC_Model
         public string OTP { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
+        public string AadharID { get; set; }
 
     }
 

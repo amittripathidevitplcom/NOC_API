@@ -53,7 +53,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_LandDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_LandDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -83,7 +83,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_CollegeDocument", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_CollegeDocument", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -114,7 +114,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_OtherInformation", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_OtherInformation", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -145,7 +145,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_HostelDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_HostelDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -175,7 +175,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_FacilityDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_FacilityDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -206,7 +206,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_HospitalDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_HospitalDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -237,7 +237,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_AcademicInformation", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_AcademicInformation", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -268,7 +268,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_CollegeManagementSociety", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -299,7 +299,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_LegalEntity", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_LegalEntity", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -330,7 +330,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_CollegeDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_CollegeDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -361,7 +361,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_RoomDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_RoomDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -391,7 +391,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_BuildingDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_BuildingDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -421,7 +421,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_StaffDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_StaffDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -451,7 +451,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_OldNOCDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_OldNOCDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -484,7 +484,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.CheckDocumentScrutinyTabsData", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.CheckDocumentScrutinyTabsData", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -515,7 +515,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_ParamedicalHospitalDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_ParamedicalHospitalDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -527,6 +527,107 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+
+        [HttpGet("GetNodalOfficerApplyNOCApplicationList/{RoleID}/{UserID}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetNodalOfficerApplyNOCApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetApplicationPvDetails/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPvDetails(int ApplyNOCID, int RoleID)
+        {
+            //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.CheckDocumentScrutinyTabsData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+
+        [HttpPost("GetPhysicalVerificationAppliationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetPhysicalVerificationAppliationList(request));
+                if (result.Data.Count>0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPhysicalVerificationAppliationList", 0, "DepartmentOfCollegeDocumentScrutiny");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPhysicalVerificationAppliationList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

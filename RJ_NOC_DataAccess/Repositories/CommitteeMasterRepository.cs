@@ -29,6 +29,9 @@ namespace RJ_NOC_DataAccess.Repository
             _commonHelper = commonHelper;
         }
 
+
+        #region "COomitteMaster Section"
+       
         public bool SaveData(CommitteeMasterDataModel request)
         {
             string CommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.CommitteeMemberDetailList, "Temp_CommitteeMasterDetail");
@@ -93,6 +96,45 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        #endregion
+
+
+        #region "Application (Committee"
+        public bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel request)
+        {
+            string CommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_CommitteeMasterDetail");
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveApplicationCommitteeMember  @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@CommitteeMasterDetail_Str='" + CommitteeMasterDetail_Str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveApplicationCommitteeData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool DeleteApplicationCommittee(int CommitteeMemberID)
+        {
+            string SqlQuery = " exec USP_DeleteCommitteeMasterList @CommitteeMemberID='" + CommitteeMemberID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.DeleteCommitteeData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID)
+        {
+            string SqlQuery = " exec USP_GetApplicationCommitteeList @ApplyNocApplicationID='" + ApplyNocApplicationID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "CommitteeMaster.GetApplicationCommitteeMasterList");
+            List<ApplicationCommitteeMemberdataModel> listdataModels = new List<ApplicationCommitteeMemberdataModel>();
+            ApplicationCommitteeMemberdataModel dataModels = new ApplicationCommitteeMemberdataModel();
+          
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+                listdataModels = JsonConvert.DeserializeObject<List<ApplicationCommitteeMemberdataModel>>(JsonDataTable_Data);
+            
+            return listdataModels;
+        }
+        #endregion
 
     }
 }

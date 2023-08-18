@@ -58,9 +58,27 @@ namespace RJ_NOC_Model
     public class CommiteeInspection_RNCCheckList_DataModel
     {
         public int RNCCheckListID { get; set; }
+        public string IsChecked { get; set; }
         public int ApplyNOCID { get; set; }
         public int CreatedBy { get; set; }
         public string? FileUploadName { get; set; }
+        public string? Remark { get; set; }
 
+    }
+
+    public class ApplyNocApplicationDetails_DataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public string ApplicationNo { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string DepartmentName { get; set; }
+        public string CollegeName { get; set; }
+        public int PVStage { get; set; }
+        public string strPVStage { get; set; }
+    }
+    public class GetPhysicalVerificationAppliationList
+    {
+        public string SSOID { get; set; }
     }
 }

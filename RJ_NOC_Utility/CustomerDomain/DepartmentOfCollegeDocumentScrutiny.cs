@@ -79,6 +79,20 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
         }
+        public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetPhysicalVerificationAppliationList(request);
+        }
+
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID);
+        }
+        public List<CommonDataModel_DataTable> GetApplicationPvDetails(int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetApplicationPvDetails(ApplyNOCID);
+        }
+
 
     }
 }
