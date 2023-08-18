@@ -63,6 +63,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
 
             List<LegalEntityListModel> dataModels = new List<LegalEntityListModel>();
+
             LegalEntityListModel dataModel = new LegalEntityListModel();
             dataModel.data = dataSet;
             dataModels.Add(dataModel);

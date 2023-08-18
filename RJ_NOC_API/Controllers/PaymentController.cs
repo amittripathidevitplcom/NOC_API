@@ -251,81 +251,92 @@ namespace RJ_NOC_API.Controllers
             var requestDetailsModel = new OperationResult<EmitraRequestDetails>();
             try
             {
-               
+
 
                 var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
-                 
-                EmitraTransactions objEmitra = new EmitraTransactions();
-                objEmitra.key = "InsertDetails";
-                objEmitra.ApplicationIdEnc = Model.ApplicationIdEnc;
-                objEmitra.Amount = Model.Amount;
-                var result = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
 
-                if (result.TransactionId > 0)
+                if (EmitraServiceDetail.REVENUEHEAD != null)
                 {
-                    PGRequest data = new PGRequest();
-                    data.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
-                    //data.PRN = "NOC" + result.TransactionId;
-                    Random rnd = new Random();
-                    data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
 
-                    data.REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-                    data.AMOUNT = Convert.ToString(Model.Amount);
-                    data.SUCCESSURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + Model.ServiceID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("NO");
-                    data.FAILUREURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + Model.ServiceID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("YES");
-                    data.USERNAME = Model.UserName;
-                    data.USERMOBILE = Model.MobileNo;
-                    data.COMMTYPE = EmitraServiceDetail.COMMTYPE;
-                    data.OFFICECODE = EmitraServiceDetail.OFFICECODE;
-                    data.REVENUEHEAD = EmitraServiceDetail.REVENUEHEAD.Replace("##", Model.Amount.ToString());
-                    data.SERVICEID = EmitraServiceDetail.SERVICEID;
-                    data.UDF1 = Model.RegistrationNo;
-                    data.UDF2 = Model.SsoID;
-                    data.USEREMAIL = "";
-                    data.CHECKSUM = PaymentEncriptionDec.CreateMD5(data.PRN + "|" + data.AMOUNT + "|" + EmitraServiceDetail.CHECKSUMKEY);
+                    EmitraTransactions objEmitra = new EmitraTransactions();
+                    objEmitra.key = "InsertDetails";
+                    objEmitra.ApplicationIdEnc = Model.ApplicationIdEnc;
+                    objEmitra.Amount = Model.Amount;
+                    var result = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
 
-                    // data.ServiceURL = EmitraServiceDetail.ServiceURL;
-                    //string datad=  "?strdata=" + JsonConvert.SerializeObject(data) + "&enckey=" + EmitraServiceDetail.EncryptionKey;
-
-                    EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration endpointConfiguration = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration();
-
-                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-
-                    EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient emitraencsev = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient(endpointConfiguration, EmitraServiceDetail.WebServiceURL);
-                    EmitraEncryptStringResponse response = await emitraencsev.EmitraEncryptStringAsync(EmitraServiceDetail.EncryptionKey, JsonConvert.SerializeObject(data));
-
-                    if (data != null)
+                    if (result.TransactionId > 0)
                     {
-                        try
+                        PGRequest data = new PGRequest();
+                        data.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
+                        //data.PRN = "NOC" + result.TransactionId;
+                        Random rnd = new Random();
+                        data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+
+                        data.REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                        data.AMOUNT = Convert.ToString(Model.Amount);
+                        data.SUCCESSURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + Model.ServiceID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("NO");
+                        data.FAILUREURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + Model.ServiceID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("YES");
+                        data.USERNAME = Model.UserName;
+                        data.USERMOBILE = Model.MobileNo;
+                        data.COMMTYPE = EmitraServiceDetail.COMMTYPE;
+                        data.OFFICECODE = EmitraServiceDetail.OFFICECODE;
+                        data.REVENUEHEAD = EmitraServiceDetail.REVENUEHEAD.Replace("##", Model.Amount.ToString());
+                        data.SERVICEID = EmitraServiceDetail.SERVICEID;
+                        data.UDF1 = Model.RegistrationNo;
+                        data.UDF2 = Model.SsoID;
+                        data.USEREMAIL = "";
+                        data.CHECKSUM = PaymentEncriptionDec.CreateMD5(data.PRN + "|" + data.AMOUNT + "|" + EmitraServiceDetail.CHECKSUMKEY);
+
+                        // data.ServiceURL = EmitraServiceDetail.ServiceURL;
+                        //string datad=  "?strdata=" + JsonConvert.SerializeObject(data) + "&enckey=" + EmitraServiceDetail.EncryptionKey;
+
+                        EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration endpointConfiguration = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration();
+
+                        ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+                        EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient emitraencsev = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient(endpointConfiguration, EmitraServiceDetail.WebServiceURL);
+                        EmitraEncryptStringResponse response = await emitraencsev.EmitraEncryptStringAsync(EmitraServiceDetail.EncryptionKey, JsonConvert.SerializeObject(data));
+
+                        if (data != null)
                         {
-                            objEmitra.key = "UpdateDetails";
-                            objEmitra.RequestString = JsonConvert.SerializeObject(data);
-                            objEmitra.TransactionId = result.TransactionId;
-                            objEmitra.ServiceID = EmitraServiceDetail.SERVICEID;
-                            objEmitra.PRN = data.PRN;
-                            var UpdateStatus = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
-                        }
-                        catch (System.Exception ex)
-                        {
-                            CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPaymentUpdateDetails", ex.ToString());
+                            try
+                            {
+                                objEmitra.key = "UpdateDetails";
+                                objEmitra.RequestString = JsonConvert.SerializeObject(data);
+                                objEmitra.TransactionId = result.TransactionId;
+                                objEmitra.ServiceID = EmitraServiceDetail.SERVICEID;
+                                objEmitra.PRN = data.PRN;
+                                var UpdateStatus = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
+                            }
+                            catch (System.Exception ex)
+                            {
+                                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPaymentUpdateDetails", ex.ToString());
+                            }
+
                         }
 
+                        Model.ENCDATA = response.Body.EmitraEncryptStringResult;
+                        Model.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
+                        Model.PaymentRequestURL = EmitraServiceDetail.ServiceURL;
+                        Model.ServiceID = EmitraServiceDetail.SERVICEID;
+                        Model.IsSucccess = true;
+
+                        requestDetailsModel.Data = Model;
+                        requestDetailsModel.State = OperationState.Success;
+                        requestDetailsModel.SuccessMessage = "successfully .!";
                     }
-
-                    Model.ENCDATA = response.Body.EmitraEncryptStringResult;
-                    Model.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
-                    Model.PaymentRequestURL = EmitraServiceDetail.ServiceURL;
-                    Model.ServiceID = EmitraServiceDetail.SERVICEID;
-                    Model.IsSucccess = true;
-
-                    requestDetailsModel.Data = Model;
-                    requestDetailsModel.State = OperationState.Success;
-                    requestDetailsModel.SuccessMessage = "successfully .!";
-
                 }
+                else 
+                {
+                    requestDetailsModel.Data = Model;
+                    requestDetailsModel.State = OperationState.Error;
+                    requestDetailsModel.ErrorMessage = "Service Id Not Mapped";
+                }
+
             }
+           
             catch (System.Exception ex)
             {
                 requestDetailsModel.Data = Model;

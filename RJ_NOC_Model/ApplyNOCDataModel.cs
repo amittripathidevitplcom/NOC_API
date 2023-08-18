@@ -63,4 +63,16 @@ namespace RJ_NOC_Model
         public string? FileUploadName { get; set; }
 
     }
+
+    public class ApplyNocApplicationDetails_DataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public string ApplicationNo { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string DepartmentName { get; set; }
+        public string CollegeName { get; set; }
+        public int PVStage { get; set; }
+        public int strPVStage { get; set; }
+    }
 }
