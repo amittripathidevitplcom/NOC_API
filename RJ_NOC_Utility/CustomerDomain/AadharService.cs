@@ -33,6 +33,12 @@ namespace RJ_NOC_Utility.CustomerDomain
             return ValidateOTP(modal.TransactionNo, modal.AadharNo, modal.OTP, _configuration);
         }
 
+        public string GetAadharByVID(CommonDataModel_AadharDataModel modal, IConfiguration _configuration)
+        {
+            return GetAadharByVID(modal.AadharID,  _configuration);
+        }
+
+
 
 
         #region "User Define Functiotion"
@@ -374,6 +380,76 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         #endregion
 
+
+
+        #region "GetAadharByVID"
+        public string GetAadharByVID(string _UUID, IConfiguration _configuration)
+        {
+
+            string _AadhaarNo = string.Empty;
+            string subaua = _configuration["AadharServiceDetails:subaua"].ToString();
+            // string subaua = "PNSCL22866";
+            try
+            {
+                if (!string.IsNullOrEmpty(_UUID) && _UUID.Length == 15)
+                {
+                    string ip = GetIpAddress();
+                    //string url = "https://api.sewadwaar.rajasthan.gov.in/app/live/Aadhaar/Prod/detokenizeV2/doitAadhaar/encDec/demo/hsm/auth?client_id=f6de7747-60d3-4cf0-a0ae-71488abd6e95";
+                    string url = "https://aadhaarauthapi.rajasthan.gov.in/doit-aadhaar-enc-dec/demo/hsm/auth/detokenizeV2";
+
+                    string ModifiedData = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><AuthRequest UUID=\"" + _UUID + "\" subaua=\"" + subaua + "\" flagType=\"" + "A" + "\" ver=\"2.5\"></AuthRequest>";
+
+                    System.Net.WebRequest req = null;
+                    WebResponse rsp = null;
+                    try
+                    {
+                        req = WebRequest.Create(url);
+                        req.Method = "POST";
+                        req.ContentType = "application/xml";
+                        req.Headers["appname"] = "CO-Operative";
+                        StreamWriter writer = new StreamWriter(req.GetRequestStream());
+                        writer.Write(ModifiedData);
+                        writer.Close();
+                        rsp = req.GetResponse();
+                        StreamReader sr = new StreamReader(rsp.GetResponseStream());
+                        string results = sr.ReadToEnd();
+                        sr.Close();
+                        XmlDocument xml = new XmlDocument();
+                        xml.LoadXml(results);
+                        XmlNodeList xnList = xml.SelectNodes("/DSMTokanize");
+                        string sa = "";
+                        foreach (XmlNode xn in xnList)
+                        {
+                            sa = xn["status"].InnerText;
+                            if (sa.ToUpper() == "Y")
+                                _AadhaarNo = xn["AadhaarNo"].InnerText;
+                            else
+                                _AadhaarNo = "NO";
+                        }
+                        if (sa.ToUpper() == "N")
+                        {
+
+                            _AadhaarNo = "NO";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _AadhaarNo = "NO#" + ex.Message;
+                    }
+                }
+                else
+                {
+                    _AadhaarNo = "NO" + "#" + "ReferenceId Not Found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                _AadhaarNo = "NO" + "#" + "ReferenceId Not Found";
+                CommonDataAccessHelper.Insert_ErrorLog("GetAadharByVID", ex.ToString());
+            }
+            return _AadhaarNo;
+        }
+        #endregion
     }
 
 }

@@ -529,9 +529,9 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetNodalOfficerApplyNOCApplicationList/{RoleID}/{UserID}")]
-        public async Task<OperationResult<List<ApplyNOCDataModel>>> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
         {
-            var result = new OperationResult<List<ApplyNOCDataModel>>();
+            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID));
@@ -559,6 +559,41 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("GetApplicationPvDetails/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPvDetails(int ApplyNOCID, int RoleID)
+        {
+            //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.CheckDocumentScrutinyTabsData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
 
     }

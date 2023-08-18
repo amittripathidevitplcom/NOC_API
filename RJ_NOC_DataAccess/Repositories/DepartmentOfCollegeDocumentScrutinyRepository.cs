@@ -415,15 +415,28 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
         //Get Nodal Officer Application
-        public List<ApplyNOCDataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
         {
             string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNodalOfficerApplyNOCApplicationList");
-            List<ApplyNOCDataModel> listdataModels = new List<ApplyNOCDataModel>();
+            List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            listdataModels = JsonConvert.DeserializeObject<List<ApplyNOCDataModel>>(JsonDataTable_Data);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
             return listdataModels;
+        }
+
+
+        public List<CommonDataModel_DataTable> GetApplicationPvDetails(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetApplicationPvDetails @ApplyNocApplicationID ='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.CheckDocumentScrutinyTabsData");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

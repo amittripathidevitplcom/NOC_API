@@ -197,6 +197,12 @@ namespace RJ_NOC_Model
         public int Nodal_Rejected { get; set; }
         public int Nodal_Completed { get; set; }
 
+        //
+        public int PVCommittee_Pending { get; set; }
+        public int PVCommittee_Reverted { get; set; }
+        public int PVCommittee_Rejected { get; set; }
+        public int PVCommittee_Completed { get; set; }
+
 
     }
 
