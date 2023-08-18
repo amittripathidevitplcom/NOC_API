@@ -13,6 +13,14 @@ namespace RJ_NOC_DataAccess.Interface
         bool IfExists(int CommitteeMasterID, string CommitteeType, string CommitteeName);
         List<CommitteeMasterDataModel> GetCommitteeMasterList(int CommitteeMasterID);
         bool DeleteCommitteeData(int CommitteeMasterID);
+
+        //Save Application Commitee
+        bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel ListData);
+        bool DeleteApplicationCommittee(int CommitteeMemberID);
+        List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID);
+
+
+
     }
 
 }

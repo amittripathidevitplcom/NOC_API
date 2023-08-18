@@ -413,5 +413,17 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
+
+        //Get Nodal Officer Application
+        public List<ApplyNOCDataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        {
+            string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNodalOfficerApplyNOCApplicationList");
+            List<ApplyNOCDataModel> listdataModels = new List<ApplyNOCDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNOCDataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
     }
 }

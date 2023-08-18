@@ -34,6 +34,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @PanchayatSamitiID='" + buildingdetails.PanchayatSamitiID + "',";
             SqlQuery += " @CityTownVillage='" + buildingdetails.CityTownVillage + "',";
             SqlQuery += " @Pincode='" + buildingdetails.Pincode + "',";
+            SqlQuery += " @BuildingHostelQuartersRoadArea='" + buildingdetails.BuildingHostelQuartersRoadArea + "',";
             SqlQuery += " @OwnBuildingOrderNo='" + buildingdetails.OwnBuildingOrderNo + "',";
             SqlQuery += " @OwnBuildingOrderDate='" + buildingdetails.OwnBuildingOrderDate + "',";
             SqlQuery += " @OwnBuildingFileUpload='" + buildingdetails.OwnBuildingFileUpload + "',";

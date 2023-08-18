@@ -87,5 +87,76 @@ namespace RJ_NOC_API.Controllers
 
 
 
+
+        [HttpGet("GetSubjectWiseStudenetDetails/{collegeId}")]
+        public async Task<OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>> GetSubjectWiseStudenetDetails(int collegeId)
+        {
+            var result = new OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetSubjectWiseStudenetDetails(collegeId));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ClassWiseStudentDetailsController.GetCollegeWiseStudenetDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("SaveDataSubjectWise")]
+        public async Task<OperationResult<bool>> SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.SaveDataSubjectWise(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.CollegeID, "Save", 0, "CollegeDocument");
+                    result.SuccessMessage = "Saved successfully .!";
+
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ClassWiseStudentDetailsController.SaveDataSubjectWise", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
     }
 }

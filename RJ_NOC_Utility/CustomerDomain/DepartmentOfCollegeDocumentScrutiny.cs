@@ -80,5 +80,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
         }
 
+        public List<ApplyNOCDataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID);
+        }
     }
 }

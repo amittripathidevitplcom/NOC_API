@@ -4,23 +4,23 @@ using RJ_NOC_Model;
 
 namespace RJ_NOC_API.Controllers
 {
-    [Route("api/AnimalDocumentScrutiny")]
+    [Route("api/AgricultureDocumentScrutiny")]
     [ApiController]
-    public class AnimalDocumentScrutinyController : RJ_NOC_ControllerBase
+    public class AgricultureDocumentScrutinyController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
-        public AnimalDocumentScrutinyController(IConfiguration configuration) : base(configuration)
+        public AgricultureDocumentScrutinyController(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
 
         [HttpPost("DocumentScrutiny_LegalEntity/{CollegeID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity>>> DocumentScrutiny_LegalEntity(int CollegeID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity>>> DocumentScrutiny_LegalEntity(int CollegeID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity>>();
+            var result = new OperationResult<List<AgricultureDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_LegalEntity(CollegeID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_LegalEntity(CollegeID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -34,7 +34,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_LegalEntity", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_LegalEntity", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -51,7 +51,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_CollegeDetail(CollegeID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_CollegeDetail(CollegeID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -65,7 +65,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_CollegeDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_CollegeDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -78,12 +78,12 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpPost("DocumentScrutiny_CollegeManagementSociety/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>>> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>>> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_CollegeManagementSociety(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_CollegeManagementSociety(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -97,7 +97,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_CollegeManagementSociety", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_CollegeManagementSociety", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -109,12 +109,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_LandDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails>>> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyLandDetails>>> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyLandDetails>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_LandDetails(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_LandDetails(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -128,7 +128,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_LandDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_LandDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -140,12 +140,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_FacilityDetail/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail>>> DocumentScrutiny_FacilityDetail(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentFacilityDetail>>> DocumentScrutiny_FacilityDetail(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentFacilityDetail>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_FacilityDetail(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_FacilityDetail(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -159,7 +159,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_FacilityDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_FacilityDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -171,12 +171,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_CollegeDocument/{DepartmentID}/{CollageID}/{RoleID}/{ApplyNOCID}/{Type}")]
-        public async Task<OperationResult<List<AnimalDocuemntScrutinyCommonModel>>> DocumentScrutiny_CollegeDocument(int DepartmentID, int CollageID, int RoleID, int ApplyNOCID, string Type)
+        public async Task<OperationResult<List<AgricultureDocuemntScrutinyCommonModel>>> DocumentScrutiny_CollegeDocument(int DepartmentID, int CollageID, int RoleID, int ApplyNOCID, string Type)
         {
-            var result = new OperationResult<List<AnimalDocuemntScrutinyCommonModel>>();
+            var result = new OperationResult<List<AgricultureDocuemntScrutinyCommonModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_CollegeDocument(DepartmentID, CollageID, RoleID, ApplyNOCID, Type));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_CollegeDocument(DepartmentID, CollageID, RoleID, ApplyNOCID, Type));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -190,7 +190,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_CollegeDocument", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_CollegeDocument", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -202,12 +202,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_RoomDetail/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails>>> DocumentScrutiny_RoomDetail(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentRoomDetails>>> DocumentScrutiny_RoomDetail(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentRoomDetails>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_RoomDetail(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_RoomDetail(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -221,7 +221,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_RoomDetail", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_RoomDetail", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -233,12 +233,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_BuildingDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails>>> DocumentScrutiny_BuildingDetails(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentBuildingDetails>>> DocumentScrutiny_BuildingDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentBuildingDetails>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_BuildingDetails(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_BuildingDetails(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -252,7 +252,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_BuildingDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_BuildingDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -264,12 +264,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_StaffDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails>>> DocumentScrutiny_StaffDetails(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentStaffDetails>>> DocumentScrutiny_StaffDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentStaffDetails>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_StaffDetails(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_StaffDetails(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -283,7 +283,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_StaffDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_StaffDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -295,12 +295,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_OldNOCDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails>>> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentOldNOCDetails>>> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentOldNOCDetails>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_OldNOCDetails(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_OldNOCDetails(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -314,7 +314,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_OldNOCDetails", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_OldNOCDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -326,12 +326,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_AcademicInformation/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>>> DocumentScrutiny_AcademicInformation(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>>> DocumentScrutiny_AcademicInformation(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_AcademicInformation(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_AcademicInformation(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -345,7 +345,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_AcademicInformation", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_AcademicInformation", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -357,12 +357,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("DocumentScrutiny_OtherInformation/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation>>> DocumentScrutiny_OtherInformation(int CollageID, int RoleID, int ApplyNOCID)
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyOtherInformation>>> DocumentScrutiny_OtherInformation(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyOtherInformation>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_OtherInformation(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_OtherInformation(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -376,7 +376,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_OtherInformation", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_OtherInformation", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -387,13 +387,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("DocumentScrutiny_VeterinaryHospital/{CollageID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital>>> DocumentScrutiny_VeterinaryHospital(int CollageID, int RoleID, int ApplyNOCID)
+        [HttpPost("DocumentScrutiny_FarmLandDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails>>> DocumentScrutiny_FarmLandDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital>>();
+            var result = new OperationResult<List<AgricultureDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_VeterinaryHospital(CollageID, RoleID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.DocumentScrutiny_FarmLandDetails(CollageID, RoleID, ApplyNOCID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
@@ -407,7 +407,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_VeterinaryHospital", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.DocumentScrutiny_FarmLandDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
@@ -425,7 +425,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -440,7 +440,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.CheckDocumentScrutinyTabsData", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AgricultureDocumentScrutinyController.CheckDocumentScrutinyTabsData", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
