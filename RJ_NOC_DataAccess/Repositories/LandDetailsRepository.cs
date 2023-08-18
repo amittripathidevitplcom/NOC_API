@@ -30,7 +30,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<CommonDataModel_DataSet> GetLandDetailsList(int SelectedCollageID, int LandDetailID)
         {
-            string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "'";
+            string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "',@Actiontype='GetLandApplication'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LandDetails.GetLandDetailsList");
 
@@ -42,7 +42,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<LandDetailsDataModel> GetLandDetailsIDWise(int LandDetailID, int CollageID)
         {
-            string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "',@SelectedCollageID='" + CollageID + "'";
+            string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "',@SelectedCollageID='" + CollageID + "',@Actiontype='Both'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
             List<LandDetailsDataModel> listdataModels = new List<LandDetailsDataModel>();

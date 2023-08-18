@@ -68,6 +68,7 @@ namespace RJ_NOC_Utility
         IDepartmentOfCollegeDocumentScrutiny DepartmentOfCollegeScrutinyUtility { get; }
 
         IAnimalDocumentScrutiny AnimalDocumentScrutinyUtility { get; }
+        IAgricultureDocumentScrutiny AgricultureDocumentScrutinyUtility { get; }
 
     }
 }

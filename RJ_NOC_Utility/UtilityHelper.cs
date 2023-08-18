@@ -101,6 +101,7 @@ namespace RJ_NOC_Utility
 
         public IClassWiseStudentDetails ClassWiseStudentDetailsUtility { get; private set; }
         public IAnimalDocumentScrutiny AnimalDocumentScrutinyUtility { get; private set; }
+        public IAgricultureDocumentScrutiny AgricultureDocumentScrutinyUtility { get; private set; }
 
         public IDepartmentOfCollegeDocumentScrutiny DepartmentOfCollegeScrutinyUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
@@ -165,6 +166,7 @@ namespace RJ_NOC_Utility
             ParamedicalHospitalUtility = new ParamedicalHospital(UnitOfWork);
             ClassWiseStudentDetailsUtility = new ClassWiseStudentDetails(UnitOfWork);
             AnimalDocumentScrutinyUtility = new AnimalDocumentScrutiny(UnitOfWork);
+            AgricultureDocumentScrutinyUtility = new AgricultureDocumentScrutiny(UnitOfWork);
             DepartmentOfCollegeScrutinyUtility = new DepartmentOfCollegeDocumentScrutiny(UnitOfWork);
         }
     }
