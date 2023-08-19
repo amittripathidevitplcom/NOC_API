@@ -96,7 +96,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.RoleID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RoleID"]);
                     dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
                     dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
-                    dataModels.Salary = Convert.ToInt32(dataSet.Tables[0].Rows[0]["Salary"]);
+                    dataModels.Salary = Convert.ToDecimal(dataSet.Tables[0].Rows[0]["Salary"]);
                     dataModels.RoleName = dataSet.Tables[0].Rows[0]["RoleName"].ToString();
                     dataModels.CreatedBy = Convert.ToInt32( dataSet.Tables[0].Rows[0]["CreatedBy"]);
                     dataModels.ModifyBy = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ModifyBy"]);

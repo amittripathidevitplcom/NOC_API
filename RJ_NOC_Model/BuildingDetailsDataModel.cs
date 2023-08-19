@@ -33,7 +33,7 @@ namespace RJ_NOC_Model
         public int PanchayatSamitiID { get; set; }
         public string CityTownVillage { get; set; }
         public int Pincode { get; set; }
-        public int BuildingHostelQuartersRoadArea { get; set; }
+        public decimal BuildingHostelQuartersRoadArea { get; set; }
         public string ContactNo { get; set; }
         public string OwnerName { get; set; }
         public string OwnBuildingOrderNo { get; set; }
