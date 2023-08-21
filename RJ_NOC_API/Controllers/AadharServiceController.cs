@@ -86,18 +86,21 @@ namespace RJ_NOC_API.Controllers
                 PaymentEncriptionDec.EmitraEncrypt(Model.AadharNo);
                 DataTable dt = UtilityHelper.AadharServiceUtility.ValidateAadhaarOTP(Model, _configuration);
                 //create table
-                if (dt.Rows[0][0].ToString().ToLower().Contains("failed") || dt.Rows[0][0].ToString().ToLower().Contains("invalid"))
+                if (dt.Rows[0][0].ToString().ToLower().Contains("Success") )
                 {
-                    urldt.Rows.Add(new Object[]{
-                                "Invalid OTP!",1,
-                                dt.Rows[0][0].ToString() });
-                }
-                else
-                {
+                  
+
                     urldt.Rows.Add(new Object[]{
                                 "success",0,
                                 CommonHelper.ConvertDataTable(dt)
                 });
+                }
+                else
+                {
+                    urldt.Rows.Add(new Object[]{
+                                "Invalid OTP!",1,
+                                dt.Rows[0][0].ToString() });
+
                 }
             }
             catch (Exception ex)
