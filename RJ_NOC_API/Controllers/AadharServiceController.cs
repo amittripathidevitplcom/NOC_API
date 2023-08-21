@@ -109,6 +109,7 @@ namespace RJ_NOC_API.Controllers
                                 "Please try again",1,
                                 "Please try again"
                                 });
+                CommonDataAccessHelper.Insert_ErrorLog("Aadharservice.ValidateAadharOTP", ex.ToString());
             }
             return urldt;
         }
