@@ -95,6 +95,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetApplicationPvDetails(int ApplyNOCID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetApplicationPvDetails(ApplyNOCID);
+        }  
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails> DocumentScrutiny_ClassWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_ClassWiseStudentDetail(CollageID, RoleID, ApplyNOCID);
         }
 
 
