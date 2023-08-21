@@ -764,9 +764,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
         {
-            string SqlQuery = "exec USP_GetRNCCheckListByTypeDepartment @Type='"+Type+ "' ,@DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = "exec USP_GetRNCCheckListByTypeDepartment @Type='"+Type+ "' ,@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "',@RoleID='" + RoleID + "'";
             DataTable dataTable = new DataTable();
 
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRNCCheckListByTypeDepartment");

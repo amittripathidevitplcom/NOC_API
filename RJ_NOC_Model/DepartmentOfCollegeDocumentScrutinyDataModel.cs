@@ -85,6 +85,11 @@ namespace RJ_NOC_Model
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
 
+    public class DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails
+    {
+        public List<ClassWiseStudentDetailsDataModel> ClassWiseStudentDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
 
     //public class DocumentScrutiny_Action
     //{

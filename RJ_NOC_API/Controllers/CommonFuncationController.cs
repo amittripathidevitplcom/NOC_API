@@ -1942,13 +1942,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetRNCCheckListByTypeDepartment/{Type}/{DepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_RNCCheckListData>>> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID)
+        [HttpGet("GetRNCCheckListByTypeDepartment/{Type}/{DepartmentID}/{ApplyNOCID}/{CreatedBy}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_RNCCheckListData>>> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
         {
             var result = new OperationResult<List<CommonDataModel_RNCCheckListData>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRNCCheckListByTypeDepartment(Type, DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRNCCheckListByTypeDepartment(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

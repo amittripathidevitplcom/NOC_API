@@ -395,7 +395,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                 {
                     string ip = GetIpAddress();
                     //string url = "https://api.sewadwaar.rajasthan.gov.in/app/live/Aadhaar/Prod/detokenizeV2/doitAadhaar/encDec/demo/hsm/auth?client_id=f6de7747-60d3-4cf0-a0ae-71488abd6e95";
-                    string url = "https://aadhaarauthapi.rajasthan.gov.in/doit-aadhaar-enc-dec/demo/hsm/auth/detokenizeV2";
+                    string url = _configuration["AadharServiceDetails:GetAadhaarNoByVIDURL"].ToString();
 
                     string ModifiedData = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><AuthRequest UUID=\"" + _UUID + "\" subaua=\"" + subaua + "\" flagType=\"" + "A" + "\" ver=\"2.5\"></AuthRequest>";
 

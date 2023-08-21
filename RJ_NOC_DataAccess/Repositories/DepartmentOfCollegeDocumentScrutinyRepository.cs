@@ -450,5 +450,42 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_FinalSubmitInspectionCommittee";
+            SqlQuery += " @ApplyNOCID='"+ ApplyNOCID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.GetPhysicalVerificationAppliationList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails> DocumentScrutiny_ClassWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_ClassWiseStudentDetails_DCE @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_ClassWiseStudentDetail");
+
+            List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails> listdataModels = new List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails>();
+            DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails dataModels = new DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails();
+
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<ClassWiseStudentDetailsDataModel> ClassWiseStudentDetails_Item = JsonConvert.DeserializeObject<List<ClassWiseStudentDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.ClassWiseStudentDetails = ClassWiseStudentDetails_Item;
+
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
     }
 }

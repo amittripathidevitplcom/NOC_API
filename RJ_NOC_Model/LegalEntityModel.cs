@@ -91,7 +91,7 @@ namespace RJ_NOC_Model
         public string InstituteDesignation { get; set; }
         public string InstituteContactNumber { get; set; }
         public int StateID { get; set; }
-        public string StateName { get; set; }
+        public string? StateName { get; set; }
 
         public string? Action { get; set; }
         public string? Remark { get; set; }

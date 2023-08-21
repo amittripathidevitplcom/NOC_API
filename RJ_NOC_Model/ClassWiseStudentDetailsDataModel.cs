@@ -39,6 +39,9 @@ namespace RJ_NOC_Model
         public int OFTotalPHBoys { get; set; }
         public int OFTotalPHGirls { get; set; }
 
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
+
     }
 
     public class PostClassWiseStudentDetailsDataModel
