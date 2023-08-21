@@ -100,12 +100,12 @@ namespace RJ_NOC_DataAccess.Repository
         #endregion
 
 
-        #region "Application (Committee"
+        #region "Application (Committee)"
         public bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel request)
         {
             string CommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_CommitteeMasterDetail");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveApplicationCommitteeMember  @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@CommitteeMasterDetail_Str='" + CommitteeMasterDetail_Str + "'";
+            string SqlQuery = " exec USP_SaveApplicationCommitteeMember @UserID='" + request.UserID + "', @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@CommitteeMasterDetail_Str='" + CommitteeMasterDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveApplicationCommitteeData");
             if (Rows > 0)
                 return true;
