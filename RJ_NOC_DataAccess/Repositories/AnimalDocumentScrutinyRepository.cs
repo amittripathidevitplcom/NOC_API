@@ -23,7 +23,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_LegalEntity_AH @CollegeID='" + CollegeID + "',@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_LegalEntity");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_LegalEntity");
 
             List<AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity> listdataModels = new List<AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity>();
             AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity dataModels = new AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity();
@@ -65,7 +65,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_CheckDocumentScrutinyTabsData @ApplyNOCID ='" + ApplyNOCID + "',@RoleID ='" + RoleID + "'";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.CheckDocumentScrutinyTabsData");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.CheckDocumentScrutinyTabsData");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
@@ -78,7 +78,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_LandDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetWorkFlowMasterList");
 
             List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails>();
             AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyLandDetails();
@@ -101,7 +101,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_FacilityDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetWorkFlowMasterList");
 
             List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentFacilityDetail>();
             AnimalDocumentScrutinyDataModel_DocumentFacilityDetail dataModels = new AnimalDocumentScrutinyDataModel_DocumentFacilityDetail();
@@ -124,7 +124,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_RoomDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetWorkFlowMasterList");
 
             List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentRoomDetails>();
             AnimalDocumentScrutinyDataModel_DocumentRoomDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentRoomDetails();
@@ -147,7 +147,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_BuildingDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetWorkFlowMasterList");
 
             List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentBuildingDetails>();
             AnimalDocumentScrutinyDataModel_DocumentBuildingDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentBuildingDetails();
@@ -170,7 +170,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_StaffDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetWorkFlowMasterList");
 
             List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentStaffDetails>();
             AnimalDocumentScrutinyDataModel_DocumentStaffDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentStaffDetails();
@@ -193,7 +193,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_OldNOCDetails_AH @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetWorkFlowMasterList");
 
             List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails>();
             AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails dataModels = new AnimalDocumentScrutinyDataModel_DocumentOldNOCDetails();
@@ -218,7 +218,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SP_Name = Type == "Other Document" ? "USP_DocumentScrutiny_OtherDocument_AH" : "USP_DocumentScrutiny_RequiredDocument_AH";
             string SqlQuery = " exec " + SP_Name + " @DepartmentID=" + DepartmentID + ",@CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + ",@DocumentType='" + Type + "'";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutinyRepository.DocumentScrutiny_CollegeDocument");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_CollegeDocument");
 
             List<AnimalDocuemntScrutinyCommonModel> listdataModels = new List<AnimalDocuemntScrutinyCommonModel>();
             AnimalDocuemntScrutinyCommonModel dataModels = new AnimalDocuemntScrutinyCommonModel();
@@ -239,7 +239,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_OtherInformation_AH @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_OtherInformation");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_OtherInformation");
 
             List<AnimalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation>();
             AnimalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyOtherInformation();
@@ -265,7 +265,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_AcademicInformation_AH @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_AcademicInformation");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_AcademicInformation");
 
             List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation>();
             AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation();
@@ -289,7 +289,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_CollegeManagementSociety_AH @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety");
 
             List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>();
             AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety();
@@ -313,7 +313,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_CollegeDetail_AH @CollegeID=" + CollegeID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_CollegeDetail");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_CollegeDetail");
 
             List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail>();
             MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail();
@@ -345,7 +345,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_DocumentScrutiny_VeterinaryHospital_AH @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_VeterinaryHospital");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.DocumentScrutiny_VeterinaryHospital");
 
             List<AnimalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital>();
             AnimalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital dataModels = new AnimalDocumentScrutinyDataModel_DocumentScrutinyVeterinaryHospital();

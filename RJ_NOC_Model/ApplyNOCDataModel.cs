@@ -76,7 +76,7 @@ namespace RJ_NOC_Model
         public string DepartmentName { get; set; }
         public string CollegeName { get; set; }
         public int PVStage { get; set; }
-        public int strPVStage { get; set; }
+        public string strPVStage { get; set; }
     }
     public class GetPhysicalVerificationAppliationList
     {

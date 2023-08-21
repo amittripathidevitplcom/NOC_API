@@ -337,5 +337,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetLandSqureMeterMappingDetails_DepartmentWise(DepartmentID, CollageID, LandAreaId);
         }
+
+        public List<CommonDataModel_DataTable> GetDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDocumentScritintyTaril(ID, NOCApplyID, CollageID, DepartmentID, ActionType);
+        }
     }
 }

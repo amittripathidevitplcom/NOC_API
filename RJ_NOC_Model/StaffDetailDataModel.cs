@@ -26,7 +26,7 @@ namespace RJ_NOC_Model
         public string DateOfJoining { get; set; }
         public string SpecializationSubject { get; set; }
         public string RoleMapping { get; set; }
-        public int Salary { get; set; }
+        public decimal Salary { get; set; }
         public string StaffStatus { get; set; }
         public string PFDeduction { get; set; }
         public string UANNumber { get; set; }

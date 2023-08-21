@@ -892,6 +892,19 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<CommonDataModel_DataTable> GetDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_Trail @ActionType='"+ ActionType + "', @CollegeID='" + CollageID + "',@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + NOCApplyID + "',@ID='" + ID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetDocumentScritintyTaril");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
     }
 }
 

@@ -66,7 +66,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.LandConvertedID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandConvertedID"]);
                     dataModels.LandTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandTypeID"]);
                     dataModels.KhasraNumber = dataSet.Tables[0].Rows[0]["KhasraNumber"].ToString();
-                    dataModels.LandArea = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandArea"]);
+                    dataModels.LandArea = Convert.ToDecimal(dataSet.Tables[0].Rows[0]["LandArea"]);
                     dataModels.LandOwnerName = dataSet.Tables[0].Rows[0]["LandOwnerName"].ToString();
                     dataModels.BuildingHostelQuartersRoadArea = Convert.ToInt32(dataSet.Tables[0].Rows[0]["BuildingHostelQuartersRoadArea"]);
                     dataModels.LandConversionOrderDate = dataSet.Tables[0].Rows[0]["LandConversionOrderDate"].ToString();
