@@ -562,13 +562,13 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetApplicationPvDetails/{ApplyNOCID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPvDetails(int ApplyNOCID, int RoleID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPvDetails(int ApplyNOCID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetApplicationPvDetails(ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -619,6 +619,38 @@ namespace RJ_NOC_API.Controllers
             catch (Exception e)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}")]
+        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID));
+                if (result.Data ==true)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitInspectionCommittee", 0, "DepartmentOfCollegeDocumentScrutiny");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in FinalSubmitInspectionCommittee";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.FinalSubmitInspectionCommittee", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }

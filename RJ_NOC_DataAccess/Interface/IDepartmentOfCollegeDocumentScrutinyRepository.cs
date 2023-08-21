@@ -33,6 +33,7 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request);
+        bool FinalSubmitInspectionCommittee(int ApplyNOCID);
     }
 
 }
