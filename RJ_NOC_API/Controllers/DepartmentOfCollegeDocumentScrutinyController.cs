@@ -562,13 +562,13 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetApplicationPvDetails/{ApplyNOCID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPvDetails(int ApplyNOCID, int RoleID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPvDetails(int ApplyNOCID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetApplicationPvDetails(ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
