@@ -63,7 +63,8 @@ namespace RJ_NOC_Model
         public int CreatedBy { get; set; }
         public string? FileUploadName { get; set; }
         public string? Remark { get; set; }
-
+        public string? FinalRemark { get; set; }
+        public int RoleID { get; set; }
     }
 
     public class ApplyNocApplicationDetails_DataModel

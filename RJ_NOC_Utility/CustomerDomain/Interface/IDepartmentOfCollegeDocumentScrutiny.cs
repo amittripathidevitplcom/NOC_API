@@ -28,5 +28,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         //get list
         List<ApplyNOCDataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID);
         List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request);
+        bool FinalSubmitInspectionCommittee(int ApplyNOCID);
     }
 }

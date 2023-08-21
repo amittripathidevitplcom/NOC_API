@@ -437,5 +437,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_FinalSubmitInspectionCommittee";
+            SqlQuery += " @ApplyNOCID='"+ ApplyNOCID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.GetPhysicalVerificationAppliationList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

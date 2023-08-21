@@ -87,6 +87,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<ApplyNOCDataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID);
+        }       
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID);
         }
     }
 }
