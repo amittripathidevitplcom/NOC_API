@@ -1845,13 +1845,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetRoleListForApporval/{RoleID}")]
-        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID)
+        [HttpGet("GetRoleListForApporval/{RoleID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID,int DepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListForApporval(RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListForApporval(RoleID, DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -1878,13 +1878,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetUserDetailsByRoleID/{RoleID}")]
-        public async Task<OperationResult<List<CreateUserDataModel>>> GetUserDetailsByRoleID(int RoleID)
+        [HttpGet("GetUserDetailsByRoleID/{RoleID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CreateUserDataModel>>> GetUserDetailsByRoleID(int RoleID,int DepartmentID)
         {
             var result = new OperationResult<List<CreateUserDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUserDetailsByRoleID(RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUserDetailsByRoleID(RoleID, DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -1910,13 +1910,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetWorkFlowActionListByRole/{RoleID}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type)
+        [HttpGet("GetWorkFlowActionListByRole/{RoleID}/{Type}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type,int DepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type,DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
