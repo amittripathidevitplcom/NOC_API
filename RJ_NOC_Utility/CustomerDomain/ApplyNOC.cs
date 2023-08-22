@@ -41,13 +41,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SaveCommiteeInspectionRNCCheckList(request);
         }
-        public List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName)
+        public List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRejectedReport(UserID,ActionName);
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRejectedReport(UserID,ActionName, RoleID, DepartmentID);
         }
-        public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName)
+        public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID,ActionName);
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID,ActionName , RoleID,  DepartmentID);
         }
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {

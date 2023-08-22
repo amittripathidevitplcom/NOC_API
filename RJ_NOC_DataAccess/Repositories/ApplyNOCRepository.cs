@@ -177,9 +177,9 @@ namespace RJ_NOC_DataAccess.Repositories
         }
 
 
-        public List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName)
+        public List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetApplyNOCRejectedReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
+            string SqlQuery = " exec USP_GetApplyNOCRejectedReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "',@DepartmentID ='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplyNOCRejectedReport");
 
@@ -190,9 +190,9 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName)
+        public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetApplyNOCCompletedReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
+            string SqlQuery = " exec USP_GetApplyNOCCompletedReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "',@DepartmentID ='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplyNOCCompletedReport");
 

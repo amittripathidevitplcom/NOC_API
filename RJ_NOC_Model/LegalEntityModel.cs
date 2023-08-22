@@ -72,9 +72,6 @@ namespace RJ_NOC_Model
         public string PresidentAadhaarProofDocPath { get; set; }
         public string PresidentAadhaarProofDoc { get; set; }
 
-        public bool ActiveStatus { get; set; }
-        public bool DeleteStatus { get; set; }
-        public bool IsDeleted { get; set; }
         public string? C_Action { get; set; }
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
@@ -100,9 +97,7 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
-        public bool ActiveStatus { get; set; }
-        public bool DeleteStatus { get; set; }
-        public bool IsDeleted { get; set; }
+
     }
     public class LegalEntityDuplicateCheckDataModel
     {

@@ -230,14 +230,14 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetApplyNOCRejectedReport/{UserID}/{ActionName}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCRejectedReport(int UserID, string ActionName)
+        [HttpGet("GetApplyNOCRejectedReport/{UserID}/{ActionName}/{RoleID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCRejectedReport(int UserID, string ActionName, int RoleID,int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetApplyNOCRejectedReport", 0, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCRejectedReport(UserID, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCRejectedReport(UserID, ActionName,  RoleID,  DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -263,14 +263,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetApplyNOCCompletedReport/{UserID}/{ActionName}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCCompletedReport(int UserID, string ActionName)
+        [HttpGet("GetApplyNOCCompletedReport/{UserID}/{ActionName}/{RoleID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetApplyNOCCompletedReport", 0, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCCompletedReport(UserID, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCCompletedReport(UserID, ActionName, RoleID,  DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
