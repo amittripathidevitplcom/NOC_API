@@ -487,5 +487,25 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
+
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_SubjectWiseStudentDetails_DCE @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_ClassWiseStudentDetail");
+
+            List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> listdataModels = new List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails>();
+            DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails dataModels = new DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails();
+
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<SubjectWiseStatisticsDetailsDataModel> ClassWiseStudentDetails_Item = JsonConvert.DeserializeObject<List<SubjectWiseStatisticsDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.SubjectWiseStudentDetails = ClassWiseStudentDetails_Item;
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+            listdataModels.Add(dataModels);
+            return listdataModels;
+        }
     }
 }

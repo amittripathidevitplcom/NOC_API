@@ -101,6 +101,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_ClassWiseStudentDetail(CollageID, RoleID, ApplyNOCID);
         }
 
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_SubjectWiseStudentDetail(CollageID, RoleID, ApplyNOCID);
+        }
 
     }
 }

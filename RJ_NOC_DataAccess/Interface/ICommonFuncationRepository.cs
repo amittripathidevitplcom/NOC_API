@@ -88,9 +88,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_CommitteeList> GetCommitteeList();
 
         //Roles
-        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID);
-        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
-        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type);
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID,int DepartmentID);
+        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID);
+        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type,int DepartmentID );
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
         List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID);

@@ -35,5 +35,6 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
+        public string? FinancialYearName { get; set; }
     }
 }

@@ -83,10 +83,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_GetConnectionString> GetConnectionString();
         List<CommonDataModel_CommitteeList> GetCommitteeList();
 
-        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID);
-        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID);
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID,int DepartmentID);
+        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID);
 
-        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type);
+        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
         List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID, int DepartmentID);

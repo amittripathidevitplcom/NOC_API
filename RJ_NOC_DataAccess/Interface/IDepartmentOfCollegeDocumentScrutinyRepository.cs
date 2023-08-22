@@ -36,6 +36,11 @@ namespace RJ_NOC_DataAccess.Interface
         bool FinalSubmitInspectionCommittee(int ApplyNOCID);
 
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails> DocumentScrutiny_ClassWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID);
+
+        List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID);
+
+
+       
     }
 
 }
