@@ -277,18 +277,18 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetCommitteeList();
         }
 
-        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID)
+        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval(RoleID);
+            return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval(RoleID,DepartmentID);
         }
 
-        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID)
+        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID);
+            return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID, DepartmentID);
         }
-        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type)
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID,Type);
+            return UnitOfWork.CommonFuncationRepository.GetWorkFlowActionListByRole(RoleID,Type, DepartmentID);
         }
         public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
         {
