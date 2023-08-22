@@ -54,9 +54,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID, int UserID)
+        public List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID, int UserID, int DepartmentID)
         {
-            string SqlQuery = " exec USP_ApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "'";
+            string SqlQuery = " exec USP_ApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "',@DepartmentID='" + DepartmentID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetApplyNOCApplicationListByRole");
             List<ApplyNOCDataModel> listdataModels = new List<ApplyNOCDataModel>();

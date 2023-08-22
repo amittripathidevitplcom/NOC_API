@@ -35,13 +35,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetApplyNOCApplicationListByRole/{RoleID}/{UserID}")]
-        public async Task<OperationResult<List<ApplyNOCDataModel>>> GetApplyNOCApplicationListByRole(int RoleID, int UserID)
+        [HttpGet("GetApplyNOCApplicationListByRole/{RoleID}/{UserID}/{DepartmentID}")]
+        public async Task<OperationResult<List<ApplyNOCDataModel>>> GetApplyNOCApplicationListByRole(int RoleID, int UserID,int DepartmentID)
         {
             var result = new OperationResult<List<ApplyNOCDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCApplicationListByRole(RoleID, UserID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCApplicationListByRole(RoleID, UserID, DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

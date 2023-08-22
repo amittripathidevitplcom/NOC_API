@@ -78,5 +78,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AnimalDocumentScrutinyRepository.DocumentScrutiny_VeterinaryHospital(CollageID, RoleID, ApplyNOCID);
         }
 
+        public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetPhysicalVerificationAppliationList(request);
+        }
+
     }
 }
