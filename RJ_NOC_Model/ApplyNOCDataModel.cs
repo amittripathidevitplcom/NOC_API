@@ -81,5 +81,9 @@ namespace RJ_NOC_Model
     public class GetPhysicalVerificationAppliationList
     {
         public string SSOID { get; set; }
+        public int? UserID { get; set; }
+        public int? RoleID { get; set; }
+        public int? DepartmentID { get; set; }
+        public string? Status { get; set; }
     }
 }
