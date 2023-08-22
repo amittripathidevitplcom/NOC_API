@@ -32,9 +32,8 @@ namespace RJ_NOC_Model
         public int OtherBoysCount { get; set; }
         public int OtherGirlsCount { get; set; }
         public decimal Total { get; set; }
-
-
-
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
     }
 
     public class PostSubjectWiseStatisticsDetailsDataModel
