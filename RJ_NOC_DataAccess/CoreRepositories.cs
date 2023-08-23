@@ -356,6 +356,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return departmentofcollegedocumentscrutinyrepository; }
         }
+        private IFireQueryRepository fireQueryRepository;
+        public IFireQueryRepository FireQueryRepository
+        {
+            get { return fireQueryRepository; }
+        }
 
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
@@ -414,6 +419,7 @@ namespace RJ_NOC_DataAccess.Repository
             animalDocumentScrutinyRepository = new AnimalDocumentScrutinyRepository(commonHelper);
             agricultureDocumentScrutinyRepository = new AgricultureDocumentScrutinyRepository(commonHelper);
             departmentofcollegedocumentscrutinyrepository = new DepartmentOfCollegeDocumentScrutinyRepository(commonHelper);
+            fireQueryRepository = new FireQueryRepository(commonHelper);
 
         }
     }

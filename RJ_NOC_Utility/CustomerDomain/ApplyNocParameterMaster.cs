@@ -257,10 +257,10 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb1.Append(" select");
                 sb1.AppendFormat(" ChangeInNameID={0},", 0);
                 sb1.AppendFormat(" NewName_Eng=''{0}'',", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.NewNameEnglish);
-                sb1.AppendFormat(" NewName_Hi=''{0}'',", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.NewNameHindi);
+                sb1.AppendFormat(" NewName_Hi=N''{0}'',", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.NewNameHindi);
                 sb1.AppendFormat(" DocumentName=''{0}''", request.ApplyNocParameterMasterList_ChangeInNameOfCollege.DocumentName);
                 sb1.Append(" ) as t");
-                sb.AppendFormat("@ApplyNocApplicationChangeInNameDetailList='{0}',", sb1.ToString());
+                sb.AppendFormat("@ApplyNocApplicationChangeInNameDetailList=N'{0}',", sb1.ToString());
             }
             //Change Place Detail
 

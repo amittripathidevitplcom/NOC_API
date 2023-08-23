@@ -68,5 +68,6 @@ namespace RJ_NOC_DataAccess.Interface
         IAgricultureDocumentScrutinyRepository AgricultureDocumentScrutinyRepository { get; }
 
         IDepartmentOfCollegeDocumentScrutinyRepository DepartmentOfCollegeDocumentScrutinyRepository { get; }
+        IFireQueryRepository FireQueryRepository { get; }
     }
 }
