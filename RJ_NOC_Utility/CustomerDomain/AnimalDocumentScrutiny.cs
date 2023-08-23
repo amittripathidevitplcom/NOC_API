@@ -82,6 +82,25 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetPhysicalVerificationAppliationList(request);
         }
+        public List<CommonDataModel_DataTable> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetPreVerificationDoneList(request);
+        }
+
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID,int UserID)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID,UserID);
+        }
+
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName);
+        }
+
+        public List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetPreVerificationchecklistDetails(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID);
+        }
 
     }
 }

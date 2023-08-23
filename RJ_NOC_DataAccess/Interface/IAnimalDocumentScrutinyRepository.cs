@@ -28,5 +28,10 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID);
 
         List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request);
+        List<CommonDataModel_DataTable> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request);
+        bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID);
+        bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName);
+
+        List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
     }
 }
