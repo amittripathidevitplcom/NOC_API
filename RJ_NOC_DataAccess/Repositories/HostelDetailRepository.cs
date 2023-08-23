@@ -93,6 +93,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.DistrictName = dataSet.Tables[0].Rows[0]["DistrictName"].ToString();
                     dataModels.TehsilName = dataSet.Tables[0].Rows[0]["TehsilName"].ToString();
                     dataModels.PanchyatSamitiName = dataSet.Tables[0].Rows[0]["PanchyatSamitiName"].ToString();
+                    dataModels.HostelCategory = dataSet.Tables[0].Rows[0]["HostelCategory"].ToString();
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<HostelDetailsDataModel_Hostel> HostelDetailsDataModel_Hostel_Item = JsonConvert.DeserializeObject<List<HostelDetailsDataModel_Hostel>>(JsonDataTable_Data);
