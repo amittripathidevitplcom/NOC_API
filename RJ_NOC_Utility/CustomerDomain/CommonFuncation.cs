@@ -139,6 +139,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear();
         }
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear_AcademicInformation();
+        }
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
@@ -164,6 +168,20 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseList_CollegeWise(CollegID, CourseType);
+        }
+
+        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.Get_CollegeWiseCourse_Subject_OldNOC(CollegeID, Type, CourseID);
+        }
+        
+        public List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWise_SubjectList_StaffDetails(CollegeID, Type, CourseID);
+        }
+        public List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWise_CourseList_AcademicInformation(CollegeID, Type, CourseID);
         }
 
         public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)

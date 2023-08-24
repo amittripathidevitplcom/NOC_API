@@ -343,6 +343,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FinancialYearDDL>>(JsonDataTable_Data);
             return dataModels;
         }
+         public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
+        {
+            string SqlQuery = "exec USP_FinancialYearMaster_AcademicInformation ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllFinancialYear_AcademicInformation");
+
+            List<CommonDataModel_FinancialYearDDL> dataModels = new List<CommonDataModel_FinancialYearDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FinancialYearDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
@@ -402,6 +413,45 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID)
+        {
+            string SqlQuery = $" Exec Get_CollegeWiseCourse_Subject_OldNOC @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels; 
+        }
+        public List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type,int CourseID)
+        {
+            string SqlQuery = $" Exec GetCollegeWise_SubjectList_StaffDetails @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeWise_SubjectList_StaffDetails");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels; 
+        }
+        public List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID)
+        {
+            string SqlQuery = $" Exec GetCollegeWise_CourseList_AcademicInformation @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeWise_CourseList_AcademicInformation");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels; 
+        } 
 
         public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
         {
