@@ -43,6 +43,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_ParliamentAreaDDL> GetParliamentAreaByDistrictId(int districtId);
         List<CommonDataModel_AssemblyAreaDDL> GetAssembelyAreaByDistrictId(int districtId);
         List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear();
+        List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation();
 
         List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID);
@@ -52,6 +53,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_OccupationDDL> GetAllOccupation();
 
         List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType);
+        List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID, int OldNocID);
+        List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID);
+        List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID);
+
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
