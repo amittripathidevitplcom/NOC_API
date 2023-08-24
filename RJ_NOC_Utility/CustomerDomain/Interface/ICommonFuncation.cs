@@ -58,7 +58,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
 
 
-        List<CommonDataModel_BuildingType> GetBuildingTypeCheck();
+        List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID);
         List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId);
 
 

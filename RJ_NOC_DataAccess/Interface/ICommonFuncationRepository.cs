@@ -57,7 +57,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
         
-        List<CommonDataModel_BuildingType> GetBuildingTypeCheck();
+        List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID);
         List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId);
 
 
