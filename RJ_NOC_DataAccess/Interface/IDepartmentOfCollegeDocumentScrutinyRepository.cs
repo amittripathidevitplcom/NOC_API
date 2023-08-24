@@ -28,7 +28,7 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         //get list
-        List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID);
+        List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID, string Status);
         List<CommonDataModel_DataTable> GetApplicationPvDetails(int ApplyNOCID);
 
 

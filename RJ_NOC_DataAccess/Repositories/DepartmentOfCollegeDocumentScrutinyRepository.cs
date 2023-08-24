@@ -415,9 +415,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
         //Get Nodal Officer Application
-        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID,string Status)
         {
-            string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "'";
+            string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNodalOfficerApplyNOCApplicationList");
             List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
@@ -428,7 +428,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
         {
-            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList @SSOID ='" + request.SSOID + "'";
+            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList @SSOID ='" + request.SSOID + "',@Status ='" + request.Status + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
