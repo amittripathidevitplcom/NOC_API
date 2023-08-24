@@ -413,9 +413,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID)
+        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID, int OldNocID)
         {
-            string SqlQuery = $" Exec Get_CollegeWiseCourse_Subject_OldNOC @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "'";
+            string SqlQuery = $" Exec Get_CollegeWiseCourse_Subject_OldNOC @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "',@OldNocID='" + OldNocID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
 

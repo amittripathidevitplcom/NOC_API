@@ -1055,13 +1055,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("Get_CollegeWiseCourse_Subject_OldNOC/{CollegeID}/{Type}/{CourseID}")]
-        public async Task<OperationResult<List<DataTable>>> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID)
+        [HttpGet("Get_CollegeWiseCourse_Subject_OldNOC/{CollegeID}/{Type}/{CourseID}/{OldNocID}")]
+        public async Task<OperationResult<List<DataTable>>> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID,int OldNocID)
         {
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.Get_CollegeWiseCourse_Subject_OldNOC(CollegeID, Type, CourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.Get_CollegeWiseCourse_Subject_OldNOC(CollegeID, Type, CourseID, OldNocID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

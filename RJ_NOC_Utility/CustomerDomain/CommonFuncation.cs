@@ -170,9 +170,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetCourseList_CollegeWise(CollegID, CourseType);
         }
 
-        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID)
+        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID, int OldNocID)
         {
-            return UnitOfWork.CommonFuncationRepository.Get_CollegeWiseCourse_Subject_OldNOC(CollegeID, Type, CourseID);
+            return UnitOfWork.CommonFuncationRepository.Get_CollegeWiseCourse_Subject_OldNOC(CollegeID, Type, CourseID, OldNocID);
         }
         
         public List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID)
