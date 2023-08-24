@@ -489,7 +489,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID,DepartmentID, UserID));
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID));
                 if (result.Data == true)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitInspectionCommittee", 0, "AnimalDocumentScrutinyController");
@@ -582,7 +582,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("FinalSubmitPreVerification/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}")]
-        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID,string ActionName)
+        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
         {
             var result = new OperationResult<bool>();
             try
@@ -612,5 +612,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetNOCApplicationList/{UserID}/{RoleID}/{DepartmentID}/{ActionType}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetNOCApplicationList(int UserID, int RoleID, int DepartmentID, string ActionType)
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetApplyNOCApplicationList(RoleID, UserID, DepartmentID, ActionType));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationchecklistDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        
     }
 }

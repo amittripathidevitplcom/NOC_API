@@ -102,5 +102,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetPreVerificationchecklistDetails(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID);
         }
 
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID,int DepartmetID,string Action)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetApplyNOCApplicationList(RoleID, UserID, DepartmetID, Action);
+        }
+
     }
 }

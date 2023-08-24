@@ -33,5 +33,6 @@ namespace RJ_NOC_DataAccess.Interface
         bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName);
 
         List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
+        List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmentID, string Action);
     }
 }

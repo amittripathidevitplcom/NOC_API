@@ -185,6 +185,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("SaveApplicationCommitteeData_AH")]
+        public async Task<OperationResult<bool>> SaveApplicationCommitteeData_AH(PostApplicationCommitteeMemberdataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommitteeMasterUtility.SaveApplicationCommitteeData_AH(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "CommitteeMaster");
+                    result.SuccessMessage = "Saved successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommitteeMasterController.SaveApplicationCommitteeData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
         [HttpGet("GetApplicationCommitteeList/{ApplyNocApplicationID}")]
         public async Task<OperationResult<List<ApplicationCommitteeMemberdataModel>>> GetApplicationCommitteeList(int ApplyNocApplicationID)
@@ -193,6 +226,37 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.CommitteeMasterUtility.GetApplicationCommitteeList(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommitteeMasterController.GetApplicationCommitteeMasterList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetApplicationCommitteeList_AH/{ApplyNocApplicationID}/{ActionType}")]
+        public async Task<OperationResult<List<ApplicationCommitteeMemberdataModel>>> GetApplicationCommitteeList_AH(int ApplyNocApplicationID,string ActionType)
+        {
+            var result = new OperationResult<List<ApplicationCommitteeMemberdataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommitteeMasterUtility.GetApplicationCommitteeList_AH(ApplyNocApplicationID, ActionType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

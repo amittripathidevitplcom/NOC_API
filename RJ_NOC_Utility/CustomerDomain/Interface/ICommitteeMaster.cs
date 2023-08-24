@@ -15,7 +15,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         //Save Application Commitee
         bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel ListData);
+        bool SaveApplicationCommitteeData_AH(PostApplicationCommitteeMemberdataModel ListData);
         bool DeleteApplicationCommittee(int CommitteeMemberID);
         List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID);
+        List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList_AH(int ApplyNocApplicationID, string ActionType);
     }
 }
