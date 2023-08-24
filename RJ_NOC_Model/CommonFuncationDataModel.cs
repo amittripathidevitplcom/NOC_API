@@ -175,6 +175,7 @@ namespace RJ_NOC_Model
         public int JointSecretary_Rejected { get; set; }
         public int JointSecretary_Completed { get; set; }
         public int JointSecretary_ReleaseNOCPending { get; set; }
+        public int JointSecretary_ReleaseNOC { get; set; }
 
 
 
