@@ -23,5 +23,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID,string NOCIssuedRemark);
         int CheckAppliedNOCCollegeWise(int CollegeID);
+        List<CommonDataModel_DataTable> GetIssuedNOCReportList(int UserID, string ActionName, int RoleID, int DepartmentID);
     }
 }

@@ -48,7 +48,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
             return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID,ActionName , RoleID,  DepartmentID);
-        }
+        }       
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {
             return UnitOfWork.ApplyNOCRepository.GetPendingMedicalApplications(RoleID, UserID,ActionName);
@@ -68,6 +68,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public int CheckAppliedNOCCollegeWise(int CollegeID)
         {
             return UnitOfWork.ApplyNOCRepository.CheckAppliedNOCCollegeWise(CollegeID);
+        }
+        public List<CommonDataModel_DataTable> GetIssuedNOCReportList(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetIssuedNOCReportList(UserID, ActionName, RoleID, DepartmentID);
         }
     }
 }

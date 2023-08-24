@@ -376,5 +376,54 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetPreVerificationDoneList_AH @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID,int DepartmentID,int UserID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_FinalSubmitInspectionCommittee_AH";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.GetPhysicalVerificationAppliationList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            string SqlQuery = "exec USP_GetPreVerificationchecklistDetails @Type='" + Type + "' ,@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetPreVerificationchecklistDetails");
+            List<CommonDataModel_RNCCheckListData> dataModels = new List<CommonDataModel_RNCCheckListData>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RNCCheckListData>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID,string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_FinalSubmitPreVerification_AH";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.GetPhysicalVerificationAppliationList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }
