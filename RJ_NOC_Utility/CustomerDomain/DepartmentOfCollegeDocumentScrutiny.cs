@@ -84,9 +84,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetPhysicalVerificationAppliationList(request);
         }
 
-        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID)
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID, string Status)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID, Status);
         }       
         public bool FinalSubmitInspectionCommittee(int ApplyNOCID)
         {

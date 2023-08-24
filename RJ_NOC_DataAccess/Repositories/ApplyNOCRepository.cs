@@ -202,6 +202,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+ 
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {
             string SqlQuery = " exec USP_GetPendingMedicalApplications @RoleID ='" + RoleID + "',@UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
@@ -260,6 +261,18 @@ namespace RJ_NOC_DataAccess.Repositories
                 Result = Convert.ToInt32(dt.Rows[0]["TotalAppliedNOC"]);
             }
             return Result;
+        }
+        public List<CommonDataModel_DataTable> GetIssuedNOCReportList(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetIssuedNOCReportData @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "',@DepartmentID ='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetIssuedNOCReportList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

@@ -139,6 +139,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear();
         }
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear_AcademicInformation();
+        }
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
@@ -166,6 +170,20 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetCourseList_CollegeWise(CollegID, CourseType);
         }
 
+        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID, int OldNocID)
+        {
+            return UnitOfWork.CommonFuncationRepository.Get_CollegeWiseCourse_Subject_OldNOC(CollegeID, Type, CourseID, OldNocID);
+        }
+        
+        public List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWise_SubjectList_StaffDetails(CollegeID, Type, CourseID);
+        }
+        public List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeWise_CourseList_AcademicInformation(CollegeID, Type, CourseID);
+        }
+
         public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseRoomSize(CourseID);
@@ -186,9 +204,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         //    return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentAndTypeWise(DepartmentID, Type);
         //}
 
-        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck()
+        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck();
+            return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck(SelectedDepartmentID);
         }
         public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
