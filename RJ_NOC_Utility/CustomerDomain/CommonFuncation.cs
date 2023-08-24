@@ -204,9 +204,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         //    return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentAndTypeWise(DepartmentID, Type);
         //}
 
-        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck()
+        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck();
+            return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck(SelectedDepartmentID);
         }
         public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {

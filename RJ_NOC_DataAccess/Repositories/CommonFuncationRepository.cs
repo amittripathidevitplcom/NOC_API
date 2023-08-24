@@ -503,9 +503,9 @@ namespace RJ_NOC_DataAccess.Repository
         //}
 
 
-        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck()
+        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID)
         {
-            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingtype'";
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingtype',@DepartmentID='" + SelectedDepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingTypeCheck");
 

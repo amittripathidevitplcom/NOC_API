@@ -1323,13 +1323,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetBuildingTypeCheck")]
-        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetBuildingTypeCheck()
+        [HttpGet("GetBuildingTypeCheck/{SelectedDepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetBuildingTypeCheck(int SelectedDepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_BuildingType>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetBuildingTypeCheck());
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetBuildingTypeCheck(SelectedDepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
