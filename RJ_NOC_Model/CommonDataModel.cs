@@ -273,6 +273,7 @@ namespace RJ_NOC_Model
         public string ActionName { get; set; }
         public int ActionID { get; set; }
         public bool IsNextAction { get; set; }
+        public bool IsRevert { get; set; }
     }
 
     public class CommonDataModel_RNCCheckListData
