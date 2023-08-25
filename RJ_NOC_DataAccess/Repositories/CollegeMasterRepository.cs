@@ -63,6 +63,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@DistanceFromCity='{0}',", request.DistanceFromCity);
             sb.AppendFormat("@CollegeNAACAccredited='{0}',", request.CollegeNAACAccredited);
             sb.AppendFormat("@NAACAccreditedCertificate='{0}',", request.NAACAccreditedCertificate);
+            sb.AppendFormat("@NACCValidityDate='{0}',", request.NACCValidityDate);
             // child
             sb.AppendFormat("@ContactDetailsList='{0}',", CommonHelper.GetDetailsTableQry(request.ContactDetailsList, "ContactDetailsList"));
             if (request.NearestGovernmentHospitalsList.Count > 0)
