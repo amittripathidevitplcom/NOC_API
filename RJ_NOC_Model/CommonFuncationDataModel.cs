@@ -130,6 +130,7 @@ namespace RJ_NOC_Model
         public int TotalLegalEntity { get; set; }
         public int TotalRevertApplication { get; set; }
         public int TotalApplyNocApplication { get; set; }
+        public int TotalRejectApplication { get; set; }
 
         // Common use All Department
         public int Pending { get; set; }

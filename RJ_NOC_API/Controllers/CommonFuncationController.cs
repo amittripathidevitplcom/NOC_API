@@ -1324,7 +1324,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetBuildingTypeCheck/{SelectedDepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetBuildingTypeCheck(int SelectedDepartmentID)
+        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetBuildingTypeCheck(int SelectedDepartmentID) 
         {
             var result = new OperationResult<List<CommonDataModel_BuildingType>>();
             try
