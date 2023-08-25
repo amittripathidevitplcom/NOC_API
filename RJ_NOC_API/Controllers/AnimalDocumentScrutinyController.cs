@@ -483,13 +483,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}/{DepartmentID}/{UserID}")]
-        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID)
+        [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}")]
+        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID,string ActionName)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID));
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID, ActionName));
                 if (result.Data == true)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitInspectionCommittee", 0, "AnimalDocumentScrutinyController");
@@ -645,6 +645,69 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        
+        [HttpPost("GetPostVerificationAppliationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPostVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetPostVerificationAppliationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPreVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPreVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("GetPostVerificationDoneList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPostVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetPostVerificationDoneList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPostVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPostVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPostVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
