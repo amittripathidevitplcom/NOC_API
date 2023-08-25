@@ -63,6 +63,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@DistanceFromCity='{0}',", request.DistanceFromCity);
             sb.AppendFormat("@CollegeNAACAccredited='{0}',", request.CollegeNAACAccredited);
             sb.AppendFormat("@NAACAccreditedCertificate='{0}',", request.NAACAccreditedCertificate);
+            sb.AppendFormat("@NACCValidityDate='{0}',", request.NACCValidityDate);
             // child
             sb.AppendFormat("@ContactDetailsList='{0}',", CommonHelper.GetDetailsTableQry(request.ContactDetailsList, "ContactDetailsList"));
             if (request.NearestGovernmentHospitalsList.Count > 0)
@@ -152,6 +153,18 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
             CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
             dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID)
+        {
+            string SqlQuery = "exec USP_DceCollegeRevertedApplicationList @LoginSSOID='" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.RevertApplicationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
         }
