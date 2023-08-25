@@ -36,5 +36,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.ViewTotalCollegeDataByID(CollegeID);
         }
+        public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID)
+        {
+            return UnitOfWork.CollegeMasterRepository.RevertedApplicationList(LoginSSOID);
+        }
+
     }
 }

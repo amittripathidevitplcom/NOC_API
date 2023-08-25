@@ -216,6 +216,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("RevertedApplicationList/{LoginSSOID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> RevertedApplicationList(string LoginSSOID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.RevertedApplicationList(LoginSSOID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.RevertedApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 
