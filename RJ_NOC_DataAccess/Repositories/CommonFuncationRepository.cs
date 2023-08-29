@@ -918,9 +918,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID,int UniversityID)
         {
-            string SqlQuery = "exec USP_CommonDataList  @Key='GetCourseByStreamID',@StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "'";
+            string SqlQuery = "exec USP_CommonDataList  @Key='GetCourseByStreamID',@StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "',@UniversityID='"+ UniversityID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetStreamMaster");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

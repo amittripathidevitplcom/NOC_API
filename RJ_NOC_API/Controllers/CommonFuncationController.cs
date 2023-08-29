@@ -2368,13 +2368,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetCourseByStreamID/{StreamID}/{DepartmentID}/{CourseLevelID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        [HttpGet("GetCourseByStreamID/{StreamID}/{DepartmentID}/{CourseLevelID}/{UniversityID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID, int UniversityID)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID, UniversityID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

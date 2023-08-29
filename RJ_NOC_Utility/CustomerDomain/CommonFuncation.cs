@@ -346,9 +346,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetMappedStreamListByID(DepartmentID);
         }
-        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID,int UniversityID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID);
+            return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID, UniversityID);
         }
 
         public List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
