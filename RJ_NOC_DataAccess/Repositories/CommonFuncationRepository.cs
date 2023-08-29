@@ -967,6 +967,28 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentID)
+        {
+            string SqlQuery = $"exec USP_UniversityMaster @Action='GetUniversityDepartmentWise', @DepartmentID={DepartmentID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUniversityDepartmentWise");
+
+            List<CommonDataModel_UniversityDDL> dataModels = new List<CommonDataModel_UniversityDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_UniversityDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID)
+        {
+            string SqlQuery = $"exec USP_GetSubjectDepartmentWise  @DepartmentID={DepartmentID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSubjectDepartmentWise");
+
+            List<CommonDataModel_SubjectMaster> dataModels = new List<CommonDataModel_SubjectMaster>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SubjectMaster>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

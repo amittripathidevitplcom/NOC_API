@@ -118,6 +118,8 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DataTable> GetDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching);
+        List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId);
+        List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID);
     }
 }
 

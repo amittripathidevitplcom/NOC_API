@@ -28,21 +28,30 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<AddCourseMasterDataModel> GetCourseIDWise(int CourseID)
         {
-            string SqlQuery = " exec USP_AddCourseMaster_GetData @CourseID='" + CourseID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AddCourseMasterService.GetCourseIDWise");
-
             List<AddCourseMasterDataModel> dataModels = new List<AddCourseMasterDataModel>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<AddCourseMasterDataModel>>(JsonDataTable_Data);
+            string SqlQuery = " exec USP_AddCourseMaster_GetData @CourseID='" + CourseID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AddCourseMasterService.GetCourseIDWise");
+            if (dataSet != null)
+            {
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+                dataModels = JsonConvert.DeserializeObject<List<AddCourseMasterDataModel>>(JsonDataTable_Data);
+                if (dataSet.Tables[1] != null)
+                {
+                    string subjects = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                    List<SubjectAddCourseMasterDataModel> subjectaddcoursemasterdatamodel = JsonConvert.DeserializeObject<List<SubjectAddCourseMasterDataModel>>(subjects);
+                    dataModels[0].CourseSubjects = subjectaddcoursemasterdatamodel;
+                }
+            }
             return dataModels;
         }
         public bool SaveData(AddCourseMasterDataModel request)
         {
+            string CourseSubject_str = CommonHelper.GetDetailsTableQry(request.CourseSubjects, "Temp_M_CourseWiseSubject");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_USP_AddCourseMaster_AddUpdate";
             SqlQuery += " @CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@CollegeLevel='" + request.CollegeLevel + "',@CourseLevelID='" + request.CourseLevelID + "',@CourseName='" + request.CourseName+ "',@Duration='" + request.Duration + "',@NoOfRooms='" + request.NoOfRooms + "',@CourseDurationType='" + request.CourseDurationType + "',";
-            SqlQuery += "@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += "@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "',@CourseSubject_str='" + CourseSubject_str + "',@UniversityID='" + request.UniversityID + "',@StreamID='" + request.StreamID + "',@NoofSubjectsForCombination='" + request.NoofSubjectsForCombination + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "AddCourseMasterService.SaveData");
             if (Rows > 0)
                 return true;
@@ -58,9 +67,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int DepartmentID,int CourseID, string CourseName)
+        public bool IfExists(int DepartmentID,int CourseID, string CourseName,int UniversityID,int StreamID)
         {
-            string SqlQuery = " select CourseName from M_CourseMaster Where DepartmentID = '" + DepartmentID + "' and CourseName='" + CourseName.Trim() + "'  and CourseID !='" + CourseID + "'  and DeleteStatus=0";
+            string SqlQuery = "USP_IfExistsCourse @CourseID='" + CourseID + "',@DepartmentID='" + DepartmentID + "',@UniversityID='" + UniversityID + "',@CourseName='" + CourseName + "',@StreamID='" + StreamID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AddCourseMasterService.IfExists");
             if (dataTable.Rows.Count > 0)

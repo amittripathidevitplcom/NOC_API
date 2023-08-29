@@ -110,6 +110,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId);
         List<CommonDataModel_DataTable> GetDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching);
+        List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId);
+        List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID);
     }
 
 }

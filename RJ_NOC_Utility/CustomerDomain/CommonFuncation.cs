@@ -364,5 +364,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetStaffDesignation(IsTeaching);
         }
+        public List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetUniversityDepartmentWise(DepartmentId);
+        }
+        public List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSubjectDepartmentWise(DepartmentID);
+        }
     }
 }
