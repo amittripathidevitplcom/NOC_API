@@ -9,7 +9,7 @@ namespace RJ_NOC_Model
     {
        public int DepartmentID { get; set; }
        public int SubjectID { get; set; }
-        public int CourseID { get; set; }
+        //public int CourseID { get; set; }
         public string SubjectName { get; set; }
         public int UserID { get; set; }
         public string? Predical { get; set; }
@@ -21,9 +21,9 @@ namespace RJ_NOC_Model
     {
         public DataTable data { get; set; }
     }
-    public class CourseList
-    {
-        public int CourseID { get; set; }
-        public string CourseName { get; set; }
-    }
+    //public class CourseList
+    //{
+    //    public int CourseID { get; set; }
+    //    public string CourseName { get; set; }
+    //}
 }
