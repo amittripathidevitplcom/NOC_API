@@ -63,6 +63,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @ContactNo='" + buildingdetails.ContactNo + "',";
             SqlQuery += " @UserID='" + buildingdetails.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @Rentvaliditydate='" + buildingdetails.Rentvaliditydate + "',";
             SqlQuery += " @BuildingDetail_Document_Str='" + BuildingDetail_Document_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "BuildingDetailsMasterService.SaveData");

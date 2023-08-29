@@ -334,19 +334,19 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GeneratePDFForJointSecretary/{ApplyNOCID}/{DepartmentID}/{RoleID}/{UserID}/{NOCIssuedRemark}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GeneratePDFForJointSecretary(int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark)
+        [HttpPost("GeneratePDFForJointSecretary/{ApplyNOCID}/{DepartmentID}/{RoleID}/{UserID}/{NOCIssuedRemark}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GeneratePDFForJointSecretary(GenerateNOC_DataModel request)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GeneratePDFForJointSecretary", ApplyNOCID, "ApplyNOCController");
+            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "GeneratePDFForJointSecretary", request.ApplyNOCID, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GeneratePDFForJointSecretary(ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GeneratePDFForJointSecretary(request.ApplyNOCID));
                 string Path=GeneratePDF(result.Data);
 
                 if (!string.IsNullOrEmpty(Path))
                 {
-                    if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SavePDFPath(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark)))
+                    if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SavePDFPath(Path, request.ApplyNOCID, request.DepartmentID, request.RoleID, request.UserID, request.NOCIssuedRemark)))
                     {
                         result.State = OperationState.Success;
                         result.SuccessMessage = "PDF Generate Successfully .!";

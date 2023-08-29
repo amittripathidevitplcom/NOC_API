@@ -38,7 +38,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += "@StaffDetailID='"+request.StaffDetailID+"',@TeachingType='"+request.TeachingType+"',@SubjectID='"+request.SubjectID+"',@PersonName='"+request.PersonName+"',@RoleID='"+request.RoleID+"',@MobileNo='"+request.MobileNo+"',@Email='"+request.Email+"',";
             SqlQuery += "@HighestQualification='"+request.HighestQualification+"',@NumberofExperience='"+request.NumberofExperience+"',@AadhaarNo='"+request.AadhaarNo+"',@DateOfBirth='"+request.DateOfBirth+"',@DateOfAppointment='"+request.DateOfAppointment+"',@DateOfJoining='"+request.DateOfJoining+"',";
             SqlQuery += "@SpecializationSubject='"+request.SpecializationSubject+"',@RoleMapping='"+request.RoleMapping+"',@Salary='"+request.Salary+"',@StaffStatus='"+request.StaffStatus+"',@PFDeduction='"+request.PFDeduction+"',@UANNumber='"+request.UANNumber+"',@ResearchGuide='"+request.ResearchGuide+"',";
-            SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "',@Gender='" + request.Gender + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StaffDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -102,6 +102,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.ModifyBy = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ModifyBy"]);
                     dataModels.IPAddress = dataSet.Tables[0].Rows[0]["IPAddress"].ToString();
                     dataModels.HighestQualificationName = dataSet.Tables[0].Rows[0]["HighestQualificationName"].ToString();
+                    dataModels.Gender = dataSet.Tables[0].Rows[0]["Gender"].ToString();
 
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);

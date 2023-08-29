@@ -1483,13 +1483,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID)
+        [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}/{IsTeaching}")]
+        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching)
         {
             var result = new OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetQualificationMasterList_DepartmentWise(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2455,6 +2455,39 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetCollegeBasicDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetStaffDesignation/{IsTeaching}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffDesignation(int IsTeaching)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetStaffDesignation(IsTeaching));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetStaffDesignation", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

@@ -562,9 +562,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID)
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching)
         {
-            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "'";
+            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentWise");
 
@@ -947,6 +947,18 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " exec USP_DocumentScrutiny_Trail @ActionType='"+ ActionType + "', @CollegeID='" + CollageID + "',@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + NOCApplyID + "',@ID='" + ID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetDocumentScritintyTaril");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching)
+        {
+            string SqlQuery = " exec USP_GetStaffDesignation @IsTeaching='" + IsTeaching + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetStaffDesignation");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
