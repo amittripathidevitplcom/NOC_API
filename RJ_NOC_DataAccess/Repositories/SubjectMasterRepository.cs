@@ -14,17 +14,17 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CourseList> GetDepartmentByCourse(int DepartmentID)
-        {
-            string SqlQuery = "exec USP_GetCourseList @DepartmentID=" + DepartmentID;
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetDepartmentByCourse");
+        //public List<CourseList> GetDepartmentByCourse(int DepartmentID)
+        //{
+        //    string SqlQuery = "exec USP_GetCourseList @DepartmentID=" + DepartmentID;
+        //    DataTable dataTable = new DataTable();
+        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetDepartmentByCourse");
 
-            List<CourseList> dataModels = new List<CourseList>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CourseList>>(JsonDataTable_Data);
-            return dataModels;
-        }
+        //    List<CourseList> dataModels = new List<CourseList>();
+        //    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+        //    dataModels = JsonConvert.DeserializeObject<List<CourseList>>(JsonDataTable_Data);
+        //    return dataModels;
+        //}
         public List<SubjectMasterDataModel_list> GetAllSubjectList(int DepartmentID)
         {
             string SqlQuery = " exec USP_GetAllSubjectList @DepartmentID=" + DepartmentID;
@@ -52,7 +52,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_M_SubjectMasterInsert";
-            SqlQuery += " @SubjectID='" + request.SubjectID + "',@DepartmentID='" + request.DepartmentID + "',@CourseID='" + request.CourseID + "',@SubjectName='" + request.SubjectName + "',@IsPredical='" + request.IsPredical+ "',@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @SubjectID='" + request.SubjectID + "',@DepartmentID='" + request.DepartmentID + "',@SubjectName='" + request.SubjectName + "',@IsPredical='" + request.IsPredical+ "',@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "SubjectMasterService.SaveData");
             if (Rows > 0)
                 return true;
@@ -68,9 +68,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName,int CourseID)
+        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName)
         {
-            string SqlQuery = " select SubjectName from M_SubjectMaster Where DepartmentID = '"+ DepartmentID + "' and CourseID='"+ CourseID + "' and SubjectName='" + SubjectName.Trim() + "'  and SubjectID !='" + SubjectID + "'  and DeleteStatus=0";
+            string SqlQuery = " select SubjectName from M_SubjectMaster Where DepartmentID = '"+ DepartmentID + "' and SubjectName='" + SubjectName.Trim() + "'  and SubjectID <>'" + SubjectID + "'  and DeleteStatus=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.IfExists");
             if (dataTable.Rows.Count > 0)

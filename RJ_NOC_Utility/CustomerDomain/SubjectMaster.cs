@@ -13,10 +13,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public SubjectMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CourseList> GetDepartmentByCourse(int DepartmentID)
-        {
-            return UnitOfWork.SubjectMasterRepository.GetDepartmentByCourse(DepartmentID);
-        }
+        //public List<CourseList> GetDepartmentByCourse(int DepartmentID)
+        //{
+        //    return UnitOfWork.SubjectMasterRepository.GetDepartmentByCourse(DepartmentID);
+        //}
         public List<SubjectMasterDataModel_list> GetAllSubjectList(int DepartmentID)
         {
             return UnitOfWork.SubjectMasterRepository.GetAllSubjectList(DepartmentID);
@@ -34,9 +34,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.SubjectMasterRepository.DeleteData(SubjectID);
         }
         
-        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName, int CourseID)
+        public bool IfExists(int DepartmentID,int SubjectID, string SubjectName)
         {
-            return UnitOfWork.SubjectMasterRepository.IfExists(DepartmentID, SubjectID, SubjectName, CourseID);
+            return UnitOfWork.SubjectMasterRepository.IfExists(DepartmentID, SubjectID, SubjectName);
         }
 
        

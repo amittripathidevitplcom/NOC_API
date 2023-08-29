@@ -343,7 +343,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FinancialYearDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-         public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
         {
             string SqlQuery = "exec USP_FinancialYearMaster_AcademicInformation ";
             DataTable dataTable = new DataTable();
@@ -404,7 +404,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType)
         {
-            string SqlQuery = $" Exec Get_CollegeWiseCourse @CollegeID={CollegID},@CourseType='"+ CourseType + "'";
+            string SqlQuery = $" Exec Get_CollegeWiseCourse @CollegeID={CollegID},@CourseType='" + CourseType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
 
@@ -413,9 +413,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID, int OldNocID)
+        public List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID, int OldNocID)
         {
-            string SqlQuery = $" Exec Get_CollegeWiseCourse_Subject_OldNOC @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "',@OldNocID='" + OldNocID + "'";
+            string SqlQuery = $" Exec Get_CollegeWiseCourse_Subject_OldNOC @CollegeID={CollegeID}, @Type='" + Type + "',@CourseID='" + CourseID + "',@OldNocID='" + OldNocID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
 
@@ -424,11 +424,11 @@ namespace RJ_NOC_DataAccess.Repository
             DataTable dataModel = new DataTable();
             dataModel = dataTable;
             dataModels.Add(dataModel);
-            return dataModels; 
+            return dataModels;
         }
-        public List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type,int CourseID)
+        public List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID)
         {
-            string SqlQuery = $" Exec GetCollegeWise_SubjectList_StaffDetails @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "'";
+            string SqlQuery = $" Exec GetCollegeWise_SubjectList_StaffDetails @CollegeID={CollegeID}, @Type='" + Type + "',@CourseID='" + CourseID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeWise_SubjectList_StaffDetails");
 
@@ -437,11 +437,11 @@ namespace RJ_NOC_DataAccess.Repository
             DataTable dataModel = new DataTable();
             dataModel = dataTable;
             dataModels.Add(dataModel);
-            return dataModels; 
+            return dataModels;
         }
-        public List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID)
+        public List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID)
         {
-            string SqlQuery = $" Exec GetCollegeWise_CourseList_AcademicInformation @CollegeID={CollegeID}, @Type='"+ Type + "',@CourseID='"+ CourseID + "'";
+            string SqlQuery = $" Exec GetCollegeWise_CourseList_AcademicInformation @CollegeID={CollegeID}, @Type='" + Type + "',@CourseID='" + CourseID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeWise_CourseList_AcademicInformation");
 
@@ -450,8 +450,8 @@ namespace RJ_NOC_DataAccess.Repository
             DataTable dataModel = new DataTable();
             dataModel = dataTable;
             dataModels.Add(dataModel);
-            return dataModels; 
-        } 
+            return dataModels;
+        }
 
         public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
         {
@@ -503,7 +503,7 @@ namespace RJ_NOC_DataAccess.Repository
         //}
 
 
-        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID) 
+        public List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID)
         {
             string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingtype',@DepartmentID='" + SelectedDepartmentID + "'";
             DataTable dataTable = new DataTable();
@@ -516,7 +516,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
-            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype',@DepartmentID='"+ DepartmentId + "'";
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype',@DepartmentID='" + DepartmentId + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingUploadDetails");
 
@@ -562,9 +562,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching)
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type)
         {
-            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "'";
+            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentWise");
 
@@ -637,7 +637,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssemblyAreaDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID)  
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID)
         {
             string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "'";
             List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
@@ -802,7 +802,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID,string Type, int DepartmentID)
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID)
         {
             string SqlQuery = "exec USP_GetWorkFlowActionListByRole @RoleID='" + RoleID + "',@Type='" + Type + "',@DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
@@ -816,7 +816,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
         {
-            string SqlQuery = "exec USP_GetRNCCheckListByTypeDepartment @Type='"+Type+ "' ,@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "',@RoleID='" + RoleID + "'";
+            string SqlQuery = "exec USP_GetRNCCheckListByTypeDepartment @Type='" + Type + "' ,@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "',@RoleID='" + RoleID + "'";
             DataTable dataTable = new DataTable();
 
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRNCCheckListByTypeDepartment");
@@ -836,7 +836,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ApplicationTrail>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID,int DepartmentID)
+        public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID, int DepartmentID)
         {
             string SqlQuery = "exec USP_CourseList_ByCourseLevelIDWise @CourseLevelID='" + CourseLevelID + "' ,@DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
@@ -860,10 +860,10 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_Stream>>(JsonDataTable_Data);
             return dataModels;
         }
-       
-        public List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID,int DepartmentID, int CourseLevelID ,int CourseID)
+
+        public List<CommonDataModel_SubjectMaster> GetSubjectList_StreamIDWise(int StreamID, int DepartmentID, int CourseLevelID, int CourseID)
         {
-            string SqlQuery = "exec USP_GetSubjectList_StreamIDWise @StreamID='" + StreamID +"', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "', @CourseID = '" + CourseID + "'";;
+            string SqlQuery = "exec USP_GetSubjectList_StreamIDWise @StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "', @CourseID = '" + CourseID + "'"; ;
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSubjectList_StreamIDWise");
             List<CommonDataModel_SubjectMaster> dataModels = new List<CommonDataModel_SubjectMaster>();
@@ -885,7 +885,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> GetCollegeWiseCourseIDSubjectList(int CollegeID, int CollegeWiseCourseID, string ViewMode)
         {
-            string SqlQuery = " exec USP_CollegeWiseCourseSubjectGet @CollegeID='" + CollegeID + "',@ViewMode='"+ ViewMode + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
+            string SqlQuery = " exec USP_CollegeWiseCourseSubjectGet @CollegeID='" + CollegeID + "',@ViewMode='" + ViewMode + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeWiseCourseIDSubjectList");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -918,9 +918,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID,int UniversityID)
         {
-            string SqlQuery = "exec USP_CommonDataList  @Key='GetCourseByStreamID',@StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "'" ;
+            string SqlQuery = "exec USP_CommonDataList  @Key='GetCourseByStreamID',@StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "',@UniversityID='"+ UniversityID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetStreamMaster");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -944,7 +944,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_Trail @ActionType='"+ ActionType + "', @CollegeID='" + CollageID + "',@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + NOCApplyID + "',@ID='" + ID + "'";
+            string SqlQuery = " exec USP_DocumentScrutiny_Trail @ActionType='" + ActionType + "', @CollegeID='" + CollageID + "',@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + NOCApplyID + "',@ID='" + ID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetDocumentScritintyTaril");
 
@@ -964,6 +964,17 @@ namespace RJ_NOC_DataAccess.Repository
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandDetailID)
+        {
+            string SqlQuery = " Exec USP_LandTypeDetails_CollegeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "',@LandDetailID='" + LandDetailID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandTypeDetails_CollegeWise");
+            List<CollegeLandTypeDetailsDataModel> dataModels = new List<CollegeLandTypeDetailsDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CollegeLandTypeDetailsDataModel>>(JsonDataTable_Data);
             return dataModels;
         }
 

@@ -16,37 +16,37 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("GetDepartmentByCourse/{DepartmentID}")]        
-        public async Task<OperationResult<List<CourseList>>> GetDepartmentByCourse(int DepartmentID)
-        {
-            var result = new OperationResult<List<CourseList>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetDepartmentByCourse(DepartmentID));
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
-                {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.GetDepartmentByCourse", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
+        //[HttpGet("GetDepartmentByCourse/{DepartmentID}")]        
+        //public async Task<OperationResult<List<CourseList>>> GetDepartmentByCourse(int DepartmentID)
+        //{
+        //    var result = new OperationResult<List<CourseList>>();
+        //    try
+        //    {
+        //        result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.GetDepartmentByCourse(DepartmentID));
+        //        result.State = OperationState.Success;
+        //        if (result.Data.Count > 0)
+        //        {
+        //            result.State = OperationState.Success;
+        //            result.SuccessMessage = "Data load successfully .!";
+        //        }
+        //        else
+        //        {
+        //            result.State = OperationState.Warning;
+        //            result.SuccessMessage = "No record found.!";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        CommonDataAccessHelper.Insert_ErrorLog("SubjectMasterController.GetDepartmentByCourse", ex.ToString());
+        //        result.State = OperationState.Error;
+        //        result.ErrorMessage = ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        // UnitOfWork.Dispose();
+        //    }
+        //    return result;
+        //}
         [HttpGet("GetAllSubjectList/{UserID}/{DepartmentID}")]
         public async Task<OperationResult<List<SubjectMasterDataModel_list>>> GetAllSubjectList(int UserID,int DepartmentID)
         {
@@ -118,7 +118,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.SubjectMasterUtility.IfExists(request.DepartmentID,request.SubjectID, request.SubjectName,request.CourseID);
+                IfExits = UtilityHelper.SubjectMasterUtility.IfExists(request.DepartmentID,request.SubjectID, request.SubjectName);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.SubjectMasterUtility.SaveData(request));

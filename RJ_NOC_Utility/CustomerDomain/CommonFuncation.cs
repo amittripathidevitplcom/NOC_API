@@ -225,9 +225,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAnnexureDataList_DepartmentWise(DepartmentID, LandDocumentTypeID, LandConvertedID);
         }
-        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching)
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching,string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching);
+            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching, Type);
         }
 
 
@@ -346,9 +346,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetMappedStreamListByID(DepartmentID);
         }
-        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID,int UniversityID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID);
+            return UnitOfWork.CommonFuncationRepository.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID, UniversityID);
         }
 
         public List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId)
@@ -363,6 +363,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching)
         {
             return UnitOfWork.CommonFuncationRepository.GetStaffDesignation(IsTeaching);
+        }
+        public List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandTypeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandTypeDetails_CollegeWise(DepartmentID, Type, LandTypeID);
         }
         public List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId)
         {

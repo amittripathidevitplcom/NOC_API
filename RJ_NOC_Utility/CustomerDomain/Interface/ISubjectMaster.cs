@@ -7,12 +7,12 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface ISubjectMaster
     {
-        List<CourseList> GetDepartmentByCourse(int DepartmentID);
+        //List<CourseList> GetDepartmentByCourse(int DepartmentID);
         List<SubjectMasterDataModel_list> GetAllSubjectList(int DepartmentID);
         List<SubjectMasterDataModel>GetSubjectIDWise(int SubjectID);
         bool SaveData(SubjectMasterDataModel request);       
         bool DeleteData(int SubjectID);
-        bool IfExists(int DepartmentID,int SubjectID, string SubjectName,int CourseID);
+        bool IfExists(int DepartmentID,int SubjectID, string SubjectName);
 
 
     }
