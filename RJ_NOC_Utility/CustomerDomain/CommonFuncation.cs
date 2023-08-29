@@ -225,9 +225,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAnnexureDataList_DepartmentWise(DepartmentID, LandDocumentTypeID, LandConvertedID);
         }
-        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching)
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching,string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching);
+            return UnitOfWork.CommonFuncationRepository.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching, Type);
         }
 
 

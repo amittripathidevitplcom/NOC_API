@@ -1483,13 +1483,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}/{IsTeaching}")]
-        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching)
+        [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}/{IsTeaching}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching,string Type)
         {
             var result = new OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
