@@ -28,6 +28,8 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public List<CommonDataModel_BuildingUploadDoc> LandDetailDocument { get; set; }
+
+        public List<CollegeLandTypeDetailsDataModel> CollegeLandTypeDetails { get; set; }
         //Add by Deepak 28062023
         public string? LandTypeName { get; set; }
         public string? Code { get; set; }
@@ -41,7 +43,7 @@ namespace RJ_NOC_Model
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
         public string? AreaType { get; set; }
-
+     
     }
 
     //public class LandDetailDocumentDataModel:document
@@ -51,5 +53,14 @@ namespace RJ_NOC_Model
     //    //public string SelectedFileName { get; set; }
     //    //public string SelectedFilePath { get; set; }
     //}
+
+    public class CollegeLandTypeDetailsDataModel 
+    {
+        public int LandTypeID { get; set; }
+        public string LandTypeName { get; set; }
+        public decimal LandArea { get; set; }
+        public string? KhasraNo { get; set; }
+        public bool IsLandSelected { get; set; }
+    }
 }
 

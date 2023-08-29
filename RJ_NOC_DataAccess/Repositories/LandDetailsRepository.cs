@@ -122,7 +122,9 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @IsConvereted='" + request.IsConvereted + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f=>f.IsLandSelected==true), "Temp_LandTypeDetails") + "',";
             SqlQuery += " @SchoolLandInformation_Document_Str='" + SchoolLandInformation_Document_Str + "'";
+
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
             if (Rows > 0)

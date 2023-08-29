@@ -100,7 +100,6 @@ namespace RJ_NOC_API.Controllers
         public async Task<OperationResult<bool>> SaveData(LandDetailsDataModel request)
         {
             var result = new OperationResult<bool>();
-
             try
             {
                 //bool IfExits = false;

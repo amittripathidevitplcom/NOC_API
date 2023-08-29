@@ -2464,6 +2464,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-         
+
+
+        [HttpGet("GetLandTypeDetails_CollegeWise/{DepartmentID}/{Type}/{LandDetailID}")]
+        public async Task<OperationResult<List<CollegeLandTypeDetailsDataModel>>> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type,int LandDetailID)
+        {
+            var result = new OperationResult<List<CollegeLandTypeDetailsDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetLandTypeDetails_CollegeWise(DepartmentID, Type, LandDetailID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetLandTypeDetails_CollegeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }

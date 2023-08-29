@@ -360,5 +360,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDocumentScritintyTaril(ID, NOCApplyID, CollageID, DepartmentID, ActionType);
         }
+        public List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandTypeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLandTypeDetails_CollegeWise(DepartmentID, Type, LandTypeID);
+        }
     }
 }

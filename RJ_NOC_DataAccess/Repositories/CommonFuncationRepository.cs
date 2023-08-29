@@ -955,6 +955,17 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type,int LandDetailID)
+        {
+            string SqlQuery = " Exec USP_LandTypeDetails_CollegeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "',@LandDetailID='" + LandDetailID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandTypeDetails_CollegeWise");
+            List<CollegeLandTypeDetailsDataModel> dataModels = new List<CollegeLandTypeDetailsDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CollegeLandTypeDetailsDataModel>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
     }
 }
 
