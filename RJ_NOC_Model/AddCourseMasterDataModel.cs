@@ -21,5 +21,15 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
+
+        public int StreamID { get; set; }
+        public int UniversityID { get; set; }
+        public int NoofSubjectsForCombination { get; set; }
+        public List<SubjectAddCourseMasterDataModel> CourseSubjects { get; set; }
+    }
+    public class SubjectAddCourseMasterDataModel
+    {
+        public int CourseID { get; set; }
+        public int SubjectID { get; set; }
     }
 }

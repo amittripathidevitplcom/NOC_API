@@ -30,9 +30,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AddCourseMasterRepository.DeleteData(CourseID);
         }
         
-        public bool IfExists(int DepartmentID,int CourseID, string CourseName)
+        public bool IfExists(int DepartmentID,int CourseID, string CourseName, int UniversityID, int StreamID)
         {
-            return UnitOfWork.AddCourseMasterRepository.IfExists(DepartmentID, CourseID, CourseName);
+            return UnitOfWork.AddCourseMasterRepository.IfExists(DepartmentID, CourseID, CourseName,UniversityID,StreamID);
         }
 
        

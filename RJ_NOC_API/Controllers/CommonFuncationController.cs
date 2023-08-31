@@ -1483,13 +1483,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}/{IsTeaching}")]
-        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching)
+        [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}/{IsTeaching}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching,string Type)
         {
             var result = new OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetQualificationMasterList_DepartmentWise(DepartmentID, IsTeaching, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2368,13 +2368,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetCourseByStreamID/{StreamID}/{DepartmentID}/{CourseLevelID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID)
+        [HttpGet("GetCourseByStreamID/{StreamID}/{DepartmentID}/{CourseLevelID}/{UniversityID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID, int UniversityID)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseByStreamID(StreamID, DepartmentID, CourseLevelID, UniversityID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2531,6 +2531,71 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpGet("GetUniversityDepartmentWise/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_UniversityDDL>>> GetUniversityDepartmentWise(int DepartmentId)
+        {
+            var result = new OperationResult<List<CommonDataModel_UniversityDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUniversityDepartmentWise(DepartmentId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetUniversityDepartmentWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetSubjectDepartmentWise/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_SubjectMaster>>> GetSubjectDepartmentWise(int DepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_SubjectMaster>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubjectDepartmentWise( DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSubjectDepartmentWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("GetCollegeInspectionFee/{CollegID}/{DepartmentID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCollegeInspectionFee(int CollageID, int DepartmentID)
         {
