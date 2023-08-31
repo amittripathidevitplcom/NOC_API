@@ -368,5 +368,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetLandTypeDetails_CollegeWise(DepartmentID, Type, LandTypeID);
         }
+        public List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollageID,int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeInspectionFee( CollageID, DepartmentID);
+        }
     }
 }
