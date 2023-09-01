@@ -167,41 +167,44 @@ namespace RJ_NOC_Utility.CustomerDomain
             // child            
             StringBuilder sb1 = new StringBuilder();
 
-
-            sb1.Append("select * into ##ApplyNocParameterDetailList from(");
-            foreach (var item in request.ApplyNocParameterMasterListDataModel.Where(x => x.IsChecked == true))
+            if (request.ApplyNocParameterMasterListDataModel.Where(x => x.IsChecked == true).Count() > 0)
             {
-                sb1.Append(" select");
-                sb1.AppendFormat(" ApplyNocParameterDetailID={0},", 0);
-                sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
-                sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
-                sb1.AppendFormat(" ApplyNocFor=''{0}'',", item.ApplyNocFor);
-                if (item.ApplyNocCode == "DEC_NewCourse")
+                sb1.Append("select * into ##ApplyNocParameterDetailList from(");
+                foreach (var item in request.ApplyNocParameterMasterListDataModel.Where(x => x.IsChecked == true))
                 {
-                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_NewCourse.FeeAmount);
+                    sb1.Append(" select");
+                    sb1.AppendFormat(" ApplyNocParameterDetailID={0},", 0);
+                    sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
+                    sb1.AppendFormat(" ApplyNocParameterID={0},", item.ApplyNocID);
+                    sb1.AppendFormat(" ApplyNocFor=''{0}'',", item.ApplyNocFor);
+                    if (item.ApplyNocCode == "DEC_NewCourse")
+                    {
+                        sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_NewCourse.FeeAmount);
+                    }
+                    else if (item.ApplyNocCode == "DEC_TNOCExtOfSubject")
+                    {
+                        sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_TNOCExtOfSubject.FeeAmount);
+                    }
+                    else if (item.ApplyNocCode == "DEC_NewSubject")
+                    {
+                        sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_NewCourseSubject.FeeAmount);
+                    }
+                    else if (item.ApplyNocCode == "DEC_PNOCSubject")
+                    {
+                        sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_PNOCOfSubject.FeeAmount);
+                    }
+                    else
+                    {
+                        sb1.AppendFormat(" FeeAmount={0}", item.FeeAmount);
+                    }
+                    sb1.Append(" union all");
                 }
-                else if(item.ApplyNocCode == "DEC_TNOCExtOfSubject")
-                {
-                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_TNOCExtOfSubject.FeeAmount);
-                }
-                else if (item.ApplyNocCode == "DEC_NewSubject")
-                {
-                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_NewCourseSubject.FeeAmount);
-                }
-                else if (item.ApplyNocCode == "DEC_PNOCSubject")
-                {
-                    sb1.AppendFormat(" FeeAmount={0}", request.ApplyNocParameterMasterList_PNOCOfSubject.FeeAmount);
-                }
-                else
-                {
-                    sb1.AppendFormat(" FeeAmount={0}", item.FeeAmount);
-                }
-                sb1.Append(" union all");
-            }
-            sb1.Length = sb1.Length - 9;// remove union all
-            sb1.Append(" ) as t");
-            sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString());
 
+                sb1.Length = sb1.Length - 9;// remove union all
+                sb1.Append(" ) as t");
+                sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString());
+            }
+            
 
 
 

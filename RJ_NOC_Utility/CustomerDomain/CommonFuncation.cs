@@ -376,5 +376,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetSubjectDepartmentWise(DepartmentID);
         }
+        public List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollageID,int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeInspectionFee( CollageID, DepartmentID);
+        }
     }
 }

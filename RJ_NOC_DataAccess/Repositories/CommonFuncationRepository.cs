@@ -1000,6 +1000,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SubjectMaster>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID,int DepartmentId)
+        {
+            string SqlQuery = " exec USP_CollegeInspectionFee_GetData @CollegeID='" + CollegID + "',@DepartmentId='" + DepartmentId + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeInspectionFee");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
     }
 }
 
