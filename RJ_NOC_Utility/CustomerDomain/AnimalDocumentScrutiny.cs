@@ -125,6 +125,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmetID, string Action)
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetApplyNOCApplicationList(RoleID, UserID, DepartmetID, Action);
+        } 
+        public List<CommonDataModel_DataTable> GetNOCCourse(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetNOCCourse(ApplyNocID, DepartmentID, CollegeID, Action);
         }
 
     }

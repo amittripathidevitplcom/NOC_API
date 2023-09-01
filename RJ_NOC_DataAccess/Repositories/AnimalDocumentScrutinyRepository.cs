@@ -490,5 +490,18 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
+        public List<CommonDataModel_DataTable> GetNOCCourse(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            string SqlQuery = " exec USP_GetNOCDetails_AH @ApplyNocID='" + ApplyNocID + "',@departmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ActionType='" + Action + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetNOCCourse");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+
     }
 }

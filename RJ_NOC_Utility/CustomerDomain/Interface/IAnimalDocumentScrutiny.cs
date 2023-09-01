@@ -37,5 +37,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool FinalSubmitPreVerification(int ApplyNOCID,int DepartmentID,int UserID, string ActionName);
         List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID,int DepartmentID,string Action);
+
+        List<CommonDataModel_DataTable> GetNOCCourse(int ApplyNocID, int DepartmentID, int CollegeID, string Action);
     }
 }
