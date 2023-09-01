@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
-    public class AnimalDocumentScrutiny : UtilityBase,IAnimalDocumentScrutiny
+    public class AnimalDocumentScrutiny : UtilityBase, IAnimalDocumentScrutiny
     {
         public AnimalDocumentScrutiny(IRepositories unitOfWork) : base(unitOfWork)
         {
@@ -38,7 +38,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.DocumentScrutiny_OtherInformation(CollageID, RoleID, ApplyNOCID);
         }
-        
+
         public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> DocumentScrutiny_AcademicInformation(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.DocumentScrutiny_AcademicInformation(CollageID, RoleID, ApplyNOCID);
@@ -86,6 +86,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetPostVerificationAppliationList(request);
         }
+        public List<CommonDataModel_DataTable> GetFinalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetFinalVerificationAppliationList(request);
+        }
         public List<CommonDataModel_DataTable> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request)
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetPreVerificationDoneList(request);
@@ -95,10 +99,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetPostVerificationDoneList(request);
         }
-
-        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID,int UserID, string ActionName)
+        public List<CommonDataModel_DataTable> GetFinalVerificationDoneList(GetPhysicalVerificationAppliationList request)
         {
-            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID,UserID, ActionName);
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetFinalVerificationDoneList(request);
+        }
+        public List<CommonDataModel_DataTable> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetFinalNOCApplicationList(request);
+        }
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID, ActionName);
         }
 
         public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
@@ -111,7 +122,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetPreVerificationchecklistDetails(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID);
         }
 
-        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID,int DepartmetID,string Action)
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmetID, string Action)
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetApplyNOCApplicationList(RoleID, UserID, DepartmetID, Action);
         }

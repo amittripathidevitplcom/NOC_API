@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_Model;
+using RJ_NOC_Utility;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -484,7 +485,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}")]
-        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID,string ActionName)
+        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
         {
             var result = new OperationResult<bool>();
             try
@@ -700,6 +701,105 @@ namespace RJ_NOC_API.Controllers
             catch (Exception e)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPostVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("GetFinalVerificationAppliationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetFinalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetFinalVerificationAppliationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPreVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPreVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("GetFinalVerificationDoneList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetFinalVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetFinalVerificationDoneList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetFinalVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetFinalVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetFinalVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("GetFinalNOCApplicationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetFinalNOCApplicationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetFinalNOCApplicationList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetFinalNOCApplicationList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetFinalNOCApplicationList", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
