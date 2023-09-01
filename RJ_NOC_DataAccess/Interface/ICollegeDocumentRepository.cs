@@ -12,6 +12,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DataTable> GetAllData(int DepartmentID,int CollegeID, string Type);
         bool SaveData(CollegeDocumentDataModel request);
+        bool Delete(int AID);
     }
 
 }

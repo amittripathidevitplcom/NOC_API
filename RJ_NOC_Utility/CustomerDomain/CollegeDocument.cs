@@ -17,12 +17,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetAllData(int DepartmentID, int CollegeID, string Type)
         {
             return UnitOfWork.CollegeDocumentRepository.GetAllData(DepartmentID, CollegeID, Type);
-        } 
+        }
         public bool SaveData(CollegeDocumentDataModel request)
         {
             return UnitOfWork.CollegeDocumentRepository.SaveData(request);
         }
-         
-         
+
+        public bool Delete(int Delete)
+        {
+            return UnitOfWork.CollegeDocumentRepository.Delete(Delete);
+        }
+
+
     }
 }

@@ -96,7 +96,43 @@ namespace RJ_NOC_API.Controllers
                 //UnitOfWork.Dispose();
             }
             return result;
-        } 
+        }
+
+
+        [HttpGet("Delete/{AID}")]
+        public async Task<OperationResult<bool>> Delete(int AID)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeDocumentUtility.Delete(AID));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(AID, "Delete", 0, "CollegeDocument");
+                    result.SuccessMessage = "Saved successfully .!";
+
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error deleting data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeDocumentController.Delete", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

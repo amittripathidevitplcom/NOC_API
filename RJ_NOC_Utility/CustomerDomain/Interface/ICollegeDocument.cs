@@ -9,6 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ICollegeDocument
     {
         List<CommonDataModel_DataTable> GetAllData(int DepartmentID, int CollegeID, string Type);
-        bool SaveData(CollegeDocumentDataModel request); 
+        bool SaveData(CollegeDocumentDataModel request);
+        bool Delete(int AID);
     }
 }

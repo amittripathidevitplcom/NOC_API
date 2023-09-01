@@ -9,6 +9,7 @@ namespace RJ_NOC_Model
     { 
         public int CollegeID { get; set; }
         public string DocumentType { get; set; }
+       
         public List<CommonDataModel_BuildingUploadDoc> DocumentDetails { get; set; }
     }
      
