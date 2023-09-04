@@ -44,7 +44,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string SqlQuery = " exec USP_LandDetails_GetData @LandDetailID='" + LandDetailID + "',@SelectedCollageID='" + CollageID + "',@Actiontype='Both'";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "WorkFlowMaster.GetWorkFlowMasterList");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LandDetails.GetLandDetailsIDWise");
             List<LandDetailsDataModel> listdataModels = new List<LandDetailsDataModel>();
             LandDetailsDataModel dataModels = new LandDetailsDataModel();
             if (LandDetailID == 0)
@@ -82,6 +82,11 @@ namespace RJ_NOC_DataAccess.Repositories
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<CommonDataModel_BuildingUploadDoc> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
                     dataModels.LandDetailDocument = LandDetailDataModel_Item;
+                    //listdataModels.Add(dataModels);                 
+                    //land Types
+                    string CollegeLandTypeDetails = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
+                    List<CollegeLandTypeDetailsDataModel> CollegeLandTypeDetails_Item = JsonConvert.DeserializeObject<List<CollegeLandTypeDetailsDataModel>>(CollegeLandTypeDetails);
+                    dataModels.CollegeLandTypeDetails = CollegeLandTypeDetails_Item;
                     listdataModels.Add(dataModels);
                 }
             }
