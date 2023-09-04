@@ -1,7 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.tool.xml.css;
+using iTextSharp.tool.xml.html;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.end;
+using iTextSharp.tool.xml.pipeline.html;
+using iTextSharp.tool.xml;
+using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_Model;
 using RJ_NOC_Utility;
+using static RJ_NOC_API.Controllers.ApplyNOCController;
+using System.Text;
+using iTextSharp.text;
+using iTextSharp.tool.xml.parser;
+using static com.sun.tools.@internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+using RJ_NOC_Utility.CustomerDomain;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -831,7 +844,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationchecklistDetails", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetNOCCourse", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -842,5 +855,160 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("UpdateNOCPDFData/{ApplyNocID}/{DepartmentID}/{CollegeID}/{ActionType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> UpdateNOCPDFData(int ApplyNocID, int DepartmentID, int CollegeID, string ActionType)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(ApplyNocID, "UpdateNOCPDFData", DepartmentID, "AanimalController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetGeneratePDFData(ApplyNocID, DepartmentID, CollegeID, ActionType));
+                string Path = GeneratePDF(result.Data);
+
+                if (!string.IsNullOrEmpty(Path))
+                {
+                    if (await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSavePDFPathandNOC(Path, ApplyNocID, DepartmentID, 0, 0, "", "UpdateGeneratePDF")))
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "PDF Generate Successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "There was an error Generate PDF!";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutiny.UpdateNOCPDFData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("FinalNOCRejectRelese")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> FinalNOCRejectRelese(GenerateNOC_DataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "FinalNOCRejectRelese", request.ApplyNOCID, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                bool success = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSavePDFPathandNOC("", request.ApplyNOCID, request.DepartmentID, 0, request.UserID, request.NOCIssuedRemark, "UpdateNOCDetails"));
+                if (success)
+                {
+                    result.Data = new List<CommonDataModel_DataTable>();
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "NOC Relesed Successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutiny.FinalNOCRejectRelese", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet]
+        public string GeneratePDF(List<CommonDataModel_DataTable> dt)
+        {
+            StringBuilder sb = new StringBuilder();
+            var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";
+            StringBuilder sbhtml = new StringBuilder();
+
+            string CollegeName = dt[0].data.Rows[0]["CollegeName"].ToString();
+            string CollegeMobileNo = dt[0].data.Rows[0]["CollegeMobileNo"].ToString();
+            string CollegeEmail = dt[0].data.Rows[0]["CollegeEmail"].ToString();
+            string ApplicationTypeName = dt[0].data.Rows[0]["ApplicationTypeName"].ToString();
+            string TotalFeeAmount = dt[0].data.Rows[0]["TotalFeeAmount"].ToString();
+            string ApplicationStatus = dt[0].data.Rows[0]["ApplicationStatus"].ToString();
+            string DepartmentName = dt[0].data.Rows[0]["DepartmentName"].ToString();
+            string ApplicationNo = dt[0].data.Rows[0]["ApplicationNo"].ToString();
+            DateTime now = DateTime.Now.Date;
+            var Date = now.ToString("dd-MM-yyyy");
+
+            {
+                sb.Clear();
+                sb.Append("<table style='width:100%;'>");
+                sb.Append("<tr><td style='text-align:center'><h1 style='margin-bottom:0px;'>" + DepartmentName + "</h1></td></tr>");
+                sb.Append("<tr><td style='text-align:center'><h4 style='margin-bottom:0px;'>No Objection Certificate</h4></td></tr>");
+                sb.Append("<tr><td style='text-align:center'><h6 style='margin-bottom:0px;'>" + CollegeName + " Apply For " + ApplicationTypeName + "</h6></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Application No. : </b> " + ApplicationNo + "</td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Contact No. : </b>" + CollegeMobileNo + "</td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Email : </b>" + CollegeEmail + "</td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Date : </b>" + Date + "</td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td><b>Total Fee Amount : </b>" + TotalFeeAmount + "</td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
+                sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
+                sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Signature</b></td></tr>");
+                sb.Append("</table>");
+            }
+            //}
+
+            sbhtml.Append(UnicodeToKrutidev.FindAndReplaceKrutidev(sb.ToString().Replace("<br>", "<br/>"), true, "15px"));
+            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
+            Document pdfDoc = new Document(iTextSharp.text.PageSize.A4, 50f, 50f, 50f, 70f);
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(filepath, FileMode.Create));
+            try
+            {
+                pdfDoc.Open();
+                var tagProcessors = (DefaultTagProcessorFactory)Tags.GetHtmlTagProcessorFactory();
+                tagProcessors.RemoveProcessor(HTML.Tag.IMG);
+                tagProcessors.AddProcessor(HTML.Tag.IMG, new CustomImageTagProcessor());
+                var cssFiles = new CssFilesImpl();
+                cssFiles.Add(XMLWorkerHelper.GetInstance().GetDefaultCSS());
+                var cssResolver = new StyleAttrCSSResolver(cssFiles);
+                var charset = System.Text.Encoding.UTF8;
+                var context = new HtmlPipelineContext(new CssAppliersImpl(new XMLWorkerFontProvider()));
+                context.SetAcceptUnknown(true).AutoBookmark(true).SetTagFactory(tagProcessors);
+                var htmlPipeline = new HtmlPipeline(context, new PdfWriterPipeline(pdfDoc, writer));
+                var cssPipeline = new CssResolverPipeline(cssResolver, htmlPipeline);
+                var worker = new XMLWorker(cssPipeline, true);
+                var xmlParser = new XMLParser(true, worker, charset);
+                using (var sr = new StringReader(sbhtml.ToString()))
+                {
+                    xmlParser.Parse(sr);
+                    pdfDoc.Close();
+                    writer.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                pdfDoc.Close();
+                writer.Close();
+                throw ex;
+            }
+
+            return fileName;
+
+        }
     }
 }
