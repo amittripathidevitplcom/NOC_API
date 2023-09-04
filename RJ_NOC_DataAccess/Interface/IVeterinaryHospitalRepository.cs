@@ -15,6 +15,7 @@ namespace RJ_NOC_DataAccess.Interface
         VeterinaryHospitalDataModel GetVeterinaryHospitalByIDWise(int VeterinaryHospitalID);
         bool SaveData(VeterinaryHospitalDataModel request);
         bool DeleteData(int VeterinaryHospitalID);
+        List<VeterinaryHospitalDataModelList> GetSeatInformationByCourse(int CollegeID, int DepartmentID);
 
     }
 

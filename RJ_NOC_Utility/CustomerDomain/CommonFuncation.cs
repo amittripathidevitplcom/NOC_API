@@ -360,9 +360,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDocumentScritintyTaril(ID, NOCApplyID, CollageID, DepartmentID, ActionType);
         }
-        public List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching)
+        public List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching, int DepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetStaffDesignation(IsTeaching);
+            return UnitOfWork.CommonFuncationRepository.GetStaffDesignation(IsTeaching, DepartmentID);
         }
         public List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandTypeID)
         {

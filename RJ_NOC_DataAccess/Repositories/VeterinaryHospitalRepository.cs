@@ -114,5 +114,19 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public List<VeterinaryHospitalDataModelList> GetSeatInformationByCourse(int CollegeID, int DepartmentID)
+        {
+            string SqlQuery = $" exec USP_GetSeatInformationByCourse @CollegeID='" + CollegeID + "',@DepartmentID='"+ DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "VeterinaryHospital.GetSeatInformationByCourse");
+
+            List<VeterinaryHospitalDataModelList> dataModels = new List<VeterinaryHospitalDataModelList>();
+            VeterinaryHospitalDataModelList dataModel = new VeterinaryHospitalDataModelList();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+        }
     }
 }
