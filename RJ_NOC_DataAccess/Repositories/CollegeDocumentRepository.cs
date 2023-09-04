@@ -41,8 +41,16 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public bool Delete(int AID)
+        {
+            string SqlQuery = " Update Trn_CollegeDocument set ActiveStatus=0,DeleteStatus=1 Where aid='"+ AID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CollegeDocument.Delete");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
 
-        
         public bool SaveData(CollegeDocumentDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();

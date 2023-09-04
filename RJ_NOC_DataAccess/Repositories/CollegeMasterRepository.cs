@@ -27,6 +27,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@PresentCollegeStatusID='{0}',", request.PresentCollegeStatusID);
             sb.AppendFormat("@CollegeTypeID='{0}',", request.CollegeTypeID);
             sb.AppendFormat("@CollegeLevelID='{0}',", request.CollegeLevelID);
+            sb.AppendFormat("@CollegeCode='{0}',", request.CollegeCode);
             sb.AppendFormat("@CollegeNameEn='{0}',", request.CollegeNameEn);
             sb.AppendFormat("@CollegeNameHi=N'{0}',", request.CollegeNameHi);
             sb.AppendFormat("@AISHECodeStatus='{0}',", request.AISHECodeStatus);

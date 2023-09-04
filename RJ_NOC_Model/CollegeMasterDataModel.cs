@@ -14,6 +14,7 @@ namespace RJ_NOC_Model
         public int PresentCollegeStatusID { get; set; }
         public int CollegeTypeID { get; set; }
         public int CollegeLevelID { get; set; }
+        public string CollegeCode { get; set; }
         public string CollegeNameEn { get; set; }
         public string CollegeNameHi { get; set; }
         public int? AISHECodeStatus { get; set; }
