@@ -72,7 +72,7 @@ namespace RJ_NOC_Model
         public int? EmergencyAndDisasterNursingEmergencylBeds { get; set; }
 
         public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
+        public string? AddressLine2 { get; set; }
         public int RuralUrban { get; set; }
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
@@ -82,7 +82,7 @@ namespace RJ_NOC_Model
         public int Pincode { get; set; }
 
         public string AddressLine1_ManageBy { get; set; }
-        public string AddressLine2_ManageBy { get; set; }
+        public string? AddressLine2_ManageBy { get; set; }
         public int RuralUrban_ManageBy { get; set; }
         public int DivisionID_ManageBy { get; set; }
         public int DistrictID_ManageBy { get; set; }
@@ -92,7 +92,7 @@ namespace RJ_NOC_Model
         public int Pincode_ManageBy { get; set; }
 
         public string AddressLine1_Owner { get; set; }
-        public string AddressLine2_Owner { get; set; }
+        public string? AddressLine2_Owner { get; set; }
         public int RuralUrban_Owner { get; set; }
         public int DivisionID_Owner { get; set; }
         public int DistrictID_Owner { get; set; }

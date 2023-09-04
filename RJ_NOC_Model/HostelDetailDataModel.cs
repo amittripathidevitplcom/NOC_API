@@ -24,7 +24,7 @@ namespace RJ_NOC_Model
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
+        public string? AddressLine2 { get; set; }
         public string IsRuralUrban { get; set; }
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
