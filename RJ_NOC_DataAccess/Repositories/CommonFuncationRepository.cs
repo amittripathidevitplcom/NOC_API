@@ -954,9 +954,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching)
+        public List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching, int DepartmentID)
         {
-            string SqlQuery = " exec USP_GetStaffDesignation @IsTeaching='" + IsTeaching + "'";
+            string SqlQuery = " exec USP_GetStaffDesignation @IsTeaching='" + IsTeaching + "',@departmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetStaffDesignation");
 
