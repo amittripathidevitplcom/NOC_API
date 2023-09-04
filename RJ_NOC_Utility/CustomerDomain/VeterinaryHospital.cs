@@ -34,5 +34,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.VeterinaryHospitalRepository.DeleteData(VeterinaryHospitalID);
         }
+        public List<VeterinaryHospitalDataModelList> GetSeatInformationByCourse(int CollegeID, int DepartmentID)
+        {
+            return UnitOfWork.VeterinaryHospitalRepository.GetSeatInformationByCourse(CollegeID, DepartmentID);
+        }
     }
 }
