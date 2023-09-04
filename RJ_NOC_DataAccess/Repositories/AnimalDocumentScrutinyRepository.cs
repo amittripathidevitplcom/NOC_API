@@ -502,6 +502,32 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
+        public List<CommonDataModel_DataTable> GetGeneratePDFData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            string SqlQuery = " exec USP_GetNOCDetails_AH @ApplyNocID='" + ApplyNocID + "',@departmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ActionType='" + Action + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GeneratePDFForJointSecretary");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public bool FinalSavePDFPathandNOC(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark,string Action)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_UpdateNOCDetails_AH @ActionType='{Action}',@NOCFilePath='{Path}',@ApplyNocID={ApplyNOCID},@departmentID={DepartmentID},@RoleID={RoleID},@userID={UserID},@Remarks='{NOCIssuedRemark}',@IPAddress='{IPAddress}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.FinalSavePDFPathandNOC");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
 
     }
 }

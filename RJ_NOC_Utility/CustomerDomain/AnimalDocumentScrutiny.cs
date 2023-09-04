@@ -131,5 +131,14 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AnimalDocumentScrutinyRepository.GetNOCCourse(ApplyNocID, DepartmentID, CollegeID, Action);
         }
 
+        public List<CommonDataModel_DataTable> GetGeneratePDFData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetGeneratePDFData( ApplyNocID,  DepartmentID,  CollegeID,  Action);
+        }
+
+        public bool FinalSavePDFPathandNOC(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark, string Action)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSavePDFPathandNOC(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark, Action);
+        }
     }
 }
