@@ -56,7 +56,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID,int OldNocID);
         List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type,int CourseID);
         List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID);
-        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
+        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 

@@ -225,6 +225,7 @@ namespace RJ_NOC_Model
     public class CommonDataModel_CourseRoomSize
     {
         public int NoOfRooms { get; set; }
+        public int NoofPredicalRooms { get; set; }
         public int WidthMin { get; set; }
         public int LengthMin { get; set; }
     }
