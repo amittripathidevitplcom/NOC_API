@@ -453,9 +453,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
+        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID,int CollegeID)
         {
-            string SqlQuery = " exec USP_CourseRoomSize @CourseID='" + CourseID + "'";
+            string SqlQuery = " exec USP_CourseRoomSize @CourseID='" + CourseID + "',@CollegeID='"+ CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
 

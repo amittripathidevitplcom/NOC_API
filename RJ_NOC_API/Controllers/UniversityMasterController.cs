@@ -97,12 +97,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.UniversityID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UniversityID, "Save", 0, "UiversityMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.UniversityID, "UiversityMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UniversityID, "Update", request.UniversityID, "UiversityMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.UniversityID, "UiversityMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }

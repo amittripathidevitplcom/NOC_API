@@ -43,12 +43,12 @@ namespace RJ_NOC_API.Controllers
                     result.State = OperationState.Success;
                     if (request.DocumentMasterID == 0)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "DocumentMaster");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.DocumentMasterID, "DocumentMaster");
                         result.SuccessMessage = "Saved successfully .!";
                     }
                     else
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.DocumentMasterID, "DocumentMaster");
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.DocumentMasterID, "DocumentMaster");
                         result.SuccessMessage = "Updated successfully .!";
                     }
                 }

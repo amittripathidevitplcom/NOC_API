@@ -162,12 +162,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.LandAreaID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.LandAreaID, "Save", 0, "LandAreaSituatedMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.LandAreaID, "LandAreaSituatedMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.LandAreaID, "Update", request.LandAreaID, "LandAreaSituatedMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.LandAreaID, "LandAreaSituatedMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }
