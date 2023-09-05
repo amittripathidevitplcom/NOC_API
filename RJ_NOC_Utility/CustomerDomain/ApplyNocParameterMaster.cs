@@ -104,10 +104,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             //if (request.ApplyNocParameterMasterList_NewCourse != null)
             //{
             //    obj = UnitOfWork.ApplyNocParameterMasterRepository.GetDCECourseSubjectFees(request.ApplyNocParameterMasterList_NewCourse.ApplyNocID);
-                
+
             //    dNewCoursePGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "PG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "PG").FeeAmount:0;
             //    dNewCourseUGFees = obj.FirstOrDefault(f => f.strCollegeLevel == "UG") != null? obj.FirstOrDefault(f => f.strCollegeLevel == "UG").FeeAmount:0;
-                
+
             //    foreach (var item in request.ApplyNocParameterMasterList_NewCourse.ApplyNocParameterCourseList)
             //    {
             //        if (item.CollegeLevel != null)
@@ -150,11 +150,13 @@ namespace RJ_NOC_Utility.CustomerDomain
             //    }
             //}
 
-            
+
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID={0},", request.CollegeID);
             sb.AppendFormat("@ApplicationTypeID={0},", request.ApplicationTypeID);
             sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees + dNewSubjectFees);
+            sb.AppendFormat("@TotalNocFee={0},", request.TotalNocFee);
+            sb.AppendFormat("@LateFee={0},", request.LateFee);
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
@@ -204,7 +206,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb1.Append(" ) as t");
                 sb.AppendFormat("@ApplyNocParameterDetailList='{0}',", sb1.ToString());
             }
-            
+
 
 
 
@@ -465,7 +467,13 @@ namespace RJ_NOC_Utility.CustomerDomain
 
             //@ApplyNocParameterMasterList_TNOCExtOfSubject text = '',
             //@ApplyNocParameterMasterList_PNOCOfSubject  text = '',
-
+            if (request.ApplyNocLateFeeDetailList != null)
+            {
+                if (request.ApplyNocLateFeeDetailList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocLateFeeDetails='{0}',", CommonHelper.GetDetailsTableQry(request.ApplyNocLateFeeDetailList, "ApplyNocLateFeeDetails"));
+                }
+            }
 
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");
@@ -535,7 +543,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                     }).ToList();
                 });
                 //
-           
+
                 model.ChangeInNameOfCollegeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInNameOfCollege>>(ds.Tables[3]);
                 model.ChangeInPlaceOfCollegeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInPlaceOfCollege>>(ds.Tables[4]);
                 model.ChangeInCoedtoGirlsList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInCoedtoGirls>>(ds.Tables[5]);
