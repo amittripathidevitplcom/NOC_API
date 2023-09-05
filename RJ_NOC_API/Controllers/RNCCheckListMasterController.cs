@@ -97,12 +97,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.RNCCheckListID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.RNCCheckListID, "Save", 0, "RNCCheckListMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RNCCheckListID, "RNCCheckListMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.RNCCheckListID, "Update", request.RNCCheckListID, "RNCCheckListMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RNCCheckListID, "RNCCheckListMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }

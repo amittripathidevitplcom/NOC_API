@@ -112,12 +112,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.RoleID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "AddRoleMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RoleID, "AddRoleMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.RoleID, "AddRoleMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RoleID, "AddRoleMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }
