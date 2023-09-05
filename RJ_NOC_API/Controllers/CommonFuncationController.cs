@@ -1219,13 +1219,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetCourseRoomSize/{CourseID}")]
-        public async Task<OperationResult<List<CommonDataModel_CourseRoomSize>>> GetCourseRoomSize(int CourseID)
+        [HttpGet("GetCourseRoomSize/{CourseID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_CourseRoomSize>>> GetCourseRoomSize(int CourseID, int CollegeID)
         {
             var result = new OperationResult<List<CommonDataModel_CourseRoomSize>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseRoomSize(CourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseRoomSize(CourseID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2466,13 +2466,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetStaffDesignation/{IsTeaching}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffDesignation(int IsTeaching)
+        [HttpGet("GetStaffDesignation/{IsTeaching}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffDesignation(int IsTeaching, int DepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetStaffDesignation(IsTeaching));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetStaffDesignation(IsTeaching, DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

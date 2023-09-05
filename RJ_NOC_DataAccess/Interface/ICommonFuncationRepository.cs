@@ -56,7 +56,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID,int OldNocID);
         List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type,int CourseID);
         List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID);
-        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
+        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
@@ -117,7 +117,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId);
 
         List<CommonDataModel_DataTable> GetDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType);
-        List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching);
+        List<CommonDataModel_DataTable> GetStaffDesignation(int IsTeaching, int DepartmentID);
         List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandTypeID);
         List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId);
         List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID);
