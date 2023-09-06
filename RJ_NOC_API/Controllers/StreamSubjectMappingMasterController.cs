@@ -113,7 +113,7 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.StreamMappingID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "SubjectStream");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.StreamMappingID, "SubjectStream");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else

@@ -127,12 +127,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.SubjectID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.SubjectID, "Save", 0, "SubjectMasterService");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.SubjectID, "SubjectMasterService");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.SubjectID, "Update", request.SubjectID, "SubjectMasterService");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.SubjectID, "SubjectMasterService");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }

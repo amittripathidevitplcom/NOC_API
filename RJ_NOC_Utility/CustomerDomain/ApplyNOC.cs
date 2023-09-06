@@ -73,5 +73,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetIssuedNOCReportList(UserID, ActionName, RoleID, DepartmentID);
         }
+
+        public List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetNocLateFees(DepartmentID);
+        }
     }
 }
