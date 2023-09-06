@@ -1011,6 +1011,16 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailID, string Type)
+        {
+            string SqlQuery = " Exec USP_CollegeLandConversionDetail_GetData @DepartmentID='" + DepartmentID.ToString() + "',@LandDetailID='" + LandDetailID + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeLandConversionDetail");
+            List<CollegeLandConversionDetailsDataModel> dataModels = new List<CollegeLandConversionDetailsDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CollegeLandConversionDetailsDataModel>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
     }
 }

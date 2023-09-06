@@ -127,9 +127,13 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @IsConvereted='" + request.IsConvereted + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
-            SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f=>f.IsLandSelected==true), "Temp_LandTypeDetails") + "',";
-            SqlQuery += " @SchoolLandInformation_Document_Str='" + SchoolLandInformation_Document_Str + "'";
+            SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f => f.IsLandSelected == true), "Temp_LandTypeDetails") + "',";
 
+            if (request.CollegeLandConversionDetails.Count > 0)
+            {
+                SqlQuery += " @LandConversionDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandConversionDetails, "Temp_LandConversionDetail") + "',";
+            }
+            SqlQuery += " @SchoolLandInformation_Document_Str='" + SchoolLandInformation_Document_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
             if (Rows > 0)
