@@ -28,6 +28,7 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int NoofBooks { get; set; }
+        public int NoofComputers { get; set; }
         public int UserID { get; set; }
 
         public string? Action { get; set; }
