@@ -380,5 +380,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeInspectionFee( CollageID, DepartmentID);
         }
+        public List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailsId, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeLandConversionDetail(DepartmentID, LandDetailsId, Type) ;
+        }
     }
 }
