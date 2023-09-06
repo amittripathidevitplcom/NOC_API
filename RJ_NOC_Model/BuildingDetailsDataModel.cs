@@ -12,6 +12,8 @@ namespace RJ_NOC_Model
         public int SchoolBuildingDetailsID { get; set; }
         public int BuildingTypeID { get; set; }
         public string? BuildingTypeName { get; set; }
+
+        public string FireNOCOrderNumber { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string FireNOCFileUpload { get; set; }
