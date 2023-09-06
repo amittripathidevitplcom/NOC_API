@@ -21,7 +21,7 @@ namespace RJ_NOC_Model
         public string DesignationName { get; set; }
         public int OccupationID { get; set; }
         public string OccupationName { get; set; }
-        public String Educationists { get; set; }
+        public String? Educationists { get; set; }
         public string PersonName { get; set; }
         public string FatherName { get; set; }
         public string MobileNo { get; set; }
@@ -66,5 +66,6 @@ namespace RJ_NOC_Model
         public string ConsentLetter { get; set; }
         public string? Dis_ConsentLetter { get; set; }
         public string? ConsentLetterPath { get; set; }
+        public string? OtherOccupation { get; set; }
     }
 }
