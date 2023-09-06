@@ -87,7 +87,17 @@ namespace RJ_NOC_DataAccess.Repositories
                     string CollegeLandTypeDetails = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
                     List<CollegeLandTypeDetailsDataModel> CollegeLandTypeDetails_Item = JsonConvert.DeserializeObject<List<CollegeLandTypeDetailsDataModel>>(CollegeLandTypeDetails);
                     dataModels.CollegeLandTypeDetails = CollegeLandTypeDetails_Item;
+                    //listdataModels.Add(dataModels);
+
+
+                    string CollegeConversionDetails = CommonHelper.ConvertDataTable(dataSet.Tables[3]);
+                    List<CollegeLandConversionDetailsDataModel> CollegeConversion_Item = JsonConvert.DeserializeObject<List<CollegeLandConversionDetailsDataModel>>(CollegeConversionDetails);
+                    dataModels.CollegeLandConversionDetails = CollegeConversion_Item;
                     listdataModels.Add(dataModels);
+
+
+
+
                 }
             }
             return listdataModels;
@@ -127,9 +137,13 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @IsConvereted='" + request.IsConvereted + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
-            SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f=>f.IsLandSelected==true), "Temp_LandTypeDetails") + "',";
-            SqlQuery += " @SchoolLandInformation_Document_Str='" + SchoolLandInformation_Document_Str + "'";
+            SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f => f.IsLandSelected == true), "Temp_LandTypeDetails") + "',";
 
+            if (request.CollegeLandConversionDetails.Count > 0)
+            {
+                SqlQuery += " @LandConversionDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandConversionDetails, "Temp_LandConversionDetail") + "',";
+            }
+            SqlQuery += " @SchoolLandInformation_Document_Str='" + SchoolLandInformation_Document_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
             if (Rows > 0)

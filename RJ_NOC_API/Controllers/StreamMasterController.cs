@@ -96,12 +96,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.StreamMappingID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.StreamMappingID, "Save", 0, "StreamMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.StreamMappingID, "StreamMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.StreamMappingID, "Update", request.StreamMappingID, "StreamMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.StreamMappingID, "StreamMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }

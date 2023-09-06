@@ -184,9 +184,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetCollegeWise_CourseList_AcademicInformation(CollegeID, Type, CourseID);
         }
 
-        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID)
+        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCourseRoomSize(CourseID);
+            return UnitOfWork.CommonFuncationRepository.GetCourseRoomSize(CourseID,   CollegeID);
         }
 
         public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type)
@@ -379,6 +379,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollageID,int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeInspectionFee( CollageID, DepartmentID);
+        }
+        public List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailsId, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeLandConversionDetail(DepartmentID, LandDetailsId, Type) ;
         }
     }
 }

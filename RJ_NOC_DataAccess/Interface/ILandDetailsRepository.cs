@@ -14,6 +14,10 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(LandDetailsDataModel request);
         bool DeleteData(int LandDetailID);
         bool IfExists(int LandDetailID, int LandAreaID, int CollegeID);
+
+
+
+
     }
 
 }

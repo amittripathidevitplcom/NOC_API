@@ -57,7 +57,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID);
         List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID);
 
-        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
+        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
@@ -114,6 +114,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId);
         List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID);
         List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID, int DepartmentID);
+        List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID,  int LandDetailsID,string Type);
     }
 
 }

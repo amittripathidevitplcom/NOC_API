@@ -24,6 +24,8 @@ namespace RJ_NOC_Model
         public int ModifyBy { get; set; }
         public string? IPAddress { get; set; }
         public string? SSOID { get; set; }
+        public decimal TotalNocFee { get; set; }
+        public decimal LateFee { get; set; }
 
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
@@ -40,6 +42,12 @@ namespace RJ_NOC_Model
 
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtOfSubject { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_PNOCOfSubject { get; set; }
+
+        //noc applicaton late fees
+        public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
+
+
+
     }
     public class ApplyNocParameterMaster_ddl
     {
@@ -134,6 +142,9 @@ namespace RJ_NOC_Model
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
+        public decimal TotalNocFee { get; set; }
+        public decimal LateFee { get; set; }
+
         public bool? ApplicationStatus { get; set; }
         public bool? IsFinalSubmit { get; set; }
         public bool? IsMakePayment_ApplicationFee { get; set; }
@@ -290,7 +301,16 @@ namespace RJ_NOC_Model
         public string CollegeLevel { get; set; }
         public decimal FeeAmount { get; set; }
         public int ApplyNocFeeID { get; }
+    }
 
-
+    public class ApplyNocLateFeeDetailDataModal
+    {
+        public int ID { get; set; }
+        public int DepartmentID { get; set; }
+        public int LateFeeID { get; set; }
+        public string FeesType { get; set; }
+        public decimal FeesAmount { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
     }
 }

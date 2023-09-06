@@ -54,6 +54,8 @@ namespace RJ_NOC_Model
     {
         public int AnimalDetailsID { get; set; }
         public int AnimalMasterID { get; set; }
+        public int MaleAnimalCount { get; set; }
+        public int FemaleAnimalCount { get; set; }
         public int AnimalCount { get; set; }
         public string AnimalName { get; set; }
         public bool ActiveStatus { get; set; }

@@ -1219,13 +1219,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetCourseRoomSize/{CourseID}")]
-        public async Task<OperationResult<List<CommonDataModel_CourseRoomSize>>> GetCourseRoomSize(int CourseID)
+        [HttpGet("GetCourseRoomSize/{CourseID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_CourseRoomSize>>> GetCourseRoomSize(int CourseID, int CollegeID)
         {
             var result = new OperationResult<List<CommonDataModel_CourseRoomSize>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseRoomSize(CourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseRoomSize(CourseID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2628,6 +2628,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpGet("GetCollegeLandConversionDetail/{DepartmentID}/{LandDetailID}/{Type}")]
+        public async Task<OperationResult<List<CollegeLandConversionDetailsDataModel>>> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailID, string Type)
+        {
+            var result = new OperationResult<List<CollegeLandConversionDetailsDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeLandConversionDetail(DepartmentID, LandDetailID, Type));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetCollegeLandConversionDetail", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
     }

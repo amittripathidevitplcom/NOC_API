@@ -56,7 +56,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID,int OldNocID);
         List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type,int CourseID);
         List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID);
-        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID);
+        List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
@@ -121,8 +121,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandTypeID);
         List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId);
         List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID);
-
         List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID,int DepartmentID);
+        List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailID,string Type);
     }
 }
 

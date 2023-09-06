@@ -27,9 +27,11 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
-        public List<CommonDataModel_BuildingUploadDoc> LandDetailDocument { get; set; }
 
+        public List<CommonDataModel_BuildingUploadDoc> LandDetailDocument { get; set; }
         public List<CollegeLandTypeDetailsDataModel> CollegeLandTypeDetails { get; set; }
+        public List<CollegeLandConversionDetailsDataModel> CollegeLandConversionDetails { get; set; }
+
         //Add by Deepak 28062023
         public string? LandTypeName { get; set; }
         public string? Code { get; set; }
@@ -61,6 +63,15 @@ namespace RJ_NOC_Model
         public decimal LandArea { get; set; }
         public string? KhasraNo { get; set; }
         public bool IsLandSelected { get; set; }
+    }
+
+
+    public class CollegeLandConversionDetailsDataModel
+    {
+        public int LandDetailID { get; set; }
+        public int LandConversionID { get; set; }
+        public string LandConversionOrderDate { get; set; }
+        public string LandConversionOrderNo { get; set; }
     }
 }
 

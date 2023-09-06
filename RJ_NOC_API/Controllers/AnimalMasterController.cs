@@ -96,12 +96,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.AnimalMasterID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.AnimalMasterID, "Save", 0, "AnimalMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.AnimalMasterID, "AnimalMaster");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.AnimalMasterID, "Update", request.AnimalMasterID, "AnimalMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.AnimalMasterID, "AnimalMaster");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }

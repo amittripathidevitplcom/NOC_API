@@ -99,12 +99,12 @@ namespace RJ_NOC_API.Controllers
                         result.State = OperationState.Success;
                         if (request.FID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.FID, "Save", 0, "FacilitiesMaser");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.FID, "FacilitiesMaser");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.FID, "Update", request.FID, "FacilitiesMaser");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.FID, "FacilitiesMaser");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }

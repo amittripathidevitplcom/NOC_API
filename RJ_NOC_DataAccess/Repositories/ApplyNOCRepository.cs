@@ -202,7 +202,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
- 
+
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {
             string SqlQuery = " exec USP_GetPendingMedicalApplications @RoleID ='" + RoleID + "',@UserID ='" + UserID + "',@ActionName ='" + ActionName + "'";
@@ -256,7 +256,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_CheckAppliedNOC_CollegeWise @CollegeID='" + CollegeID + "'";
             DataTable dt = new DataTable();
             dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.CheckAppliedNOCCollegeWise");
-            if(dt!=null && dt.Rows.Count>0)
+            if (dt != null && dt.Rows.Count > 0)
             {
                 Result = Convert.ToInt32(dt.Rows[0]["TotalAppliedNOC"]);
             }
@@ -274,5 +274,20 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetLateFees @DepartmentID ='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNocLateFees");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+
+
     }
 }
