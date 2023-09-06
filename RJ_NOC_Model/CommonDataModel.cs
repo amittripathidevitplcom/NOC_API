@@ -244,7 +244,8 @@ namespace RJ_NOC_Model
         public int WidthMin { get; set; }
         public int LengthMin { get; set; }
         public int NoOfRooms { get; set; }
-        public int AnnexurePath { get; set; }
+        public string AnnexurePath { get; set; }
+        public string AnnexurePath2 { get; set; }
 
     }
     public class CommonDataModel_DesignationDDL
