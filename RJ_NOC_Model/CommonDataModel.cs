@@ -104,6 +104,7 @@ namespace RJ_NOC_Model
     public class CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster
     {
         public int CollegeID { get; set; }
+        public int DepartmentID { get; set; }
         public string CollegeName { get; set; }
     }
 
