@@ -87,7 +87,17 @@ namespace RJ_NOC_DataAccess.Repositories
                     string CollegeLandTypeDetails = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
                     List<CollegeLandTypeDetailsDataModel> CollegeLandTypeDetails_Item = JsonConvert.DeserializeObject<List<CollegeLandTypeDetailsDataModel>>(CollegeLandTypeDetails);
                     dataModels.CollegeLandTypeDetails = CollegeLandTypeDetails_Item;
+                    //listdataModels.Add(dataModels);
+
+
+                    string CollegeConversionDetails = CommonHelper.ConvertDataTable(dataSet.Tables[3]);
+                    List<CollegeLandConversionDetailsDataModel> CollegeConversion_Item = JsonConvert.DeserializeObject<List<CollegeLandConversionDetailsDataModel>>(CollegeConversionDetails);
+                    dataModels.CollegeLandConversionDetails = CollegeConversion_Item;
                     listdataModels.Add(dataModels);
+
+
+
+
                 }
             }
             return listdataModels;
