@@ -48,6 +48,11 @@ namespace RJ_NOC_Model
         public string? District_Eng { get; set; }
         public string? RegisteredAct { get; set; }
 
+
+        public string? Dis_RegistrationDocName { get; set; }
+        public string? RegistrationDocPath { get; set; }
+        public string? RegistrationDoc { get; set; }
+
     }
 
     public class LegalEntityMemberDetailsDataModel
