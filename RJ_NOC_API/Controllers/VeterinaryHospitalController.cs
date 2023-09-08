@@ -225,5 +225,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetCourseLevelByCollegeIDAndDepartmentID_CourseWise/{CollegeID}/{DepartmentID}/{CourseID}")]
+        public async Task<OperationResult<List<VeterinaryHospitalDataModelList>>> GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(int CollegeID, int DepartmentID, int CourseID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "GetCourseLevelByCollegeIDAndDepartmentID_CourseWise");
+            var result = new OperationResult<List<VeterinaryHospitalDataModelList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.VeterinaryHospitalUtility.GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(CollegeID, DepartmentID, CourseID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonMaster.GetCourseLevelByCollegeIDAndDepartmentID_CourseWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

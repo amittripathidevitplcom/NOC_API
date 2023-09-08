@@ -14,6 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(VeterinaryHospitalDataModel request);
         bool DeleteData(int VeterinaryHospitalID);
         List<VeterinaryHospitalDataModelList> GetSeatInformationByCourse(int CollegeID, int DepartmentID);
+        List<VeterinaryHospitalDataModelList> GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(int CollegeID, int DepartmentID, int CourseID);
 
     }
 }
