@@ -49,7 +49,7 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " exec USP_SaveApplyNoc_FDRMasterDetail @ApplyNocFDRID='" + request.ApplyNocFDRID + "',@ApplyNocID='" + request.ApplyNocID + "',";
             SqlQuery += "@CollegeID = '" + request.CollegeID + "',@BankName = '" + request.BankName + "',@BranchName = '" + request.BranchName + "',@IFSCCode = '" + request.IFSCCode + "',";
             SqlQuery += "@FDRNumber = '" + request.FDRNumber + "',@FDRAmount = '" + request.FDRAmount + "',@FDRDate = '" + request.FDRDate + "',@PeriodOfFDR = '" + request.PeriodOfFDR + "',";
-            SqlQuery += "@IsFDRSubmited = '" + request.IsFDRSubmited + "',@FDRDocument = '" + request.FDRDocument + "',@IPAddress = '" + IPAddress + "'";
+            SqlQuery += "@IsFDRSubmited = '" + request.IsFDRSubmited + "',@FDRDocument = '" + request.FDRDocument + "',@IPAddress = '" + IPAddress + "',@FDRExpriyDate = '" + request.FDRExpriyDate + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveData");
             if (Rows > 0)
                 return true;
