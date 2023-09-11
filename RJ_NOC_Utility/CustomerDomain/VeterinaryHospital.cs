@@ -38,5 +38,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.VeterinaryHospitalRepository.GetSeatInformationByCourse(CollegeID, DepartmentID);
         }
+        public List<VeterinaryHospitalDataModelList> GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(int CollegeID, int DepartmentID,int CourseID)
+        {
+            return UnitOfWork.VeterinaryHospitalRepository.GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(CollegeID, DepartmentID, CourseID);
+        }
     }
 }

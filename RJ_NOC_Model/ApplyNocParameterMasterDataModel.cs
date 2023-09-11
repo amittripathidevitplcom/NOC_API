@@ -113,6 +113,7 @@ namespace RJ_NOC_Model
         public string FDRDocument { get; set; }
         public string FDRDocumentPath { get; set; }
         public string FDRDocument_Dis_FileName { get; set; }
+        public string FDRExpriyDate { get; set; }
     }
 
     // application details
