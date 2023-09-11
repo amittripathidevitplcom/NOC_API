@@ -90,9 +90,6 @@ namespace RJ_NOC_DataAccess.Repositories
                     //listdataModels.Add(dataModels);
 
 
-                    string CollegeConversionDetails = CommonHelper.ConvertDataTable(dataSet.Tables[3]);
-                    List<CollegeLandConversionDetailsDataModel> CollegeConversion_Item = JsonConvert.DeserializeObject<List<CollegeLandConversionDetailsDataModel>>(CollegeConversionDetails);
-                    dataModels.CollegeLandConversionDetails = CollegeConversion_Item;
                     listdataModels.Add(dataModels);
 
 
