@@ -81,6 +81,7 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
+        public string? Dis_AadhaarNumber { get; set; }
 
     }
 
@@ -108,6 +109,7 @@ namespace RJ_NOC_Model
     {
         public int LegalEntityID { get; set; }
         public string RegistrationNo { get; set; }
+        public string AadhaarNo { get; set; }
     }
     public class LegalEntitySSODuplicateCheckDataModel
     {
