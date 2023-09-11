@@ -30,15 +30,20 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public bool IfExists(int LegalEntityID, string RegistrationNo)
+        public bool IfExists(int LegalEntityID, string RegistrationNo, string AadhaarNo)
         {
-            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "LegalEntity.IfExists");
-            if (dataTable.Rows.Count > 0)
-                return true;
+            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "',@AadhaarNo='"+ AadhaarNo + "'";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.IfExists");
+            if (dataset!=null)
+            {
+                if (dataset.Tables[0].Rows.Count > 0 || dataset.Tables[1].Rows.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
             else
-                return false;
+            { return false; }
         }
         public bool SaveData(LegalEntityModel request)
         {
