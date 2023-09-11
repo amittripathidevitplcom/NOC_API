@@ -120,6 +120,7 @@ namespace RJ_NOC_Model
         public string FacilitiesName { get; set; }
         public int MinSize { get; set; }
         public string Unit { get; set; }
+        public string IsYesNoOption { get; set; }
     }
     public class CommonDataModel_DashBoard
     {

@@ -18,6 +18,7 @@ namespace RJ_NOC_Model
         public int FacilitiesID { get; set; }
         public int NoOf { get; set; }
         public string FacilitiesUrl { get; set; }
+        public string IsAvailable { get; set; }
         public string? FacilitiesUrlPath { get; set; }
         public string? FacilitiesUrl_Dis_FileName { get; set; }
         public int Width { get; set; }
