@@ -35,10 +35,10 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.RoomDetailsUtility.IfExists(request.DepartmentID, request.CollegeID, request.CourseID,request.CollegeWiseRoomID);
-                if (IfExits == false)
-                {
-                    result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
+                IfExits = UtilityHelper.RoomDetailsUtility.IfExists(request.DepartmentID, request.CollegeID, request.CourseID, request.CollegeWiseRoomID);
+                //if (IfExits == false)
+                //{
+                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
@@ -61,12 +61,12 @@ namespace RJ_NOC_API.Controllers
                     else
                         result.ErrorMessage = "There was an error updating data.!";
                 }
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
-                }
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
+                //}
 
             }
             catch (Exception e)
@@ -83,7 +83,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetRoomDetailAllList/{UserID}/{CollegeID}")]
-        public async Task<OperationResult<List<RoomDetailsDataModels>>> GetRoomDetailAllList(int UserID,int CollegeID)
+        public async Task<OperationResult<List<RoomDetailsDataModels>>> GetRoomDetailAllList(int UserID, int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "RoomDetails");
             var result = new OperationResult<List<RoomDetailsDataModels>>();
@@ -121,7 +121,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<RoomDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailsByID(CollegeWiseRoomID,CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.GetRoomDetailsByID(CollegeWiseRoomID, CollegeID));
                 if (result.Data.Count > 0)
                 {
 
