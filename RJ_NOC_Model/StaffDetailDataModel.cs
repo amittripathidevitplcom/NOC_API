@@ -29,6 +29,7 @@ namespace RJ_NOC_Model
         public decimal Salary { get; set; }
         public string StaffStatus { get; set; }
         public string PFDeduction { get; set; }
+        public string ESINumber { get; set; }
         public string UANNumber { get; set; }
         public string ResearchGuide { get; set; }
         public int? ProfessionalQualificationID { get; set; }
