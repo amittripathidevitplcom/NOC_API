@@ -63,6 +63,22 @@ namespace RJ_NOC_Model
         public decimal LandArea { get; set; }
         public string? KhasraNo { get; set; }
         public bool IsLandSelected { get; set; }
+
+        public string? LandConversionOrderDate { get; set; }
+        public string? LandConversionOrderNo { get; set; }
+        public string? LandConverstionDocument { get; set; }
+        public string? OtherDocument { get; set; }
+        public bool? IsOtherDocument { get; set; }
+
+        public string? Dis_FileName { get; set; }
+        public string? FileName { get; set; }
+        public string? FilePath { get; set; }
+
+
+        public string? Dis_OtherFileName { get; set; }
+        public string? FileOtherName { get; set; }
+        public string? FileOtherPath { get; set; }
+
     }
 
 
