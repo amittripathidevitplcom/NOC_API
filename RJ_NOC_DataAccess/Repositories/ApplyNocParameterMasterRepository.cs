@@ -141,5 +141,12 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID)
+        {
+            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationLists',@CollegeID='" + SelectedCollageID + "',@DepartmentID='" + SelectedDepartmentID + "'";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationLists");
+            return dt;
+        }
     }
 }

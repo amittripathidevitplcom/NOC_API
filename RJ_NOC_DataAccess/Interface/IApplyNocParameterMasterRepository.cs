@@ -21,5 +21,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<ApplyNocParameterFeesDataModel> GetDCECourseSubjectFees(int ApplyNOCParameterID);
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
+        DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
     }
 }

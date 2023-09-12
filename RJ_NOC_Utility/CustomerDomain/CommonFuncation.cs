@@ -384,5 +384,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeLandConversionDetail(DepartmentID, LandDetailsId, Type) ;
         }
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWises(int DepartmentID, int CollageID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWises(DepartmentID, CollageID, Type);
+        }
     }
 }
