@@ -577,7 +577,16 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
 
 
-
+        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID)
+        {
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationLists(SelectedCollageID, SelectedDepartmentID);
+            List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
+            if (dt != null)
+            {
+                model = CommonHelper.ConvertDataTable<List<ApplyNocApplicationDataModel>>(dt);
+            }
+            return model;
+        }
 
 
     }

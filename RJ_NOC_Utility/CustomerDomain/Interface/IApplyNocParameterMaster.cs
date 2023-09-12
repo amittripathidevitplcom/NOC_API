@@ -21,5 +21,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy);
         List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
+        List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
     }
 }

@@ -493,6 +493,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetApplyNocApplicationLists/{SelectedCollageID}/{SelectedDepartmentID}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationLists(int SelectedCollageID,int SelectedDepartmentID)
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationLists(SelectedCollageID, SelectedDepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.GetApplyNocApplicationLists", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }
