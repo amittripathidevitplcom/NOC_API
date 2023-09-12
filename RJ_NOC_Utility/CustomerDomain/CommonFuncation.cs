@@ -142,6 +142,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
         {
             return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear_AcademicInformation();
+        }        
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_OldNOC(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear_OldNOC(CollegeID);
         }
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)

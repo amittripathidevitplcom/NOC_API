@@ -25,7 +25,7 @@ namespace RJ_NOC_Model
         public string UploadNOCDoc { get; set; }
         public string UploadNOCDocPath { get; set; }
         public string Dis_FileName { get; set; }
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
         public string? Action { get; set; }
         public List<OldNocDetails_SubjectDataModel> SubjectData { get; set; }
 
