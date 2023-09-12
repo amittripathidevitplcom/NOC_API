@@ -331,7 +331,7 @@ namespace RJ_NOC_Model
         public string FinancialYearName { get; set; }
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
-        public int RequiredSquareMeter { get; set; }
+        public string RequiredSquareMeter { get; set; }
         public string AreaType { get; set; }
     }
 
