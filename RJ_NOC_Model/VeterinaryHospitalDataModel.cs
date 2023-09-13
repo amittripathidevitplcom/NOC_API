@@ -79,8 +79,8 @@ namespace RJ_NOC_Model
         public int SansthaRoomID { get; set; }
         public int VeterinaryHospitalID { get; set; }
         public string? RoomName { get; set; }
-        public int Width { get; set; }
-        public int Length { get; set; }
+        public int? Width { get; set; }
+        public int? Length { get; set; }
         public int NoOfRooms { get; set; }
     }
 }
