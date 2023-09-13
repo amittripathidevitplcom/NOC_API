@@ -31,6 +31,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string AnimalDetails_Str = request.AnimalDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.AnimalDetails, "Temp_AnimalDetails_VeterinaryHospital") : "";
+            string SansthaBhvanDetails_Str = request.SansthaBhavanDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.SansthaBhavanDetails, "Temp_SansthaBhavanDetails_VeterinaryHospital") : "";
             string SqlQuery = " exec USP_Trn_VeterinaryHospital_IU";
 
             SqlQuery += " @ActionType='UI',";
@@ -60,7 +61,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @SSOID='" + request.SSOID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
-            SqlQuery += "@AnimalDetails_Str='" + AnimalDetails_Str + "'";
+            SqlQuery += "@AnimalDetails_Str='" + AnimalDetails_Str + "',";
+            SqlQuery += "@SansthaBhvanDetails_Str='" + SansthaBhvanDetails_Str + "'";
 
 
 
@@ -100,7 +102,11 @@ namespace RJ_NOC_DataAccess.Repository
                 if (ds.Tables.Count > 1)
                 {
                     veterinaryHospitalDataModel.AnimalDetails = CommonHelper.ConvertDataTable<List<AnimalDataModel>>(ds.Tables[1]);
-                }                
+                }
+                if (ds.Tables.Count > 2)
+                {
+                    veterinaryHospitalDataModel.SansthaBhavanDetails = CommonHelper.ConvertDataTable<List<SansthaBhavanDataModel>>(ds.Tables[2]);
+                }
             }
 
             return veterinaryHospitalDataModel;

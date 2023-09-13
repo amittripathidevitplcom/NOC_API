@@ -44,6 +44,7 @@ namespace RJ_NOC_Model
         public string? AadhaarCardPath { get; set; }
         public string? AadhaarCard_Dis_FileName  { get; set; }
         public string PANCard { get; set; }
+        public string PANNo { get; set; }
         public string? PANCardPath { get; set; }
         public string? PANCard_Dis_FileName  { get; set; }
         public string ExperienceCertificate { get; set; }

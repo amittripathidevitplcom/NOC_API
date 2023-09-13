@@ -48,8 +48,9 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
+        public List<SansthaBhavanDataModel> SansthaBhavanDetails { get; set; }
 
-    }   
+    }
     public class AnimalDataModel
     {
         public int AnimalDetailsID { get; set; }
@@ -72,5 +73,15 @@ namespace RJ_NOC_Model
         public DataTable data { get; set; }
     }
 
+    public class SansthaBhavanDataModel
+    {
+        public int? SansthaDetailsID { get; set; }
+        public int SansthaRoomID { get; set; }
+        public int VeterinaryHospitalID { get; set; }
+        public string? RoomName { get; set; }
+        public int? Width { get; set; }
+        public int? Length { get; set; }
+        public int NoOfRooms { get; set; }
+    }
 }
 
