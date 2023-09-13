@@ -46,6 +46,15 @@ namespace RJ_NOC_Model
         public string RentAgreementFileUpload { get; set; }
         public string? Dis_RentAgreementFileUpload { get; set; }
         public string? RentAgreementFileUploadPath { get; set; }
+
+
+        public string buildingOtherDoc1FileUpload { get; set; }
+        public string? Dis_buildingOtherDoc1FileUpload { get; set; }
+        public string? buildingOtherDoc1FileUploadPath { get; set; }
+
+        public string buildingOtherDoc2FileUpload { get; set; }
+        public string? Dis_buildingOtherDoc2FileUpload { get; set; }
+        public string? buildingOtherDoc2FileUploadPath { get; set; }
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
