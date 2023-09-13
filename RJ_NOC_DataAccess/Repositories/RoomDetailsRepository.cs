@@ -68,9 +68,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public bool IfExists(int DepartmentID, int CollegeID, int CourseID, int CollegeWiseRoomID)
+        public bool IfExists(int DepartmentID, int CollegeID, int CourseID, int CollegeWiseRoomID, int NoOfRooms)
         {
-            string SqlQuery = " select CourseID from Trn_College_RoomDetails Where DepartmentID='"+ DepartmentID + "' and  CollegeID='"+ CollegeID + "' and CourseID='"+ CourseID + "' and   DeleteStatus=0  and CollegeWiseRoomID !='"+ CollegeWiseRoomID + "' ";
+            string SqlQuery = " select CourseID from Trn_College_RoomDetails Where DepartmentID='"+ DepartmentID + "' and  CollegeID='"+ CollegeID + "' and CourseID='"+ CourseID + "' and   DeleteStatus=0  and CollegeWiseRoomID !='"+ CollegeWiseRoomID + "' and NoOfRooms='"+ NoOfRooms + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.IfExists");
             if (dataTable.Rows.Count > 0)

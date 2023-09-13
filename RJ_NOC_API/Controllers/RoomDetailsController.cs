@@ -35,38 +35,38 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.RoomDetailsUtility.IfExists(request.DepartmentID, request.CollegeID, request.CourseID, request.CollegeWiseRoomID);
-                //if (IfExits == false)
-                //{
-                result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
-                if (result.Data)
+                IfExits = UtilityHelper.RoomDetailsUtility.IfExists(request.DepartmentID, request.CollegeID, request.CourseID, request.CollegeWiseRoomID,Convert.ToInt32(request.NoOfRooms));
+                if (IfExits == false)
                 {
-                    result.State = OperationState.Success;
-                    if (request.CollegeWiseRoomID == 0)
+                    result.Data = await Task.Run(() => UtilityHelper.RoomDetailsUtility.SaveData(request));
+                    if (result.Data)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "RoomDetails");
-                        result.SuccessMessage = "Saved successfully .!";
+                        result.State = OperationState.Success;
+                        if (request.CollegeWiseRoomID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "RoomDetails");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.CollegeWiseRoomID, "RoomDetails");
+                            result.SuccessMessage = "Updated successfully .!";
+                        }
                     }
                     else
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.CollegeWiseRoomID, "RoomDetails");
-                        result.SuccessMessage = "Updated successfully .!";
+                        result.State = OperationState.Error;
+                        if (request.CollegeWiseRoomID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
                     }
                 }
                 else
                 {
-                    result.State = OperationState.Error;
-                    if (request.CollegeWiseRoomID == 0)
-                        result.ErrorMessage = "There was an error adding data.!";
-                    else
-                        result.ErrorMessage = "There was an error updating data.!";
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = request.CourseName+" (Room No."+ request.NoOfRooms+ ") is Already Exist, It Can't Not Be Duplicate.!";
                 }
-                //}
-                //else
-                //{
-                //    result.State = OperationState.Warning;
-                //    result.ErrorMessage = request.CourseName + " is Already Exist, It Can't Not Be Duplicate.!";
-                //}
 
             }
             catch (Exception e)
