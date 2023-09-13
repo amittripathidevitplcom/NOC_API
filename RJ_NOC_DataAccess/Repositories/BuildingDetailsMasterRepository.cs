@@ -13,8 +13,8 @@ namespace RJ_NOC_DataAccess.Repository
         public BuildingDetailsMasterRepository(CommonDataAccessHelper commonHelper)
         {
             _commonHelper = commonHelper;
-        }         
-       
+        }
+
         public bool SaveData(BuildingDetailsDataModel buildingdetails)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -39,6 +39,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @OwnBuildingOrderDate='" + buildingdetails.OwnBuildingOrderDate + "',";
             SqlQuery += " @OwnBuildingFileUpload='" + buildingdetails.OwnBuildingFileUpload + "',";
             SqlQuery += " @RentAgreementFileUpload='" + buildingdetails.RentAgreementFileUpload + "',";
+            SqlQuery += " @OtherDoc1FileUpload='" + buildingdetails.buildingOtherDoc1FileUpload + "',";
+            SqlQuery += " @OtherDoc2FileUpload='" + buildingdetails.buildingOtherDoc2FileUpload + "',";
             SqlQuery += " @FromDate='" + buildingdetails.FromDate + "',";
             SqlQuery += " @FireNOCOrderNumber='" + buildingdetails.FireNOCOrderNumber + "',";
             SqlQuery += " @ToDate='" + buildingdetails.ToDate + "',";
@@ -134,14 +136,20 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public bool IfExists(int SchoolBuildingDetailsID, string OwnerName)
         {
-            string SqlQuery = " select OwnerName from Trn_School_BuildingDetails Where OwnerName='" + OwnerName.Trim() + "'  and SchoolBuildingDetailsID !='" + SchoolBuildingDetailsID + "'  and DeleteStatus=0";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "BuildingDetailsMasterService.IfExists");
-            if (dataTable.Rows.Count > 0)
-                return true;
+            if (OwnerName != "")
+            {
+                string SqlQuery = " select OwnerName from Trn_School_BuildingDetails Where OwnerName='" + OwnerName.Trim() + "'  and SchoolBuildingDetailsID !='" + SchoolBuildingDetailsID + "'  and DeleteStatus=0 and and ActiveStatus=1";
+                DataTable dataTable = new DataTable();
+                dataTable = _commonHelper.Fill_DataTable(SqlQuery, "BuildingDetailsMasterService.IfExists");
+                if (dataTable.Rows.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
             else
+            {
                 return false;
+            }
         }
-      
     }
 }
