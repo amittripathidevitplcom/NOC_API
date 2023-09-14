@@ -143,7 +143,7 @@ namespace RJ_NOC_Model
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
-        public decimal TotalNocFee { get; set; }
+        public decimal TotalNocFee { get; set; } 
         public decimal LateFee { get; set; }
 
         public bool? ApplicationStatus { get; set; }
@@ -151,6 +151,8 @@ namespace RJ_NOC_Model
         public bool? IsMakePayment_ApplicationFee { get; set; }
         public bool? IsSaveFDR { get; set; }
         public bool? IsMakePayment { get; set; }
+        public bool? IsNOCIssued { get; set; }
+        public string? NOCFilePath { get; set; }
 
         public decimal ApplicationFeeAmount { get; set; }
         public int ServiceId { get; set; }
