@@ -13,9 +13,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public StreamMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetAllStreamList()
+        public List<CommonDataModel_DataTable> GetAllStreamList(int DepartmentID)
         {
-            return UnitOfWork.StreamMasterRepository.GetAllStreamList();
+            return UnitOfWork.StreamMasterRepository.GetAllStreamList(DepartmentID);
         }
         public List<StreamMasterDataModel> GetByID(int StreamMappingID)
         {

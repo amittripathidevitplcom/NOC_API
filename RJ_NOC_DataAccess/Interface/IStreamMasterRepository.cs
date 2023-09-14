@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IStreamMasterRepository
     {
-        List<CommonDataModel_DataTable> GetAllStreamList();
+        List<CommonDataModel_DataTable> GetAllStreamList(int DepartmentID);
         List<StreamMasterDataModel> GetByID(int StreamMappingID);
         bool SaveData(StreamMasterDataModel request);       
         bool DeleteData(int StreamMappingID);

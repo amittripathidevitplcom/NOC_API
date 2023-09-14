@@ -15,6 +15,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(RoomDetailsDataModel request);
         bool DeleteData(int CollegeWiseRoomID);
 
-        bool IfExists(int DepartmentID, int CollegeID, int CourseID,int CollegeWiseRoomID);
+        bool IfExists(int DepartmentID, int CollegeID, int CourseID,int CollegeWiseRoomID, int NoOfRooms);
     }
 }
