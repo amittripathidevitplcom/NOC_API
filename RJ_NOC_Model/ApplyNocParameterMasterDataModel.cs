@@ -143,7 +143,7 @@ namespace RJ_NOC_Model
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
-        public decimal TotalNocFee { get; set; }
+        public decimal TotalNocFee { get; set; } 
         public decimal LateFee { get; set; }
 
         public bool? ApplicationStatus { get; set; }
