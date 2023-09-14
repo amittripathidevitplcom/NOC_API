@@ -151,6 +151,8 @@ namespace RJ_NOC_Model
         public bool? IsMakePayment_ApplicationFee { get; set; }
         public bool? IsSaveFDR { get; set; }
         public bool? IsMakePayment { get; set; }
+        public bool? IsNOCIssued { get; set; }
+        public string? NOCFilePath { get; set; }
 
         public decimal ApplicationFeeAmount { get; set; }
         public int ServiceId { get; set; }
