@@ -168,5 +168,73 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetCollegeLabInformationList/{CollegeID}/{key}")]
+        public async Task<OperationResult<List<CollegeLabInformationDataModel>>> GetCollegeLabInformationList( int CollegeID, string key)
+        {
+
+            var result = new OperationResult<List<CollegeLabInformationDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetCollegeLabInformationList(CollegeID,key));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("OtherInformationController.GetCollegeLabInformationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("SaveLabData")]
+        public async Task<OperationResult<bool>> SaveLabData(PostCollegeLabInformation request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.SaveLabData(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.CollegeID, "Save", 0, "CollegeDocument");
+                    result.SuccessMessage = "Saved successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("OtherInformationController.SaveLabData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
