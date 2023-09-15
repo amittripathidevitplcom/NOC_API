@@ -37,7 +37,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += "@HostelCategoryID='" + request.HostelCategoryID + "',@HostelDetailID = '"+request.HostelDetailID+"',@IsHostelCampus = '"+request.IsHostelCampus+"',@HostelName = '"+request.HostelName+"',@AddressLine1 = '"+request.AddressLine1+"',@AddressLine2 = '"+request.AddressLine2+"',@IsRuralUrban = '"+request.IsRuralUrban+"',@DivisionId = '"+request.DivisionID+"',@DistrictID = '"+request.DistrictID+"',@TehsilID = '"+request.TehsilID+"',@PanchayatSamitiID = '"+request.PanchayatSamitiID+"',";
             SqlQuery += "@CityTownVillage='" + request.CityTownVillage + "',@Pincode='" + request.Pincode + "',@ContactPersonName='" + request.ContactPersonName + "',@ContactPersonNo='" + request.ContactPersonNo + "',";
             SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',";
-            SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "'";
+            SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "',@CityID='" + request.CityID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "HostelDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -71,6 +71,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.DivisionID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DivisionID"]);
                     dataModels.DistrictID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DistrictID"]);
                     dataModels.TehsilID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["TehsilID"]);
+                    dataModels.CityID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CityID"]);
                     dataModels.PanchayatSamitiID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["PanchayatSamitiID"]);
 
                     dataModels.CityTownVillage = dataSet.Tables[0].Rows[0]["CityTownVillage"].ToString();
@@ -92,6 +93,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.DivisionName = dataSet.Tables[0].Rows[0]["DivisionName"].ToString();
                     dataModels.DistrictName = dataSet.Tables[0].Rows[0]["DistrictName"].ToString();
                     dataModels.TehsilName = dataSet.Tables[0].Rows[0]["TehsilName"].ToString();
+                    dataModels.CityName = dataSet.Tables[0].Rows[0]["CityName"].ToString();
                     dataModels.PanchyatSamitiName = dataSet.Tables[0].Rows[0]["PanchyatSamitiName"].ToString();
                     dataModels.HostelCategory = dataSet.Tables[0].Rows[0]["HostelCategory"].ToString();
 

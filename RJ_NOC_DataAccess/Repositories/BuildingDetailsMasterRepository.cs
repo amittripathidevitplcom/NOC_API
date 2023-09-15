@@ -67,6 +67,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @UserID='" + buildingdetails.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
             SqlQuery += " @Rentvaliditydate='" + buildingdetails.Rentvaliditydate + "',";
+            SqlQuery += " @CityID='" + buildingdetails.CityID + "',";
             SqlQuery += " @BuildingDetail_Document_Str='" + BuildingDetail_Document_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "BuildingDetailsMasterService.SaveData");
@@ -138,7 +139,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             if (OwnerName != "")
             {
-                string SqlQuery = " select OwnerName from Trn_School_BuildingDetails Where OwnerName='" + OwnerName.Trim() + "'  and SchoolBuildingDetailsID !='" + SchoolBuildingDetailsID + "'  and DeleteStatus=0 and and ActiveStatus=1";
+                string SqlQuery = " select OwnerName from Trn_School_BuildingDetails Where OwnerName='" + OwnerName.Trim() + "'  and SchoolBuildingDetailsID !='" + SchoolBuildingDetailsID + "'  and DeleteStatus=0 and ActiveStatus=1";
                 DataTable dataTable = new DataTable();
                 dataTable = _commonHelper.Fill_DataTable(SqlQuery, "BuildingDetailsMasterService.IfExists");
                 if (dataTable.Rows.Count > 0)

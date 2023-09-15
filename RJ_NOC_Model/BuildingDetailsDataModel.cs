@@ -94,6 +94,9 @@ namespace RJ_NOC_Model
         public string? S_Remark { get; set; }
         public string? Rentvaliditydate { get; set; }
 
+        public int? CityID { get; set; }
+        public string? CityName { get; set; }
+
     }
     public class BuildingDetailsDataModelList
     {
