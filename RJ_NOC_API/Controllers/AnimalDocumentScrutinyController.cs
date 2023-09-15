@@ -961,9 +961,9 @@ namespace RJ_NOC_API.Controllers
                 sb.Append("<tr><td height='30px;'></td></tr>");
                 sb.Append("<tr><td><b>Total Fee Amount : </b>" + TotalFeeAmount + "</td></tr>");
                 sb.Append("<tr><td height='30px;'></td></tr>");
-                sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
-                sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
-                sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
+                sb.Append("<tr><td><p>NOC has been issued to "+ CollegeName + " College of Animal Husbandry Department. I have no objection to this, I am marking it with my seal.</p></td></tr>");
+                //sb.Append("<tr><td><p></p></td></tr>");
+                //sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
                 sb.Append("<tr><td height='30px;'></td></tr>");
                 sb.Append("<tr><td height='30px;'></td></tr>");
                 sb.Append("<tr><td height='30px;'></td></tr>");
