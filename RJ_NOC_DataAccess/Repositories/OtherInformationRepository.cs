@@ -87,6 +87,8 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_CollegeLabInformation_AddUpdate";
             SqlQuery += " @CollegeID='" + request.CollegeID + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @OtherID='" + request.OtherID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @CollegeLabInformationDetails='" + CommonHelper.GetDetailsTableQry(request.CollegeLabInformationList, "TempCollegeLabInformationDetail") + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ClassWiseStudentDetailsRepository.SaveLabData");
             if (Rows > 0)
