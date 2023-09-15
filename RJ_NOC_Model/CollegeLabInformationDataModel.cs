@@ -28,6 +28,7 @@ namespace RJ_NOC_Model
     {
         public int CollegeID { get; set; }
         public int UserID { get; set; }
+        public int OtherID { get; set; }
         public int DepartmentID { get; set; }
         public List<CollegeLabInformationDataModel> CollegeLabInformationList { get; set; }
     }

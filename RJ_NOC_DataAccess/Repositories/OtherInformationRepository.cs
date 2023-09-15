@@ -32,7 +32,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<OtherInformationDataModels> GetOtherInformationAllList(int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "OtherInformation.GetOtherInformationAllList");
 
@@ -47,7 +47,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<OtherInformationDataModel> GetOtherInformationByID(int CollegeWiseOtherInfoID, int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "', @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "', @CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "OtherInformation.GetOtherInformationByID");
 
@@ -60,6 +60,7 @@ namespace RJ_NOC_DataAccess.Repositories
         public bool DeleteData(int CollegeWiseOtherInfoID)
         {
             string SqlQuery = " Update Trn_College_OtherInformation set ActiveStatus=0 , DeleteStatus=1  WHERE CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "'";
+            SqlQuery += "  Delete from Trn_CollegeLabInformation Where   CollegeWiseOtherInfoID   = '" + CollegeWiseOtherInfoID + "' ";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OtherInformation.DeleteData");
             if (Rows > 0)
                 return true;
@@ -67,8 +68,8 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-    
-        public List<CollegeLabInformationDataModel> GetCollegeLabInformationList( int CollegeID, string key)
+
+        public List<CollegeLabInformationDataModel> GetCollegeLabInformationList(int CollegeID, string key)
         {
             string SqlQuery = " exec USP_CollegeWiseLabSubject @CollegeID='" + CollegeID + "',@key='" + key + "'";
             DataTable dataTable = new DataTable();
