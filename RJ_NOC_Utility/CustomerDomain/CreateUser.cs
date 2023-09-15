@@ -32,9 +32,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CreateUserRepository.DeleteData(UId);
         }
 
-        public bool IfExists(int UId, string SSOID, string Name)
+        public bool IfExists(int UId, string SSOID,int DepartmentID, int RoleID)
         {
-            return UnitOfWork.CreateUserRepository.IfExists(UId, SSOID, Name);
+            return UnitOfWork.CreateUserRepository.IfExists(UId, SSOID, DepartmentID, RoleID);
         }
 
     }

@@ -7,7 +7,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IStreamMaster
     {
-        List<CommonDataModel_DataTable> GetAllStreamList();
+        List<CommonDataModel_DataTable> GetAllStreamList(int DepartmentID);
         List<StreamMasterDataModel> GetByID(int StreamMappingID);
         bool SaveData(StreamMasterDataModel request);       
         bool DeleteData(int StreamMappingID);

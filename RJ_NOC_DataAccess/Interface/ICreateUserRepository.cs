@@ -13,7 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CreateUserDataModel> GetUserByIDWise(int UId);
         bool SaveData(CreateUserDataModel request);
         bool DeleteData(int UId);
-        bool IfExists(int UId, string SSOID, string Name);
+        bool IfExists(int UId, string SSOID,int DepartmentID, int RoleID);
     }
 
 }

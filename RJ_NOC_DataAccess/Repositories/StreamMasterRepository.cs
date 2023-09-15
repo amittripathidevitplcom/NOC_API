@@ -15,9 +15,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetAllStreamList()
+        public List<CommonDataModel_DataTable> GetAllStreamList(int DepartmentID)
         {
-            string SqlQuery = "exec USP_GetStreamMasterData @Key='GetmappingList'";
+            string SqlQuery = "exec USP_GetStreamMasterData @Key='GetmappingList',";
+            SqlQuery += " @DepartmentID='" + DepartmentID + "'";
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StreamMaster.GetAllStreamList");
 

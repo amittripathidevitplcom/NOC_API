@@ -16,14 +16,14 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllStreamList(int UserID)
+        [HttpGet("{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllStreamList(int DepartmentID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "StreamMaster");
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "StreamMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.GetAllStreamList());
+                result.Data = await Task.Run(() => UtilityHelper.StreamMasterUtility.GetAllStreamList(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

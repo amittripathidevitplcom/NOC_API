@@ -56,6 +56,7 @@ namespace RJ_NOC_Model
         public string? NAACAccreditedCertificate_Dis_FileName { get; set; }
         public string? NACCValidityDate { get; set; }
         public string? CollegeStatus { get; set; }
+        public int? CityID { get; set; }
         public List<ContactDetailsDataModel> ContactDetailsList { get; set; }
         public List<NearestGovernmentHospitalsDataModel> NearestGovernmentHospitalsList { get; set; }
     }

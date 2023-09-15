@@ -116,6 +116,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID, int DepartmentID);
         List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID,  int LandDetailsID,string Type);
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWises(int DepartmentID, int CollageID, string Type);
+        List<CommonDataModel_DataTable> GetCityByDistrict(int DistrictID);
     }
 
 }
