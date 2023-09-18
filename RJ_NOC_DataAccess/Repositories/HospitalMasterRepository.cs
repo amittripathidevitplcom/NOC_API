@@ -144,6 +144,11 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@PollutionUnitID='{0}',", request.PollutionUnitID);
             sb.AppendFormat("@PollutionCertificate='{0}',", request.PollutionCertificate);
             sb.AppendFormat("@HospitalStatus='{0}',", request.HospitalStatus);
+
+            sb.AppendFormat("@CityID='{0}',", request.CityID);
+            sb.AppendFormat("@CityID_ManageBy='{0}',", request.CityID_ManageBy);
+            sb.AppendFormat("@CityID_Owner='{0}',", request.CityID_Owner);
+            sb.AppendFormat("@CityID_Other='{0}',", request.CityID_Other);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
 

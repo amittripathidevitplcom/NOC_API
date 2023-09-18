@@ -94,5 +94,7 @@ namespace RJ_NOC_Model
         public string? PanchayatSamitiName { get; set; }
         public string CityTownVillage { get; set; }
         public int Pincode { get; set; }
+        public int? CityID { get; set; }
+        public string? CityName { get; set; }
     }
 }
