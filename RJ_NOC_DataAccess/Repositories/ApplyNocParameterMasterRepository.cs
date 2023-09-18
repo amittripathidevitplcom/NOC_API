@@ -148,5 +148,11 @@ namespace RJ_NOC_DataAccess.Repository
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationLists");
             return dt;
         }
+        public DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID)
+        {
+            string SqlQuery = $"exec USP_ApplyNocFDRMaster @action='ViewApplyNocFDRDetailsByCollegeID',@CollegeID={CollegeID}";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.ViewApplyNoc_FDRDetailsByCollegeID");
+            return dt;
+        }
     }
 }
