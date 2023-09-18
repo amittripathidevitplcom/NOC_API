@@ -136,7 +136,11 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@PollutionCertificate='{0}',", request.PollutionCertificate);
             sb.AppendFormat("@HospitalStatus='{0}',", request.HospitalStatus);
             sb.AppendFormat("@CityPopulation='{0}',", request.CityPopulation);
-            sb.AppendFormat("@ParamedicalHospitalBedValidationList_Str='{0}'", ParamedicalHospitalBedValidationList_Str);
+            sb.AppendFormat("@ParamedicalHospitalBedValidationList_Str='{0}',", ParamedicalHospitalBedValidationList_Str);
+            sb.AppendFormat("@CityID='{0}',", request.CityID);
+            sb.AppendFormat("@CityID_ManageBy='{0}',", request.CityID_ManageBy);
+            sb.AppendFormat("@CityID_Owner='{0}',", request.CityID_Owner);
+            sb.AppendFormat("@CityID_Other='{0}'", request.CityID_Other);
 
             string SqlQuery = $" exec USP_ParamedicalHospital_IU  {sb.ToString()}";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ParamedicalHospital.SaveData");

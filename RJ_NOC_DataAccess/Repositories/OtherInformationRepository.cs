@@ -32,7 +32,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<OtherInformationDataModels> GetOtherInformationAllList(int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "OtherInformation.GetOtherInformationAllList");
 
@@ -47,7 +47,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<OtherInformationDataModel> GetOtherInformationByID(int CollegeWiseOtherInfoID, int CollegeID)
         {
-            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "', @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "', @CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "OtherInformation.GetOtherInformationByID");
 
@@ -57,11 +57,41 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
 
         }
-
         public bool DeleteData(int CollegeWiseOtherInfoID)
         {
             string SqlQuery = " Update Trn_College_OtherInformation set ActiveStatus=0 , DeleteStatus=1  WHERE CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "'";
+            SqlQuery += "  Delete from Trn_CollegeLabInformation Where   CollegeWiseOtherInfoID   = '" + CollegeWiseOtherInfoID + "' ";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OtherInformation.DeleteData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+        public List<CollegeLabInformationDataModel> GetCollegeLabInformationList(int CollegeID, string key)
+        {
+            string SqlQuery = " exec USP_CollegeWiseLabSubject @CollegeID='" + CollegeID + "',@key='" + key + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "OtherInformation.GetCollegeLabInformationList");
+
+            List<CollegeLabInformationDataModel> dataModels = new List<CollegeLabInformationDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CollegeLabInformationDataModel>>(JsonDataTable_Data);
+            return dataModels;
+
+        }
+
+        public bool SaveLabData(PostCollegeLabInformation request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CollegeLabInformation_AddUpdate";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @OtherID='" + request.OtherID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeLabInformationDetails='" + CommonHelper.GetDetailsTableQry(request.CollegeLabInformationList, "TempCollegeLabInformationDetail") + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ClassWiseStudentDetailsRepository.SaveLabData");
             if (Rows > 0)
                 return true;
             else

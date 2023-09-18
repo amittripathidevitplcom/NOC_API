@@ -14,5 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<OtherInformationDataModel> GetOtherInformationByID(int CollegeWiseOtherInfoID, int CollegeID);
         bool SaveData(OtherInformationDataModel request);
         bool DeleteData(int CollegeWiseOtherInfoID);
+        List<CollegeLabInformationDataModel> GetCollegeLabInformationList(int CollegeID,string Key);
+
+        bool SaveLabData(PostCollegeLabInformation request);
+
     }
 }

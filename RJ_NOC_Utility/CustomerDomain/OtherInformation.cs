@@ -34,5 +34,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.OtherInformationRepository.DeleteData(CollegeWiseOtherInfoID);
         }
+        public List<CollegeLabInformationDataModel> GetCollegeLabInformationList(int CollegeID, string key)
+        {
+            return UnitOfWork.OtherInformationRepository.GetCollegeLabInformationList(CollegeID, key);
+        }
+        public bool SaveLabData(PostCollegeLabInformation request)
+        {
+            return UnitOfWork.OtherInformationRepository.SaveLabData(request);
+        }
     }
 }

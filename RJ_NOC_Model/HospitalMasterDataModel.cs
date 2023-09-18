@@ -162,6 +162,15 @@ namespace RJ_NOC_Model
         public string? PollutionCertificatePath { get; set; }
 
         public string HospitalStatus { get; set; }
+
+        public int? CityID { get; set; }
+        public string? CityName { get; set; }
+        public int? CityID_ManageBy { get; set; }
+        public string? CityName_ManageBy { get; set; }
+        public int? CityID_Owner { get; set; }
+        public string? CityName_Owner { get; set; }
+        public int? CityID_Other { get; set; }
+        public string? CityName_Other { get; set; }
     }
     public class HospitalAreaValidation
     {
