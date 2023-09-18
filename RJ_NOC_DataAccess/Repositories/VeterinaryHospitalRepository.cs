@@ -62,7 +62,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @SSOID='" + request.SSOID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
             SqlQuery += "@AnimalDetails_Str='" + AnimalDetails_Str + "',";
-            SqlQuery += "@SansthaBhvanDetails_Str='" + SansthaBhvanDetails_Str + "'";
+            SqlQuery += "@SansthaBhvanDetails_Str='" + SansthaBhvanDetails_Str + "',";
+            SqlQuery += "@CityID='" + request.CityID + "'";
 
 
 

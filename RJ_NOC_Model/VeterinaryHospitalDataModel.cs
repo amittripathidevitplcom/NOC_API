@@ -13,6 +13,7 @@ namespace RJ_NOC_Model
         public int DistrictID { get; set; }
         public int TehsilID { get; set; }
         public int PanchayatSamitiID { get; set; }
+        public int? CityID { get; set; }
         public string CityTownVillage { get; set; }
         public string HospitalName { get; set; }
         public int DistanceFromInstitute { get; set; }
@@ -35,10 +36,11 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public int DepartmentID { get; set; }
         public string SSOID { get; set; }
-        public string District_Eng { get; set; }
-        public string Division_English { get; set; }
-        public string TehsilName { get; set; }
-        public string PanchyatSamitiName { get; set; }
+        public string? District_Eng { get; set; }
+        public string? Division_English { get; set; }
+        public string? TehsilName { get; set; }
+        public string? PanchyatSamitiName { get; set; }
+        public string? CityName { get; set; }
         public List<AnimalDataModel> AnimalDetails { get; set; }
 
         public string? Action { get; set; }
