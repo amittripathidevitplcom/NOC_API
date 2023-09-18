@@ -22,5 +22,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
+        List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID);
+        
     }
 }
