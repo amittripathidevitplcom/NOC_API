@@ -30,7 +30,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID)
         {
-            string SqlQuery = " exec USP_CourseMaster_GetData @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = " exec USP_CourseMaster_GetData  @LoginSSOID='" + LoginSSOID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetAllData");
 
@@ -160,6 +160,19 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
+        }
+
+        public List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetCoursesCollegeWise @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetCoursesByCollegeID");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
 
     }
