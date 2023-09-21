@@ -55,5 +55,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommitteeMasterRepository.GetApplicationCommitteeList_AH(ApplyNocApplicationID, ActionType);
         }
+        public NodelOfficerDetails_DCE GetApplicationNodelOfficer(int ApplyNocApplicationID)
+        {
+            return UnitOfWork.CommitteeMasterRepository.GetApplicationNodelOfficer(ApplyNocApplicationID);
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool DeleteApplicationCommittee(int CommitteeMemberID);
         List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID);
         List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList_AH(int ApplyNocApplicationID, string ActionType);
-
+        NodelOfficerDetails_DCE GetApplicationNodelOfficer(int ApplyNocApplicationID);
 
 
     }
