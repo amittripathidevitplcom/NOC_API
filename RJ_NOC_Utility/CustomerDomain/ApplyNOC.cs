@@ -45,6 +45,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetApplyNOCRejectedReport(UserID,ActionName, RoleID, DepartmentID);
         }
+        public List<CommonDataModel_DataTable> GetForwardCommiteeAHList(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetForwardCommiteeAHList(UserID,ActionName, RoleID, DepartmentID);
+        }
         public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
             return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID,ActionName , RoleID,  DepartmentID);

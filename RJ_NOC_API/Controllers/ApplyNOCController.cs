@@ -263,7 +263,40 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-       
+        [HttpGet("GetForwardCommiteeAHList/{UserID}/{ActionName}/{RoleID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetForwardCommiteeAHList(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetForwardCommiteeAHList", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetForwardCommiteeAHList(UserID, ActionName, RoleID, DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetForwardCommiteeAHList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
 
 
         [HttpGet("GetPendingMedicalApplications/{RoleID}/{UserID}/{ActionName}")]
