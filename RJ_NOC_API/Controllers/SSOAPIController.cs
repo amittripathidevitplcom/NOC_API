@@ -44,7 +44,14 @@ namespace RJ_NOC_API.Controllers
             string SSOID = "";
             if (sSOLandingDataDataModel.LoginType.ToString() != "0")
             {
-                  SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
+                if (sSOLandingDataDataModel.Username == "1")
+                {
+                    SSOID = "ravindra.singhdoit";
+                }
+                else
+                {
+                    SSOID = CommonHelper.Decrypt(sSOLandingDataDataModel.Username);
+                }
             }
             else
             {
