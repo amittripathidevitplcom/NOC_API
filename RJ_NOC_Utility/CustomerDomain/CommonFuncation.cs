@@ -396,5 +396,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCityByDistrict(DistrictID);
         }
+        public List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetNOCApplicationStepList( ApplyNocID,  CurrentActionID,  DepartmentID,  ActionType);
+        }
     }
 }

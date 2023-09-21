@@ -39,6 +39,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CourseMasterRepository.IfExists(CourseID, DepartmentID, CollegeWiseCourseID, CollegeID, StreamMasterID);
         }
-         
+        public List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID)
+        {
+            return UnitOfWork.CourseMasterRepository.GetCoursesByCollegeID(CollegeID);
+        }
     }
 }
