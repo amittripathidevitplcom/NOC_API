@@ -284,6 +284,38 @@ namespace RJ_NOC_API.Controllers
         #endregion
 
 
+        [HttpGet("GetApplicationNodelOfficer/{ApplyNocApplicationID}")]
+        public async Task<OperationResult<NodelOfficerDetails_DCE>> GetApplicationNodelOfficer(int ApplyNocApplicationID)
+        {
+            var result = new OperationResult<NodelOfficerDetails_DCE>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommitteeMasterUtility.GetApplicationNodelOfficer(ApplyNocApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data!=null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommitteeMasterController.GetApplicationNodelOfficer", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

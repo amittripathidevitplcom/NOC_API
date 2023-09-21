@@ -160,6 +160,16 @@ namespace RJ_NOC_DataAccess.Repository
             return listdataModels;
         }
 
+        public NodelOfficerDetails_DCE GetApplicationNodelOfficer(int ApplyNocApplicationID)
+        {
+            string SqlQuery = " exec USP_GetApplicationNodelOfficer @ApplyNocApplicationID='" + ApplyNocApplicationID + "'";
+            DataTable datatable = new DataTable();
+            datatable = _commonHelper.Fill_DataTable(SqlQuery, "CommitteeMaster.GetApplicationNodelOfficer");
+            NodelOfficerDetails_DCE dataModels = new NodelOfficerDetails_DCE();
+            dataModels = CommonHelper.ConvertDataTable<NodelOfficerDetails_DCE>(datatable); 
+            return dataModels;
+        }
+
         #endregion
 
     }

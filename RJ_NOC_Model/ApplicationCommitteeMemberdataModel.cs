@@ -29,6 +29,12 @@ namespace RJ_NOC_Model
         public int? ApplyNocApplicationID { get; set; }
         public int? UserID { get; set; }
         public List<ApplicationCommitteeMemberdataModel>? ApplicationCommitteeList { get; set; }
-}
+    }
+    public class NodelOfficerDetails_DCE
+    {
+        public int UId { get; set; }
+        public string Name { get; set; }
+        public string SSOID { get; set; }
+    }
 
 }

@@ -182,6 +182,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetCoursesByCollegeID/{CollegeID}/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCoursesByCollegeID(int CollegeID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CollegeID, "CourseMaster");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetCoursesByCollegeID(CollegeID));
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.GetCoursesByCollegeID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }
