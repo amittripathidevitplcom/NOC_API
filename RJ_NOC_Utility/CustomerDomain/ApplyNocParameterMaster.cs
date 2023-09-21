@@ -587,7 +587,15 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             return model;
         }
-
-
+        public List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID)
+        {
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.ViewApplyNocFDRDetailsByCollegeID(CollegeID);
+            List<ApplyNocFDRDetailsDataModel> model = new List<ApplyNocFDRDetailsDataModel>();
+            if (dt != null)
+            {
+                model = CommonHelper.ConvertDataTable<List<ApplyNocFDRDetailsDataModel>>(dt);
+            }
+            return model;
+        }
     }
 }

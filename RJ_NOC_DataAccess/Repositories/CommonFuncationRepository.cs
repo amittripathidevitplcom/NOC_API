@@ -1056,6 +1056,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        
+        public List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType)
+        {
+            string SqlQuery = " exec USP_ShowApplicationStep @ApplyNocID='" + ApplyNocID + "',@CurrentActionID='" + CurrentActionID + "',@DeptID='" + DepartmentID + "',@actionType='" + ActionType + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetNOCApplicationStepList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
 

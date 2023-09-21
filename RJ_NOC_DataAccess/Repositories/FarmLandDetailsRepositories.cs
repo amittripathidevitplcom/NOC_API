@@ -80,7 +80,8 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @LandType='" + request.LandType + "',";
             SqlQuery += " @SourceIrrigation='" + request.SourceIrrigation + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
-            SqlQuery += " @IPAddress='" + IPAddress + "'";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CityID='" + request.CityID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "FarmLandDetails.SaveData");
             if (Rows > 0)
                 return true;
