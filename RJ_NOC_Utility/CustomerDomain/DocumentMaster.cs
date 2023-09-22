@@ -36,9 +36,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DocumentMasterRepository.DeleteData(DocumentMasterID);
         }
 
-        public bool IfExists(int DocumentMasterID, string DocumentName)
+        public bool IfExists(int DocumentMasterID,int DepartmentID, string DocumentName)
         {
-            return UnitOfWork.DocumentMasterRepository.IfExists(DocumentMasterID, DocumentName);
+            return UnitOfWork.DocumentMasterRepository.IfExists(DocumentMasterID, DepartmentID, DocumentName);
         }
     }
 }

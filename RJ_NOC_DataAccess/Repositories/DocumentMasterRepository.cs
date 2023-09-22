@@ -80,9 +80,9 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool IfExists(int DocumentMasterID, string DocumentName)
+        public bool IfExists(int DocumentMasterID,int DepartmentID, string DocumentName)
         {
-            string SqlQuery = " select DocumentName from M_DocumentMaster Where DocumentName='" + DocumentName.Trim() + "'  and DID !='" + DocumentMasterID + "'  and DeleteStatus=0 and ActiveStatus=1";
+            string SqlQuery = " select DocumentName from M_DocumentMaster Where DocumentName='" + DocumentName.Trim() + "'  and DepartmentID ='" + DepartmentID + "'  and DID !='" + DocumentMasterID + "'  and DeleteStatus=0 and ActiveStatus=1";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DocumentMaster.IfExists");
             if (dataTable.Rows.Count > 0)
