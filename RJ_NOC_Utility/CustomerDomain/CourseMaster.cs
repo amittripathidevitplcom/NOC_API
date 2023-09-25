@@ -20,7 +20,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
-            return UnitOfWork.CourseMasterRepository.GetCollegeWiseCourseIDWise(CollegeWiseCourseID,LoginSSOID);
+            return UnitOfWork.CourseMasterRepository.GetCollegeWiseCourseIDWise(CollegeWiseCourseID, LoginSSOID);
         }
         public bool SaveData(CourseMasterDataModel request)
         {
@@ -34,14 +34,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CourseMasterRepository.DeleteData(CollegeWiseCourseID);
         }
-        
+
         public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID, int StreamMasterID)
         {
             return UnitOfWork.CourseMasterRepository.IfExists(CourseID, DepartmentID, CollegeWiseCourseID, CollegeID, StreamMasterID);
         }
-        public List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID)
+        public DataTable IfExists_CheckCourseandSubject(string Action, int CollegeWiseCourseID, string Subject_Ids)
         {
-            return UnitOfWork.CourseMasterRepository.GetCoursesByCollegeID(CollegeID);
+            return UnitOfWork.CourseMasterRepository.IfExists_CheckCourseandSubject(Action,   CollegeWiseCourseID,   Subject_Ids);
         }
+    public List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID)
+    {
+        return UnitOfWork.CourseMasterRepository.GetCoursesByCollegeID(CollegeID);
     }
+}
 }

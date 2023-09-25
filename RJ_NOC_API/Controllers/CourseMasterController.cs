@@ -103,9 +103,32 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID,request.StreamID);
+                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID, request.StreamID);
                 if (IfExits == false)
                 {
+                    //Edit Time check Course and Subject Exits or not exits
+                    if (request.CollegeWiseCourseID > 0)
+                    {
+                        string SubjectIDs = "";
+                        foreach (var item in request.SelectedSubjectDetails)
+                        {
+                            SubjectIDs += item.SubjectID + ",";
+                        }
+                        DataTable dataTable = new DataTable();
+                        dataTable = UtilityHelper.CourseMasterUtility.IfExists_CheckCourseandSubject("Edit", request.CollegeWiseCourseID, SubjectIDs);
+                        if (dataTable.Rows.Count > 0)
+                        {
+                            if (dataTable.Rows[0]["Status"].ToString() == "T")
+                            {
+                            }
+                            else
+                            {
+                                result.State = OperationState.Error;
+                                result.ErrorMessage = dataTable.Rows[0]["Message"].ToString();
+                            }
+                        }
+                    }
+
                     result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.SaveData(request));
                     if (result.Data)
                     {
@@ -129,6 +152,7 @@ namespace RJ_NOC_API.Controllers
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
+
                 }
                 else
                 {
@@ -156,17 +180,33 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.DeleteData(CollegeWiseCourseID));
-                if (result.Data)
+
+
+                DataTable dataTable = new DataTable();
+                dataTable = UtilityHelper.CourseMasterUtility.IfExists_CheckCourseandSubject("Delete", CollegeWiseCourseID, "");
+                if (dataTable.Rows.Count > 0)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", CollegeWiseCourseID, "CourseMaster");
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Deleted successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error deleting data.!";
+                    if (dataTable.Rows[0]["Status"].ToString() == "T")
+                    {
+
+                        result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.DeleteData(CollegeWiseCourseID));
+                        if (result.Data)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", CollegeWiseCourseID, "CourseMaster");
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "Deleted successfully .!";
+                        }
+                        else
+                        {
+                            result.State = OperationState.Error;
+                            result.ErrorMessage = "There was an error deleting data.!";
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        result.ErrorMessage = dataTable.Rows[0]["Message"].ToString();
+                    }
                 }
             }
             catch (Exception e)

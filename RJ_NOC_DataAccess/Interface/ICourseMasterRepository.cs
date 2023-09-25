@@ -15,6 +15,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool UpdateData(CourseMasterDataModel request);
         bool DeleteData(int CollegeWiseCourseID);
         bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID,int StreamMasterID);
+        DataTable IfExists_CheckCourseandSubject(string Action, int CollegeWiseCourseID, string Subject_Ids);
         List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID);
     }
 

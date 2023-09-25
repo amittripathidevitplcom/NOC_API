@@ -141,6 +141,7 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
         public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID,int StreamMasterID)
         {
             string query = string.Empty;
@@ -173,6 +174,16 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+
+        public DataTable IfExists_CheckCourseandSubject(string Action,int CollegeWiseCourseID,string Subject_Ids)
+        {
+            string SqlQuery = " EXEC USP_CheckSubjectCan_EditDelete @Action='"+ Action + "',@CollegeWiseCourseID='"+ CollegeWiseCourseID + "',@Subject_Ids='"+ Subject_Ids + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.IfExists_CheckCourseandSubject");
+
+            return dataTable;
         }
 
     }
