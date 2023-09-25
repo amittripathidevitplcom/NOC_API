@@ -15,6 +15,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(DocumentMasterDataModel request);
         bool UpdateData(DocumentMasterDataModel request);
         bool DeleteData(int DocumentMasterID);
-        bool IfExists(int DocumentMasterID, string DocumentName);
+        bool IfExists(int DocumentMasterID,int DepartmentID, string DocumentName);
     }
 }
