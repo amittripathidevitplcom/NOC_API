@@ -14,6 +14,11 @@ using static System.Diagnostics.Activity;
 using System.Security.Cryptography;
 using System.Net;
 using RJ_NOC_Model;
+using Newtonsoft.Json.Linq;
+using static Azure.Core.HttpHeader;
+using Org.BouncyCastle.Ocsp;
+using iTextSharp.text.pdf.qrcode;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RJ_NOC_DataAccess.Common
 {
@@ -159,16 +164,20 @@ namespace RJ_NOC_DataAccess.Common
             return encoding1.GetString(memStream.ToArray());
         }
 
-        public static string SendSMS(SMSConfigurationSetting sMSConfigurationSetting, string MobileNo, string Message, string TemplateID)
+        public static string SendSMS(SMSConfigurationSetting sMSConfigurationSetting, string MobileNo, string Message, string TemplateID, string language = "ENG")
         {
             string RetrunValue = "";
             try
             {
-                UNOCSMSDataModel Model = new UNOCSMSDataModel();
-                Model.MobileNo = MobileNo;
-                Model.ServiceName = sMSConfigurationSetting.ServiceName;
-                Model.UniqueID = sMSConfigurationSetting.UniqueID;
-                Model.Message = Message;
+                var Model = new UNOCSmsModel
+                {
+                    Language = language,
+                    Message = Message,
+                    MobileNo = new List<string> { MobileNo },
+                    ServiceName = sMSConfigurationSetting.ServiceName,
+                    UniqueID = sMSConfigurationSetting.UniqueID
+                };
+
                 var response = string.Empty;
                 WebRequest request = (HttpWebRequest)WebRequest.Create(sMSConfigurationSetting.SMSUrl + "?client_id=" + sMSConfigurationSetting.SmsClientID);
                 request.ContentType = "application/json";
@@ -176,8 +185,6 @@ namespace RJ_NOC_DataAccess.Common
                 request.Headers.Add("username", sMSConfigurationSetting.SMSUserName);
                 request.Headers.Add("password", sMSConfigurationSetting.SMSPassWord);
                 var inputJsonSer = System.Text.Json.JsonSerializer.Serialize(Model);
-
-
 
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
@@ -189,18 +196,25 @@ namespace RJ_NOC_DataAccess.Common
                 {
                     response = streamReader.ReadToEnd();
                 }
-                RetrunValue = response.ToString();
+                var outputJsonDser = System.Text.Json.JsonSerializer.Deserialize<SmsResponseModel>(response);
+                outputJsonDser.TrustType = "Final Save";
+                outputJsonDser.responseID = MobileNo;
+                RetrunValue = outputJsonDser.responseMessage.ToString();
             }
-            catch (Exception ex)
+            catch (WebException ex)
             {
-                //return new ServiceResponse() { data = "", IsSuccess = false, Message = "Success" };
+                //SmsResponseModel res = new SmsResponseModel();
+                //res.responseCode = 200;
+                //res.responseID = "1234556789";
+                RetrunValue = "Request send Successfully";
+                //var outputJsonDser = res;
+                //return outputJsonDser;
+                throw ex;
             }
+
             return RetrunValue;
 
-
-
         }
-
 
         public static T ConvertDataTable<T>(DataTable dt)
         {
@@ -214,4 +228,5 @@ namespace RJ_NOC_DataAccess.Common
         }
 
     }
+
 }
