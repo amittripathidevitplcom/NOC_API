@@ -182,6 +182,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetLandDetailsListForPDF/{SelectedCollageID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetLandDetailsListForPDF(int SelectedCollageID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetLandDetailsListForPDF", 0, "LandDetails");
+            var result = new OperationResult<List<CommonDataModel_DataSet>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.LandDetailsUtility.GetLandDetailsListForPDF(SelectedCollageID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("LandDetailsController.GetLandDetailsListForPDF", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 
