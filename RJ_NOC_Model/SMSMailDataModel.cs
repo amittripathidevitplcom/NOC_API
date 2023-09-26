@@ -43,4 +43,21 @@ namespace RJ_NOC_Model
         public string EntityID { get; set; }
         public string TemplateID { get; set; }
     }
+
+    public class UNOCSmsModel
+    {
+        public string UniqueID { get; set; }
+        public string ServiceName { get; set; }
+        public string Language { get; set; }
+        public string Message { get; set; }
+        public List<string> MobileNo { get; set; }
+    }
+    public class SmsResponseModel
+    {
+        public int responseCode { get; set; }
+        public string responseMessage { get; set; }
+        public string responseID { get; set; }
+        public string TrustType { get; set; }
+
+    }
 }

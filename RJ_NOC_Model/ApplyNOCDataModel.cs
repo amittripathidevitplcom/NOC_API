@@ -78,6 +78,7 @@ namespace RJ_NOC_Model
         public int PVStage { get; set; }
         public string strPVStage { get; set; }
         public string? IsCommittee { get; set; }
+        public string? NOCFilePath { get; set; }
     }
     public class GetPhysicalVerificationAppliationList
     {

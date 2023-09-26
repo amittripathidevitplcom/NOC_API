@@ -404,6 +404,44 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("GenerateNOCForDCE")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(GenerateNOC_DataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "GenerateNOCForDCE", request.ApplyNOCID, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                //result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GenerateNOCForDCE(request.ApplyNOCID));
+                string Path = GeneratePDFDCE(result.Data);
+
+                if (!string.IsNullOrEmpty(Path))
+                {
+                    //if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SavePDFPath(Path, request.ApplyNOCID, request.DepartmentID, request.RoleID, request.UserID, request.NOCIssuedRemark)))
+                    //{
+                    //    result.State = OperationState.Success;
+                    //    result.SuccessMessage = "PDF Generate Successfully .!";
+                    //}
+                    //else
+                    //{
+                    //    result.State = OperationState.Warning;
+                    //    result.SuccessMessage = "There was an error Generate PDF!";
+                    //}
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GenerateNOCForDCE", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         public class CustomImageTagProcessor : iTextSharp.tool.xml.html.Image
         {
             public override IList<IElement> End(IWorkerContext ctx, Tag tag, IList<IElement> currentContent)
@@ -651,6 +689,74 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpGet]
+        public string GeneratePDFDCE(List<CommonDataModel_DataTable> dt)
+        {
+            StringBuilder sb = new StringBuilder();
+            var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";
+            StringBuilder sbhtml = new StringBuilder();
+
+            //string CollegeName = dt[0].data.Rows[0]["CollegeName"].ToString();
+            //string CollegeMobileNo = dt[0].data.Rows[0]["CollegeMobileNo"].ToString();
+            //string CollegeEmail = dt[0].data.Rows[0]["CollegeEmail"].ToString();
+            //string ApplicationTypeName = dt[0].data.Rows[0]["ApplicationTypeName"].ToString();
+            //string TotalFeeAmount = dt[0].data.Rows[0]["TotalFeeAmount"].ToString();
+            //string ApplicationStatus = dt[0].data.Rows[0]["ApplicationStatus"].ToString();
+            //string DepartmentName = dt[0].data.Rows[0]["DepartmentName"].ToString();
+            //string ApplicationNo = dt[0].data.Rows[0]["ApplicationNo"].ToString();
+            string CollegeLogo = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/dce_logo.jpg");
+            DateTime now = DateTime.Now.Date;
+            var Date = now.ToString("dd-MM-yyyy");
+
+            {
+                sb.Clear();
+                sb.Append("<table style='width:100%;'>");
+                sb.Append("<tr><td align='left'><img  src='"+ CollegeLogo + "' height='80' width='80' alt='logo'/></td>");
+                sb.Append("<td align='center'><table style='width:100%'><tr><td align='center' valign='top'><h2 style='font-size:28px'>राजस्थान सरकार</h2></td></tr></table></td>");
+                
+                sb.Append("</tr></table>");
+            }
+
+            sbhtml.Append(UnicodeToKrutidev.FindAndReplaceKrutidev(sb.ToString().Replace("<br>", "<br/>"), true, "20px"));
+            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
+            Document pdfDoc = new Document(iTextSharp.text.PageSize.A4, 50f, 50f, 50f, 70f);
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(filepath, FileMode.Create));
+            try
+            {
+                pdfDoc.Open();
+                var tagProcessors = (DefaultTagProcessorFactory)Tags.GetHtmlTagProcessorFactory();
+                tagProcessors.RemoveProcessor(HTML.Tag.IMG);
+                tagProcessors.AddProcessor(HTML.Tag.IMG, new CustomImageTagProcessor());
+                var cssFiles = new CssFilesImpl();
+                cssFiles.Add(XMLWorkerHelper.GetInstance().GetDefaultCSS());
+                var cssResolver = new StyleAttrCSSResolver(cssFiles);
+                var charset = System.Text.Encoding.UTF8;
+                var context = new HtmlPipelineContext(new CssAppliersImpl(new XMLWorkerFontProvider()));
+                context.SetAcceptUnknown(true).AutoBookmark(true).SetTagFactory(tagProcessors);
+                var htmlPipeline = new HtmlPipeline(context, new PdfWriterPipeline(pdfDoc, writer));
+                var cssPipeline = new CssResolverPipeline(cssResolver, htmlPipeline);
+                var worker = new XMLWorker(cssPipeline, true);
+                var xmlParser = new XMLParser(true, worker, charset);
+                using (var sr = new StringReader(sbhtml.ToString()))
+                {
+                    xmlParser.Parse(sr);
+                    pdfDoc.Close();
+                    writer.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                pdfDoc.Close();
+                writer.Close();
+                throw ex;
+            }
+
+            return fileName;
+
+        }
     }
 
 }

@@ -36,6 +36,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public string SendMessage(string MobileNo, string MessageType)
         {
+            string ReturnOTP = "";
             string MessageBody = "";
             string TempletID = "";
             string SqlQuery = " exec USP_GetSMSTemplateByMessageType @MessageType='" + MessageType + "'";
@@ -52,10 +53,21 @@ namespace RJ_NOC_DataAccess.Repository
             {
                 SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
                 mSConfigurationSetting = this.GetConfigurationSetting();
-                MessageBody = MessageBody.Replace("{#OTP#}", "123456");
+                ReturnOTP = GenerateNewRandom();
+                MessageBody = MessageBody.Replace("{#OTP#}", ReturnOTP);
                 CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
             }
-            return MessageBody;
+            return ReturnOTP;
+        }
+        private static string GenerateNewRandom()
+        {
+            Random generator = new Random();
+            String r = generator.Next(0, 1000000).ToString("D6");
+            if (r.Distinct().Count() == 1)
+            {
+                r = GenerateNewRandom();
+            }
+            return r;
         }
     }
 }
