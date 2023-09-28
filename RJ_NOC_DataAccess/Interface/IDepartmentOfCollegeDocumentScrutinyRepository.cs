@@ -33,14 +33,14 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request);
-        bool FinalSubmitInspectionCommittee(int ApplyNOCID);
+        bool FinalSubmitInspectionCommittee(int ApplyNOCID, int CreatedBy);
 
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails> DocumentScrutiny_ClassWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID);
 
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID);
 
 
-       
+        List<CommonDataModel_DataTable> GetWorkFlowRemarksByApplicationID(int ApplyNOCID);
     }
 
 }

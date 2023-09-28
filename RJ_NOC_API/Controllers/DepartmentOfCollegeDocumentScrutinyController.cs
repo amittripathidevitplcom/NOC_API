@@ -629,13 +629,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}")]
-        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID)
+        [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}/{CreatedBy}")]
+        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID,int CreatedBy)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID, CreatedBy));
                 if (result.Data ==true)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitInspectionCommittee", 0, "DepartmentOfCollegeDocumentScrutiny");
@@ -720,6 +720,38 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetWorkFlowRemarksByApplicationID/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetWorkFlowRemarksByApplicationID(int ApplyNOCID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetWorkFlowRemarksByApplicationID(ApplyNOCID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetWorkFlowRemarksByApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
             }
             return result;
         }
