@@ -136,6 +136,12 @@ namespace RJ_NOC_API
                 FileProvider = new PhysicalFileProvider(
                                 Path.Combine(Directory.GetCurrentDirectory(), "ImageFile")),
                 RequestPath = "/ImageFile"
+            }); 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                                Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF")),
+                RequestPath = "/SystemGeneratedPDF"
             });
             //Enable directory browsing
             app.UseDirectoryBrowser(new DirectoryBrowserOptions
@@ -143,6 +149,12 @@ namespace RJ_NOC_API
                 FileProvider = new PhysicalFileProvider(
                             Path.Combine(Directory.GetCurrentDirectory(), "ImageFile")),
                 RequestPath = "/ImageFile"
+            }); 
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                            Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF")),
+                RequestPath = "/SystemGeneratedPDF"
             });
             app.UseSession();
             app.UseCookiePolicy();

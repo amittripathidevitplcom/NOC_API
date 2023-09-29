@@ -7,6 +7,10 @@ using RJ_NOC_DataAccess.Interface;
 using Azure.Core;
 using System.Xml.Linq;
 using System.Data;
+using static Azure.Core.HttpHeader;
+using Newtonsoft.Json.Linq;
+using System.Web.Http.Common;
+using System.Net;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -404,5 +408,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDownloadPdfDetails(DepartmentID, CollageID);
         }
+
+       
     }
 }

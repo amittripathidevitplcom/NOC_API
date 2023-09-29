@@ -13,5 +13,6 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(HostelDataModel request);
         List<HostelDataModel> GetHostelDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID);
         bool DeleteHostelDetail(int HostelDetailID);
+        List<CommonDataModel_DataSet> GetHostelPdfDetails(int DepartmentID, int CollageID);
     }
 }

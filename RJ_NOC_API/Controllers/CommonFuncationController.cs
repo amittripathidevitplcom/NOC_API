@@ -2787,6 +2787,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+         
         
         [HttpGet("GetDownloadPdfDetails/{DepartmentID}/{CollageID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDownloadPdfDetails(int DepartmentID, int CollageID)

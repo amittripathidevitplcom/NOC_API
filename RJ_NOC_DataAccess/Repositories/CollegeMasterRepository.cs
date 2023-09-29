@@ -22,6 +22,7 @@ namespace RJ_NOC_DataAccess.Repository
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID='{0}',", request.CollegeID);
             sb.AppendFormat("@DepartmentID='{0}',", request.DepartmentID);
+            sb.AppendFormat("@TypeofCollege='{0}',", request.TypeofCollege);
             sb.AppendFormat("@CollegeStatusID='{0}',", request.CollegeStatusID);
             sb.AppendFormat("@CollegeLogo='{0}',", request.CollegeLogo);
             sb.AppendFormat("@PresentCollegeStatusID='{0}',", request.PresentCollegeStatusID);
@@ -89,6 +90,18 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = "exec USP_DraftApplicationList @LoginSSOID='" + LoginSSOID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.DraftApplicationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID)
+        {
+            string SqlQuery = "exec USP_CollegeDetailsList @LoginSSOID='" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.CollegeDetails");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
