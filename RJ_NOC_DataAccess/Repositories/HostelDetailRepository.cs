@@ -115,5 +115,17 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+        public List<CommonDataModel_DataSet> GetHostelPdfDetails(int DepartmentID, int CollageID)
+        {
+            string SqlQuery = " exec USP_GetHostelDetailList_ForPDf @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollageID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "HostelDetail.GetHostelPdfDetails");
+
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
