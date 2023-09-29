@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CrystalReports.ReportAppServer.ReportDefModel" Version="13.0.4003" />
+    <PackageReference Include="CrystalReports.ReportSource" Version="13.0.4003" />
     <PackageReference Include="IKVM" Version="8.6.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
@@ -24,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ReportModel\ReportModel.csproj" />
     <ProjectReference Include="..\RJ_NOC_Model\RJ_NOC_Model.csproj" />
     <ProjectReference Include="..\RJ_NOC_Utility\RJ_NOC_Utility.csproj" />
   </ItemGroup>

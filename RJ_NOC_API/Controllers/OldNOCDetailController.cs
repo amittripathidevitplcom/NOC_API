@@ -134,5 +134,40 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        
+
+        [HttpGet("GetOldNOCDetailListForPDF/{DepartmentID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetOldNOCDetailListForPDF(int DepartmentID, int CollegeID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetOldNOCDetailListForPDF", 0, "StaffDetail");
+            var result = new OperationResult<List<CommonDataModel_DataSet>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.OldNOCDetailUtility.GetOldNOCDetailListForPDF(DepartmentID, CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("LandDetailsController.GetLandDetailsListForPDF", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }

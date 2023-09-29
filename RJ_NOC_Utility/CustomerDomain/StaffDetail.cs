@@ -34,5 +34,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffDetailRepository.DeleteStaffDetail(StaffDetailID);
         }
+        public List<CommonDataModel_DataSet> GetStaffDetailListForPDF(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.StaffDetailRepository.GetStaffDetailListForPDF(DepartmentID,  CollegeID);
+        }
     }
 }

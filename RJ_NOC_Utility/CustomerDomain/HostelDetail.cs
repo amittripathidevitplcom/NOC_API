@@ -34,5 +34,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.HostelDetailRepository.DeleteHostelDetail(HostelDetailID);
         }
+        public List<CommonDataModel_DataSet> GetHostelPdfDetails(int DepartmentID, int CollageID)
+        {
+            return UnitOfWork.HostelDetailRepository.GetHostelPdfDetails(DepartmentID, CollageID);
+        }
     }
 }
