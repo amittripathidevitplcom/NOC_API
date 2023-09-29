@@ -14,5 +14,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<OldNocDetailsDataModel> GetOldNOCDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int OldNocID);
         bool DeleteOldNocDetail(int OldNocID);
         bool IfExists(int OldNocID, string NOCNumber);
+        List<CommonDataModel_DataSet> GetOldNOCDetailListForPDF(int DepartmentID, int CollegeID);
     }
 }

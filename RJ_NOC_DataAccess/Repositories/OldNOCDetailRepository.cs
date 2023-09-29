@@ -31,12 +31,12 @@ namespace RJ_NOC_DataAccess.Repositories
         //}
         public bool SaveData(OldNocDetailsDataModel request)
         {
-            string SubjectDetail_Str = request.SubjectData.Count>0? CommonHelper.GetDetailsTableQry(request.SubjectData, "Temp_SubjectDetail_OldNOCDetail") :"";
+            string SubjectDetail_Str = request.SubjectData.Count > 0 ? CommonHelper.GetDetailsTableQry(request.SubjectData, "Temp_SubjectDetail_OldNOCDetail") : "";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveOldNOCDetail_IU  ";
-            SqlQuery += "@OldNocID='"+request.OldNocID+"',@CollegeID='"+request.CollegeID+"',@CourseID='"+request.CourseID+"',@NOCTypeID='"+request.NOCTypeID+"',@SessionYear='"+request.SessionYear+"',";
-            SqlQuery += "@IssuedYear='"+request.IssuedYear+"',@NOCNumber='"+request.NOCNumber+"',@NOCReceivedDate='"+request.NOCReceivedDate+"',@NOCExpireDate='"+request.NOCExpireDate+"',";
-            SqlQuery += "@UploadNOCDoc='"+request.UploadNOCDoc+"',@Remark='"+request.Remark+"',@DepartmentID='"+request.DepartmentID+ "',@SubjectDetail_Str='" + SubjectDetail_Str + "'";
+            SqlQuery += "@OldNocID='" + request.OldNocID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@NOCTypeID='" + request.NOCTypeID + "',@SessionYear='" + request.SessionYear + "',";
+            SqlQuery += "@IssuedYear='" + request.IssuedYear + "',@NOCNumber='" + request.NOCNumber + "',@NOCReceivedDate='" + request.NOCReceivedDate + "',@NOCExpireDate='" + request.NOCExpireDate + "',";
+            SqlQuery += "@UploadNOCDoc='" + request.UploadNOCDoc + "',@Remark='" + request.Remark + "',@DepartmentID='" + request.DepartmentID + "',@SubjectDetail_Str='" + SubjectDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OldNOCDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -122,7 +122,7 @@ namespace RJ_NOC_DataAccess.Repositories
             }
             return listdataModels;
         }
-        public bool DeleteOldNocDetail (int OldNocID)
+        public bool DeleteOldNocDetail(int OldNocID)
         {
             string SqlQuery = "exec USP_DeleteOldNocDetail @OldNocID='" + OldNocID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OldNOCDetail.DeleteOldNocDetail");
@@ -141,6 +141,19 @@ namespace RJ_NOC_DataAccess.Repositories
                 return true;
             else
                 return false;
+        }
+
+        public List<CommonDataModel_DataSet> GetOldNOCDetailListForPDF(int DepartmentID, int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetOldNocList_ForPDf @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "OldNOCDetail.GetOldNOCDetailListForPDF");
+
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }
