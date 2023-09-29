@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using System.Security.Cryptography;
 using RJ_NOC_DataAccess.Common;
+using Newtonsoft.Json.Linq;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -35,7 +36,7 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         public string GetAadharByVID(CommonDataModel_AadharDataModel modal, IConfiguration _configuration)
         {
-            return GetAadharByVID(modal.AadharID,  _configuration);
+            return GetAadharByVID(modal.AadharID, _configuration);
         }
 
 
@@ -56,7 +57,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             string results = "";
             string errorcode = "";
             String timeStamp = DateTime.Now.ToString();
-            string auacode = _configuration["AadharServiceDetails:subaua"].ToString(); 
+            string auacode = _configuration["AadharServiceDetails:subaua"].ToString();
             string lickey = _configuration["AadharServiceDetails:AadhaarLicKey"].ToString();
             string XMLDATA = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><authrequest uid='" + _AadharNo + "' subaua='" + auacode + "'  ip='" + ip + "' fdc='NA' idc='NA' bt='otp' macadd='78-2B-CB-8D-93-F1' lot='P' lov='110002' lk='" + lickey + "' rc='Y' ver='2.5'><otp/></authrequest>";
 
@@ -141,7 +142,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                         }
                         //_txnid = errorcode;
                         _txnid = Errormsg;
-                         
+
                     }
                     //if (sa.ToUpper() == "N")
                     //{
@@ -174,9 +175,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             try
             {
 
-                string auacode = _configuration["AadharServiceDetails:subaua"].ToString(); 
+                string auacode = _configuration["AadharServiceDetails:subaua"].ToString();
                 string Certificatename = "uidai_auth_prod.cer";
-                string lickey = _configuration["AadharServiceDetails:AadhaarLicKey"].ToString(); 
+                string lickey = _configuration["AadharServiceDetails:AadhaarLicKey"].ToString();
                 string url = _configuration["AadharServiceDetails:ValidateAadharServiceURL"].ToString();
                 //string CertificatePath = context.Server.MapPath(Certificatename);
                 string pathString = "~/Content/";
@@ -364,7 +365,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return Convert.ToBase64String(Encrypted);
         }
 
-        public  string GetIpAddress()  // Get IP Address
+        public string GetIpAddress()  // Get IP Address
         {
             string ip = "";
             IPHostEntry ipEntry = Dns.GetHostEntry(GetCompCode());
@@ -450,6 +451,109 @@ namespace RJ_NOC_Utility.CustomerDomain
             return _AadhaarNo;
         }
         #endregion
+
+
+
+
+
+
+        public List<CommonDataModel_DataTable> eSignPDF(string PDFFileName, string OTPTransactionID, IConfiguration _configuration)
+        {
+            string pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF") + "/" + PDFFileName;
+            string str = GenerateEsign_PDF(pdfPath, OTPTransactionID, "MSKY", _configuration);
+
+
+            DataTable dataTable = new DataTable();
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+        }
+
+        public string GenerateEsign_PDF(string pdfPath, string txn, string formType, IConfiguration _configuration)
+        {
+            string final_status = "";
+            string final_document = "";
+            string succmsg = string.Empty;
+            byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfPath);
+            string pdfBase64 = Convert.ToBase64String(pdfBytes);
+            string url = _configuration["AadharServiceDetails:eSignMultipleSignAgri"].ToString();
+            string json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"350\",\"lly\":\"100\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
+            string ss2 = WebRequestinJson(url, json2, "application/json");
+           // string ss2 = WebRequestinJson(url, json2, "multipart/form-data");
+            JObject root2 = (JObject)JObject.Parse(ss2);
+            foreach (var item in root2)
+            {
+                if (item.Key.ToLower() == "status")
+                {
+                    final_status = item.Value.ToString();
+                }
+                if (item.Key.ToLower() == "errormessage")
+                {
+                    if (item.Value.ToString() == "The signature already exists")
+                    {
+                        succmsg = "Success";
+                    }
+                }
+                if (item.Key.ToLower() == "document")
+                {
+                    final_document = item.Value.ToString().Replace("\"", "");
+                    byte[] sPDFDecoded = Convert.FromBase64String(final_document);
+                    string filepath = string.Empty;
+                    filepath = "SystemGeneratedPDF" + Path.GetFileName(pdfPath);
+
+                    filepath = Path.Combine(Directory.GetCurrentDirectory(), filepath); //System.Web.Hosting.HostingEnvironment.MapPath("~/" + filepath);
+                    FileStream stream = new FileStream(filepath, FileMode.Create);
+                    BinaryWriter writer = new BinaryWriter(stream);
+                    writer.Write(sPDFDecoded, 0, sPDFDecoded.Length);
+                    writer.Close();
+                    FileInfo fi = new FileInfo(filepath);
+                    succmsg = "Success";
+
+                }
+            }
+            return succmsg;
+        }
+
+        public string WebRequestinJson(string url, string postData, string contenttype)
+        {
+            string ret = string.Empty;
+            try
+            {
+                StreamWriter requestWriter;
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+                var webRequest = System.Net.WebRequest.Create(url) as HttpWebRequest;
+                if (webRequest != null)
+                {
+                    webRequest.Method = "POST";
+                    webRequest.ServicePoint.Expect100Continue = false;
+                    webRequest.Timeout = 40000;
+
+                    webRequest.ContentType = contenttype;
+                    //POST the data.
+                    using (requestWriter = new StreamWriter(webRequest.GetRequestStream()))
+                    {
+                        requestWriter.Write(postData);
+                    }
+                }
+
+                HttpWebResponse resp = (HttpWebResponse)webRequest.GetResponse();
+                Stream resStream = resp.GetResponseStream();
+                StreamReader reader = new StreamReader(resStream);
+                ret = reader.ReadToEnd();
+
+            }
+            catch (WebException wex)
+            {
+            }
+            return ret;
+        }
+
     }
 
 }

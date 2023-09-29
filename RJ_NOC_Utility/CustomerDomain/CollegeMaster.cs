@@ -20,6 +20,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.DraftApplicationList(LoginSSOID);
         }
+        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID)
+        {
+            return UnitOfWork.CollegeMasterRepository.CollegeDetails(LoginSSOID);
+        }
         public CollegeMasterDataModel GetCollegeById(int collegeId)
         {
             return UnitOfWork.CollegeMasterRepository.GetCollegeById(collegeId);
