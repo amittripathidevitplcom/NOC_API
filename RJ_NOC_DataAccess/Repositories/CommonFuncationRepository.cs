@@ -1078,6 +1078,17 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
+            //var path = "ImageFile/naresh_sign.jpg";
+            //var bytes = File.ReadAllBytes(path);
+            try
+            {
+                var bytes = File.ReadAllBytes(dataModel.data.Rows[0]["MemberSignature2"].ToString());
+                dataModel.data.Rows[0]["MemberSignature2"] = "data:image/png;charset=utf-8;base64," + Convert.ToBase64String(bytes);
+            }
+            catch (Exception ex)
+            {
+
+            }
             dataModels.Add(dataModel);
             return dataModels;
         }
