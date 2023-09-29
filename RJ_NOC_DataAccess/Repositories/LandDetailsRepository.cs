@@ -92,6 +92,13 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.LandTypeName = dataSet.Tables[0].Rows[0]["LandTypeName"].ToString();
                     dataModels.Code = dataSet.Tables[0].Rows[0]["Code"].ToString();
                     dataModels.AreaType = dataSet.Tables[0].Rows[0]["AreaType"].ToString();
+
+                    dataModels.MedicalGroupOneLandTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["MedicalGroupOneLandTypeID"]);
+                    dataModels.MedicalGroupOneLandUnitID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["MedicalGroupOneLandUnitID"]);
+                    dataModels.LeaseDate = dataSet.Tables[0].Rows[0]["LeaseDate"].ToString();
+                    dataModels.NameOfLandPurchasedAllotted = dataSet.Tables[0].Rows[0]["NameOfLandPurchasedAllotted"].ToString();
+                    dataModels.MedicalGroupOneLandType = dataSet.Tables[0].Rows[0]["MedicalGroupOneLandType"].ToString();
+                    dataModels.MedicalGroupOneLandUnit = dataSet.Tables[0].Rows[0]["MedicalGroupOneLandUnit"].ToString();
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<CommonDataModel_BuildingUploadDoc> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
                     dataModels.LandDetailDocument = LandDetailDataModel_Item;
@@ -147,6 +154,11 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @IsConvereted='" + request.IsConvereted + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @MedicalGroupOneLandTypeID='" + request.MedicalGroupOneLandTypeID + "',";
+            SqlQuery += " @MedicalGroupOneLandUnitID='" + request.MedicalGroupOneLandUnitID + "',";
+            SqlQuery += " @LeaseDate='" + request.LeaseDate + "',";
+            SqlQuery += " @NameOfLandPurchasedAllotted='" + request.NameOfLandPurchasedAllotted + "',";
+
             SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f => f.IsLandSelected == true), "Temp_LandTypeDetails") + "',";
 
             if (request.CollegeLandConversionDetails.Count > 0)

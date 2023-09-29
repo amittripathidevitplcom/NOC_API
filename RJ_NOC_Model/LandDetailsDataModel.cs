@@ -45,7 +45,16 @@ namespace RJ_NOC_Model
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
         public string? AreaType { get; set; }
-     
+
+
+
+        public int? MedicalGroupOneLandTypeID { get; set; }
+        public string? MedicalGroupOneLandType { get; set; }
+        public int? MedicalGroupOneLandUnitID { get; set; }
+        public string? MedicalGroupOneLandUnit { get; set; }
+        public string? LeaseDate { get; set; }
+        public string? NameOfLandPurchasedAllotted { get; set; }
+
     }
 
     //public class LandDetailDocumentDataModel:document
@@ -56,7 +65,7 @@ namespace RJ_NOC_Model
     //    //public string SelectedFilePath { get; set; }
     //}
 
-    public class CollegeLandTypeDetailsDataModel 
+    public class CollegeLandTypeDetailsDataModel
     {
         public int LandTypeID { get; set; }
         public string LandTypeName { get; set; }
