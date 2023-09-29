@@ -250,6 +250,18 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }        
+        public List<CommonDataModel_DataTable> GenerateNOCForDCE(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetNOCListForGeneratePDF_JointSecretary @Action='GetDataForPDF',@ApplyNOCID ='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GenerateNOCForDCE");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
         public bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark)
         {

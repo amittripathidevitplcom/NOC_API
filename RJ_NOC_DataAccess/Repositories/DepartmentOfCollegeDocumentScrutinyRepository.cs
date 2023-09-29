@@ -415,9 +415,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
         //Get Nodal Officer Application
-        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID,string Status)
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID,string Status, string ActionName)
         {
-            string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "'";
+            string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "',@ActionName='" + ActionName + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNodalOfficerApplyNOCApplicationList");
             List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
@@ -451,11 +451,11 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public bool FinalSubmitInspectionCommittee(int ApplyNOCID)
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int CreatedBy)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_FinalSubmitInspectionCommittee";
-            SqlQuery += " @ApplyNOCID='"+ ApplyNOCID + "'";
+            SqlQuery += " @ApplyNOCID='"+ ApplyNOCID + "',@CreatedBy='"+ CreatedBy + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.GetPhysicalVerificationAppliationList");
             if (Rows > 0)
                 return true;
@@ -506,6 +506,18 @@ namespace RJ_NOC_DataAccess.Repository
 
             listdataModels.Add(dataModels);
             return listdataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetWorkFlowRemarksByApplicationID(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetWorkFlowRemarksByApplicationID @ApplyNOCID ='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetWorkFlowRemarksByApplicationID");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

@@ -84,13 +84,13 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetPhysicalVerificationAppliationList(request);
         }
 
-        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID, string Status)
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID, Status);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID, Status, ActionName);
         }       
-        public bool FinalSubmitInspectionCommittee(int ApplyNOCID)
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int CreatedBy)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, CreatedBy);
         }
         public List<CommonDataModel_DataTable> GetApplicationPvDetails(int ApplyNOCID)
         {
@@ -104,6 +104,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_SubjectWiseStudentDetail(CollageID, RoleID, ApplyNOCID);
+        }
+        public List<CommonDataModel_DataTable> GetWorkFlowRemarksByApplicationID(int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetWorkFlowRemarksByApplicationID(ApplyNOCID);
         }
 
     }

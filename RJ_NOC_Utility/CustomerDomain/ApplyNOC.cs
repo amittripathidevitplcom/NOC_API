@@ -65,6 +65,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GeneratePDFForJointSecretary(ApplyNOCID);
         }
+        public List<CommonDataModel_DataTable> GenerateNOCForDCE(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GenerateNOCForDCE(ApplyNOCID);
+        }
         public bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark)
         {
             return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark);

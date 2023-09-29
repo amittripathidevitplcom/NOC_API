@@ -38,5 +38,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.OldNOCDetailRepository.IfExists(OldNocID, NOCNumber);
         }
+        public List<CommonDataModel_DataSet> GetOldNOCDetailListForPDF(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.OldNOCDetailRepository.GetOldNOCDetailListForPDF(DepartmentID, CollegeID);
+        }
     }
 }

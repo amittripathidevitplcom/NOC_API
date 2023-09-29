@@ -28,6 +28,19 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
+        public List<CommonDataModel_DataSet> GetLandDetailsListForPDF(int SelectedCollageID)
+        {
+            string SqlQuery = " exec USP_LandDetails_ForPDF @CollegeID='" + SelectedCollageID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LandDetails.GetLandDetailsListForPDF");
+
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
         public List<CommonDataModel_DataSet> GetLandDetailsList(int SelectedCollageID, int LandDetailID)
         {
             string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "',@Actiontype='GetLandApplication'";

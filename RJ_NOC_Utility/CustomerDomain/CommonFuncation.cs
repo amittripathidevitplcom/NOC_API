@@ -404,6 +404,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetNOCApplicationStepList( ApplyNocID,  CurrentActionID,  DepartmentID,  ActionType);
         }
+        public List<CommonDataModel_DataTable> GetDownloadPdfDetails(int DepartmentID, int CollageID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDownloadPdfDetails(DepartmentID, CollageID);
+        }
 
        
     }

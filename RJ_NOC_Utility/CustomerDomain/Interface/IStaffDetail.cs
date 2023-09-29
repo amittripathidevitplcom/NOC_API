@@ -13,5 +13,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(StaffDetailDataModel request);
         List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID);
         bool DeleteStaffDetail(int StaffDetailID);
+
+        List<CommonDataModel_DataSet> GetStaffDetailListForPDF(int DepartmentID, int CollegeID);
     }
 }
