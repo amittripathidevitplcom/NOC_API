@@ -12,5 +12,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         DataTable SendOtpByAadharNo(CommonDataModel_AadharDataModel modal, IConfiguration _configuration);
         DataTable ValidateAadhaarOTP(CommonDataModel_AadharDataModel modal, IConfiguration _configuration);
         string GetAadharByVID(CommonDataModel_AadharDataModel modal, IConfiguration _configuration);
+
+        List<CommonDataModel_DataTable> eSignPDF(string PDFFileName, string OTPTransactionID, IConfiguration _configuration);
     }
 }

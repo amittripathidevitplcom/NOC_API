@@ -370,3 +370,8 @@ FodyWeavers.xsd
 /RJ_NOC_API/appsettings.json
 /RJ_NOC_API/appsettings.json
 /RJ_NOC_API/appsettings.json
+/RJ_NOC_API/Properties/DataSources
+/RJ_NOC_API/ReportFiles
+*.cs
+/CrystalReportsWebSite1
+/RJ_NOC_API/ReportFile

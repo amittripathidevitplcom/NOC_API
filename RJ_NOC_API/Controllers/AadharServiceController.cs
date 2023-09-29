@@ -86,9 +86,9 @@ namespace RJ_NOC_API.Controllers
                 PaymentEncriptionDec.EmitraEncrypt(Model.AadharNo);
                 DataTable dt = UtilityHelper.AadharServiceUtility.ValidateAadhaarOTP(Model, _configuration);
                 //create table
-                if (dt.Rows[0][0].ToString().ToLower().Contains("Success") )
+                if (dt.Rows[0][0].ToString().ToLower().Contains("success"))
                 {
-                  
+
 
                     urldt.Rows.Add(new Object[]{
                                 "success",0,
@@ -144,7 +144,7 @@ namespace RJ_NOC_API.Controllers
                                 strResult });
                     }
                 }
-                else 
+                else
                 {
                     //create table
                     urldt.Rows.Add(new Object[]{
@@ -162,6 +162,39 @@ namespace RJ_NOC_API.Controllers
                                 });
             }
             return urldt;
+        }
+
+
+        [HttpGet("eSignPDF/{PDFPath}/{OTPTransactionID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> eSignPDF(string PDFFileName, string OTPTransactionID, IConfiguration _configuration)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID, _configuration));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.eSignPDF", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
         }
 
 

@@ -7,6 +7,7 @@ namespace RJ_NOC_Model
     {
         public int CollegeID { get; set; }
         public int DepartmentID { get; set; }
+        public string TypeofCollege { get; set; }
         public int CollegeStatusID { get; set; }
         public string CollegeLogo { get; set; }
         public string CollegeLogoPath { get; set; }
