@@ -111,8 +111,8 @@ namespace RJ_NOC_DataAccess.Repositories
             //{
             //DataTable dt = dataModel.data.Tables[0];
             dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"].ToString());
-            dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"].ToString());
-            dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"].ToString());
+           // dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"].ToString());
+            //dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"].ToString());
             // dt.Rows[0]["RegistrationDoc"] = _commonHelper.ConvertTobase64(dt.Rows[0]["TrustLogoDoc"].ToString());
             //}
             dataModels.Add(dataModel);
