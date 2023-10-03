@@ -83,6 +83,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        
+        [HttpGet("GetDataListForPDF/{legalEntityID}")]
+        public async Task<OperationResult<List<TrusteeGeneralInfoMasterDataModel>>> GetDataListForPDF(int legalEntityID)
+        {
+            var result = new OperationResult<List<TrusteeGeneralInfoMasterDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.TrusteeGeneralInfoMasterUtility.GetDataListForPDF(legalEntityID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("TrusteeGeneralInfoMasterController.GetDataListForPDF", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
         [HttpGet("GetData/{TrusteeGeneralInfoId}")]
         public async Task<OperationResult<TrusteeGeneralInfoMasterDataModel>> GetData(int TrusteeGeneralInfoId)

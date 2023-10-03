@@ -93,5 +93,22 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return legalEntityDataModel;
         }
+
+        public List<TrusteeGeneralInfoMasterDataModel> GetDataListForPDF(int legalEntityID)
+        {
+            string SqlQuery = $"exec USP_TrusteeGeneralInfoMaster @LegalEntityID={legalEntityID},@Action='GetTrusteeGeneralInfoListByLegalEntityId'";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "TrusteeGeneralInfoMaster.GetDataList");
+
+            List<TrusteeGeneralInfoMasterDataModel> trusteeGeneralInfoMasterDataModel = new List<TrusteeGeneralInfoMasterDataModel>();
+            if (dt != null)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dt.Rows[i]["SocietyLogo"] = _commonHelper.ConvertTobase64(dt.Rows[i]["SocietyLogo"].ToString());
+                }
+                trusteeGeneralInfoMasterDataModel = CommonHelper.ConvertDataTable<List<TrusteeGeneralInfoMasterDataModel>>(dt);
+            }
+            return trusteeGeneralInfoMasterDataModel;
+        }
     }
 }
