@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
- 
+
 
 namespace RJ_NOC_DataAccess.Common
 {
@@ -16,7 +16,7 @@ namespace RJ_NOC_DataAccess.Common
     {
         //private IConfiguration _configuration { get; }
         private static IConfiguration _configuration;
-       // string sqlConnectionStaring1 = "";
+        // string sqlConnectionStaring1 = "";
         string sqlConnectionStaring = "";
         static string sqlConnectionStaringSys = "";
         public CommonDataAccessHelper(IConfiguration configuration)
@@ -32,14 +32,14 @@ namespace RJ_NOC_DataAccess.Common
 
         public void GetConnectionstr(ref string ConnectionString1, ref string ConnectionString2, ref string ConnectionString3)
         {
-             ConnectionString1 = AppSetting.GetConnectionString();
-             ConnectionString2 = sqlConnectionStaring;
+            ConnectionString1 = AppSetting.GetConnectionString();
+            ConnectionString2 = sqlConnectionStaring;
             //ConnectionString3 = sqlConnectionStaring1; 
-            ConnectionString3 = ""; ; 
+            ConnectionString3 = ""; ;
         }
 
 
-        public DataTable Fill_DataTable(string SqlQuery,string FuncationName="")
+        public DataTable Fill_DataTable(string SqlQuery, string FuncationName = "")
         {
             //string Connectionstr = AppSetting.GetConnectionString();
             using (SqlConnection con = new SqlConnection(sqlConnectionStaring))
@@ -60,7 +60,7 @@ namespace RJ_NOC_DataAccess.Common
                 {
                     CommonDataAccessHelper.Insert_ErrorLog(FuncationName, ex.ToString());
                     throw new Exception(ex.ToString());
-                    
+
                     //throw;
                 }
                 finally
@@ -70,7 +70,7 @@ namespace RJ_NOC_DataAccess.Common
                 }
             }
         }
-        public DataSet Fill_DataSet(string SqlQuery,string FuncationName="")
+        public DataSet Fill_DataSet(string SqlQuery, string FuncationName = "")
         {
             using (SqlConnection con = new SqlConnection(sqlConnectionStaring))
             {
@@ -98,7 +98,7 @@ namespace RJ_NOC_DataAccess.Common
                 }
             }
         }
-        public int NonQuerry(string SqlQuery,string FuncationName="")
+        public int NonQuerry(string SqlQuery, string FuncationName = "")
         {
             int Rows = 0;
             DataTable dt = new DataTable();
@@ -110,7 +110,7 @@ namespace RJ_NOC_DataAccess.Common
                     conn.Open();
                     //string Qry = "BEGIN TRY BEGIN TRANSACTION " + SqlQuery + " COMMIT TRANSACTION END TRY BEGIN CATCH IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION END CATCH";
                     string Qry = SqlQuery;
-                     transaction = conn.BeginTransaction("createOrder");
+                    transaction = conn.BeginTransaction("createOrder");
                     using (var cmd = new SqlCommand(Qry, conn))
                     {
                         cmd.Transaction = transaction;
@@ -151,7 +151,7 @@ namespace RJ_NOC_DataAccess.Common
                         Rows = cmd.ExecuteScalar();
                         if (Rows != null)
                         {
-                           Rows=Convert.ToInt32(Rows);
+                            Rows = Convert.ToInt32(Rows);
                         }
                         transaction.Commit();
                     }
@@ -243,7 +243,7 @@ namespace RJ_NOC_DataAccess.Common
             {
                 string SqlQry = "   insert into trn_ErrorLog ";
                 SqlQry += "  (FunctionName, ErrorMessage) ";
-                SqlQry += "  Values('" + FunctionName + "', '" + ErrorMessage.Replace("'","") + "')  ";
+                SqlQry += "  Values('" + FunctionName + "', '" + ErrorMessage.Replace("'", "") + "')  ";
                 int Rows = NonQuerrySys(SqlQry);
             }
             catch (Exception ex)
@@ -256,19 +256,24 @@ namespace RJ_NOC_DataAccess.Common
         public string ConvertTobase64(string FileName)
         {
             string base64Data = "";
-            var noImagePath = "ImageFile/Noimage.png";
+            string path = "";
+            string FullPath = "";
+
             try
             {
-                string path = "ImageFile/" + FileName;
-                var filePath = Path.GetFullPath(path);
-                if (System.IO.File.Exists(filePath))
+                path = "ImageFile/" + FileName;
+                FullPath = Path.Combine(Directory.GetCurrentDirectory(), path);
+
+                if (System.IO.File.Exists(FullPath))
                 {
-                    var bytes = File.ReadAllBytes(path);
+                    var bytes = File.ReadAllBytes(FullPath);
                     base64Data = "data:image/png;charset=utf-8;base64," + Convert.ToBase64String(bytes);
                 }
                 else
                 {
-                    var bytes = File.ReadAllBytes(noImagePath);
+                    path = "ImageFile/Noimage.png";
+                    FullPath = Path.Combine(Directory.GetCurrentDirectory(), path);
+                    var bytes = File.ReadAllBytes(FullPath);
                     base64Data = "data:image/png;charset=utf-8;base64," + Convert.ToBase64String(bytes);
                 }
             }
