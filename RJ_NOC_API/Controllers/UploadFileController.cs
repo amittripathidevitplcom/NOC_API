@@ -20,6 +20,7 @@ using System.Data.OleDb;
 using RJ_NOC_API.Controllers;
 using RJ_NOC_DataAccess.Common;
 
+
 namespace RJ_NOC_API.Controllers
 {
     [Route("api/UploadFile")]
@@ -57,7 +58,7 @@ namespace RJ_NOC_API.Controllers
                         // 3a. read the file name of the received file
                         var fileName = ContentDispositionHeaderValue.Parse(postedFile.ContentDisposition).FileName.Trim('"');
                         // 3b. save the file on Path
-                        var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmsstt") + fileName;
+                        var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + fileName;
 
                         List<UploadFileDataModel> uploadFileDataModels = new List<UploadFileDataModel>();
                         UploadFileDataModel uploadFileDataModel = new UploadFileDataModel();
@@ -125,8 +126,8 @@ namespace RJ_NOC_API.Controllers
                         // 3a. read the file name of the received file
                         var fileName = ContentDispositionHeaderValue.Parse(postedFile.ContentDisposition).FileName.Trim('"');
                         // 3b. save the file on Path
-                        var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmsstt") + fileName;
-                        var FileNameSave = System.DateTime.Now.ToString("ddMMMyyyyhhmmsstt") + "-" + fileName;
+                        var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + fileName;
+                        var FileNameSave = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + "-" + fileName;
 
                         List<UploadFileDataModel> uploadFileDataModels = new List<UploadFileDataModel>();
                         UploadFileDataModel uploadFileDataModel = new UploadFileDataModel();
@@ -199,7 +200,7 @@ namespace RJ_NOC_API.Controllers
                         // 3a. read the file name of the received file
                         var fileName = ContentDispositionHeaderValue.Parse(postedFile.ContentDisposition).FileName.Trim('"');
                         // 3b. save the file on Path
-                        var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmsstt") + fileName;
+                        var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + fileName;
                         var finalPathSave = Path.Combine(uploadFolder, FileName);
                         string FilePath = UtilityHelper.CommonFuncationUtility.UploadFilePath() + FileName;
 
@@ -253,7 +254,7 @@ namespace RJ_NOC_API.Controllers
         {
             var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
             return (extension.ToLower() == ".bmp" || extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".gif" || extension.ToLower() == ".png"); // Change the extension based on your need
-        } 
+        }
         private bool CheckIfImageWithPDFFile(IFormFile file)
         {
             var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
@@ -357,6 +358,56 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
+        }
+
+
+        [HttpPost("ManageDCEDocument/{FolderName}")]
+        public void ManageDCEDocument(string FolderName)
+        {
+            var result = new OperationResult<bool>();
+            int Rows = 0;
+            try
+            {
+                string FolderPath = (Path.Combine(Directory.GetCurrentDirectory(), "DecFiles"));
+                string[] Folders = Directory.GetDirectories(FolderPath, "*");
+                foreach (var folder in Folders)
+                {
+                    string CurrentFolderName = folder;
+
+                    string[] SubFolders = Directory.GetDirectories(CurrentFolderName, "*");
+                    foreach (var subFolder in SubFolders)
+                    {
+                        string[] SubFolders_1 = Directory.GetDirectories(subFolder, "*");
+                        foreach (var subFolder_1 in SubFolders_1)
+                        {
+                            string PrimaryKeyFolder = subFolder_1.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+                            string[] Currentfiles = Directory.GetFiles(subFolder_1, "*");
+                            foreach (var file in Currentfiles)
+                            {
+                                string oldPath = file;
+                                string newpath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "ImageFile"));
+                                string filename = System.IO.Path.GetFileName(oldPath);
+                                var FileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + filename;
+                                System.IO.File.Copy(oldPath, Path.Combine(newpath, FileName));
+                                //Update in database column
+                                string SqlQry = " insert into Tbl_Client_FolderWiseImages ";
+                                SqlQry += " (TableName,ColumnName,PrimaryId,DocName) ";
+                                SqlQry += " Values('"+ CurrentFolderName + "','"+ subFolder_1 + "','"+ PrimaryKeyFolder + "','"+ FileName + "') ";
+
+                                Rows += UtilityHelper.CommonFuncationUtility.Client_FolderWiseImages(SqlQry);
+
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("UploadFile.DeleteDocument", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
         }
 
     }
