@@ -375,3 +375,5 @@ FodyWeavers.xsd
 *.cs
 /CrystalReportsWebSite1
 /RJ_NOC_API/ReportFile
+/RJ_NOC_API/DecFiles
+/RJ_NOC_API/ImageFile - Copy
