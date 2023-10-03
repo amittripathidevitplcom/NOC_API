@@ -360,7 +360,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_OldNOC(int CollegeID)
         {
-            string SqlQuery = "exec USP_FinancialYearMaster_OldNOC @CollegeID='"+CollegeID+"' ";
+            string SqlQuery = "exec USP_FinancialYearMaster_OldNOC @CollegeID='" + CollegeID + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllFinancialYear_OldNOC");
 
@@ -468,9 +468,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID,int CollegeID)
+        public List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID)
         {
-            string SqlQuery = " exec USP_CourseRoomSize @CourseID='" + CourseID + "',@CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_CourseRoomSize @CourseID='" + CourseID + "',@CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetLandDoucmentTypeMasterList_DepartmentWise");
 
@@ -933,9 +933,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID,int UniversityID)
+        public List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID, int UniversityID)
         {
-            string SqlQuery = "exec USP_CommonDataList  @Key='GetCourseByStreamID',@StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "',@UniversityID='"+ UniversityID + "'";
+            string SqlQuery = "exec USP_CommonDataList  @Key='GetCourseByStreamID',@StreamID='" + StreamID + "', @DepartmentID = '" + DepartmentID + "', @CourseLevelID = '" + CourseLevelID + "',@UniversityID='" + UniversityID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetStreamMaster");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -1015,7 +1015,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_SubjectMaster>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID,int DepartmentId)
+        public List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID, int DepartmentId)
         {
             string SqlQuery = " exec USP_CollegeInspectionFee_GetData @CollegeID='" + CollegID + "',@DepartmentId='" + DepartmentId + "'";
             DataTable dataTable = new DataTable();
@@ -1060,7 +1060,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        
+
         public List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType)
         {
             string SqlQuery = " exec USP_ShowApplicationStep @ApplyNocID='" + ApplyNocID + "',@CurrentActionID='" + CurrentActionID + "',@DeptID='" + DepartmentID + "',@actionType='" + ActionType + "'";
@@ -1082,17 +1082,8 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
-            //var path = "ImageFile/naresh_sign.jpg";
-            //var bytes = File.ReadAllBytes(path);
-            try
-            {
-                var bytes = File.ReadAllBytes(dataModel.data.Rows[0]["MemberSignature2"].ToString());
-                dataModel.data.Rows[0]["MemberSignature2"] = "data:image/png;charset=utf-8;base64," + Convert.ToBase64String(bytes);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
+            
             dataModels.Add(dataModel);
             return dataModels;
         }

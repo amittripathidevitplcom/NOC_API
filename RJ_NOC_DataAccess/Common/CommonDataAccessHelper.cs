@@ -252,6 +252,34 @@ namespace RJ_NOC_DataAccess.Common
         }
         #endregion
 
+        #region "Common convert file to base64 Function"
+        public string ConvertTobase64(string FileName)
+        {
+            string base64Data = "";
+            var noImagePath = "ImageFile/Noimage.png";
+            try
+            {
+                string path = "ImageFile/" + FileName;
+                var filePath = Path.GetFullPath(path);
+                if (System.IO.File.Exists(filePath))
+                {
+                    var bytes = File.ReadAllBytes(path);
+                    base64Data = "data:image/png;charset=utf-8;base64," + Convert.ToBase64String(bytes);
+                }
+                else
+                {
+                    var bytes = File.ReadAllBytes(noImagePath);
+                    base64Data = "data:image/png;charset=utf-8;base64," + Convert.ToBase64String(bytes);
+                }
+            }
+            catch (Exception ex)
+            {
+                base64Data = "";
+            }
+            return base64Data;
+        }
+        #endregion
+
 
     }
 }
