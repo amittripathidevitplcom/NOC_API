@@ -10,6 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ICommonFuncation
     {
         string UploadFilePath();
+        int Client_FolderWiseImages(string SqlQry);
 
 
         List<CommonDataModel_DepartmentMasterList> GetDepartmentList();

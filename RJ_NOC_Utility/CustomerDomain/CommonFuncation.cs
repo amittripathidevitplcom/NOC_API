@@ -24,6 +24,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.UploadFilePath();
         }
+        public int Client_FolderWiseImages(string SqlQry)
+        {
+            return UnitOfWork.CommonFuncationRepository.Client_FolderWiseImages(SqlQry);
+        }
 
 
 
