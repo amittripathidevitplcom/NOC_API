@@ -15,6 +15,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<LegalEntityListModel> GetLegalEntityList(string SSOID);
         List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID,string SSOID);
         List<LegalEntityListModel> GetLegalEntityBySSOID(string SSOID);
+        List<LegalEntityListModel> GetLegalEntityBySSOIDFForPDF(string SSOID);
         bool CheckExistsLegalEntity(string SSOID, int RoleID);
     }
 }

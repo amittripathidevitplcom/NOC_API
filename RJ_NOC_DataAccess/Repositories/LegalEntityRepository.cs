@@ -32,10 +32,10 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public bool IfExists(int LegalEntityID, string RegistrationNo, string AadhaarNo)
         {
-            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "',@AadhaarNo='"+ AadhaarNo + "'";
+            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "',@AadhaarNo='" + AadhaarNo + "'";
             DataSet dataset = new DataSet();
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.IfExists");
-            if (dataset!=null)
+            if (dataset != null)
             {
                 if (dataset.Tables[0].Rows.Count > 0 || dataset.Tables[1].Rows.Count > 0)
                     return true;
@@ -63,7 +63,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<LegalEntityListModel> GetLegalEntityList(string SSOID)
         {
-            string SqlQuery = " exec USP_GetLegalEntity_Preview @SSOID='"+ SSOID + "'";
+            string SqlQuery = " exec USP_GetLegalEntity_Preview @SSOID='" + SSOID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
 
@@ -74,7 +74,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID,string SSOID)
+        public List<LegalEntityListModel> ViewlegalEntityDataByID(int LegalEntityID, string SSOID)
         {
             string SqlQuery = " exec USP_GetLegalEntity_Preview @LegalEntityID = '" + LegalEntityID + "',@SSOID='" + SSOID + "'";
             DataSet dataSet = new DataSet();
@@ -96,6 +96,27 @@ namespace RJ_NOC_DataAccess.Repositories
             LegalEntityListModel dataModel = new LegalEntityListModel();
             dataModel.data = dataSet;
             dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<LegalEntityListModel> GetLegalEntityBySSOIDFForPDF(string SSOID)
+        {
+            string SqlQuery = " exec USP_GetLegalEntityBySSOID @SSOID = '" + SSOID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.GetAllData");
+
+            List<LegalEntityListModel> dataModels = new List<LegalEntityListModel>();
+            LegalEntityListModel dataModel = new LegalEntityListModel();
+            dataModel.data = dataSet;
+            //for (int i = 0; i < dataModel.data.Tables.Count; i++)
+            //{
+            //DataTable dt = dataModel.data.Tables[0];
+            dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"].ToString());
+            dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"].ToString());
+            dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"].ToString());
+            // dt.Rows[0]["RegistrationDoc"] = _commonHelper.ConvertTobase64(dt.Rows[0]["TrustLogoDoc"].ToString());
+            //}
+            dataModels.Add(dataModel);
+
             return dataModels;
         }
 
