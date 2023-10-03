@@ -372,11 +372,12 @@ namespace RJ_NOC_API.Controllers
                 string[] Folders = Directory.GetDirectories(FolderPath, "*");
                 foreach (var folder in Folders)
                 {
-                    string CurrentFolderName = folder;
+                    string TableName = folder.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
-                    string[] SubFolders = Directory.GetDirectories(CurrentFolderName, "*");
+                    string[] SubFolders = Directory.GetDirectories(folder, "*");
                     foreach (var subFolder in SubFolders)
                     {
+                        string ColumnName = subFolder.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
                         string[] SubFolders_1 = Directory.GetDirectories(subFolder, "*");
                         foreach (var subFolder_1 in SubFolders_1)
                         {
@@ -392,7 +393,7 @@ namespace RJ_NOC_API.Controllers
                                 //Update in database column
                                 string SqlQry = " insert into Tbl_Client_FolderWiseImages ";
                                 SqlQry += " (TableName,ColumnName,PrimaryId,DocName) ";
-                                SqlQry += " Values('"+ CurrentFolderName + "','"+ subFolder_1 + "','"+ PrimaryKeyFolder + "','"+ FileName + "') ";
+                                SqlQry += " Values('"+ TableName + "','"+ ColumnName + "','"+ PrimaryKeyFolder + "','"+ FileName + "') ";
 
                                 Rows += UtilityHelper.CommonFuncationUtility.Client_FolderWiseImages(SqlQry);
 
