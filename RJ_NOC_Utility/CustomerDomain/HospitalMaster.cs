@@ -35,5 +35,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.HospitalMasterRepository.GetDataList(collegeId);
         }
+        public HospitalMasterDataModel GetHospitalDataListforPDF(int CollegeID)
+        {
+            return UnitOfWork.HospitalMasterRepository.GetHospitalDataListforPDF(CollegeID);
+        }
     }
 }
