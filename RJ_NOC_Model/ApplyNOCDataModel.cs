@@ -25,6 +25,7 @@ namespace RJ_NOC_Model
         public int ApplyNOCID { get; set; }
         public string TabName { get; set; }
         public string FinalRemark { get; set; }
+        public int? ActionID {get;set;}
         public List<DocumentScrutinyList_DataModel> DocumentScrutinyDetail { get; set; }
 
     }
@@ -96,5 +97,10 @@ namespace RJ_NOC_Model
         public int RoleID { get; set; }
         public int UserID { get; set; }
         public string NOCIssuedRemark { get; set; }
+    }
+    public class SubmitRevertApplication
+    {
+        public int ApplyNOCID { get; set; }
+        public int DepartmentID { get; set; }
     }
 }

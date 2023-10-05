@@ -28,5 +28,6 @@ namespace RJ_NOC_DataAccess.Interface
         int CheckAppliedNOCCollegeWise(int CollegeID);
         List<CommonDataModel_DataTable> GetIssuedNOCReportList(int UserID, string ActionName, int RoleID, int DepartmentID);
         List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID);
+        bool SubmitRevertApplication(SubmitRevertApplication request);
     }
 }
