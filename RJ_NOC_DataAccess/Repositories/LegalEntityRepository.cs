@@ -107,14 +107,13 @@ namespace RJ_NOC_DataAccess.Repositories
             List<LegalEntityListModel> dataModels = new List<LegalEntityListModel>();
             LegalEntityListModel dataModel = new LegalEntityListModel();
             dataModel.data = dataSet;
-            //for (int i = 0; i < dataModel.data.Tables.Count; i++)
-            //{
-            //DataTable dt = dataModel.data.Tables[0];
+
             dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"].ToString());
-           // dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrusteeMemberProofDoc"].ToString());
-            //dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["SocietyPanProofDoc"].ToString());
-            // dt.Rows[0]["RegistrationDoc"] = _commonHelper.ConvertTobase64(dt.Rows[0]["TrustLogoDoc"].ToString());
-            //}
+            for (int i = 0; i < dataModel.data.Tables[2].Rows.Count; i++)
+            {
+              dataModel.data.Tables[2].Rows[i]["MemberPhoto"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[2].Rows[i]["MemberPhoto"].ToString());
+              dataModel.data.Tables[2].Rows[i]["MemberSignature"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[2].Rows[i]["MemberSignature"].ToString());
+            }
             dataModels.Add(dataModel);
 
             return dataModels;

@@ -11,6 +11,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool DeleteData(int TrusteeGeneralInfoId, int modifiedBy);
         TrusteeGeneralInfoMasterDataModel GetData(int TrusteeGeneralInfoId);
         List<TrusteeGeneralInfoMasterDataModel> GetDataList(int legalEntityID);
+        List<TrusteeGeneralInfoMasterDataModel> GetDataListForPDF(int legalEntityID);
         public LegalEntityDataModel GetDataOfLegalEntity(string ssoId);
         bool SaveData(TrusteeGeneralInfoMasterDataModel request);
     }

@@ -26,6 +26,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<TrusteeGeneralInfoMasterDataModel> GetDataList(int legalEntityID)
         {
             return UnitOfWork.TrusteeGeneralInfoMasterRepository.GetDataList(legalEntityID);
+        } 
+        public List<TrusteeGeneralInfoMasterDataModel> GetDataListForPDF(int legalEntityID)
+        {
+            return UnitOfWork.TrusteeGeneralInfoMasterRepository.GetDataListForPDF(legalEntityID);
         }
         public LegalEntityDataModel GetDataOfLegalEntity(string ssoId)
         {

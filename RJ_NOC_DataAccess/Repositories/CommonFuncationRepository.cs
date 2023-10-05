@@ -34,6 +34,10 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return uploadFilePath;
         }
+        public int Client_FolderWiseImages(string SqlQry)
+        {
+            return  _commonHelper.NonQuerry(SqlQry, "CommonFuncation.Client_FolderWiseImages"); ;
+        }
 
 
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList()
@@ -1083,6 +1087,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+         
     }
 }
 
