@@ -70,6 +70,7 @@ namespace RJ_NOC_Utility
         IAnimalDocumentScrutiny AnimalDocumentScrutinyUtility { get; }
         IAgricultureDocumentScrutiny AgricultureDocumentScrutinyUtility { get; }
         IFireQuery FireQueryUtility { get; }
+        IStaffAttendance StaffAttendanceUtility { get; }
 
     }
 }

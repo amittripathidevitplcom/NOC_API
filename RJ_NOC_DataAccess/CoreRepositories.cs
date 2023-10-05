@@ -361,7 +361,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return fireQueryRepository; }
         }
-
+        private IStaffAttendanceRepository staffAttendanceRepository;
+        public IStaffAttendanceRepository StaffAttendanceRepository
+        {
+            get { return staffAttendanceRepository; }
+        }
 
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -420,7 +424,7 @@ namespace RJ_NOC_DataAccess.Repository
             agricultureDocumentScrutinyRepository = new AgricultureDocumentScrutinyRepository(commonHelper);
             departmentofcollegedocumentscrutinyrepository = new DepartmentOfCollegeDocumentScrutinyRepository(commonHelper);
             fireQueryRepository = new FireQueryRepository(commonHelper);
-
+            staffAttendanceRepository = new StaffAttendanceRepository(commonHelper);
         }
     }
 }

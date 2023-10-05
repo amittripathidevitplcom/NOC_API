@@ -105,6 +105,7 @@ namespace RJ_NOC_Utility
         public IFireQuery FireQueryUtility { get; private set; }
 
         public IDepartmentOfCollegeDocumentScrutiny DepartmentOfCollegeScrutinyUtility { get; private set; }
+        public IStaffAttendance StaffAttendanceUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -170,6 +171,7 @@ namespace RJ_NOC_Utility
             AgricultureDocumentScrutinyUtility = new AgricultureDocumentScrutiny(UnitOfWork);
             DepartmentOfCollegeScrutinyUtility = new DepartmentOfCollegeDocumentScrutiny(UnitOfWork);
             FireQueryUtility = new FireQuery(UnitOfWork);
+            StaffAttendanceUtility = new StaffAttendance(UnitOfWork);
         }
     }
 }
