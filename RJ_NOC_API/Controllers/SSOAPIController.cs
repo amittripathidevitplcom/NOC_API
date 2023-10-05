@@ -46,7 +46,7 @@ namespace RJ_NOC_API.Controllers
             {
                 if (sSOLandingDataDataModel.Username == "1")
                 {
-                    SSOID = "ravindra.singhdoit";
+                    SSOID = "nrawat455";
                 }
                 else
                 {
