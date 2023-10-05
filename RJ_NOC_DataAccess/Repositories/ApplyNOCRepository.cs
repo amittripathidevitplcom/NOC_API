@@ -46,6 +46,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @RoleID='" + request.RoleID + "',";
             SqlQuery += " @UserID='" + request.UserID + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @ActionID='" + request.ActionID + "',";
             SqlQuery += " @DocumentScrutiny_Detail_Str='" + DocumentScrutiny_Detail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveDocumentScrutiny");
             if (Rows > 0)
@@ -312,7 +313,17 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
-
+        public bool SubmitRevertApplication(SubmitRevertApplication request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SubmitRevertApplication  ";
+            SqlQuery += "@DepartmentID=" + request.DepartmentID + ",@ApplyNOCID=" + request.ApplyNOCID + "";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SubmitRevertApplication");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
 
     }
 }

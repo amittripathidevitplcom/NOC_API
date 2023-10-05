@@ -109,6 +109,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetWorkFlowRemarksByApplicationID(ApplyNOCID);
         }
+        public List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertedTabData(ApplyNOCID);
+        }
 
     }
 }

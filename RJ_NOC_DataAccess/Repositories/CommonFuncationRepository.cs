@@ -36,7 +36,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public int Client_FolderWiseImages(string SqlQry)
         {
-            return  _commonHelper.NonQuerry(SqlQry, "CommonFuncation.Client_FolderWiseImages"); ;
+            return _commonHelper.NonQuerry(SqlQry, "CommonFuncation.Client_FolderWiseImages"); ;
         }
 
 
@@ -1083,11 +1083,48 @@ namespace RJ_NOC_DataAccess.Repository
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
-            
+
             dataModels.Add(dataModel);
             return dataModels;
         }
-         
+
+        public bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName)
+        {
+
+            string SqlQuery = "";
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string ImportStaticsFileDetails_Str = CommonHelper.GetDetailsTableQry(request, "Temp_ImportStaticsFileDetails");
+            SqlQuery = " exec USP_ImportExcelStatics_AddUpdate";
+
+            SqlQuery += " @StaticsFileID='" + 0 + "',";
+            SqlQuery += " @CollegeID='" + collegeID + "',";
+            SqlQuery += " @DepartmentID='" + DeptId + "',";
+            SqlQuery += " @CourseID='" + courseID + "',";
+            SqlQuery += " @FinYear='" + FinYear + "',";
+            SqlQuery += " @FileName='" + FileName.Replace("C:\\fakepath\\", "") + "',";
+            SqlQuery += " @TotalCount='" + request.Count() + "',";
+            SqlQuery += " @ImportStaticsFileDetails_Str='" + ImportStaticsFileDetails_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<CommonDataModel_DataTable> GetImportExcelData(int DeptId, int collegeID, int StaticsFileID, string ActionType)
+        {
+            string SqlQuery = " exec USP_ImportExcelStaticsDetails @DepartmentID='" + DeptId + "',@CollegeID='" + collegeID + "',@StaticsFileID='" + StaticsFileID + "',@ActionType='" + @ActionType + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetImportExcelData");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
     }
 }
 
