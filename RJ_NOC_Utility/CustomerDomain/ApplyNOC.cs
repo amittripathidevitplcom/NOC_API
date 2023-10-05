@@ -85,6 +85,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID)
         {
             return UnitOfWork.ApplyNOCRepository.GetNocLateFees(DepartmentID);
+        }      
+        public bool SubmitRevertApplication(SubmitRevertApplication request)
+        {
+            return UnitOfWork.ApplyNOCRepository.SubmitRevertApplication(request);
         }
     }
 }

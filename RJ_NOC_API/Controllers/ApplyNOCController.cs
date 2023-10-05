@@ -778,6 +778,41 @@ namespace RJ_NOC_API.Controllers
             return fileName;
 
         }
+
+
+        [HttpPost("SubmitRevertApplication")]
+        public async Task<OperationResult<bool>> SubmitRevertApplication(SubmitRevertApplication request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.SubmitRevertApplication(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "SubmitRevertApplication", request.ApplyNOCID, "SubmitRevertApplication");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Re Submit Application successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error submit application";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.SubmitRevertApplication", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
     }
 
 }
