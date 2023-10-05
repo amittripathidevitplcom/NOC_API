@@ -218,6 +218,8 @@ namespace RJ_NOC_DataAccess.Common
 
         public static T ConvertDataTable<T>(DataTable dt)
         {
+            try
+            {
             var json = JsonConvert.SerializeObject(dt);
             if (typeof(T).Name != "List`1")
             {
@@ -225,6 +227,11 @@ namespace RJ_NOC_DataAccess.Common
             }
             var obj = JsonConvert.DeserializeObject<T>(json);
             return obj;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
     }

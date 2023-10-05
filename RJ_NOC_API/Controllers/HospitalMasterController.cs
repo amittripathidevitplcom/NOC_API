@@ -215,6 +215,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetHospitalDataListforPDF/{CollegeID}")]
+        public async Task<OperationResult<HospitalMasterDataModel>> GetHospitalDataListforPDF(int CollegeID)
+        {
+            var result = new OperationResult<HospitalMasterDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.HospitalMasterUtility.GetHospitalDataListforPDF(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("HospitalMasterController.GetHospitalDataListforPDF", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

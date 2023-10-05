@@ -182,7 +182,8 @@ namespace RJ_NOC_DataAccess.Repository
             }
 
             return hospitalMasterDataModel;
-        }
+        }       
+
         public bool IsSuperSpecialtyHospital(int collegeId)
         {
             string SqlQuery = $"exec USP_CheckSuperHospital @CollegeID={collegeId}";
@@ -208,6 +209,20 @@ namespace RJ_NOC_DataAccess.Repository
             }
 
             return hospitalMasterDataList;
+        }
+
+        public HospitalMasterDataModel GetHospitalDataListforPDF(int CollegeID)
+        {
+            string SqlQuery = $"exec USP_GetHospitalMasterPDFDetail @CollegeID={CollegeID}";
+            var dt = _commonHelper.Fill_DataTable(SqlQuery, "HospitalMaster.GetHospitalDataListforPDF");
+
+            HospitalMasterDataModel hospitalMasterDataModel = new HospitalMasterDataModel();
+            if (dt != null)
+            {
+                hospitalMasterDataModel = CommonHelper.ConvertDataTable<HospitalMasterDataModel>(dt);
+            }
+
+            return hospitalMasterDataModel;
         }
     }
 }
