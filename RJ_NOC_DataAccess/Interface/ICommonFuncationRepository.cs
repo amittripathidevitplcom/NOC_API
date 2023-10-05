@@ -128,6 +128,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetCityByDistrict(int DistrictID);
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetDownloadPdfDetails( int DepartmentID, int CollageID);
+
+        bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName);
+        List<CommonDataModel_DataTable> GetImportExcelData(int DeptId, int collegeID, int StaticsFileID, string ActionType);
     }
 }
 
