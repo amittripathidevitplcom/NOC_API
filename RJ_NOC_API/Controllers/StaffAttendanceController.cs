@@ -56,29 +56,41 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.SaveData(request));
-                if (result.Data)
+                bool IfExits = false;
+                IfExits = UtilityHelper.StaffAttendanceUtility.IfExists(request.StaffAttendanceID, request.CollegeID, request.CourseID, request.Date);
+                if (IfExits == false)
                 {
-                    result.State = OperationState.Success;
-                    if (request.StaffAttendanceID == 0)
+                    result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.SaveData(request));
+                    if (result.Data)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "StaffAttendance");
-                        result.SuccessMessage = "Saved successfully .!";
+                        result.State = OperationState.Success;
+                        if (request.StaffAttendanceID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "StaffAttendance");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", 0, "StaffAttendance");
+                            result.SuccessMessage = "Updateed successfully .!";
+                        }
                     }
+
                     else
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", 0, "StaffAttendance");
-                        result.SuccessMessage = "Updateed successfully .!";
+                        result.State = OperationState.Error;
+                        if (request.StaffAttendanceID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
                     }
                 }
                 else
                 {
-                    result.State = OperationState.Error;
-                    if (request.StaffAttendanceID == 0)
-                        result.ErrorMessage = "There was an error adding data.!";
-                    else
-                        result.ErrorMessage = "There was an error updating data.!";
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "Data Already Exist, It Can't Not Be Duplicate.!";
                 }
+
             }
             catch (Exception ex)
             {

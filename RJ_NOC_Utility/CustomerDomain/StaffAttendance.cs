@@ -24,5 +24,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffAttendanceRepository.SaveData(request);
         }
+        public bool IfExists(int StaffAttendanceID, int CollegeID, int CourseID, string Date)
+        {
+            return UnitOfWork.StaffAttendanceRepository.IfExists(StaffAttendanceID, CollegeID, CourseID, Date);
+        }
     }
 }
