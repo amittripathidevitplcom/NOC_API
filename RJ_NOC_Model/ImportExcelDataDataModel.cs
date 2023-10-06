@@ -8,8 +8,10 @@ namespace RJ_NOC_Model
 {
     public class ImportExcelDataDataModel
     {
-        public string DataType { get; set; } 
+        public int StaticsFileID { get; set; } 
+        public string DataType { get; set; }
         public string FileName { get; set; }
+        public string SSOID { get; set; }
         public string FinancialYear { get; set; }
         public int CollegeID { get; set; }
         public int CourseID { get; set; }
@@ -34,5 +36,6 @@ namespace RJ_NOC_Model
         public string Cast { get; set; }
         public string PH { get; set; }
         public string Minorty { get; set; }
+        public string CreatedDate { get; set; }
     }
 }

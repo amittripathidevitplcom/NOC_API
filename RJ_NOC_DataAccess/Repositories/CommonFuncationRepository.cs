@@ -1088,7 +1088,7 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName)
+        public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID)
         {
 
             string SqlQuery = "";
@@ -1096,13 +1096,14 @@ namespace RJ_NOC_DataAccess.Repository
             string ImportStaticsFileDetails_Str = CommonHelper.GetDetailsTableQry(request, "Temp_ImportStaticsFileDetails");
             SqlQuery = " exec USP_ImportExcelStatics_AddUpdate";
 
-            SqlQuery += " @StaticsFileID='" + 0 + "',";
+            SqlQuery += " @StaticsFileID='" + StaticsFileID + "',";
             SqlQuery += " @CollegeID='" + collegeID + "',";
             SqlQuery += " @DepartmentID='" + DeptId + "',";
             SqlQuery += " @CourseID='" + courseID + "',";
             SqlQuery += " @FinYear='" + FinYear + "',";
             SqlQuery += " @FileName='" + FileName.Replace("C:\\fakepath\\", "") + "',";
             SqlQuery += " @TotalCount='" + request.Count() + "',";
+            SqlQuery += " @SSOID='" + SSOID + "',";
             SqlQuery += " @ImportStaticsFileDetails_Str='" + ImportStaticsFileDetails_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
@@ -1112,9 +1113,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public List<CommonDataModel_DataTable> GetImportExcelData(int DeptId, int collegeID, int StaticsFileID, string ActionType)
+        public List<CommonDataModel_DataTable> GetImportExcelData(string SSOID, int DeptId, int collegeID, int StaticsFileID, string ActionType)
         {
-            string SqlQuery = " exec USP_ImportExcelStaticsDetails @DepartmentID='" + DeptId + "',@CollegeID='" + collegeID + "',@StaticsFileID='" + StaticsFileID + "',@ActionType='" + @ActionType + "'";
+            string SqlQuery = " exec USP_ImportExcelStaticsDetails @SSOID='" + SSOID + "',@DepartmentID='" + DeptId + "',@CollegeID='" + collegeID + "',@StaticsFileID='" + StaticsFileID + "',@ActionType='" + @ActionType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetImportExcelData");
 
