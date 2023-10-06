@@ -1088,7 +1088,7 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID)
+        public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID)
         {
 
             string SqlQuery = "";
@@ -1096,7 +1096,7 @@ namespace RJ_NOC_DataAccess.Repository
             string ImportStaticsFileDetails_Str = CommonHelper.GetDetailsTableQry(request, "Temp_ImportStaticsFileDetails");
             SqlQuery = " exec USP_ImportExcelStatics_AddUpdate";
 
-            SqlQuery += " @StaticsFileID='" + 0 + "',";
+            SqlQuery += " @StaticsFileID='" + StaticsFileID + "',";
             SqlQuery += " @CollegeID='" + collegeID + "',";
             SqlQuery += " @DepartmentID='" + DeptId + "',";
             SqlQuery += " @CourseID='" + courseID + "',";

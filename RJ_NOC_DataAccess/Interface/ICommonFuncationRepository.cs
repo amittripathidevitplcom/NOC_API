@@ -129,7 +129,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetDownloadPdfDetails( int DepartmentID, int CollageID);
 
-        bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
+        bool SaveExcelData(List<MemberDataModel> request,int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
         List<CommonDataModel_DataTable> GetImportExcelData(string SSOID, int DeptId, int collegeID, int StaticsFileID, string ActionType);
     }
 }

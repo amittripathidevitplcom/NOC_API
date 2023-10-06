@@ -413,9 +413,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetDownloadPdfDetails(DepartmentID, CollageID);
         }
        
-        public bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID)
+        public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID,int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID)
         {
-            return UnitOfWork.CommonFuncationRepository.SaveExcelData(request, DeptId, collegeID, courseID, FinYear, FileName, SSOID);
+            return UnitOfWork.CommonFuncationRepository.SaveExcelData(request, StaticsFileID, DeptId, collegeID, courseID, FinYear, FileName, SSOID);
         }
         public List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType)
         {

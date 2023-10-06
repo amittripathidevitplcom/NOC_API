@@ -228,7 +228,7 @@ namespace RJ_NOC_API.Controllers
 
                 if (isSave == true)
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveExcelData(PartyJson, request.DepartmentID, request.CollegeID, request.CourseID, request.FinancialYear, request.FileName, request.SSOID));
+                    result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveExcelData(PartyJson, request.StaticsFileID, request.DepartmentID, request.CollegeID, request.CourseID, request.FinancialYear, request.FileName, request.SSOID));
 
                     if (result.Data)
                     {
@@ -256,12 +256,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetImportExcelData/{SSOID}/{DeptId}/{CollegeID}/{StaticsFileID}/{ActionType}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetImportExcelData(string SSOID,int DeptId, int CollegeID, int StaticsFileID, string ActionType)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetImportExcelData(string SSOID, int DeptId, int CollegeID, int StaticsFileID, string ActionType)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetImportExcelData( SSOID,DeptId, CollegeID, StaticsFileID, ActionType));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetImportExcelData(SSOID, DeptId, CollegeID, StaticsFileID, ActionType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
