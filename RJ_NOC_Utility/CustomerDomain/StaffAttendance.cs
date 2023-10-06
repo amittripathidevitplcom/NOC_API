@@ -28,5 +28,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffAttendanceRepository.IfExists(StaffAttendanceID, CollegeID, CourseID, Date);
         }
+        public List<CommonDataModel_DataTable> GetStaffAttendanceReportData(int CollegeID, int CourseID, string FromDate, string ToDate, int StatusID)
+        {
+            return UnitOfWork.StaffAttendanceRepository.GetStaffAttendanceReportData(CollegeID, CourseID, FromDate, ToDate, StatusID);
+        }
     }
 }

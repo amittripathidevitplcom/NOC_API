@@ -101,5 +101,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetStaffAttendanceReportData/{CollegeID}/{CourseID}/{FromDate}/{ToDate}/{StatusID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffAttendanceReportData(int CollegeID, int CourseID, string FromDate, string ToDate, int StatusID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetStaffDetailListForPDF", 0, "StaffDetail");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.GetStaffAttendanceReportData(CollegeID,CourseID,FromDate,ToDate,StatusID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("StaffAttendanceController.GetStaffAttendanceReportData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -55,5 +55,18 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+        public List<CommonDataModel_DataTable> GetStaffAttendanceReportData(int CollegeID, int CourseID, string FromDate, string ToDate, int StatusID)
+        {
+            string SqlQuery = " exec USP_GetReportStaffAttendanceDetails @CollegeID='" + CollegeID + "',@CourseID='" + CourseID + "',@FromDate='" + FromDate + "',@ToDate='" + ToDate + "',@StatusID='" + StatusID + "'";
+            DataTable dt = new DataTable();
+            dt = _commonHelper.Fill_DataTable(SqlQuery, "StaffAttendance.GetStaffAttendanceReportData");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dt;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

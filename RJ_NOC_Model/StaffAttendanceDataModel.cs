@@ -27,4 +27,18 @@ namespace RJ_NOC_Model
         public int PresentStatus { get; set; }
 
     }
+
+    public class StaffAttendanceReportDataModel
+    {
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public string? FromDate { get; set; }
+        public string? ToDate { get; set; }
+        public int StatusID { get; set; }
+        public string? StaffName { get; set; }
+        public string? StatusName { get; set; }
+        public int? PresentStatus { get; set; }
+        public string? Date { get; set; }
+
+    }
 }
