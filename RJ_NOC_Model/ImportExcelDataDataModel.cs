@@ -10,6 +10,7 @@ namespace RJ_NOC_Model
     {
         public string DataType { get; set; } 
         public string FileName { get; set; }
+        public string SSOID { get; set; }
         public string FinancialYear { get; set; }
         public int CollegeID { get; set; }
         public int CourseID { get; set; }

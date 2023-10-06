@@ -120,9 +120,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetCityByDistrict(int DistrictID);
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetDownloadPdfDetails(int DepartmentID, int CollegeID);
-        bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName);
+        bool SaveExcelData(List<MemberDataModel> request, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
 
-        List<CommonDataModel_DataTable> GetImportExcelData(int DeptId, int collegeID, int StaticsFileID, string ActionType);
+        List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType);
     }
 
 }
