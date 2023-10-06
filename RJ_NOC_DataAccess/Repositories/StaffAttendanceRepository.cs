@@ -44,5 +44,16 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+        public bool IfExists(int StaffAttendanceID, int CollegeID, int CourseID, string Date)
+        {
+            string SqlQuery = " USP_IfExistsStaffAttendanceDetails @CollegeID='" + CollegeID + "',@CourseID = '" + CourseID + "',@Date = '" + Date + "',@StaffAttendanceID='" + StaffAttendanceID + "' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StaffAttendance.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
