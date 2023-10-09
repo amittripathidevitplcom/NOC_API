@@ -16,14 +16,14 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("GetStaffList_CollegeWise/{CollegeID}/{CourseID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffList_CollegeWise(int CollegeID, int CourseID)
+        [HttpGet("GetStaffList_CollegeWise/{CollegeID}/{StaffType}/{CourseID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetStaffDetailListForPDF", 0, "StaffDetail");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.GetStaffList_CollegeWise(CollegeID, CourseID));
+                result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.GetStaffList_CollegeWise(CollegeID, StaffType, CourseID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -57,7 +57,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.StaffAttendanceUtility.IfExists(request.StaffAttendanceID, request.CollegeID, request.CourseID, request.Date);
+                IfExits = UtilityHelper.StaffAttendanceUtility.IfExists(request.StaffAttendanceID, request.CollegeID,request.StaffType, request.CourseID, request.Date);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.SaveData(request));
@@ -102,14 +102,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetStaffAttendanceReportData/{CollegeID}/{CourseID}/{FromDate}/{ToDate}/{StatusID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffAttendanceReportData(int CollegeID, int CourseID, string FromDate, string ToDate, int StatusID)
+        [HttpGet("GetStaffAttendanceReportData/{CollegeID}/{StaffType}/{CourseID}/{FromDate}/{ToDate}/{StatusID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetStaffAttendanceReportData(int CollegeID,string StaffType, int CourseID, string FromDate, string ToDate, int StatusID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetStaffDetailListForPDF", 0, "StaffDetail");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.GetStaffAttendanceReportData(CollegeID,CourseID,FromDate,ToDate,StatusID));
+                result.Data = await Task.Run(() => UtilityHelper.StaffAttendanceUtility.GetStaffAttendanceReportData(CollegeID, StaffType, CourseID,FromDate,ToDate,StatusID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
