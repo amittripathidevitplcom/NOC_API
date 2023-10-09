@@ -15,6 +15,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool DeleteData(int VeterinaryHospitalID);
         List<VeterinaryHospitalDataModelList> GetSeatInformationByCourse(int CollegeID, int DepartmentID);
         List<VeterinaryHospitalDataModelList> GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(int CollegeID, int DepartmentID, int CourseID);
-
+        List<CommonDataModel_DataSet> GetVeterinaryHospitalListForPdf(int DepartmentID, int CollegeID);
     }
 }
