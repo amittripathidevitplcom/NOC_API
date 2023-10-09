@@ -148,5 +148,18 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
 
         }
+
+        public List<CommonDataModel_DataSet> GetVeterinaryHospitalListForPdf(int DepartmentID, int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetVetnaryHospitalDetailList_ForPDf @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "VeterinaryHospital.GetVeterinaryHospitalListForPdf");
+
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

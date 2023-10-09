@@ -11,6 +11,7 @@ namespace RJ_NOC_Model
         public int StaffAttendanceID { get; set; }
         public int CollegeID { get; set; }
         public int CourseID { get; set; }
+        public string StaffType { get; set; }
         public int? DepartmentID { get; set; }
         public int StaffDetailID { get; set; }
         public string? Date { get; set; }
@@ -25,6 +26,21 @@ namespace RJ_NOC_Model
         public int StaffAttendanceDetailID { get; set; }
         public int StaffID { get; set; }
         public int PresentStatus { get; set; }
+
+    }
+
+    public class StaffAttendanceReportDataModel
+    {
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public string? StaffType { get; set; }
+        public string? FromDate { get; set; }
+        public string? ToDate { get; set; }
+        public int StatusID { get; set; }
+        public string? StaffName { get; set; }
+        public string? StatusName { get; set; }
+        public int? PresentStatus { get; set; }
+        public string? Date { get; set; }
 
     }
 }
