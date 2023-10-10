@@ -42,5 +42,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.VeterinaryHospitalRepository.GetCourseLevelByCollegeIDAndDepartmentID_CourseWise(CollegeID, DepartmentID, CourseID);
         }
+        public List<CommonDataModel_DataSet> GetVeterinaryHospitalListForPdf( int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.VeterinaryHospitalRepository.GetVeterinaryHospitalListForPdf(DepartmentID,CollegeID);
+        }
     }
 }

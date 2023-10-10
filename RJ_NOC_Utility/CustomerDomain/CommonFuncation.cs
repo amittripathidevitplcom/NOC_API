@@ -417,6 +417,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SaveExcelData(request, StaticsFileID, DeptId, collegeID, courseID, FinYear, FileName, SSOID);
         }
+        public bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.UpdateSingleRow(request, DeptId, collegeID, SSOID);
+        }
         public List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType)
         {
             return UnitOfWork.CommonFuncationRepository.GetImportExcelData( SSOID,DeptId, collegeID, StaticsFileID, ActionType);
