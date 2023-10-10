@@ -134,6 +134,10 @@ namespace RJ_NOC_DataAccess.Repositories
             List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
             CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
             dataModel.data = dataSet;
+            for (int i = 0; i < dataModel.data.Tables[0].Rows.Count; i++)
+            {
+                dataModel.data.Tables[0].Rows[i]["ProfilePhoto"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[i]["ProfilePhoto"].ToString());
+            }
             dataModels.Add(dataModel);
             return dataModels;
         }

@@ -137,12 +137,12 @@ namespace RJ_NOC_API
                                 Path.Combine(Directory.GetCurrentDirectory(), "ImageFile")),
                 RequestPath = "/ImageFile"
             });
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                                Path.Combine(Directory.GetCurrentDirectory(), "ExcelFile")),
-                RequestPath = "/ExcelFile"
-            });
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //                    Path.Combine(Directory.GetCurrentDirectory(), "ExcelFile")),
+            //    RequestPath = "/ExcelFile"
+            //});
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
