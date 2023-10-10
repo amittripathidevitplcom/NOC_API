@@ -29,9 +29,9 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetAllData(int DepartmentID, int CollegeID, string Type)
+        public List<CommonDataModel_DataTable> GetAllData(int DepartmentID, int CollegeID, string Type, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_CollegeDocument @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@DocumentType='" + Type + "'";
+            string SqlQuery = " exec USP_CollegeDocument @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@DocumentType='" + Type + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeDocument.GetAllData");
 

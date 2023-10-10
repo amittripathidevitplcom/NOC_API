@@ -14,9 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CollegeDocument(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetAllData(int DepartmentID, int CollegeID, string Type)
+        public List<CommonDataModel_DataTable> GetAllData(int DepartmentID, int CollegeID, string Type, int ApplyNOCID)
         {
-            return UnitOfWork.CollegeDocumentRepository.GetAllData(DepartmentID, CollegeID, Type);
+            return UnitOfWork.CollegeDocumentRepository.GetAllData(DepartmentID, CollegeID, Type, ApplyNOCID);
         }
         public bool SaveData(CollegeDocumentDataModel request)
         {

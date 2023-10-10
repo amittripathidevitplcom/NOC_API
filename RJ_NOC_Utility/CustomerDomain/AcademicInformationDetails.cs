@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public AcademicInformationDetails(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList(int CollegeID)
+        public List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.AcademicInformationDetailsRepository.GetAcademicInformationDetailAllList(CollegeID);
+            return UnitOfWork.AcademicInformationDetailsRepository.GetAcademicInformationDetailAllList(CollegeID, ApplyNOCID);
         }
         public List<AcademicInformationDetailsDataModel> GetAcademicInformationDetailByID(int AcademicInformationID, int CollegeID)
         {

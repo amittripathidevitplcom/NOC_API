@@ -16,13 +16,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetCollegeWiseStudenetDetails/{collegeId}")]
-        public async Task<OperationResult<List<ClassWiseStudentDetailsDataModel>>> GetCollegeWiseStudenetDetails(int collegeId)
+        [HttpGet("GetCollegeWiseStudenetDetails/{collegeId}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<ClassWiseStudentDetailsDataModel>>> GetCollegeWiseStudenetDetails(int collegeId,int ApplyNOCID)
         {
             var result = new OperationResult<List<ClassWiseStudentDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetCollegeWiseStudenetDetails(collegeId));
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetCollegeWiseStudenetDetails(collegeId, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -88,13 +88,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetSubjectWiseStudenetDetails/{collegeId}")]
-        public async Task<OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>> GetSubjectWiseStudenetDetails(int collegeId)
+        [HttpGet("GetSubjectWiseStudenetDetails/{collegeId}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>> GetSubjectWiseStudenetDetails(int collegeId,int ApplyNOCID)
         {
             var result = new OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetSubjectWiseStudenetDetails(collegeId));
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetSubjectWiseStudenetDetails(collegeId, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {

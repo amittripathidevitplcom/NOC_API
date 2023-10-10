@@ -46,9 +46,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID)
+        public List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_GetStaffDetailList_DepartmentCollegeWise @StaffDetailID='" + StaffDetailID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_GetStaffDetailList_DepartmentCollegeWise @StaffDetailID='" + StaffDetailID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "StaffDetail.GetStaffDetailList_DepartmentCollegeWise");
             List<StaffDetailDataModel> listdataModels = new List<StaffDetailDataModel>();
@@ -105,7 +105,6 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.Gender = dataSet.Tables[0].Rows[0]["Gender"].ToString();
                     dataModels.ESINumber = dataSet.Tables[0].Rows[0]["ESINumber"].ToString();
                     dataModels.PANNo = dataSet.Tables[0].Rows[0]["PANNo"].ToString();
-
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails_StaffDetail_Item = JsonConvert.DeserializeObject<List<EducationalQualificationDetails_StaffDetail>>(JsonDataTable_Data);

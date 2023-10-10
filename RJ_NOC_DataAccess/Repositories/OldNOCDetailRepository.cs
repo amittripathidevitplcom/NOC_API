@@ -43,9 +43,9 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public List<OldNocDetailsDataModel> GetOldNOCDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int OldNocID)
+        public List<OldNocDetailsDataModel> GetOldNOCDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int OldNocID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_GetOldNOCDetailList_DepartmentCollegeWise @OldNocID='" + OldNocID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_GetOldNOCDetailList_DepartmentCollegeWise @OldNocID='" + OldNocID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "OldNOCDetail.GetOlsNOCDetailList_DepartmentCollegeWise");
             List<OldNocDetailsDataModel> listdataModels = new List<OldNocDetailsDataModel>();
@@ -77,6 +77,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.CourseName = dataSet.Tables[0].Rows[i]["CourseName"].ToString();
                     dataModels.NOCTypeName = dataSet.Tables[0].Rows[i]["NOCTypeName"].ToString();
                     dataModels.FinancialYearName = dataSet.Tables[0].Rows[i]["FinancialYearName"].ToString();
+                    dataModels.Action = dataSet.Tables[0].Rows[i]["Action"].ToString();
                     for (int j = 0; j < dataSet.Tables[1].Rows.Count; j++)
                     {
                         if (Convert.ToInt32(dataSet.Tables[1].Rows[j]["OldNocID"]) == Convert.ToInt32(dataSet.Tables[0].Rows[i]["OldNocID"]))
@@ -113,6 +114,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.CourseName = dataSet.Tables[0].Rows[0]["CourseName"].ToString();
                     dataModels.NOCTypeName = dataSet.Tables[0].Rows[0]["NOCTypeName"].ToString();
                     dataModels.FinancialYearName = dataSet.Tables[0].Rows[0]["FinancialYearName"].ToString();
+                    dataModels.Action = dataSet.Tables[0].Rows[0]["Action"].ToString();
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<OldNocDetails_SubjectDataModel> OldNocDetails_SubjectDataModel_Item = JsonConvert.DeserializeObject<List<OldNocDetails_SubjectDataModel>>(JsonDataTable_Data);

@@ -76,9 +76,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID)
+        public List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID, int ApplyNOCID)
         {
-            string SqlQuery = $" exec USP_Trn_School_BuildingDetails_GetData @CollegeID={CollegeID}";
+            string SqlQuery = $" exec USP_Trn_School_BuildingDetails_GetData @CollegeID={CollegeID},@ApplyNOCID={ApplyNOCID}";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "BuildingDetailsMasterService.GetAllBuildingDetailsList");
 
