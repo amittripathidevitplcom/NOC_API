@@ -207,6 +207,13 @@ namespace RJ_NOC_Model
         public int PVCommittee_Completed { get; set; }
 
 
+        //Admin
+        public int TotalApplication { get; set; }
+        public int TotalApplicationPending { get; set; }
+        public int TotalApplicationReject { get; set; }
+        public int TotalApplicationCompleted { get; set; }
+
+
     }
 
     public class CommonDataModel_Stream
