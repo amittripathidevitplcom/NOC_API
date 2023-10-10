@@ -78,6 +78,13 @@ namespace RJ_NOC_API.Controllers
                         result.ErrorMessage = " Father Name is required.!";
                         return result;
                     }
+                    if ((data.Year == null) || (data.Year == ""))
+                    {
+                        isSave = false;
+                        result.State = OperationState.Warning;
+                        result.ErrorMessage = " Year is required.!";
+                        return result;
+                    }
                     if ((data.DOB == null) || (data.DOB == ""))
                     {
                         isSave = false;
@@ -255,7 +262,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost]
+        [HttpPost("UpdateSingleRow")]
         public async Task<OperationResult<bool>> UpdateSingleRow(MemberDataModel data)
         {
             var result = new OperationResult<bool>();
@@ -296,6 +303,13 @@ namespace RJ_NOC_API.Controllers
                     isSave = false;
                     result.State = OperationState.Warning;
                     result.ErrorMessage = " Father Name is required.!";
+                    return result;
+                }
+                if ((data.Year == null) || (data.Year == ""))
+                {
+                    isSave = false;
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = " Year is required.!";
                     return result;
                 }
                 if ((data.DOB == null) || (data.DOB == ""))
@@ -453,7 +467,11 @@ namespace RJ_NOC_API.Controllers
                     if (result.Data)
                     {
                         result.State = OperationState.Success;
-                        result.SuccessMessage = "Update successfully .!";
+                        if (data.ID > 0)
+                            result.SuccessMessage = "Update successfully .!";
+                        else
+                            result.SuccessMessage = "Added successfully .!";
+
                     }
                     else
                     {

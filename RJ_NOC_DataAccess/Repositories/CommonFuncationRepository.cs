@@ -1106,7 +1106,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @SSOID='" + SSOID + "',";
             SqlQuery += " @ImportStaticsFileDetails_Str='" + ImportStaticsFileDetails_Str + "'";
 
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "Commomfunction.SaveData");
             if (Rows > 0)
                 return true;
             else
@@ -1148,9 +1148,9 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @Minorty='" + request.Minorty + "',";
             SqlQuery += " @RollNo='" + request.RollNo + "',";
             SqlQuery += " @Section='" + request.Section + "',";
-            SqlQuery += " @Gender='" + request.Gender + "',";
+            SqlQuery += " @Gender='" + request.Gender + "'";
 
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "Commomfunction.UpdateSingleRow");
             if (Rows > 0)
                 return true;
             else
