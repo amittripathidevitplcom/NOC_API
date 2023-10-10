@@ -30,9 +30,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList(int CollegeID)
+        public List<AcademicInformationDetailsDataModels> GetAcademicInformationDetailAllList(int CollegeID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_Trn_School_AcademicInformationDetails_GetData @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_Trn_School_AcademicInformationDetails_GetData @CollegeID='"+ CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AcademicInformationDetails.GetAcademicInformationDetailAllList");
 

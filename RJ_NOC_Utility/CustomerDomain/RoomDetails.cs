@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public RoomDetails(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID)
+        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.RoomDetailsRepository.GetRoomDetailAllList(CollegeID);
+            return UnitOfWork.RoomDetailsRepository.GetRoomDetailAllList(CollegeID, ApplyNOCID);
         }
         public List<RoomDetailsDataModel> GetRoomDetailsByID(int CollegeWiseRoomID, int CollegeID)
         {
