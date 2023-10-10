@@ -30,9 +30,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID)
+        public List<RoomDetailsDataModels> GetRoomDetailAllList(int CollegeID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_Trn_College_RoomDetails_GetData @CollegeID='"+ CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "RoomDetails.GetRoomDetailAllList");
 

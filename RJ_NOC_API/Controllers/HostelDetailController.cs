@@ -71,13 +71,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetHostelDetailList_DepartmentCollegeWise/{DepartmentID}/{CollegeID}/{HostelDetailID}")]
-        public async Task<OperationResult<List<HostelDataModel>>> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID)
+        [HttpGet("GetHostelDetailList_DepartmentCollegeWise/{DepartmentID}/{CollegeID}/{HostelDetailID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<HostelDataModel>>> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID,int ApplyNOCID)
         {
             var result = new OperationResult<List<HostelDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.HostelDetailUtility.GetHostelDetailList_DepartmentCollegeWise(DepartmentID, CollegeID, HostelDetailID));
+                result.Data = await Task.Run(() => UtilityHelper.HostelDetailUtility.GetHostelDetailList_DepartmentCollegeWise(DepartmentID, CollegeID, HostelDetailID, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

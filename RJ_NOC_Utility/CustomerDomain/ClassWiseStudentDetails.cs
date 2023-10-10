@@ -16,14 +16,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID)
+        public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails(CollegeID);
+            return UnitOfWork.ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails(CollegeID, ApplyNOCID);
         }
 
-        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID)
+        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.ClassWiseStudentDetailsRepository.GetSubjectWiseStudenetDetails(CollegeID);
+            return UnitOfWork.ClassWiseStudentDetailsRepository.GetSubjectWiseStudenetDetails(CollegeID, ApplyNOCID);
         }
 
         public bool SaveData(PostClassWiseStudentDetailsDataModel request)

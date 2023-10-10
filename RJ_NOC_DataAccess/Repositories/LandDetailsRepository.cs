@@ -41,9 +41,9 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
-        public List<CommonDataModel_DataSet> GetLandDetailsList(int SelectedCollageID, int LandDetailID)
+        public List<CommonDataModel_DataSet> GetLandDetailsList(int SelectedCollageID, int LandDetailID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "',@Actiontype='GetLandApplication'";
+            string SqlQuery = " exec USP_LandDetails_GetData @SelectedCollageID='" + SelectedCollageID + "', @LandDetailID='" + LandDetailID + "',@Actiontype='GetLandApplication',@ApplyNOCID='"+ ApplyNOCID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "LandDetails.GetLandDetailsList");
 

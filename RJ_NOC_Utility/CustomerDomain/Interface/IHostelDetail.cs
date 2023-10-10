@@ -11,7 +11,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     {
         bool IfExists(int HostelDetailID, int CollegeID, string HostelName);
         bool SaveData(HostelDataModel request);
-        List<HostelDataModel> GetHostelDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID);
+        List<HostelDataModel> GetHostelDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID, int ApplyNOCID);
         bool DeleteHostelDetail(int HostelDetailID);
         List<CommonDataModel_DataSet> GetHostelPdfDetails(int DepartmentID, int CollegeID);
     }

@@ -26,9 +26,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffDetailRepository.SaveData(request);
         }
-        public List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID)
+        public List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID, int ApplyNOCID)
         {
-            return UnitOfWork.StaffDetailRepository.GetStaffDetailList_DepartmentCollegeWise(DepartmentID,CollegeID,StaffDetailID);
+            return UnitOfWork.StaffDetailRepository.GetStaffDetailList_DepartmentCollegeWise(DepartmentID,CollegeID,StaffDetailID, ApplyNOCID);
         }   
         public bool DeleteStaffDetail(int StaffDetailID)
         {
