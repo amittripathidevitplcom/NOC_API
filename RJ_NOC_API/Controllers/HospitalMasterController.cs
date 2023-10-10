@@ -216,9 +216,9 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetHospitalDataListforPDF/{CollegeID}")]
-        public async Task<OperationResult<HospitalMasterDataModel>> GetHospitalDataListforPDF(int CollegeID)
+        public async Task<OperationResult<List<HospitalMasterDataModel>>> GetHospitalDataListforPDF(int CollegeID)
         {
-            var result = new OperationResult<HospitalMasterDataModel>();
+            var result = new OperationResult<List<HospitalMasterDataModel>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.HospitalMasterUtility.GetHospitalDataListforPDF(CollegeID));
@@ -246,7 +246,6 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
     }
 }
 
