@@ -19,9 +19,9 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID)
+        public List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID,string Date)
         {
-            string SqlQuery = " exec USP_StaffListForAttendance_CollegeWise @CollegeID='" + CollegeID + "',@StaffType='" + StaffType + "',@CourseID='" + CourseID + "'";
+            string SqlQuery = " exec USP_StaffListForAttendance_CollegeWise @CollegeID='" + CollegeID + "',@StaffType='" + StaffType + "',@CourseID='" + CourseID + "',@Date='" + Date + "'";
             DataTable dt = new DataTable();
             dt = _commonHelper.Fill_DataTable(SqlQuery, "StaffAttendance.GetStaffList_CollegeWise");
 
@@ -44,6 +44,7 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
 
         public bool IfExists(int StaffAttendanceID, int CollegeID,string StaffType, int CourseID, string Date)
         {
