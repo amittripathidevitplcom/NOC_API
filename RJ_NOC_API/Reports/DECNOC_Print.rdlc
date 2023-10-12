@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DCENOC_Print">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>0c1933ff-77e7-4546-b338-0d7c57670fe3</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_CollegeDetails">
+      <Query>
+        <DataSourceName>DCENOC_Print</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="NOCIssueNo">
+          <DataField>NOCIssueNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOCIssueFinancialYear">
+          <DataField>NOCIssueFinancialYear</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img">
+          <DataField>img</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DCENOC_Print</rd:DataSetName>
+        <rd:SchemaPath>E:\ReportTesting\CoreRDLCReport-master\CoreRDLCReport-master\CoreRDLCReport\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:TableName>CollegeDetails</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet_CourseAndSubjectDetails">
+      <Query>
+        <DataSourceName>DCENOC_Print</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="LegalEntityName">
+          <DataField>LegalEntityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeName">
+          <DataField>CollegeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UniversityName">
+          <DataField>UniversityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StreamName">
+          <DataField>StreamName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DCENOC_Print</rd:DataSetName>
+        <rd:SchemaPath>E:\ReportTesting\CoreRDLCReport-master\CoreRDLCReport-master\CoreRDLCReport\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:TableName>CourseAndSubjectDetails</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>राजस्थान सरकार</Value>
+                    <Style>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>आयुक्तालय, कालेज शिक्षा, राजस्थान, जयपुर</Value>
+                    <Style>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Block-4, RKS Sankul, JLN Road, Jaipur- 302015, Rajasthan</Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Website: http://hte.rajasthan.gov.in/dept/dce/</Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>e-mail: </Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>jdpi.cce@gmail.com</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Ph.: 0141-2706736(0)</Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.3175cm</Top>
+            <Left>2.55833cm</Left>
+            <Height>2.87542cm</Height>
+            <Width>14.21635cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line2">
+            <Top>3.1345cm</Top>
+            <Left>3.53261cm</Left>
+            <Height>0cm</Height>
+            <Width>13.24208cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+            </Style>
+          </Line>
+          <Image Name="Image1">
+            <Source>Embedded</Source>
+            <Value>logo</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.20849cm</Top>
+            <Height>3.0875cm</Height>
+            <Width>3.405cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>क्रमांक : एफ4 (40) आकाश / नि.सं./</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.43641cm</Top>
+            <Left>0.26141cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.9925cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>दिनांक - </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.43641cm</Top>
+            <Left>12.48875cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.5475cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>आदेश </Value>
+                    <Style>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>4.08333cm</Top>
+            <Left>7.80203cm</Left>
+            <Height>0.8075cm</Height>
+            <Width>1.5475cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>        राजस्थान गैर सरकारी शैक्षिक यम, 1989 तथा तत्संबंधी नियम 1993 एवं राजा सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत सत्र             </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>(एक सत्र)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> के लिए स्नातक </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>स्तर पर पूर्व संचालित संकाय/ विषयों में अस्थाई अनापत्ति प्रमाण पत्र अभिवृद्धि</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> निम्नलिखित शर्तों के साथ स्वीकृत की जाती है-</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>4.95646cm</Top>
+            <Left>0.02687cm</Left>
+            <Height>1.47856cm</Height>
+            <Width>16.7875cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.3003cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.5029cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.99988cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.98441cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>संचालक संस्था</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox12">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>महाविद्यालय का नाम</Value>
+                                  <MarkupType>HTML</MarkupType>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox14">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>सम्बद्ध विश्वविद्यालय</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox16">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>पूर्व संचालित संकाय/ विषय</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="LegalEntityName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!LegalEntityName.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>LegalEntityName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CollegeName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CollegeName.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CollegeName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="UniversityName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!UniversityName.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>UniversityName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="StreamName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!StreamName.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>StreamName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_CourseAndSubjectDetails</DataSetName>
+            <Top>6.57912cm</Top>
+            <Left>0.02687cm</Left>
+            <Height>1.2cm</Height>
+            <Width>16.78749cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>1. संस्था प्रत्येक सत्र में निरीक्षण करवाने हेतु नियमानुसार निर्धारित शुल्क जमा करवाकर ऑनलाइन प्रपत्र प्रस्तुत करेगी।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>2. संस्था सत्र 2023-24 में निर्धारित नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करेगी।
+3. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।
+4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता अधिकृत अधिकारी द्वारा गया अभिलेख उपलब्ध करायेगी।
+5. संस्था को समय-समय पर यू.जी.सी. राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप से करनी होगी।
+6. संख्या संबंधित विद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बसे मान्यता व विश्वविद्यालय से समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।
+7. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी तथा महाविद्यालय तदनुसार तय संख्या सीमा में प्रवेश दिया जाना सुनिश्चित करेगा।
+8. संख्या महाविद्यालय में अध्यापन कार्य हेतु पूजीसी सामारी प्राचार्य एवं व्याख्यान मानदण्डानुसार कि स्टाफ की नियुक्ति के साथ-2 अन्य निर्धारित शर्मा को चलना करेगी।
+9. राज्य सरकार की महाविद्यालय प्रवेश नीति 2022-23 तथा बाद में जानी होने वाली नीतियों का पालन करना</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+10. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाएं निर्धारित अवधि मे भरकर अपलोड़ करेगी।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+11. मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>DCF-II (Data Capture format-ii)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> भरवार अपलोड करना अनिवार्य होगा प्रमाण-पत्र की कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करे।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>7.98322cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>8.78106cm</Height>
+            <Width>16.7875cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox21">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>आयुक्त </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>कॉलेज शिक्षा राजस्थान जयपुर</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>17.5387cm</Top>
+            <Left>11.82995cm</Left>
+            <Height>0.99688cm</Height>
+            <Width>5.0073cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox22">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+1. विशिष्ट सहायक मा० उच्च शिक्षा मंत्री महोदय, राजस्थान जयपुर ।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>2. निजी सचिव शासन सचिव उच्च शिक्षा विभाग, राजस्थान जयपुर ।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>3. निजी सचिव आयुक्त आयुक्तालय कॉलेज शिक्षा राजस्थान जयपुर ।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>4. जिला कलेक्टर पाली।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>5. कुल शहिद जय नारायणालय, जोधपुर।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>6. सचिव सम्बन्धित महाविद्यालय ।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>7. सध्या आयुक्तालय शिक्षा राजस्थान जयपुर।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>8. रक्षित पत्रावली </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>18.61052cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>4.03959cm</Height>
+            <Width>11.11219cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox23">
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>संयुक्त निदेशक (नि०सं०) </Value>
+                    <Style>
+                      <FontSize>9.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>कॉलेज शिक्षा राजस्थान जयपुर</Value>
+                    <Style>
+                      <FontSize>9.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>22.71156cm</Top>
+            <Left>11.80707cm</Left>
+            <Height>1.31438cm</Height>
+            <Width>5.00729cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="NOCIssueNo">
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DataSet_CollegeDetails")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>NOCIssueNo</rd:DefaultName>
+            <Top>3.56933cm</Top>
+            <Left>6.08224cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Date">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Date.Value, "DataSet_CollegeDetails")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Date</rd:DefaultName>
+            <Top>3.53641cm</Top>
+            <Left>13.90328cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.8714cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="NOCIssueFinancialYear">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NOCIssueFinancialYear.Value, "DataSet_CollegeDetails")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>NOCIssueFinancialYear</rd:DefaultName>
+            <Top>5.60412cm</Top>
+            <Left>4.70058cm</Left>
+            <Height>0.7cm</Height>
+            <Width>3.5875cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>25.7cm</Height>
+        <Style />
+      </Body>
+      <Width>17cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>2cm</LeftMargin>
+        <RightMargin>2cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="test">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>test</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>9106acdb-8e4c-4731-904e-3e33e8590c33</rd:ReportID>
+</Report>
