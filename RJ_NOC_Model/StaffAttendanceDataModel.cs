@@ -26,7 +26,6 @@ namespace RJ_NOC_Model
         public int StaffAttendanceDetailID { get; set; }
         public int StaffID { get; set; }
         public int PresentStatus { get; set; }
-
     }
 
     public class StaffAttendanceReportDataModel
