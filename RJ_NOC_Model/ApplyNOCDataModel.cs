@@ -96,6 +96,11 @@ namespace RJ_NOC_Model
         public int DepartmentID { get; set; }
         public int RoleID { get; set; }
         public int UserID { get; set; }
+        public int? CourseID { get; set; }
+        public string? CourseName { get; set; }
+        public int? SubjectID { get; set; }
+        public string? SubjectName { get; set; }
+        public int? ApplyNocParameterID { get; set; }
         public string NOCIssuedRemark { get; set; }
     }
     public class SubmitRevertApplication

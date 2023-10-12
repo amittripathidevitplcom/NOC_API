@@ -6,6 +6,7 @@ using RJ_NOC_DataAccess.Common;
 using System.Data;
 using System.Text;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -598,6 +599,38 @@ namespace RJ_NOC_Utility.CustomerDomain
                 model = CommonHelper.ConvertDataTable<List<ApplyNocFDRDetailsDataModel>>(dt);
             }
             return model;
+        }
+        public List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID)
+        {
+            DataTable dt = new DataTable();
+            List<ApplyNOCCourseListDataModal> applyNOCCourseList = new List<ApplyNOCCourseListDataModal>();
+            List<ApplyNOCCourseSubjectListDataModal> model = new List<ApplyNOCCourseSubjectListDataModal>();
+            dt = UnitOfWork.ApplyNocParameterMasterRepository.GetCourseSubjectByApplyNOCID(ApplyNOCID);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                model = CommonHelper.ConvertDataTable<List<ApplyNOCCourseSubjectListDataModal>>(dt);
+                if (model != null)
+                {
+                    var DistinctCourse = model.Select(s => s.CourseID).Distinct();
+                    foreach (var c in DistinctCourse)
+                    {
+                        var data = model.Where(w => w.CourseID == c).FirstOrDefault();
+                        applyNOCCourseList.Add(new ApplyNOCCourseListDataModal()
+                        {
+                            ApplyNocApplicationID = data.ApplyNocApplicationID,
+                            CourseID = data.CourseID,
+                            CourseName = data.CourseName,
+                            SubjectList = model.Where(w => w.CourseID == c).Select(sub => new ApplyNOCSubjectListCourseWiseDataModal()
+                            {
+                                ApplyNocParameterID = sub.ApplyNocParameterID,
+                                SubjectID = sub.SubjectID,
+                                SubjectName = sub.SubjectName
+                            }).ToList()
+                        });
+                    }
+                }
+            }
+            return applyNOCCourseList;
         }
     }
 }

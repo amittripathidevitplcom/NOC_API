@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.Extensions.Primitives;
 using java.util;
 using System.Data;
+using AspNetCore.Reporting;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -407,16 +408,17 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("GenerateNOCForDCE")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(GenerateNOC_DataModel request)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(List<GenerateNOC_DataModel> request)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "GenerateNOCForDCE", request.ApplyNOCID, "ApplyNOCController");
+            CommonDataAccessHelper.Insert_TrnUserLog(request[0].UserID, "GenerateNOCForDCE", request[0].ApplyNOCID, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                string Path = GeneratePDFDCE(request.ApplyNOCID);
+                //string Path = GeneratePDFDCE(request[0].ApplyNOCID,request);
+                string Path = GeneratePDFDCE(request[0].ApplyNOCID);
                 if (!string.IsNullOrEmpty(Path))
                 {
-                    if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SavePDFPath(Path, request.ApplyNOCID, request.DepartmentID, request.RoleID, request.UserID, request.NOCIssuedRemark)))
+                    if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(Path, request)))
                     {
                         result.State = OperationState.Success;
                         result.SuccessMessage = "PDF Generate Successfully .!";
@@ -689,91 +691,143 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+        private DataSet CollegeDetails()
+        {
+            var dataSet = new DataSet();
+            dataSet.Tables.Add(new DataTable());
+            dataSet.Tables[0].Columns.Add("NOCIssueNo");
+            dataSet.Tables[0].Columns.Add("Date");
+            dataSet.Tables[0].Columns.Add("NOCIssueFinancialYear");
+            dataSet.Tables[0].Columns.Add("Img");
+            DataRow row;
+            row = dataSet.Tables[0].NewRow();
+            row["NOCIssueNo"] = "2023-2024/30";
+            row["Date"] = "05-09-2023";
+            row["NOCIssueFinancialYear"] = "2023-2024";
+            row["Img"] = "http://172.22.33.75:81/assets/images/logoLarge.png";
+            dataSet.Tables[0].Rows.Add(row);
+            ////
+            dataSet.Tables.Add(new DataTable());
+            dataSet.Tables[1].Columns.Add("LegalEntityName");
+            dataSet.Tables[1].Columns.Add("CollegeName");
+            dataSet.Tables[1].Columns.Add("UniversityName");
+            dataSet.Tables[1].Columns.Add("StreamName");
+            DataRow row1;
+            row1 = dataSet.Tables[1].NewRow();
+            row1["LegalEntityName"] = "श्री कॉम्प कंप्यूटर शिक्षण संस्थान, सोजत सिटी, जिला पाली|";
+            row1["CollegeName"] = "श्री विनायक महाविद्यालय मेला चौक, सोजत सिटी, जिला पाली|";
+            row1["UniversityName"] = "जय नारायण व्यास विश्व विद्यालय, जोधपुर |";
+            row1["StreamName"] = "अनिवार्य विषयो सहित सनातक स्टार प्र कला संकाय:- भुगोल, राजनीति विज्ञान, हिंदी साहित्य, इतिहास |";
+            dataSet.Tables[1].Rows.Add(row1);
 
+            return dataSet;
+        }
         [HttpGet]
+       // public string GeneratePDFDCE(int ApplyNOCID, List<GenerateNOC_DataModel> CourseSubjectData)
         public string GeneratePDFDCE(int ApplyNOCID)
         {
             StringBuilder sb = new StringBuilder();
             var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";
-            StringBuilder sbhtml = new StringBuilder();
+            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
 
-            string CollegeLogo = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/dce_logo.jpg");
-            List<CommonDataModel_DataTable> dt = new List<CommonDataModel_DataTable>();
-            dt = UtilityHelper.ApplyNOCUtility.GeneratePDFForJointSecretary(ApplyNOCID);
-            if (dt.Count > 0)
-            {
-                sb.Clear();
-                sb.Append("<table style='width:100%;line-height:1' cellpadding='0' cellspacing='0'>");
-                sb.Append("<tr><td align='left' width='10%'><img  src='" + CollegeLogo + "' height='80' width='80' alt='logo'/></td>");
-                sb.Append("<td align='center'><table style='width:100%;line-height:1' cellpadding='0' cellspacing='0'><tr><td align='center' valign='top'><h2 style='font-size:28px'>राजस्थान सरकार</h2></td></tr>");
-                sb.Append("<tr><td align='center' valign='top'><p>आयुक्तालय, कालेज शिक्षा, राजस्थान, जयपुर</p></td></tr>");
-                sb.Append("<tr><td align='center' valign='top'><p>Block-4, RKS Sankul, JLN Road, Jaipur- 302015, Rajasthan</p></td></tr>");
-                sb.Append("<tr><td align='center' valign='top'><p>Website: http://hte.rajasthan.gov.in/dept/dce/</p></td></tr>");
-                sb.Append("<tr><td align='center' valign='top'><p>e-mail: jdpi.cce@gmail.com Ph.: 0141-2706736(0);</p></td></tr>");
-                sb.Append("<tr><td align='center' valign='top'><hr /></td></tr></table></td></tr>");
-                sb.Append("<tr><td colspan='2' style='margin-top:10px'><table style='width:100%;line-height:1' cellpadding='0' cellspacing='0'><tr>");
-                sb.Append("<td align='left' valign='top'>क्रमांक : एफ4 (40) आकाश / नि.सं./ 2018 /1154</td><td align='right' valign='top'>दिनांक - " + DateTime.Now.ToString("dd/MM/yyyy") + "</td></tr></table></td></tr>");
-                sb.Append("<tr><td colspan='2' align='center' valign='top'><b>आदेश</b></td></tr>");
-                sb.Append("<tr><td colspan='2' align='left' valign='top' style='font-size:16px'> &nbsp;&nbsp;&nbsp;&nbsp;राजस्थान गैर सरकारी शैक्षिक यम, 1989 तथा तत्संबंधी नियम 1993 एवं राजा सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत <b>सत्र  " + dt[0].data.Rows[0]["FinancialYearName"].ToString() + "</b> (एक सत्र) के लिए स्नातक स्तर पर पूर्व संचालित संकाय/ विषयों में अस्थाई अनापत्ति प्रमाण पत्र अभिवृद्धि निम्नलिखित शर्तों के साथ स्वीकृत की जाती है-<br/></td></tr>");
-                sb.Append("<tr><td colspan='2' align='left' valign='top'><table style='width:100%;line-height:1;' cellpadding='0' cellspacing='0' border='1'>");
-                sb.Append("<tr><td align='left' valign='top' style='margin:10px'>संचालक संस्था</td><td align='left' valign='top' style='margin:10px'>महाविद्यालय का नाम</td>");
-                sb.Append("<td align='left' valign='top' style='margin:10px'>सम्बद्ध विश्वविद्यालय</td><td align='left' valign='top' style='margin:10px'>पूर्व संचालित संकाय/ विषय</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td align='left' valign='top' style='margin:10px'>" + dt[0].data.Rows[0]["SocietyName"].ToString() + "</td><td align='left' valign='top' style='padding:10px'>" + dt[0].data.Rows[0]["CollegeName"].ToString() + "</td>");
-                sb.Append("<td align='left' valign='top' style='margin:10px'> " + dt[0].data.Rows[0]["UniversityName"].ToString() + "</td><td align='left' valign='top' style='margin:10px'>अनिवार्य विषयों सहित स्नातक स्तर पर</td></tr></table></td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>1. संस्था प्रत्येक सत्र में निरीक्षण करवाने हेतु नियमानुसार निर्धारित शुल्क जमा करवाकर ऑनलाइन प्रपत्र प्रस्तुत करेगी।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top' style='font-size:14px'>2. संस्था सत्र " + dt[0].data.Rows[0]["FinancialYearName"].ToString() + " में निर्धारित नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करेगी।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>3. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता अधिकृत अधिकारी द्वारा गया अभिलेख उपलब्ध करायेगी।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>5. संस्था को समय-समय पर यू.जी.सी. राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप से करनी होगी।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>6. संख्या संबंधित विद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बसे मान्यता व विश्वविद्यालय से समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>7. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी तथा महाविद्यालय तदनुसार तय संख्या सीमा में प्रवेश दिया जाना सुनिश्चित करेगा।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>8. संख्या महाविद्यालय में अध्यापन कार्य हेतु पूजीसी सामारी प्राचार्य एवं व्याख्यान मानदण्डानुसार कि स्टाफ की नियुक्ति के साथ-2 अन्य निर्धारित शर्मा को चलना करेगी।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top' style='font-size:14px'>9. राज्य सरकार की महाविद्यालय प्रवेश नीति " + dt[0].data.Rows[0]["FinancialYearName"].ToString() + " तथा बाद में जानी होने वाली नीतियों का पालन करना</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>10. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाएं निर्धारित अवधि मे भरकर अपलोड़ करेगी।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>11. मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर DCF-II (Data Capture format-ii) भरवार अपलोड करना अनिवार्य होगा प्रमाण-पत्र की कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करे।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</td></tr>");
-                sb.Append("<tr style='font-size:14px'><td colspan='2' align='right' valign='top'><br/><br/>आयुक्त <br />कॉलेज शिक्षा राजस्थान जयपुर</td></tr>");
-                sb.Append("<tr><td colspan='2' align='left' valign='top'><p>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-</p>");
-                sb.Append("<p>1. विशिष्ट सहायक मा० उच्च शिक्षा मंत्री महोदय, राजस्थान जयपुर ।</p><p>2. निजी सचिव शासन सचिव उच्च शिक्षा विभाग, राजस्थान जयपुर ।</p><p>3. निजी सचिव आयुक्त आयुक्तालय कॉलेज शिक्षा राजस्थान जयपुर</p>");
-                sb.Append("<p>4. जिला कलेक्टर पानी</p><p>5. कुल शहिद जय नारायणालय, जोधपुर।</p><p>6. सचिव सम्बन्धित महाविद्यालय ।</p><p>7. सध्या आयुक्तालय शिक्षा राजस्थान जयपुर</p><p>8. रक्षित पत्रावली </p></td></tr>");
-                sb.Append(" <tr><td colspan='2' align='right' valign='top'><br/>संयुक्त निदेशक (नि०सं०) <br />कॉलेज शिक्षा राजस्थान जयपुर</td></tr>");
-                sb.Append("</table>");
-            }
 
-            sbhtml.Append(UnicodeToKrutidev.FindAndReplaceKrutidev(sb.ToString().Replace("<br>", "<br/>"), true, "17px"));
-            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
-            Document pdfDoc = new Document(iTextSharp.text.PageSize.A4, 50f, 50f, 50f, 70f);
-            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(filepath, FileMode.Create));
-            try
-            {
-                pdfDoc.Open();
-                var tagProcessors = (DefaultTagProcessorFactory)Tags.GetHtmlTagProcessorFactory();
-                tagProcessors.RemoveProcessor(HTML.Tag.IMG);
-                tagProcessors.AddProcessor(HTML.Tag.IMG, new CustomImageTagProcessor());
-                var cssFiles = new CssFilesImpl();
-                cssFiles.Add(XMLWorkerHelper.GetInstance().GetDefaultCSS());
-                var cssResolver = new StyleAttrCSSResolver(cssFiles);
-                var charset = System.Text.Encoding.UTF8;
-                var context = new HtmlPipelineContext(new CssAppliersImpl(new XMLWorkerFontProvider()));
-                context.SetAcceptUnknown(true).AutoBookmark(true).SetTagFactory(tagProcessors);
-                var htmlPipeline = new HtmlPipeline(context, new PdfWriterPipeline(pdfDoc, writer));
-                var cssPipeline = new CssResolverPipeline(cssResolver, htmlPipeline);
-                var worker = new XMLWorker(cssPipeline, true);
-                var xmlParser = new XMLParser(true, worker, charset);
-                using (var sr = new StringReader(sbhtml.ToString()))
-                {
-                    xmlParser.Parse(sr);
-                    pdfDoc.Close();
-                    writer.Close();
-                }
+            DataSet dataset = new DataSet();
+            dataset = CollegeDetails();
+            string mimetype = "";
+            int extension = 1;
+            var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\DECNOC_Print.rdlc";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+            parameters.Add("test", "");
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
+            localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            //return File(result.MainStream, "application/pdf");
+            String file_name_pdf = "\\Test.pdf";
+            System.IO.File.WriteAllBytes(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports") + file_name_pdf, result.MainStream);
 
-            }
-            catch (Exception ex)
-            {
-                pdfDoc.Close();
-                writer.Close();
-                throw ex;
-            }
+
+            //StringBuilder sbhtml = new StringBuilder();
+
+            //string CollegeLogo = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/dce_logo.jpg");
+
+            //List<CommonDataModel_DataTable> dt = new List<CommonDataModel_DataTable>();
+            //dt = UtilityHelper.ApplyNOCUtility.GeneratePDFForJointSecretary(ApplyNOCID);
+            //if (dt.Count > 0)
+            //{
+            //    sb.Clear();
+            //    sb.Append("<table style='width:100%;line-height:1' cellpadding='0' cellspacing='0'>");
+            //    sb.Append("<tr><td align='left' width='10%'><img  src='" + CollegeLogo + "' height='80' width='80' alt='logo'/></td>");
+            //    sb.Append("<td align='center'><table style='width:100%;line-height:1' cellpadding='0' cellspacing='0'><tr><td align='center' valign='top'><h2 style='font-size:28px'>राजस्थान सरकार</h2></td></tr>");
+            //    sb.Append("<tr><td align='center' valign='top'><p>आयुक्तालय, कालेज शिक्षा, राजस्थान, जयपुर</p></td></tr>");
+            //    sb.Append("<tr><td align='center' valign='top'><p>Block-4, RKS Sankul, JLN Road, Jaipur- 302015, Rajasthan</p></td></tr>");
+            //    sb.Append("<tr><td align='center' valign='top'><p>Website: http://hte.rajasthan.gov.in/dept/dce/</p></td></tr>");
+            //    sb.Append("<tr><td align='center' valign='top'><p>e-mail: jdpi.cce@gmail.com Ph.: 0141-2706736(0);</p></td></tr>");
+            //    sb.Append("<tr><td align='center' valign='top'><hr /></td></tr></table></td></tr>");
+            //    sb.Append("<tr><td colspan='2' style='margin-top:10px'><table style='width:100%;line-height:1' cellpadding='0' cellspacing='0'><tr>");
+            //    sb.Append("<td align='left' valign='top'>क्रमांक : एफ4 (40) आकाश / नि.सं./ 2018 /1154</td><td align='right' valign='top'>दिनांक - " + DateTime.Now.ToString("dd/MM/yyyy") + "</td></tr></table></td></tr>");
+            //    sb.Append("<tr><td colspan='2' align='center' valign='top'><b>आदेश</b></td></tr>");
+            //    sb.Append("<tr><td colspan='2' align='left' valign='top' style='font-size:16px'> &nbsp;&nbsp;&nbsp;&nbsp;राजस्थान गैर सरकारी शैक्षिक यम, 1989 तथा तत्संबंधी नियम 1993 एवं राजा सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत <b>सत्र  " + dt[0].data.Rows[0]["FinancialYearName"].ToString() + "</b> (एक सत्र) के लिए स्नातक स्तर पर पूर्व संचालित संकाय/ विषयों में अस्थाई अनापत्ति प्रमाण पत्र अभिवृद्धि निम्नलिखित शर्तों के साथ स्वीकृत की जाती है-<br/></td></tr>");
+            //    sb.Append("<tr><td colspan='2' align='left' valign='top'><table style='width:100%;line-height:1;' cellpadding='0' cellspacing='0' border='1'>");
+            //    sb.Append("<tr><td align='left' valign='top' style='margin:10px'>संचालक संस्था</td><td align='left' valign='top' style='margin:10px'>महाविद्यालय का नाम</td>");
+            //    sb.Append("<td align='left' valign='top' style='margin:10px'>सम्बद्ध विश्वविद्यालय</td><td align='left' valign='top' style='margin:10px'>पूर्व संचालित संकाय/ विषय</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td align='left' valign='top' style='margin:10px'>" + dt[0].data.Rows[0]["SocietyName"].ToString() + "</td><td align='left' valign='top' style='padding:10px'>" + dt[0].data.Rows[0]["CollegeName"].ToString() + "</td>");
+            //    sb.Append("<td align='left' valign='top' style='margin:10px'> " + dt[0].data.Rows[0]["UniversityName"].ToString() + "</td><td align='left' valign='top' style='margin:10px'>अनिवार्य विषयों सहित स्नातक स्तर पर</td></tr></table></td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>1. संस्था प्रत्येक सत्र में निरीक्षण करवाने हेतु नियमानुसार निर्धारित शुल्क जमा करवाकर ऑनलाइन प्रपत्र प्रस्तुत करेगी।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top' style='font-size:14px'>2. संस्था सत्र " + dt[0].data.Rows[0]["FinancialYearName"].ToString() + " में निर्धारित नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करेगी।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>3. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता अधिकृत अधिकारी द्वारा गया अभिलेख उपलब्ध करायेगी।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>5. संस्था को समय-समय पर यू.जी.सी. राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप से करनी होगी।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>6. संख्या संबंधित विद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बसे मान्यता व विश्वविद्यालय से समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>7. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी तथा महाविद्यालय तदनुसार तय संख्या सीमा में प्रवेश दिया जाना सुनिश्चित करेगा।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>8. संख्या महाविद्यालय में अध्यापन कार्य हेतु पूजीसी सामारी प्राचार्य एवं व्याख्यान मानदण्डानुसार कि स्टाफ की नियुक्ति के साथ-2 अन्य निर्धारित शर्मा को चलना करेगी।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top' style='font-size:14px'>9. राज्य सरकार की महाविद्यालय प्रवेश नीति " + dt[0].data.Rows[0]["FinancialYearName"].ToString() + " तथा बाद में जानी होने वाली नीतियों का पालन करना</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>10. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाएं निर्धारित अवधि मे भरकर अपलोड़ करेगी।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>11. मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर DCF-II (Data Capture format-ii) भरवार अपलोड करना अनिवार्य होगा प्रमाण-पत्र की कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करे।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='left' valign='top'>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</td></tr>");
+            //    sb.Append("<tr style='font-size:14px'><td colspan='2' align='right' valign='top'><br/><br/>आयुक्त <br />कॉलेज शिक्षा राजस्थान जयपुर</td></tr>");
+            //    sb.Append("<tr><td colspan='2' align='left' valign='top'><p>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-</p>");
+            //    sb.Append("<p>1. विशिष्ट सहायक मा० उच्च शिक्षा मंत्री महोदय, राजस्थान जयपुर ।</p><p>2. निजी सचिव शासन सचिव उच्च शिक्षा विभाग, राजस्थान जयपुर ।</p><p>3. निजी सचिव आयुक्त आयुक्तालय कॉलेज शिक्षा राजस्थान जयपुर</p>");
+            //    sb.Append("<p>4. जिला कलेक्टर पानी</p><p>5. कुल शहिद जय नारायणालय, जोधपुर।</p><p>6. सचिव सम्बन्धित महाविद्यालय ।</p><p>7. सध्या आयुक्तालय शिक्षा राजस्थान जयपुर</p><p>8. रक्षित पत्रावली </p></td></tr>");
+            //    sb.Append(" <tr><td colspan='2' align='right' valign='top'><br/>संयुक्त निदेशक (नि०सं०) <br />कॉलेज शिक्षा राजस्थान जयपुर</td></tr>");
+            //    sb.Append("</table>");
+            //}
+
+            //sbhtml.Append(UnicodeToKrutidev.FindAndReplaceKrutidev(sb.ToString().Replace("<br>", "<br/>"), true, "17px"));
+            //string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
+            //Document pdfDoc = new Document(iTextSharp.text.PageSize.A4, 50f, 50f, 50f, 70f);
+            //PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(filepath, FileMode.Create));
+            //try
+            //{
+            //    pdfDoc.Open();
+            //    var tagProcessors = (DefaultTagProcessorFactory)Tags.GetHtmlTagProcessorFactory();
+            //    tagProcessors.RemoveProcessor(HTML.Tag.IMG);
+            //    tagProcessors.AddProcessor(HTML.Tag.IMG, new CustomImageTagProcessor());
+            //    var cssFiles = new CssFilesImpl();
+            //    cssFiles.Add(XMLWorkerHelper.GetInstance().GetDefaultCSS());
+            //    var cssResolver = new StyleAttrCSSResolver(cssFiles);
+            //    var charset = System.Text.Encoding.UTF8;
+            //    var context = new HtmlPipelineContext(new CssAppliersImpl(new XMLWorkerFontProvider()));
+            //    context.SetAcceptUnknown(true).AutoBookmark(true).SetTagFactory(tagProcessors);
+            //    var htmlPipeline = new HtmlPipeline(context, new PdfWriterPipeline(pdfDoc, writer));
+            //    var cssPipeline = new CssResolverPipeline(cssResolver, htmlPipeline);
+            //    var worker = new XMLWorker(cssPipeline, true);
+            //    var xmlParser = new XMLParser(true, worker, charset);
+            //    using (var sr = new StringReader(sbhtml.ToString()))
+            //    {
+            //        xmlParser.Parse(sr);
+            //        pdfDoc.Close();
+            //        writer.Close();
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    pdfDoc.Close();
+            //    writer.Close();
+            //    throw ex;
+            //}
 
             return fileName;
 

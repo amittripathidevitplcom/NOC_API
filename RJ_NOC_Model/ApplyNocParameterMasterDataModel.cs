@@ -143,7 +143,7 @@ namespace RJ_NOC_Model
         public int ApplicationTypeID { get; set; }
         public string? ApplicationTypeName { get; set; }
         public decimal TotalFeeAmount { get; set; }
-        public decimal TotalNocFee { get; set; } 
+        public decimal TotalNocFee { get; set; }
         public decimal LateFee { get; set; }
 
         public bool? ApplicationStatus { get; set; }
@@ -316,5 +316,27 @@ namespace RJ_NOC_Model
         public decimal FeesAmount { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+    }
+    public class ApplyNOCCourseSubjectListDataModal
+    {
+        public int ApplyNocApplicationID { get; set; }
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+        public int ApplyNocParameterID { get; set; }
+    }
+    public class ApplyNOCCourseListDataModal
+    {
+        public int ApplyNocApplicationID { get; set; }
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+        public List<ApplyNOCSubjectListCourseWiseDataModal> SubjectList { get; set; }
+    }
+    public class ApplyNOCSubjectListCourseWiseDataModal
+    {
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+        public int ApplyNocParameterID { get; set; }
     }
 }
