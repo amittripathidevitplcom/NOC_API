@@ -71,7 +71,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark)
         {
-            return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark);
+            return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID,RoleID,UserID,NOCIssuedRemark);
         }
         public int CheckAppliedNOCCollegeWise(int CollegeID)
         {
@@ -89,6 +89,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SubmitRevertApplication(SubmitRevertApplication request)
         {
             return UnitOfWork.ApplyNOCRepository.SubmitRevertApplication(request);
+        }
+        public bool SaveDCENOCData(string Path, List<GenerateNOC_DataModel> model)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveDCENOCData(Path,model);
         }
     }
 }

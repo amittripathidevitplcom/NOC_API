@@ -407,16 +407,16 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("GenerateNOCForDCE")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(GenerateNOC_DataModel request)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(List<GenerateNOC_DataModel> request)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "GenerateNOCForDCE", request.ApplyNOCID, "ApplyNOCController");
+            CommonDataAccessHelper.Insert_TrnUserLog(request[0].UserID, "GenerateNOCForDCE", request[0].ApplyNOCID, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                string Path = GeneratePDFDCE(request.ApplyNOCID);
+                string Path = GeneratePDFDCE(request[0].ApplyNOCID,request);
                 if (!string.IsNullOrEmpty(Path))
                 {
-                    if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SavePDFPath(Path, request.ApplyNOCID, request.DepartmentID, request.RoleID, request.UserID, request.NOCIssuedRemark)))
+                    if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(Path, request)))
                     {
                         result.State = OperationState.Success;
                         result.SuccessMessage = "PDF Generate Successfully .!";
@@ -691,7 +691,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet]
-        public string GeneratePDFDCE(int ApplyNOCID)
+        public string GeneratePDFDCE(int ApplyNOCID, List<GenerateNOC_DataModel> CourseSubjectData)
         {
             StringBuilder sb = new StringBuilder();
             var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";

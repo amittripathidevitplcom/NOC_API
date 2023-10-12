@@ -324,6 +324,16 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-
+        public bool  SaveDCENOCData(string Path, List<GenerateNOC_DataModel> model)
+        {
+            string IssuedNOCData_Str = CommonHelper.GetDetailsTableQry(model, "Temp_IssuedNOCData");
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='Save',@NOCFilePath='{Path}',@IssuedNOCData_str='{IssuedNOCData_Str}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SaveDCENOCData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
