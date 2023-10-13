@@ -12,6 +12,7 @@ namespace RJ_NOC_Model
         public int FarmLandDetailID { get; set; }
         public int UserID { get; set; }
         public int CollegeID { get; set; }
+        public string? CollegeName { get;set; }
         public string CertificatefOfTehsildarPath { get; set; }
         public string CertificatefOfTehsildarName { get; set; }
         public string CertificatefOfTehsildar_DisName { get; set; }

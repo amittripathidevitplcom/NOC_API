@@ -29,5 +29,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetIssuedNOCReportList(int UserID, string ActionName, int RoleID, int DepartmentID);
         List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID);
         bool SubmitRevertApplication(SubmitRevertApplication request);
+
+        bool SaveDCENOCData(string Path, List<GenerateNOC_DataModel> model);
     }
 }

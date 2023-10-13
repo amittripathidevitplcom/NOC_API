@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DCENOC_Print" targetNamespace="http://tempuri.org/DCENOC_Print.xsd" xmlns:mstns="http://tempuri.org/DCENOC_Print.xsd" xmlns="http://tempuri.org/DCENOC_Print.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DCENOC_Print" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DCENOC_Print" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DCENOC_Print">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="CollegeDetails" msprop:Generator_RowEvHandlerName="CollegeDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="CollegeDetailsRowDeleted" msprop:Generator_RowDeletingName="CollegeDetailsRowDeleting" msprop:Generator_RowEvArgName="CollegeDetailsRowChangeEvent" msprop:Generator_TablePropName="CollegeDetails" msprop:Generator_RowChangedName="CollegeDetailsRowChanged" msprop:Generator_UserTableName="CollegeDetails" msprop:Generator_RowChangingName="CollegeDetailsRowChanging" msprop:Generator_RowClassName="CollegeDetailsRow" msprop:Generator_TableClassName="CollegeDetailsDataTable" msprop:Generator_TableVarName="tableCollegeDetails">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NOCIssueNo" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="NOCIssueNoColumn" msprop:Generator_ColumnPropNameInRow="NOCIssueNo" msprop:Generator_UserColumnName="NOCIssueNo" msprop:Generator_ColumnVarNameInTable="columnNOCIssueNo" type="xs:string" minOccurs="0" />
+              <xs:element name="Date" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnVarNameInTable="columnDate" type="xs:string" minOccurs="0" />
+              <xs:element name="NOCIssueFinancialYear" msprop:Generator_UserColumnName="NOCIssueFinancialYear" msprop:Generator_ColumnPropNameInTable="NOCIssueFinancialYearColumn" msprop:Generator_ColumnPropNameInRow="NOCIssueFinancialYear" msprop:Generator_ColumnVarNameInTable="columnNOCIssueFinancialYear" type="xs:string" minOccurs="0" />
+              <xs:element name="img" msprop:Generator_ColumnPropNameInRow="img" msprop:Generator_ColumnPropNameInTable="imgColumn" msprop:Generator_ColumnVarNameInTable="columnimg" msprop:Generator_UserColumnName="img" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CourseAndSubjectDetails" msprop:Generator_RowEvHandlerName="CourseAndSubjectDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="CourseAndSubjectDetailsRowDeleted" msprop:Generator_RowDeletingName="CourseAndSubjectDetailsRowDeleting" msprop:Generator_RowEvArgName="CourseAndSubjectDetailsRowChangeEvent" msprop:Generator_TablePropName="CourseAndSubjectDetails" msprop:Generator_RowChangedName="CourseAndSubjectDetailsRowChanged" msprop:Generator_UserTableName="CourseAndSubjectDetails" msprop:Generator_RowChangingName="CourseAndSubjectDetailsRowChanging" msprop:Generator_RowClassName="CourseAndSubjectDetailsRow" msprop:Generator_TableClassName="CourseAndSubjectDetailsDataTable" msprop:Generator_TableVarName="tableCourseAndSubjectDetails">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LegalEntityName" msprop:Generator_ColumnPropNameInTable="LegalEntityNameColumn" msprop:Generator_ColumnPropNameInRow="LegalEntityName" msprop:Generator_UserColumnName="LegalEntityName" msprop:Generator_ColumnVarNameInTable="columnLegalEntityName" type="xs:string" minOccurs="0" />
+              <xs:element name="CollegeName" msprop:Generator_ColumnPropNameInTable="CollegeNameColumn" msprop:Generator_ColumnPropNameInRow="CollegeName" msprop:Generator_UserColumnName="CollegeName" msprop:Generator_ColumnVarNameInTable="columnCollegeName" type="xs:string" minOccurs="0" />
+              <xs:element name="UniversityName" msprop:Generator_UserColumnName="UniversityName" msprop:Generator_ColumnPropNameInTable="UniversityNameColumn" msprop:Generator_ColumnPropNameInRow="UniversityName" msprop:Generator_ColumnVarNameInTable="columnUniversityName" type="xs:string" minOccurs="0" />
+              <xs:element name="StreamName" msprop:Generator_UserColumnName="StreamName" msprop:Generator_ColumnPropNameInTable="StreamNameColumn" msprop:Generator_ColumnPropNameInRow="StreamName" msprop:Generator_ColumnVarNameInTable="columnStreamName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

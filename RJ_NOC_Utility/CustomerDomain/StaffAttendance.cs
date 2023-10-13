@@ -16,9 +16,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public StaffAttendance(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID)
+        public List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID, string Date)
         {
-            return UnitOfWork.StaffAttendanceRepository.GetStaffList_CollegeWise(CollegeID, StaffType, CourseID);
+            return UnitOfWork.StaffAttendanceRepository.GetStaffList_CollegeWise(CollegeID, StaffType, CourseID, Date);
         }
         public bool SaveData(StaffAttendanceDataModel request)
         {
