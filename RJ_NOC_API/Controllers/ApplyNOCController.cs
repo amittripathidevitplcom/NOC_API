@@ -753,7 +753,7 @@ namespace RJ_NOC_API.Controllers
         public string GeneratePDFDCE(int ApplyNOCID)
         {
             StringBuilder sb = new StringBuilder();
-            var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";
+            var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
             string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
 
 
@@ -770,8 +770,7 @@ namespace RJ_NOC_API.Controllers
             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
             //return File(result.MainStream, "application/pdf");
-            String file_name_pdf = "\\Test.pdf";
-            System.IO.File.WriteAllBytes(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports") + file_name_pdf, result.MainStream);
+            System.IO.File.WriteAllBytes(filepath, result.MainStream);
 
 
             //StringBuilder sbhtml = new StringBuilder();
@@ -821,7 +820,7 @@ namespace RJ_NOC_API.Controllers
             //}
 
             //sbhtml.Append(UnicodeToKrutidev.FindAndReplaceKrutidev(sb.ToString().Replace("<br>", "<br/>"), true, "17px"));
-            //string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
+            ////string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
             //Document pdfDoc = new Document(iTextSharp.text.PageSize.A4, 50f, 50f, 50f, 70f);
             //PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(filepath, FileMode.Create));
             //try
