@@ -41,6 +41,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommitteeMasterRepository.SaveApplicationCommitteeData_AH(ListData);
         }
+        public bool SaveApplicationCommitteeData_Agri(PostApplicationCommitteeMemberdataModel ListData)
+        {
+            return UnitOfWork.CommitteeMasterRepository.SaveApplicationCommitteeData_Agri(ListData);
+        }
 
         public bool DeleteApplicationCommittee(int CommitteeMemberID)
         {

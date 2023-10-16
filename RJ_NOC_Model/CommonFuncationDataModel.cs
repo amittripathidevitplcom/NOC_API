@@ -152,6 +152,7 @@ namespace RJ_NOC_Model
         public int secretary_Revert { get; set; }
         public int ScrutinyCommittee_Forward { get; set; }
         public int RegistratCommittee_Forward { get; set; }
+        public int ApprovedAndForward { get; set; }
 
 
 

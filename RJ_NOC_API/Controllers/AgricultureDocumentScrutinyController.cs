@@ -1,6 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.tool.xml.css;
+using iTextSharp.tool.xml.html;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.end;
+using iTextSharp.tool.xml.pipeline.html;
+using iTextSharp.tool.xml;
+using Microsoft.AspNetCore.Mvc;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_Model;
+using RJ_NOC_Utility;
+using static RJ_NOC_API.Controllers.ApplyNOCController;
+using System.Text;
+using iTextSharp.text;
+using iTextSharp.tool.xml.parser;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -449,6 +461,547 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
+        }
+
+
+        [HttpPost("GetPhysicalVerificationAppliationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetPhysicalVerificationAppliationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPhysicalVerificationAppliationList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPhysicalVerificationAppliationList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPhysicalVerificationAppliationList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("FinalSubmitInspectionCommittee/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}")]
+        public async Task<OperationResult<bool>> FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID, ActionName));
+                if (result.Data == true)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitInspectionCommittee", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in FinalSubmitInspectionCommittee";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.FinalSubmitInspectionCommittee", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GetPreVerificationDoneList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetPreVerificationDoneList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPreVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPreVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetPreVerificationchecklistDetails/{Type}/{DepartmentID}/{ApplyNOCID}/{CreatedBy}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_RNCCheckListData>>> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            var result = new OperationResult<List<CommonDataModel_RNCCheckListData>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetPreVerificationchecklistDetails(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationchecklistDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("FinalSubmitPreVerification/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}")]
+        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName));
+                if (result.Data == true)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitPreVerification", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in FinalSubmitPreVerification";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.FinalSubmitPreVerification", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetNOCApplicationList/{UserID}/{RoleID}/{DepartmentID}/{ActionType}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetNOCApplicationList(int UserID, int RoleID, int DepartmentID, string ActionType)
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetApplyNOCApplicationList(RoleID, UserID, DepartmentID, ActionType));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationchecklistDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GetPostVerificationAppliationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPostVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetPostVerificationAppliationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPreVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPreVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GetPostVerificationDoneList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetPostVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetPostVerificationDoneList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPostVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPostVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPostVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GetFinalVerificationAppliationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetFinalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetFinalVerificationAppliationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetPreVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetPreVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetPreVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GetFinalVerificationDoneList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetFinalVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetFinalVerificationDoneList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetFinalVerificationDoneList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetFinalVerificationDoneList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetFinalVerificationDoneList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GetFinalNOCApplicationList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetFinalNOCApplicationList(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetFinalNOCApplicationList", 0, "AnimalDocumentScrutinyController");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in GetFinalNOCApplicationList";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetFinalNOCApplicationList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetNOCCourse/{ApplyNocID}/{DepartmentID}/{CollegeID}/{ActionType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetNOCCourse(int ApplyNocID, int DepartmentID, int CollegeID, string ActionType)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetNOCCourse(ApplyNocID, DepartmentID, CollegeID, ActionType));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.GetNOCCourse", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("UpdateNOCPDFData/{ApplyNocID}/{DepartmentID}/{CollegeID}/{ActionType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> UpdateNOCPDFData(int ApplyNocID, int DepartmentID, int CollegeID, string ActionType)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(ApplyNocID, "UpdateNOCPDFData", DepartmentID, "AanimalController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.GetGeneratePDFData(ApplyNocID, DepartmentID, CollegeID, ActionType));
+                string Path = GeneratePDF(result.Data);
+
+                if (!string.IsNullOrEmpty(Path))
+                {
+                    if (await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.FinalSavePDFPathandNOC(Path, ApplyNocID, DepartmentID, 0, 0, "", "UpdateGeneratePDF")))
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "PDF Generate Successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "There was an error Generate PDF!";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutiny.UpdateNOCPDFData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("FinalNOCRejectRelese")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> FinalNOCRejectRelese(GenerateNOC_DataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "FinalNOCRejectRelese", request.ApplyNOCID, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                bool success = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.FinalSavePDFPathandNOC("", request.ApplyNOCID, request.DepartmentID, 0, request.UserID, request.NOCIssuedRemark, "UpdateNOCDetails"));
+                if (success)
+                {
+                    result.Data = new List<CommonDataModel_DataTable>();
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "NOC Relesed Successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutiny.FinalNOCRejectRelese", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet]
+        public string GeneratePDF(List<CommonDataModel_DataTable> dt)
+        {
+            StringBuilder sb = new StringBuilder();
+            var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";
+            StringBuilder sbhtml = new StringBuilder();
+
+            string CollegeName = dt[0].data.Rows[0]["CollegeName"].ToString();
+            string CollegeMobileNo = dt[0].data.Rows[0]["CollegeMobileNo"].ToString();
+            string CollegeEmail = dt[0].data.Rows[0]["CollegeEmail"].ToString();
+            string ApplicationTypeName = dt[0].data.Rows[0]["ApplicationTypeName"].ToString();
+            string TotalFeeAmount = dt[0].data.Rows[0]["TotalFeeAmount"].ToString();
+            string ApplicationStatus = dt[0].data.Rows[0]["ApplicationStatus"].ToString();
+            string DepartmentName = dt[0].data.Rows[0]["DepartmentName"].ToString();
+            string ApplicationNo = dt[0].data.Rows[0]["ApplicationNo"].ToString();
+            DateTime now = DateTime.Now.Date;
+            var Date = now.ToString("dd-MM-yyyy");
+
+            {
+                sb.Clear();
+                sb.Append("<table style='width:100%;'>");
+                sb.Append("<tr><td style='text-align:center'><h1 style='margin-bottom:0px;'>" + DepartmentName + "</h1></td></tr>");
+                sb.Append("<tr><td style='text-align:center'><h4 style='margin-bottom:0px;'>No Objection Certificate</h4></td></tr>");
+                sb.Append("<tr><td style='text-align:center'><h6 style='margin-bottom:0px;'>" + CollegeName + " Apply For " + ApplicationTypeName + "</h6></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Application No. : </b> " + ApplicationNo + "</td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Contact No. : </b>" + CollegeMobileNo + "</td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Email : </b>" + CollegeEmail + "</td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Date : </b>" + Date + "</td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td><b>Total Fee Amount : </b>" + TotalFeeAmount + "</td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td><p>NOC has been issued to " + CollegeName + " College of Animal Husbandry Department. I have no objection to this, I am marking it with my seal.</p></td></tr>");
+                //sb.Append("<tr><td><p></p></td></tr>");
+                //sb.Append("<tr><td><p>sdgfomsdfgomdsfg osdgmf fsogm dsfgom dsfgomd fsgmofg mdsfgm dsg</p></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td height='30px;'></td></tr>");
+                sb.Append("<tr><td style='text-align:right'><b>Signature</b></td></tr>");
+                sb.Append("</table>");
+            }
+            //}
+
+            sbhtml.Append(UnicodeToKrutidev.FindAndReplaceKrutidev(sb.ToString().Replace("<br>", "<br/>"), true, "15px"));
+            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile/" + fileName);
+            Document pdfDoc = new Document(iTextSharp.text.PageSize.A4, 50f, 50f, 50f, 70f);
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(filepath, FileMode.Create));
+            try
+            {
+                pdfDoc.Open();
+                var tagProcessors = (DefaultTagProcessorFactory)Tags.GetHtmlTagProcessorFactory();
+                tagProcessors.RemoveProcessor(HTML.Tag.IMG);
+                tagProcessors.AddProcessor(HTML.Tag.IMG, new CustomImageTagProcessor());
+                var cssFiles = new CssFilesImpl();
+                cssFiles.Add(XMLWorkerHelper.GetInstance().GetDefaultCSS());
+                var cssResolver = new StyleAttrCSSResolver(cssFiles);
+                var charset = System.Text.Encoding.UTF8;
+                var context = new HtmlPipelineContext(new CssAppliersImpl(new XMLWorkerFontProvider()));
+                context.SetAcceptUnknown(true).AutoBookmark(true).SetTagFactory(tagProcessors);
+                var htmlPipeline = new HtmlPipeline(context, new PdfWriterPipeline(pdfDoc, writer));
+                var cssPipeline = new CssResolverPipeline(cssResolver, htmlPipeline);
+                var worker = new XMLWorker(cssPipeline, true);
+                var xmlParser = new XMLParser(true, worker, charset);
+                using (var sr = new StringReader(sbhtml.ToString()))
+                {
+                    xmlParser.Parse(sr);
+                    pdfDoc.Close();
+                    writer.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                pdfDoc.Close();
+                writer.Close();
+                throw ex;
+            }
+
+            return fileName;
+
         }
     }
 }

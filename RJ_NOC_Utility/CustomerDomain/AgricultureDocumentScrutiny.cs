@@ -78,5 +78,68 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AgricultureDocumentScrutinyRepository.DocumentScrutiny_FarmLandDetails(CollageID, RoleID, ApplyNOCID);
         }
 
+        public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetPhysicalVerificationAppliationList(request);
+        }
+        public List<CommonDataModel_DataTable> GetPostVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetPostVerificationAppliationList(request);
+        }
+        public List<CommonDataModel_DataTable> GetFinalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetFinalVerificationAppliationList(request);
+        }
+        public List<CommonDataModel_DataTable> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetPreVerificationDoneList(request);
+        }
+
+        public List<CommonDataModel_DataTable> GetPostVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetPostVerificationDoneList(request);
+        }
+        public List<CommonDataModel_DataTable> GetFinalVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetFinalVerificationDoneList(request);
+        }
+        public List<CommonDataModel_DataTable> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetFinalNOCApplicationList(request);
+        }
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID, ActionName);
+        }
+
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName);
+        }
+
+        public List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetPreVerificationchecklistDetails(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID);
+        }
+
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmetID, string Action)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetApplyNOCApplicationList(RoleID, UserID, DepartmetID, Action);
+        }
+        public List<CommonDataModel_DataTable> GetNOCCourse(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetNOCCourse(ApplyNocID, DepartmentID, CollegeID, Action);
+        }
+
+        public List<CommonDataModel_DataTable> GetGeneratePDFData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.GetGeneratePDFData(ApplyNocID, DepartmentID, CollegeID, Action);
+        }
+
+        public bool FinalSavePDFPathandNOC(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark, string Action)
+        {
+            return UnitOfWork.AgricultureDocumentScrutinyRepository.FinalSavePDFPathandNOC(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark, Action);
+        }
+
     }
 }
