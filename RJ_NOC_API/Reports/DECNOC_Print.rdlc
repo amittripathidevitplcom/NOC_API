@@ -89,6 +89,7 @@
                   <TextRun>
                     <Value>राजस्थान सरकार</Value>
                     <Style>
+                      <FontFamily>Kruti Dev 010</FontFamily>
                       <FontSize>10.5pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
@@ -204,9 +205,9 @@
             <Source>Embedded</Source>
             <Value>dce_logo</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>0.20849cm</Top>
-            <Height>3.0875cm</Height>
-            <Width>3.405cm</Width>
+            <Top>0.33549cm</Top>
+            <Height>2.40743cm</Height>
+            <Width>2.74509cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
