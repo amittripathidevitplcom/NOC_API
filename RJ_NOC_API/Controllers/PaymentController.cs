@@ -55,7 +55,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<PaymentRequest>();
             Random rnd = new Random();
             //string PRN = "PRN" + rnd.Next(100000, 999999)+ rnd.Next(100000, 999999);
-            string PRN = "TXN"+ GenerateTransactionNumber();
+            string PRN = "TXN"+ CommonHelper.GenerateTransactionNumber();
             try
             {
                 if (!string.IsNullOrEmpty(data.MerchantCode))
@@ -319,7 +319,7 @@ namespace RJ_NOC_API.Controllers
                     paymentRequest.REQUESTJSON = JsonConvert.SerializeObject(Model);
                     paymentRequest.REQUESTPARAMETERS.UDF1= Model.ApplyNocApplicationID;
                     paymentRequest.REQUESTPARAMETERS.RequestType = (int)enmPaymetRequest.RefundRequest;
-                    paymentRequest.REQUESTPARAMETERS.PRN ="RFD"+  GenerateTransactionNumber();
+                    paymentRequest.REQUESTPARAMETERS.PRN ="RFD"+ CommonHelper.GenerateTransactionNumber();
                     paymentRequest.REQUESTPARAMETERS.AMOUNT = Model.AMOUNT;
                     paymentRequest.REQUESTPARAMETERS.MERCHANTCODE = data.MerchantCode;
                     paymentRequest.REQUESTPARAMETERS.RPPTXNID = Model.RPPTXNID;
@@ -867,23 +867,6 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        #region "User Define Function"
-        public string GenerateTransactionNumber()
-        {
-            // Generate a new GUID.
-            Guid guid = Guid.NewGuid();
-
-            // Convert the first 6 bytes of the GUID to a byte array.
-            byte[] bytes = guid.ToByteArray();
-
-            // Take the first 6 bytes and convert them to a hexadecimal string.
-            string hexString = BitConverter.ToString(bytes, 0, 6).Replace("-", "");
-      
-            Random rnd = new Random();
-            //Create a 12-character transaction number from the hexadecimal string.
-            string transactionNumber =  rnd.Next(10000, 99999)+ hexString;
-            return transactionNumber;
-        }
-        #endregion
+        
     }
 }
