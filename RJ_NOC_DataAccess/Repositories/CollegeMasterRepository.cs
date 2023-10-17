@@ -67,11 +67,17 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@NAACAccreditedCertificate='{0}',", request.NAACAccreditedCertificate);
             sb.AppendFormat("@NACCValidityDate='{0}',", request.NACCValidityDate);
             sb.AppendFormat("@CityID='{0}',", request.CityID);
+            sb.AppendFormat("@ManagementType='{0}',", request.ManagementTypeID);
+            sb.AppendFormat("@OtherUniversityName='{0}',", request.OtherUniversityName);
             // child
             sb.AppendFormat("@ContactDetailsList='{0}',", CommonHelper.GetDetailsTableQry(request.ContactDetailsList, "ContactDetailsList"));
             if (request.NearestGovernmentHospitalsList.Count > 0)
             {
                 sb.AppendFormat("@NearestGovernmentHospitalsList='{0}',", CommonHelper.GetDetailsTableQry(request.NearestGovernmentHospitalsList, "NearestGovernmentHospitalsList"));
+            }
+            if (request.CollegeLevelDetails.Count > 0)
+            {
+                sb.AppendFormat("@DTECollegeLevel_College='{0}',", CommonHelper.GetDetailsTableQry(request.CollegeLevelDetails, "Temp_DTECollegeLevel_College"));
             }
             // action
             sb.AppendFormat("@Action='{0}'", "SaveCollegeData");
@@ -129,6 +135,10 @@ namespace RJ_NOC_DataAccess.Repository
                 if (ds.Tables.Count > 2)
                 {
                     collegeMasterDataModel.NearestGovernmentHospitalsList = CommonHelper.ConvertDataTable<List<NearestGovernmentHospitalsDataModel>>(ds.Tables[2]);
+                }
+                if (ds.Tables.Count > 3)
+                {
+                    collegeMasterDataModel.CollegeLevelDetails = CommonHelper.ConvertDataTable<List<CollegeLevelDetailsDataModel>>(ds.Tables[3]);
                 }
             }
 

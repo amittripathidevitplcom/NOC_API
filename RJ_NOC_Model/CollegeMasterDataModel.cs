@@ -14,7 +14,7 @@ namespace RJ_NOC_Model
         public string CollegeLogo_Dis_FileName { get; set; }
         public int PresentCollegeStatusID { get; set; }
         public int CollegeTypeID { get; set; }
-        public int CollegeLevelID { get; set; }
+        public int? CollegeLevelID { get; set; }
         public string CollegeCode { get; set; }
         public string CollegeNameEn { get; set; }
         public string CollegeNameHi { get; set; }
@@ -58,8 +58,11 @@ namespace RJ_NOC_Model
         public string? NACCValidityDate { get; set; }
         public string? CollegeStatus { get; set; }
         public int? CityID { get; set; }
+        public int? ManagementTypeID { get; set; }
+        public string? OtherUniversityName { get; set; }
         public List<ContactDetailsDataModel> ContactDetailsList { get; set; }
         public List<NearestGovernmentHospitalsDataModel> NearestGovernmentHospitalsList { get; set; }
+        public List<CollegeLevelDetailsDataModel> CollegeLevelDetails { get; set; }
     }
     public class ContactDetailsDataModel
     {
@@ -97,5 +100,13 @@ namespace RJ_NOC_Model
         public int Pincode { get; set; }
         public int? CityID { get; set; }
         public string? CityName { get; set; }
+    }
+
+    public class CollegeLevelDetailsDataModel
+    {
+        public int AID { get; set; }
+        public int CollegeID { get; set; }
+        public int ID { get; set; }
+        public string? Name { get; set; }
     }
 }
