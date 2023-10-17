@@ -480,7 +480,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<CommonDataModel_DataTable> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request)
         {
-            string SqlQuery = " exec USP_GetFinalNOCList_AH @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            string SqlQuery = " exec USP_GetFinalNOCList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetFinalVerificationDoneList");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -519,7 +519,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 
-            string SqlQuery = $" exec USP_UpdateNOCDetails_AH @ActionType='{Action}',@NOCFilePath='{Path}',@ApplyNocID={ApplyNOCID},@departmentID={DepartmentID},@RoleID={RoleID},@userID={UserID},@Remarks='{NOCIssuedRemark}',@IPAddress='{IPAddress}'";
+            string SqlQuery = $" exec USP_UpdateNOCDetails_Agri @ActionType='{Action}',@NOCFilePath='{Path}',@ApplyNocID={ApplyNOCID},@departmentID={DepartmentID},@RoleID={RoleID},@userID={UserID},@Remarks='{NOCIssuedRemark}',@IPAddress='{IPAddress}'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.FinalSavePDFPathandNOC");
             if (Rows > 0)
                 return true;

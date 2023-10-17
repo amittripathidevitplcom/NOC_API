@@ -137,18 +137,13 @@ namespace RJ_NOC_API
                                 Path.Combine(Directory.GetCurrentDirectory(), "ImageFile")),
                 RequestPath = "/ImageFile"
             }); 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                                Path.Combine(Directory.GetCurrentDirectory(), "DecFiles")),
-                RequestPath = "/DecFiles"
-            });
             //app.UseStaticFiles(new StaticFileOptions
             //{
             //    FileProvider = new PhysicalFileProvider(
-            //                    Path.Combine(Directory.GetCurrentDirectory(), "ExcelFile")),
-            //    RequestPath = "/ExcelFile"
+            //                    Path.Combine(Directory.GetCurrentDirectory(), "DecFiles")),
+            //    RequestPath = "/DecFiles"
             //});
+            
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
@@ -168,12 +163,12 @@ namespace RJ_NOC_API
                             Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF")),
                 RequestPath = "/SystemGeneratedPDF"
             });
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                            Path.Combine(Directory.GetCurrentDirectory(), "DecFiles")),
-                RequestPath = "/DecFiles"
-            });
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //                Path.Combine(Directory.GetCurrentDirectory(), "DecFiles")),
+            //    RequestPath = "/DecFiles"
+            //});
             app.UseSession();
             app.UseCookiePolicy();
             app.UseRouting();

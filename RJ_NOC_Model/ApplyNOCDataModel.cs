@@ -102,6 +102,7 @@ namespace RJ_NOC_Model
         public string? SubjectName { get; set; }
         public int? ApplyNocParameterID { get; set; }
         public string NOCIssuedRemark { get; set; }
+        public string Status { get; set; }
     }
     public class SubmitRevertApplication
     {
