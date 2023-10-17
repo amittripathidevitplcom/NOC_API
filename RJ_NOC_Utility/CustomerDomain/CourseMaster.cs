@@ -26,6 +26,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CourseMasterRepository.SaveData(request);
         }
+        public bool DTESaveData(DTECourseMasterDataModel request)
+        {
+            return UnitOfWork.CourseMasterRepository.DTESaveData(request);
+        }
         public bool UpdateData(CourseMasterDataModel request)
         {
             return UnitOfWork.CourseMasterRepository.UpdateData(request);

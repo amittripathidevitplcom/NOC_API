@@ -255,6 +255,62 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("DTESaveData")]
+        public async Task<OperationResult<bool>> DTESaveData(DTECourseMasterDataModel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                bool IfExits = false;
+                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID, request.StreamID);
+                if (IfExits == false)
+                {
+                    result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.DTESaveData(request));
+                    if (result.Data)
+                    {
+                        result.State = OperationState.Success;
+                        if (request.CollegeWiseCourseID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "CourseMaster");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.CollegeWiseCourseID, "CourseMaster");
+                            result.SuccessMessage = "Updated successfully .!";
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        if (request.CollegeWiseCourseID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
+                    }
+
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "This course is Already Exist, It Can't Not Be Duplicate.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.SaveData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

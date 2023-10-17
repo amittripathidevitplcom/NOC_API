@@ -186,5 +186,30 @@ namespace RJ_NOC_DataAccess.Repository
             return dataTable;
         }
 
+        public bool DTESaveData(DTECourseMasterDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CollegeWiseCourse_AddUpdate_DTE  ";
+            SqlQuery += " @CollegeWiseCourseID='" + request.CollegeWiseCourseID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @CourseID='" + request.CourseID + "',";
+            SqlQuery += " @OtherCourseName='" + request.OtherCourseName + "',";
+            SqlQuery += " @Seats='" + request.SuperNumerarySeats + "',";
+            SqlQuery += " @NoOfEnrolledStudents='" + request.Enrollment + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
+            SqlQuery += " @StreamID='" + request.StreamID + "',";
+            SqlQuery += " @Intake='" + request.Intake + "',";
+            SqlQuery += " @Shift='" + request.Shift + "',";
+            SqlQuery += " @ConductMode='" + request.ConductMode + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

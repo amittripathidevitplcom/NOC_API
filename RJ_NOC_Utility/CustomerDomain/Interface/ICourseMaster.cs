@@ -11,6 +11,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID);
         List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID);
         bool SaveData(CourseMasterDataModel request);
+        bool DTESaveData(DTECourseMasterDataModel request);
         bool UpdateData(CourseMasterDataModel request);
         bool DeleteData(int CollegeWiseCourseID);
         bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID, int StreamMasterID);

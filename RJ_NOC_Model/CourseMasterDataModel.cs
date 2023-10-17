@@ -30,4 +30,24 @@ namespace RJ_NOC_Model
         public string SubjectName { get; set; }
 
     }
+
+    public class DTECourseMasterDataModel
+    {
+        public int CollegeWiseCourseID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public string OtherCourseName { get; set; }
+        public int SuperNumerarySeats { get; set; } 
+        public int Intake { get; set; }
+        public int ConductMode { get; set; }
+        public int Shift { get; set; }
+        public int Enrollment { get; set; }
+        public int UserID { get; set; }
+        public bool ActiveStatus { get; set; }
+        public bool DeleteStatus { get; set; }
+        public int CourseLevelID { get; set; }
+        public int StreamID { get; set; }
+
+    }
 }
