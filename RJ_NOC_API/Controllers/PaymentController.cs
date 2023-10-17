@@ -19,6 +19,10 @@ using System.Threading.Tasks;
 using java.awt;
 using sun.security.jca;
 using System.Net;
+using java.sql;
+using sun.security.x509;
+using System.Drawing;
+using System.Web.Http;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -34,30 +38,56 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
+        #region "RPP PAYMENT INTEGRAION"
+
+  
+
+
         [HttpPost("PaymentRequest")]
         public async Task<OperationResult<PaymentRequest>> PaymentRequest(RequestDetails request)
         {
 
             PaymentGatewayDataModel Model = new PaymentGatewayDataModel();
             Model.PaymentGateway = (int)enmPaymentGatway.RPP;
+            Model.DepartmentID = request.DepartmentID;
             var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(Model);
 
             var result = new OperationResult<PaymentRequest>();
             Random rnd = new Random();
-            string PRN = "PRN" + rnd.Next(100000, 999999);
+            //string PRN = "PRN" + rnd.Next(100000, 999999)+ rnd.Next(100000, 999999);
+            string PRN = "TXN"+ CommonHelper.GenerateTransactionNumber();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID, data));
-                if (result.Data != null)
+                if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(0, "PaymentRequest", 0, "Payment");
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Payment successfully .!";
+                    result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID, data));
+                    if (result.Data != null)
+                    {
+                        result.Data.REQUESTPARAMETERS.RequestType = (int)enmPaymetRequest.PaymentRequest;
+                        bool isSuccess = UtilityHelper.PaymentUtility.CreatePaymentRequest(result.Data);
+                        if (isSuccess)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(0, "PaymentRequest", 0, "Payment");
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "Payment successfully .!";
+                        }
+                        else
+                        {
+                            result.State = OperationState.Error;
+                            result.ErrorMessage = "There was an error payment.!";
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        result.ErrorMessage = "There was an error payment.!";
+                    }
                 }
-                else
+                else 
                 {
                     result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error payment.!";
+                    result.Data = new PaymentRequest();
+                    result.ErrorMessage = "Payment Integraion Details Not Found.!";
                 }
             }
             catch (System.Exception e)
@@ -75,10 +105,18 @@ namespace RJ_NOC_API.Controllers
 
         //  public IActionResult Task<OperationResult<PaymentResponse>> PaymentResponse()
         [HttpPost("PaymentResponse")] //IActionResult
-        public IActionResult PaymentResponse()
+        public IActionResult PaymentResponse(string DepartmentID = "0")
         {
+
+            //Get Department ID
+            DepartmentID = DepartmentID.Replace(' ', '+');
+            DepartmentID = DepartmentID.Replace(' ', '+');
+            DepartmentID = DepartmentID.Replace(' ', '+');
+
+            //Get Payment Details 
             PaymentGatewayDataModel Model = new PaymentGatewayDataModel();
             Model.PaymentGateway = (int)enmPaymentGatway.RPP;
+            Model.DepartmentID = Convert.ToInt32(PaymentEncriptionDec.EmitraDecrypt(DepartmentID));
             var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(Model);
 
             string RetrunUrL = "";
@@ -87,6 +125,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<PaymentResponse>();
             try
             {
+
                 result.Data = UtilityHelper.PaymentUtility.GetResponse(STATUS, ENCDATA, data);
                 result.State = OperationState.Success;
                 if (result.Data != null)
@@ -135,11 +174,6 @@ namespace RJ_NOC_API.Controllers
 
             //return result;
         }
-
-
-
-
-
         [HttpGet("GetTransactionDetails/{TransID}")]
         public async Task<OperationResult<List<ResponseParameters>>> GetTransactionDetails(string TransID)
         {
@@ -173,6 +207,352 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+
+        [HttpPost("GetTransactionStatus")]
+        public async Task<OperationResult<ResponseParameters>> GetTransactionStatus(TransactionStatusDataModel Model)
+        {
+            var result = new OperationResult<ResponseParameters>();
+            try
+            {
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                //get payment details form database
+                PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
+                dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
+                dataModel.DepartmentID = Model.DepartmentID;
+                var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
+
+                if (!string.IsNullOrEmpty(data.MerchantCode))
+                {
+                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.VerificationURL + "?MERCHANTCODE=" + data.MerchantCode + "&&PRN=" + Model.PRN + "&&AMOUNT=" + Model.AMOUNT);
+                    webrequest.Method = "POST";
+                    webrequest.ContentType = "application/x-www-form-urlencoded";
+                    webrequest.ContentLength = 0;
+
+                    Stream stream = webrequest.GetRequestStream();
+                    stream.Close();
+                    string RESPONSEJSON;
+                    using (WebResponse response = webrequest.GetResponse())
+                    {
+                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            RESPONSEJSON = reader.ReadToEnd();
+                            ResponseParameters RESPONSEPARAMS = JsonConvert.DeserializeObject<ResponseParameters>(RESPONSEJSON);
+                            dynamic stuff = JsonConvert.DeserializeObject(RESPONSEJSON);
+                            string STATUS = stuff.STATUS;
+                            string RESPONSECODE = stuff.RESPONSECODE;
+                            if (STATUS == "SUCCESS")
+                            {
+                                result.State = OperationState.Success;
+                                result.Data = RESPONSEPARAMS;
+                                result.SuccessMessage = RESPONSEPARAMS.RESPONSEMESSAGE;
+
+                                //Update Database
+                                PaymentResponse objresponse = new PaymentResponse();
+                                objresponse.STATUS = RESPONSEPARAMS.STATUS;
+                                objresponse.RESPONSEJSON = RESPONSEJSON;
+                                objresponse.RESPONSEPARAMETERS = RESPONSEPARAMS;
+                                UtilityHelper.PaymentUtility.SaveData(objresponse);
+
+                            }
+                            else
+                            {
+                                result.State = OperationState.Error;
+                                result.Data = RESPONSEPARAMS;
+                                result.ErrorMessage = RESPONSEPARAMS.RESPONSEMESSAGE;
+
+
+                                //Update Database
+                                PaymentResponse objresponse = new PaymentResponse();
+                                objresponse.STATUS = RESPONSEPARAMS.STATUS;
+                                objresponse.RESPONSEJSON = RESPONSEJSON;
+                                objresponse.RESPONSEPARAMETERS = RESPONSEPARAMS;
+                                UtilityHelper.PaymentUtility.SaveData(objresponse);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.Data = new ResponseParameters();
+                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionStatus", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+        [HttpPost("RPPTransactionRefund")]
+        public async Task<OperationResult<ResponseParameters>> RPPTransactionRefund(TransactionStatusDataModel Model)
+        {
+            var result = new OperationResult<ResponseParameters>();
+            try
+            {
+                string APINAME = "TXNREFUND";
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+               
+                //get payment details form database
+                PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
+                dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
+                dataModel.DepartmentID = Model.DepartmentID;
+                var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
+     
+                if (!string.IsNullOrEmpty(data.MerchantCode))
+                {
+                    //Save Data in database
+                    PaymentRequest paymentRequest = new PaymentRequest();
+                    //
+                    paymentRequest.REQUESTPARAMETERS = new RequestParameters();//assign memory
+
+                    Model.SubOrderID = paymentRequest.REQUESTPARAMETERS.PRN;
+                    paymentRequest.REQUESTJSON = JsonConvert.SerializeObject(Model);
+                    paymentRequest.REQUESTPARAMETERS.UDF1= Model.ApplyNocApplicationID;
+                    paymentRequest.REQUESTPARAMETERS.RequestType = (int)enmPaymetRequest.RefundRequest;
+                    paymentRequest.REQUESTPARAMETERS.PRN ="RFD"+ CommonHelper.GenerateTransactionNumber();
+                    paymentRequest.REQUESTPARAMETERS.AMOUNT = Model.AMOUNT;
+                    paymentRequest.REQUESTPARAMETERS.MERCHANTCODE = data.MerchantCode;
+                    paymentRequest.REQUESTPARAMETERS.RPPTXNID = Model.RPPTXNID;
+                    bool isSuccess = UtilityHelper.PaymentUtility.CreatePaymentRequest(paymentRequest);
+                    if (isSuccess)
+                    {
+
+                        HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.RefundURL + "?MERCHANTCODE=" + data.MerchantCode + "&PRN=" + Model.PRN + "&AMOUNT=" + Model.AMOUNT + "&RPPTXNID=" + Model.RPPTXNID + "&SUBORDERID=" + paymentRequest.REQUESTPARAMETERS.PRN + "&APINAME=" + APINAME);
+                        webrequest.Method = "POST";
+                        webrequest.ContentType = "application/x-www-form-urlencoded";
+                        webrequest.ContentLength = 0;
+
+                        Stream stream = webrequest.GetRequestStream();
+                        stream.Close();
+                        string RESPONSEJSON;
+                        using (WebResponse response = webrequest.GetResponse())
+                        {
+                            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                            {
+                                RESPONSEJSON = reader.ReadToEnd();
+                                ResponseParameters RESPONSEPARAMS = JsonConvert.DeserializeObject<ResponseParameters>(RESPONSEJSON);
+                                dynamic stuff = JsonConvert.DeserializeObject(RESPONSEJSON);
+                                string STATUS = stuff.STATUS;
+                                string RESPONSECODE = stuff.RESPONSECODE;
+                                if (STATUS == "SUCCESS")
+                                {
+                                    result.State = OperationState.Success;
+                                    result.Data = RESPONSEPARAMS;
+                                    result.SuccessMessage = RESPONSEPARAMS.REMARKS;
+
+                                    #region "Update Payment Status Success Case"
+                                    PaymentResponse obj = new PaymentResponse();
+                                    obj.RESPONSEPARAMETERS = RESPONSEPARAMS;
+                                    obj.RESPONSEJSON = RESPONSEJSON;
+                                    obj.RESPONSEPARAMETERS.UDF1 = Model.ApplyNocApplicationID;
+                                    obj.RESPONSEPARAMETERS.PRN = paymentRequest.REQUESTPARAMETERS.PRN;
+                                    obj.RESPONSEPARAMETERS.REFUNDID = RESPONSEPARAMS.REFUNDID;
+                                    obj.RESPONSEPARAMETERS.REFUNDTIMESTAMP = RESPONSEPARAMS.REFUNDTIMESTAMP;
+                                    obj.RESPONSEPARAMETERS.REMARKS = RESPONSEPARAMS.REMARKS;
+                                    obj.RESPONSEPARAMETERS.RESPONSEMESSAGE = RESPONSEPARAMS.REFUNDSTATUS;
+                                    obj.RESPONSEPARAMETERS.REFUNDSTATUS = RESPONSEPARAMS.REFUNDSTATUS;
+                                    obj.RESPONSEPARAMETERS.RPPTXNID= Model.RPPTXNID;
+                                    UtilityHelper.PaymentUtility.UpdateRefundStatus(obj);
+                                    #endregion
+                                }
+                                else
+                                {
+                                    result.State = OperationState.Error;
+                                    result.Data = RESPONSEPARAMS;
+                                    result.ErrorMessage = RESPONSEPARAMS.RESPONSEMESSAGE;
+
+                                    #region "Update Payment Status Failed Case"
+                                    PaymentResponse obj = new PaymentResponse();
+                                    obj.RESPONSEPARAMETERS = RESPONSEPARAMS;
+                                    obj.RESPONSEJSON = RESPONSEJSON;
+                                    obj.RESPONSEPARAMETERS.UDF1 = Model.ApplyNocApplicationID;
+                                    obj.RESPONSEPARAMETERS.PRN = paymentRequest.REQUESTPARAMETERS.PRN;
+                                    obj.RESPONSEPARAMETERS.RESPONSECODE = RESPONSEPARAMS.RESPONSECODE;
+                                    obj.RESPONSEPARAMETERS.REFUNDSTATUS = RESPONSEPARAMS.STATUS;
+                                    obj.RESPONSEPARAMETERS.RPPTXNID = Model.RPPTXNID;
+                                    UtilityHelper.PaymentUtility.UpdateRefundStatus(obj);
+                                    #endregion
+
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        result.Data = new ResponseParameters();
+                        result.ErrorMessage = "Something went wrong";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.Data = new ResponseParameters();
+                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionStatus", ex.ToString());
+                result.State = OperationState.Error;
+                result.Data = new ResponseParameters();
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("RPPTransactionRefundStatus")]
+        public async Task<OperationResult<RefundTransactionDataModel>> RPPTransactionRefundStatus(TransactionStatusDataModel Model)
+        {
+            var result = new OperationResult<RefundTransactionDataModel>();
+            try
+            {
+                string APINAME = "REFUNDSTATUS";
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+                //get payment details form database
+                PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
+                dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
+                dataModel.DepartmentID = Model.DepartmentID;
+                var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
+
+                if (!string.IsNullOrEmpty(data.MerchantCode))
+                {
+                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.RefundStatusURL + "?MERCHANTCODE=" + data.MerchantCode + "&RPPTXNID=" + Model.RPPTXNID + "&APINAME=" + APINAME );
+                    webrequest.Method = "POST";
+                    webrequest.ContentType = "application/x-www-form-urlencoded";
+                    webrequest.ContentLength = 0;
+
+                    Stream stream = webrequest.GetRequestStream();
+                    stream.Close();
+                    string RESPONSEJSON;
+                    using (WebResponse response = webrequest.GetResponse())
+                    {
+                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            RESPONSEJSON = reader.ReadToEnd();
+                            RefundTransactionDataModel RESPONSEPARAMS = JsonConvert.DeserializeObject<RefundTransactionDataModel>(RESPONSEJSON);
+                            dynamic stuff = JsonConvert.DeserializeObject(RESPONSEJSON);
+                            string STATUS = stuff.STATUS;
+                            string RESPONSECODE = stuff.RESPONSECODE;
+                            if (STATUS == "SUCCESS")
+                            {
+                                result.State = OperationState.Success;
+                                result.Data = RESPONSEPARAMS;
+                                result.SuccessMessage = RESPONSEPARAMS.STATUS;
+
+
+                                RESPONSEPARAMS.ApplyNocApplicationID = Convert.ToInt32(Model.ApplyNocApplicationID);
+                                //Update Status In DataBase
+                                RESPONSEPARAMS.PRN = Model.PRN;
+                                RESPONSEPARAMS.RESPONSEJSON = RESPONSEJSON;
+                                UtilityHelper.PaymentUtility.UpdateRefundTransactionStatus(RESPONSEPARAMS);
+
+
+                            }
+                            else
+                            {
+                                result.State = OperationState.Error;
+                                result.Data = RESPONSEPARAMS;
+                                result.ErrorMessage = RESPONSEPARAMS.STATUS;
+                                //Update Status
+                                RESPONSEPARAMS.ApplyNocApplicationID = Convert.ToInt32(Model.ApplyNocApplicationID);
+                                RESPONSEPARAMS.PRN = Model.PRN;
+                                RESPONSEPARAMS.RESPONSEJSON = RESPONSEJSON;
+                                UtilityHelper.PaymentUtility.UpdateRefundTransactionStatus(RESPONSEPARAMS);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.Data = new RefundTransactionDataModel();
+                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionStatus", ex.ToString());
+                result.State = OperationState.Error;
+                result.Data = new RefundTransactionDataModel();
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+   
+        [HttpPost("RPPTransactionCallback")]
+        public IActionResult RPPTransactionCallback()
+        {
+            try
+            {
+                string STATUS = Request.Form["STATUS"];
+                string ENCDATA = Request.Form["ENCDATA"];
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.RPPTransactionCallbackLogs", string.Format("Status={0},EncData={1}", STATUS, ENCDATA));
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.RPPTransactionCallback", ex.ToString());
+            }
+            return Ok();
+        }
+
+
+        [HttpPost("GetRPPTransactionList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetRPPTransactionList(TransactionSearchFilterModel Model)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetRPPTransactionList(Model));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRPPTransactionList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+        #endregion
         //[HttpPost("EmitraPayment")]
         //public async Task<EmitraRequestDetails> EmitraPayment(EmitraRequestDetails Model)
         //{
@@ -328,7 +708,7 @@ namespace RJ_NOC_API.Controllers
                         requestDetailsModel.SuccessMessage = "successfully .!";
                     }
                 }
-                else 
+                else
                 {
                     requestDetailsModel.Data = Model;
                     requestDetailsModel.State = OperationState.Error;
@@ -336,7 +716,7 @@ namespace RJ_NOC_API.Controllers
                 }
 
             }
-           
+
             catch (System.Exception ex)
             {
                 requestDetailsModel.Data = Model;
@@ -387,7 +767,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpPost("EmitraPaymentResponse")] //IActionResult
-        public async Task<IActionResult> EmitraPaymentResponse(string UniquerequestId = "", string ApplicationIdEnc = "", string ServiceID="", string IsFailed = "")
+        public async Task<IActionResult> EmitraPaymentResponse(string UniquerequestId = "", string ApplicationIdEnc = "", string ServiceID = "", string IsFailed = "")
         {
             var RetrunUrL = "";
             try
@@ -414,7 +794,7 @@ namespace RJ_NOC_API.Controllers
                 var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
 
                 var data = Convert.ToString(Request.Form["encData"]);
-             
+
                 var vIsFailed = PaymentEncriptionDec.EmitraDecrypt(IsFailed);
 
                 EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration endpointConfiguration = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient.EndpointConfiguration();
@@ -429,7 +809,7 @@ namespace RJ_NOC_API.Controllers
                     //EmitraResponseData.ResponseString = JsonConvert.SerializeObject(response.Body.EmitraDecriptStringResult);
                     UtilityHelper.PaymentUtility.UpdateEmitraPaymentStatus(EmitraResponseData);
                 }
-                
+
                 if (vIsFailed == "NO")
                 {
                     RetrunUrL = string.Format("{0}{1}", EmitraServiceDetail.SuccessFailedURL, EmitraResponseData.PRN);
@@ -484,5 +864,9 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+
+        
     }
 }

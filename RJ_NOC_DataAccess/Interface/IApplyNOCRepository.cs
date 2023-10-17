@@ -1,6 +1,7 @@
 ﻿using RJ_NOC_Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,10 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID);
         bool SubmitRevertApplication(SubmitRevertApplication request);
 
-        bool SaveDCENOCData(string Path, List<GenerateNOC_DataModel> model);
+        bool SaveDCENOCData(List<GenerateNOC_DataModel> model);
+
+        DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID);
+        bool UpdateNOCPDFPath(int ApplyNOCID,string Path);
+        bool DeleteNOCIssuedDetails(int ApplyNOCID);
     }
 }

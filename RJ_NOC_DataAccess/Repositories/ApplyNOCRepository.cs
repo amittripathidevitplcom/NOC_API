@@ -324,12 +324,42 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool  SaveDCENOCData(string Path, List<GenerateNOC_DataModel> model)
+        public bool  SaveDCENOCData(List<GenerateNOC_DataModel> model)
         {
             string IssuedNOCData_Str = CommonHelper.GetDetailsTableQry(model, "Temp_IssuedNOCData");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='Save',@NOCFilePath='{Path}',@IssuedNOCData_str='{IssuedNOCData_Str}'";
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='Save',@IssuedNOCData_str='{IssuedNOCData_Str}'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SaveDCENOCData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID)
+        {
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='GetNOCIssuedDetail',@NOCID={ApplyNOCID}";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNOCIssuedDetailsByNOCIID");
+            //List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            //CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            //dataModel.data = dataTable;
+            //dataModels.Add(dataModel);
+            return dataset;
+        }
+
+        public bool UpdateNOCPDFPath(int ApplyNOCID, string Path)
+        {
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='UpdatePDFPath',@NOCID='{ApplyNOCID}',@NOCFilePath='{Path}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateNOCPDFPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool DeleteNOCIssuedDetails(int ApplyNOCID)
+        {
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='DeleteNOCIssuedDetails',@NOCID='{ApplyNOCID}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateNOCPDFPath");
             if (Rows > 0)
                 return true;
             else

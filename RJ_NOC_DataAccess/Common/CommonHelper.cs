@@ -234,6 +234,25 @@ namespace RJ_NOC_DataAccess.Common
             }
         }
 
+        #region "User Define Function"
+        public static string GenerateTransactionNumber()
+        {
+            // Generate a new GUID.
+            Guid guid = Guid.NewGuid();
+
+            // Convert the first 6 bytes of the GUID to a byte array.
+            byte[] bytes = guid.ToByteArray();
+
+            // Take the first 6 bytes and convert them to a hexadecimal string.
+            string hexString = BitConverter.ToString(bytes, 0, 6).Replace("-", "");
+
+            Random rnd = new Random();
+            //Create a 12-character transaction number from the hexadecimal string.
+            string transactionNumber = rnd.Next(10000, 99999) + hexString;
+            return transactionNumber;
+        }
+        #endregion
+
     }
 
 }
