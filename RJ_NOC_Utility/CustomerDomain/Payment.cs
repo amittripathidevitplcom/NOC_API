@@ -31,6 +31,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.SaveData(response);
         }
+        public bool CreatePaymentRequest(PaymentRequest request)
+        {
+            return UnitOfWork.PaymentRepository.CreatePaymentRequest(request);
+        }
+        public bool UpdateRefundStatus(PaymentResponse request)
+        {
+            return UnitOfWork.PaymentRepository.UpdateRefundStatus(request);
+        }
+        public bool UpdateRefundTransactionStatus(RefundTransactionDataModel request)
+        {
+            return UnitOfWork.PaymentRepository.UpdateRefundTransactionStatus(request);
+        }
 
         public List<ResponseParameters> GetPaymentListIDWise(string TransactionID)
         {
@@ -46,7 +58,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.GetPreviewPaymentDetails(ApplyNocApplicationID);
         }
-
+        public List<CommonDataModel_DataTable> GetRPPTransactionList(TransactionSearchFilterModel Model)
+        {
+            return UnitOfWork.PaymentRepository.GetRPPTransactionList(Model);
+        }
 
         #region "Emitra Section"
         public EmitraRequstParameters GetEmitraServiceDetails(EmitraRequestDetails model)

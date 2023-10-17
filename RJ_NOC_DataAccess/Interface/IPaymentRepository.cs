@@ -12,6 +12,11 @@ namespace RJ_NOC_DataAccess.Interface
         PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID, PaymentGatewayDataModel Model);
         PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel Model);
         bool SaveData(PaymentResponse request);
+        bool CreatePaymentRequest(PaymentRequest request);
+        bool UpdateRefundStatus(PaymentResponse request);
+        bool UpdateRefundTransactionStatus(RefundTransactionDataModel request);
+        List<CommonDataModel_DataTable> GetRPPTransactionList(TransactionSearchFilterModel model);
+
         List<ResponseParameters> GetPaymentListIDWise(string TransactionID);
 
         //payment gaeway

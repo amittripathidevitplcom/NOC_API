@@ -17,6 +17,7 @@ namespace RJ_NOC_Model
         public string SUCCESSURL { get; set; }
         public string FAILUREURL { get; set; }
         public string CANCELURL { get; set; }
+        public string CALLBACKURL { get; set; }
         public string USERNAME { get; set; }
         public string USERMOBILE { get; set; }
         public string USEREMAIL { get; set; }
@@ -27,6 +28,8 @@ namespace RJ_NOC_Model
         public string REVENUEHEAD { get; set; }
         public string CHECKSUM { get; set; }
         public string CreatedDate { get; set; }
+        public int RequestType { get; set; }
+        public string RPPTXNID { get; set; }
     }
 
 
@@ -51,7 +54,15 @@ namespace RJ_NOC_Model
         public string UDF3 { get; set; }
         public string CHECKSUM { get; set; }
         public string CreatedDate { get; set; }
+
+        public string REFUNDID { get; set; }
+        public string REFUNDSTATUS { get; set; }
+        public string REFUNDTIMESTAMP { get; set; }
+        public string REMARKS { get; set; }
+
+
     }
+
 
 
 
@@ -67,8 +78,7 @@ namespace RJ_NOC_Model
 
 
     public class PaymentResponse
-    {
-        public ResponseParameters RESPONSEPARAMETERS { get; set; }
+    {public ResponseParameters RESPONSEPARAMETERS { get; set; }
         public string RESPONSEJSON { get; set; }
         public string STATUS { get; set; }
         public string ENCDATA { get; set; }
@@ -85,10 +95,23 @@ namespace RJ_NOC_Model
         public string USERMOBILE { get; set; }
         public string USEREMAIL { get; set; }
         public string ApplyNocApplicationID { get; set; }
+        public int DepartmentID { get; set; }
 
     }
 
-    #region "EMITRA MODAL"
+    public class TransactionStatusDataModel
+    {
+        public string ApplyNocApplicationID { get; set; }
+        public string AMOUNT { get; set; }
+        public string PRN { get; set; }
+        public int DepartmentID { get; set; }
+        public string? RPPTXNID { get; set; }
+        public string? SubOrderID { get; set; }
+        public string? REFUNDID { get; set; }
+     
+    }
+
+    #region "EMITRA MODEL"
     public class EmitraRequstParameters
     {
         public string MERCHANTCODE { get; set; }
@@ -153,9 +176,9 @@ namespace RJ_NOC_Model
         public string ApplicationIdEnc { get; set; }
         public string UniquerequestId { get; set; }
 
-      
 
-    
+
+
     }
 
 
@@ -216,7 +239,7 @@ namespace RJ_NOC_Model
 
     public class EmitraTransactions
     {
-         public int TransactionId { get; set; } 
+        public int TransactionId { get; set; }
         public string ApplicationIdEnc { get; set; }
 
         public string ApplicationNo { get; set; }
@@ -240,15 +263,60 @@ namespace RJ_NOC_Model
         public string CreatedIP { get; set; }
         public string ServiceID { get; set; }
         public decimal Amount { get; set; }
-        public string key { get;set; }
+        public string key { get; set; }
 
         public string PRN { get; set; }
 
-
-
-
     }
 
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class RefundTransactionDataModel
+    {
+        public string RPPTXNID { get; set; }
+        public string PRN { get; set; }
+        public string REFUNDEDAMOUNT { get; set; }
+        public string REMAININGAMOUNT { get; set; }
+        public string STATUS { get; set; }
+
+        public string RESPONSEMESSAGE { get; set; }
+
+
+        public string RESPONSEJSON { get; set; }
+        public string RESPONSECODE { get; set; }
+        public int ApplyNocApplicationID { get; set; }
+        public List<TRANSACTIONDetails> TRANSACTIONS { get; set; }
+    }
+
+    public class TRANSACTIONDetails
+    {
+        public int REFUNDID { get; set; }
+        public string SUBORDERID { get; set; }
+        public string REFUNDAMOUNT { get; set; }
+        public string REFUNDACKNOWLEDGEMENTNUMBER { get; set; }
+        public string REFUNDSTATUS { get; set; }
+        public string REFUNDTIMESTAMP { get; set; }
+        public string REFUNDCOMPLETIONTIMESTAMP { get; set; }
+        public string REMARKS { get; set; }
+    }
+
+
+    public class TransactionSearchFilterModel
+    {
+        public int DepartmentID { get; set; }
+        public int? CollegeID { get; set; }
+        public int? TransactionID { get; set; }
+        public string? PRN  { get; set; }
+        public string? RPPTranID { get; set; }
+        public string Key { get; set; }
+        public string? RefundID { get; set; }
+        public int? ApplyNocApplicationID { get; set; }
+    }
+
+    public enum enmPaymetRequest
+    {
+        PaymentRequest = 1,
+        RefundRequest = 2
+    }
 
     #endregion
 }
