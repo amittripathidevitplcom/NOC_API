@@ -11,7 +11,7 @@ namespace RJ_NOC_DataAccess.Interface
     {
         //bool IfExists(int HostelDetailID, int CollegeID, string HostelName);
         bool SaveData(OldNocDetailsDataModel request);
-        List<OldNocDetailsDataModel> GetOldNOCDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int OldNocID);
+        List<OldNocDetailsDataModel> GetOldNOCDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int OldNocID,int ApplyNOCID);
         bool DeleteOldNocDetail(int OldNocID);
         bool IfExists(int OldNocID, string NOCNumber);
         List<CommonDataModel_DataSet> GetOldNOCDetailListForPDF(int DepartmentID, int CollegeID);

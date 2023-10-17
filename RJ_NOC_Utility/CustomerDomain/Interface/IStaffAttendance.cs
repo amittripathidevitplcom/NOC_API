@@ -9,9 +9,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IStaffAttendance
     {
-        List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID, int CourseID);
+        List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID, string Date);
         bool SaveData(StaffAttendanceDataModel request);
-        bool IfExists(int StaffAttendanceID, int CollegeID,int CourseID, string Date);
-        List<CommonDataModel_DataTable> GetStaffAttendanceReportData( int CollegeID, int CourseID, string FromDate,string ToDate,int StatusID);
+        bool IfExists(int StaffAttendanceID, int CollegeID,string StaffType, int CourseID, string Date);
+        List<CommonDataModel_DataTable> GetStaffAttendanceReportData( int CollegeID,string StaffType, int CourseID, string FromDate,string ToDate,int StatusID);
     }
 }

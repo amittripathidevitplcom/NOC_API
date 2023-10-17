@@ -73,14 +73,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetOtherInformationAllList/{UserID}/{CollegeID}")]
-        public async Task<OperationResult<List<OtherInformationDataModels>>> GetOtherInformationAllList(int UserID,int CollegeID)
+        [HttpGet("GetOtherInformationAllList/{UserID}/{CollegeID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<OtherInformationDataModels>>> GetOtherInformationAllList(int UserID,int CollegeID,int ApplyNOCID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "OtherInformation");
             var result = new OperationResult<List<OtherInformationDataModels>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetOtherInformationAllList(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.OtherInformationUtility.GetOtherInformationAllList(CollegeID, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

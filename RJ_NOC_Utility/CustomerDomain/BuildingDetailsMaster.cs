@@ -14,9 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public BuildingDetailsMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID)
+        public List<BuildingDetailsDataModelList> GetAllBuildingDetailsList(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.BuildingDetailsMasterRepository.GetAllBuildingDetailsList(CollegeID);
+            return UnitOfWork.BuildingDetailsMasterRepository.GetAllBuildingDetailsList(CollegeID, ApplyNOCID);
         }
         public List<BuildingDetailsDataModelList> GetBuildingDetailsIDWise(int SchoolBuildingDetailsID)
         {

@@ -121,6 +121,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetDownloadPdfDetails(int DepartmentID, int CollegeID);
         bool SaveExcelData(List<MemberDataModel> request,int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
+        bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID);
 
         List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType);
     }

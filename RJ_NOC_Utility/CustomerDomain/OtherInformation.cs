@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public OtherInformation(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<OtherInformationDataModels> GetOtherInformationAllList(int CollegeID)
+        public List<OtherInformationDataModels> GetOtherInformationAllList(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.OtherInformationRepository.GetOtherInformationAllList(CollegeID);
+            return UnitOfWork.OtherInformationRepository.GetOtherInformationAllList(CollegeID, ApplyNOCID);
         }
         public List<OtherInformationDataModel> GetOtherInformationByID(int CollegeWiseOtherInfoID, int CollegeID)
         {

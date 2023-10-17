@@ -16,21 +16,21 @@ namespace RJ_NOC_Utility.CustomerDomain
         public StaffAttendance(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID, int CourseID)
+        public List<CommonDataModel_DataTable> GetStaffList_CollegeWise(int CollegeID,string StaffType, int CourseID, string Date)
         {
-            return UnitOfWork.StaffAttendanceRepository.GetStaffList_CollegeWise(CollegeID, CourseID);
+            return UnitOfWork.StaffAttendanceRepository.GetStaffList_CollegeWise(CollegeID, StaffType, CourseID, Date);
         }
         public bool SaveData(StaffAttendanceDataModel request)
         {
             return UnitOfWork.StaffAttendanceRepository.SaveData(request);
         }
-        public bool IfExists(int StaffAttendanceID, int CollegeID, int CourseID, string Date)
+        public bool IfExists(int StaffAttendanceID, int CollegeID,string StaffType, int CourseID, string Date)
         {
-            return UnitOfWork.StaffAttendanceRepository.IfExists(StaffAttendanceID, CollegeID, CourseID, Date);
+            return UnitOfWork.StaffAttendanceRepository.IfExists(StaffAttendanceID, CollegeID, StaffType, CourseID, Date);
         }
-        public List<CommonDataModel_DataTable> GetStaffAttendanceReportData(int CollegeID, int CourseID, string FromDate, string ToDate, int StatusID)
+        public List<CommonDataModel_DataTable> GetStaffAttendanceReportData(int CollegeID,string StaffType, int CourseID, string FromDate, string ToDate, int StatusID)
         {
-            return UnitOfWork.StaffAttendanceRepository.GetStaffAttendanceReportData(CollegeID, CourseID, FromDate, ToDate, StatusID);
+            return UnitOfWork.StaffAttendanceRepository.GetStaffAttendanceReportData(CollegeID, StaffType, CourseID, FromDate, ToDate, StatusID);
         }
     }
 }

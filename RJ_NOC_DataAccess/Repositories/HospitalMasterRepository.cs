@@ -211,18 +211,19 @@ namespace RJ_NOC_DataAccess.Repository
             return hospitalMasterDataList;
         }
 
-        public HospitalMasterDataModel GetHospitalDataListforPDF(int CollegeID)
+        public List<HospitalMasterDataModel> GetHospitalDataListforPDF(int CollegeID)
         {
             string SqlQuery = $"exec USP_GetHospitalMasterPDFDetail @CollegeID={CollegeID}";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "HospitalMaster.GetHospitalDataListforPDF");
 
-            HospitalMasterDataModel hospitalMasterDataModel = new HospitalMasterDataModel();
+            List<HospitalMasterDataModel> hospitalMasterDataList = new List<HospitalMasterDataModel>();
             if (dt != null)
             {
-                hospitalMasterDataModel = CommonHelper.ConvertDataTable<HospitalMasterDataModel>(dt);
+                hospitalMasterDataList = CommonHelper.ConvertDataTable<List<HospitalMasterDataModel>>(dt);
             }
 
-            return hospitalMasterDataModel;
+            return hospitalMasterDataList;
         }
+
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Azure.Core;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -71,7 +72,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark)
         {
-            return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark);
+            return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID,RoleID,UserID,NOCIssuedRemark);
         }
         public int CheckAppliedNOCCollegeWise(int CollegeID)
         {
@@ -89,6 +90,22 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SubmitRevertApplication(SubmitRevertApplication request)
         {
             return UnitOfWork.ApplyNOCRepository.SubmitRevertApplication(request);
+        }
+        public bool SaveDCENOCData(List<GenerateNOC_DataModel> model)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveDCENOCData(model);
+        }          
+        public bool UpdateNOCPDFPath(int ApplyNOCID, string Path)
+        {
+            return UnitOfWork.ApplyNOCRepository.UpdateNOCPDFPath(ApplyNOCID, Path);
+        }
+        public bool DeleteNOCIssuedDetails(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.DeleteNOCIssuedDetails(ApplyNOCID);
+        }     
+        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
         }
     }
 }

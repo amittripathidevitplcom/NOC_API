@@ -215,7 +215,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<AgricultureDocuemntScrutinyCommonModel> DocumentScrutiny_CollegeDocument(int DepartmentID, int CollageID, int RoleID, int ApplyNOCID, string Type)
         {
-            string SP_Name = Type == "Other Document" ? "USP_DocumentScrutiny_OldNOCDetails_Agriculture" : "USP_DocumentScrutiny_RequiredDocument_AH";
+            string SP_Name = Type == "Other Document" ? "USP_DocumentScrutiny_OtherDocument_Agri" : "USP_DocumentScrutiny_RequiredDocument_Agri";
             string SqlQuery = " exec " + SP_Name + " @DepartmentID=" + DepartmentID + ",@CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + ",@DocumentType='" + Type + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AgricultureDocumentScrutinyRepository.DocumentScrutiny_CollegeDocument");
@@ -363,6 +363,168 @@ namespace RJ_NOC_DataAccess.Repositories
             listdataModels.Add(dataModels);
 
             return listdataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetPhysicalVerificationAppliationList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetPostVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetPostVerificationAppliationList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetPhysicalVerificationAppliationList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetFinalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetFinalVerificationAppliationList_AH @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetFinalVerificationAppliationList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetPreVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetPreVerificationDoneList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetPhysicalVerificationAppliationList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_FinalSubmitInspectionCommittee_Agri";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "AnimalDocumentScrutiny.FinalSubmitInspectionCommittee");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            string SqlQuery = "exec USP_GetPreVerificationchecklistDetails @Type='" + Type + "' ,@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetPreVerificationchecklistDetails");
+            List<CommonDataModel_RNCCheckListData> dataModels = new List<CommonDataModel_RNCCheckListData>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RNCCheckListData>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_FinalSubmitPreVerification_Agri";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "AnimalDocumentScrutiny.FinalSubmitPreVerification");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmentID, string ActionType)
+        {
+            string SqlQuery = " exec USP_ApplyNOCApplicationList_Agri @RoleID='" + RoleID + "',@UserID='" + UserID + "',@DepartmentID='" + DepartmentID + "',@ActionType='" + ActionType + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetApplyNOCApplicationList");
+            List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetPostVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetPostVerificationDoneList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetPostVerificationDoneList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetFinalVerificationDoneList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetFinalVerificationDoneList_AH @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetFinalVerificationDoneList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request)
+        {
+            string SqlQuery = " exec USP_GetFinalNOCList_AH @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetFinalVerificationDoneList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetNOCCourse(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            string SqlQuery = " exec USP_GetNOCDetails_AH @ApplyNocID='" + ApplyNocID + "',@departmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ActionType='" + Action + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AnimalDocumentScrutiny.GetNOCCourse");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetGeneratePDFData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            string SqlQuery = " exec USP_GetNOCDetails_AH @ApplyNocID='" + ApplyNocID + "',@departmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ActionType='" + Action + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GeneratePDFForJointSecretary");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public bool FinalSavePDFPathandNOC(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark, string Action)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_UpdateNOCDetails_AH @ActionType='{Action}',@NOCFilePath='{Path}',@ApplyNocID={ApplyNOCID},@departmentID={DepartmentID},@RoleID={RoleID},@userID={UserID},@Remarks='{NOCIssuedRemark}',@IPAddress='{IPAddress}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.FinalSavePDFPathandNOC");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

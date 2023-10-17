@@ -45,9 +45,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<HostelDataModel> GetHostelDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID)
+        public List<HostelDataModel> GetHostelDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HostelDetailID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_GetHostelDetailList_DepartmentCollegeWise @HostelDetailID='" + HostelDetailID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_GetHostelDetailList_DepartmentCollegeWise @HostelDetailID='" + HostelDetailID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "StaffDetail.GetStaffDetailList_DepartmentCollegeWise");
             List<HostelDataModel> listdataModels = new List<HostelDataModel>();

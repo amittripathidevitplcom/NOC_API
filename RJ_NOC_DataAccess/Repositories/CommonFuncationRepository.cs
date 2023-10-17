@@ -1106,7 +1106,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @SSOID='" + SSOID + "',";
             SqlQuery += " @ImportStaticsFileDetails_Str='" + ImportStaticsFileDetails_Str + "'";
 
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "LandDetails.SaveData");
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "Commomfunction.SaveData");
             if (Rows > 0)
                 return true;
             else
@@ -1125,6 +1125,40 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID)
+        {
+
+            string SqlQuery = "";
+           // string IPAddress = CommonHelper.GetVisitorIPAddress();
+            SqlQuery = " exec USP_ImportExcelStatics_UpdateSingleRow";
+
+            SqlQuery += " @ID='" + request.ID + "',";
+            SqlQuery += " @StaticsFileID='" + request.ImportExcelID + "',";
+            SqlQuery += " @CollegeID='" + collegeID + "',";
+            SqlQuery += " @DepartmentID='" + DeptId + "',";
+            SqlQuery += " @Course='" + request.Course + "',";
+            SqlQuery += " @Subject='" + request.Subject + "',";
+            SqlQuery += " @StudentName='" + request.StudentName + "',";
+            SqlQuery += " @FatherName='" + request.FatherName + "',";
+            SqlQuery += " @Cast='" + request.Cast + "',";
+            SqlQuery += " @PH='" + request.PH + "',";
+            SqlQuery += " @Year='" + request.Year + "',";
+            SqlQuery += " @DOB='" + request.DOB + "',";
+            SqlQuery += " @Minorty='" + request.Minorty + "',";
+            SqlQuery += " @RollNo='" + request.RollNo + "',";
+            SqlQuery += " @Section='" + request.Section + "',";
+            SqlQuery += " @Gender='" + request.Gender + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "Commomfunction.UpdateSingleRow");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+
 
     }
 }

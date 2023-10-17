@@ -152,6 +152,7 @@ namespace RJ_NOC_Model
         public int secretary_Revert { get; set; }
         public int ScrutinyCommittee_Forward { get; set; }
         public int RegistratCommittee_Forward { get; set; }
+        public int ApprovedAndForward { get; set; }
 
 
 
@@ -205,6 +206,13 @@ namespace RJ_NOC_Model
         public int PVCommittee_Reverted { get; set; }
         public int PVCommittee_Rejected { get; set; }
         public int PVCommittee_Completed { get; set; }
+
+
+        //Admin
+        public int TotalApplication { get; set; }
+        public int TotalApplicationPending { get; set; }
+        public int TotalApplicationReject { get; set; }
+        public int TotalApplicationCompleted { get; set; }
 
 
     }

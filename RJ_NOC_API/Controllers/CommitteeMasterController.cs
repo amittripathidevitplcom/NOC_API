@@ -218,6 +218,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("SaveApplicationCommitteeData_Agri")]
+        public async Task<OperationResult<bool>> SaveApplicationCommitteeData_Agri(PostApplicationCommitteeMemberdataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommitteeMasterUtility.SaveApplicationCommitteeData_Agri(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "CommitteeMaster");
+                    result.SuccessMessage = "Saved successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommitteeMasterController.SaveApplicationCommitteeData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
         [HttpGet("GetApplicationCommitteeList/{ApplyNocApplicationID}")]
         public async Task<OperationResult<List<ApplicationCommitteeMemberdataModel>>> GetApplicationCommitteeList(int ApplyNocApplicationID)

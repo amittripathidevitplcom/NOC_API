@@ -14,6 +14,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<HospitalAreaValidation> GetHospitalAreaValidation();
         bool IsSuperSpecialtyHospital(int collegeId);
         bool SaveData(HospitalMasterDataModel request);
-        HospitalMasterDataModel GetHospitalDataListforPDF(int CollegeID);
+        List<HospitalMasterDataModel> GetHospitalDataListforPDF(int CollegeID);
     }
 }

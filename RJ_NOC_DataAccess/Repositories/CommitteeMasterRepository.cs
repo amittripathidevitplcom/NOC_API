@@ -118,7 +118,18 @@ namespace RJ_NOC_DataAccess.Repository
             string CommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_CommitteeMasterDetail");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveApplicationCommitteeMember_AH @UserID='" + request.UserID + "', @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@CommitteeMasterDetail_Str='" + CommitteeMasterDetail_Str + "'";
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveApplicationCommitteeData");
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveApplicationCommitteeData_AH");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool SaveApplicationCommitteeData_Agri(PostApplicationCommitteeMemberdataModel request)
+        {
+            string CommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_CommitteeMasterDetail");
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveApplicationCommitteeMember_Agri @UserID='" + request.UserID + "', @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@CommitteeMasterDetail_Str='" + CommitteeMasterDetail_Str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommitteeMaster.SaveApplicationCommitteeData_Agri");
             if (Rows > 0)
                 return true;
             else

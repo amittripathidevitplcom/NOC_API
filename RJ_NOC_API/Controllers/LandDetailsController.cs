@@ -30,14 +30,14 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetAllLandDetails/{SelectedCollageID}/{LandDetailID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetLandDetailsList(int SelectedCollageID,int LandDetailID)
+        [HttpGet("GetAllLandDetails/{SelectedCollageID}/{LandDetailID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetLandDetailsList(int SelectedCollageID,int LandDetailID,int ApplyNOCID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetLandDetailsList", 0, "LandDetails");
             var result = new OperationResult<List<CommonDataModel_DataSet>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.LandDetailsUtility.GetLandDetailsList(SelectedCollageID, LandDetailID));
+                result.Data = await Task.Run(() => UtilityHelper.LandDetailsUtility.GetLandDetailsList(SelectedCollageID, LandDetailID, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

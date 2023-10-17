@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     public interface ICollegeDocumentRepository
     {
 
-        List<CommonDataModel_DataTable> GetAllData(int DepartmentID,int CollegeID, string Type);
+        List<CommonDataModel_DataTable> GetAllData(int DepartmentID,int CollegeID, string Type,int ApplyNOCID);
         bool SaveData(CollegeDocumentDataModel request);
         bool Delete(int AID);
     }
