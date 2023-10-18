@@ -74,6 +74,8 @@ namespace RJ_NOC_Model
         public string ENCDATA { get; set; }
         public string PaymentRequestURL { get; set; }
         public string CreatedBy { get; set; }
+        public string SSOID { get; set; }
+        
     }
 
 
@@ -87,6 +89,7 @@ namespace RJ_NOC_Model
         public bool CHECKSUMVALID { get; set; }
         public string PaymentRequestURL { get; set; }
         public string CreatedBy { get; set; }
+        public string SSOID { get; set; }
 
     }
 

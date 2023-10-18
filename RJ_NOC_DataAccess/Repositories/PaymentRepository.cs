@@ -206,7 +206,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
             SqlQuery += " @PaymentStatus='"+strPaymentStatus+"',@PRNNO='" + request.REQUESTPARAMETERS.PRN + "',@CheckSum='" + request.REQUESTPARAMETERS.CHECKSUM + "'," +
                 "@Amount='" + request.REQUESTPARAMETERS.AMOUNT + "',@MerchantCode='" + request.REQUESTPARAMETERS.MERCHANTCODE + "',@PaymentAmount='" + request.REQUESTPARAMETERS.AMOUNT +
-                "',@UDF1='" + request.REQUESTPARAMETERS.UDF1 + "',@UDF2='" + request.REQUESTPARAMETERS.UDF2 + "',@REQUESTJSON='" + request.REQUESTJSON + "',@ENCDATA='" + request.ENCDATA + "'," + "@key='CreatePaymentRequest',@RequestType='"+request.REQUESTPARAMETERS.RequestType+ "',@RPPTXNID='" + request.REQUESTPARAMETERS.RPPTXNID+"',@CreatedBy='"+ request.CreatedBy+ "',@IPAddress='"+ IPAddress + "'";
+                "',@UDF1='" + request.REQUESTPARAMETERS.UDF1 + "',@UDF2='" + request.REQUESTPARAMETERS.UDF2 + "',@REQUESTJSON='" + request.REQUESTJSON + "',@ENCDATA='" + request.ENCDATA + "'," + "@key='CreatePaymentRequest',@RequestType='"+request.REQUESTPARAMETERS.RequestType+ "',@RPPTXNID='" + request.REQUESTPARAMETERS.RPPTXNID+"',@CreatedBy='"+ request.CreatedBy+ "',@IPAddress='"+ IPAddress + "',@SSOID='"+request.SSOID+"'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.CreatePaymentRequest");
             if (Rows > 0)
                 return true;
