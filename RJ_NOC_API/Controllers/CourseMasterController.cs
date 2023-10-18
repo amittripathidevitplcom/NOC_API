@@ -63,6 +63,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetAllCourseDTE/{CollegeWiseCourseID}/{LoginSSOID}/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourseDTE( int CollegeWiseCourseID, string LoginSSOID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "GetAllCourseDTE");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourseDTE(LoginSSOID, CollegeWiseCourseID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.GetAllCourseDTE", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("{CollegeWiseCourseID}/{LoginSSOID}/{UserID}")]
         public async Task<OperationResult<List<CourseMasterDataModel>>> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID, int UserID)
         {
