@@ -63,6 +63,7 @@ namespace RJ_NOC_API.Controllers
                     result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID, data));
                     if (result.Data != null)
                     {
+                        result.Data.CreatedBy = request.CreatedBy;
                         result.Data.REQUESTPARAMETERS.RequestType = (int)enmPaymetRequest.PaymentRequest;
                         bool isSuccess = UtilityHelper.PaymentUtility.CreatePaymentRequest(result.Data);
                         if (isSuccess)

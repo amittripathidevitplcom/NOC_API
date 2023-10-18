@@ -73,17 +73,20 @@ namespace RJ_NOC_Model
         public string REQUESTJSON { get; set; }
         public string ENCDATA { get; set; }
         public string PaymentRequestURL { get; set; }
+        public string CreatedBy { get; set; }
     }
 
 
 
     public class PaymentResponse
-    {public ResponseParameters RESPONSEPARAMETERS { get; set; }
+    {
+        public ResponseParameters RESPONSEPARAMETERS { get; set; }
         public string RESPONSEJSON { get; set; }
         public string STATUS { get; set; }
         public string ENCDATA { get; set; }
         public bool CHECKSUMVALID { get; set; }
         public string PaymentRequestURL { get; set; }
+        public string CreatedBy { get; set; }
 
     }
 
@@ -96,6 +99,7 @@ namespace RJ_NOC_Model
         public string USEREMAIL { get; set; }
         public string ApplyNocApplicationID { get; set; }
         public int DepartmentID { get; set; }
+        public string CreatedBy { get; set; }
 
     }
 
