@@ -769,6 +769,9 @@ namespace RJ_NOC_API.Controllers
             localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+
+            
+
             //return File(result.MainStream, "application/pdf");
             System.IO.File.WriteAllBytes(filepath, result.MainStream);
 

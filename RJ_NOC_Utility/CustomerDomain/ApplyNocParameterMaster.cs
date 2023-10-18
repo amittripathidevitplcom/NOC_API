@@ -162,6 +162,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
             sb.AppendFormat("@SSOID='{0}',", request.SSOID);
+            sb.AppendFormat("@ExistingLetterofEOA='{0}',", request.ExistingLetterofEOA);
 
 
 
