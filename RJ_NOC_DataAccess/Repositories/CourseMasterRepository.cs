@@ -41,6 +41,19 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID)
+        {
+            string SqlQuery = " exec USP_CourseMaster_GetData_DTE @LoginSSOID ='" + LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetAllCourseDTE");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
             string SqlQuery = " exec USP_CourseMaster_GetData @LoginSSOID ='" + LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
@@ -184,6 +197,31 @@ namespace RJ_NOC_DataAccess.Repository
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.IfExists_CheckCourseandSubject");
 
             return dataTable;
+        }
+
+        public bool DTESaveData(DTECourseMasterDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CollegeWiseCourse_AddUpdate_DTE  ";
+            SqlQuery += " @CollegeWiseCourseID='" + request.CollegeWiseCourseID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @CourseID='" + request.CourseID + "',";
+            SqlQuery += " @OtherCourseName='" + request.OtherCourseName + "',";
+            SqlQuery += " @Seats='" + request.SuperNumerarySeats + "',";
+            SqlQuery += " @NoOfEnrolledStudents='" + request.Enrollment + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
+            SqlQuery += " @StreamID='" + request.StreamID + "',";
+            SqlQuery += " @Intake='" + request.Intake + "',";
+            SqlQuery += " @Shift='" + request.Shift + "',";
+            SqlQuery += " @ConductMode='" + request.ConductMode + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
 
     }

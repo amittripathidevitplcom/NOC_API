@@ -63,6 +63,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetAllCourseDTE/{CollegeWiseCourseID}/{LoginSSOID}/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourseDTE( int CollegeWiseCourseID, string LoginSSOID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "GetAllCourseDTE");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourseDTE(LoginSSOID, CollegeWiseCourseID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.GetAllCourseDTE", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("{CollegeWiseCourseID}/{LoginSSOID}/{UserID}")]
         public async Task<OperationResult<List<CourseMasterDataModel>>> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID, int UserID)
         {
@@ -251,6 +284,62 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("DTESaveData")]
+        public async Task<OperationResult<bool>> DTESaveData(DTECourseMasterDataModel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                bool IfExits = false;
+                IfExits = UtilityHelper.CourseMasterUtility.IfExists(request.CourseID, request.DepartmentID, request.CollegeWiseCourseID, request.CollegeID, request.StreamID);
+                if (IfExits == false)
+                {
+                    result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.DTESaveData(request));
+                    if (result.Data)
+                    {
+                        result.State = OperationState.Success;
+                        if (request.CollegeWiseCourseID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", 0, "CourseMaster");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.CollegeWiseCourseID, "CourseMaster");
+                            result.SuccessMessage = "Updated successfully .!";
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        if (request.CollegeWiseCourseID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
+                    }
+
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "This course is Already Exist, It Can't Not Be Duplicate.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CourseMasterController.SaveData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
             }
             return result;
         }

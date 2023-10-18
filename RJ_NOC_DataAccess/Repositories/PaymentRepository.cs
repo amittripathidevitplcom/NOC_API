@@ -29,14 +29,12 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
         #region "RPP PAYMENT SECTION"
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID, PaymentGatewayDataModel Model)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID, PaymentGatewayDataModel Model)
         {
             string REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             //string CHECKSUM = MD5HASHING(MERCHANTCODE + "|" + PRN + "|" + AMOUNT + "|" + CHECKSUMKEY);
             string CHECKSUM = MD5HASHING(Model.MerchantCode + "|" + PRN + "|" + AMOUNT + "|" + Model.CheckSumKey);
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-
 
             RequestParameters REQUESTPARAMS = new RequestParameters
             {
@@ -45,9 +43,10 @@ namespace RJ_NOC_DataAccess.Repositories
                 REQTIMESTAMP = REQTIMESTAMP,
                 PURPOSE = PURPOSE,
                 AMOUNT = AMOUNT,
-                SUCCESSURL = Model.SuccessURL,// SUCCESSURL,
-                FAILUREURL = Model.SuccessURL, //FAILUREURL,
-                CANCELURL = Model.CencelURL, //CANCELURL,
+                SUCCESSURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,
+                FAILUREURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //FAILUREURL,
+                CANCELURL = Model.CencelURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //CANCELURL,
+                CALLBACKURL = Model.CallBackURL ,
                 USERNAME = USERNAME,
                 USERMOBILE = USERMOBILE,
                 USEREMAIL = USEREMAIL,
@@ -69,8 +68,7 @@ namespace RJ_NOC_DataAccess.Repositories
                 REQUESTJSON = REQUESTJSON,
                 REQUESTPARAMETERS = REQUESTPARAMS,
                 ENCDATA = ENCDATA,
-                PaymentRequestURL=Model.PaymentRequestURL
-               
+                PaymentRequestURL = Model.PaymentRequestURL
             };
 
 
@@ -176,18 +174,103 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_CreatePaymentTransation";
-            SqlQuery += " @PaymentStatus='" + request.STATUS + "',@CheckSumValid='" + request.CHECKSUMVALID + "',@PRNNO='" + request.RESPONSEPARAMETERS.PRN + "',@CheckSum='" + request.RESPONSEPARAMETERS.CHECKSUM + "'," +
-                "@Amount='" + request.RESPONSEPARAMETERS.AMOUNT + "',@MerchantCode='" + request.RESPONSEPARAMETERS.MERCHANTCODE + "',@PaymentAmount='" + request.RESPONSEPARAMETERS.PAYMENTAMOUNT + "'," +
+            SqlQuery += " @PaymentStatus='" + request.STATUS + "'" +
+                ",@CheckSumValid='" + request.CHECKSUMVALID + "'" +
+                ",@ResponseMessage='" + request.RESPONSEPARAMETERS.RESPONSEMESSAGE + "'" +
+                ",@PRNNO='" + request.RESPONSEPARAMETERS.PRN + "'" +
+                ",@CheckSum='" + request.RESPONSEPARAMETERS.CHECKSUM + "'" +
+                "," + "@Amount='" + request.RESPONSEPARAMETERS.AMOUNT + "',@MerchantCode='" + request.RESPONSEPARAMETERS.MERCHANTCODE + "',@PaymentAmount='" + request.RESPONSEPARAMETERS.PAYMENTAMOUNT + "'," +
                 "@PaymentMode='" + request.RESPONSEPARAMETERS.PAYMENTMODE + "'" + ",@PaymentModeBID='" + request.RESPONSEPARAMETERS.PAYMENTMODEBID + "'" + ",@PaymentModeTimeStamp='" + request.RESPONSEPARAMETERS.PAYMENTMODETIMESTAMP + "'" +
                 ",@ReqTimeStamp='" + request.RESPONSEPARAMETERS.REQTIMESTAMP + "',@ResponseCode='" + request.RESPONSEPARAMETERS.RESPONSECODE + "',@RPPTXNID='" + request.RESPONSEPARAMETERS.RPPTXNID + "'," +
-                "@STATUS='" + request.RESPONSEPARAMETERS.STATUS + "',@UDF1='" + request.RESPONSEPARAMETERS.UDF1 + "',@UDF2='" + request.RESPONSEPARAMETERS.UDF2 + "',@RESPONSEJSON='" + request.RESPONSEJSON+ "'"; 
+                "@STATUS='" + request.RESPONSEPARAMETERS.STATUS + "',@UDF1='" + request.RESPONSEPARAMETERS.UDF1 + "',@UDF2='" + request.RESPONSEPARAMETERS.UDF2 + "',@RESPONSEJSON='" + request.RESPONSEJSON + "'," + "@key='UpdatePaymentStatus'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.SaveData");
             if (Rows > 0)
                 return true;
             else
                 return false;
         }
-      
+
+        public bool CreatePaymentRequest(PaymentRequest request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CreatePaymentTransation";
+
+            string strPaymentStatus = "";
+            if (request.REQUESTPARAMETERS.RequestType == (int)enmPaymetRequest.PaymentRequest)
+              strPaymentStatus = "PaymentRequest";
+            else if (request.REQUESTPARAMETERS.RequestType == (int)enmPaymetRequest.RefundRequest)
+                strPaymentStatus = "RefundRequest";
+            else
+                strPaymentStatus = "PaymentRequest";
+
+
+            SqlQuery += " @PaymentStatus='"+strPaymentStatus+"',@PRNNO='" + request.REQUESTPARAMETERS.PRN + "',@CheckSum='" + request.REQUESTPARAMETERS.CHECKSUM + "'," +
+                "@Amount='" + request.REQUESTPARAMETERS.AMOUNT + "',@MerchantCode='" + request.REQUESTPARAMETERS.MERCHANTCODE + "',@PaymentAmount='" + request.REQUESTPARAMETERS.AMOUNT +
+                "',@UDF1='" + request.REQUESTPARAMETERS.UDF1 + "',@UDF2='" + request.REQUESTPARAMETERS.UDF2 + "',@REQUESTJSON='" + request.REQUESTJSON + "',@ENCDATA='" + request.ENCDATA + "'," + "@key='CreatePaymentRequest',@RequestType='"+request.REQUESTPARAMETERS.RequestType+ "',@RPPTXNID='" + request.REQUESTPARAMETERS.RPPTXNID+"'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.CreatePaymentRequest");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool UpdateRefundStatus(PaymentResponse request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CreatePaymentTransation";
+            SqlQuery += " @PRNNO='" + request.RESPONSEPARAMETERS.PRN + "',";
+            SqlQuery += " @ResponseMessage='" + request.RESPONSEPARAMETERS.RESPONSEMESSAGE + "',";
+            SqlQuery += " @ResponseJson='" + request.RESPONSEJSON + "',";
+            SqlQuery += " @UDF1='" + request.RESPONSEPARAMETERS.UDF1 + "',";
+            SqlQuery += " @ResponseCode='" + request.RESPONSEPARAMETERS.RESPONSECODE + "',";
+            SqlQuery += " @STATUS='" + request.RESPONSEPARAMETERS.STATUS + "',";
+            SqlQuery += " @RefundID='" + request.RESPONSEPARAMETERS.REFUNDID + "',";
+            SqlQuery += " @RPPTimeStamp='" + request.RESPONSEPARAMETERS.REFUNDTIMESTAMP + "',";
+            SqlQuery += " @REMARKS='" + request.RESPONSEPARAMETERS.REMARKS + "',";
+            SqlQuery += " @RPPTXNID='" + request.RESPONSEPARAMETERS.RPPTXNID + "',";
+            SqlQuery += " @key='UpdateRefundStatus'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.UpdateRefundStatus");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+
+        public bool UpdateRefundTransactionStatus(RefundTransactionDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CreatePaymentTransation";
+            SqlQuery += " @PRNNO='" + request.PRN + "',";
+            SqlQuery += " @ResponseMessage='" + request.RESPONSEMESSAGE + "',";
+            SqlQuery += " @ResponseJson='" + request.RESPONSEJSON + "',";
+            SqlQuery += " @UDF1='" + request.ApplyNocApplicationID + "',";
+            SqlQuery += " @ResponseCode='" + request.RESPONSECODE + "',";
+            SqlQuery += " @STATUS='" + request.STATUS + "',";
+            SqlQuery += " @RPPTXNID='" + request.RPPTXNID + "',";
+            if (request.TRANSACTIONS != null)
+            {
+                if (request.TRANSACTIONS.Count > 0)
+                {
+                    string strRefundID = request.TRANSACTIONS.FirstOrDefault() != null ? Convert.ToString(request.TRANSACTIONS.FirstOrDefault().REFUNDID) : string.Empty;
+                    string RPPTimeStamp = request.TRANSACTIONS.FirstOrDefault() != null ? request.TRANSACTIONS.FirstOrDefault().REFUNDTIMESTAMP : string.Empty;
+                    string REMARKS = request.TRANSACTIONS.FirstOrDefault() != null ? request.TRANSACTIONS.FirstOrDefault().REMARKS : string.Empty;
+                    
+                    SqlQuery += " @RefundID='" + strRefundID + "',";
+                    SqlQuery += " @RPPTimeStamp='" + RPPTimeStamp + "',";
+                    SqlQuery += " @REMARKS='" + REMARKS + "',";
+                 
+                }
+            }
+            SqlQuery += " @key='UpdateRefundStatus'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.UpdateRefundTransactionStatus");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
         public List<ResponseParameters> GetPaymentListIDWise(string TransactionID)
         {
             string SqlQuery = " exec USP_PaymentTransaction_GetData @PRNNO='" + TransactionID + "' ,@Key= 'ViewRecord' ";
@@ -203,11 +286,11 @@ namespace RJ_NOC_DataAccess.Repositories
         //gete payment gateway details
         public PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel model)
         {
-            string SqlQuery = " exec USP_PaymentGateway_GetData @PaymentGateway='" + model.PaymentGateway + "' ,@Key= 'GetRecord' ";
+            string SqlQuery = " exec USP_PaymentGateway_GetData @PaymentGateway='" + model.PaymentGateway + "' ,@Key= 'GetRecord',@DepartmentID='" + model.DepartmentID + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
 
-           List< PaymentGatewayDataModel> dataModels = new List<PaymentGatewayDataModel>();
+            List<PaymentGatewayDataModel> dataModels = new List<PaymentGatewayDataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<PaymentGatewayDataModel>>(JsonDataTable_Data);
 
@@ -243,7 +326,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public EmitraRequstParameters GetEmitraServiceDetails(EmitraRequestDetails model)
         {
-            EmitraRequstParameters objData = new EmitraRequstParameters(); 
+            EmitraRequstParameters objData = new EmitraRequstParameters();
             string SqlQuery = " exec USP_GetEmitraServiceDetails @ServiceId='" + model.ServiceID + "',@IsKiosk='" + model.IsKiosk + "' , @Key= 'GetServiceDetails' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetEmitraServiceDetails");
@@ -251,7 +334,6 @@ namespace RJ_NOC_DataAccess.Repositories
             List<EmitraRequstParameters> dataModels = new List<EmitraRequstParameters>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<EmitraRequstParameters>>(JsonDataTable_Data);
-
             if (dataModels.Count > 0)
             {
                 var record = dataModels.FirstOrDefault();
@@ -285,7 +367,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_InsertEmitraTransactions";
-            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@TransactionId='" + request.TRANSACTIONID  + "',@PRN='" + request.PRN + "',@PaidAmount='" + request.PAIDAMOUNT + "',@TokenNo='" + request.RECEIPTNO + "',@StatusMsg='" + request.RESPONSEMESSAGE + "',@ResponseString='" + JsonConvert.SerializeObject(request) + "',@ReceiptNo='" + request.RECEIPTNO + "',"+ "@RequestStatus='" + request.STATUS + "'," + 
+            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@TransactionId='" + request.TRANSACTIONID + "',@PRN='" + request.PRN + "',@PaidAmount='" + request.PAIDAMOUNT + "',@TokenNo='" + request.RECEIPTNO + "',@StatusMsg='" + request.RESPONSEMESSAGE + "',@ResponseString='" + JsonConvert.SerializeObject(request) + "',@ReceiptNo='" + request.RECEIPTNO + "'," + "@RequestStatus='" + request.STATUS + "'," +
                 "@key='UpdateEmitraPaymentStatus'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.UpdateEmitraPaymentStatus");
             if (Rows > 0)
@@ -305,6 +387,27 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public List<CommonDataModel_DataTable> GetRPPTransactionList(TransactionSearchFilterModel Model )
+        {
+            string SqlQuery = " exec USP_PaymentTransaction_GetData";
+            SqlQuery += " @DepartmentID='" + Model.DepartmentID + "',";
+            SqlQuery += " @TransactionID='" + Model.TransactionID + "',";
+            SqlQuery += " @RPPTranID='" + Model.RPPTranID + "',";
+            SqlQuery += " @CollegeID='" + Model.CollegeID + "',";
+            SqlQuery += " @RefundID='" + Model.RefundID + "',";
+            SqlQuery += " @PRNNO='" + Model.PRN + "',";
+            SqlQuery += " @ApplyNocApplicationID='" + Model.ApplyNocApplicationID + "',";
+            SqlQuery += " @Key='" + Model.Key + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetRPPTransactionList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
 
         #endregion
 

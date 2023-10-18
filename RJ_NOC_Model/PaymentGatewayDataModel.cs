@@ -21,8 +21,14 @@ namespace RJ_NOC_Model
 
         public string CencelURL { get; set; }
         public string RedirectURL { get; set; }
+
+        public string VerificationURL { get; set; }
+        public string RefundURL { get; set; }
+        public string CallBackURL { get; set; }
+        public string RefundStatusURL { get; set; }
+        public string TransactionListURL { get; set; }
         public bool IsActive { get; set; }
-  
+        public int DepartmentID { get; set; }
 
 
     }

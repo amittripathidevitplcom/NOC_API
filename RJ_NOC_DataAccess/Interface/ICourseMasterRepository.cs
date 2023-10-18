@@ -10,8 +10,10 @@ namespace RJ_NOC_DataAccess.Interface
     public interface ICourseMasterRepository
     {
         List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID);
+        List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID);
         List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID);
         bool SaveData(CourseMasterDataModel request);
+        bool DTESaveData(DTECourseMasterDataModel request);
         bool UpdateData(CourseMasterDataModel request);
         bool DeleteData(int CollegeWiseCourseID);
         bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID,int StreamMasterID);

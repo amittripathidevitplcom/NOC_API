@@ -18,6 +18,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CourseMasterRepository.GetAllCourse(LoginSSOID);
         }
+        public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID)
+        {
+            return UnitOfWork.CourseMasterRepository.GetAllCourseDTE(LoginSSOID,  CollegeWiseCourseID);
+        }
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
             return UnitOfWork.CourseMasterRepository.GetCollegeWiseCourseIDWise(CollegeWiseCourseID, LoginSSOID);
@@ -25,6 +29,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveData(CourseMasterDataModel request)
         {
             return UnitOfWork.CourseMasterRepository.SaveData(request);
+        }
+        public bool DTESaveData(DTECourseMasterDataModel request)
+        {
+            return UnitOfWork.CourseMasterRepository.DTESaveData(request);
         }
         public bool UpdateData(CourseMasterDataModel request)
         {

@@ -22,6 +22,7 @@ using Microsoft.Extensions.Primitives;
 using java.util;
 using System.Data;
 using AspNetCore.Reporting;
+using sun.security.util;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -415,19 +416,37 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 //string Path = GeneratePDFDCE(request[0].ApplyNOCID,request);
-                string Path = GeneratePDFDCE(request[0].ApplyNOCID);
-                if (!string.IsNullOrEmpty(Path))
+
+
+                if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(request)))
                 {
-                    //if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(Path, request)))
-                    //{
-                    //    result.State = OperationState.Success;
-                    //    result.SuccessMessage = "PDF Generate Successfully .!";
-                    //}
-                    //else
-                    //{
-                    //    result.State = OperationState.Warning;
-                    //    result.SuccessMessage = "There was an error Generate PDF!";
-                    //}
+                    string Path = GeneratePDFDCE(request[0].ApplyNOCID);
+                    if (!string.IsNullOrEmpty(Path))
+                    {
+                        bool result1 = false;
+                        result1 = UtilityHelper.ApplyNOCUtility.UpdateNOCPDFPath(request[0].ApplyNOCID, Path);
+                        if (result1)
+                        {
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "PDF Generate Successfully .!";
+                        }
+                        else
+                        {
+                            result.State = OperationState.Warning;
+                            result.SuccessMessage = "There was an error Generate PDF!";
+                        }
+                    }
+                    else
+                    {
+                        UtilityHelper.ApplyNOCUtility.DeleteNOCIssuedDetails(request[0].ApplyNOCID);
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "There was an error Generate PDF!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
                 }
 
             }
@@ -691,8 +710,10 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        private DataSet CollegeDetails()
+        private DataSet CollegeDetails(int ApplyNOCID)
         {
+            var result = new DataSet();
+            result= UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
             var dataSet = new DataSet();
             dataSet.Tables.Add(new DataTable());
             dataSet.Tables[0].Columns.Add("NOCIssueNo");
@@ -701,9 +722,9 @@ namespace RJ_NOC_API.Controllers
             dataSet.Tables[0].Columns.Add("Img");
             DataRow row;
             row = dataSet.Tables[0].NewRow();
-            row["NOCIssueNo"] = "2023-2024/30";
-            row["Date"] = "05-09-2023";
-            row["NOCIssueFinancialYear"] = "2023-2024";
+            row["NOCIssueNo"] = result.Tables[0].Rows[0]["NOCIssueNo"];//"2023-2024/30";
+            row["Date"] = result.Tables[0].Rows[0]["Date"];//"05-09-2023";
+            row["NOCIssueFinancialYear"] = result.Tables[0].Rows[0]["NOCIssueFinancialYear"];//"2023-2024";
             row["Img"] = "http://172.22.33.75:81/assets/images/logoLarge.png";
             dataSet.Tables[0].Rows.Add(row);
             ////
@@ -714,16 +735,21 @@ namespace RJ_NOC_API.Controllers
             dataSet.Tables[1].Columns.Add("StreamName");
             DataRow row1;
             row1 = dataSet.Tables[1].NewRow();
-            row1["LegalEntityName"] = "श्री कॉम्प कंप्यूटर शिक्षण संस्थान, सोजत सिटी, जिला पाली|";
-            row1["CollegeName"] = "श्री विनायक महाविद्यालय मेला चौक, सोजत सिटी, जिला पाली|";
-            row1["UniversityName"] = "जय नारायण व्यास विश्व विद्यालय, जोधपुर |";
-            row1["StreamName"] = "अनिवार्य विषयो सहित सनातक स्टार प्र कला संकाय:- भुगोल, राजनीति विज्ञान, हिंदी साहित्य, इतिहास |";
+            row1["LegalEntityName"] = result.Tables[1].Rows[0]["LegalEntityName"];//"श्री कॉम्प कंप्यूटर शिक्षण संस्थान, सोजत सिटी, जिला पाली|";
+            row1["CollegeName"] = result.Tables[1].Rows[0]["CollegeName"];//"श्री विनायक महाविद्यालय मेला चौक, सोजत सिटी, जिला पाली|";
+            row1["UniversityName"] = result.Tables[1].Rows[0]["UniversityName"];    //"जय नारायण व्यास विश्व विद्यालय, जोधपुर |";
+            string CourseSubject = "";
+            for (int i = 0; i < result.Tables[1].Rows.Count; i++)
+            {
+                CourseSubject +=i==0? result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"] : " || " + result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"];
+            }
+            row1["StreamName"] = CourseSubject;//"अनिवार्य विषयो सहित सनातक स्टार प्र कला संकाय:- भुगोल, राजनीति विज्ञान, हिंदी साहित्य, इतिहास |";
             dataSet.Tables[1].Rows.Add(row1);
 
             return dataSet;
         }
         [HttpGet]
-       // public string GeneratePDFDCE(int ApplyNOCID, List<GenerateNOC_DataModel> CourseSubjectData)
+        // public string GeneratePDFDCE(int ApplyNOCID, List<GenerateNOC_DataModel> CourseSubjectData)
         public string GeneratePDFDCE(int ApplyNOCID)
         {
             StringBuilder sb = new StringBuilder();
@@ -732,7 +758,7 @@ namespace RJ_NOC_API.Controllers
 
 
             DataSet dataset = new DataSet();
-            dataset = CollegeDetails();
+            dataset = CollegeDetails(ApplyNOCID);
             string mimetype = "";
             int extension = 1;
             var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\DECNOC_Print.rdlc";
