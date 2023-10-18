@@ -26,6 +26,7 @@ namespace RJ_NOC_Model
         public string? SSOID { get; set; }
         public decimal TotalNocFee { get; set; }
         public decimal LateFee { get; set; }
+        public string  ExistingLetterofEOA { get; set; }
 
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
