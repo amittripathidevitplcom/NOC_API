@@ -425,6 +425,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetImportExcelData( SSOID,DeptId, collegeID, StaticsFileID, ActionType);
         }
+        public List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetOldNOCCourseList_CollegeWise(CollegID);
+        }
 
     }
 }
