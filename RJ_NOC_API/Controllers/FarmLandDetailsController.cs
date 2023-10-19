@@ -58,14 +58,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetAllFarmLandDetalsListByCollegeID/{CollegeID}")]
-        public async Task<OperationResult<List<FarmLandDetailsListModel>>> GetAllFarmLandDetalsListByCollegeID(int CollegeID)
+        [HttpGet("GetAllFarmLandDetalsListByCollegeID/{CollegeID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<FarmLandDetailsListModel>>> GetAllFarmLandDetalsListByCollegeID(int CollegeID,int ApplyNOCID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(CollegeID, "GetAllData", 0, " FarmLandDetails");
             var result = new OperationResult<List<FarmLandDetailsListModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.FarmLandDetailsUtility.GetFarmLandDetailsList(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.FarmLandDetailsUtility.GetFarmLandDetailsList(CollegeID, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

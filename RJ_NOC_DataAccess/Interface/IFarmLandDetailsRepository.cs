@@ -12,7 +12,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetAllFarmLandDetails();
         bool IfExists(int FarmLandDetailsID);
         bool SaveData(FarmLandDetailsModel request);
-        List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId);
+        List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId,int ApplyNOCID);
         FarmLandDetailsModel ViewFarmLandDetailsListByID(int FarmLandDetailsID);
         bool DeleteData(int FarmLandDetailsID);
     }

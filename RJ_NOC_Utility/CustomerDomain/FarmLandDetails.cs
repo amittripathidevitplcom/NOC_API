@@ -27,9 +27,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
 
         
-        public List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId)
+        public List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId, int ApplyNOCID)
         {
-            return UnitOfWork.FarmLandDetailsRepository.GetFarmLandDetailsList(collegeId);
+            return UnitOfWork.FarmLandDetailsRepository.GetFarmLandDetailsList(collegeId, ApplyNOCID);
         }
 
         public bool IfExists(int FarmLandDetailsID)

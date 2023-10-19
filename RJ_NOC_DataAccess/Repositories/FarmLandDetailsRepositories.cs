@@ -34,9 +34,9 @@ namespace RJ_NOC_DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId)
+        public List<FarmLandDetailsListModel> GetFarmLandDetailsList(int collegeId, int ApplyNOCID)
         {
-            string SqlQuery = $" exec USP_Trn_FarmLandDetails @CollegeID='" + collegeId + "',@ActionType='GetAllDataByCollegeID'";
+            string SqlQuery = $" exec USP_Trn_FarmLandDetails @CollegeID='" + collegeId + "',@ActionType='GetAllDataByCollegeID',@ApplyNOCID='"+ApplyNOCID+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "FarmLandDetails.GetFarmLandDetailsList");
 
