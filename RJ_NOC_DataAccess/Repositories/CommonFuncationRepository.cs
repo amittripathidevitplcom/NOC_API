@@ -1158,7 +1158,17 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
+        public List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID)
+        {
+            string SqlQuery = $" Exec Get_CollegeWiseOldNOCCourse @CollegeID={CollegID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetOldNOCCourseList_CollegeWise");
 
+            List<CommonDataModel_CollegeWiseCourseList> dataModels = new List<CommonDataModel_CollegeWiseCourseList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
     }
 }

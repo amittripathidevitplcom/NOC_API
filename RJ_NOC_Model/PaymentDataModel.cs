@@ -103,6 +103,7 @@ namespace RJ_NOC_Model
         public string ApplyNocApplicationID { get; set; }
         public int DepartmentID { get; set; }
         public string CreatedBy { get; set; }
+        public string SSOID { get; set; }
 
     }
 
@@ -115,7 +116,8 @@ namespace RJ_NOC_Model
         public string? RPPTXNID { get; set; }
         public string? SubOrderID { get; set; }
         public string? REFUNDID { get; set; }
-     
+        public string SSOID { get; set; }
+
     }
 
     #region "EMITRA MODEL"

@@ -124,6 +124,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID);
 
         List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType);
+        List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID);
     }
 
 }

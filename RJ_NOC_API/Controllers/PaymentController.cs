@@ -64,6 +64,7 @@ namespace RJ_NOC_API.Controllers
                     if (result.Data != null)
                     {
                         result.Data.CreatedBy = request.CreatedBy;
+                        result.Data.SSOID = request.SSOID;
                         result.Data.REQUESTPARAMETERS.RequestType = (int)enmPaymetRequest.PaymentRequest;
                         bool isSuccess = UtilityHelper.PaymentUtility.CreatePaymentRequest(result.Data);
                         if (isSuccess)
@@ -324,6 +325,7 @@ namespace RJ_NOC_API.Controllers
                     paymentRequest.REQUESTPARAMETERS.AMOUNT = Model.AMOUNT;
                     paymentRequest.REQUESTPARAMETERS.MERCHANTCODE = data.MerchantCode;
                     paymentRequest.REQUESTPARAMETERS.RPPTXNID = Model.RPPTXNID;
+                    paymentRequest.SSOID= Model.SSOID;
                     bool isSuccess = UtilityHelper.PaymentUtility.CreatePaymentRequest(paymentRequest);
                     if (isSuccess)
                     {
