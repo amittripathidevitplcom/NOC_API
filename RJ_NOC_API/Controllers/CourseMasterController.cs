@@ -64,14 +64,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetAllCourseDTE/{CollegeWiseCourseID}/{LoginSSOID}/{UserID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourseDTE( int CollegeWiseCourseID, string LoginSSOID, int UserID)
+        [HttpGet("GetAllCourseDTE/{CollegeWiseCourseID}/{LoginSSOID}/{UserID}/{collegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourseDTE( int CollegeWiseCourseID, string LoginSSOID, int UserID,int collegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "GetAllCourseDTE");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourseDTE(LoginSSOID, CollegeWiseCourseID));
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourseDTE(LoginSSOID, CollegeWiseCourseID, collegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

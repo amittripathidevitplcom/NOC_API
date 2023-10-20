@@ -53,7 +53,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
             return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID,ActionName , RoleID,  DepartmentID);
-        }       
+        } 
+        public List<CommonDataModel_DataTable> GetApplyNOCRevertReport(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRevertReport(UserID,ActionName , RoleID,  DepartmentID);
+        }     
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {
             return UnitOfWork.ApplyNOCRepository.GetPendingMedicalApplications(RoleID, UserID,ActionName);

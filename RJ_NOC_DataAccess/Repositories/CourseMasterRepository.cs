@@ -41,9 +41,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID)
+        public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID, int CollegeID)
         {
-            string SqlQuery = " exec USP_CourseMaster_GetData_DTE @LoginSSOID ='" + LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "'";
+            string SqlQuery = " exec USP_CourseMaster_GetData_DTE @LoginSSOID ='" + LoginSSOID + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "',@CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetAllCourseDTE");
 
