@@ -63,6 +63,15 @@ namespace RJ_NOC_Model
         public List<ContactDetailsDataModel> ContactDetailsList { get; set; }
         public List<NearestGovernmentHospitalsDataModel> NearestGovernmentHospitalsList { get; set; }
         public List<CollegeLevelDetailsDataModel> CollegeLevelDetails { get; set; }
+
+        //Medical Group 1 
+        public int? AnnualIntakeStudents { get; set; }
+        public decimal? SocietyCapitalAssets { get; set; }
+        public decimal? SocietyIncome { get; set; }
+        public decimal? TotalProjectCost { get; set; }
+        public string? FundingSources { get; set; }
+        public string? FundingSourcesPath { get; set; }
+        public string? FundingSources_Dis_FileName { get; set; }
     }
     public class ContactDetailsDataModel
     {

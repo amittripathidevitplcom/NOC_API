@@ -69,6 +69,12 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@CityID='{0}',", request.CityID);
             sb.AppendFormat("@ManagementType='{0}',", request.ManagementTypeID);
             sb.AppendFormat("@OtherUniversityName='{0}',", request.OtherUniversityName);
+
+            sb.AppendFormat("@AnnualIntakeStudents='{0}',", request.AnnualIntakeStudents);
+            sb.AppendFormat("@SocietyCapitalAssets='{0}',", request.SocietyCapitalAssets);
+            sb.AppendFormat("@SocietyIncome='{0}',", request.SocietyIncome);
+            sb.AppendFormat("@TotalProjectCost='{0}',", request.TotalProjectCost);
+            sb.AppendFormat("@FundingSources='{0}',", request.FundingSources);
             // child
             sb.AppendFormat("@ContactDetailsList='{0}',", CommonHelper.GetDetailsTableQry(request.ContactDetailsList, "ContactDetailsList"));
             if (request.NearestGovernmentHospitalsList.Count > 0)
