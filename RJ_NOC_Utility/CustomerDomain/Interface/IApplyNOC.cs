@@ -19,7 +19,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName,int RoleID, int DepartmentID);
         List<CommonDataModel_DataTable> GetForwardCommiteeAHList(int UserID, string ActionName,int RoleID, int DepartmentID);
         List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID);
-        List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName);
+      List<CommonDataModel_DataTable> GetApplyNOCRevertReport(int UserID, string ActionName, int RoleID, int DepartmentID);  List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName);
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetApplyNOCApplicationType(int CollegeID);
         List<CommonDataModel_DataTable> GeneratePDFForJointSecretary(int ApplyNOCID);
         List<CommonDataModel_DataTable> GenerateNOCForDCE(int ApplyNOCID);

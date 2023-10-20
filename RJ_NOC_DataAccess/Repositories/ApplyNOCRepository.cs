@@ -216,6 +216,18 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> GetApplyNOCRevertReport(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetApplyNOCRevertReport @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "',@DepartmentID ='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplyNOCCompletedReport");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
 
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {

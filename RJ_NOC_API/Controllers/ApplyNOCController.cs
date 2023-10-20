@@ -674,6 +674,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        
+        [HttpGet("GetApplyNOCRevertReport/{UserID}/{ActionName}/{RoleID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCRevertReport(int UserID, string ActionName, int RoleID, int DepartmentID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetApplyNOCRevertReport", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplyNOCRevertReport(UserID, ActionName, RoleID, DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetApplyNOCRevertReport", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
         [HttpGet("GetNocLateFees/{DepartmentID}")]
@@ -713,7 +746,7 @@ namespace RJ_NOC_API.Controllers
         private DataSet CollegeDetails(int ApplyNOCID)
         {
             var result = new DataSet();
-            result= UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
+            result = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
             var dataSet = new DataSet();
             dataSet.Tables.Add(new DataTable());
             dataSet.Tables[0].Columns.Add("NOCIssueNo");
@@ -741,7 +774,7 @@ namespace RJ_NOC_API.Controllers
             string CourseSubject = "";
             for (int i = 0; i < result.Tables[1].Rows.Count; i++)
             {
-                CourseSubject +=i==0? result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"] : " || " + result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"];
+                CourseSubject += i == 0 ? result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"] : " || " + result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"];
             }
             row1["StreamName"] = CourseSubject;//"अनिवार्य विषयो सहित सनातक स्टार प्र कला संकाय:- भुगोल, राजनीति विज्ञान, हिंदी साहित्य, इतिहास |";
             dataSet.Tables[1].Rows.Add(row1);
@@ -770,7 +803,7 @@ namespace RJ_NOC_API.Controllers
             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
 
-            
+
 
             //return File(result.MainStream, "application/pdf");
             System.IO.File.WriteAllBytes(filepath, result.MainStream);
