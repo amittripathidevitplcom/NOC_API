@@ -95,6 +95,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SubmitRevertApplication(request);
         }
+        public List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetParameterFeeMaster(request);
+        }
         public bool SaveDCENOCData(List<GenerateNOC_DataModel> model)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDCENOCData(model);

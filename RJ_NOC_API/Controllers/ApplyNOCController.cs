@@ -927,7 +927,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
+        [HttpPost("ParameterFeeMaster")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetParameterFeeMaster(ParameterFeeMaster request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "CommonMaster");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetParameterFeeMaster(request));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonMasterController.GetCommonMasterList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 
 }

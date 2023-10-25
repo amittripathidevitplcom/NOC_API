@@ -109,4 +109,15 @@ namespace RJ_NOC_Model
         public int ApplyNOCID { get; set; }
         public int DepartmentID { get; set; }
     }
+    
+    public class ParameterFeeMaster
+    {
+        public int ParamterID { get; set; }
+        public int DepartmentID { get; set; }
+        public int ApplyNocFeeID { get; set; }
+        public string OpenFromDate { get; set; }
+        public string OpenToDate { get; set; }
+        public int FeeAmount { get; set; }
+        public string ActionName { get; set; }
+    }
 }
