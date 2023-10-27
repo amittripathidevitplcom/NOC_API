@@ -18,8 +18,26 @@ namespace RJ_NOC_DataAccess.Repository
         public bool SaveData(CollegeMasterDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
+            if (request.AnnualIntakeStudents == null)
+            {
+                request.AnnualIntakeStudents = 0;
+            }
+            if (request.SocietyCapitalAssets == null)
+            {
+                request.SocietyCapitalAssets = 0;
+            }
+            if (request.SocietyIncome == null)
+            {
+                request.SocietyIncome = 0;
+            }
+            if (request.TotalProjectCost == null)
+            {
+                request.TotalProjectCost = 0;
+            } 
 
-            StringBuilder sb = new StringBuilder();
+
+
+        StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID='{0}',", request.CollegeID);
             sb.AppendFormat("@DepartmentID='{0}',", request.DepartmentID);
             sb.AppendFormat("@TypeofCollege='{0}',", request.TypeofCollege);
