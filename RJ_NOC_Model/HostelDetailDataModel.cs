@@ -10,6 +10,7 @@ namespace RJ_NOC_Model
     {
         public int HostelCategoryID { get; set; }
         public int HostelDetailID { get; set; }
+        public string IsHostel { get; set; }
         public string IsHostelCampus { get; set; }
         public string HostelName { get; set; }
         public string ContactPersonName { get; set; }
