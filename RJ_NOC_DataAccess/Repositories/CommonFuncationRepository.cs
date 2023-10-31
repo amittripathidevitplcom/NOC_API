@@ -221,6 +221,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DTEManagementType(int DepartmentID, string Type,string SSOID)
+        {
+            string SqlQuery = " Exec USP_CommonMasterList_DTEManagementType @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "',@SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSchemeListByDepartment");
+
+            List<CommonDataModel_CommonMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_CommonMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_DistrictList> GetDistrictList()
         {
@@ -1167,6 +1178,20 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_CollegeWiseCourseList> dataModels = new List<CommonDataModel_CollegeWiseCourseList>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<DataTable> CheckExistsDETGovernmentCollege(string SSOID)
+        {
+            string SqlQuery = "exec USP_CheckExistsDETGovernmentCollege @SSOID='"+ SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.CheckExistsDETGovernmentCollege");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
 

@@ -53,6 +53,12 @@ namespace RJ_NOC_Model
         public string? RegistrationDocPath { get; set; }
         public string? RegistrationDoc { get; set; }
 
+        public int ProcessDepartmentID { get; set; }
+        public string ManagementType { get; set; } = "Private";
+
+
+
+
     }
 
     public class LegalEntityMemberDetailsDataModel
