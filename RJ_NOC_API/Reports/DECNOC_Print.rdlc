@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <AutoRefresh>0</AutoRefresh>
+  <AutoRefresh>1</AutoRefresh>
   <DataSources>
     <DataSource Name="DCENOC_Print">
       <ConnectionProperties>
@@ -33,10 +33,14 @@
           <DataField>img</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="NocQRCode">
+          <DataField>NocQRCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>E:\ReportTesting\CoreRDLCReport-master\CoreRDLCReport-master\CoreRDLCReport\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Local\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -68,7 +72,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>E:\ReportTesting\CoreRDLCReport-master\CoreRDLCReport-master\CoreRDLCReport\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Local\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CourseAndSubjectDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -1114,6 +1118,22 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Image Name="Image5">
+            <Source>Database</Source>
+            <Value>=First(Fields!NocQRCode.Value, "DataSet_CollegeDetails")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>22.8265cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>1.67569cm</Height>
+            <Width>3.48438cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
         </ReportItems>
         <Height>25.7cm</Height>
         <Style />
