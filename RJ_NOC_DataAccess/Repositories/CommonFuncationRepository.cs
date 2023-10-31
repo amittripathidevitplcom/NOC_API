@@ -1093,8 +1093,10 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
-            dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
-
+            if (dataTable.Rows.Count > 0)
+            {
+                dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
+            }
             dataModels.Add(dataModel);
             return dataModels;
         }

@@ -18,8 +18,8 @@
               <xs:element name="NOCIssueNo" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="NOCIssueNoColumn" msprop:Generator_ColumnPropNameInRow="NOCIssueNo" msprop:Generator_UserColumnName="NOCIssueNo" msprop:Generator_ColumnVarNameInTable="columnNOCIssueNo" type="xs:string" minOccurs="0" />
               <xs:element name="Date" msdata:Caption="DataColumn1" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnVarNameInTable="columnDate" type="xs:string" minOccurs="0" />
               <xs:element name="NOCIssueFinancialYear" msprop:Generator_ColumnPropNameInTable="NOCIssueFinancialYearColumn" msprop:Generator_ColumnPropNameInRow="NOCIssueFinancialYear" msprop:Generator_UserColumnName="NOCIssueFinancialYear" msprop:Generator_ColumnVarNameInTable="columnNOCIssueFinancialYear" type="xs:string" minOccurs="0" />
-              <xs:element name="img" msprop:Generator_UserColumnName="img" msprop:Generator_ColumnPropNameInTable="imgColumn" msprop:Generator_ColumnPropNameInRow="img" msprop:Generator_ColumnVarNameInTable="columnimg" type="xs:string" minOccurs="0" />
-              <xs:element name="NocQRCode" msprop:Generator_ColumnPropNameInRow="NocQRCode" msprop:Generator_ColumnPropNameInTable="NocQRCodeColumn" msprop:Generator_ColumnVarNameInTable="columnNocQRCode" msprop:Generator_UserColumnName="NocQRCode" type="xs:string" minOccurs="0" />
+              <xs:element name="img" msprop:Generator_ColumnPropNameInTable="imgColumn" msprop:Generator_ColumnPropNameInRow="img" msprop:Generator_UserColumnName="img" msprop:Generator_ColumnVarNameInTable="columnimg" type="xs:string" minOccurs="0" />
+              <xs:element name="NocQRCode" msprop:Generator_UserColumnName="NocQRCode" msprop:Generator_ColumnPropNameInTable="NocQRCodeColumn" msprop:Generator_ColumnPropNameInRow="NocQRCode" msprop:Generator_ColumnVarNameInTable="columnNocQRCode" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -30,6 +30,7 @@
               <xs:element name="CollegeName" msprop:Generator_ColumnPropNameInTable="CollegeNameColumn" msprop:Generator_ColumnPropNameInRow="CollegeName" msprop:Generator_UserColumnName="CollegeName" msprop:Generator_ColumnVarNameInTable="columnCollegeName" type="xs:string" minOccurs="0" />
               <xs:element name="UniversityName" msprop:Generator_ColumnPropNameInTable="UniversityNameColumn" msprop:Generator_ColumnPropNameInRow="UniversityName" msprop:Generator_UserColumnName="UniversityName" msprop:Generator_ColumnVarNameInTable="columnUniversityName" type="xs:string" minOccurs="0" />
               <xs:element name="StreamName" msprop:Generator_ColumnPropNameInTable="StreamNameColumn" msprop:Generator_ColumnPropNameInRow="StreamName" msprop:Generator_UserColumnName="StreamName" msprop:Generator_ColumnVarNameInTable="columnStreamName" type="xs:string" minOccurs="0" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_UserColumnName="SubjectName" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

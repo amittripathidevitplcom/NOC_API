@@ -40,7 +40,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Local\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -69,10 +69,14 @@
           <DataField>StreamName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SubjectName">
+          <DataField>SubjectName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Local\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CourseAndSubjectDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -635,14 +639,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="StreamName">
+                        <Textbox Name="SubjectName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!StreamName.Value</Value>
+                                  <Value>=Fields!SubjectName.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                   </Style>
@@ -651,7 +655,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>StreamName</rd:DefaultName>
+                          <rd:DefaultName>SubjectName</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
