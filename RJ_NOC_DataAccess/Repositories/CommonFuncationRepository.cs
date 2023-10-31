@@ -1087,6 +1087,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> GetPaymentMode()
+        {
+            string SqlQuery = " exec USP_GetPaymentMode";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetPaymentMode");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
 
         public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID)
         {

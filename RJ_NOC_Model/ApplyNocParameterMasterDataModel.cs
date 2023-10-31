@@ -26,7 +26,7 @@ namespace RJ_NOC_Model
         public string? SSOID { get; set; }
         public decimal TotalNocFee { get; set; }
         public decimal LateFee { get; set; }
-        public string  ExistingLetterofEOA { get; set; }
+        public string ExistingLetterofEOA { get; set; }
 
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
@@ -340,4 +340,22 @@ namespace RJ_NOC_Model
         public string SubjectName { get; set; }
         public int ApplyNocParameterID { get; set; }
     }
+
+    public class ApplyNocOfflinePaymentModal
+    {
+        public int ID { get; set; }
+        public int DepartmentID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public int CollegeID { get; set; }
+        public int PaymentMode { get; set; }
+        public string BankName { get; set; }
+        public decimal Amount { get; set; }
+        public string DateofIssuance { get; set; }
+        public string DateofExpiry { get; set; }
+        public string FileName { get; set; }
+        public string Dis_FileName { get; set; }
+        public string FilePath { get; set; }
+        public string ActionName { get; set; }
+    }
+
 }
