@@ -25,7 +25,6 @@ using AspNetCore.Reporting;
 using sun.security.util;
 using System.Security.Permissions;
 using System.Security;
-using QRCoder;
 using System.Drawing;
 
 namespace RJ_NOC_API.Controllers
