@@ -19,6 +19,7 @@ using static Azure.Core.HttpHeader;
 using Org.BouncyCastle.Ocsp;
 using iTextSharp.text.pdf.qrcode;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using QRCoder;
 
 namespace RJ_NOC_DataAccess.Common
 {
@@ -231,6 +232,24 @@ namespace RJ_NOC_DataAccess.Common
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        public static byte[] GenerateQrCode(string qrmsg)
+        {
+            string code = qrmsg;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
+            QRCoder.QRCode qrCode = new QRCoder.QRCode(qrCodeData);
+
+            using (System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    qrCodeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] byteImage = ms.ToArray();
+                    return byteImage;
+                }
             }
         }
 

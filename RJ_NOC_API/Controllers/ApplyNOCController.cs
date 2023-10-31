@@ -23,6 +23,10 @@ using java.util;
 using System.Data;
 using AspNetCore.Reporting;
 using sun.security.util;
+using System.Security.Permissions;
+using System.Security;
+using QRCoder;
+using System.Drawing;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -753,12 +757,14 @@ namespace RJ_NOC_API.Controllers
             dataSet.Tables[0].Columns.Add("Date");
             dataSet.Tables[0].Columns.Add("NOCIssueFinancialYear");
             dataSet.Tables[0].Columns.Add("Img");
+            dataSet.Tables[0].Columns.Add("NocQRCode", typeof(byte[]));
             DataRow row;
             row = dataSet.Tables[0].NewRow();
             row["NOCIssueNo"] = result.Tables[0].Rows[0]["NOCIssueNo"];//"2023-2024/30";
             row["Date"] = result.Tables[0].Rows[0]["Date"];//"05-09-2023";
             row["NOCIssueFinancialYear"] = result.Tables[0].Rows[0]["NOCIssueFinancialYear"];//"2023-2024";
-            row["Img"] = "http://172.22.33.75:81/assets/images/logoLarge.png";
+            //row["Img"] = "http://172.22.33.75:81/assets/images/logoLarge.png";
+            row["NocQRCode"] = CommonHelper.GenerateQrCode(result.Tables[0].Rows[0]["NocQRCode"].ToString());
             dataSet.Tables[0].Rows.Add(row);
             ////
             dataSet.Tables.Add(new DataTable());
@@ -781,7 +787,8 @@ namespace RJ_NOC_API.Controllers
 
             return dataSet;
         }
-        [HttpGet]
+
+        [HttpGet("GeneratePDFDCE")]
         // public string GeneratePDFDCE(int ApplyNOCID, List<GenerateNOC_DataModel> CourseSubjectData)
         public string GeneratePDFDCE(int ApplyNOCID)
         {
@@ -798,6 +805,7 @@ namespace RJ_NOC_API.Controllers
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
             parameters.Add("test", "");
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             LocalReport localReport = new LocalReport(path);
             localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
