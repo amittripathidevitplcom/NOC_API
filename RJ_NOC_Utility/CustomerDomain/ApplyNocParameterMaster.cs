@@ -496,6 +496,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNoc_FDRMasterDetail(request);
         }
+        public bool  SaveOfflinePaymnetDetail(ApplyNocOfflinePaymentModal request)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.SaveOfflinePaymnetDetail(request);
+        }
         public List<ApplyNocFDRDetailsDataModel> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID)
         {
             var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocFDRDetails(ApplyNocFDRID, ApplyNocID);
@@ -578,6 +582,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID)
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.GetApplicationPaymentHistoryApplicationID(ApplyNocApplicationID);
+        }
+        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.GetOfflinePaymentDetails(ApplyNocApplicationID, PaymentOfflineID, ActionName);
         }
 
 

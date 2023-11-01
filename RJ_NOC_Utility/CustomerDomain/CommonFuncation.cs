@@ -160,6 +160,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DepartmentAndTypeWise(DepartmentID, Type);
         }
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DTEManagementType(int DepartmentID, string Type, string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCommonMasterList_DTEManagementType(DepartmentID, Type, SSOID);
+        }
         public List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.GetDocumentMasterList_DepartmentAndTypeWise(DepartmentID, Type);
@@ -412,6 +416,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDownloadPdfDetails(DepartmentID, CollageID);
         }
+        public List<CommonDataModel_DataTable> GetPaymentMode()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetPaymentMode();
+        }
        
         public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID,int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID)
         {
@@ -428,6 +436,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID)
         {
             return UnitOfWork.CommonFuncationRepository.GetOldNOCCourseList_CollegeWise(CollegID);
+        }
+        public List<DataTable> CheckExistsDETGovernmentCollege(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.CheckExistsDETGovernmentCollege(SSOID);
         }
 
     }

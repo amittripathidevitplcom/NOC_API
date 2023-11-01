@@ -221,6 +221,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DTEManagementType(int DepartmentID, string Type,string SSOID)
+        {
+            string SqlQuery = " Exec USP_CommonMasterList_DTEManagementType @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "',@SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSchemeListByDepartment");
+
+            List<CommonDataModel_CommonMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_CommonMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CommonMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_DistrictList> GetDistrictList()
         {
@@ -1082,8 +1093,23 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
-            dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
+            if (dataTable.Rows.Count > 0)
+            {
+                dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
+            }
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetPaymentMode()
+        {
+            string SqlQuery = " exec USP_GetPaymentMode";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetPaymentMode");
 
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            
             dataModels.Add(dataModel);
             return dataModels;
         }
@@ -1167,6 +1193,20 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_CollegeWiseCourseList> dataModels = new List<CommonDataModel_CollegeWiseCourseList>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_CollegeWiseCourseList>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<DataTable> CheckExistsDETGovernmentCollege(string SSOID)
+        {
+            string SqlQuery = "exec USP_CheckExistsDETGovernmentCollege @SSOID='"+ SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.CheckExistsDETGovernmentCollege");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
 

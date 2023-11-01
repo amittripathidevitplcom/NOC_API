@@ -25,7 +25,6 @@ using AspNetCore.Reporting;
 using sun.security.util;
 using System.Security.Permissions;
 using System.Security;
-using QRCoder;
 using System.Drawing;
 
 namespace RJ_NOC_API.Controllers
@@ -747,58 +746,18 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        private DataSet CollegeDetails(int ApplyNOCID)
-        {
-            var result = new DataSet();
-            result = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
-            var dataSet = new DataSet();
-            dataSet.Tables.Add(new DataTable());
-            dataSet.Tables[0].Columns.Add("NOCIssueNo");
-            dataSet.Tables[0].Columns.Add("Date");
-            dataSet.Tables[0].Columns.Add("NOCIssueFinancialYear");
-            dataSet.Tables[0].Columns.Add("Img");
-            dataSet.Tables[0].Columns.Add("NocQRCode", typeof(byte[]));
-            DataRow row;
-            row = dataSet.Tables[0].NewRow();
-            row["NOCIssueNo"] = result.Tables[0].Rows[0]["NOCIssueNo"];//"2023-2024/30";
-            row["Date"] = result.Tables[0].Rows[0]["Date"];//"05-09-2023";
-            row["NOCIssueFinancialYear"] = result.Tables[0].Rows[0]["NOCIssueFinancialYear"];//"2023-2024";
-            //row["Img"] = "http://172.22.33.75:81/assets/images/logoLarge.png";
-            row["NocQRCode"] = CommonHelper.GenerateQrCode(result.Tables[0].Rows[0]["NocQRCode"].ToString());
-            dataSet.Tables[0].Rows.Add(row);
-            ////
-            dataSet.Tables.Add(new DataTable());
-            dataSet.Tables[1].Columns.Add("LegalEntityName");
-            dataSet.Tables[1].Columns.Add("CollegeName");
-            dataSet.Tables[1].Columns.Add("UniversityName");
-            dataSet.Tables[1].Columns.Add("StreamName");
-            DataRow row1;
-            row1 = dataSet.Tables[1].NewRow();
-            row1["LegalEntityName"] = result.Tables[1].Rows[0]["LegalEntityName"];//"श्री कॉम्प कंप्यूटर शिक्षण संस्थान, सोजत सिटी, जिला पाली|";
-            row1["CollegeName"] = result.Tables[1].Rows[0]["CollegeName"];//"श्री विनायक महाविद्यालय मेला चौक, सोजत सिटी, जिला पाली|";
-            row1["UniversityName"] = result.Tables[1].Rows[0]["UniversityName"];    //"जय नारायण व्यास विश्व विद्यालय, जोधपुर |";
-            string CourseSubject = "";
-            for (int i = 0; i < result.Tables[1].Rows.Count; i++)
-            {
-                CourseSubject += i == 0 ? result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"] : " || " + result.Tables[1].Rows[i]["StreamName"] + " - " + result.Tables[1].Rows[i]["SubjectName"];
-            }
-            row1["StreamName"] = CourseSubject;//"अनिवार्य विषयो सहित सनातक स्टार प्र कला संकाय:- भुगोल, राजनीति विज्ञान, हिंदी साहित्य, इतिहास |";
-            dataSet.Tables[1].Rows.Add(row1);
-
-            return dataSet;
-        }
-
-        [HttpGet("GeneratePDFDCE")]
-        // public string GeneratePDFDCE(int ApplyNOCID, List<GenerateNOC_DataModel> CourseSubjectData)
+        
         public string GeneratePDFDCE(int ApplyNOCID)
         {
             StringBuilder sb = new StringBuilder();
             var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
             string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
-
-
             DataSet dataset = new DataSet();
-            dataset = CollegeDetails(ApplyNOCID);
+            dataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
+            if (dataset.Tables[0].Rows.Count > 0)
+            {
+                dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["NocQRCodeLink"].ToString());
+            }
             string mimetype = "";
             int extension = 1;
             var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\DECNOC_Print.rdlc";
@@ -810,9 +769,7 @@ namespace RJ_NOC_API.Controllers
             localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
             var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-
-
-
+             
             //return File(result.MainStream, "application/pdf");
             System.IO.File.WriteAllBytes(filepath, result.MainStream);
 

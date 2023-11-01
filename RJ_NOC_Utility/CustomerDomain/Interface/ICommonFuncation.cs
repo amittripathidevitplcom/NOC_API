@@ -32,6 +32,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID);
         List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID);
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
+        List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DTEManagementType(int DepartmentID, string Type, string SSOID);
         List<CommonDataModel_DistrictList> GetDistrictList();
         List<CommonDataModel_StateList> GetStateList();
         List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID);
@@ -120,11 +121,15 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetCityByDistrict(int DistrictID);
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetDownloadPdfDetails(int DepartmentID, int CollegeID);
+        List<CommonDataModel_DataTable> GetPaymentMode();
         bool SaveExcelData(List<MemberDataModel> request,int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
         bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID);
 
         List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType);
         List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID);
+
+        List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
     }
+
 
 }
