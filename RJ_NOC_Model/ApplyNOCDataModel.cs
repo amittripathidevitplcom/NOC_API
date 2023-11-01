@@ -120,4 +120,12 @@ namespace RJ_NOC_Model
         public int FeeAmount { get; set; }
         public string ActionName { get; set; }
     }
+    public class NocInformation
+    {
+        public string LegalEntityName { get; set; }
+        public string CollegeName { get; set; }
+        public string UniversityName { get; set; }
+        public string StreamName { get; set; }
+        public string SubjectName { get; set; }
+    }
 }
