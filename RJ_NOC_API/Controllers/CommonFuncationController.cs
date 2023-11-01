@@ -2946,7 +2946,5 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-
     }
 }
