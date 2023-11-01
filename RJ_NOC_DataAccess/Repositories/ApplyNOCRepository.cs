@@ -263,7 +263,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }        
+        }
         public List<CommonDataModel_DataTable> GenerateNOCForDCE(int ApplyNOCID)
         {
             string SqlQuery = " exec USP_GetNOCListForGeneratePDF_JointSecretary @Action='GetDataForPDF',@ApplyNOCID ='" + ApplyNOCID + "'";
@@ -336,7 +336,7 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool  SaveDCENOCData(List<GenerateNOC_DataModel> model)
+        public bool SaveDCENOCData(List<GenerateNOC_DataModel> model)
         {
             string IssuedNOCData_Str = CommonHelper.GetDetailsTableQry(model, "Temp_IssuedNOCData");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -389,6 +389,18 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
             //CheckAppliedNOCCollegeWise
+        }
+
+        public NocInformation GetNocInformation(Guid SearchRecordID)
+        {
+            string SqlQuery = $"exec USP_SaveDCENOCData @ViewNOC_SearchRecordID='{SearchRecordID}',@ActionType='GetNocInformation'";
+            var dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNocInformation");
+            NocInformation dataModels = new NocInformation();
+            if (dataSet != null && dataSet.Tables.Count > 0)
+            {
+                dataModels = CommonHelper.ConvertDataTable<NocInformation>(dataSet.Tables[0]);
+            }
+            return dataModels;
         }
     }
 }
