@@ -366,7 +366,16 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return staffAttendanceRepository; }
         }
-
+        private ILOIFeeMasterRepository LoiFeeMasterRepository;
+        public ILOIFeeMasterRepository LOIFeeMasterRepository
+        {
+            get { return LoiFeeMasterRepository; }
+        }
+        private ISeatInformationMasterRepository seatInformationMasterRepository;
+        public ISeatInformationMasterRepository SeatInformationMasterRepository
+        {
+            get { return seatInformationMasterRepository; }
+        }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -425,6 +434,8 @@ namespace RJ_NOC_DataAccess.Repository
             departmentofcollegedocumentscrutinyrepository = new DepartmentOfCollegeDocumentScrutinyRepository(commonHelper);
             fireQueryRepository = new FireQueryRepository(commonHelper);
             staffAttendanceRepository = new StaffAttendanceRepository(commonHelper);
+            LoiFeeMasterRepository = new LOIFeeMasterRepository(commonHelper);
+            seatInformationMasterRepository = new SeatInformationMasterRepository(commonHelper);
         }
     }
 }

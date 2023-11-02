@@ -106,6 +106,8 @@ namespace RJ_NOC_Utility
 
         public IDepartmentOfCollegeDocumentScrutiny DepartmentOfCollegeScrutinyUtility { get; private set; }
         public IStaffAttendance StaffAttendanceUtility { get; private set; }
+        public ILOIFeeMaster LOIFeeMasterUtility { get; private set; }
+        public ISeatInformationMaster SeatInformationMasterUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -172,6 +174,8 @@ namespace RJ_NOC_Utility
             DepartmentOfCollegeScrutinyUtility = new DepartmentOfCollegeDocumentScrutiny(UnitOfWork);
             FireQueryUtility = new FireQuery(UnitOfWork);
             StaffAttendanceUtility = new StaffAttendance(UnitOfWork);
+            LOIFeeMasterUtility = new LOIFeeMaster(UnitOfWork);
+            SeatInformationMasterUtility = new SeatInformationMaster(UnitOfWork);
         }
     }
 }
