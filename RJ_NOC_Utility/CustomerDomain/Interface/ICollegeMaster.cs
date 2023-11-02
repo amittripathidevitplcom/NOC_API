@@ -17,6 +17,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool MapSSOIDInCollege(int CollegeId, int modifiedBy, string ssoId);
         List<CommonDataModel_DataSet> ViewTotalCollegeDataByID(int CollegeID);
         List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID);
+        List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID);
         List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID);
     }
 }

@@ -221,6 +221,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID)
+        {
+            string SqlQuery = "exec USP_GetCollegeApplyNOCRejected @SsoID='" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.RejectedApplicationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
 
         public List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID)
         {
