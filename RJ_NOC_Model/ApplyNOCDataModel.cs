@@ -119,6 +119,7 @@ namespace RJ_NOC_Model
         public string OpenToDate { get; set; }
         public int FeeAmount { get; set; }
         public string ActionName { get; set; }
+        public string TableUpdateType { get; set; }
     }
     public class NocInformation
     {

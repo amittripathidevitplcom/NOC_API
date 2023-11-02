@@ -595,13 +595,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpPost("FinalSubmitPreVerification/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}")]
-        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        [HttpPost("FinalSubmitPreVerification/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}/{Remarks}")]
+        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName,string Remarks)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName, Remarks));
                 if (result.Data == true)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "FinalSubmitPreVerification", 0, "AnimalDocumentScrutinyController");

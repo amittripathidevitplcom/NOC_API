@@ -380,7 +380,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request)
         {
-            string SqlQuery = "exec USP_ParameterFeeMaster @DepartmentID ='" + request.DepartmentID + "',@ParamterID ='" + request.ParamterID + "',@ApplyNocFeeID ='" + request.ApplyNocFeeID + "',@OpenFromDate ='" + request.@OpenFromDate + "',@OpenToDate ='" + request.OpenToDate + "',@FeeAmount ='" + request.FeeAmount + "',@ActionName ='" + request.ActionName + "'";
+            string SqlQuery = "exec USP_ParameterFeeMaster @DepartmentID ='" + request.DepartmentID + "',@ParamterID ='" + request.ParamterID + "',@ApplyNocFeeID ='" + request.ApplyNocFeeID + "',@OpenFromDate ='" + request.@OpenFromDate + "',@OpenToDate ='" + request.OpenToDate + "',@FeeAmount ='" + request.FeeAmount + "',@ActionName ='" + request.ActionName + "',@TableUpdateType ='" + request.TableUpdateType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNocLateFees");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

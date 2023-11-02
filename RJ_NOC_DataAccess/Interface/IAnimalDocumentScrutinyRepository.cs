@@ -35,7 +35,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetFinalVerificationDoneList(GetPhysicalVerificationAppliationList request);
         List<CommonDataModel_DataTable> GetFinalNOCApplicationList(GetPhysicalVerificationAppliationList request);
         bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName);
-        bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName);
+        bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName, string Remarks);
 
         List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmentID, string Action);
