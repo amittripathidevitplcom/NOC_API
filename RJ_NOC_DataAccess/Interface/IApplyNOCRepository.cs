@@ -37,6 +37,6 @@ namespace RJ_NOC_DataAccess.Interface
         DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID);
         bool UpdateNOCPDFPath(int ApplyNOCID,string Path);
         bool DeleteNOCIssuedDetails(int ApplyNOCID);
-        NocInformation GetNocInformation(Guid SearchRecordID);
+        NocInformation GetNocInformation(Guid SearchRecordID);    
     }
 }
