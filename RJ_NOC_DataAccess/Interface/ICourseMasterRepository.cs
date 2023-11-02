@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface ICourseMasterRepository
     {
-        List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID);
+        List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID, int CollegeID);
         List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID, int CollegeID);
         List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID);
         bool SaveData(CourseMasterDataModel request);
