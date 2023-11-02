@@ -677,7 +677,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        
+
         [HttpGet("GetApplyNOCRevertReport/{UserID}/{ActionName}/{RoleID}/{DepartmentID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCRevertReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
@@ -915,6 +915,38 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonMasterController.GetCommonMasterList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetNocInformation/{SearchRecordID}")]
+        public async Task<OperationResult<NocInformation>> GetNocInformation(Guid SearchRecordID)
+        {
+            var result = new OperationResult<NocInformation>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetNocInformation(SearchRecordID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetNocInformation", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

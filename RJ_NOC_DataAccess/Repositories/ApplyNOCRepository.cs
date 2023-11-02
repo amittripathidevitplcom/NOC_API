@@ -263,7 +263,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }        
+        }
         public List<CommonDataModel_DataTable> GenerateNOCForDCE(int ApplyNOCID)
         {
             string SqlQuery = " exec USP_GetNOCListForGeneratePDF_JointSecretary @Action='GetDataForPDF',@ApplyNOCID ='" + ApplyNOCID + "'";
@@ -336,7 +336,7 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool  SaveDCENOCData(List<GenerateNOC_DataModel> model)
+        public bool SaveDCENOCData(List<GenerateNOC_DataModel> model)
         {
             string IssuedNOCData_Str = CommonHelper.GetDetailsTableQry(model, "Temp_IssuedNOCData");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -380,13 +380,26 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request)
         {
-            string SqlQuery = "exec USP_ParameterFeCheckAppliedNOCCollegeWiseeMaster @DepartmentID ='" + request.DepartmentID + "',@ParamterID ='" + request.ParamterID + "',@ApplyNocFeeID ='" + request.ApplyNocFeeID + "',@OpenFromDate ='" + request.@OpenFromDate + "',@OpenToDate ='" + request.OpenToDate + "',@FeeAmount ='" + request.FeeAmount + "',@ActionName ='" + request.ActionName + "'";
+            string SqlQuery = "exec USP_ParameterFeeMaster @DepartmentID ='" + request.DepartmentID + "',@ParamterID ='" + request.ParamterID + "',@ApplyNocFeeID ='" + request.ApplyNocFeeID + "',@OpenFromDate ='" + request.@OpenFromDate + "',@OpenToDate ='" + request.OpenToDate + "',@FeeAmount ='" + request.FeeAmount + "',@ActionName ='" + request.ActionName + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNocLateFees");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
+            return dataModels;
+            //CheckAppliedNOCCollegeWise
+        }
+
+        public NocInformation GetNocInformation(Guid SearchRecordID)
+        {
+            string SqlQuery = $"exec USP_SaveDCENOCData @ViewNOC_SearchRecordID='{SearchRecordID}',@ActionType='GetNocInformation'";
+            var dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNocInformation");
+            NocInformation dataModels = new NocInformation();
+            if (dataSet != null && dataSet.Tables.Count > 0)
+            {
+                dataModels = CommonHelper.ConvertDataTable<NocInformation>(dataSet.Tables[0]);
+            }
             return dataModels;
         }
     }

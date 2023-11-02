@@ -56,6 +56,19 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public bool SaveOfflinePaymnetDetail(ApplyNocOfflinePaymentModal request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_OfflinePaymentDetails @ApplyNOCID='" + request.ApplyNOCID + "',@PaymentOfflineID='" + request.ID + "',";
+            SqlQuery += "@CollegeID = '" + request.CollegeID + "',@BankName = '" + request.BankName + "',@DepartmentId = '" + request.DepartmentID + "',@PaymentMode = '" + request.PaymentMode + "',";
+            SqlQuery += "@Amount = '" + request.Amount + "',@DateofIssuance = '" + request.DateofIssuance + "',@DateofExpiry = '" + request.DateofExpiry + "',@FileName = '" + request.FileName + "',@ActionName = 'InsertUpdate'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNocParameterMaster.SaveOfflinePaymnetDetail");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
         public DataTable GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID)
         {
             string SqlQuery = $"exec USP_GetApplyNocFDRDetails @ApplyNocFDRID={ApplyNocFDRID} ,@ApplyNocID='{ApplyNocID}'";
@@ -161,6 +174,19 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = $"exec USP_GetCourseSubjectByApplyNOCID @ApplyNOCID={ApplyNOCID}";
             dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetCourseSubjectByApplyNOCID");
             return dt;
+        }
+
+        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName)
+        {
+            string SqlQuery = " exec USP_OfflinePaymentDetails @ApplyNOCID='" + ApplyNocApplicationID + "',@PaymentOfflineID='" + PaymentOfflineID + "',@ActionName = '" + ActionName + "'";
+
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetOfflinePaymentDetails");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

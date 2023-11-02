@@ -589,6 +589,105 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("SaveOfflinePaymnetDetail")]
+        public async Task<OperationResult<bool>> SaveOfflinePaymnetDetail(ApplyNocOfflinePaymentModal request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.SaveOfflinePaymnetDetail(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    if (request.ID == 0)
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "ApplyNocParameterMaster");
+                        result.SuccessMessage = "Saved successfully .!";
+                    }
+                    else
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(0, "Update", request.ApplyNOCID, "ApplyNocParameterMaster");
+                        result.SuccessMessage = "Updated successfully .!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    if (request.ApplyNOCID == 0)
+                        result.ErrorMessage = "There was an error adding data.!";
+                    else
+                        result.ErrorMessage = "There was an error updating data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNocParameterMasterController.SaveOfflinePaymnetDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetOfflinePaymentDetails/{ApplyNocApplicationID}/{PaymentOfflineID}/{ActionName}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetOfflinePaymentDetails(ApplyNocApplicationID, PaymentOfflineID, ActionName));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    if (ActionName == "GetOfflinePaymentDetails")
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    else if (ActionName == "DeleteOfflinePayment")
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data Deleted successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data load successfully .!";
+                    }
+                    
+                }
+                else
+                {
+                    if (ActionName == "DeleteOfflinePayment")
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "There are some issue. Contact to Admin department";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("GetOfflinePaymentDetails.ApplyNocApplicationID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

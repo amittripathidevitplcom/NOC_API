@@ -920,9 +920,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-        [HttpGet]
-        public string GeneratePDF(List<CommonDataModel_DataTable> dt)
+        private string GeneratePDF(List<CommonDataModel_DataTable> dt)
         {
             StringBuilder sb = new StringBuilder();
             var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";

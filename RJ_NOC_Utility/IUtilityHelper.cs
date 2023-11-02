@@ -71,6 +71,8 @@ namespace RJ_NOC_Utility
         IAgricultureDocumentScrutiny AgricultureDocumentScrutinyUtility { get; }
         IFireQuery FireQueryUtility { get; }
         IStaffAttendance StaffAttendanceUtility { get; }
+        ILOIFeeMaster LOIFeeMasterUtility { get; }
+        ISeatInformationMaster SeatInformationMasterUtility { get; }
 
     }
 }
