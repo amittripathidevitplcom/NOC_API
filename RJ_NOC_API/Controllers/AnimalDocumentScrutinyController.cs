@@ -900,7 +900,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                bool success = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSavePDFPathandNOC("", request.ApplyNOCID, request.DepartmentID, 0, request.UserID, request.NOCIssuedRemark, "UpdateNOCDetails"));
+                bool success = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.FinalSavePDFPathandNOC("", request.ApplyNOCID, request.DepartmentID, 0, request.UserID, request.NOCIssuedRemark, request.Status));
                 if (success)
                 {
                     result.Data = new List<CommonDataModel_DataTable>();
@@ -928,9 +928,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
-        [HttpGet]
-        public string GeneratePDF(List<CommonDataModel_DataTable> dt)
+        private string GeneratePDF(List<CommonDataModel_DataTable> dt)
         {
             StringBuilder sb = new StringBuilder();
             var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";

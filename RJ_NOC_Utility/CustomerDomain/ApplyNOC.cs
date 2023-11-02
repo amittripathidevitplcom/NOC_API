@@ -115,5 +115,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
         }
+        public NocInformation GetNocInformation(Guid SearchRecordID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetNocInformation(SearchRecordID);
+        }
     }
 }
