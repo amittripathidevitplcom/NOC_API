@@ -49,5 +49,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CollegeMasterRepository.LOIApplicationList(LoginSSOID);
         }
 
+        public bool LOIFinalSubmit_OTPVerification(int CollegeID)
+        {
+            return UnitOfWork.CollegeMasterRepository.LOIFinalSubmit_OTPVerification(CollegeID);
+        }
     }
 }

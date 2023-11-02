@@ -312,6 +312,40 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpPost("LOIFinalSubmit_OTPVerification/{CollegeID}")]
+        public async Task<OperationResult<bool>> LOIFinalSubmit_OTPVerification(int CollegeID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.LOIFinalSubmit_OTPVerification(CollegeID));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error deleting data.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.LOIFinalSubmit_OTPVerification", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+
+            }
+            return result;
+        }
+
+
+
+
     }
 }
 

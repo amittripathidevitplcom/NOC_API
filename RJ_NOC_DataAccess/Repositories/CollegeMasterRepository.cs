@@ -234,5 +234,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public bool LOIFinalSubmit_OTPVerification(int CollegeID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = "exec USP_LOIFinalSubmit_OTPVerification @CollegeID='"+ CollegeID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CollegeMaster.LOIFinalSubmit_OTPVerification");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

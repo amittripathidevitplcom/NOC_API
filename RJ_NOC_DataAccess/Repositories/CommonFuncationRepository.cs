@@ -763,6 +763,17 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public bool LOIFinalSubmit(int CollegeID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_LOIFinalSubmit";
+            SqlQuery += " @CollegeID='" + CollegeID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.LOIFinalSubmit");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
         public List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int LevelID)
         {
             string SqlQuery = "exec USP_GetRoleListByLevelID @LevelID=" + LevelID;
@@ -1197,6 +1208,17 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<DataTable> Get_LOIFeeMaster(int DepartmentID)
+        {
+            string SqlQuery = " exec USP_LOIFeeMaster @DepartmentID='"+ DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.Get_LOIFeeMaster");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
 

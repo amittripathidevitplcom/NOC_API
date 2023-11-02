@@ -746,7 +746,7 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        
+        [HttpGet("GeneratePDFDCE")]
         public string GeneratePDFDCE(int ApplyNOCID)
         {
             StringBuilder sb = new StringBuilder();
