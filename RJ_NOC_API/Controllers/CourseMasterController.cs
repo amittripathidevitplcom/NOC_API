@@ -31,14 +31,14 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("{UserID}/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID, string LoginSSOID)
+        [HttpGet("GetAllCourse/{UserID}/{LoginSSOID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID, string LoginSSOID,int CollegeID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "CourseMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourse(LoginSSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CourseMasterUtility.GetAllCourse(LoginSSOID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
