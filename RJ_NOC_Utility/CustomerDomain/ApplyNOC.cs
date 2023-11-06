@@ -119,5 +119,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetNocInformation(SearchRecordID);
         }
+        public List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetNOCIssuedReportListForAdmin(UserID, ActionName, RoleID);
+        }
     }
 }
