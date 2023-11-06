@@ -1154,29 +1154,35 @@ namespace RJ_NOC_DataAccess.Repository
 
         public bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID)
         {
-
-            string SqlQuery = "";
            // string IPAddress = CommonHelper.GetVisitorIPAddress();
-            SqlQuery = " exec USP_ImportExcelStatics_UpdateSingleRow";
 
-            SqlQuery += " @ID='" + request.ID + "',";
-            SqlQuery += " @StaticsFileID='" + request.ImportExcelID + "',";
-            SqlQuery += " @CollegeID='" + collegeID + "',";
-            SqlQuery += " @DepartmentID='" + DeptId + "',";
-            SqlQuery += " @Course='" + request.Course + "',";
-            SqlQuery += " @Subject='" + request.Subject + "',";
-            SqlQuery += " @StudentName='" + request.StudentName + "',";
-            SqlQuery += " @FatherName='" + request.FatherName + "',";
-            SqlQuery += " @Cast='" + request.Cast + "',";
-            SqlQuery += " @PH='" + request.PH + "',";
-            SqlQuery += " @Year='" + request.Year + "',";
-            SqlQuery += " @DOB='" + request.DOB + "',";
-            SqlQuery += " @Minorty='" + request.Minorty + "',";
-            SqlQuery += " @RollNo='" + request.RollNo + "',";
-            SqlQuery += " @Section='" + request.Section + "',";
-            SqlQuery += " @Gender='" + request.Gender + "'";
+            var query=new StringBuilder();
+            query.Append("exec USP_ImportExcelStatics_UpdateSingleRow ");
+            query.AppendFormat("@ID={0},", request.ID);
+            query.AppendFormat("@StaticsFileID={0},", request.ImportExcelID);
+            query.AppendFormat("@ApplicationID='{0}',", request.ApplicationID);
+            query.AppendFormat("@District='{0}',", request.District);
+            query.AppendFormat("@CollegeName='{0}',", request.CollegeName);
+            query.AppendFormat("@AISHECode='{0}',", request.AISHECode);
+            query.AppendFormat("@StudentName='{0}',", request.StudentName);
+            query.AppendFormat("@FatherName='{0}',", request.FatherName);
+            query.AppendFormat("@Gender='{0}',", request.Gender);
+            query.AppendFormat("@Course='{0}',", request.Course);
+            query.AppendFormat("@Subject='{0}',", request.Subject);
+            query.AppendFormat("@Class='{0}',", request.Class);
+            query.AppendFormat("@Cast='{0}',", request.Cast);
+            query.AppendFormat("@PH='{0}',", request.PH);
+            query.AppendFormat("@Minorty='{0}',", request.Minorty);
+            query.AppendFormat("@HasScholarship='{0}',", request.HasScholarship);
+            query.AppendFormat("@ScholarshipName='{0}',", request.ScholarshipName);
+            query.AppendFormat("@DOB='{0}',", request.DOB);
+            query.AppendFormat("@StudentMobileNo='{0}',", request.StudentMobileNo);
+            query.AppendFormat("@StudentEmailId='{0}',", request.StudentEmailId);
+            query.AppendFormat("@PrincipalName='{0}',", request.PrincipalName);
+            query.AppendFormat("@PrincipalMobileNo='{0}',", request.PrincipalMobileNo);
+            query.AppendFormat("@CollegeEmailId='{0}'", request.CollegeEmailId);
 
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "Commomfunction.UpdateSingleRow");
+            int Rows = _commonHelper.NonQuerry(query.ToString(), "Commomfunction.UpdateSingleRow");
             if (Rows > 0)
                 return true;
             else
