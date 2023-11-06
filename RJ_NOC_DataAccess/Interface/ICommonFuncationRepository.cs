@@ -87,6 +87,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
         bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
+        bool LOIFinalSubmit(int CollegeID);
         List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int RoleID);
 
 
@@ -137,6 +138,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID);
         List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
+        List<DataTable> Get_LOIFeeMaster(int DepartmentID);
     }
 }
 

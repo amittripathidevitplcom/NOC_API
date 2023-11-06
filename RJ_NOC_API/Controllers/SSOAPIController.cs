@@ -55,21 +55,20 @@ namespace RJ_NOC_API.Controllers
             }
             else
             {
-                  SSOID = sSOLandingDataDataModel.Username;
+                SSOID = sSOLandingDataDataModel.Username;
             }
-           
-            string LoginType = "CITIZEN";//CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
 
-            //string SSOID = sSOLandingDataDataModel.Username;
-            //string LoginType = sSOLandingDataDataModel.LoginType;
+            string LoginType = "CITIZEN";//CommonHelper.Decrypt(sSOLandingDataDataModel.LoginType);
+                                         //string SSOID = sSOLandingDataDataModel.Username;
+                                         //string LoginType = sSOLandingDataDataModel.LoginType;
 
             string QueryStringData = "";
             var result = new OperationResult<SSOUserDetailData>();
-            bool IsSSOAuthentication = false;
+            bool IsSSOAuthentication = true;
             try
             {
 
-                IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+               // IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
 
 
                 if (sSOLandingDataDataModel.LoginType.ToString() == "-999")
@@ -212,7 +211,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-         
+
     }
 }
 

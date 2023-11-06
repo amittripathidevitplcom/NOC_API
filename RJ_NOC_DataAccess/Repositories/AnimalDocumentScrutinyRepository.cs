@@ -434,11 +434,11 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
-        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID,string ActionName)
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID,string ActionName, string Remarks)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_FinalSubmitPreVerification_AH";
-            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "'";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "',@Remarks='" + Remarks + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "AnimalDocumentScrutiny.FinalSubmitPreVerification");
             if (Rows > 0)
                 return true;

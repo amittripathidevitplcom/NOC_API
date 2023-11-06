@@ -46,20 +46,52 @@ namespace RJ_NOC_Utility.CustomerDomain
 
             try
             {
-                using (var client = new HttpClient())
+                //using (var client = new HttpClient())
+                //{
+                //    client.BaseAddress = new Uri(BaseUrl);
+                //    client.DefaultRequestHeaders.Clear();
+                //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //    HttpResponseMessage Res = await client.GetAsync("/SSOREST/GetUserDetailJSON/" + SSOID + "/" + WebServiceUser + "/" + WebServicePwd);
+                //    if (Res.IsSuccessStatusCode)
+                //    {
+                //        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                //        ssoInfo = JsonConvert.DeserializeObject<SSOUserDetailData>(EmpResponse);
+                //    }
+                //    else
+                //    { } 
+                //}
+
+                ssoInfo = new SSOUserDetailData()
                 {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("/SSOREST/GetUserDetailJSON/" + SSOID + "/" + WebServiceUser + "/" + WebServicePwd);
-                    if (Res.IsSuccessStatusCode)
-                    {
-                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-                        ssoInfo = JsonConvert.DeserializeObject<SSOUserDetailData>(EmpResponse);
-                    }
-                    else
-                    { } 
-                }
+                    SSOID = "nrawat455",
+                    AadhaarId = "957637905276",
+                    BhamashahId = "45454",
+                    BhamashahMemberId = "454654",
+                    DisplayName = "Naresh",
+                    DateOfBirth = "19/01/1991",
+                    Gender = "Male",
+                    MobileNo = "7742860212",
+                    TelephoneNumber = "014145454",
+                    IpPhone = "014145454",
+                    MailPersonal = "rishikapoordelhi@gmail.com",
+                    PostalAddress = "Jaiupr",
+                    PostalCode = "302023",
+                    City = "Jaiupr",
+                    State = "Rajasthan",
+                    Photo = "",
+                    Designation = "Citizan",
+                    Department = "College",
+                    MailOfficial = "rishikapoordelhi@gmail.com",
+                    EmployeeNumber = "1212",
+                    DepartmentId = "0",
+                    FirstName = "Naresh",
+                    LastName = "Rawat",
+                    JanaadhaarId = "23232",
+                    ManaadhaarMemberId = "1212",
+                    UserType = "0",
+                    Mfa = "454"
+                };
+
             }
             catch (Exception ex)
             {

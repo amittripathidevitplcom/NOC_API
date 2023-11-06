@@ -70,5 +70,7 @@ namespace RJ_NOC_DataAccess.Interface
         IDepartmentOfCollegeDocumentScrutinyRepository DepartmentOfCollegeDocumentScrutinyRepository { get; }
         IFireQueryRepository FireQueryRepository { get; }
         IStaffAttendanceRepository StaffAttendanceRepository { get; }
+        ILOIFeeMasterRepository LOIFeeMasterRepository { get; }
+        ISeatInformationMasterRepository SeatInformationMasterRepository { get; }
     }
 }

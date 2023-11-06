@@ -34,5 +34,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool UpdateNOCPDFPath(int ApplyNOCID, string Path);
         bool DeleteNOCIssuedDetails(int ApplyNOCID);
         NocInformation GetNocInformation(Guid SearchRecordID);
+        List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID);
     }
 }

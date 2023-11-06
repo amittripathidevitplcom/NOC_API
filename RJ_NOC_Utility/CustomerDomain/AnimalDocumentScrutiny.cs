@@ -112,9 +112,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, DepartmentID, UserID, ActionName);
         }
 
-        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName,string Remarks)
         {
-            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName);
+            return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSubmitPreVerification(ApplyNOCID, DepartmentID, UserID, ActionName, Remarks);
         }
 
         public List<CommonDataModel_RNCCheckListData> GetPreVerificationchecklistDetails(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)

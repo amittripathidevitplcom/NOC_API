@@ -289,6 +289,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(CollegeID, IsDraftSubmited);
         }
+        public bool LOIFinalSubmit(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.LOIFinalSubmit(CollegeID);
+        }
         public List<CommonDataModel_RoleListByLevel> GetRoleList()
         {
             return UnitOfWork.CommonFuncationRepository.GetRoleList();
@@ -442,5 +446,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.CheckExistsDETGovernmentCollege(SSOID);
         }
 
+        public List<DataTable> Get_LOIFeeMaster(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.Get_LOIFeeMaster(DepartmentID);
+        }
     }
 }

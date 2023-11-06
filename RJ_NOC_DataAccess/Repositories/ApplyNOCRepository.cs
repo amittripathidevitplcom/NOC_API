@@ -380,7 +380,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request)
         {
-            string SqlQuery = "exec USP_ParameterFeeMaster @DepartmentID ='" + request.DepartmentID + "',@ParamterID ='" + request.ParamterID + "',@ApplyNocFeeID ='" + request.ApplyNocFeeID + "',@OpenFromDate ='" + request.@OpenFromDate + "',@OpenToDate ='" + request.OpenToDate + "',@FeeAmount ='" + request.FeeAmount + "',@ActionName ='" + request.ActionName + "'";
+            string SqlQuery = "exec USP_ParameterFeeMaster @DepartmentID ='" + request.DepartmentID + "',@ParamterID ='" + request.ParamterID + "',@ApplyNocFeeID ='" + request.ApplyNocFeeID + "',@OpenFromDate ='" + request.@OpenFromDate + "',@OpenToDate ='" + request.OpenToDate + "',@FeeAmount ='" + request.FeeAmount + "',@ActionName ='" + request.ActionName + "',@TableUpdateType ='" + request.TableUpdateType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNocLateFees");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -400,6 +400,18 @@ namespace RJ_NOC_DataAccess.Repositories
             {
                 dataModels = CommonHelper.ConvertDataTable<NocInformation>(dataSet.Tables[0]);
             }
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID)
+        {
+            string SqlQuery = " exec USP_GetNOCIssuedReportForAdminData @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNOCIssuedReportListForAdmin");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
     }
