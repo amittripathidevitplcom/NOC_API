@@ -956,6 +956,41 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetNOCIssuedReportListForAdmin/{UserID}/{ActionName}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetNOCIssuedReportListForAdmin", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetNOCIssuedReportListForAdmin(UserID, ActionName, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetNOCIssuedReportListForAdmin", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
     }
 
 }

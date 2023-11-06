@@ -402,5 +402,17 @@ namespace RJ_NOC_DataAccess.Repositories
             }
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID)
+        {
+            string SqlQuery = " exec USP_GetNOCIssuedReportForAdminData @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNOCIssuedReportListForAdmin");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
