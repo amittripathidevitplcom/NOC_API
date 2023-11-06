@@ -43,11 +43,19 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID)
         {
             return UnitOfWork.CollegeMasterRepository.RevertedApplicationList(LoginSSOID);
-        }        
+        }
+        public List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID)
+        {
+            return UnitOfWork.CollegeMasterRepository.RejectedApplicationList(LoginSSOID);
+        }       
         public List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID)
         {
             return UnitOfWork.CollegeMasterRepository.LOIApplicationList(LoginSSOID);
         }
 
+        public bool LOIFinalSubmit_OTPVerification(int CollegeID)
+        {
+            return UnitOfWork.CollegeMasterRepository.LOIFinalSubmit_OTPVerification(CollegeID);
+        }
     }
 }

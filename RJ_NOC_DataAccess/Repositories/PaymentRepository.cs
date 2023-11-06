@@ -37,6 +37,8 @@ namespace RJ_NOC_DataAccess.Repositories
             string CHECKSUM = MD5HASHING(Model.MerchantCode + "|" + PRN + "|" + AMOUNT + "|" + Model.CheckSumKey);
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
 
+            
+
             RequestParameters REQUESTPARAMS = new RequestParameters
             {
                 MERCHANTCODE = Model.MerchantCode, //MERCHANTCODE,
@@ -52,7 +54,7 @@ namespace RJ_NOC_DataAccess.Repositories
                 USERMOBILE = USERMOBILE,
                 USEREMAIL = USEREMAIL,
                 UDF1 = ApplyNocApplicationID,
-                UDF2 = "PARAM2",
+                UDF2 = PURPOSE,
                 UDF3 = "PARAM3",
                 OFFICECODE = "",
                 REVENUEHEAD = "AMOUNT=" + AMOUNT.ToString(),

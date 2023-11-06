@@ -746,8 +746,8 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        
-        private string GeneratePDFDCE(int ApplyNOCID)
+        [HttpGet("GeneratePDFDCE")]
+        public string GeneratePDFDCE(int ApplyNOCID)
         {
             StringBuilder sb = new StringBuilder();
             var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
