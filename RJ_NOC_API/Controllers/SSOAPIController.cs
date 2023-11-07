@@ -64,11 +64,11 @@ namespace RJ_NOC_API.Controllers
 
             string QueryStringData = "";
             var result = new OperationResult<SSOUserDetailData>();
-            bool IsSSOAuthentication = true;
+            bool IsSSOAuthentication = false;
             try
             {
 
-               // IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+                IsSSOAuthentication = true;//await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
 
 
                 if (sSOLandingDataDataModel.LoginType.ToString() == "-999")
@@ -109,6 +109,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
 
         [HttpGet("Check_SSOIDWise_LegalEntity/{SSOID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> Check_SSOIDWise_LegalEntity(string SSOID)

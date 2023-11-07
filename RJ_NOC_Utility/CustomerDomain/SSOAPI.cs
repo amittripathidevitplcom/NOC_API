@@ -58,12 +58,12 @@ namespace RJ_NOC_Utility.CustomerDomain
                 //        ssoInfo = JsonConvert.DeserializeObject<SSOUserDetailData>(EmpResponse);
                 //    }
                 //    else
-                //    { } 
+                //    { }
                 //}
 
                 ssoInfo = new SSOUserDetailData()
                 {
-                    SSOID = "nrawat455",
+                    SSOID = "DKDEVIT23",
                     AadhaarId = "957637905276",
                     BhamashahId = "45454",
                     BhamashahMemberId = "454654",
