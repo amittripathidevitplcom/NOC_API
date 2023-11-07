@@ -133,6 +133,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
         List<DataTable> Get_LOIFeeMaster(int DepartmentID);
+        CommonDataModel_DataTable GetAppliedNocInformation(string SSOID);
     }
 
 

@@ -458,5 +458,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.Get_LOIFeeMaster(DepartmentID);
         }
+        public CommonDataModel_DataTable GetAppliedNocInformation(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAppliedNocInformation(SSOID);
+        }
     }
 }

@@ -1191,8 +1191,8 @@ namespace RJ_NOC_DataAccess.Repository
 
             var query=new StringBuilder();
             query.Append("exec USP_ImportExcelStatics_UpdateSingleRow ");
-            query.AppendFormat("@ID={0},", request.ID);
-            query.AppendFormat("@StaticsFileID={0},", request.ImportExcelID);
+            query.AppendFormat("@StaticsFileDetailsID={0},", request.StaticsFileDetailsID);
+            query.AppendFormat("@StaticsFileID={0},", request.StaticsFileID);
             query.AppendFormat("@ApplicationID='{0}',", request.ApplicationID);
             query.AppendFormat("@District='{0}',", request.District);
             query.AppendFormat("@CollegeName='{0}',", request.CollegeName);
@@ -1259,6 +1259,15 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+        public CommonDataModel_DataTable GetAppliedNocInformation(string SSOID)
+        {
+            string SqlQuery = $"exec USP_GetAppliedNocInformation @SSOID='{SSOID}',@action='GetLastAppliedNocInformation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAppliedNocInformation");
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            return dataModel;
         }
     }
 }
