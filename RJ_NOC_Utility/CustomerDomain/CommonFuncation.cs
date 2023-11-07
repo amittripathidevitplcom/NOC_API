@@ -208,6 +208,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentAndTypeWise(DepartmentID, Type);
+        } 
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID,int OtherInformationID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, OtherInformationID, Type);
         }
 
         public List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID)
@@ -254,6 +258,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentAndTypeWise(DepartmentID, Type);
+        }
+        public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
         }
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
         {
@@ -449,6 +457,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> Get_LOIFeeMaster(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.Get_LOIFeeMaster(DepartmentID);
+        }
+        public CommonDataModel_DataTable GetAppliedNocInformation(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAppliedNocInformation(SSOID);
         }
     }
 }

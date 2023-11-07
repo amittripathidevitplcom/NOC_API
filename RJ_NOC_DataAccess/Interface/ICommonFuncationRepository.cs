@@ -60,6 +60,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID);
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
+        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID,int OtherInformationID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
         
@@ -77,6 +78,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_CollegeWiseSubject> GetCollegeWiseSubjectList(int CollegeID);
 
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
+        List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
 
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type);
@@ -139,6 +141,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID);
         List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
         List<DataTable> Get_LOIFeeMaster(int DepartmentID);
+        CommonDataModel_DataTable GetAppliedNocInformation(string SSOID);
     }
 }
 

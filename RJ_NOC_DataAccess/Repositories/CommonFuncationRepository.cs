@@ -502,6 +502,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID,int CollegeID,int OtherInformationID, string Type)
+        {
+            string SqlQuery = " Exec USP_OtherInformationList_DepartmentCollegeAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@CollegeID='" + CollegeID.ToString() + "',@OtherInformationID='" + OtherInformationID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.OtherInformationList_DepartmentCollegeAndTypeWise");
+
+            List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> dataModels = new List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID)
         {
@@ -619,6 +630,17 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " Exec USP_FacilitiesMaster_GetList @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetFacilitiesMasterList_DepartmentAndTypeWise");
+
+            List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }     
+        public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID,int CollegeID, int FacilitieID, string Type)
+        {
+            string SqlQuery = " Exec USP_FacilitiesMaster_GetList_DepartmentCollegeWise @DepartmentID='" + DepartmentID.ToString() + "',@CollegeID='" + CollegeID.ToString() + "',@FacilitieID='" + FacilitieID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise");
 
             List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
@@ -1169,8 +1191,8 @@ namespace RJ_NOC_DataAccess.Repository
 
             var query=new StringBuilder();
             query.Append("exec USP_ImportExcelStatics_UpdateSingleRow ");
-            query.AppendFormat("@ID={0},", request.ID);
-            query.AppendFormat("@StaticsFileID={0},", request.ImportExcelID);
+            query.AppendFormat("@StaticsFileDetailsID={0},", request.StaticsFileDetailsID);
+            query.AppendFormat("@StaticsFileID={0},", request.StaticsFileID);
             query.AppendFormat("@ApplicationID='{0}',", request.ApplicationID);
             query.AppendFormat("@District='{0}',", request.District);
             query.AppendFormat("@CollegeName='{0}',", request.CollegeName);
@@ -1237,6 +1259,15 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+        public CommonDataModel_DataTable GetAppliedNocInformation(string SSOID)
+        {
+            string SqlQuery = $"exec USP_GetAppliedNocInformation @SSOID='{SSOID}',@action='GetLastAppliedNocInformation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAppliedNocInformation");
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            return dataModel;
         }
     }
 }

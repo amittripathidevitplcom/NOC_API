@@ -1347,7 +1347,37 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
+        [HttpGet("OtherInformationList_DepartmentCollegeAndTypeWise/{DepartmentID}/{CollegeID}/{OtherInformationID}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID,int CollegeID,int OtherInformationID, string Type)
+        {
+            var result = new OperationResult<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID,CollegeID, OtherInformationID, Type));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.OtherInformationList_DepartmentCollegeAndTypeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
         [HttpGet("OtherInformationSize/{OtherInformationID}")]
         public async Task<OperationResult<List<CommonDataModel_OtherInformationSize>>> OtherInformationSize(int OtherInformationID)
@@ -1644,6 +1674,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetFacilitiesMasterList_DepartmentCollegeAndTypeWise/{DepartmentID}/{CollegeID}/{FacilitieID}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID,int CollegeID,int FacilitieID, string Type)
+        {
+            var result = new OperationResult<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID,CollegeID,FacilitieID, Type));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
         [HttpGet("GetFacilitesMinSize/{FacilitieID}")]
         public async Task<OperationResult<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>> GetFacilitesMinSize(int FacilitieID)
         {
