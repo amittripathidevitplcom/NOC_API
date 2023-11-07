@@ -1238,6 +1238,15 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public CommonDataModel_DataTable GetAppliedNocInformation(string SSOID)
+        {
+            string SqlQuery = $"exec USP_GetAppliedNocInformation @SSOID='{SSOID}',@action='GetLastAppliedNocInformation'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAppliedNocInformation");
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            return dataModel;
+        }
     }
 }
 

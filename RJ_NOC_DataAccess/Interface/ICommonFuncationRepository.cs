@@ -139,6 +139,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID);
         List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
         List<DataTable> Get_LOIFeeMaster(int DepartmentID);
+        CommonDataModel_DataTable GetAppliedNocInformation(string SSOID);
     }
 }
 
