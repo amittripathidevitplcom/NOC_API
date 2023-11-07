@@ -1169,8 +1169,8 @@ namespace RJ_NOC_DataAccess.Repository
 
             var query=new StringBuilder();
             query.Append("exec USP_ImportExcelStatics_UpdateSingleRow ");
-            query.AppendFormat("@ID={0},", request.ID);
-            query.AppendFormat("@StaticsFileID={0},", request.ImportExcelID);
+            query.AppendFormat("@StaticsFileDetailsID={0},", request.StaticsFileDetailsID);
+            query.AppendFormat("@StaticsFileID={0},", request.StaticsFileID);
             query.AppendFormat("@ApplicationID='{0}',", request.ApplicationID);
             query.AppendFormat("@District='{0}',", request.District);
             query.AppendFormat("@CollegeName='{0}',", request.CollegeName);

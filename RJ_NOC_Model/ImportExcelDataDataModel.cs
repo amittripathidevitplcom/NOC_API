@@ -24,7 +24,8 @@ namespace RJ_NOC_Model
     {
         //commit
         public long ID { get; set; }
-        public int ImportExcelID { get; set; }
+        public int StaticsFileDetailsID { get; set; }
+        public int StaticsFileID { get; set; }//StaticsFileID
         public string? ApplicationID { get; set; }
         public string? District { get; set; }
         public string? CollegeName { get; set; }
@@ -33,7 +34,7 @@ namespace RJ_NOC_Model
         public string? FatherName { get; set; }
         public string? Gender { get; set; }
         public string? Course { get; set; }
-        public string? Subject { get; set; }
+        public string? Subject { get; set; }// comma seprated
         public string? Class { get; set; }
         public string? Cast { get; set; }
         public string? PH { get; set; }
@@ -46,6 +47,5 @@ namespace RJ_NOC_Model
         public string? PrincipalName { get; set; }
         public string? PrincipalMobileNo { get; set; }
         public string? CollegeEmailId { get; set; }
-        public string? CreatedDate { get; set; }
     }
 }
