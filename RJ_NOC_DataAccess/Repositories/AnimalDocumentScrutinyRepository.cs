@@ -259,7 +259,7 @@ namespace RJ_NOC_DataAccess.Repositories
             return listdataModels;
         }
 
-        
+
 
         public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyAcademicInformation> DocumentScrutiny_AcademicInformation(int CollageID, int RoleID, int ApplyNOCID)
         {
@@ -410,7 +410,7 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
-        public bool FinalSubmitInspectionCommittee(int ApplyNOCID,int DepartmentID,int UserID, string ActionName)
+        public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int DepartmentID, int UserID, string ActionName)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_FinalSubmitInspectionCommittee_AH";
@@ -434,7 +434,7 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataModels;
         }
 
-        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID,string ActionName, string Remarks)
+        public bool FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName, string Remarks)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_FinalSubmitPreVerification_AH";
@@ -445,7 +445,7 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID,int DepartmentID,string ActionType)
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, int DepartmentID, string ActionType)
         {
             string SqlQuery = " exec USP_ApplyNOCApplicationList_AH @RoleID='" + RoleID + "',@UserID='" + UserID + "',@DepartmentID='" + DepartmentID + "',@ActionType='" + ActionType + "'";
             DataSet dataSet = new DataSet();
@@ -514,8 +514,19 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public bool SaveNOCIssueData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
 
-        public bool FinalSavePDFPathandNOC(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark,string Action)
+            string SqlQuery = $" exec USP_GetNOCDetails_AH @ActionType='{Action}',@ApplyNocID={ApplyNocID},@departmentID={DepartmentID},@CollegeID={@CollegeID}";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.FinalSavePDFPathandNOC");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool FinalSavePDFPathandNOC(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark, string Action)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 

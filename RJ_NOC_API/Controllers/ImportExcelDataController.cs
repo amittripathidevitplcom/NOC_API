@@ -166,6 +166,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetLastAppliedNocInformation/{SSOID}")]
+        public async Task<OperationResult<CommonDataModel_DataTable>> GetAppliedNocInformation(string SSOID)
+        {
+            var result = new OperationResult<CommonDataModel_DataTable>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAppliedNocInformation(SSOID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ImportExcelDataController.GetAppliedNocInformation", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
         private bool IsValidExcelData(string FinancialYearName, int cont, MemberDataModel data, out string ErrorMsg)
         {
             string[] CheckGender = { "M", "F", "T" };
