@@ -64,13 +64,13 @@ namespace RJ_NOC_Utility.CustomerDomain
                 ssoInfo = new SSOUserDetailData()
                 {
                     SSOID = "nrawat455",
-                    AadhaarId = "957637905276",
+                    AadhaarId = "557975711583",
                     BhamashahId = "45454",
                     BhamashahMemberId = "454654",
                     DisplayName = "Naresh",
                     DateOfBirth = "19/01/1991",
                     Gender = "Male",
-                    MobileNo = "7742860212",
+                    MobileNo = "9660603770",
                     TelephoneNumber = "014145454",
                     IpPhone = "014145454",
                     MailPersonal = "rishikapoordelhi@gmail.com",

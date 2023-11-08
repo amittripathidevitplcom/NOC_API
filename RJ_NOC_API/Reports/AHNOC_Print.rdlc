@@ -174,9 +174,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>0.3175cm</Top>
-            <Left>0.97083cm</Left>
-            <Height>2.87542cm</Height>
-            <Width>14.21635cm</Width>
+            <Left>2.18791cm</Left>
+            <Height>2.59856cm</Height>
+            <Width>13.44906cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -188,10 +188,10 @@
             </Style>
           </Textbox>
           <Line Name="Line2">
-            <Top>3.1345cm</Top>
-            <Left>1.62761cm</Left>
+            <Top>2.817cm</Top>
+            <Left>0.15558cm</Left>
             <Height>0cm</Height>
-            <Width>13.24208cm</Width>
+            <Width>17.105cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -228,7 +228,7 @@
             <Top>3.40995cm</Top>
             <Left>0.26141cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.54271cm</Width>
+            <Width>5.48979cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -267,7 +267,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>3.40995cm</Top>
-            <Left>12.48875cm</Left>
+            <Left>12.52844cm</Left>
             <Height>0.6cm</Height>
             <Width>4.28593cm</Width>
             <ZIndex>3</ZIndex>
@@ -303,7 +303,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.14896cm</Top>
+            <Top>3.83146cm</Top>
             <Left>6.65469cm</Left>
             <Height>0.8075cm</Height>
             <Width>4.56375cm</Width>
@@ -355,7 +355,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.95646cm</Top>
+            <Top>4.63896cm</Top>
             <Left>0.02687cm</Left>
             <Height>2.4046cm</Height>
             <Width>16.7875cm</Width>
@@ -479,8 +479,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>14.52245cm</Top>
-            <Left>11.23821cm</Left>
+            <Top>14.20495cm</Top>
+            <Left>11.2779cm</Left>
             <Height>0.67938cm</Height>
             <Width>5.53647cm</Width>
             <ZIndex>7</ZIndex>
@@ -521,9 +521,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>16.4233cm</Top>
+            <Top>16.1058cm</Top>
             <Left>0.26141cm</Left>
-            <Height>4.03959cm</Height>
+            <Height>3.19292cm</Height>
             <Width>11.11219cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -541,7 +541,7 @@
             <Value>=First(Fields!NocQRCode.Value, "AHNOCPrint")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>20.78921cm</Top>
+            <Top>19.61622cm</Top>
             <Left>0.26141cm</Left>
             <Height>3.10444cm</Height>
             <Width>4.14042cm</Width>
@@ -553,16 +553,16 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>25.7cm</Height>
+        <Height>23.02771cm</Height>
         <Style />
       </Body>
       <Width>17.26058cm</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>2cm</LeftMargin>
-        <RightMargin>2cm</RightMargin>
-        <TopMargin>1cm</TopMargin>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
         <BottomMargin>0cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
