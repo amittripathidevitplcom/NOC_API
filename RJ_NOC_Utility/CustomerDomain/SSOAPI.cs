@@ -58,7 +58,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                 //        ssoInfo = JsonConvert.DeserializeObject<SSOUserDetailData>(EmpResponse);
                 //    }
                 //    else
-                //    { } 
+                //    { }
                 //}
 
                 ssoInfo = new SSOUserDetailData()
