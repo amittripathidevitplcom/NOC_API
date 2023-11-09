@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IStaffDetailRepository
     {
-        bool IfExistsPrincipal(int CollegeID,int DesignationID);
+        bool IfExistsPrincipal(int StaffDetailID, int CollegeID,int DesignationID);
         bool SaveData(StaffDetailDataModel request);
         List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID,int CollegeID,int StaffDetailID,int ApplyNOCID);
         bool DeleteStaffDetail(int StaffDetailID);

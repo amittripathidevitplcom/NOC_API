@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public bool IfExistsPrincipal(int CollegeID, int DesignationID)
+        public bool IfExistsPrincipal(int StaffDetailID, int CollegeID, int DesignationID)
         {
-            return UnitOfWork.StaffDetailRepository.IfExistsPrincipal(CollegeID, DesignationID);
+            return UnitOfWork.StaffDetailRepository.IfExistsPrincipal(StaffDetailID, CollegeID, DesignationID);
         }
 
         public bool SaveData(StaffDetailDataModel request)

@@ -24,7 +24,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.CollegeID,request.RoleID);
+                IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.StaffDetailID,request.CollegeID,request.RoleID);
                 if (IfExits == false)
                 {
                     result.Data= await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData(request));

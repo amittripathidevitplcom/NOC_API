@@ -19,9 +19,9 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public bool IfExistsPrincipal(int CollegeID, int DesignationID)
+        public bool IfExistsPrincipal(int StaffDetailID, int CollegeID, int DesignationID)
         {
-            string SqlQuery = " USP_IfExistsPrincipalStaffDetail @CollegeID='"+CollegeID+ "',@DesignationID='" + DesignationID + "'";
+            string SqlQuery = " USP_IfExistsPrincipalStaffDetail @CollegeID='"+CollegeID+ "',@StaffDetailID='" + StaffDetailID + "',@DesignationID='" + DesignationID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StaffDetail.IfExistsPrincipal");
             if (dataTable.Rows.Count > 0)
