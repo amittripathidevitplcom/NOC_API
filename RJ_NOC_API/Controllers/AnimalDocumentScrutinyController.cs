@@ -598,7 +598,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("FinalSubmitPreVerification/{ApplyNOCID}/{DepartmentID}/{UserID}/{ActionName}/{Remarks}")]
-        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName,string Remarks)
+        public async Task<OperationResult<bool>> FinalSubmitPreVerification(int ApplyNOCID, int DepartmentID, int UserID, string ActionName, string Remarks)
         {
             var result = new OperationResult<bool>();
             try
@@ -858,13 +858,13 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("UpdateNOCPDFData/{ApplyNocID}/{DepartmentID}/{CollegeID}/{ActionType}/{UserId}/{RoleID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> UpdateNOCPDFData(int ApplyNocID, int DepartmentID, int CollegeID, string ActionType,int UserId,int RoleID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> UpdateNOCPDFData(int ApplyNocID, int DepartmentID, int CollegeID, string ActionType, int UserId, int RoleID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(ApplyNocID, "UpdateNOCPDFData", DepartmentID, "AanimalController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                if(await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.SaveNOCIssueData(ApplyNocID, DepartmentID, CollegeID, ActionType)))
+                if (await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.SaveNOCIssueData(ApplyNocID, DepartmentID, CollegeID, ActionType)))
                 {
                     string Path = GeneratePDF(ApplyNocID);
                     if (!string.IsNullOrEmpty(Path))
@@ -912,15 +912,16 @@ namespace RJ_NOC_API.Controllers
                 {
                     result.Data = new List<CommonDataModel_DataTable>();
                     result.State = OperationState.Success;
-                    result.SuccessMessage = "NOC Relesed Successfully .!";
+                    if (request.Status == "Release NOC")
+                        result.SuccessMessage = "NOC Relesed Successfully .!";
+                    else
+                        result.SuccessMessage = "NOC Rejected Successfully .!"; 
                 }
                 else
                 {
                     result.State = OperationState.Warning;
                     result.SuccessMessage = "There was an error Generate PDF!";
                 }
-
-
             }
             catch (Exception ex)
             {

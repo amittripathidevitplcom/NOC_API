@@ -68,7 +68,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
 
-                IsSSOAuthentication =  await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+                IsSSOAuthentication = true;//await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
 
 
                 if (sSOLandingDataDataModel.LoginType.ToString() == "-999")

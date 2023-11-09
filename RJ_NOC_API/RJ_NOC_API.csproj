@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ReportDataset\**" />
-    <Content Remove="ReportDataset\**" />
-    <EmbeddedResource Remove="ReportDataset\**" />
-    <None Remove="ReportDataset\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="CrystalReports.ReportAppServer.ReportDefModel" Version="13.0.4003" />
     <PackageReference Include="CrystalReports.ReportSource" Version="13.0.4003" />
@@ -78,6 +71,30 @@
 
   <ItemGroup>
     <Folder Include="SystemGeneratedPDF\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ReportDataset\AHNOC_Print.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AHNOC_Print.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ReportDataset\DCENOC_Print.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DCENOC_Print.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ReportDataset\AHNOC_Print.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AHNOC_Print.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="ReportDataset\DCENOC_Print.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DCENOC_Print.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
