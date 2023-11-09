@@ -68,7 +68,7 @@ namespace RJ_NOC_API.Controllers
             return urldt;
         }
 
-          [HttpPost("SendOtpByAadharNo_Esign")]
+        [HttpPost("SendOtpByAadharNo_Esign")]
         public DataTable SendOtpByAadharNo_Esign(CommonDataModel_AadharDataModel Model)
         {
             var urldt = new System.Data.DataTable("tableName");
@@ -86,22 +86,39 @@ namespace RJ_NOC_API.Controllers
                                 dt.Rows[0][0].ToString(),1,
                                 dt.Rows[0][0].ToString() });
                     }
+                    else if (dt.Rows[0][0].ToString().Contains("NO#"))
+                    {
+                        urldt.Rows.Add(new Object[]{
+                                dt.Rows[0][0].ToString(),1,
+                                dt.Rows[0][0].ToString() });
+                    }
                     else
                     {
-                        // insert row values
-                        if (dt.Rows[0][0].ToString().Contains("DOIT"))
-                        {
-                            urldt.Rows.Add(new Object[]{
-                                "success",0,
-                               dt.Rows[0][0].ToString()});
-                        }
-                        else
-                        {
-                            urldt.Rows.Add(new Object[]{
-                                dt.Rows[0][0].ToString(),1,
-                               dt.Rows[0][0].ToString()});
-                        }
+                        urldt.Rows.Add(new Object[]{
+                               "success",0,
+                              dt.Rows[0][0].ToString()});
+
+                        //// insert row values
+                        //if (dt.Rows[0][0].ToString().Contains("DOIT"))
+                        //{
+                        //    urldt.Rows.Add(new Object[]{
+                        //        "success",0,
+                        //       dt.Rows[0][0].ToString()});
+                        //}
+                        //else
+                        //{
+                        //    urldt.Rows.Add(new Object[]{
+                        //        dt.Rows[0][0].ToString(),1,
+                        //       dt.Rows[0][0].ToString()});
+                        //}
                     }
+                }
+                else
+                {
+                    urldt.Rows.Add(new Object[]{
+                                "AadharID is null",1,
+                                "AadharID is null"
+                                });
                 }
             }
             catch (Exception ex)
@@ -160,7 +177,7 @@ namespace RJ_NOC_API.Controllers
             return urldt;
         }
 
-         [HttpPost("ValidateAadharOTP_Esign")]
+        [HttpPost("ValidateAadharOTP_Esign")]
         public DataTable ValidateAadharOTP_Esign(CommonDataModel_AadharDataModel Model)
         {
             var urldt = new System.Data.DataTable("tableName");
@@ -178,8 +195,6 @@ namespace RJ_NOC_API.Controllers
                 //create table
                 if (dt.Rows[0][0].ToString().ToLower().Contains("success"))
                 {
-
-
                     urldt.Rows.Add(new Object[]{
                                 "success",0,
                                 CommonHelper.ConvertDataTable(dt)
@@ -255,36 +270,42 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("eSignPDF/{PDFPath}/{OTPTransactionID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> eSignPDF(string PDFFileName, string OTPTransactionID, IConfiguration _configuration)
+        [HttpGet("eSignPDF/{PDFFileName}/{OTPTransactionID}")]
+        public async Task<DataTable> eSignPDF(string PDFFileName, string OTPTransactionID)
         {
-            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            var urldt = new System.Data.DataTable("tableName");
+            // create fields
+            urldt.Columns.Add("message", typeof(string));
+            urldt.Columns.Add("status", typeof(int));
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID, _configuration));
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
+                string str = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID, _configuration));
+                if (str == "Success")
                 {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    urldt.Rows.Add(new Object[]{
+                                "E-Sign Successfully",0
+                });
                 }
                 else
                 {
-                    result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
+                    urldt.Rows.Add(new Object[]{
+                                "Transaction Id Invalid!",1,
+                                });
+
                 }
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.eSignPDF", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
+                urldt.Rows.Add(new Object[]{
+                                "Please try again",1
+                                });
+                CommonDataAccessHelper.Insert_ErrorLog("Aadharservice.ValidateAadharOTP", ex.ToString());
             }
             finally
             {
                 // UnitOfWork.Dispose();
             }
-            return result;
+            return urldt;
         }
 
 

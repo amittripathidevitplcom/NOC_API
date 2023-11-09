@@ -140,5 +140,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.FinalSavePDFPathandNOC(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark, Action);
         }
+        public bool SaveNOCIssueData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.SaveNOCIssueData( ApplyNocID,  DepartmentID,  CollegeID,  Action);
+        }
     }
 }
