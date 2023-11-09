@@ -19,16 +19,16 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        //public bool IfExists(int HostelDetailID, int CollegeID, string HostelName)
-        //{
-        //    string SqlQuery = " USP_IfExistsHostelDetail @HostelName='" + HostelName + "',@CollegeID='" + CollegeID + "',@HostelDetailID='" + HostelDetailID + "' ";
-        //    DataTable dataTable = new DataTable();
-        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "HostelDetail.IfExists");
-        //    if (dataTable.Rows.Count > 0)
-        //        return true;
-        //    else
-        //        return false;
-        //}
+        public bool IfExistsPrincipal(int CollegeID, int DesignationID)
+        {
+            string SqlQuery = " USP_IfExistsPrincipalStaffDetail @CollegeID='"+CollegeID+ "',@DesignationID='" + DesignationID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StaffDetail.IfExistsPrincipal");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
         public bool SaveData(StaffDetailDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();

@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IStaffDetail
     {
-       // bool IfExists(int HostelDetailID, int CollegeID, string HostelName);
+        bool IfExistsPrincipal(int CollegeID, int DesignationID);
         bool SaveData(StaffDetailDataModel request);
         List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID, int ApplyNOCID);
         bool DeleteStaffDetail(int StaffDetailID);

@@ -58,28 +58,38 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.SaveData(request));
-                if (result.Data)
+                bool IfExits = false;
+                IfExits = UtilityHelper.CollegeMasterUtility.IfExists(request.DepartmentID,request.CollegeID,request.MobileNumber,request.Email);
+                if (IfExits == false)
                 {
-                    result.State = OperationState.Success;
-                    if (request.CollegeID == 0)
+                    result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.SaveData(request));
+                    if (result.Data)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "CollegeMaster");
-                        result.SuccessMessage = "Saved successfully .!";
+                        result.State = OperationState.Success;
+                        if (request.CollegeID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "CollegeMaster");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "CollegeMaster");
+                            result.SuccessMessage = "Updateed successfully .!";
+                        }
                     }
                     else
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "CollegeMaster");
-                        result.SuccessMessage = "Updateed successfully .!";
+                        result.State = OperationState.Error;
+                        if (request.CollegeID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
                     }
                 }
                 else
                 {
-                    result.State = OperationState.Error;
-                    if (request.CollegeID == 0)
-                        result.ErrorMessage = "There was an error adding data.!";
-                    else
-                        result.ErrorMessage = "There was an error updating data.!";
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "this mobile No - "+ request.MobileNumber+" or Email - "+request.Email+ " is Already Exist, It Can't Not Be Duplicate.!";
                 }
             }
             catch (Exception ex)

@@ -258,5 +258,15 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public bool IfExists(int DepartmentID,int CollegeID, string MobileNo, string Email)
+        {
+            string SqlQuery = " USP_IfExistsCollegeDetail @DepartmentID='"+ DepartmentID + "', @Email='" + Email + "',@CollegeID='" + CollegeID + "',@MobileNo='" + MobileNo + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

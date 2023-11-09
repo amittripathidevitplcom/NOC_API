@@ -56,6 +56,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool LOIFinalSubmit_OTPVerification(int CollegeID)
         {
             return UnitOfWork.CollegeMasterRepository.LOIFinalSubmit_OTPVerification(CollegeID);
+        }     
+        public bool IfExists(int DepartmentID,int CollegeID, string MobileNo, string Email)
+        {
+            return UnitOfWork.CollegeMasterRepository.IfExists(DepartmentID,CollegeID, MobileNo,Email);
         }
     }
 }

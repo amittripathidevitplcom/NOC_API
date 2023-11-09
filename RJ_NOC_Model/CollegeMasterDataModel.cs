@@ -60,6 +60,7 @@ namespace RJ_NOC_Model
         public int? CityID { get; set; }
         public int? ManagementTypeID { get; set; }
         public string? OtherUniversityName { get; set; }
+        public string? FinancialYear { get; set; }
         public List<ContactDetailsDataModel> ContactDetailsList { get; set; }
         public List<NearestGovernmentHospitalsDataModel> NearestGovernmentHospitalsList { get; set; }
         public List<CollegeLevelDetailsDataModel> CollegeLevelDetails { get; set; }

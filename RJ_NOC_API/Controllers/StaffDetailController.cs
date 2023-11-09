@@ -24,7 +24,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                //IfExits = true;//UtilityHelper.HostelDetailUtility.IfExists(request.HostelDetailID, request.CollegeID, request.HostelName);
+                IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.CollegeID,request.RoleID);
                 if (IfExits == false)
                 {
                     result.Data= await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData(request));
@@ -54,12 +54,12 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = request.StaffStatus + " is Already Exist, It Can't Not Be Duplicate.!";
+                    result.ErrorMessage ="Principal is Already Exist, It Can't Not Be Duplicate.!";
                 }
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("HostelDetailController.SaveData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("StaffDetailController.SaveData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
 

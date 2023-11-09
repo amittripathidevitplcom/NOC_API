@@ -19,5 +19,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID);
         List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID);
         List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID);
+        bool IfExists(int DepartmentID,int CollegeID, string MobileNo,string Email);
     }
 }

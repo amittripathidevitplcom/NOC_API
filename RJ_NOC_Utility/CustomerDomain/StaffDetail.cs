@@ -17,10 +17,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        //public bool IfExists(int HostelDetailID, int CollegeID, string HostelName)
-        //{
-        //    return UnitOfWork.HostelDetailRepository.IfExists(HostelDetailID, CollegeID, HostelName);
-        //}
+        public bool IfExistsPrincipal(int CollegeID, int DesignationID)
+        {
+            return UnitOfWork.StaffDetailRepository.IfExistsPrincipal(CollegeID, DesignationID);
+        }
 
         public bool SaveData(StaffDetailDataModel request)
         {
