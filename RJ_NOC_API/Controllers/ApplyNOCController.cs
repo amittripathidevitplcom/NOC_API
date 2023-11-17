@@ -573,10 +573,7 @@ namespace RJ_NOC_API.Controllers
             }
 
             return fileName;
-
         }
-
-
 
         [HttpGet("CheckAppliedNOCCollegeWise/{CollegeID}")]
         public async Task<OperationResult<int>> CheckAppliedNOCCollegeWise(int CollegeID)

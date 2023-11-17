@@ -7,11 +7,11 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>01310026-ffed-4264-9e49-31d77f990778</rd:DataSourceID>
+      <rd:DataSourceID>8111c66c-477d-412f-a791-cf360ae26912</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet_CollegeDetails">
+    <DataSet Name="DCENOC1686_CollegeDetails">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -71,7 +71,7 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
-    <DataSet Name="DataSet_CourseAndSubjectDetails">
+    <DataSet Name="DCENOC1686_Subject_Details">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -95,6 +95,10 @@
         </Field>
         <Field Name="SubjectName">
           <DataField>SubjectName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SocityAddress">
+          <DataField>SocityAddress</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -348,26 +352,40 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>        राजस्थान गैर सरकारी शैक्षिक यम, 1989 तथा तत्संबंधी नियम 1993 एवं राजा सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत सत्र             </Value>
+                    <Value>        राजस्थान गैर सरकारी शैक्षिक संस्था अधिनियम, 1999 तथा तत्संबंधी नियम, 1993 एवं राज्य सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत सत्र </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>(एक सत्र)</Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> के लिए स्नातक </Value>
+                    <Value>=Fields!NOCIssueFinancialYear.Value</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> (एक सत्र)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> के लिए </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>स्तर पर पूर्व संचालित संकाय/ विषयों में अस्थाई अनापत्ति प्रमाण पत्र अभिवृद्धि</Value>
+                    <Value>स्नातक स्तर पर पूर्व संचालित संकाय/ विषयों में अस्थाई अनापत्ति प्रमाण पत्र अभिवृद्धि</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -734,7 +752,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>1. संस्था प्रत्येक सत्र में निरीक्षण करवाने हेतु नियमानुसार निर्धारित शुल्क जमा करवाकर ऑनलाइन प्रपत्र प्रस्तुत करेगी।</Value>
+                    <Value>1.  संस्था सत्र 2024-25 में निर्धारित अवधि में नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करेगी। </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -745,44 +763,118 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>2. संस्था सत्र 2023-24 में निर्धारित नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करेगी।
-3. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।
-4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता अधिकृत अधिकारी द्वारा गया अभिलेख उपलब्ध करायेगी।
-5. संस्था को समय-समय पर यू.जी.सी. राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप से करनी होगी।
-6. संख्या संबंधित विद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बसे मान्यता व विश्वविद्यालय से समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।
-7. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी तथा महाविद्यालय तदनुसार तय संख्या सीमा में प्रवेश दिया जाना सुनिश्चित करेगा।
-8. संख्या महाविद्यालय में अध्यापन कार्य हेतु पूजीसी सामारी प्राचार्य एवं व्याख्यान मानदण्डानुसार कि स्टाफ की नियुक्ति के साथ-2 अन्य निर्धारित शर्मा को चलना करेगी।
-9. राज्य सरकार की महाविद्यालय प्रवेश नीति 2022-23 तथा बाद में जानी होने वाली नीतियों का पालन करना</Value>
+                    <Value>2. संस्था द्वारा सावधि जमा राशि (एफ.डी.आर.) का प्रत्येक 5 वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा ।
+3. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकेगा तथा संस्था अधिकृत  </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
                   <TextRun>
-                    <Value>
-10. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाएं निर्धारित अवधि मे भरकर अपलोड़ करेगी।</Value>
+                    <Value>   अधिकारी द्वारा चाहा गया अभिलेख उपलब्ध करायेगी।
+4. संस्था को समय-समय पर यू.जी.सी. / राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>   से करनी होगी।
+5. संस्था संबंधित विश्वविद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बी०सी०आई० से मान्यता व </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>   विश्वविद्यालय से संबद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।
+6. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>   तथा महाविद्यालय तदनुसार तय संख्या सीमा में ही प्रवेश दिया जाना सुनिश्चित करेगा।
+7. संस्था महाविद्यालय में अध्यापन कार्य हेतु यू.जी.सी. अर्हताधारी प्राचार्य एवं व्याख्याताओं तथा निर्धारित मानदण्डानुसार</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>   अशैक्षणिक स्टाफ की नियुक्ति के साथ 2 अन्य निर्धारित शर्तों की पालना करेगी ।
+8. राज्य सरकार की महाविद्यालय प्रवेश नीति 2023-24 तथा बाद में जारी होने वाली नीतियों का पालन करना होगा।
+9. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाऐं प्रवेश प्रक्रिया समाप्त
+   होने पर आयुक्तालय कॉलेज शिक्षा द्वारा निर्धारित अवधि में भरकर अपलोड़ करेगी। </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>10. मानव संसाधन विकास मंत्रालय, भारत    सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर करवाकर </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>        DCF-II (Data Capture format-II) भरकर       अपलोड करना अनिवार्य होगा। महाविद्यालय अपलोडेड प्रमाण-पत्र की हार्ड 
+    कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करेगें।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>
-11. मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>DCF-II (Data Capture format-ii)</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> भरवार अपलोड करना अनिवार्य होगा प्रमाण-पत्र की कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करे।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -792,7 +884,7 @@
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>7.98322cm</Top>
             <Left>0.10625cm</Left>
-            <Height>7.77564cm</Height>
+            <Height>8.78106cm</Height>
             <Width>16.7875cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -839,8 +931,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>19.5072cm</Top>
-            <Left>11.76645cm</Left>
+            <Top>17.5387cm</Top>
+            <Left>11.82995cm</Left>
             <Height>0.99688cm</Height>
             <Width>5.0073cm</Width>
             <ZIndex>9</ZIndex>
@@ -968,7 +1060,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>19.56302cm</Top>
+            <Top>18.61052cm</Top>
             <Left>0.10625cm</Left>
             <Height>4.03959cm</Height>
             <Width>11.11219cm</Width>
@@ -981,51 +1073,6 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox23">
-            <CanShrink>true</CanShrink>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>संयुक्त निदेशक (नि०सं०) </Value>
-                    <Style>
-                      <FontSize>9.5pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>कॉलेज शिक्षा राजस्थान जयपुर</Value>
-                    <Style>
-                      <FontSize>9.5pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>23.98156cm</Top>
-            <Left>11.80707cm</Left>
-            <Height>1.31438cm</Height>
-            <Width>5.00729cm</Width>
-            <ZIndex>11</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
             </Style>
           </Textbox>
           <Textbox Name="NOCIssueNo">
@@ -1047,7 +1094,7 @@
             <Left>6.08224cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1080,7 +1127,7 @@
             <Left>13.90328cm</Left>
             <Height>0.6cm</Height>
             <Width>2.8714cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1092,124 +1139,22 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="NOCIssueFinancialYear">
-            <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!NOCIssueFinancialYear.Value, "DataSet_CollegeDetails")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>NOCIssueFinancialYear</rd:DefaultName>
-            <Top>5.60412cm</Top>
-            <Left>4.70058cm</Left>
-            <Height>0.7cm</Height>
-            <Width>3.5875cm</Width>
-            <ZIndex>14</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Image Name="Image5">
             <Source>Database</Source>
-            <Value>=First(Fields!NocQRCode.Value, "DataSet_CollegeDetails")</Value>
+            <Value>=First(Fields!NocQRCode.Value, "DCENOC1686_CollegeDetails")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>23.779cm</Top>
+            <Top>22.8265cm</Top>
             <Left>0.10625cm</Left>
             <Height>1.67569cm</Height>
             <Width>3.48438cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Image>
-          <Textbox Name="Textbox1">
-            <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>12. </Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value>कार्यालय जिला कलेक्टर, चित्तौडगढ़ के आदेश क्रमांक / राजस्व / कृ.भू.रू. /62/14/1171 दिनांक 31.07. 2015 द्वारा खसरा संख्या 281 / 45, 283/45, 285/45, 288 / 45, 290 / 45 क्षेत्रफल 63830 वर्गमीटर, भूमि शैक्षणिक प्रयोजनार्थ रूपान्तरित है।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>15.87183cm</Top>
-            <Left>0.10625cm</Left>
-            <Height>1.42375cm</Height>
-            <Width>16.66843cm</Width>
-            <ZIndex>16</ZIndex>
-            <Visibility>
-              <Hidden>=IIf(First(Fields!NOCType.Value, "DataSet_CollegeDetails")="1",true,false)</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>17.47196cm</Top>
-            <Left>0.19791cm</Left>
-            <Height>0.59265cm</Height>
-            <Width>16.51327cm</Width>
-            <ZIndex>17</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
         <Height>25.7cm</Height>
         <Style />
