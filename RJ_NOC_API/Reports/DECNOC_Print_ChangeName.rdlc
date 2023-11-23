@@ -61,10 +61,22 @@
           <DataField>NOCType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LegalentitywithAddress">
+          <DataField>LegalentitywithAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewName">
+          <DataField>CollegeNewName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeDistrict">
+          <DataField>CollegeDistrict</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Naresh_NOC\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>E:\Ravi Raj\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -312,16 +324,45 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>        संस्था यू. एस. ओस्तवाल एज्यूकेशन सोसायटी, ए-1 शान्ति गंगा अपार्टमेंट, रेल्वे स्टेशन के सामने, भयान्दर, जिला ठाणे, महाराष्ट्र द्वारा संचालित यू. एस. ओस्तवाल साइंस, आर्ट्स एण्ड कॉमर्स कॉलेज, नारायणपुरा टोल प्लाजा, उदयपुर रोड़, मंगलवाड़, तहसील डूंगला, जिला चित्तौडगढ़ को महाविद्यालय नाम परिवर्तन की अनुमति प्रदान की जाती है। अतः महाविद्यालय का नवीन नाम </Value>
+                    <Value>        संस्था </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!CollegeNameHi.Value</Value>
+                    <Value>=First(Fields!LegalentitywithAddress.Value, "DCENOC1654")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> द्वारा संचालित </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeNameEng.Value, "DCENOC1654")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeAddress.Value, "DCENOC1654")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> को महाविद्यालय नाम परिवर्तन की अनुमति प्रदान की जाती है। अतः महाविद्यालय का नवीन नाम </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeNewName.Value, "DCENOC1654")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -332,10 +373,9 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!CollegeAddress.Value</Value>
+                    <Value>=First(Fields!CollegeAddress.Value, "DCENOC1654")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -427,7 +467,19 @@
 1. विशिष्ट सचिव, मा० उच्च शिक्षा मंत्री महोदय, राजस्थान, जयपुर ।
 2. निजी सचिव, प्रमुख शासन सचिव, उच्च शिक्षा विभाग, राजस्थान, जयपुर ।
 3. निजी सचिव, आयुक्त, कॉलेज शिक्षा, राजस्थान, जयपुर।
-4. जिला कलेक्टर, चित्तौडगढ़ ।
+4. जिला कलेक्टर, </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeDistrict.Value, "DCENOC1654")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> ।
 5. कुल सचिव, मोहनलाल सुखाडिया विश्वविद्यालय, उदयपुर ।
 6. सचिव, सम्बन्धित महाविद्यालय ।
 7. सांख्यिकी शाखा, आयुक्तालय, कॉलेज शिक्षा, राजस्थान, जयपुर ।
@@ -476,12 +528,13 @@
           </Image>
           <Textbox Name="NOCIssueNo">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!NOCIssueNo.Value, "DataSet_CollegeDetails")</Value>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOC1654")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -489,10 +542,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>NOCIssueNo</rd:DefaultName>
-            <Top>3.43641cm</Top>
-            <Left>6.19167cm</Left>
+            <Top>3.53625cm</Top>
+            <Left>6.32447cm</Left>
             <Height>0.69984cm</Height>
-            <Width>2.65516cm</Width>
+            <Width>4.89397cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -511,7 +564,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Date.Value, "DataSet_CollegeDetails")</Value>
+                    <Value>=First(Fields!Date.Value, "DCENOC1654")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -519,8 +572,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Date</rd:DefaultName>
-            <Top>3.46287cm</Top>
-            <Left>14.20495cm</Left>
+            <Top>3.53625cm</Top>
+            <Left>14.21264cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>11</ZIndex>

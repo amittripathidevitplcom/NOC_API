@@ -61,10 +61,22 @@
           <DataField>NOCType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LegalentitywithAddress">
+          <DataField>LegalentitywithAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewName">
+          <DataField>CollegeNewName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeDistrict">
+          <DataField>CollegeDistrict</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Naresh_NOC\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>E:\Ravi Raj\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -904,7 +916,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>4. जिला कलेक्टर पाली।</Value>
+                    <Value>4. जिला कलेक्टर </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeDistrict.Value, "DataSet_CollegeDetails")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -1029,6 +1053,7 @@
             </Style>
           </Textbox>
           <Textbox Name="NOCIssueNo">
+            <CanGrow>true</CanGrow>
             <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1046,7 +1071,7 @@
             <Top>3.56933cm</Top>
             <Left>6.08224cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.5cm</Width>
+            <Width>5.74771cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -1184,7 +1209,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
+                    <Value>उपर्युक्त शतों की पालना नहीं करने पर स्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>

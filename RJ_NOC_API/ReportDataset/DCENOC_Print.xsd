@@ -25,7 +25,10 @@
               <xs:element name="DepartmentNameHi" msprop:Generator_ColumnPropNameInTable="DepartmentNameHiColumn" msprop:Generator_ColumnPropNameInRow="DepartmentNameHi" msprop:Generator_UserColumnName="DepartmentNameHi" msprop:Generator_ColumnVarNameInTable="columnDepartmentNameHi" type="xs:string" minOccurs="0" />
               <xs:element name="DepartmentNameEn" msprop:Generator_ColumnPropNameInTable="DepartmentNameEnColumn" msprop:Generator_ColumnPropNameInRow="DepartmentNameEn" msprop:Generator_UserColumnName="DepartmentNameEn" msprop:Generator_ColumnVarNameInTable="columnDepartmentNameEn" type="xs:string" minOccurs="0" />
               <xs:element name="CollegeAddress" msprop:Generator_ColumnPropNameInTable="CollegeAddressColumn" msprop:Generator_ColumnPropNameInRow="CollegeAddress" msprop:Generator_UserColumnName="CollegeAddress" msprop:Generator_ColumnVarNameInTable="columnCollegeAddress" type="xs:string" minOccurs="0" />
-              <xs:element name="NOCType" msprop:Generator_ColumnPropNameInRow="NOCType" msprop:Generator_ColumnPropNameInTable="NOCTypeColumn" msprop:Generator_ColumnVarNameInTable="columnNOCType" msprop:Generator_UserColumnName="NOCType" type="xs:string" minOccurs="0" />
+              <xs:element name="NOCType" msprop:Generator_UserColumnName="NOCType" msprop:Generator_ColumnPropNameInTable="NOCTypeColumn" msprop:Generator_ColumnPropNameInRow="NOCType" msprop:Generator_ColumnVarNameInTable="columnNOCType" type="xs:string" minOccurs="0" />
+              <xs:element name="LegalentitywithAddress" msprop:Generator_ColumnPropNameInRow="LegalentitywithAddress" msprop:Generator_ColumnPropNameInTable="LegalentitywithAddressColumn" msprop:Generator_ColumnVarNameInTable="columnLegalentitywithAddress" msprop:Generator_UserColumnName="LegalentitywithAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="CollegeNewName" msprop:Generator_ColumnPropNameInRow="CollegeNewName" msprop:Generator_ColumnPropNameInTable="CollegeNewNameColumn" msprop:Generator_ColumnVarNameInTable="columnCollegeNewName" msprop:Generator_UserColumnName="CollegeNewName" type="xs:string" minOccurs="0" />
+              <xs:element name="CollegeDistrict" msprop:Generator_ColumnPropNameInRow="CollegeDistrict" msprop:Generator_ColumnPropNameInTable="CollegeDistrictColumn" msprop:Generator_ColumnVarNameInTable="columnCollegeDistrict" msprop:Generator_UserColumnName="CollegeDistrict" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -37,7 +40,7 @@
               <xs:element name="UniversityName" msprop:Generator_ColumnPropNameInTable="UniversityNameColumn" msprop:Generator_ColumnPropNameInRow="UniversityName" msprop:Generator_UserColumnName="UniversityName" msprop:Generator_ColumnVarNameInTable="columnUniversityName" type="xs:string" minOccurs="0" />
               <xs:element name="StreamName" msprop:Generator_ColumnPropNameInTable="StreamNameColumn" msprop:Generator_ColumnPropNameInRow="StreamName" msprop:Generator_UserColumnName="StreamName" msprop:Generator_ColumnVarNameInTable="columnStreamName" type="xs:string" minOccurs="0" />
               <xs:element name="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" type="xs:string" minOccurs="0" />
-              <xs:element name="SocityAddress" msprop:Generator_UserColumnName="SocityAddress" msprop:Generator_ColumnPropNameInTable="SocityAddressColumn" msprop:Generator_ColumnPropNameInRow="SocityAddress" msprop:Generator_ColumnVarNameInTable="columnSocityAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="SocityAddress" msprop:Generator_ColumnPropNameInTable="SocityAddressColumn" msprop:Generator_ColumnPropNameInRow="SocityAddress" msprop:Generator_UserColumnName="SocityAddress" msprop:Generator_ColumnVarNameInTable="columnSocityAddress" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

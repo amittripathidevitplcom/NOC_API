@@ -609,12 +609,12 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             return model;
         }
-        public List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID)
+        public List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID, int ParameterID)
         {
             DataTable dt = new DataTable();
             List<ApplyNOCCourseListDataModal> applyNOCCourseList = new List<ApplyNOCCourseListDataModal>();
             List<ApplyNOCCourseSubjectListDataModal> model = new List<ApplyNOCCourseSubjectListDataModal>();
-            dt = UnitOfWork.ApplyNocParameterMasterRepository.GetCourseSubjectByApplyNOCID(ApplyNOCID);
+            dt = UnitOfWork.ApplyNocParameterMasterRepository.GetCourseSubjectByApplyNOCID(ApplyNOCID, ParameterID);
             if (dt != null && dt.Rows.Count > 0)
             {
                 model = CommonHelper.ConvertDataTable<List<ApplyNOCCourseSubjectListDataModal>>(dt);

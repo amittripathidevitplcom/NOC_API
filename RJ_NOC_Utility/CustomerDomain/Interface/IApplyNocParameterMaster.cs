@@ -26,7 +26,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
         List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID);
 
-        List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID);
+        List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
 
     }
 }

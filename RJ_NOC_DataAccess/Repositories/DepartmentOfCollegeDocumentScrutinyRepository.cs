@@ -358,7 +358,7 @@ namespace RJ_NOC_DataAccess.Repository
 
             List<DataTable> CollegeDetailDataModel = new List<DataTable>();
             CollegeDetailDataModel.Add(dataSet.Tables[0]);
-            dataModels.CollegeDetails= CollegeDetailDataModel;
+            dataModels.CollegeDetails = CollegeDetailDataModel;
 
 
             List<DataTable> CollegeContactDetailDataModel = new List<DataTable>();
@@ -415,7 +415,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
         //Get Nodal Officer Application
-        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID,string Status, string ActionName)
+        public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
             string SqlQuery = " exec USP_GetNodalOfficerApplyNOCApplicationList @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "',@ActionName='" + ActionName + "'";
             DataSet dataSet = new DataSet();
@@ -423,6 +423,21 @@ namespace RJ_NOC_DataAccess.Repository
             List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+
+            if (dataSet.Tables.Count > 1 && dataSet.Tables[1].Rows.Count > 0)
+            {
+                List<NOCPdfFileDataModel> NOCPdfFileDataModel = new List<NOCPdfFileDataModel>();
+                string JsonDataTable_PDFData = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                NOCPdfFileDataModel = JsonConvert.DeserializeObject<List<NOCPdfFileDataModel>>(JsonDataTable_PDFData);
+                for (int i = 0; i < listdataModels.Count; i++)
+                {
+                    var Data = NOCPdfFileDataModel.Where(w => w.ApplyNOCID == listdataModels[i].ApplyNOCID).ToList();
+                    if (Data != null && Data.Count > 0)
+                    {
+                        listdataModels[i].NOCPdfFileDataModel = Data;
+                    }
+                }
+            }
             return listdataModels;
         }
 
@@ -455,7 +470,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_FinalSubmitInspectionCommittee";
-            SqlQuery += " @ApplyNOCID='"+ ApplyNOCID + "',@CreatedBy='"+ CreatedBy + "'";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.GetPhysicalVerificationAppliationList");
             if (Rows > 0)
                 return true;
@@ -530,6 +545,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+        public bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy)
+        {
+            string SqlQuery = " exec USP_SaveDCENOCData  ";
+            SqlQuery += "@ActionType='EsignPDF',@NOCID='" + ApplyNOCID + "',@ParameterID='" + ParameterID + "',@EsignBy='" + CreatedBy + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "LegalEntity.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

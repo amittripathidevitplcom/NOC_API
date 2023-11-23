@@ -35,5 +35,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> GetWorkFlowRemarksByApplicationID(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID);
+
+        bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy);
     }
 }

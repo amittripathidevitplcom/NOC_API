@@ -1480,6 +1480,8 @@ namespace SSOService
         
         private string userTypeField;
         
+        private string delegateByField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string sAMAccountName
@@ -1533,6 +1535,20 @@ namespace SSOService
             set
             {
                 this.userTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string DelegateBy
+        {
+            get
+            {
+                return this.delegateByField;
+            }
+            set
+            {
+                this.delegateByField = value;
             }
         }
     }
@@ -3050,6 +3066,7 @@ namespace SSOService
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;
                 result.AllowCookies = true;
+                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
                 return result;
             }
             if ((endpointConfiguration == EndpointConfiguration.SSOWSSoap12))
@@ -3058,11 +3075,11 @@ namespace SSOService
                 System.ServiceModel.Channels.TextMessageEncodingBindingElement textBindingElement = new System.ServiceModel.Channels.TextMessageEncodingBindingElement();
                 textBindingElement.MessageVersion = System.ServiceModel.Channels.MessageVersion.CreateVersion(System.ServiceModel.EnvelopeVersion.Soap12, System.ServiceModel.Channels.AddressingVersion.None);
                 result.Elements.Add(textBindingElement);
-                System.ServiceModel.Channels.HttpTransportBindingElement httpBindingElement = new System.ServiceModel.Channels.HttpTransportBindingElement();
-                httpBindingElement.AllowCookies = true;
-                httpBindingElement.MaxBufferSize = int.MaxValue;
-                httpBindingElement.MaxReceivedMessageSize = int.MaxValue;
-                result.Elements.Add(httpBindingElement);
+                System.ServiceModel.Channels.HttpsTransportBindingElement httpsBindingElement = new System.ServiceModel.Channels.HttpsTransportBindingElement();
+                httpsBindingElement.AllowCookies = true;
+                httpsBindingElement.MaxBufferSize = int.MaxValue;
+                httpsBindingElement.MaxReceivedMessageSize = int.MaxValue;
+                result.Elements.Add(httpsBindingElement);
                 return result;
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
@@ -3072,11 +3089,11 @@ namespace SSOService
         {
             if ((endpointConfiguration == EndpointConfiguration.SSOWSSoap))
             {
-                return new System.ServiceModel.EndpointAddress("http://ssotest.rajasthan.gov.in:8888/ssows.asmx");
+                return new System.ServiceModel.EndpointAddress("https://ssotest.rajasthan.gov.in:4443/ssows.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.SSOWSSoap12))
             {
-                return new System.ServiceModel.EndpointAddress("http://ssotest.rajasthan.gov.in:8888/ssows.asmx");
+                return new System.ServiceModel.EndpointAddress("https://ssotest.rajasthan.gov.in:4443/ssows.asmx");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

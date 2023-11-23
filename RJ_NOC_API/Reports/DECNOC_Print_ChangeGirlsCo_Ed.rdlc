@@ -61,10 +61,22 @@
           <DataField>NOCType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LegalentitywithAddress">
+          <DataField>LegalentitywithAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewName">
+          <DataField>CollegeNewName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeDistrict">
+          <DataField>CollegeDistrict</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Naresh_NOC\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>E:\Ravi Raj\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -312,13 +324,25 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>        राजस्थान गैर सरकारी शैक्षिक संस्था अधिनियम, 1989 तथा तत्संबंधी नियम, 1993 एवं राज्य सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के आधार पर रीजनल सेवा समिति, उदयपुरवाटी, जिला झुन्झुनू द्वारा संचालित </Value>
+                    <Value>        राजस्थान गैर सरकारी शैक्षिक संस्था अधिनियम, 1989 तथा तत्संबंधी नियम, 1993 एवं राज्य सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के आधार पर </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!CollegeNameHi.Value</Value>
+                    <Value>=First(Fields!LegalentitywithAddress.Value, "DCENOC1599")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> द्वारा संचालित </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeNameHi.Value, "DCENOC1599")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -332,7 +356,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!CollegeAddress.Value</Value>
+                    <Value>=First(Fields!CollegeAddress.Value, "DCENOC1599")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -352,7 +376,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!NOCIssueFinancialYear.Value</Value>
+                    <Value>=First(Fields!NOCIssueFinancialYear.Value, "DCENOC1599")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -364,7 +388,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!CollegeNameHi.Value</Value>
+                    <Value>=First(Fields!CollegeNameHi.Value, "DCENOC1599")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -378,7 +402,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!CollegeAddress.Value</Value>
+                    <Value>=First(Fields!CollegeAddress.Value, "DCENOC1599")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -497,7 +521,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>4. जिला कलेक्टर, झुन्झुनू ।
+                    <Value>4. जिला कलेक्टर, </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeDistrict.Value, "DCENOC1599")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> ।
 5. कुल सचिव, पण्डित दीनदयाल उपाध्याय शेखावाटी विश्वविद्यालय, सीकर |
 6. सचिव, सम्बन्धित महाविद्यालय |
 7. सांख्यिकी शाखा, आयुक्तालय, कॉलेज शिक्षा, राजस्थान, जयपुर ।
@@ -575,7 +611,7 @@
           </Textbox>
           <Image Name="Image5">
             <Source>Database</Source>
-            <Value>=First(Fields!NocQRCode.Value, "DataSet_CollegeDetails")</Value>
+            <Value>=First(Fields!NocQRCode.Value, "DCENOC1599")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Top>13.9365cm</Top>
@@ -591,12 +627,13 @@
           </Image>
           <Textbox Name="NOCIssueNo">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!NOCIssueNo.Value, "DataSet_CollegeDetails")</Value>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOC1599")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -604,10 +641,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>NOCIssueNo</rd:DefaultName>
-            <Top>3.43641cm</Top>
-            <Left>6.19167cm</Left>
+            <Top>3.5246cm</Top>
+            <Left>6.21864cm</Left>
             <Height>0.69984cm</Height>
-            <Width>2.65516cm</Width>
+            <Width>5.69787cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -621,12 +658,13 @@
           </Textbox>
           <Textbox Name="Date">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Date.Value, "DataSet_CollegeDetails")</Value>
+                    <Value>=First(Fields!Date.Value, "DCENOC1599")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -634,8 +672,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Date</rd:DefaultName>
-            <Top>3.46287cm</Top>
-            <Left>14.20495cm</Left>
+            <Top>3.53625cm</Top>
+            <Left>14.21264cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>12</ZIndex>

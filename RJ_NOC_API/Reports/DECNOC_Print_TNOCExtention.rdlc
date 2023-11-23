@@ -61,10 +61,22 @@
           <DataField>NOCType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LegalentitywithAddress">
+          <DataField>LegalentitywithAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewName">
+          <DataField>CollegeNewName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeDistrict">
+          <DataField>CollegeDistrict</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Naresh_NOC\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>E:\Ravi Raj\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -104,7 +116,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Naresh_NOC\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>E:\Ravi Raj\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CourseAndSubjectDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -352,27 +364,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>        राजस्थान गैर सरकारी शैक्षिक संस्था अधिनियम, 1999 तथा तत्संबंधी नियम, 1993 एवं राज्य सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत सत्र </Value>
+                    <Value>        राजस्थान गैर सरकारी शैक्षिक संस्था अधिनियम, 1999 तथा तत्संबंधी नियम, 1993 एवं राज्य सरकार द्वारा जारी अद्यतन निजी महाविद्यालय नीति के अन्तर्गत सत्र             </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!NOCIssueFinancialYear.Value</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> (एक सत्र)</Value>
+                    <Value>(एक सत्र)</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -733,7 +731,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>DataSet_CourseAndSubjectDetails</DataSetName>
+            <DataSetName>DCENOC1686_Subject_Details</DataSetName>
             <Top>6.57912cm</Top>
             <Left>0.02687cm</Left>
             <Height>1.2cm</Height>
@@ -996,7 +994,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>4. जिला कलेक्टर पाली।</Value>
+                    <Value>4. जिला कलेक्टर </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CollegeDistrict.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -1076,13 +1086,14 @@
             </Style>
           </Textbox>
           <Textbox Name="NOCIssueNo">
+            <CanGrow>true</CanGrow>
             <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!NOCIssueNo.Value, "DataSet_CollegeDetails")</Value>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOC1686_CollegeDetails")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1093,7 +1104,7 @@
             <Top>3.56933cm</Top>
             <Left>6.08224cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.5cm</Width>
+            <Width>5.74771cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -1113,7 +1124,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Date.Value, "DataSet_CollegeDetails")</Value>
+                    <Value>=First(Fields!Date.Value, "DCENOC1686_CollegeDetails")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1155,6 +1166,37 @@
               </Border>
             </Style>
           </Image>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NOCIssueFinancialYear.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>5.50016cm</Top>
+            <Left>6.45266cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>25.7cm</Height>
         <Style />

@@ -42,6 +42,8 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DataTable> GetWorkFlowRemarksByApplicationID(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID);
+
+        bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy);
     }
 
 }

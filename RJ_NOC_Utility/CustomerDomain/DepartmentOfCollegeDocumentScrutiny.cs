@@ -113,6 +113,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertedTabData(ApplyNOCID);
         }
+        public bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DCEPdfEsign(ApplyNOCID, ParameterID, CreatedBy);
+        }
 
     }
 }
