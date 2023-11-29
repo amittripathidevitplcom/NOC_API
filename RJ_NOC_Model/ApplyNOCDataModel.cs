@@ -83,6 +83,18 @@ namespace RJ_NOC_Model
         public List<NOCPdfFileDataModel> NOCPdfFileDataModel { get; set; }
     }
 
+    public class LOIApplicationDetails_DataModel
+    {
+        public int LOIID { get; set; }
+        public string ApplicationNo { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string DepartmentName { get; set; }
+        public string CollegeName { get; set; }
+        public int PVStage { get; set; }
+        public string? NOCFilePath { get; set; }
+    }
+
     public class NOCPdfFileDataModel
     {
         public int ApplyNOCID { get; set; }

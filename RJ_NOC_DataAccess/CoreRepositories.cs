@@ -375,6 +375,11 @@ namespace RJ_NOC_DataAccess.Repository
         public ISeatInformationMasterRepository SeatInformationMasterRepository
         {
             get { return seatInformationMasterRepository; }
+        }       
+        private IMGOneDocumentScrutinyRepository mgoneDocumentScrutinyRepository;
+        public IMGOneDocumentScrutinyRepository MGOneDocumentScrutinyRepository
+        {
+            get { return mgoneDocumentScrutinyRepository; }
         }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -436,6 +441,7 @@ namespace RJ_NOC_DataAccess.Repository
             staffAttendanceRepository = new StaffAttendanceRepository(commonHelper);
             LoiFeeMasterRepository = new LOIFeeMasterRepository(commonHelper);
             seatInformationMasterRepository = new SeatInformationMasterRepository(commonHelper);
+            mgoneDocumentScrutinyRepository = new MGOneDocumentScrutinyRepository(commonHelper);
         }
     }
 }
