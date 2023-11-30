@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -51,6 +52,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<LOIApplicationDetails_DataModel> GetLOIApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.GetLOIApplicationList(RoleID, UserID, Status, ActionName);
-        }       
+        }
+
+        public DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData(LOIFinalSubmitID);
+        }
     }
 }

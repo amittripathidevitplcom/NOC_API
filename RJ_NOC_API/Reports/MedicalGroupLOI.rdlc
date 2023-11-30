@@ -33,6 +33,10 @@
           <DataField>LOIFinalSubmitID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LOIQRCode">
+          <DataField>LOIQRCode</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
@@ -368,7 +372,7 @@
           </Textbox>
           <Image Name="Image5">
             <Source>Database</Source>
-            <Value>=First(Fields!NocQRCode.Value, "AgriNOCPDF")</Value>
+            <Value>=First(Fields!LOIQRCode.Value, "MedicalGroupLOI")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Top>19.61622cm</Top>
@@ -399,25 +403,10 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParameters>
-    <ReportParameter Name="test">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
-  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>test</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <EmbeddedImages>

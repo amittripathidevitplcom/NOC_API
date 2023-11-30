@@ -20,6 +20,7 @@ using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using RJ_NOC_DataAccess.Common;
+using AspNetCore.Reporting;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -27,7 +28,7 @@ namespace RJ_NOC_API.Controllers
     [ApiController]
     public class MGOneDocumentScrutinyController : RJ_NOC_ControllerBase
     {
-        private IConfiguration _configuration; 
+        private IConfiguration _configuration;
         public MGOneDocumentScrutinyController(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
@@ -253,13 +254,13 @@ namespace RJ_NOC_API.Controllers
         [HttpPost("DocumentScrutiny_StaffDetails/{CollageID}/{RoleID}/{ApplyNOCID}")]
 
         [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}/{CollegeID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID, int CollegeID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID,RoleID,CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -286,12 +287,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetLOIApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}")]
-        public async Task<OperationResult<List<LOIApplicationDetails_DataModel>>> GetLOIApplicationList(int RoleID, int UserID,string Status,string ActionName)
+        public async Task<OperationResult<List<LOIApplicationDetails_DataModel>>> GetLOIApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
             var result = new OperationResult<List<LOIApplicationDetails_DataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.GetLOIApplicationList(RoleID, UserID,Status, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.GetLOIApplicationList(RoleID, UserID, Status, ActionName));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -317,7 +318,55 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GeneratePDF_MedicalGroupLOIC/{LOIFinalSubmitID}")]
+        public async Task<OperationResult<bool>> GeneratePDF_MedicalGroupLOIC(int LOIFinalSubmitID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
 
+                LocalReport localReport = null;
+                List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
+                DataSet dataset = new DataSet();
+                dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(LOIFinalSubmitID);
+
+                StringBuilder sb = new StringBuilder();
+                var fileName = "MedicalGroupLOIC_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+                string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                string mimetype = "";
+                int extension = 1;
+                string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
+                ReportPath += "\\MedicalGroupLOI.rdlc";
+                localReport = new LocalReport(ReportPath);
+                localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
+
+
+                //Dictionary<string, string> parameters = new Dictionary<string, string>();
+                //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                //parameters.Add("test", "");
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
+                System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
+
+                result.State = OperationState.Success;
+                result.SuccessMessage = "LOI PDF Generated Successfully .!";
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.GeneratePD_FMedicalGroupLOIC", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using RJ_NOC_Model;
 
@@ -16,5 +17,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<MGOneDocumentScrutinyDataModel_DocumentBuildingDetails> DocumentScrutiny_BuildingDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID);
         List<LOIApplicationDetails_DataModel> GetLOIApplicationList(int RoleID, int UserID, string Status, string ActionName);
+
+        DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID);
     }
 }

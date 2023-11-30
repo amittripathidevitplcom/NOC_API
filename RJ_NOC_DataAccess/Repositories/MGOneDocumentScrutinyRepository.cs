@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Collections;
 using System.Diagnostics.Metrics;
+using System.Reflection.Metadata;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -249,5 +250,12 @@ namespace RJ_NOC_DataAccess.Repository
             return listdataModels;
         }
 
+        public DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID)
+        {
+            string SqlQuery = "exec USP_GeneratePDF_MedicalGroupLOIC @LOIFinalSubmitID='"+ LOIFinalSubmitID + "'";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData");
+            return dataset;
+        }
     }
 }
