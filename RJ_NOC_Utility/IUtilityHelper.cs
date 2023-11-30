@@ -73,6 +73,7 @@ namespace RJ_NOC_Utility
         IStaffAttendance StaffAttendanceUtility { get; }
         ILOIFeeMaster LOIFeeMasterUtility { get; }
         ISeatInformationMaster SeatInformationMasterUtility { get; }
+        IMGOneDocumentScrutiny MGOneScrutinyUtility { get; }
 
     }
 }

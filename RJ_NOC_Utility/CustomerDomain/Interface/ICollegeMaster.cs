@@ -20,5 +20,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID);
         List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID);
         bool IfExists(int DepartmentID,int CollegeID, string MobileNo, string Email);
+        bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request);
     }
 }

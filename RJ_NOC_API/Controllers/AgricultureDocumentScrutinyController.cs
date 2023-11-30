@@ -431,14 +431,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
+        [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.AgricultureDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {

@@ -32,12 +32,14 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID);
         bool SubmitRevertApplication(SubmitRevertApplication request);
         List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request);
-        bool SaveDCENOCData(List<GenerateNOC_DataModel> model);
+        bool SaveDCENOCData(NOCIssuedRequestDataModel model);
 
-        DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID);
-        bool UpdateNOCPDFPath(int ApplyNOCID,string Path);
+        DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID,int ParameterID);
+        bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList);
         bool DeleteNOCIssuedDetails(int ApplyNOCID);
         NocInformation GetNocInformation(Guid SearchRecordID);
         List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID);
+
+        List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
     }
 }

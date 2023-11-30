@@ -26,6 +26,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName);
         DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
         DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID);
-        DataTable GetCourseSubjectByApplyNOCID(int ApplyNOCID);
+        DataTable GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
     }
 }

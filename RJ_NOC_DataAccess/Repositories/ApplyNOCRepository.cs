@@ -336,20 +336,21 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool SaveDCENOCData(List<GenerateNOC_DataModel> model)
+        public bool SaveDCENOCData(NOCIssuedRequestDataModel model)
         {
-            string IssuedNOCData_Str = CommonHelper.GetDetailsTableQry(model, "Temp_IssuedNOCData");
+            string IssuedNOCData_Str = model.NOCDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(model.NOCDetails, "Temp_IssuedNOCData"):"";
+            string GenerateNOCParameter_str = CommonHelper.GetDetailsTableQry(model.AppliedNOCFor, "Temp_GenerateNOCParameter");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='Save',@IssuedNOCData_str='{IssuedNOCData_Str}'";
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='Save',@IssuedNOCData_str='{IssuedNOCData_Str}',@GenerateNOCParameter_str='{GenerateNOCParameter_str}'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SaveDCENOCData");
             if (Rows > 0)
                 return true;
             else
                 return false;
         }
-        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID)
+        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID,int ParameterID)
         {
-            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='GetNOCIssuedDetail',@NOCID={ApplyNOCID}";
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='GetNOCIssuedDetail',@NOCID={ApplyNOCID},@ParameterID={ParameterID}";
             DataSet dataset = new DataSet();
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNOCIssuedDetailsByNOCIID");
             //List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -359,9 +360,10 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataset;
         }
 
-        public bool UpdateNOCPDFPath(int ApplyNOCID, string Path)
+        public bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList)
         {
-            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='UpdatePDFPath',@NOCID='{ApplyNOCID}',@NOCFilePath='{Path}'";
+            string PdfPathList_str = CommonHelper.GetDetailsTableQry(PdfPathList, "Temp_DCEPdfPathList");
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='UpdatePDFPath',@PdfPathList_str='{PdfPathList_str}'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateNOCPDFPath");
             if (Rows > 0)
                 return true;
@@ -407,6 +409,18 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_GetNOCIssuedReportForAdminData @UserID ='" + UserID + "',@ActionName ='" + ActionName + "',@RoleID ='" + RoleID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetNOCIssuedReportListForAdmin");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetAppliedParameterNOCForByApplyNOCID @ApplyNOCID ='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetAppliedParameterNOCForByApplyNOCID");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();

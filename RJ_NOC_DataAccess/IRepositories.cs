@@ -72,5 +72,6 @@ namespace RJ_NOC_DataAccess.Interface
         IStaffAttendanceRepository StaffAttendanceRepository { get; }
         ILOIFeeMasterRepository LOIFeeMasterRepository { get; }
         ISeatInformationMasterRepository SeatInformationMasterRepository { get; }
+        IMGOneDocumentScrutinyRepository MGOneDocumentScrutinyRepository { get; }
     }
 }

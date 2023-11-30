@@ -15,9 +15,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
+        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
         {
-            return UnitOfWork.AnimalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
+            return UnitOfWork.AnimalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID, CollegeID);
         }
 
         public List<AnimalDocuemntScrutinyCommonModel_DocumentScrutinyLegalEntity> DocumentScrutiny_LegalEntity(int CollegeID, int RoleID, int ApplyNOCID)

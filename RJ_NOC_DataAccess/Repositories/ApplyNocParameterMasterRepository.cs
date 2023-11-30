@@ -168,10 +168,10 @@ namespace RJ_NOC_DataAccess.Repository
             return dt;
         }
 
-        public DataTable GetCourseSubjectByApplyNOCID(int ApplyNOCID)
+        public DataTable GetCourseSubjectByApplyNOCID(int ApplyNOCID, int ParameterID)
         {
             DataTable dt = new DataTable();
-            string SqlQuery = $"exec USP_GetCourseSubjectByApplyNOCID @ApplyNOCID={ApplyNOCID}";
+            string SqlQuery = $"exec USP_GetCourseSubjectByApplyNOCID @ApplyNOCID={ApplyNOCID},@ParameterID={ParameterID}";
             dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetCourseSubjectByApplyNOCID");
             return dt;
         }

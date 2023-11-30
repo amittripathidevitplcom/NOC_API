@@ -22,7 +22,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentStaffDetails> DocumentScrutiny_StaffDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyParamedicalHospitalDetail> DocumentScrutiny_ParamedicalHospitalDetail(int CollageID, int RoleID, int ApplyNOCID);
-        List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID);
+        List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID,int CollegeID);
 
 
         //get list
@@ -35,5 +35,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails> DocumentScrutiny_SubjectWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> GetWorkFlowRemarksByApplicationID(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID);
+
+        bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy);
     }
 }

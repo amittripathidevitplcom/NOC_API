@@ -99,21 +99,21 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetParameterFeeMaster(request);
         }
-        public bool SaveDCENOCData(List<GenerateNOC_DataModel> model)
+        public bool SaveDCENOCData(NOCIssuedRequestDataModel model)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDCENOCData(model);
         }          
-        public bool UpdateNOCPDFPath(int ApplyNOCID, string Path)
+        public bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList)
         {
-            return UnitOfWork.ApplyNOCRepository.UpdateNOCPDFPath(ApplyNOCID, Path);
+            return UnitOfWork.ApplyNOCRepository.UpdateNOCPDFPath(PdfPathList);
         }
         public bool DeleteNOCIssuedDetails(int ApplyNOCID)
         {
             return UnitOfWork.ApplyNOCRepository.DeleteNOCIssuedDetails(ApplyNOCID);
         }     
-        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID)
+        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID, int ParameterID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
+            return UnitOfWork.ApplyNOCRepository.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, ParameterID);
         }
         public NocInformation GetNocInformation(Guid SearchRecordID)
         {
@@ -122,6 +122,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID)
         {
             return UnitOfWork.ApplyNOCRepository.GetNOCIssuedReportListForAdmin(UserID, ActionName, RoleID);
+        }
+        public List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetAppliedParameterNOCForByApplyNOCID(ApplyNOCID);
         }
     }
 }

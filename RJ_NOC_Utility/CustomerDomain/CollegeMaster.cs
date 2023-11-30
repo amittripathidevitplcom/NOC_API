@@ -61,5 +61,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.IfExists(DepartmentID,CollegeID, MobileNo,Email);
         }
+        public bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request)
+        {
+            return UnitOfWork.CollegeMasterRepository.SaveLOIWorkFlow(request);
+        }
     }
 }

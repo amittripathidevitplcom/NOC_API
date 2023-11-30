@@ -25,7 +25,7 @@ namespace RJ_NOC_Model
         public int ApplyNOCID { get; set; }
         public string TabName { get; set; }
         public string FinalRemark { get; set; }
-        public int? ActionID {get;set;}
+        public int? ActionID { get; set; }
         public List<DocumentScrutinyList_DataModel> DocumentScrutinyDetail { get; set; }
 
     }
@@ -80,6 +80,30 @@ namespace RJ_NOC_Model
         public string strPVStage { get; set; }
         public string? IsCommittee { get; set; }
         public string? NOCFilePath { get; set; }
+        public List<NOCPdfFileDataModel> NOCPdfFileDataModel { get; set; }
+    }
+
+    public class LOIApplicationDetails_DataModel
+    {
+        public int LOIID { get; set; }
+        public string ApplicationNo { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string DepartmentName { get; set; }
+        public string CollegeName { get; set; }
+        public int PVStage { get; set; }
+        public string? NOCFilePath { get; set; }
+    }
+
+    public class NOCPdfFileDataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public int ApplyNocParameterID { get; set; }
+        public string ApplyNocFor { get; set; }
+        public string FileName { get; set; }
+        public string NOCFilePath { get; set; }
+        public bool IsEsign { get; set; }
+        public int EsignBy { get; set; }
     }
     public class GetPhysicalVerificationAppliationList
     {
@@ -101,15 +125,28 @@ namespace RJ_NOC_Model
         public int? SubjectID { get; set; }
         public string? SubjectName { get; set; }
         public int? ApplyNocParameterID { get; set; }
-        public string NOCIssuedRemark { get; set; }
-        public string Status { get; set; }
+        public string? NOCIssuedRemark { get; set; }
+        public string? Status { get; set; }
+    }
+    public class NOCIssuedForDataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public int ParameterID { get; set; }
+        public int CreatedBy { get; set; }
+        public string Remark { get; set; }
+    }
+
+    public class NOCIssuedRequestDataModel
+    {
+        public List<GenerateNOC_DataModel> NOCDetails { get; set; }
+        public List<NOCIssuedForDataModel> AppliedNOCFor { get; set; }
     }
     public class SubmitRevertApplication
     {
         public int ApplyNOCID { get; set; }
         public int DepartmentID { get; set; }
     }
-    
+
     public class ParameterFeeMaster
     {
         public int ParamterID { get; set; }
@@ -128,5 +165,12 @@ namespace RJ_NOC_Model
         public string UniversityName { get; set; }
         public string StreamName { get; set; }
         public string SubjectName { get; set; }
+    }
+    public class DCENOCPDFPathDataModel
+    {
+        public int AID { get; set; }
+        public int ParameterID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public string PDFPath { get; set; }
     }
 }

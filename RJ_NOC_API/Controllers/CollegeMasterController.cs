@@ -383,7 +383,37 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-
+        [HttpPost("SaveLOIWorkFlow")]
+        public async Task<OperationResult<bool>> SaveLOIWorkFlow(DocumentScrutinySave_DataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.SaveLOIWorkFlow(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "SaveLOIWorkFlow", request.ApplyNOCID, "ApplyLOI");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error revert application";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.DocumentScrutiny", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }

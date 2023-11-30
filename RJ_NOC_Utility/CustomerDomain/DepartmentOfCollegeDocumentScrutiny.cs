@@ -75,9 +75,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_ParamedicalHospitalDetail(CollageID, RoleID, ApplyNOCID);
         }
 
-        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID)
+        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID,int CollegeID)
         {
-            return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID);
+            return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID, CollegeID);
         }
         public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
         {
@@ -112,6 +112,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertedTabData(ApplyNOCID);
+        }
+        public bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DCEPdfEsign(ApplyNOCID, ParameterID, CreatedBy);
         }
 
     }

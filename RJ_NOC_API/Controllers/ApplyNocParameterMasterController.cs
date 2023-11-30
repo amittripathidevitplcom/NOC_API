@@ -558,13 +558,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetCourseSubjectByApplyNOCID/{ApplyNOCID}")]
-        public async Task<OperationResult<List<ApplyNOCCourseListDataModal>>> GetCourseSubjectByApplyNOCID(int ApplyNOCID)
+        [HttpGet("GetCourseSubjectByApplyNOCID/{ApplyNOCID}/{ParameterID}")]
+        public async Task<OperationResult<List<ApplyNOCCourseListDataModal>>> GetCourseSubjectByApplyNOCID(int ApplyNOCID, int ParameterID)
         {
             var result = new OperationResult<List<ApplyNOCCourseListDataModal>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetCourseSubjectByApplyNOCID(ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetCourseSubjectByApplyNOCID(ApplyNOCID, ParameterID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

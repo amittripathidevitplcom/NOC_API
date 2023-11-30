@@ -412,9 +412,9 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("GenerateNOCForDCE")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(List<GenerateNOC_DataModel> request)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForDCE(NOCIssuedRequestDataModel request)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(request[0].UserID, "GenerateNOCForDCE", request[0].ApplyNOCID, "ApplyNOCController");
+            CommonDataAccessHelper.Insert_TrnUserLog(request.AppliedNOCFor[0].CreatedBy, "GenerateNOCForDCE", request.AppliedNOCFor[0].ApplyNOCID, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
@@ -423,11 +423,12 @@ namespace RJ_NOC_API.Controllers
 
                 if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(request)))
                 {
-                    string Path = GeneratePDFDCE(request[0].ApplyNOCID);
-                    if (!string.IsNullOrEmpty(Path))
+                    List<DCENOCPDFPathDataModel> PdfPathList= GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
+                    //string Path = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
+                    if (PdfPathList.Count>0)
                     {
                         bool result1 = false;
-                        result1 = UtilityHelper.ApplyNOCUtility.UpdateNOCPDFPath(request[0].ApplyNOCID, Path);
+                        result1 = UtilityHelper.ApplyNOCUtility.UpdateNOCPDFPath(PdfPathList);
                         if (result1)
                         {
                             result.State = OperationState.Success;
@@ -441,7 +442,7 @@ namespace RJ_NOC_API.Controllers
                     }
                     else
                     {
-                        UtilityHelper.ApplyNOCUtility.DeleteNOCIssuedDetails(request[0].ApplyNOCID);
+                        UtilityHelper.ApplyNOCUtility.DeleteNOCIssuedDetails(request.AppliedNOCFor[0].ApplyNOCID);
                         result.State = OperationState.Warning;
                         result.SuccessMessage = "There was an error Generate PDF!";
                     }
@@ -573,10 +574,7 @@ namespace RJ_NOC_API.Controllers
             }
 
             return fileName;
-
         }
-
-
 
         [HttpGet("CheckAppliedNOCCollegeWise/{CollegeID}")]
         public async Task<OperationResult<int>> CheckAppliedNOCCollegeWise(int CollegeID)
@@ -747,31 +745,134 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GeneratePDFDCE")]
-        public string GeneratePDFDCE(int ApplyNOCID)
+        public List<DCENOCPDFPathDataModel> GeneratePDFDCE(int ApplyNOCID)
         {
-            StringBuilder sb = new StringBuilder();
-            var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
-            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+            LocalReport localReport = null;
+            List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
             DataSet dataset = new DataSet();
-            dataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID);
-            if (dataset.Tables[0].Rows.Count > 0)
+            DataSet Subjectdataset = null;
+            dataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID,0);
+            if (dataset.Tables[2].Rows.Count > 0)
             {
-                dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["NocQRCodeLink"].ToString());
+                for (int i = 0; i < dataset.Tables[2].Rows.Count; i++)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+                    string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                    string mimetype = "";
+                    int extension = 1;
+                    string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                    if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangeName")
+                    {
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_ChangeName.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
+                        
+                    }
+                    else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangePlace")
+                    {
+                        ReportPath += "";
+                        localReport = new LocalReport(ReportPath);
+                    }   
+                    else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_CoedToGirls")
+                    {
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_ChangeGirlsCo_Ed.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DCENOC1599", dataset.Tables[0]);
+                    }   
+                    else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_GilsToCoed")
+                    {
+                        ReportPath += "";
+                        localReport = new LocalReport(ReportPath);
+                    }
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_Merger")
+                    {
+                        ReportPath += "";
+                        localReport = new LocalReport(ReportPath);
+                    }
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangeManagement")
+                    {
+                        ReportPath += "";
+                        localReport = new LocalReport(ReportPath);
+                    }       
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject" || dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
+                    {
+                        int ParameterID = 0;
+                        ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
+                        Subjectdataset = new DataSet();
+                        Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, ParameterID);
+
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
+                        localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
+                    }    
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_TNOCExtOfSubject")
+                    {
+                        int ParameterID = 0;
+                        ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
+                        Subjectdataset = new DataSet();
+                        Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, ParameterID);
+
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_TNOCExtention.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DCENOC1686_CollegeDetails", dataset.Tables[0]);
+                        localReport.AddDataSource("DCENOC1686_Subject_Details", Subjectdataset.Tables[1]);
+                    }
+                    //var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports", ReportName)) ;
+
+                    Dictionary<string, string> parameters = new Dictionary<string, string>();
+                    string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                    parameters.Add("test", "");
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                    
+                    var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+
+                    //return File(result.MainStream, "application/pdf");
+                    System.IO.File.WriteAllBytes(filepath, result.MainStream);
+                    PdfPathList.Add(new DCENOCPDFPathDataModel() {
+                        AID =Convert.ToInt32(dataset.Tables[2].Rows[i]["AID"]),
+                        ParameterID= Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]),
+                        ApplyNOCID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNOCID"]),
+                        PDFPath = fileName
+                    });
+                }
+                
             }
-            string mimetype = "";
-            int extension = 1;
-            var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\DECNOC_Print.rdlc";
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
-            parameters.Add("test", "");
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            LocalReport localReport = new LocalReport(path);
-            localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
-            localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
-            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            //StringBuilder sb = new StringBuilder();
+            //var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+            //string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+            ////if (dataset.Tables[0].Rows.Count > 0)
+            ////{
+            ////    dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["NocQRCodeLink"].ToString());
+            ////}
+            //string mimetype = "";
+            //int extension = 1;
+            //var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\DECNOC_Print.rdlc";
+            //Dictionary<string, string> parameters = new Dictionary<string, string>();
+            //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+            //parameters.Add("test", "");
+            //System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            //LocalReport localReport = new LocalReport(path);
+            //localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
+            //localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
+            //var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
              
-            //return File(result.MainStream, "application/pdf");
-            System.IO.File.WriteAllBytes(filepath, result.MainStream);
+            ////return File(result.MainStream, "application/pdf");
+            //System.IO.File.WriteAllBytes(filepath, result.MainStream);
 
 
             //StringBuilder sbhtml = new StringBuilder();
@@ -855,7 +956,7 @@ namespace RJ_NOC_API.Controllers
             //    throw ex;
             //}
 
-            return fileName;
+            return PdfPathList;
 
         }
 
@@ -990,6 +1091,40 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpGet("GetAppliedParameterNOCForByApplyNOCID/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID)
+        {
+            //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetNOCIssuedReportListForAdmin", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetAppliedParameterNOCForByApplyNOCID(ApplyNOCID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetAppliedParameterNOCForByApplyNOCID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 

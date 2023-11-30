@@ -268,5 +268,17 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_ApplyLOI_WorkFlow  ";
+            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='" + request.Remark + "',@NextActionID='" + request.NextActionID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CollegeMaster.SaveLOIWorkFlow");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
