@@ -23,6 +23,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<LOIApplicationDetails_DataModel> GetLOIApplicationList(int RoleID, int UserID, string Status, string ActionName);
 
         DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID);
+
+        List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID);
     }
 
 }

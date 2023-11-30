@@ -58,5 +58,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData(LOIFinalSubmitID);
         }
+
+        public List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.MedicalGroupLOIIssuedReport(LoginUserID, RoleID);
+        }
     }
 }

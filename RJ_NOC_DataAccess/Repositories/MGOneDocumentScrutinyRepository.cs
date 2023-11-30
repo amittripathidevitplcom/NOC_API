@@ -257,5 +257,21 @@ namespace RJ_NOC_DataAccess.Repository
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData");
             return dataset;
         }
+
+        public List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID)
+        {
+            string SqlQuery = " exec USP_MedicalGroupLOICIssuedReport @LoginUserID ='"+ LoginUserID + "',@RoleID='"+ RoleID + "' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MGOneDocumentScrutinyRepository.MedicalGroupLOIIssuedReport");
+
+             
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+
+        }
     }
 }
