@@ -95,10 +95,11 @@ namespace RJ_NOC_Model
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
 
-    //public class DocumentScrutiny_Action
-    //{
-    //    public string Action { get; set; }
-    //    public string Remark { get; set; }
+    public class GenerateLOIPDFDataModel
+    {
+        public int LOIID { get; set; }
+        public int UserID { get; set; }
+        public string Remark { get; set; }
 
-    //}
+    }
 }

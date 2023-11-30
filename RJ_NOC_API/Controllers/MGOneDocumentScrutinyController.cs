@@ -318,8 +318,8 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GeneratePDF_MedicalGroupLOIC/{LOIFinalSubmitID}")]
-        public async Task<OperationResult<bool>> GeneratePDF_MedicalGroupLOIC(int LOIFinalSubmitID)
+        [HttpPost("GeneratePDF_MedicalGroupLOIC")]
+        public async Task<OperationResult<bool>> GeneratePDF_MedicalGroupLOIC(GenerateLOIPDFDataModel request)
         {
             var result = new OperationResult<bool>();
             try
@@ -328,7 +328,7 @@ namespace RJ_NOC_API.Controllers
                 LocalReport localReport = null;
                 List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
                 DataSet dataset = new DataSet();
-                dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(LOIFinalSubmitID);
+                dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(request);
 
                 StringBuilder sb = new StringBuilder();
                 var fileName = "MedicalGroupLOIC_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
@@ -351,8 +351,12 @@ namespace RJ_NOC_API.Controllers
                 var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
                 System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
 
-                result.State = OperationState.Success;
-                result.SuccessMessage = "LOI PDF Generated Successfully .!";
+
+                if (await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.SavePDFPath(fileName, request.LOIID, request.UserID, request.Remark)))
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "LOI PDF Generated Successfully .!";
+                }
             }
             catch (Exception e)
             {
@@ -372,12 +376,12 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("MedicalGroupLOIIssuedReport/{LoginUserID}/{RoleID}")]
-        public async Task<OperationResult<List<DataTable>>> MedicalGroupLOIIssuedReport(int LoginUserID,int RoleID)
+        public async Task<OperationResult<List<DataTable>>> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID)
         {
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.MedicalGroupLOIIssuedReport(LoginUserID,RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.MedicalGroupLOIIssuedReport(LoginUserID, RoleID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

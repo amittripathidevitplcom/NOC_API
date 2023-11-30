@@ -19,8 +19,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<LOIApplicationDetails_DataModel> GetLOIApplicationList(int RoleID, int UserID, string Status, string ActionName);
         
 
-        DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID);
+        DataSet GeneratePDF_MedicalGroupLOICData(GenerateLOIPDFDataModel request);
 
         List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID);
+
+        bool SavePDFPath(string Path, int LOIID,int UserID, string Remark);
     }
 }

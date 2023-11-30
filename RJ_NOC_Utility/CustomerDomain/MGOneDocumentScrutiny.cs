@@ -54,14 +54,18 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.MGOneDocumentScrutinyRepository.GetLOIApplicationList(RoleID, UserID, Status, ActionName);
         }
 
-        public DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID)
+        public DataSet GeneratePDF_MedicalGroupLOICData(GenerateLOIPDFDataModel request)
         {
-            return UnitOfWork.MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData(LOIFinalSubmitID);
+            return UnitOfWork.MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData(request);
         }
 
         public List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID)
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.MedicalGroupLOIIssuedReport(LoginUserID, RoleID);
+        }     
+        public bool SavePDFPath(string Path, int LOIID, int UserID, string Remark)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.SavePDFPath(Path, LOIID,UserID,Remark);
         }
     }
 }

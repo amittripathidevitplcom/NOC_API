@@ -250,9 +250,9 @@ namespace RJ_NOC_DataAccess.Repository
             return listdataModels;
         }
 
-        public DataSet GeneratePDF_MedicalGroupLOICData(int LOIFinalSubmitID)
+        public DataSet GeneratePDF_MedicalGroupLOICData(GenerateLOIPDFDataModel request)
         {
-            string SqlQuery = "exec USP_GeneratePDF_MedicalGroupLOIC @LOIFinalSubmitID='"+ LOIFinalSubmitID + "'";
+            string SqlQuery = "exec USP_GeneratePDF_MedicalGroupLOIC @LOIFinalSubmitID='"+ request.LOIID + "'";
             DataSet dataset = new DataSet();
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "MGOneDocumentScrutinyRepository.GeneratePDF_MedicalGroupLOICData");
             return dataset;
@@ -272,6 +272,18 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
 
 
+        }
+
+        public bool SavePDFPath(string Path, int LOIID, int UserID, string Remark)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_InsertIssueLOI @NOCFilePath='{Path}',@LOIID={LOIID},@UserId={UserID},@Remark='{Remark}',@IPAddress='{IPAddress}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SavePDFPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
