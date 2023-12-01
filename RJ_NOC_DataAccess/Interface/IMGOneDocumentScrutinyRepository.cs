@@ -26,6 +26,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID);
         bool SavePDFPath(string Path, int LOIID, int UserID, string Remark);
+        bool PdfEsign(int LOIID, int CreatedBy);
     }
 
 }

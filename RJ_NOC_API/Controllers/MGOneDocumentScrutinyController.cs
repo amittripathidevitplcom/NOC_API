@@ -407,6 +407,37 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpPost("PdfEsign/{LOIID}/{CreatedBy}")]
+        public async Task<OperationResult<bool>> DCEPdfEsign(int LOIID, int CreatedBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.PdfEsign(LOIID, CreatedBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "error in data save.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.PdfEsign", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

@@ -279,7 +279,18 @@ namespace RJ_NOC_DataAccess.Repository
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 
             string SqlQuery = $" exec USP_InsertIssueLOI @NOCFilePath='{Path}',@LOIID={LOIID},@UserId={UserID},@Remark='{Remark}',@IPAddress='{IPAddress}'";
-            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SavePDFPath");
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MGOneDocumentScrutinyRepository.SavePDFPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }  
+        public bool PdfEsign(int LOIID, int CreatedBy)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_PDFEsignMGOne @LOIID={LOIID},@CreatedBy={CreatedBy}";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MGOneDocumentScrutinyRepository.PdfEsign");
             if (Rows > 0)
                 return true;
             else

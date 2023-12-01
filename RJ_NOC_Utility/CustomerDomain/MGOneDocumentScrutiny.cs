@@ -67,5 +67,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.SavePDFPath(Path, LOIID,UserID,Remark);
         }
+        public bool PdfEsign(int LOIID, int CreatedBy)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.PdfEsign( LOIID, CreatedBy);
+        }
     }
 }

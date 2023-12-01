@@ -574,14 +574,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         #endregion
 
-        public string eSignPDF(string PDFFileName, string OTPTransactionID, IConfiguration _configuration)
+        public string eSignPDF(string PDFFileName, string OTPTransactionID,int DepartmentID, int ParamID, IConfiguration _configuration)
         {
             string pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF") + "/" + PDFFileName;
-            var str = GenerateEsign_PDF(pdfPath, OTPTransactionID, "MSKY", _configuration);
+            var str = GenerateEsign_PDF(pdfPath, OTPTransactionID,  DepartmentID,  ParamID, "MSKY", _configuration);
             return str;
         }
 
-        public string GenerateEsign_PDF(string pdfPath, string txn, string formType, IConfiguration _configuration)
+        public string GenerateEsign_PDF(string pdfPath, string txn, int DepartmentID, int ParamID, string formType, IConfiguration _configuration)
         {
            
             string final_status = "";
@@ -590,7 +590,16 @@ namespace RJ_NOC_Utility.CustomerDomain
             byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfPath);
             string pdfBase64 = Convert.ToBase64String(pdfBytes);
             string url = _configuration["AadharServiceDetails:eSignMultipleSignAgri"].ToString();
-            string json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"350\",\"lly\":\"100\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
+            string json2 = "";
+
+            if (DepartmentID == 5)
+            {
+                json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"70\",\"lly\":\"150\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
+            }
+            else
+            {
+                json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"350\",\"lly\":\"100\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
+            }
             string ss2 = WebRequestinJson(url, json2, "application/json");
             // string ss2 = WebRequestinJson(url, json2, "multipart/form-data");
             JObject root2 = (JObject)JObject.Parse(ss2);

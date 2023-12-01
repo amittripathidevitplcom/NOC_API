@@ -270,8 +270,8 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("eSignPDF/{PDFFileName}/{OTPTransactionID}")]
-        public async Task<DataTable> eSignPDF(string PDFFileName, string OTPTransactionID)
+        [HttpGet("eSignPDF/{PDFFileName}/{OTPTransactionID}/{DepartmentID}/{ParamID}")]
+        public async Task<DataTable> eSignPDF(string PDFFileName, string OTPTransactionID,int DepartmentID,int ParamID)
         {
             var urldt = new System.Data.DataTable("tableName");
             // create fields
@@ -279,7 +279,7 @@ namespace RJ_NOC_API.Controllers
             urldt.Columns.Add("status", typeof(int));
             try
             {
-                string str = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID, _configuration));
+                string str = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID,  DepartmentID,  ParamID, _configuration));
                 if (str == "Success")
                 {
                     urldt.Rows.Add(new Object[]{
