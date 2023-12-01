@@ -328,32 +328,31 @@ namespace RJ_NOC_API.Controllers
                 LocalReport localReport = null;
                 List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
                 DataSet dataset = new DataSet();
-                dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(request);
 
                 StringBuilder sb = new StringBuilder();
                 var fileName = "MedicalGroupLOIC_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
-                string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
-                string mimetype = "";
-                int extension = 1;
-                string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
-
-                dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
-                ReportPath += "\\MedicalGroupLOI.rdlc";
-                localReport = new LocalReport(ReportPath);
-                localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
-
-
-                //Dictionary<string, string> parameters = new Dictionary<string, string>();
-                //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
-                //parameters.Add("test", "");
-                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-                var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
-                System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
-
 
                 if (await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.SavePDFPath(fileName, request.LOIID, request.UserID, request.Remark)))
                 {
+                    dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(request);
+                    string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                    string mimetype = "";
+                    int extension = 1;
+                    string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                    dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
+                    ReportPath += "\\MedicalGroupLOI.rdlc";
+                    localReport = new LocalReport(ReportPath);
+                    localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
+
+
+                    //Dictionary<string, string> parameters = new Dictionary<string, string>();
+                    //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                    //parameters.Add("test", "");
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                    var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
+                    System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
                     result.State = OperationState.Success;
                     result.SuccessMessage = "LOI PDF Generated Successfully .!";
                 }

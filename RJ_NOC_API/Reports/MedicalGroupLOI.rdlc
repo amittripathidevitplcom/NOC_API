@@ -379,7 +379,7 @@
             <Value>=First(Fields!LOIQRCode.Value, "MedicalGroupLOI")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>46.58432cm</Top>
+            <Top>43.72682cm</Top>
             <Left>1.49966cm</Left>
             <Height>1.83444cm</Height>
             <Width>2.55292cm</Width>

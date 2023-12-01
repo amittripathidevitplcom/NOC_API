@@ -594,7 +594,7 @@ namespace RJ_NOC_Utility.CustomerDomain
 
             if (DepartmentID == 5)
             {
-                json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"70\",\"lly\":\"150\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
+                json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"370\",\"lly\":\"230\",\"positionX\":\"420\",\"positionY\":\"170\",\"mode\":\"1\"}";
             }
             else
             {
