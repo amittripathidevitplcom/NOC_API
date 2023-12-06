@@ -100,6 +100,7 @@ namespace RJ_NOC_Model
         public int LOIID { get; set; }
         public int UserID { get; set; }
         public string Remark { get; set; }
+        public int? IsLOIIssued { get; set; }
 
     }
 }

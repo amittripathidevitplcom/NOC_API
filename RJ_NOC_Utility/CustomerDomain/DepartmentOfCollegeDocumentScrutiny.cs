@@ -109,9 +109,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetWorkFlowRemarksByApplicationID(ApplyNOCID);
         }
-        public List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID)
+        public List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID, int CollegeID)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertedTabData(ApplyNOCID);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertedTabData(ApplyNOCID, CollegeID);
         }
         public bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy)
         {

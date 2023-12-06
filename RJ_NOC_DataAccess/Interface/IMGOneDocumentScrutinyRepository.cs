@@ -25,8 +25,13 @@ namespace RJ_NOC_DataAccess.Interface
         DataSet GeneratePDF_MedicalGroupLOICData(GenerateLOIPDFDataModel request);
 
         List<DataTable> MedicalGroupLOIIssuedReport(int LoginUserID, int RoleID);
-        bool SavePDFPath(string Path, int LOIID, int UserID, string Remark);
+        bool SavePDFPath(string Path, int LOIID, int UserID, string Remark,int IsIssuedLOI);
         bool PdfEsign(int LOIID, int CreatedBy);
+        List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
+        bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request);
+        List<CommonDataModel_RNCCheckListData> GetRNCCheckListByRole(string Type, int ApplyNOCID, int RoleID);
+        bool SubmitRevertApplication(int LOIID, int DepartmentID, int CollegeID);
+        List<DataTable> GetRevertApllicationRemark(int DepartmentID, int ApplicationID);
     }
 
 }
