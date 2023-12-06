@@ -10,6 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     {
         bool SaveData(CollegeMasterDataModel request);
         List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID);
+        List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID);
         List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID);
         CollegeMasterDataModel GetCollegeById(int collegeId);
         bool DeleteData(int CollegeId, int modifiedBy);

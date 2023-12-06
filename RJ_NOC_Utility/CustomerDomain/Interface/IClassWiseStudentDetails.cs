@@ -14,6 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         //Save
         List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID);
         bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel model);
+        bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model);
 
     }
 }

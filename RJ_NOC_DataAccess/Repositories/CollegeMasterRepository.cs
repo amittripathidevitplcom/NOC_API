@@ -127,6 +127,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID)
+        {
+            string SqlQuery = "exec USP_StatisticsCollegeList @LoginSSOID='" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.DraftApplicationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
         public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID)
         {
             string SqlQuery = "exec USP_CollegeDetailsList @LoginSSOID='" + LoginSSOID + "'";

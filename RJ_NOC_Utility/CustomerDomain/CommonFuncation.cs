@@ -462,5 +462,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAppliedNocInformation(SSOID);
         }
+
+        public CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeID_SearchRecordIDWise(SearchRecordID);
+        }
     }
 }

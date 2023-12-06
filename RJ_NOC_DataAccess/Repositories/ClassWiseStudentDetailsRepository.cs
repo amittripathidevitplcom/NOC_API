@@ -68,5 +68,16 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels = JsonConvert.DeserializeObject<List<SubjectWiseStatisticsDetailsDataModel>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_StatisticsFinalSubmit_Save @CollegeID='"+ model.CollegeID+ "',@SSOID='"+ model.SSOID+ "',@Confirmation='" + model.Confirmation + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ClassWiseStudentDetailsRepository.StatisticsFinalSubmit_Save");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

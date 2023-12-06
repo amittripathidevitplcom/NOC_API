@@ -1085,7 +1085,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetCourseList_CollegeWise/{CollegID}/{CourseType}")]
-        public async Task<OperationResult<List<CommonDataModel_CollegeWiseCourseList>>> GetCourseList_CollegeWise(int CollegID, string CourseType ="All")
+        public async Task<OperationResult<List<CommonDataModel_CollegeWiseCourseList>>> GetCourseList_CollegeWise(int CollegID, string CourseType = "All")
         {
             var result = new OperationResult<List<CommonDataModel_CollegeWiseCourseList>>();
             try
@@ -1118,7 +1118,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("Get_CollegeWiseCourse_Subject_OldNOC/{CollegeID}/{Type}/{CourseID}/{OldNocID}")]
-        public async Task<OperationResult<List<DataTable>>> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID,int OldNocID)
+        public async Task<OperationResult<List<DataTable>>> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID, int OldNocID)
         {
             var result = new OperationResult<List<DataTable>>();
             try
@@ -1182,7 +1182,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-         [HttpGet("GetCollegeWise_CourseList_AcademicInformation/{CollegeID}/{Type}/{CourseID}")]
+        [HttpGet("GetCollegeWise_CourseList_AcademicInformation/{CollegeID}/{Type}/{CourseID}")]
         public async Task<OperationResult<List<DataTable>>> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID)
         {
             var result = new OperationResult<List<DataTable>>();
@@ -1348,12 +1348,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("OtherInformationList_DepartmentCollegeAndTypeWise/{DepartmentID}/{CollegeID}/{OtherInformationID}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID,int CollegeID,int OtherInformationID, string Type)
+        public async Task<OperationResult<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type)
         {
             var result = new OperationResult<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID,CollegeID, OtherInformationID, Type));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, OtherInformationID, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -1416,7 +1416,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetBuildingTypeCheck/{SelectedDepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetBuildingTypeCheck(int SelectedDepartmentID) 
+        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetBuildingTypeCheck(int SelectedDepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_BuildingType>>();
             try
@@ -1576,7 +1576,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetQualificationMasterList_DepartmentWise/{DepartmentID}/{IsTeaching}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching,string Type)
+        public async Task<OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type)
         {
             var result = new OperationResult<List<CommonDataModel_QualificationMasterDepartmentWise>>();
             try
@@ -1675,12 +1675,12 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetFacilitiesMasterList_DepartmentCollegeAndTypeWise/{DepartmentID}/{CollegeID}/{FacilitieID}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID,int CollegeID,int FacilitieID, string Type)
+        public async Task<OperationResult<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
         {
             var result = new OperationResult<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID,CollegeID,FacilitieID, Type));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, FacilitieID, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2133,7 +2133,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetRoleListForApporval/{RoleID}/{DepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID,int DepartmentID)
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID, int DepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
             try
@@ -2166,7 +2166,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetUserDetailsByRoleID/{RoleID}/{DepartmentID}")]
-        public async Task<OperationResult<List<CreateUserDataModel>>> GetUserDetailsByRoleID(int RoleID,int DepartmentID)
+        public async Task<OperationResult<List<CreateUserDataModel>>> GetUserDetailsByRoleID(int RoleID, int DepartmentID)
         {
             var result = new OperationResult<List<CreateUserDataModel>>();
             try
@@ -2198,12 +2198,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetWorkFlowActionListByRole/{RoleID}/{Type}/{DepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type,int DepartmentID)
+        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type,DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type, DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2656,7 +2656,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetLandTypeDetails_CollegeWise/{DepartmentID}/{Type}/{LandDetailID}")]
-        public async Task<OperationResult<List<CollegeLandTypeDetailsDataModel>>> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type,int LandDetailID)
+        public async Task<OperationResult<List<CollegeLandTypeDetailsDataModel>>> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandDetailID)
         {
             var result = new OperationResult<List<CollegeLandTypeDetailsDataModel>>();
             try
@@ -2727,7 +2727,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_SubjectMaster>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubjectDepartmentWise( DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSubjectDepartmentWise(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2887,7 +2887,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetNOCApplicationStepList( ApplyNocID,  CurrentActionID,  DepartmentID,  ActionType));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetNOCApplicationStepList(ApplyNocID, CurrentActionID, DepartmentID, ActionType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2912,8 +2912,8 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-         
-        
+
+
         [HttpGet("GetDownloadPdfDetails/{DepartmentID}/{CollageID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDownloadPdfDetails(int DepartmentID, int CollageID)
         {
@@ -3064,6 +3064,40 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetPaymentMode", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+        [HttpGet("GetCollegeID_SearchRecordIDWise/{SearchRecordID}")]
+        public async Task<OperationResult<CommonDataModel_CollegeID_SearchRecordIDWise>> GetCollegeID_SearchRecordIDWise(string SearchRecordID)
+        {
+            var result = new OperationResult<CommonDataModel_CollegeID_SearchRecordIDWise>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeID_SearchRecordIDWise(SearchRecordID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSchemeListByDepartment", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

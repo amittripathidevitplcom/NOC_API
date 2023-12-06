@@ -142,6 +142,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
         List<DataTable> Get_LOIFeeMaster(int DepartmentID);
         CommonDataModel_DataTable GetAppliedNocInformation(string SSOID);
+
+        CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID);
     }
 }
 
