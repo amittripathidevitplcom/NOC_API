@@ -73,6 +73,7 @@ namespace RJ_NOC_Model
         public string? FundingSources { get; set; }
         public string? FundingSourcesPath { get; set; }
         public string? FundingSources_Dis_FileName { get; set; }
+        public int? LegalEntityID { get; set; }
     }
     public class ContactDetailsDataModel
     {

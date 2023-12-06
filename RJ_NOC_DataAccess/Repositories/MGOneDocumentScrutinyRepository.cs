@@ -274,11 +274,11 @@ namespace RJ_NOC_DataAccess.Repository
 
         }
 
-        public bool SavePDFPath(string Path, int LOIID, int UserID, string Remark)
+        public bool SavePDFPath(string Path, int LOIID, int UserID, string Remark, int IsIssuedLOI)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 
-            string SqlQuery = $" exec USP_InsertIssueLOI @NOCFilePath='{Path}',@LOIID={LOIID},@UserId={UserID},@Remark='{Remark}',@IPAddress='{IPAddress}'";
+            string SqlQuery = $" exec USP_InsertIssueLOI @NOCFilePath='{Path}',@LOIID={LOIID},@UserId={UserID},@Remark='{Remark}',@IPAddress='{IPAddress}',@IsIssuedLOI='{IsIssuedLOI}'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MGOneDocumentScrutinyRepository.SavePDFPath");
             if (Rows > 0)
                 return true;
@@ -295,6 +295,68 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
+        }
+
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            string SqlQuery = "exec USP_GetLOIRNCCheckListByTypeDepartment @Type='" + Type + "' ,@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "',@CreatedBy='" + CreatedBy + "',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MGOneDocumentScrutinyRepository.GetRNCCheckListByTypeDepartment");
+            List<CommonDataModel_RNCCheckListData> dataModels = new List<CommonDataModel_RNCCheckListData>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RNCCheckListData>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            string LOI_RNCCheckList = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_LOI_RNCCheckList") : "";
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveLOI_RNCCheckList @LOI_RNCCheckList='" + LOI_RNCCheckList + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "MGOneDocumentScrutinyRepository.SaveCommiteeInspectionRNCCheckList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByRole(string Type, int ApplyNOCID, int RoleID)
+        {
+            string SqlQuery = "exec USP_GetLOIRNCCheckListByRole @Type='" + Type + "' ,@ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MGOneDocumentScrutinyRepository.GetRNCCheckListByRole");
+            List<CommonDataModel_RNCCheckListData> dataModels = new List<CommonDataModel_RNCCheckListData>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_RNCCheckListData>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public bool SubmitRevertApplication(int LOIID, int DepartmentID, int CollegeID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SubmitRevertApplicationMGOne  ";
+            SqlQuery += "@LOIID=" + LOIID + ",@DepartmentID=" + DepartmentID + ",@CollegeID=" + CollegeID + "";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "MGOneDocumentScrutinyRepository.SubmitRevertApplication");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<DataTable> GetRevertApllicationRemark(int DepartmentID, int ApplicationID)
+        {
+            string SqlQuery = " exec USP_GetRevertApllicationRemark_MGOne @DepartmentID ='" + DepartmentID + "',@ApplicationID='" + ApplicationID + "' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MGOneDocumentScrutinyRepository.GetRevertApllicationRemark");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+
         }
     }
 }

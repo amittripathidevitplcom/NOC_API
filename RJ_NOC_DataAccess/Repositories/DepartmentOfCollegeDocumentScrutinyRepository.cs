@@ -535,9 +535,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID)
+        public List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID, int CollegeID)
         {
-            string SqlQuery = " exec USP_GetRevertedTabData @ApplyNOCID ='" + ApplyNOCID + "'";
+            string SqlQuery = " exec USP_GetRevertedTabData @ApplyNOCID ='" + ApplyNOCID + "',@CollegeID ='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetRevertedTabData");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

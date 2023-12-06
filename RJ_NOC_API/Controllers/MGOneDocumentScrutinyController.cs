@@ -330,31 +330,39 @@ namespace RJ_NOC_API.Controllers
                 DataSet dataset = new DataSet();
 
                 StringBuilder sb = new StringBuilder();
-                var fileName = "MedicalGroupLOIC_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
-
-                if (await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.SavePDFPath(fileName, request.LOIID, request.UserID, request.Remark)))
+                var fileName =request.IsLOIIssued==1? "MedicalGroupLOIC_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf":"";
+                int IsIssuedLOI=request.IsLOIIssued==null?0:request.IsLOIIssued.Value;
+                if (await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.SavePDFPath(fileName, request.LOIID, request.UserID, request.Remark, IsIssuedLOI)))
                 {
-                    dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(request);
-                    string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
-                    string mimetype = "";
-                    int extension = 1;
-                    string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+                    if (request.IsLOIIssued == 1)
+                    {
+                        dataset = UtilityHelper.MGOneScrutinyUtility.GeneratePDF_MedicalGroupLOICData(request);
+                        string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                        string mimetype = "";
+                        int extension = 1;
+                        string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
 
-                    dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
-                    ReportPath += "\\MedicalGroupLOI.rdlc";
-                    localReport = new LocalReport(ReportPath);
-                    localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
+                        dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
+                        ReportPath += "\\MedicalGroupLOI.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
 
 
-                    //Dictionary<string, string> parameters = new Dictionary<string, string>();
-                    //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
-                    //parameters.Add("test", "");
-                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                        //Dictionary<string, string> parameters = new Dictionary<string, string>();
+                        //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                        //parameters.Add("test", "");
+                        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
-                    var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
-                    System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "LOI PDF Generated Successfully .!";
+                        var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
+                        System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "LOI PDF Generated Successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "LOI Reject Successfully .!";
+                    }
                 }
             }
             catch (Exception e)
@@ -434,6 +442,166 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetRNCCheckListByTypeDepartment/{Type}/{DepartmentID}/{ApplyNOCID}/{CreatedBy}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_RNCCheckListData>>> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            var result = new OperationResult<List<CommonDataModel_RNCCheckListData>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.GetRNCCheckListByTypeDepartment(Type, DepartmentID, ApplyNOCID, CreatedBy, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.GetRNCCheckListByTypeDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("SaveCommiteeInspectionRNCCheckList")]
+        public async Task<OperationResult<bool>> SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.SaveCommiteeInspectionRNCCheckList(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.FirstOrDefault().CreatedBy, "SaveCommiteeInspectionRNCCheckList", 0, "ApplyNOC");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save Commitee Inspection";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.SaveCommiteeInspectionRNCCheckList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetRNCCheckListByRole/{Type}/{ApplyNOCID}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_RNCCheckListData>>> GetRNCCheckListByRole(string Type, int ApplyNOCID, int RoleID)
+        {
+            var result = new OperationResult<List<CommonDataModel_RNCCheckListData>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.GetRNCCheckListByRole(Type, ApplyNOCID, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.GetRNCCheckListByRole", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("SubmitRevertApplication/{LOIID}/{DepartmentID}/{CollegeID}")]
+        public async Task<OperationResult<bool>> SubmitRevertApplication(int LOIID,int DepartmentID,int CollegeID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.SubmitRevertApplication(LOIID, DepartmentID, CollegeID));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Re Submit Application successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error submit application";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.SubmitRevertApplication", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("GetRevertApllicationRemark/{DepartmentID}/{ApplicationID}")]
+        public async Task<OperationResult<List<DataTable>>> GetRevertApllicationRemark(int DepartmentID, int ApplicationID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.GetRevertApllicationRemark(DepartmentID, ApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.GetRevertApllicationRemark", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
             }
             return result;
         }

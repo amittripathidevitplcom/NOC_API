@@ -756,14 +756,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetRevertedTabData/{ApplyNOCID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetRevertedTabData(int ApplyNOCID)
+        [HttpGet("GetRevertedTabData/{ApplyNOCID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetRevertedTabData(int ApplyNOCID,int CollegeID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetRevertedTabData(ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetRevertedTabData(ApplyNOCID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {

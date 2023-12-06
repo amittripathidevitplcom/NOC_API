@@ -63,13 +63,33 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.MedicalGroupLOIIssuedReport(LoginUserID, RoleID);
         }     
-        public bool SavePDFPath(string Path, int LOIID, int UserID, string Remark)
+        public bool SavePDFPath(string Path, int LOIID, int UserID, string Remark,int IsIssuedLOI)
         {
-            return UnitOfWork.MGOneDocumentScrutinyRepository.SavePDFPath(Path, LOIID,UserID,Remark);
+            return UnitOfWork.MGOneDocumentScrutinyRepository.SavePDFPath(Path, LOIID,UserID,Remark, IsIssuedLOI);
         }
         public bool PdfEsign(int LOIID, int CreatedBy)
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.PdfEsign( LOIID, CreatedBy);
+        } 
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.GetRNCCheckListByTypeDepartment( Type, DepartmentID,ApplyNOCID,CreatedBy,RoleID);
+        }
+        public bool SaveCommiteeInspectionRNCCheckList(List<CommiteeInspection_RNCCheckList_DataModel> request)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.SaveCommiteeInspectionRNCCheckList(request);
+        }
+        public List<CommonDataModel_RNCCheckListData> GetRNCCheckListByRole(string Type, int ApplyNOCID, int RoleID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.GetRNCCheckListByRole(Type,ApplyNOCID,RoleID);
+        }
+        public bool SubmitRevertApplication(int LOIID, int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.SubmitRevertApplication(LOIID, DepartmentID, CollegeID);
+        }
+        public List<DataTable> GetRevertApllicationRemark(int DepartmentID, int ApplicationID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.GetRevertApllicationRemark( DepartmentID, ApplicationID);
         }
     }
 }
