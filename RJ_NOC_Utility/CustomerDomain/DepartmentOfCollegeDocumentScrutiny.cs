@@ -120,6 +120,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetClassWiseStaticReport(request);
+        }     
+        public List<CommonDataModel_DataTable> GetSubjectWiseStaticReport(SearchFilterDataModel request)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetSubjectWiseStaticReport(request);
         }
 
     }
