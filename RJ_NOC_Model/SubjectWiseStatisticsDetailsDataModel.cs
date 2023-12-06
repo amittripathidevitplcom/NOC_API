@@ -44,4 +44,10 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public List<SubjectWiseStatisticsDetailsDataModel> SubjectWiseStatisticsDetails { get; set; }
     }
+    public class StatisticsFinalSubmitDataModel
+    {
+        public int CollegeID { get; set; }
+        public string SSOID { get; set; }
+        public string Confirmation { get; set; }
+    }
 }

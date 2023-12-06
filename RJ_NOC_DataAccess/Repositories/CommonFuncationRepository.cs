@@ -1269,6 +1269,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             return dataModel;
         }
+
+        public CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID)
+        {
+            string SqlQuery = "select CollegeID from M_CollegeMaster where SearchRecordID='"+ SearchRecordID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetCollegeID_SearchRecordIDWise");
+
+            CommonDataModel_CollegeID_SearchRecordIDWise dataModels = new CommonDataModel_CollegeID_SearchRecordIDWise();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<CommonDataModel_CollegeID_SearchRecordIDWise>(JsonDataTable_Data.Replace("[","").Replace("]", ""));
+            return dataModels;
+        }
     }
 }
 

@@ -39,6 +39,11 @@ namespace RJ_NOC_Model
         public int OFTotalPHBoys { get; set; }
         public int OFTotalPHGirls { get; set; }
 
+        public int OFTotalMinorityTransgender { get; set; }
+        public int MinorityTotal { get; set; }
+        public int OFTotalPHTransgender { get; set; }
+        public int PHTotal { get; set; } 
+
         public string? Action { get; set; }
         public string? Remark { get; set; }
 

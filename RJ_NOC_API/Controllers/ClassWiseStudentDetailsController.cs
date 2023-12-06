@@ -156,6 +156,41 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("StatisticsFinalSubmit_Save")]
+        public async Task<OperationResult<bool>> StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.StatisticsFinalSubmit_Save(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.CollegeID, "Save", 0, "ClassWiseStudentDetailsController.StatisticsFinalSubmit_Save");
+                    result.SuccessMessage = "Saved successfully .!";
+
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ClassWiseStudentDetailsController.StatisticsFinalSubmit_Save", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
 
     }

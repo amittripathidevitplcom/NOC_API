@@ -48,6 +48,10 @@ namespace RJ_NOC_Model
         public int SchemeID { get; set; }
         public int DepatmentID { get; set; }
         public string SchemeName { get; set; }
+    } 
+    public class CommonDataModel_CollegeID_SearchRecordIDWise
+    {
+        public int CollegeID { get; set; }
     }
 
     public class CommonDataModel_ModuleMasterList

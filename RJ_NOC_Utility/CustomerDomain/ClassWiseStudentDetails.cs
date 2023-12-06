@@ -35,5 +35,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ClassWiseStudentDetailsRepository.SaveDataSubjectWise(model);
         }
+
+        public bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.StatisticsFinalSubmit_Save(model);
+        }
     }
 }
