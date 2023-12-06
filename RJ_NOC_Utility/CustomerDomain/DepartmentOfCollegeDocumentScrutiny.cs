@@ -117,6 +117,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DCEPdfEsign(ApplyNOCID, ParameterID, CreatedBy);
         }
+        public List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetClassWiseStaticReport(request);
+        }
 
     }
 }

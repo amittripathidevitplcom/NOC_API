@@ -1,6 +1,7 @@
 ﻿using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
+using System.Data;
 using Azure.Core;
 
 namespace RJ_NOC_Utility.CustomerDomain
@@ -64,6 +65,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request)
         {
             return UnitOfWork.CollegeMasterRepository.SaveLOIWorkFlow(request);
+        }
+        public List<DataTable> GetCollegesByDepartmentID(int DepartmentID)
+        {
+            return UnitOfWork.CollegeMasterRepository.GetCollegesByDepartmentID(DepartmentID);
         }
     }
 }

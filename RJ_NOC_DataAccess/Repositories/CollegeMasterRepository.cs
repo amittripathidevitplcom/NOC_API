@@ -280,5 +280,18 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public List<DataTable> GetCollegesByDepartmentID(int DepartmentID)
+        {
+            string SqlQuery = "exec USP_GetCollegesByDepartmentID @DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.GetCollegesByDepartmentID");
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

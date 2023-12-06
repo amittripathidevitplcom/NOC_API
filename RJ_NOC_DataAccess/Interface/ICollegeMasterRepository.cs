@@ -22,5 +22,6 @@ namespace RJ_NOC_DataAccess.Interface
         bool IfExists(int DepartmentID,int CollegeID, string MobileNo,string Email);
 
         bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request);
+        List<DataTable> GetCollegesByDepartmentID(int DepartmentID);
     }
 }

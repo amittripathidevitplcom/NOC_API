@@ -415,6 +415,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpGet("GetCollegesByDepartmentID/{DepartmentID}")]
+        public async Task<OperationResult<List<DataTable>>> GetCollegesByDepartmentID(int DepartmentID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.GetCollegesByDepartmentID(DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.GetData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

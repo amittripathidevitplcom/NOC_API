@@ -37,5 +37,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetRevertedTabData(int ApplyNOCID, int CollegeID);
 
         bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy);
+        List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request);
     }
 }
