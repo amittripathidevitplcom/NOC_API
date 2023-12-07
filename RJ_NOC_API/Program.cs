@@ -163,6 +163,7 @@ namespace RJ_NOC_API
                             Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF")),
                 RequestPath = "/SystemGeneratedPDF"
             });
+
             //app.UseDirectoryBrowser(new DirectoryBrowserOptions
             //{
             //    FileProvider = new PhysicalFileProvider(

@@ -75,7 +75,8 @@ namespace RJ_NOC_Model
         public string PaymentRequestURL { get; set; }
         public string CreatedBy { get; set; }
         public string SSOID { get; set; }
-        
+        public string AUIN { get; set; }
+
     }
 
 
