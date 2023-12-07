@@ -881,7 +881,7 @@ namespace RJ_NOC_API.Controllers
                 EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
 
                 // Server.MapPath("~/SystemGeneratedPDF/rajnoc.key");
-                string keypath= Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF","rajnoc.key");
+                string keypath= Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey","rajnoc.key");
 
                 string Head_Amount1 = "10000.00";
                 string Head_Name1 = "023000104000000000";
