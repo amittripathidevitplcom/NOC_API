@@ -117,8 +117,8 @@ namespace RJ_NOC_Model
         public int WorkFlowActionID { get; set; }
         public int NodelOfficerID { get; set; }
         public int CollegeTypeID { get; set; }
-        public string? FromSubmitDate { get; set; }
-        public string? ToSubmitDate { get; set; }
+        public DateTime? FromSubmitDate { get; set; }
+        public DateTime? ToSubmitDate { get; set; }
         public int ApplicationTypeID { get; set; }
         public int SearchStaticsID { get; set; }
         public int ApplicationID { get; set; }
