@@ -3107,5 +3107,70 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetUsersByRoleDepartment/{DepartmentID}/{RoleID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetUsersByRoleDepartment(int DepartmentID,int RoleID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUsersByRoleDepartment(DepartmentID,RoleID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetUsersByRoleDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetWorkFlowStatusbyDepartment/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetWorkFlowStatusbyDepartment(int DepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowStatusbyDepartment(DepartmentID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetWorkFlowStatusbyDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -467,5 +467,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeID_SearchRecordIDWise(SearchRecordID);
         }
+        public List<CommonDataModel_DataTable> GetUsersByRoleDepartment(int DepartmentID, int RoleID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetUsersByRoleDepartment(DepartmentID,RoleID);
+        }    
+        public List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetWorkFlowStatusbyDepartment(DepartmentID);
+        }
     }
 }

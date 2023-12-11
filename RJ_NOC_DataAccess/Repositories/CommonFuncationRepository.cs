@@ -1281,6 +1281,33 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<CommonDataModel_CollegeID_SearchRecordIDWise>(JsonDataTable_Data.Replace("[","").Replace("]", ""));
             return dataModels;
         }
+
+        public List<CommonDataModel_DataTable> GetUsersByRoleDepartment(int DepartmentID, int RoleID)
+        {
+            string SqlQuery = $" Exec USP_GetUsersByRoleDepartment @DepartmentID={DepartmentID}, @RoleID={ RoleID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUsersByRoleDepartment");
+
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }        
+        public List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID)
+        {
+            string SqlQuery = $" Exec USP_GetWorkFlowStatusbyDepartment @DepartmentID={DepartmentID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetWorkFlowStatusbyDepartment");
+
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
 
