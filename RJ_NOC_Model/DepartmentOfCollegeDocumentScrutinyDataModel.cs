@@ -122,7 +122,7 @@ namespace RJ_NOC_Model
         public int ApplicationTypeID { get; set; }
         public int SearchStaticsID { get; set; }
         public int ApplicationID { get; set; }
-        public int ReportStatus { get; set; }
+        public string ReportStatus { get; set; }
         public int ApplicationStatusID { get; set; }
         public int YearNewExistingID { get; set; }
     }
