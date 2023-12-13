@@ -1307,6 +1307,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }        
+        public List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID)
+        {
+            string SqlQuery = $" Exec USP_GetApplyNOCParameterbyDepartment @DepartmentID={DepartmentID}";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetApplyNOCParameterbyDepartment");
+
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

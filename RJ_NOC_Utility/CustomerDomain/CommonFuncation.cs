@@ -474,6 +474,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetWorkFlowStatusbyDepartment(DepartmentID);
+        } 
+        public List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetApplyNOCParameterbyDepartment(DepartmentID);
         }
     }
 }

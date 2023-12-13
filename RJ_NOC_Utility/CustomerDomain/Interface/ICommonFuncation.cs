@@ -138,6 +138,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<CommonDataModel_DataTable> GetUsersByRoleDepartment(int DepartmentID, int RoleID);
         List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID);
+        List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID);
     }
 
 

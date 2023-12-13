@@ -146,6 +146,7 @@ namespace RJ_NOC_DataAccess.Interface
         CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID);
         List<CommonDataModel_DataTable> GetUsersByRoleDepartment(int DepartmentID, int RoleID);
         List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID);
+        List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID);
     }
 }
 
