@@ -898,7 +898,7 @@ namespace RJ_NOC_API.Controllers
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "GetDCENOCReportData", 0, "DepartmentOfCollegeDocumentScrutiny");
                     result.State = OperationState.Success;
-                    result.SuccessMessage = "Save successfully .!";
+                    result.SuccessMessage = "Data load successfully .!";
                 }
                 else
                 {
