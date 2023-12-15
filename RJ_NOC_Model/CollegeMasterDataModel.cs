@@ -120,4 +120,12 @@ namespace RJ_NOC_Model
         public int ID { get; set; }
         public string? Name { get; set; }
     }
+
+    public class TotalCollegeReportSearchFilter
+    {
+        public int DepartmentID { get; set; }
+        public int UniversityID { get; set; }
+        public int DivisionID { get; set; }
+        public int DistrictID { get; set; }
+    }
 }

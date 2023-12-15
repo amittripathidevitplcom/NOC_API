@@ -107,8 +107,13 @@ namespace RJ_NOC_DataAccess.Repositories
             List<LegalEntityListModel> dataModels = new List<LegalEntityListModel>();
             LegalEntityListModel dataModel = new LegalEntityListModel();
             dataModel.data = dataSet;
-
-            dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"].ToString());
+            if (dataModel.data.Tables.Count > 0)
+            {
+                if (dataModel.data.Tables[0].Rows.Count > 0)
+                { 
+                dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[0].Rows[0]["TrustLogoDoc"].ToString());
+            }
+            }
             for (int i = 0; i < dataModel.data.Tables[2].Rows.Count; i++)
             {
               dataModel.data.Tables[2].Rows[i]["MemberPhoto"] = _commonHelper.ConvertTobase64(dataModel.data.Tables[2].Rows[i]["MemberPhoto"].ToString());

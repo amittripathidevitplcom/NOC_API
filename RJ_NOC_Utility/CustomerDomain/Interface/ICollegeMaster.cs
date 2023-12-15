@@ -23,5 +23,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool IfExists(int DepartmentID,int CollegeID, string MobileNo, string Email);
         bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request);
         List<DataTable> GetCollegesByDepartmentID(int DepartmentID);
+        List<CommonDataModel_DataTable> TotalCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request);
     }
 }

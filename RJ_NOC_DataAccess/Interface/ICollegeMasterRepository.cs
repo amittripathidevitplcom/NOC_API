@@ -24,5 +24,6 @@ namespace RJ_NOC_DataAccess.Interface
 
         bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request);
         List<DataTable> GetCollegesByDepartmentID(int DepartmentID);
+        List<CommonDataModel_DataTable> TotalCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request);
     }
 }
