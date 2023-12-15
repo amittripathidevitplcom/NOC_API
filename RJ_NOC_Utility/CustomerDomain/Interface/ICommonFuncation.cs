@@ -135,6 +135,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> Get_LOIFeeMaster(int DepartmentID);
         CommonDataModel_DataTable GetAppliedNocInformation(string SSOID);
         CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID);
+
+        List<CommonDataModel_DataTable> GetUsersByRoleDepartment(int DepartmentID, int RoleID);
+        List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID);
+        List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID);
     }
 
 

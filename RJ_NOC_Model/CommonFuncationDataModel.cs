@@ -215,6 +215,20 @@ namespace RJ_NOC_Model
         public int TotalApplicationCompleted { get; set; }
 
 
+
+        public int TotalSubmittedApplication { get; set; }
+        public int ApplicationsAfterStatisticsInformation { get; set; }
+        public int PendingtoSubmit { get; set; }
+        public int PendingtoReceive { get; set; }
+        public int PendingInspectionByNodal { get; set; }
+        public int DeficiencyMarked { get; set; }
+        public int DefaulterApplication { get; set; }
+        public int PendingtoReportOL1 { get; set; }
+        public int PendingtoInspectionByOL1 { get; set; }
+        public int PendingtoReporttoOL2 { get; set; }
+        public int PendingtoInspectionByOL2 { get; set; }
+
+
     }
 
     public class CommonDataModel_Stream
@@ -223,4 +237,5 @@ namespace RJ_NOC_Model
         public int StreamMasterID { get; set; }
         public string StreamName { get; set; }
     }
+
 }

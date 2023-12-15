@@ -39,5 +39,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool DCEPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy);
         List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request);
         List<CommonDataModel_DataTable> GetSubjectWiseStaticReport(SearchFilterDataModel request);
+        List<CommonDataModel_DataTable> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request);
     }
 }

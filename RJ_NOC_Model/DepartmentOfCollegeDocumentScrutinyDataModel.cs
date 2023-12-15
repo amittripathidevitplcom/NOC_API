@@ -107,4 +107,23 @@ namespace RJ_NOC_Model
         public int ParliamentAreaID { get; set; }
 
     }
+    public class DCENOCReportSearchFilterDataModel
+    {
+        public int DistrictID { get; set; }
+        public int UniversityID { get; set; }
+        public string? CollegeName { get; set; }
+        public string? CollegeEmail { get; set; }
+        public int NOCStatusID { get; set; }
+        public int WorkFlowActionID { get; set; }
+        public int NodelOfficerID { get; set; }
+        public int CollegeTypeID { get; set; }
+        public DateTime? FromSubmitDate { get; set; }
+        public DateTime? ToSubmitDate { get; set; }
+        public int ApplicationTypeID { get; set; }
+        public int SearchStaticsID { get; set; }
+        public int ApplicationID { get; set; }
+        public string ReportStatus { get; set; }
+        public int ApplicationStatusID { get; set; }
+        public int YearNewExistingID { get; set; }
+    }
 }

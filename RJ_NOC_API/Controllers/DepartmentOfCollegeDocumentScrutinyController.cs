@@ -886,6 +886,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpPost("GetDCENOCReportData")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetDCENOCReportData(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetDCENOCReportData", 0, "DepartmentOfCollegeDocumentScrutiny");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error in DCENOCReportData";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetDCENOCReportData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

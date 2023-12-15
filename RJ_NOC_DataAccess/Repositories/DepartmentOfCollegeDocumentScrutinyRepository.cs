@@ -582,5 +582,21 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public List<CommonDataModel_DataTable> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
+        {
+            string SqlQuery = $" exec USP_GetDCENOCReportData @UniversirtyID={request.UniversityID},@DistrictID={request.DistrictID},@CollegeName='"+request.CollegeName+"',";
+            SqlQuery += "@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='"+request.NOCStatusID+ "',@WorkFlowActionID='" + request.WorkFlowActionID+"',";
+            SqlQuery += "@NodelOfficerID='" + request.NodelOfficerID + "',@CollegeTypeID='" + request.CollegeTypeID+ "',@FromSubmitDate='" + request.FromSubmitDate+"',";
+            SqlQuery += "@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationTypeID='" + request.ApplicationTypeID+ "',@SearchStaticsID='" + request.SearchStaticsID+"',";
+            SqlQuery += "@ApplicationID='" + request.ApplicationID + "',@ApplicationStatusID='" + request.ApplicationStatusID + "',@YearNewExistingID='" + request.YearNewExistingID + "',@ReportStatus='"+request.ReportStatus+"'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
