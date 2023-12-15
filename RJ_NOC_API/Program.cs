@@ -102,7 +102,9 @@ namespace RJ_NOC_API
 
             builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
             {
-                builder.WithOrigins("http://172.22.33.75:80", "http://172.22.33.75:81", "http://172.22.33.75").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins("http://172.22.33.75:80", "http://172.22.33.75:81", "http://172.22.33.75", "https://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in/API", "http://rajonc.rajasthan.gov.in").AllowAnyMethod().AllowAnyHeader();
+
+                //builder.WithOrigins("https://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in/API").AllowAnyMethod().AllowAnyHeader();
             }));
 
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
