@@ -30,12 +30,13 @@ namespace RJ_NOC_DataAccess.Repository
         public List<DataTable> GetGrievance_AddedSSOIDWise(string SSOID)
         {
             string SqlQuery = "exec USP_Grievance_SSOIDWise @SSOID='" + SSOID + "'";
+            
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Grievance.GetByID");
-
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Grievance.GetGrievance_AddedSSOIDWise");
             List<DataTable> dataModels = new List<DataTable>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<DataTable>>(JsonDataTable_Data);
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
 
