@@ -479,5 +479,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetApplyNOCParameterbyDepartment(DepartmentID);
         }
+        public List<CommonDataModel_DataTable> WebsiteDetails()
+        {
+            return UnitOfWork.CommonFuncationRepository.WebsiteDetails();
+        }
     }
 }

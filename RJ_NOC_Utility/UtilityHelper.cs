@@ -109,6 +109,7 @@ namespace RJ_NOC_Utility
         public ILOIFeeMaster LOIFeeMasterUtility { get; private set; }
         public ISeatInformationMaster SeatInformationMasterUtility { get; private set; }
         public IMGOneDocumentScrutiny MGOneScrutinyUtility { get; private set; }
+        public IGrievance GrievanceUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -178,6 +179,7 @@ namespace RJ_NOC_Utility
             LOIFeeMasterUtility = new LOIFeeMaster(UnitOfWork);
             SeatInformationMasterUtility = new SeatInformationMaster(UnitOfWork);
             MGOneScrutinyUtility = new MGOneDocumentScrutiny(UnitOfWork);
+            GrievanceUtility = new Grievance(UnitOfWork);
         }
     }
 }

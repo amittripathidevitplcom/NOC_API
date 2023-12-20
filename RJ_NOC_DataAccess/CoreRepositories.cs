@@ -381,6 +381,12 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return mgoneDocumentScrutinyRepository; }
         }
+        
+        private IGrievanceRepository grievanceRepository;
+        public IGrievanceRepository GrievanceRepository
+        {
+            get { return grievanceRepository; }
+        }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -442,6 +448,7 @@ namespace RJ_NOC_DataAccess.Repository
             LoiFeeMasterRepository = new LOIFeeMasterRepository(commonHelper);
             seatInformationMasterRepository = new SeatInformationMasterRepository(commonHelper);
             mgoneDocumentScrutinyRepository = new MGOneDocumentScrutinyRepository(commonHelper);
+            grievanceRepository = new GrievanceRepository(commonHelper);
         }
     }
 }

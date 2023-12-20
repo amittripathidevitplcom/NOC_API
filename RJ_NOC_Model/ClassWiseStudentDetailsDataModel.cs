@@ -55,4 +55,13 @@ namespace RJ_NOC_Model
         public int UserID { get; set; }
         public List<ClassWiseStudentDetailsDataModel> ClassWiseStudentDetails { get; set; }
     }
+
+
+    public class CollegeList_StatisticsFinalSubmitedDataModel_Filter
+    {
+        public int DepartmentID { get; set; }
+        public int UniversityID { get; set; }
+        public int DivisionID { get; set; }
+        public int DistrictID { get; set; }
+    }
 }

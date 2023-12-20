@@ -1,6 +1,7 @@
 ﻿using RJ_NOC_Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID);
         bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel model);
         bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model);
+        List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter request);
 
     }
 }

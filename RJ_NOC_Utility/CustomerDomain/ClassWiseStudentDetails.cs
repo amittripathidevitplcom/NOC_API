@@ -4,6 +4,7 @@ using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,11 @@ namespace RJ_NOC_Utility.CustomerDomain
     {
         public ClassWiseStudentDetails(IRepositories unitOfWork) : base(unitOfWork)
         {
+        }
+
+        public List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter request)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.CollegeList_StatisticsFinalSubmited(request);
         }
 
         public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID)
@@ -40,5 +46,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ClassWiseStudentDetailsRepository.StatisticsFinalSubmit_Save(model);
         }
+         
     }
 }

@@ -20,6 +20,7 @@ using Org.BouncyCastle.Ocsp;
 using iTextSharp.text.pdf.qrcode;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using QRCoder;
+using Microsoft.Extensions.Primitives;
 
 namespace RJ_NOC_DataAccess.Common
 {
@@ -117,52 +118,83 @@ namespace RJ_NOC_DataAccess.Common
             return str;
         }
 
+        private static string _privateKey= "DevITNOT";
+        private static string _publicKey= "DevITNOT";
+        private static UnicodeEncoding _encoder = new UnicodeEncoding();
         public static string Encrypt(string textToEncrypt, string EncryptionPassword = "DevITNOT")
         {
-            MemoryStream memStream = null;
-            try
+            var sb = new StringBuilder();
+            var bytes = Encoding.Unicode.GetBytes(textToEncrypt);
+            foreach (var t in bytes)
             {
-                byte[] key = { };
-                byte[] IV = { 12, 21, 43, 17, 57, 35, 67, 27 };
-                key = Encoding.UTF8.GetBytes(EncryptionPassword);
-                byte[] byteInput = Encoding.UTF8.GetBytes(textToEncrypt);
-                DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
-                memStream = new MemoryStream();
-                ICryptoTransform transform = provider.CreateEncryptor(key, IV);
-                CryptoStream cryptoStream = new CryptoStream(memStream, transform, CryptoStreamMode.Write);
-                cryptoStream.Write(byteInput, 0, byteInput.Length);
-                cryptoStream.FlushFinalBlock();
+                sb.Append(t.ToString("X2"));
             }
-            catch (Exception ex)
-            {
-                //Response.Write(ex.Message);
-            }
-            return Convert.ToBase64String(memStream.ToArray());
+            return sb.ToString(); // returns: "48656C6C6F20776F726C64" for "Hello world"
+
+            //string Text = "";
+            //byte[] data = UTF8Encoding.UTF8.GetBytes(textToEncrypt);
+            //using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            //{
+            //    byte[] keys = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(EncryptionPassword));
+            //    using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+            //    {
+            //        ICryptoTransform transform = tripDes.CreateEncryptor();
+            //        byte[] results = transform.TransformFinalBlock(data, 0, data.Length);
+            //        Text = Convert.ToBase64String(results, 0, results.Length);
+            //    }
+            //}
+            //return Text;
+            //MemoryStream memStream = null;
+            //try
+            //{
+            //    byte[] key = { };
+            //    byte[] IV = { 12, 21, 43, 17, 57, 35, 67, 27 };
+            //    key = Encoding.UTF8.GetBytes(EncryptionPassword);
+            //    byte[] byteInput = Encoding.UTF8.GetBytes(textToEncrypt);
+            //    DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
+            //    memStream = new MemoryStream();
+            //    ICryptoTransform transform = provider.CreateEncryptor(key, IV);
+            //    CryptoStream cryptoStream = new CryptoStream(memStream, transform, CryptoStreamMode.Write);
+            //    cryptoStream.Write(byteInput, 0, byteInput.Length);
+            //    cryptoStream.FlushFinalBlock();
+            //}
+            //catch (Exception ex)
+            //{
+            //    //Response.Write(ex.Message);
+            //}
+            //return Convert.ToBase64String(memStream.ToArray());
         }
         public static string Decrypt(string textToDecrypt, string EncryptionPassword = "DevITNOT")
         {
-            MemoryStream memStream = null;
-            try
+            var bytes = new byte[textToDecrypt.Length / 2];
+            for (var i = 0; i < bytes.Length; i++)
             {
-                byte[] key = { };
-                byte[] IV = { 12, 21, 43, 17, 57, 35, 67, 27 };
-                key = Encoding.UTF8.GetBytes(EncryptionPassword);
-                byte[] byteInput = new byte[textToDecrypt.Length];
-                byteInput = Convert.FromBase64String(textToDecrypt);
-                DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
-                memStream = new MemoryStream();
-                ICryptoTransform transform = provider.CreateDecryptor(key, IV);
-                CryptoStream cryptoStream = new CryptoStream(memStream, transform, CryptoStreamMode.Write);
-                cryptoStream.Write(byteInput, 0, byteInput.Length);
-                cryptoStream.FlushFinalBlock();
-            }
-            catch (Exception ex)
-            {
-                //Response.Write(ex.Message);
+                bytes[i] = Convert.ToByte(textToDecrypt.Substring(i * 2, 2), 16);
             }
 
-            Encoding encoding1 = Encoding.UTF8;
-            return encoding1.GetString(memStream.ToArray());
+            return Encoding.Unicode.GetString(bytes); // returns: "Hello world" for "48656C6C6F20776F726C64"
+            //MemoryStream memStream = null;
+            //try
+            //{
+            //    byte[] key = { };
+            //    byte[] IV = { 12, 21, 43, 17, 57, 35, 67, 27 };
+            //    key = Encoding.UTF8.GetBytes(EncryptionPassword);
+            //    byte[] byteInput = new byte[textToDecrypt.Length];
+            //    byteInput = Convert.FromBase64String(textToDecrypt);
+            //    DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
+            //    memStream = new MemoryStream();
+            //    ICryptoTransform transform = provider.CreateDecryptor(key, IV);
+            //    CryptoStream cryptoStream = new CryptoStream(memStream, transform, CryptoStreamMode.Write);
+            //    cryptoStream.Write(byteInput, 0, byteInput.Length);
+            //    cryptoStream.FlushFinalBlock();
+            //}
+            //catch (Exception ex)
+            //{
+            //    //Response.Write(ex.Message);
+            //}
+
+            //Encoding encoding1 = Encoding.UTF8;
+            //return encoding1.GetString(memStream.ToArray());
         }
 
         public static string SendSMS(SMSConfigurationSetting sMSConfigurationSetting, string MobileNo, string Message, string TemplateID, string language = "ENG")
@@ -221,13 +253,13 @@ namespace RJ_NOC_DataAccess.Common
         {
             try
             {
-            var json = JsonConvert.SerializeObject(dt);
-            if (typeof(T).Name != "List`1")
-            {
-                json = json.TrimStart('[').TrimEnd(']');
-            }
-            var obj = JsonConvert.DeserializeObject<T>(json);
-            return obj;
+                var json = JsonConvert.SerializeObject(dt);
+                if (typeof(T).Name != "List`1")
+                {
+                    json = json.TrimStart('[').TrimEnd(']');
+                }
+                var obj = JsonConvert.DeserializeObject<T>(json);
+                return obj;
             }
             catch (Exception ex)
             {

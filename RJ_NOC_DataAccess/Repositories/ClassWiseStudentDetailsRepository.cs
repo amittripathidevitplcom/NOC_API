@@ -79,5 +79,17 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+         
+
+        List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter model)
+        {
+            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails");
+            List<DataTable> dataModels = new List<DataTable>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<DataTable>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
