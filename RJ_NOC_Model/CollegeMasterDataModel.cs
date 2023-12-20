@@ -128,4 +128,57 @@ namespace RJ_NOC_Model
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
     }
+
+    public class DCECollegesReportSearchFilter
+    {
+        public int DepartmentID { get; set; }
+        public string CollegeName { get; set; }
+        public int NOCStatusID { get; set; }
+        public int ApplicationStatusID { get; set; }
+        public string FromSubmittedDate { get; set; }
+        public string ToSubmittedDate { get; set; }
+        public int CollegeTypeID { get; set; }
+        public string CollegeMobileNo { get; set; }
+        public string CollegeEmail { get; set; }
+        public int StatusOfCollegeID { get; set; }
+        public int CollegeLevelID { get; set; }
+        public int DivisionID { get; set; }
+        public int DistrictID { get; set; }
+        public int SubDivisionID { get; set; }
+        public int TehsilID { get; set; }
+        public int ParliamentID { get; set; }
+        public int AssemblyID { get; set; }
+        public string PermanentAddress { get; set; }
+        public string CityTownVillage { get; set; }
+        public string PinCode { get; set; }
+        public string LandlineNo { get; set; }
+        public string AdditionalMobileNo { get; set; }
+        public string FaxNo { get; set; }
+        public string Website { get; set; }
+        public string NodalOfficerID { get; set; }
+        public string EstablishmentYearID { get; set; }
+        public int ApplicationTypeID { get; set; }
+        public int LandAreaID { get; set; }
+        public int LandDocumentID { get; set; }
+        public int LandConversionID { get; set; }
+        public int AgricultureLandArea { get; set; }
+        public int CommercialLandArea { get; set; }
+        public int InstitutionalLandArea { get; set; }
+        public int ResidentialLandArea { get; set; }
+        public string AgricultureKhasraNo { get; set; }
+        public string CommercialKhasraNo { get; set; }
+        public string InstitutionalKhasraNo { get; set; }
+        public string ResidentialKhasraNo { get; set; }
+        public string FromAffidavitDate { get; set; }
+        public string ToAffidavitDate { get; set; }
+        public int UniversityID { get; set; }
+        public int CourseID { get; set; }
+        public int SubjectID { get; set; }
+        public int UrbanRuralID { get; set; }
+        public int CollegeNAACID { get; set; }
+        public string AISHECode { get; set; }
+        public string ApplicationId { get; set; }
+    }
+
+
 }

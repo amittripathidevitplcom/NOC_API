@@ -40,7 +40,7 @@ namespace RJ_NOC_API.Controllers
         {
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
-
+            string SSOEncrpt = CommonHelper.Encrypt("vijaykanugo.risl");
             string SSOID = "";
             if (sSOLandingDataDataModel.LoginType.ToString() != "0")
             {

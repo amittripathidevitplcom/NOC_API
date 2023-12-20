@@ -227,6 +227,7 @@ namespace RJ_NOC_Model
         public int PendingtoInspectionByOL1 { get; set; }
         public int PendingtoReporttoOL2 { get; set; }
         public int PendingtoInspectionByOL2 { get; set; }
+        public int TotalFinatSubmitStatistics { get; set; }
 
 
     }

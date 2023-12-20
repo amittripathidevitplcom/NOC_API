@@ -4,6 +4,7 @@ using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Interface;
 using Newtonsoft.Json;
 using System.Data;
+using System.Reflection;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -33,11 +34,11 @@ namespace RJ_NOC_DataAccess.Repository
             if (request.TotalProjectCost == null)
             {
                 request.TotalProjectCost = 0;
-            } 
+            }
 
 
 
-        StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.AppendFormat("@CollegeID='{0}',", request.CollegeID);
             sb.AppendFormat("@DepartmentID='{0}',", request.DepartmentID);
             sb.AppendFormat("@TypeofCollege='{0}',", request.TypeofCollege);
@@ -263,16 +264,16 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 
-            string SqlQuery = "exec USP_LOIFinalSubmit_OTPVerification @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = "exec USP_LOIFinalSubmit_OTPVerification @CollegeID='" + CollegeID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CollegeMaster.LOIFinalSubmit_OTPVerification");
             if (Rows > 0)
                 return true;
             else
                 return false;
         }
-        public bool IfExists(int DepartmentID,int CollegeID, string MobileNo, string Email)
+        public bool IfExists(int DepartmentID, int CollegeID, string MobileNo, string Email)
         {
-            string SqlQuery = " USP_IfExistsCollegeDetail @DepartmentID='"+ DepartmentID + "', @Email='" + Email + "',@CollegeID='" + CollegeID + "',@MobileNo='" + MobileNo + "'";
+            string SqlQuery = " USP_IfExistsCollegeDetail @DepartmentID='" + DepartmentID + "', @Email='" + Email + "',@CollegeID='" + CollegeID + "',@MobileNo='" + MobileNo + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.IfExists");
             if (dataTable.Rows.Count > 0)
@@ -311,6 +312,24 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = "exec USP_TotalCollegeDetailsByDepartment @DepartmentID='" + request.DepartmentID + "', @UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.TotalCollegeDetailsByDepartment");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> CollegesReport(DCECollegesReportSearchFilter request)
+        {
+            string SqlQuery = @"exec USP_CollegesReportDCE @DepartmentID='" + request.DepartmentID + "',@CollegeName='" + request.CollegeName + "',@NOCStatusID='" + request.NOCStatusID + "',@ApplicationStatusID = '" + request.ApplicationStatusID + "',@FromSubmittedDate = '" + request.FromSubmittedDate + "',@ToSubmittedDate = '" + request.ToSubmittedDate + "',";
+            SqlQuery += "@CollegeTypeID = '" + request.CollegeTypeID + "',@CollegeMobileNo = '" + request.CollegeMobileNo + "',@CollegeEmail = '" + request.CollegeEmail + "',@StatusOfCollegeID = '" + request.StatusOfCollegeID + "',@CollegeLevelID = '" + request.CollegeLevelID + "',@DivisionID = '" + request.DivisionID + "',";
+            SqlQuery += "@DistrictID = '" + request.DistrictID + "',@SubDivisionID = '" + request.SubDivisionID + "',@TehsilID = '" + request.TehsilID + "',@ParliamentID = '" + request.ParliamentID + "',@AssemblyID = '" + request.AssemblyID + "',@PermanentAddress = '" + request.PermanentAddress + "',";
+            SqlQuery += "@CityTownVillage = '" + request.CityTownVillage + "',@PinCode = '" + request.PinCode + "',@LandlineNo = '" + request.LandlineNo + "',@AdditionalMobileNo = '" + request.AdditionalMobileNo + "',@FaxNo = '" + request.FaxNo + "',@Website = '" + request.Website + "',";
+            SqlQuery += "@NodalOfficerID = '" + request.NodalOfficerID + "',@EstablishmentYearID = '" + request.EstablishmentYearID + "',@ApplicationTypeID = '" + request.ApplicationTypeID + "',@LandAreaID = '" + request.LandAreaID + "',@LandDocumentID = '" + request.LandDocumentID + "',@LandConversionID = '" + request.LandConversionID + "',@AgricultureLandArea = '" + request.AgricultureLandArea + "',";
+            SqlQuery += "@CommercialLandArea = '" + request.CommercialLandArea + "',@InstitutionalLandArea = '" + request.InstitutionalLandArea + "',@ResidentialLandArea = '" + request.ResidentialLandArea + "',@AgricultureKhasraNo = '" + request.AgricultureKhasraNo + "',@CommercialKhasraNo = '" + request.CommercialKhasraNo + "',";
+            SqlQuery += "@InstitutionalKhasraNo = '" + request.InstitutionalKhasraNo + "',@ResidentialKhasraNo = '" + request.ResidentialKhasraNo + "',@FromAffidavitDate = '" + request.FromAffidavitDate + "',@ToAffidavitDate = '" + request.ToAffidavitDate + "',@UniversityID = '" + request.UniversityID + "',@CourseID = '" + request.CourseID + "',@SubjectID = '" + request.SubjectID + "',";
+            SqlQuery += "@UrbanRuralID = '" + request.UrbanRuralID + "',@CollegeNAACID = '" + request.CollegeNAACID + "',@AISHECode = '" + request.AISHECode + "',@ApplicationId = '" + request.ApplicationId + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.CollegesReport");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;

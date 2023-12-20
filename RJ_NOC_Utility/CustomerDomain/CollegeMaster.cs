@@ -78,5 +78,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.TotalCollegeDetailsByDepartment(request);
         }
+        public List<CommonDataModel_DataTable> CollegesReport(DCECollegesReportSearchFilter request)
+        {
+            return UnitOfWork.CollegeMasterRepository.CollegesReport(request);
+        }
     }
 }
