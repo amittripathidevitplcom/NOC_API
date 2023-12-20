@@ -62,7 +62,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @CollegeID = '" + request.CollegeID + "',  ";
             SqlQuery += " @Subject ='" + request.Subject + "',  ";
             SqlQuery += " @Description = '" + request.Description + "',  ";
-            SqlQuery += " @AttachmentFile = '" + request.Description + "'  ";
+            SqlQuery += " @AttachmentFile = '" + request.AttachmentFile + "'  ";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "Grievance.SaveData");
             if (Rows > 0)
                 return true;
