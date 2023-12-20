@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Cors;
 using RJ_NOC_DataAccess;
 using RJ_NOC_DataAccess.Common;
 
+
 namespace RJ_NOC_API.Controllers
 {
     [Route("api/CommonFuncation")]
@@ -3109,12 +3110,12 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetUsersByRoleDepartment/{DepartmentID}/{RoleID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetUsersByRoleDepartment(int DepartmentID,int RoleID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetUsersByRoleDepartment(int DepartmentID, int RoleID)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUsersByRoleDepartment(DepartmentID,RoleID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUsersByRoleDepartment(DepartmentID, RoleID));
                 result.State = OperationState.Success;
                 if (result != null)
                 {
@@ -3235,6 +3236,26 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
+        }
+        [HttpGet("Enc_Text")]
+        public string Enc_Text(string ID)
+        {
+            string Text = "";
+            try
+            {
+                Text = CommonHelper.Encrypt(ID);
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.WebsiteDetails", ex.ToString());
+                Text = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return Text;
         }
     }
 }

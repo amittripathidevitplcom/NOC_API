@@ -1,6 +1,7 @@
 ﻿using RJ_NOC_Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace RJ_NOC_DataAccess.Interface
    public interface IClassWiseStudentDetailsRepository
     {
         List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID);
+
+        List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter request);
         bool SaveData(PostClassWiseStudentDetailsDataModel model);
 
         //Save

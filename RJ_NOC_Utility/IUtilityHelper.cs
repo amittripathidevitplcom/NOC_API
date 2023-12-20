@@ -74,6 +74,7 @@ namespace RJ_NOC_Utility
         ILOIFeeMaster LOIFeeMasterUtility { get; }
         ISeatInformationMaster SeatInformationMasterUtility { get; }
         IMGOneDocumentScrutiny MGOneScrutinyUtility { get; }
+        IGrievance GrievanceUtility { get; }
 
     }
 }

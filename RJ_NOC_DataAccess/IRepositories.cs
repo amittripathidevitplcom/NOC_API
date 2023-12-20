@@ -73,5 +73,6 @@ namespace RJ_NOC_DataAccess.Interface
         ILOIFeeMasterRepository LOIFeeMasterRepository { get; }
         ISeatInformationMasterRepository SeatInformationMasterRepository { get; }
         IMGOneDocumentScrutinyRepository MGOneDocumentScrutinyRepository { get; }
+        IGrievanceRepository GrievanceRepository { get; }
     }
 }
