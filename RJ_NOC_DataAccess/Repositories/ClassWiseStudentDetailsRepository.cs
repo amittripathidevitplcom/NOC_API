@@ -81,12 +81,25 @@ namespace RJ_NOC_DataAccess.Repositories
         }
          
 
-        List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter model)
+        List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited(CollegeList_StatisticsDraftSubmitedDataModel_Filter model)
         {
-            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "'";
+            string SqlQuery = " exec USP_CollegeList_StatisticsDraftSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "'";
             
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter model)
+        {
+            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "'";
+
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited");
             List<DataTable> dataModels = new List<DataTable>();
             DataTable dataModel = new DataTable();
             dataModel = dataTable;
