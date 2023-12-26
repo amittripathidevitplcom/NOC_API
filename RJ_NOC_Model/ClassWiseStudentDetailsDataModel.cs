@@ -64,4 +64,11 @@ namespace RJ_NOC_Model
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
     }
+    public class CollegeList_StatisticsDraftSubmitedDataModel_Filter
+    {
+        public int DepartmentID { get; set; }
+        public int UniversityID { get; set; }
+        public int DivisionID { get; set; }
+        public int DistrictID { get; set; }
+    }
 }

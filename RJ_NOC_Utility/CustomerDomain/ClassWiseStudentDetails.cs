@@ -21,6 +21,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ClassWiseStudentDetailsRepository.CollegeList_StatisticsFinalSubmited(request);
         }
+         public List<DataTable> CollegeList_StatisticsDraftSubmited(CollegeList_StatisticsDraftSubmitedDataModel_Filter request)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited(request);
+        }
 
         public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID)
         {
