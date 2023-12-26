@@ -241,6 +241,7 @@ namespace RJ_NOC_Model
     public class CommonDataModel_TotalApplicationSearchFilter
     {
         public int DepartmentID { get; set; }
+
     }
 
 }

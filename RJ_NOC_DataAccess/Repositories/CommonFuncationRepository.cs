@@ -1337,7 +1337,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
-            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='"+request.DepartmentID+"'";
+            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='"+request.DepartmentID+ "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTotalApplicationListByDepartment");
 
