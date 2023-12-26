@@ -369,7 +369,7 @@ namespace RJ_NOC_API.Controllers
                 if (result.Data)
                 {
                     result.State = OperationState.Success;
-                    result.SuccessMessage = "Deleted successfully .!";
+                    result.SuccessMessage = "Apply LOI successfully .!";
                 }
                 else
                 {

@@ -148,6 +148,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID);
         List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID);
         List<CommonDataModel_DataTable> WebsiteDetails();
+        List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request);
     }
 }
 

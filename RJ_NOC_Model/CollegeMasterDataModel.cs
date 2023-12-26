@@ -155,8 +155,8 @@ namespace RJ_NOC_Model
         public string AdditionalMobileNo { get; set; }
         public string FaxNo { get; set; }
         public string Website { get; set; }
-        public string NodalOfficerID { get; set; }
-        public string EstablishmentYearID { get; set; }
+        public int NodalOfficerID { get; set; }
+        public int EstablishmentYearID { get; set; }
         public int ApplicationTypeID { get; set; }
         public int LandAreaID { get; set; }
         public int LandDocumentID { get; set; }

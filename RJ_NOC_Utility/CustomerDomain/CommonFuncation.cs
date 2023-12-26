@@ -482,6 +482,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> WebsiteDetails()
         {
             return UnitOfWork.CommonFuncationRepository.WebsiteDetails();
+        }        
+        public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetTotalApplicationListByDepartment(request);
         }
     }
 }

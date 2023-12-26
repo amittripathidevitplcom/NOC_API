@@ -3257,5 +3257,37 @@ namespace RJ_NOC_API.Controllers
             }
             return Text;
         }
+
+        [HttpPost("GetTotalApplicationListByDepartment")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetTotalApplicationListByDepartment(request));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetTotalApplicationListByDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
