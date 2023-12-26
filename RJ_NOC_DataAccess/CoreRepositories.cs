@@ -387,6 +387,13 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return grievanceRepository; }
         }
+
+
+        private IDepartmentOfTechnicalDocumentScrutinyRepository departmentoftechnicaldocumentscrutinyrepository;
+        public IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository
+        {
+            get { return departmentoftechnicaldocumentscrutinyrepository; }
+        }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -449,6 +456,7 @@ namespace RJ_NOC_DataAccess.Repository
             seatInformationMasterRepository = new SeatInformationMasterRepository(commonHelper);
             mgoneDocumentScrutinyRepository = new MGOneDocumentScrutinyRepository(commonHelper);
             grievanceRepository = new GrievanceRepository(commonHelper);
+            departmentoftechnicaldocumentscrutinyrepository = new DepartmentOfTechnicalDocumentScrutinyRepository(commonHelper);
         }
     }
 }

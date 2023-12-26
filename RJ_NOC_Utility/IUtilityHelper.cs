@@ -76,5 +76,6 @@ namespace RJ_NOC_Utility
         IMGOneDocumentScrutiny MGOneScrutinyUtility { get; }
         IGrievance GrievanceUtility { get; }
 
+        IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; }
     }
 }

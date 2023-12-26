@@ -110,6 +110,8 @@ namespace RJ_NOC_Utility
         public ISeatInformationMaster SeatInformationMasterUtility { get; private set; }
         public IMGOneDocumentScrutiny MGOneScrutinyUtility { get; private set; }
         public IGrievance GrievanceUtility { get; private set; }
+
+        public IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -180,6 +182,7 @@ namespace RJ_NOC_Utility
             SeatInformationMasterUtility = new SeatInformationMaster(UnitOfWork);
             MGOneScrutinyUtility = new MGOneDocumentScrutiny(UnitOfWork);
             GrievanceUtility = new Grievance(UnitOfWork);
+            DepartmentOfTechnicalScrutinyUtility = new DepartmentOfTechnicalDocumentScrutiny(UnitOfWork);
         }
     }
 }

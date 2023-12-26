@@ -74,5 +74,6 @@ namespace RJ_NOC_DataAccess.Interface
         ISeatInformationMasterRepository SeatInformationMasterRepository { get; }
         IMGOneDocumentScrutinyRepository MGOneDocumentScrutinyRepository { get; }
         IGrievanceRepository GrievanceRepository { get; }
+        IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository { get; }
     }
 }
