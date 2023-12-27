@@ -388,6 +388,12 @@ namespace RJ_NOC_DataAccess.Repository
             get { return grievanceRepository; }
         }
 
+         private IDTECommitteeMasterRepository dTECommitteeMasterRepository;
+        public IDTECommitteeMasterRepository DTECommitteeMasterRepository
+        {
+            get { return dTECommitteeMasterRepository; }
+        }
+
 
         private IDepartmentOfTechnicalDocumentScrutinyRepository departmentoftechnicaldocumentscrutinyrepository;
         public IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository
@@ -457,6 +463,7 @@ namespace RJ_NOC_DataAccess.Repository
             mgoneDocumentScrutinyRepository = new MGOneDocumentScrutinyRepository(commonHelper);
             grievanceRepository = new GrievanceRepository(commonHelper);
             departmentoftechnicaldocumentscrutinyrepository = new DepartmentOfTechnicalDocumentScrutinyRepository(commonHelper);
+            dTECommitteeMasterRepository = new DTECommitteeMasterRepository(commonHelper);
         }
     }
 }

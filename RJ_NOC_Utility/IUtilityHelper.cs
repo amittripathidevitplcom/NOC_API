@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_DataAccess.Interface;
+using RJ_NOC_DataAccess.Repository;
 using RJ_NOC_Utility.CustomerDomain;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 
@@ -77,5 +78,6 @@ namespace RJ_NOC_Utility
         IGrievance GrievanceUtility { get; }
 
         IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; }
+        IDTECommitteeMaster DTECommitteeMasterUtility { get; }
     }
 }

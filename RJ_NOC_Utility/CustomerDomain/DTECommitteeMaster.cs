@@ -32,36 +32,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DTECommitteeMasterRepository.DeleteCommitteeData(DTECommitteeMasterID);
         }
-
-        public bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel ListData)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.SaveApplicationCommitteeData(ListData);
-        }
-        public bool SaveApplicationCommitteeData_AH(PostApplicationCommitteeMemberdataModel ListData)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.SaveApplicationCommitteeData_AH(ListData);
-        }
-        public bool SaveApplicationCommitteeData_Agri(PostApplicationCommitteeMemberdataModel ListData)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.SaveApplicationCommitteeData_Agri(ListData);
-        }
-
-        public bool DeleteApplicationCommittee(int CommitteeMemberID)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.DeleteCommitteeData(CommitteeMemberID);
-        }
-
-        public List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.GetApplicationCommitteeList(ApplyNocApplicationID);
-        }
-        public List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList_AH(int ApplyNocApplicationID, string ActionType)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.GetApplicationCommitteeList_AH(ApplyNocApplicationID, ActionType);
-        }
-        public NodelOfficerDetails_DCE GetApplicationNodelOfficer(int ApplyNocApplicationID)
-        {
-            return UnitOfWork.DTECommitteeMasterRepository.GetApplicationNodelOfficer(ApplyNocApplicationID);
-        }
+         
     }
 }

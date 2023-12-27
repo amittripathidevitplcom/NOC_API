@@ -29,8 +29,7 @@ namespace RJ_NOC_DataAccess.Repository
             _commonHelper = commonHelper;
         }
 
-
-        #region "COomitteMaster Section"
+          
 
         public bool SaveData(DTECommitteeMasterDataModel request)
         {
@@ -80,7 +79,7 @@ namespace RJ_NOC_DataAccess.Repository
                     dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
-                    List<CommitteeMemberDetail> CommitteeMemberDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommitteeMemberDetail>>(JsonDataTable_Data);
+                    List<DETCommitteeMemberDetail> CommitteeMemberDetailDataModel_Item = JsonConvert.DeserializeObject<List<DETCommitteeMemberDetail>>(JsonDataTable_Data);
                     dataModels.CommitteeMemberDetailList = CommitteeMemberDetailDataModel_Item;
                     listdataModels.Add(dataModels);
                 }
@@ -97,91 +96,7 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        #endregion
-
-
-        #region "Application (Committee)"
-        public bool SaveApplicationCommitteeData(PostApplicationCommitteeMemberdataModel request)
-        {
-            string DTECommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_DTECommitteeMasterDetail");
-            string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveApplicationCommitteeMember @UserID='" + request.UserID + "', @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@DTECommitteeMasterDetail_Str='" + DTECommitteeMasterDetail_Str + "'";
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTECommitteeMaster.SaveApplicationCommitteeData");
-            if (Rows > 0)
-                return true;
-            else
-                return false;
-        }
-
-        public bool SaveApplicationCommitteeData_AH(PostApplicationCommitteeMemberdataModel request)
-        {
-            string DTECommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_DTECommitteeMasterDetail");
-            string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveApplicationCommitteeMember_AH @UserID='" + request.UserID + "', @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@DTECommitteeMasterDetail_Str='" + DTECommitteeMasterDetail_Str + "'";
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTECommitteeMaster.SaveApplicationCommitteeData_AH");
-            if (Rows > 0)
-                return true;
-            else
-                return false;
-        }
-        public bool SaveApplicationCommitteeData_Agri(PostApplicationCommitteeMemberdataModel request)
-        {
-            string DTECommitteeMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.ApplicationCommitteeList, "Temp_DTECommitteeMasterDetail");
-            string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveApplicationCommitteeMember_Agri @UserID='" + request.UserID + "', @ApplyNocApplicationID='" + request.ApplyNocApplicationID + "',@DTECommitteeMasterDetail_Str='" + DTECommitteeMasterDetail_Str + "'";
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTECommitteeMaster.SaveApplicationCommitteeData_Agri");
-            if (Rows > 0)
-                return true;
-            else
-                return false;
-        }
-        public bool DeleteApplicationCommittee(int CommitteeMemberID)
-        {
-            string SqlQuery = " exec USP_DeleteDTECommitteeMasterList @CommitteeMemberID='" + CommitteeMemberID + "'";
-            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTECommitteeMaster.DeleteCommitteeData");
-            if (Rows > 0)
-                return true;
-            else
-                return false;
-        }
-        public List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList(int ApplyNocApplicationID)
-        {
-            string SqlQuery = " exec USP_GetApplicationCommitteeList @ApplyNocApplicationID='" + ApplyNocApplicationID + "'";
-            DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTECommitteeMaster.GetApplicationDTECommitteeMasterList");
-            List<ApplicationCommitteeMemberdataModel> listdataModels = new List<ApplicationCommitteeMemberdataModel>();
-            ApplicationCommitteeMemberdataModel dataModels = new ApplicationCommitteeMemberdataModel();
-
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            listdataModels = JsonConvert.DeserializeObject<List<ApplicationCommitteeMemberdataModel>>(JsonDataTable_Data);
-
-            return listdataModels;
-        }
-        public List<ApplicationCommitteeMemberdataModel> GetApplicationCommitteeList_AH(int ApplyNocApplicationID, string ActionType)
-        {
-            string SqlQuery = " exec USP_GetApplicationCommitteeList_AH @ApplyNocApplicationID='" + ApplyNocApplicationID + "',@ActionType='" + ActionType + "'";
-            DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTECommitteeMaster.GetApplicationDTECommitteeMasterList");
-            List<ApplicationCommitteeMemberdataModel> listdataModels = new List<ApplicationCommitteeMemberdataModel>();
-            ApplicationCommitteeMemberdataModel dataModels = new ApplicationCommitteeMemberdataModel();
-
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            listdataModels = JsonConvert.DeserializeObject<List<ApplicationCommitteeMemberdataModel>>(JsonDataTable_Data);
-
-            return listdataModels;
-        }
-
-        public NodelOfficerDetails_DCE GetApplicationNodelOfficer(int ApplyNocApplicationID)
-        {
-            string SqlQuery = " exec USP_GetApplicationNodelOfficer @ApplyNocApplicationID='" + ApplyNocApplicationID + "'";
-            DataTable datatable = new DataTable();
-            datatable = _commonHelper.Fill_DataTable(SqlQuery, "DTECommitteeMaster.GetApplicationNodelOfficer");
-            NodelOfficerDetails_DCE dataModels = new NodelOfficerDetails_DCE();
-            dataModels = CommonHelper.ConvertDataTable<NodelOfficerDetails_DCE>(datatable); 
-            return dataModels;
-        }
-
-        #endregion
+        
 
     }
 }
