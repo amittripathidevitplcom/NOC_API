@@ -65,6 +65,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.DocumentScrutiny_OldNOCDetails(CollageID, RoleID, ApplyNOCID);
+        }     
+        public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.DocumentScrutiny_CourseDetails(CollageID, RoleID, ApplyNOCID);
+        }
+        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData( ApplyNOCID, RoleID, CollegeID);
         }
     }
 }

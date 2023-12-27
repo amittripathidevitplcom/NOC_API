@@ -66,7 +66,7 @@ namespace RJ_NOC_Model
     }
     public class DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails
     {
-        public List<DataTable> RoomDetails { get; set; }
+        public List<RoomDetailsDataModel> RoomDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
     public class DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentBuildingDetails
@@ -94,6 +94,11 @@ namespace RJ_NOC_Model
     public class DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinySubjectWiseStudentDetails
     {
         public List<SubjectWiseStatisticsDetailsDataModel> SubjectWiseStudentDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
+    public class DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail
+    {
+        public List<DataTable> CourseDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
 }

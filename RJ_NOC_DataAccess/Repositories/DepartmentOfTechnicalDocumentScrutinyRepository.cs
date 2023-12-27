@@ -77,16 +77,16 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails> DocumentScrutiny_RoomDetail(int CollageID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_CourseDetails_DTE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_RoomDetails_DTE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_RoomDetail");
 
             List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails>();
             DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails();
 
-            List<DataTable> RoomDetailsDataModels = new List<DataTable>();
-            RoomDetailsDataModels.Add(dataSet.Tables[0]);
-            dataModels.RoomDetails = RoomDetailsDataModels;
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            List<RoomDetailsDataModel> RoomDetailsDataModel_Item = JsonConvert.DeserializeObject<List<RoomDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.RoomDetails = RoomDetailsDataModel_Item;
 
             List<DataTable> dataModel = new List<DataTable>();
             dataModel.Add(dataSet.Tables[1]);
@@ -352,6 +352,38 @@ namespace RJ_NOC_DataAccess.Repository
             listdataModels.Add(dataModels);
 
             return listdataModels;
+        }
+        public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollegeID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_CourseDetails_DTE @CollegeID=" + CollegeID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_CourseDetails");
+
+            List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail>();
+            DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail();
+
+            List<DataTable> CourseDetail = new List<DataTable>();
+            CourseDetail.Add(dataSet.Tables[0]);
+            dataModels.CourseDetails = CourseDetail;
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
+        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
+        {
+            string SqlQuery = " exec USP_CheckDocumentScrutinyTabsData @ApplyNOCID ='" + ApplyNOCID + "',@RoleID ='" + RoleID + "',@CollegeID ='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "MedicalDoucmentMaster.CheckDocumentScrutinyTabsData");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }
