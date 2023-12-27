@@ -66,7 +66,7 @@ namespace RJ_NOC_Model
     }
     public class DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails
     {
-        public List<RoomDetailsDataModel> RoomDetails { get; set; }
+        public List<DataTable> RoomDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
     public class DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentBuildingDetails

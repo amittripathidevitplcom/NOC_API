@@ -31,9 +31,9 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> DocumentScrutiny_LandDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_LandDetails_DCE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_LandDetails_DTE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_LandDetails");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_LandDetails");
 
             List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails>();
             DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails();
@@ -77,16 +77,16 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails> DocumentScrutiny_RoomDetail(int CollageID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_RoomDetails_DCE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_CourseDetails_DTE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_RoomDetail");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_RoomDetail");
 
             List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails>();
             DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentRoomDetails();
 
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            List<RoomDetailsDataModel> RoomDetailsDataModel_Item = JsonConvert.DeserializeObject<List<RoomDetailsDataModel>>(JsonDataTable_Data);
-            dataModels.RoomDetails = RoomDetailsDataModel_Item;
+            List<DataTable> RoomDetailsDataModels = new List<DataTable>();
+            RoomDetailsDataModels.Add(dataSet.Tables[0]);
+            dataModels.RoomDetails = RoomDetailsDataModels;
 
             List<DataTable> dataModel = new List<DataTable>();
             dataModel.Add(dataSet.Tables[1]);
@@ -142,9 +142,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentOldNOCDetails> DocumentScrutiny_OldNOCDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_OldNOCDetails_DCE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_OldNOCDetails_DTE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_OldNOCDetails");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_OldNOCDetails");
 
             List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentOldNOCDetails> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentOldNOCDetails>();
             DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentOldNOCDetails dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentOldNOCDetails();
@@ -255,9 +255,9 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_CollegeManagementSociety_DCE @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_CollegeManagementSociety_DTE @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_CollegeManagementSociety");
 
             List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety>();
             DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety();
@@ -324,9 +324,9 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail> DocumentScrutiny_CollegeDetail(int CollegeID, int RoleID, int ApplyNOCID)
         {
-            string SqlQuery = " exec USP_DocumentScrutiny_CollegeDetail_DCE @CollegeID=" + CollegeID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            string SqlQuery = " exec USP_DocumentScrutiny_CollegeDetail_DTE @CollegeID=" + CollegeID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_CollegeDetail");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.DocumentScrutiny_CollegeDetail");
 
             List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail> listdataModels = new List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail>();
             DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail dataModels = new DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail();
