@@ -25,6 +25,8 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID);
+        List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName);
+        bool WorkflowInsertDTE(DocumentScrutinySave_DataModel request);
 
     }
 

@@ -74,5 +74,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData( ApplyNOCID, RoleID, CollegeID);
         }
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.GetApplyNOCApplicationList(  RoleID, UserID,Status,ActionName);
+        }
+        public bool WorkflowInsertDTE(DocumentScrutinySave_DataModel request)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.WorkflowInsertDTE(request);
+        }
     }
 }
