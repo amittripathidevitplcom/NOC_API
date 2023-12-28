@@ -494,6 +494,69 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetApplyNOCApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GetApplyNOCApplicationList(RoleID, UserID, Status, ActionName));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOftechnicalDocumentScrutiny.GetApplyNOCApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("WorkflowInsertDTE")]
+        public async Task<OperationResult<bool>> WorkflowInsertDTE(DocumentScrutinySave_DataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.WorkflowInsertDTE(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "WorkflowInsertDTE", request.ApplyNOCID, "DTE");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error forward application";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfTechnicalDocumentScrutinyController.WorkflowInsertDTE", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 
