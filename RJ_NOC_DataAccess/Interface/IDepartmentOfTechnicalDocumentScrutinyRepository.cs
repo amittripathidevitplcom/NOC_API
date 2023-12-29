@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_Model;
 using System.Linq;
-
+using System.Data;
 
 namespace RJ_NOC_DataAccess.Interface
 {
@@ -25,9 +25,11 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID);
-        List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName);
+        List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName);
         bool WorkflowInsertDTE(DocumentScrutinySave_DataModel request);
-
+        bool SavePDFPath(string Path, int ApplyNOCID, int UserID, string Remark, int IsIssuedNOC);
+        DataSet GeneratePDF_DTENOCData(GenerateDTENOCPDFDataModel request);
+        bool PdfEsign(int ApplyNOCID, int CreatedBy);
     }
 
 }

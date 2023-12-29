@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -74,13 +75,25 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData( ApplyNOCID, RoleID, CollegeID);
         }
-        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        public List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
             return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.GetApplyNOCApplicationList(  RoleID, UserID,Status,ActionName);
         }
         public bool WorkflowInsertDTE(DocumentScrutinySave_DataModel request)
         {
             return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.WorkflowInsertDTE(request);
+        }
+        public bool SavePDFPath(string Path, int ApplyNOCID, int UserID, string Remark, int IsIssuedNOC)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.SavePDFPath(Path, ApplyNOCID, UserID, Remark, IsIssuedNOC);
+        }
+        public DataSet GeneratePDF_DTENOCData(GenerateDTENOCPDFDataModel request)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.GeneratePDF_DTENOCData(request);
+        }        
+        public bool PdfEsign(int ApplyNOCID, int CreatedBy)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.PdfEsign(ApplyNOCID, CreatedBy);
         }
     }
 }

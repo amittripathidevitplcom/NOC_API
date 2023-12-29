@@ -101,4 +101,13 @@ namespace RJ_NOC_Model
         public List<DataTable> CourseDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
+
+    public class GenerateDTENOCPDFDataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public int UserID { get; set; }
+        public string Remark { get; set; }
+        public int? IsNOCIssued { get; set; }
+
+    }
 }

@@ -20,6 +20,7 @@ using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using RJ_NOC_DataAccess.Common;
+using AspNetCore.Reporting;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -495,9 +496,9 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("GetApplyNOCApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}")]
-        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        public async Task<OperationResult<List<DataTable>>> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
-            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
+            var result = new OperationResult<List<DataTable>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GetApplyNOCApplicationList(RoleID, UserID, Status, ActionName));
@@ -542,7 +543,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error forward application";
+                    result.ErrorMessage = "There was an error in application";
                 }
             }
             catch (Exception e)
@@ -557,6 +558,100 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("GeneratePDF_DTENOC")]
+        public async Task<OperationResult<bool>> GeneratePDF_DTENOC(GenerateDTENOCPDFDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+
+                LocalReport localReport = null;
+                List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
+                DataSet dataset = new DataSet();
+
+                StringBuilder sb = new StringBuilder();
+                var fileName = request.IsNOCIssued == 1 ? "DTENOC_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf" : "";
+                int IsIssuedLOI = request.IsNOCIssued == null ? 0 : request.IsNOCIssued.Value;
+                if (await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.SavePDFPath(fileName, request.ApplyNOCID, request.UserID, request.Remark, IsIssuedLOI)))
+                {
+                    if (request.IsNOCIssued == 1)
+                    {
+                        dataset = UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GeneratePDF_DTENOCData(request);
+                        string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                        string mimetype = "";
+                        int extension = 1;
+                        string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                        dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
+                        ReportPath += "\\MedicalGroupLOI.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
+
+
+                        //Dictionary<string, string> parameters = new Dictionary<string, string>();
+                        //string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                        //parameters.Add("test", "");
+                        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                        var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
+                        System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "NOC PDF Generated Successfully .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "NOC Reject Successfully .!";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfTechnicalDocumentScrutinyController.GeneratePDF_DTENOC", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("PdfEsign/{ApplyNOCID}/{CreatedBy}")]
+        public async Task<OperationResult<bool>> PdfEsign(int ApplyNOCID, int CreatedBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.PdfEsign(ApplyNOCID, CreatedBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Esign successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "error in data save.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfTechnicalDocumentScrutinyController.PdfEsign", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 
