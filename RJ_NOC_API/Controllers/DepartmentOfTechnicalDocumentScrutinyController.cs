@@ -583,10 +583,10 @@ namespace RJ_NOC_API.Controllers
                         int extension = 1;
                         string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
 
-                        dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
-                        ReportPath += "\\MedicalGroupLOI.rdlc";
+                        //dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
+                        ReportPath += "\\HTENOC_Print.rdlc";
                         localReport = new LocalReport(ReportPath);
-                        localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
+                        //localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
 
 
                         //Dictionary<string, string> parameters = new Dictionary<string, string>();
