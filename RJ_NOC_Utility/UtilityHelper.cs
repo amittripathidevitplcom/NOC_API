@@ -110,6 +110,7 @@ namespace RJ_NOC_Utility
         public ISeatInformationMaster SeatInformationMasterUtility { get; private set; }
         public IMGOneDocumentScrutiny MGOneScrutinyUtility { get; private set; }
         public IGrievance GrievanceUtility { get; private set; }
+        public IDTECommitteeMaster DTECommitteeMasterUtility { get; private set; }
 
         public IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; private set; }
         public UtilityHelper(IConfiguration configuration)
@@ -183,6 +184,7 @@ namespace RJ_NOC_Utility
             MGOneScrutinyUtility = new MGOneDocumentScrutiny(UnitOfWork);
             GrievanceUtility = new Grievance(UnitOfWork);
             DepartmentOfTechnicalScrutinyUtility = new DepartmentOfTechnicalDocumentScrutiny(UnitOfWork);
+            DTECommitteeMasterUtility = new DTECommitteeMaster(UnitOfWork);
         }
     }
 }

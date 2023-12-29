@@ -75,5 +75,6 @@ namespace RJ_NOC_DataAccess.Interface
         IMGOneDocumentScrutinyRepository MGOneDocumentScrutinyRepository { get; }
         IGrievanceRepository GrievanceRepository { get; }
         IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository { get; }
+        IDTECommitteeMasterRepository DTECommitteeMasterRepository { get; }
     }
 }
