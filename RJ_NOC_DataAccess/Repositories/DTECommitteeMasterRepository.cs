@@ -57,7 +57,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<DTECommitteeMasterDataModel> GetDTECommitteeMasterList(int DTECommitteeMasterID)
         {
-            string SqlQuery = " exec USP_GetDTECommitteeMasterList @DTECommitteeMasterID='" + DTECommitteeMasterID + "'";
+            string SqlQuery = " exec USP_GetDTECommitteeMasterList @CommitteeMasterID='" + DTECommitteeMasterID + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTECommitteeMaster.GetDTECommitteeMasterList");
             List<DTECommitteeMasterDataModel> listdataModels = new List<DTECommitteeMasterDataModel>();
@@ -71,10 +71,9 @@ namespace RJ_NOC_DataAccess.Repository
             {
                 if (dataSet.Tables[0].Rows.Count > 0)
                 {
-                    dataModels.DTECommitteeMasterID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DTECommitteeMasterID"]);
+                    dataModels.DTECommitteeMasterID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CommitteeMasterID"]);
                     dataModels.CommitteeType = Convert.ToString(dataSet.Tables[0].Rows[0]["CommitteeType"]);
                     dataModels.CommitteeName = Convert.ToString(dataSet.Tables[0].Rows[0]["CommitteeName"]);
-                    dataModels.ContactNumber = Convert.ToString(dataSet.Tables[0].Rows[0]["ContactNumber"]);
                     dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
                     dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
 

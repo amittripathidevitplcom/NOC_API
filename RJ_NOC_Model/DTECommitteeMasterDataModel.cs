@@ -25,6 +25,9 @@ namespace RJ_NOC_Model
         public string MobileNumber { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
+        public string SSOID { get; set; }
+        public string AadhaarNo { get; set; }
+        public bool ISPrimary { get; set; }
 
     }
 
