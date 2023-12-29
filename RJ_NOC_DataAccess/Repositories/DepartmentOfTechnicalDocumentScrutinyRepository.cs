@@ -386,14 +386,14 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        public List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
             string SqlQuery = " exec USP_GetApplyNOCApplicationList_DTE @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "',@ActionName='" + ActionName + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.GetApplyNOCApplicationList");
-            List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+            List<DataTable> listdataModels = new List<DataTable>();
+            //string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels.Add(dataSet.Tables[0]); //= JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
             
             return listdataModels;
         }
@@ -404,6 +404,37 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " exec USP_WorkFlow_Insert_DTE  ";
             SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='" + request.Remark + "',@NextActionID='" + request.NextActionID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEDocumentScrutiny.WorkflowInsertDTE");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool SavePDFPath(string Path, int ApplyNOCID, int UserID, string Remark, int IsIssuedNOC)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_InsertIssueNOCDTE @NOCFilePath='{Path}',@ApplyNOCID={ApplyNOCID},@UserId={UserID},@Remark='{Remark}',@IPAddress='{IPAddress}',@IsIssuedNOC='{IsIssuedNOC}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "DTEDocumentScrutiny.SavePDFPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public DataSet GeneratePDF_DTENOCData(GenerateDTENOCPDFDataModel request)
+        {
+            string SqlQuery = "exec USP_GeneratePDF_DTENOC @ApplyNOCID='" + request.ApplyNOCID + "'";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.GeneratePDF_DTENOCData");
+            return dataset;
+        }
+
+        public bool PdfEsign(int ApplyNOCID, int CreatedBy)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_PDFEsignDTE @ApplyNOCID={ApplyNOCID},@CreatedBy={CreatedBy}";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "DTEDocumentScrutiny.PdfEsign");
             if (Rows > 0)
                 return true;
             else
