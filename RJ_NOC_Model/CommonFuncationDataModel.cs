@@ -122,117 +122,122 @@ namespace RJ_NOC_Model
         public string Unit { get; set; }
         public string IsYesNoOption { get; set; }
     }
+    //public class CommonDataModel_DashBoard
+    //{
+    //    public int TotalCollege { get; set; }
+    //    public int TotalDraftApplication { get; set; }
+    //    public int NOCIssued { get; set; }
+    //    public int PendingNOC { get; set; }
+    //    public int TotalLegalEntity { get; set; }
+    //    public int TotalRevertApplication { get; set; }
+    //    public int TotalApplyNocApplication { get; set; }
+    //    public int TotalRejectApplication { get; set; }
+
+    //    // Common use All Department
+    //    public int Pending { get; set; }
+    //    public int Revert { get; set; }
+    //    public int Rejected { get; set; }
+    //    public int Completed { get; set; }
+
+    //    public int Clerk_Pending { get; set; }
+    //    public int Clerk_Reverted { get; set; }
+    //    public int Clerk_Rejected { get; set; }
+    //    public int Clerk_Completed { get; set; }
+
+
+    //    //secretar Counts
+    //    public int secretary_Pending { get; set; }
+    //    public int secretary_Completed { get; set; }
+    //    public int secretary_Rejected { get; set; }
+    //    public int secretary_Revert { get; set; }
+    //    public int ScrutinyCommittee_Forward { get; set; }
+    //    public int RegistratCommittee_Forward { get; set; }
+    //    public int ApprovedAndForward { get; set; }
+
+
+
+
+    //    //Section Officer Count
+    //    public int SectionOffs_Pending { get; set; }
+    //    public int SectionOffs_Revert { get; set; }
+    //    public int SectionOffs_Rejected { get; set; }
+    //    public int SectionOffs_Completed { get; set; }
+
+
+    //    //AssistantSecretary Count
+    //    public int AssistantSecretary_Pending { get; set; }
+    //    public int AssistantSecretary_Revert { get; set; }
+    //    public int AssistantSecretary_Rejected { get; set; }
+    //    public int AssistantSecretary_Completed { get; set; }
+
+
+
+    //    //JointSecretary Pending
+    //    public int JointSecretary_Pending { get; set; }
+    //    public int JointSecretary_Revert { get; set; }
+    //    public int JointSecretary_Rejected { get; set; }
+    //    public int JointSecretary_Completed { get; set; }
+    //    public int JointSecretary_ReleaseNOCPending { get; set; }
+    //    public int JointSecretary_ReleaseNOC { get; set; }
+
+
+
+    //    //JointSecretary Pending
+    //    public int ScrutinyCommittee_Pending { get; set; }
+    //    public int ScrutinyCommittee_Revert { get; set; }
+    //    public int ScrutinyCommittee_Rejected { get; set; }
+    //    public int ScrutinyCommittee_Completed { get; set; }
+
+    //    // Registrat Committe
+    //    public int RegistratCommittee_Pending { get; set; }
+    //    public int RegistratCommittee_Revert { get; set; }
+    //    public int RegistratCommittee_Rejected { get; set; }
+    //    public int RegistratCommittee_Completed { get; set; }
+
+
+    //    //Dec Data Modal
+    //    public int Nodal_Pending { get; set; }
+    //    public int Nodal_Reverted { get; set; }
+    //    public int Nodal_Rejected { get; set; }
+    //    public int Nodal_Completed { get; set; }
+
+    //    //
+    //    public int PVCommittee_Pending { get; set; }
+    //    public int PVCommittee_Reverted { get; set; }
+    //    public int PVCommittee_Rejected { get; set; }
+    //    public int PVCommittee_Completed { get; set; }
+
+
+    //    //Admin
+    //    public int TotalApplication { get; set; }
+    //    public int TotalApplicationPending { get; set; }
+    //    public int TotalApplicationReject { get; set; }
+    //    public int TotalApplicationCompleted { get; set; }
+
+
+
+    //    public int TotalSubmittedApplication { get; set; }
+    //    public int ApplicationsAfterStatisticsInformation { get; set; }
+    //    public int PendingtoSubmit { get; set; }
+    //    public int PendingtoReceive { get; set; }
+    //    public int PendingInspectionByNodal { get; set; }
+    //    public int DeficiencyMarked { get; set; }
+    //    public int DefaulterApplication { get; set; }
+    //    public int PendingtoReportOL1 { get; set; }
+    //    public int PendingtoInspectionByOL1 { get; set; }
+    //    public int PendingtoReporttoOL2 { get; set; }
+    //    public int PendingtoInspectionByOL2 { get; set; }
+    //    public int TotalFinalSubmitStatistics { get; set; }
+    //    public int TotalDraftSubmitStatistics { get; set; }
+
+
+    //}
+
     public class CommonDataModel_DashBoard
     {
-        public int TotalCollege { get; set; }
-        public int TotalDraftApplication { get; set; }
-        public int NOCIssued { get; set; }
-        public int PendingNOC { get; set; }
-        public int TotalLegalEntity { get; set; }
-        public int TotalRevertApplication { get; set; }
-        public int TotalApplyNocApplication { get; set; }
-        public int TotalRejectApplication { get; set; }
-
-        // Common use All Department
-        public int Pending { get; set; }
-        public int Revert { get; set; }
-        public int Rejected { get; set; }
-        public int Completed { get; set; }
-
-        public int Clerk_Pending { get; set; }
-        public int Clerk_Reverted { get; set; }
-        public int Clerk_Rejected { get; set; }
-        public int Clerk_Completed { get; set; }
-
-
-        //secretar Counts
-        public int secretary_Pending { get; set; }
-        public int secretary_Completed { get; set; }
-        public int secretary_Rejected { get; set; }
-        public int secretary_Revert { get; set; }
-        public int ScrutinyCommittee_Forward { get; set; }
-        public int RegistratCommittee_Forward { get; set; }
-        public int ApprovedAndForward { get; set; }
-
-
-
-
-        //Section Officer Count
-        public int SectionOffs_Pending { get; set; }
-        public int SectionOffs_Revert { get; set; }
-        public int SectionOffs_Rejected { get; set; }
-        public int SectionOffs_Completed { get; set; }
-
-
-        //AssistantSecretary Count
-        public int AssistantSecretary_Pending { get; set; }
-        public int AssistantSecretary_Revert { get; set; }
-        public int AssistantSecretary_Rejected { get; set; }
-        public int AssistantSecretary_Completed { get; set; }
-
-
-
-        //JointSecretary Pending
-        public int JointSecretary_Pending { get; set; }
-        public int JointSecretary_Revert { get; set; }
-        public int JointSecretary_Rejected { get; set; }
-        public int JointSecretary_Completed { get; set; }
-        public int JointSecretary_ReleaseNOCPending { get; set; }
-        public int JointSecretary_ReleaseNOC { get; set; }
-
-
-
-        //JointSecretary Pending
-        public int ScrutinyCommittee_Pending { get; set; }
-        public int ScrutinyCommittee_Revert { get; set; }
-        public int ScrutinyCommittee_Rejected { get; set; }
-        public int ScrutinyCommittee_Completed { get; set; }
-
-        // Registrat Committe
-        public int RegistratCommittee_Pending { get; set; }
-        public int RegistratCommittee_Revert { get; set; }
-        public int RegistratCommittee_Rejected { get; set; }
-        public int RegistratCommittee_Completed { get; set; }
-
-
-        //Dec Data Modal
-        public int Nodal_Pending { get; set; }
-        public int Nodal_Reverted { get; set; }
-        public int Nodal_Rejected { get; set; }
-        public int Nodal_Completed { get; set; }
-
-        //
-        public int PVCommittee_Pending { get; set; }
-        public int PVCommittee_Reverted { get; set; }
-        public int PVCommittee_Rejected { get; set; }
-        public int PVCommittee_Completed { get; set; }
-
-
-        //Admin
-        public int TotalApplication { get; set; }
-        public int TotalApplicationPending { get; set; }
-        public int TotalApplicationReject { get; set; }
-        public int TotalApplicationCompleted { get; set; }
-
-
-
-        public int TotalSubmittedApplication { get; set; }
-        public int ApplicationsAfterStatisticsInformation { get; set; }
-        public int PendingtoSubmit { get; set; }
-        public int PendingtoReceive { get; set; }
-        public int PendingInspectionByNodal { get; set; }
-        public int DeficiencyMarked { get; set; }
-        public int DefaulterApplication { get; set; }
-        public int PendingtoReportOL1 { get; set; }
-        public int PendingtoInspectionByOL1 { get; set; }
-        public int PendingtoReporttoOL2 { get; set; }
-        public int PendingtoInspectionByOL2 { get; set; }
-        public int TotalFinalSubmitStatistics { get; set; }
-        public int TotalDraftSubmitStatistics { get; set; }
-
-
+        public DataTable DashBoardCount { get; set; }
+        public DataTable AllDepartmentCommonCount { get; set; }
     }
-
     public class CommonDataModel_Stream
     {
         public int AID { get; set; }
@@ -245,6 +250,8 @@ namespace RJ_NOC_Model
         public int UniversityID { get; set; }
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
+        public string Status { get; set; }
+        public string CollegeName { get; set; }
     }
 
 }

@@ -689,10 +689,27 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "'";
             List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DashBoard>>(JsonDataTable_Data);
+            //DataTable dataTable = new DataTable();
+            //dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
+            //string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            //dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DashBoard>>(JsonDataTable_Data);
+            //return dataModels;
+            CommonDataModel_DashBoard datamodel=new CommonDataModel_DashBoard();
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
+
+            if (dataSet != null)
+            {
+                if(dataSet.Tables.Count>0)
+                {
+                    datamodel.DashBoardCount = dataSet.Tables[0];
+                }
+                if(dataSet.Tables.Count>1)
+                {
+                    datamodel.AllDepartmentCommonCount = dataSet.Tables[1];
+                }
+                dataModels.Add(datamodel);
+            }
             return dataModels;
         }
 
@@ -1336,7 +1353,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
-            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='"+request.DepartmentID+ "',@UniversityID='" + request.UniversityID+ "',@DivisionID='" + request.DivisionID+ "',@DistrictID='" + request.DistrictID+"'";
+            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='"+request.DepartmentID+ "',@UniversityID='" + request.UniversityID+ "',@DivisionID='" + request.DivisionID+ "',@DistrictID='" + request.DistrictID+"',@Status='" + request.Status+"',@CollegeName='" + request.CollegeName+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTotalApplicationListByDepartment");
 
