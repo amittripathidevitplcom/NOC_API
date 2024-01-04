@@ -561,7 +561,7 @@ namespace RJ_NOC_DataAccess.Repository
         public List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request)
         {
             string SqlQuery = " exec USP_GetClassWiseStaticReport @InstitutionID ='" + request.InstitutionID + "',@DivisionID ='" + request.DivisionID + "',";
-            SqlQuery += "@DistrictID ='" + request.DistrictID + "',@SubdivisionID ='" + request.SubdivisionID + "',@TehsilID ='" + request.TehsilID + "',@ParliamentAreaID ='" + request.ParliamentAreaID + "'";
+            SqlQuery += "@DistrictID ='" + request.DistrictID + "',@SubdivisionID ='" + request.SubdivisionID + "',@TehsilID ='" + request.TehsilID + "',@ParliamentAreaID ='" + request.ParliamentAreaID + "',@CollegeName ='" + request.CollegeName + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetClassWiseStaticReport");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
@@ -573,7 +573,7 @@ namespace RJ_NOC_DataAccess.Repository
         public List<CommonDataModel_DataTable> GetSubjectWiseStaticReport(SearchFilterDataModel request)
         {
             string SqlQuery = " exec USP_GetSubjectWiseStaticReport @InstitutionID ='" + request.InstitutionID + "',@DivisionID ='" + request.DivisionID + "',";
-            SqlQuery += "@DistrictID ='" + request.DistrictID + "',@SubdivisionID ='" + request.SubdivisionID + "',@TehsilID ='" + request.TehsilID + "',@ParliamentAreaID ='" + request.ParliamentAreaID + "'";
+            SqlQuery += "@DistrictID ='" + request.DistrictID + "',@SubdivisionID ='" + request.SubdivisionID + "',@TehsilID ='" + request.TehsilID + "',@ParliamentAreaID ='" + request.ParliamentAreaID + "',@CollegeName ='" + request.CollegeName + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetClassWiseStaticReport");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
