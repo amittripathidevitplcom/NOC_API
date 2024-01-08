@@ -259,5 +259,41 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+
+        [HttpPost("CollegeList_StatisticsNotFilledReport")]
+        public async Task<OperationResult<List<DataTable>>> CollegeList_StatisticsNotFilledReport(TotalNotFilledStatics_DataModel_Filter request)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.CollegeList_StatisticsNotFilledReport(request));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ClassWiseStudentDetails.CollegeList_StatisticsNotFilledReport", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+
     }
 }

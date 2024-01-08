@@ -73,4 +73,13 @@ namespace RJ_NOC_Model
         public int DistrictID { get; set; }
         public string CollegeName { get; set; }
     }
+
+    public class TotalNotFilledStatics_DataModel_Filter
+    {
+        public int DepartmentID { get; set; }
+        public int UniversityID { get; set; }
+        public int DivisionID { get; set; }
+        public int DistrictID { get; set; }
+        public string CollegeName { get; set; }
+    }
 }
