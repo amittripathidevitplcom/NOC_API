@@ -2003,6 +2003,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetRoleList_CreateUser")]
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleList_CreateUser()
+        {
+            var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleList_CreateUser());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRoleList_CreateUser", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
         [HttpGet("Load_StateWise_DistrictMaster/{StateID}")]
         public async Task<OperationResult<List<CommonDataModel_DistrictList>>> Load_StateWise_DistrictMaster(int StateID)
         {
