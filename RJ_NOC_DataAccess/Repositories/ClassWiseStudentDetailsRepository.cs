@@ -106,5 +106,18 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsNotFilledReport(TotalNotFilledStatics_DataModel_Filter model)
+        {
+            string SqlQuery = " exec USP_CollegeList_NotFilledStatistics  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "'";
+
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsNotFilledReport");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

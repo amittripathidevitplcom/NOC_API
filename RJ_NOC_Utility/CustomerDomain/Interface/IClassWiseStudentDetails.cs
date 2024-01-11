@@ -19,5 +19,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter request);
         List<DataTable> CollegeList_StatisticsDraftSubmited(CollegeList_StatisticsDraftSubmitedDataModel_Filter request);
 
+
+        List<DataTable> CollegeList_StatisticsNotFilledReport(TotalNotFilledStatics_DataModel_Filter request);
+
+
+
     }
 }
