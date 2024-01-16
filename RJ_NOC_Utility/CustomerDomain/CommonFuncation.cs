@@ -487,5 +487,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetTotalApplicationListByDepartment(request);
         }
+        public List<CommonDataModel_ApplicationTrail> GetLOIApplicationTrail(int ApplicationID, int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLOIApplicationTrail(ApplicationID, DepartmentID);
+        }
+        public List<CommonDataModel_DataTable> GetLOIDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLOIDocumentScritintyTaril(ID, NOCApplyID, CollageID, DepartmentID, ActionType);
+        }
     }
 }

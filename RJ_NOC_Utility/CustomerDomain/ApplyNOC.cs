@@ -127,5 +127,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetAppliedParameterNOCForByApplyNOCID(ApplyNOCID);
         }
+        public bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutinyLOI(request);
+        }
     }
 }
