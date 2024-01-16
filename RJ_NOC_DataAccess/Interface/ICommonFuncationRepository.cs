@@ -85,6 +85,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
+        List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser();
+        
         List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID);
         List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);

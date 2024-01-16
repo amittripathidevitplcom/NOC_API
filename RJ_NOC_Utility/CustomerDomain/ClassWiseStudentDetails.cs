@@ -50,6 +50,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ClassWiseStudentDetailsRepository.StatisticsFinalSubmit_Save(model);
         }
-         
+
+        public List<DataTable> CollegeList_StatisticsNotFilledReport(TotalNotFilledStatics_DataModel_Filter request)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.CollegeList_StatisticsNotFilledReport(request);
+        }
+
     }
 }

@@ -305,6 +305,12 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetRoleList();
         }
+        public List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetRoleList_CreateUser();
+        }
+
+        
         public List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID)
         {
             return UnitOfWork.CommonFuncationRepository.Load_StateWise_DistrictMaster(StateID);
