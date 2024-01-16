@@ -48,7 +48,7 @@ namespace RJ_NOC_DataAccess.Repository
         public bool SaveData(AddCourseMasterDataModel request)
         {
 
-            string CourseSubject_str = CommonHelper.GetDetailsTableQry(request.CourseSubjects, "Temp_M_CourseWiseSubject");
+            string CourseSubject_str = request.CourseSubjects.Count>0? CommonHelper.GetDetailsTableQry(request.CourseSubjects, "Temp_M_CourseWiseSubject"):"";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_USP_AddCourseMaster_AddUpdate";
             SqlQuery += " @CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@CollegeLevel='" + request.CollegeLevel + "',@CourseLevelID='" + request.CourseLevelID + "',@CourseName='" + request.CourseName+ "',@Duration='" + request.Duration + "',@NoOfRooms='" + request.NoOfRooms + "',@CourseDurationType='" + request.CourseDurationType + "',";
