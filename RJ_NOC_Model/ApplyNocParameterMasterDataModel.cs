@@ -46,6 +46,8 @@ namespace RJ_NOC_Model
         //noc applicaton late fees
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
 
+        public ApplyNocParameterMasterList_BankDetails? ApplyNocParameterMasterList_BankDetails { get; set; }
+
 
 
     }
@@ -355,6 +357,27 @@ namespace RJ_NOC_Model
         public string Dis_FileName { get; set; }
         public string FilePath { get; set; }
         public string ActionName { get; set; }
+    }
+
+
+
+
+    //DTE Apply NOC
+    public class ApplyNocParameterMasterList_BankDetails
+    {
+        public int BankDetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string OldBankName { get; set; }
+        public string NewBankName { get; set; }
+        public string OldBranchName { get; set; }
+        public string NewBranchName { get; set; }
+        public string OldIFSC { get; set; }
+        public string NewIFSC { get; set; }
+        public string OldAccountNumber { get; set; }
+        public string NewAccountNumber { get; set; }
+        public decimal FeeAmount { get; set; }
     }
 
 }

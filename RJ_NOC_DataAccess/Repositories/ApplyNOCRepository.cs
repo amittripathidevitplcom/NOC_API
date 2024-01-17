@@ -428,5 +428,30 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+
+        public bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string DocumentScrutiny_Detail_Str = request.DocumentScrutinyDetail.Count > 0 ? CommonHelper.GetDetailsTableQry(request.DocumentScrutinyDetail, "Temp_Trn_DocumentScrutinyLOI_Details") : "";
+            string SqlQuery = " exec USP_DocumentScrutinyLOI_IU";
+
+            SqlQuery += " @DocumentScrutinyID=0,";
+            SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',";
+            SqlQuery += " @TabName='" + request.TabName + "',";
+            SqlQuery += " @Remark='" + request.FinalRemark + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @RoleID='" + request.RoleID + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @ActionID='" + request.ActionID + "',";
+            SqlQuery += " @DocumentScrutiny_Detail_Str='" + DocumentScrutiny_Detail_Str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveDocumentScrutinyLOI");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

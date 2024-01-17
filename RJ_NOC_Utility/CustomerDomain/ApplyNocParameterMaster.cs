@@ -480,11 +480,13 @@ namespace RJ_NOC_Utility.CustomerDomain
                 }
             }
 
-
-
-
-
-
+            //DTE Deparment Apply NOC Start
+            
+            if (request.ApplyNocParameterMasterList_BankDetails!=null)
+            {
+                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',", CommonHelper.GetDetailsTableQry(request.ApplyNocParameterMasterList_BankDetails, "ApplyNocParameterMasterList_BankDetails"));
+            }
+            //DTE Deparment Apply NOC End
 
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");

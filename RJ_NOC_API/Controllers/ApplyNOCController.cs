@@ -1126,6 +1126,40 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpPost("SaveDocumentScrutinyLOI")]
+        public async Task<OperationResult<bool>> SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDocumentScrutinyLOI(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.ApplyNOCID, "SaveDocumentScrutinyLOI", 0, "ApplyNOC");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save document scrutiny";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.SaveDocumentScrutinyLOI", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 
 }
