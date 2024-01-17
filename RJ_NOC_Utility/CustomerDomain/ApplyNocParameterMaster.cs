@@ -486,9 +486,8 @@ namespace RJ_NOC_Utility.CustomerDomain
             if (request.DTE_BankDetails != null)
             {
                 sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',",
-                    "select ''"+request.DTE_BankDetails.ApplyNocID+ "''" + " as ApplyNocID, " +
-                    "''"+request.DTE_BankDetails.DepartmentID + "''" + " as DepartmentID, " +
-                    "''"+request.DTE_BankDetails.CollegeID + "''" + " as CollegeID, " +
+                    "select ''"+request.DepartmentID + "''" + " as DepartmentID, " +
+                    "''"+request.CollegeID + "''" + " as CollegeID, " +
                     "''"+request.DTE_BankDetails.OldBankName + "''" + " as OldBankName, " +
                     "''"+request.DTE_BankDetails.NewBankName + "''" + " as NewBankName, " +
                     "''"+request.DTE_BankDetails.OldBranchName + "''" + " as OldBranchName, " +
@@ -503,9 +502,8 @@ namespace RJ_NOC_Utility.CustomerDomain
             if (request.DTE_MergerofInstitutions != null)
             {
                 sb.AppendFormat("@ApplyNocParameterMasterList_MergerofInstitutions='{0}',",
-                    "select ''" + request.DTE_MergerofInstitutions.ApplyNocID + "''" + " as ApplyNocID, " +
-                    "''" + request.DTE_MergerofInstitutions.DepartmentID + "''" + " as DepartmentID, " +
-                    "''" + request.DTE_MergerofInstitutions.CollegeID + "''" + " as CollegeID, " +
+                    "select ''"+ request.DepartmentID + "''" + " as DepartmentID, " +
+                    "''" + request.CollegeID + "''" + " as CollegeID, " +
                     "''" + request.DTE_MergerofInstitutions.InstituteID1 + "''" + " as InstituteID1, " +
                     "''" + request.DTE_MergerofInstitutions.InstituteID2 + "''" + " as InstituteID2, " +
                     "''" + request.DTE_MergerofInstitutions.MergeInstituteID + "''" + " as MergeInstituteID, " +
@@ -515,12 +513,19 @@ namespace RJ_NOC_Utility.CustomerDomain
             if (request.DTE_ChangeinNameofSociety != null)
             {
                 sb.AppendFormat("@ApplyNocParameterMasterList_ChangeinNameofSociety='{0}',",
-                    "select ''" + request.DTE_ChangeinNameofSociety.ApplyNocID + "''" + " as ApplyNocID, " +
-                    "''" + request.DTE_ChangeinNameofSociety.DepartmentID + "''" + " as DepartmentID, " +
-                    "''" + request.DTE_ChangeinNameofSociety.CollegeID + "''" + " as CollegeID, " +
+                    "select ''" + request.DepartmentID + "''" + " as DepartmentID, " +
+                    "''" + request.CollegeID + "''" + " as CollegeID, " +
                     "''" + request.DTE_ChangeinNameofSociety.CurrentName + "''" + " as CurrentName, " +
                     "''" + request.DTE_ChangeinNameofSociety.NewName + "''" + " as NewName, " +
                     "''" + request.DTE_ChangeinNameofSociety.FeeAmount + "''" + " as FeeAmount");
+            }
+
+            if (request.DTE_IncreaseinIntakeAdditionofCourse != null)
+            {
+                if (request.DTE_IncreaseinIntakeAdditionofCourse.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_IncreaseinIntakeAdditionofCourse, "ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse"));
+                }
             }
             //DTE Deparment Apply NOC End
 
