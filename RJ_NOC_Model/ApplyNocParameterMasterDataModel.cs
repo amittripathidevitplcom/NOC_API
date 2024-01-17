@@ -28,6 +28,10 @@ namespace RJ_NOC_Model
         public decimal LateFee { get; set; }
         public string ExistingLetterofEOA { get; set; }
 
+        public string DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
+        //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Dis_FileName { get; set; }
+        //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Path { get; set; }
+
         public List<ApplyNocParameterMasterListDataModel> ApplyNocParameterMasterListDataModel { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtension { get; set; }
         public ApplyNocParameterMaster_AdditionOfNewSeats60DataModel? ApplyNocParameterMasterList_AdditionOfNewSeats60 { get; set; }
@@ -47,6 +51,7 @@ namespace RJ_NOC_Model
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
 
         public ApplyNocParameterMasterList_BankDetails? DTE_BankDetails { get; set; }
+        public ApplyNocParameterMasterList_MergerofInstitutions DTE_MergerofInstitutions { get; set; }
 
 
 
@@ -377,6 +382,17 @@ namespace RJ_NOC_Model
         public string NewIFSC { get; set; }
         public string OldAccountNumber { get; set; }
         public string NewAccountNumber { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+    public class ApplyNocParameterMasterList_MergerofInstitutions
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int InstituteID1 { get; set; }
+        public int InstituteID2 { get; set; }
+        public int MergeInstituteID { get; set; }
         public decimal FeeAmount { get; set; }
     }
 

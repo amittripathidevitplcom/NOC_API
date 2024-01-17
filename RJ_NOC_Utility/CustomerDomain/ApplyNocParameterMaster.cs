@@ -163,6 +163,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
             sb.AppendFormat("@SSOID='{0}',", request.SSOID);
             sb.AppendFormat("@ExistingLetterofEOA='{0}',", request.ExistingLetterofEOA);
+            sb.AppendFormat("@DTE_ChangeInTheMinorityStatusoftheInstitution='{0}',", request.DTE_ChangeInTheMinorityStatusoftheInstitution);
 
 
 
@@ -484,26 +485,31 @@ namespace RJ_NOC_Utility.CustomerDomain
 
             if (request.DTE_BankDetails != null)
             {
-                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_BankDetails, "ApplyNocParameterMasterList_BankDetails"));
+                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',",
+                    "select ''"+request.DTE_BankDetails.ApplyNocID+ "''" + " as ApplyNocID, " +
+                    "''"+request.DTE_BankDetails.DepartmentID + "''" + " as DepartmentID, " +
+                    "''"+request.DTE_BankDetails.CollegeID + "''" + " as CollegeID, " +
+                    "''"+request.DTE_BankDetails.OldBankName + "''" + " as OldBankName, " +
+                    "''"+request.DTE_BankDetails.NewBankName + "''" + " as NewBankName, " +
+                    "''"+request.DTE_BankDetails.OldBranchName + "''" + " as OldBranchName, " +
+                    "''"+request.DTE_BankDetails.NewBranchName + "''" + " as NewBranchName, " +
+                    "''"+request.DTE_BankDetails.OldIFSC + "''" + " as OldIFSC, " +
+                    "''"+request.DTE_BankDetails.NewIFSC + "''" + " as NewIFSC, " +
+                    "''"+request.DTE_BankDetails.OldAccountNumber + "''" + " as OldAccountNumber, " +
+                    "''"+request.DTE_BankDetails.NewAccountNumber + "''" + " as NewAccountNumber, " +
+                    "''" + request.DTE_BankDetails.FeeAmount + "''" + " as FeeAmount");
             }
 
-            if (request.DTE_BankDetails != null)
+            if (request.DTE_MergerofInstitutions != null)
             {
-                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',",
-                    request.DTE_BankDetails.BankDetailID + "|" +
-                    request.DTE_BankDetails.BankDetailID + "|" +
-                    request.DTE_BankDetails.ApplyNocID + "|" +
-                    request.DTE_BankDetails.DepartmentID + "|" +
-                    request.DTE_BankDetails.CollegeID + "|" +
-                    request.DTE_BankDetails.OldBankName + "|" +
-                    request.DTE_BankDetails.NewBankName + "|" +
-                    request.DTE_BankDetails.OldBranchName + "|" +
-                    request.DTE_BankDetails.NewBranchName + "|" +
-                    request.DTE_BankDetails.OldIFSC + "|" +
-                    request.DTE_BankDetails.NewIFSC + "|" +
-                    request.DTE_BankDetails.OldAccountNumber + "|" +
-                    request.DTE_BankDetails.NewAccountNumber + "|" +
-                    request.DTE_BankDetails.FeeAmount);
+                sb.AppendFormat("@ApplyNocParameterMasterList_MergerofInstitutions='{0}',",
+                    "select ''" + request.DTE_MergerofInstitutions.ApplyNocID + "''" + " as ApplyNocID, " +
+                    "''" + request.DTE_MergerofInstitutions.DepartmentID + "''" + " as DepartmentID, " +
+                    "''" + request.DTE_MergerofInstitutions.CollegeID + "''" + " as CollegeID, " +
+                    "''" + request.DTE_MergerofInstitutions.InstituteID1 + "''" + " as InstituteID1, " +
+                    "''" + request.DTE_MergerofInstitutions.InstituteID2 + "''" + " as InstituteID2, " +
+                    "''" + request.DTE_MergerofInstitutions.MergeInstituteID + "''" + " as MergeInstituteID, " +
+                    "''" + request.DTE_MergerofInstitutions.FeeAmount + "''" + " as FeeAmount");
             }
             //DTE Deparment Apply NOC End
 
