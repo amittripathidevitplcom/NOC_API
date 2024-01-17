@@ -452,7 +452,8 @@ namespace RJ_NOC_Utility.CustomerDomain
                         foreach (var item1 in item.ApplyNocParameterSubjectList)
                         {
                             sb1.Append(" select");
-                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocApplicationDChangeInNameOfCollege" +
+                                "etailID={0},", 0);
                             sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_PNOCOfSubject.ApplyNocID);
                             sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                             sb1.AppendFormat(" CourseID={0},", item.CourseID);
@@ -467,6 +468,8 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb.AppendFormat("@ApplyNocParameterMasterList_PNOCOfSubject='{0}',", sb1.ToString());
             }
 
+            
+
             //@ApplyNocParameterMasterList_TNOCExtOfSubject text = '',
             //@ApplyNocParameterMasterList_PNOCOfSubject  text = '',
             if (request.ApplyNocLateFeeDetailList != null)
@@ -476,6 +479,12 @@ namespace RJ_NOC_Utility.CustomerDomain
                     sb.AppendFormat("@ApplyNocLateFeeDetails='{0}',", CommonHelper.GetDetailsTableQry(request.ApplyNocLateFeeDetailList, "ApplyNocLateFeeDetails"));
                 }
             }
+
+
+
+
+
+
 
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");

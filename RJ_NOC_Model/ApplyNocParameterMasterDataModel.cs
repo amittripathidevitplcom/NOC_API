@@ -43,7 +43,6 @@ namespace RJ_NOC_Model
 
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_TNOCExtOfSubject { get; set; }
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_PNOCOfSubject { get; set; }
-
         //noc applicaton late fees
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
 
