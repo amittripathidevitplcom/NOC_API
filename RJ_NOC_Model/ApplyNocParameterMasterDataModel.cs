@@ -52,6 +52,7 @@ namespace RJ_NOC_Model
 
         public ApplyNocParameterMasterList_BankDetails? DTE_BankDetails { get; set; }
         public ApplyNocParameterMasterList_MergerofInstitutions DTE_MergerofInstitutions { get; set; }
+        public ApplyNocParameterMasterList_ChangeinNameofSociety DTE_ChangeinNameofSociety { get; set; }
 
 
 
@@ -395,5 +396,15 @@ namespace RJ_NOC_Model
         public int MergeInstituteID { get; set; }
         public decimal FeeAmount { get; set; }
     }
+    public class ApplyNocParameterMasterList_ChangeinNameofSociety
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
 
+        public string CurrentName { get; set; }
+        public string NewName { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
 }

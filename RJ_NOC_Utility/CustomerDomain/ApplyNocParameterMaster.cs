@@ -511,6 +511,17 @@ namespace RJ_NOC_Utility.CustomerDomain
                     "''" + request.DTE_MergerofInstitutions.MergeInstituteID + "''" + " as MergeInstituteID, " +
                     "''" + request.DTE_MergerofInstitutions.FeeAmount + "''" + " as FeeAmount");
             }
+
+            if (request.DTE_ChangeinNameofSociety != null)
+            {
+                sb.AppendFormat("@ApplyNocParameterMasterList_ChangeinNameofSociety='{0}',",
+                    "select ''" + request.DTE_ChangeinNameofSociety.ApplyNocID + "''" + " as ApplyNocID, " +
+                    "''" + request.DTE_ChangeinNameofSociety.DepartmentID + "''" + " as DepartmentID, " +
+                    "''" + request.DTE_ChangeinNameofSociety.CollegeID + "''" + " as CollegeID, " +
+                    "''" + request.DTE_ChangeinNameofSociety.CurrentName + "''" + " as CurrentName, " +
+                    "''" + request.DTE_ChangeinNameofSociety.NewName + "''" + " as NewName, " +
+                    "''" + request.DTE_ChangeinNameofSociety.FeeAmount + "''" + " as FeeAmount");
+            }
             //DTE Deparment Apply NOC End
 
             // action
