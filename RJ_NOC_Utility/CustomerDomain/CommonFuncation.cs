@@ -501,5 +501,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetLOIDocumentScritintyTaril(ID, NOCApplyID, CollageID, DepartmentID, ActionType);
         }
+        public List<CommonDataModel_DataTable> GetSocietyByCollege(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSocietyByCollege(CollegeID);
+        }
     }
 }
