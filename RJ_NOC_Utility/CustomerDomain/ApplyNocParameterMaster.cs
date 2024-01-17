@@ -468,7 +468,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                 sb.AppendFormat("@ApplyNocParameterMasterList_PNOCOfSubject='{0}',", sb1.ToString());
             }
 
-            
+
 
             //@ApplyNocParameterMasterList_TNOCExtOfSubject text = '',
             //@ApplyNocParameterMasterList_PNOCOfSubject  text = '',
@@ -481,10 +481,29 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
 
             //DTE Deparment Apply NOC Start
-            
-            if (request.ApplyNocParameterMasterList_BankDetails!=null)
+
+            if (request.DTE_BankDetails != null)
             {
-                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',", CommonHelper.GetDetailsTableQry(request.ApplyNocParameterMasterList_BankDetails, "ApplyNocParameterMasterList_BankDetails"));
+                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_BankDetails, "ApplyNocParameterMasterList_BankDetails"));
+            }
+
+            if (request.DTE_BankDetails != null)
+            {
+                sb.AppendFormat("@ApplyNocParameterMasterList_BankDetails='{0}',",
+                    request.DTE_BankDetails.BankDetailID + "|" +
+                    request.DTE_BankDetails.BankDetailID + "|" +
+                    request.DTE_BankDetails.ApplyNocID + "|" +
+                    request.DTE_BankDetails.DepartmentID + "|" +
+                    request.DTE_BankDetails.CollegeID + "|" +
+                    request.DTE_BankDetails.OldBankName + "|" +
+                    request.DTE_BankDetails.NewBankName + "|" +
+                    request.DTE_BankDetails.OldBranchName + "|" +
+                    request.DTE_BankDetails.NewBranchName + "|" +
+                    request.DTE_BankDetails.OldIFSC + "|" +
+                    request.DTE_BankDetails.NewIFSC + "|" +
+                    request.DTE_BankDetails.OldAccountNumber + "|" +
+                    request.DTE_BankDetails.NewAccountNumber + "|" +
+                    request.DTE_BankDetails.FeeAmount);
             }
             //DTE Deparment Apply NOC End
 
@@ -507,7 +526,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNoc_FDRMasterDetail(request);
         }
-        public bool  SaveOfflinePaymnetDetail(ApplyNocOfflinePaymentModal request)
+        public bool SaveOfflinePaymnetDetail(ApplyNocOfflinePaymentModal request)
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.SaveOfflinePaymnetDetail(request);
         }

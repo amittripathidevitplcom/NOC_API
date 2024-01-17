@@ -46,7 +46,7 @@ namespace RJ_NOC_Model
         //noc applicaton late fees
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
 
-        public ApplyNocParameterMasterList_BankDetails? ApplyNocParameterMasterList_BankDetails { get; set; }
+        public ApplyNocParameterMasterList_BankDetails? DTE_BankDetails { get; set; }
 
 
 
