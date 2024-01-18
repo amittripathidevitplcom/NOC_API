@@ -504,6 +504,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetSocietyByCollege(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetSocietyByCollege(CollegeID);
+        }        
+        public List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID,int CourseID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetIntakeByCollegeCourse(CollegeID, CourseID);
         }
     }
 }

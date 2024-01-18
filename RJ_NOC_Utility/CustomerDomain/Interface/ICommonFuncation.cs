@@ -146,6 +146,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_ApplicationTrail> GetLOIApplicationTrail(int ApplicationID, int DepartmentID);
         List<CommonDataModel_DataTable> GetLOIDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetSocietyByCollege(int CollegeID);
+        List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID, int CourseID);
     }
 
 

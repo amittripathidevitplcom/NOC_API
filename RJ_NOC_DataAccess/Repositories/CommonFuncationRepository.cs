@@ -1415,6 +1415,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }     
+        public List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID,int CourseID)
+        {
+            string SqlQuery = " exec USP_GetIntakeByCollegeCourse @CollegeID='" + CollegeID + "',@CourseID='" + CourseID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.USP_GetIntakeByCollegeCourse");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

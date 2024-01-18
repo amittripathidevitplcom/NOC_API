@@ -520,11 +520,67 @@ namespace RJ_NOC_Utility.CustomerDomain
                     "''" + request.DTE_ChangeinNameofSociety.FeeAmount + "''" + " as FeeAmount");
             }
 
-            if (request.DTE_IncreaseinIntakeAdditionofCourse != null)
+            if (request.DTE_IncreaseinIntakeAdditionofCourse_List != null)
             {
-                if (request.DTE_IncreaseinIntakeAdditionofCourse.Count > 0)
+                if (request.DTE_IncreaseinIntakeAdditionofCourse_List.Count > 0)
                 {
-                    sb.AppendFormat("@ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_IncreaseinIntakeAdditionofCourse, "ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse"));
+                    sb.AppendFormat("@ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_IncreaseinIntakeAdditionofCourse_List, "ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse"));
+                }
+            }
+
+            if (request.DTE_AdditionofIntegratedDualDegreeList != null)
+            {
+                if (request.DTE_AdditionofIntegratedDualDegreeList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_AdditionofIntegratedDualDegree='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_AdditionofIntegratedDualDegreeList, "ApplyNocParameterMasterList_AdditionofIntegratedDualDegree"));
+                }
+            }
+            if (request.DTE_ChangeInNameOfCourseList != null)
+            {
+                if (request.DTE_ChangeInNameOfCourseList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_ChangeInNameOfCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_ChangeInNameOfCourseList, "ApplyNocParameterMasterList_ChangeInNameOfCourse"));
+                }
+            }
+            if (request.DTE_ReductionInIntakeList != null)
+            {
+                if (request.DTE_ReductionInIntakeList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_ReductionInIntake='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_ReductionInIntakeList, "ApplyNocParameterMasterList_ReductionInIntake"));
+                }
+            }           
+            if (request.DTE_TostartNewProgramme_List != null)
+            {
+                if (request.DTE_TostartNewProgramme_List.Count > 0)
+                { 
+                    sb.AppendFormat("@ApplyNocParameterMasterList_TostartNewProgramme='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_TostartNewProgramme_List, "ApplyNocParameterMasterList_TostartNewProgramme"));
+                }
+            }
+
+            if (request.DTE_ChangeInNameofInstitution != null)
+            {
+                sb.AppendFormat("@ApplyNocParameterMasterList_ChangeInNameofInstitution='{0}',",
+                    "select ''" + request.DepartmentID + "''" + " as DepartmentID, " +
+                    "''" + request.CollegeID + "''" + " as CollegeID, " +
+                    "''" + request.DTE_ChangeInNameofInstitution.CurrentCollegeName + "''" + " as CurrentCollegeName, " +
+                    "''" + request.DTE_ChangeInNameofInstitution.NewCollegeName + "''" + " as NewCollegeName, " +
+                    "''" + request.DTE_ChangeInNameofInstitution.NewCollegeNameHi + "''" + " as NewCollegeNameHi, " +
+                    "''" + request.DTE_ChangeInNameofInstitution.FeeAmount + "''" + " as FeeAmount");
+            }          
+            if (request.DTE_ChangeofSite_Location != null)
+            {
+                sb.AppendFormat("@ApplyNocParameterMasterList_ChangeofSite_Location='{0}',",
+                    "select ''" + request.DepartmentID + "''" + " as DepartmentID, " +
+                    "''" + request.CollegeID + "''" + " as CollegeID, " +
+                    "''" + request.DTE_ChangeofSite_Location.CurrentAddress + "''" + " as CurrentAddress, " +
+                    "''" + request.DTE_ChangeofSite_Location.NewAddress + "''" + " as NewAddress, " +
+                    "''" + request.DTE_ChangeofSite_Location.FeeAmount + "''" + " as FeeAmount");
+            }
+            if (request.DTE_IncreaseInIntake_AdditionofCourse_List != null)
+            {
+                if (request.DTE_IncreaseInIntake_AdditionofCourse_List.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_IncreaseInIntake_AdditionofCourse_List, "ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse"));
                 }
             }
             //DTE Deparment Apply NOC End
