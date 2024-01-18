@@ -583,6 +583,28 @@ namespace RJ_NOC_Utility.CustomerDomain
                     sb.AppendFormat("@ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_IncreaseInIntake_AdditionofCourse_List, "ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse"));
                 }
             }
+
+            if (request.DTE_ClosureOfProgramList != null)
+            {
+                if (request.DTE_ClosureOfProgramList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_ClosureOfProgram='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_ClosureOfProgramList, "ApplyNocParameterMasterList_ClosureOfProgram"));
+                }
+            }
+            if (request.DTE_ClosureOfCoursesList != null)
+            {
+                if (request.DTE_ClosureOfCoursesList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_ClosureOfCourses='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_ClosureOfCoursesList, "ApplyNocParameterMasterList_ClosureOfCourses"));
+                }
+            }
+            if (request.DTE_MergerOfTheCourseList != null)
+            {
+                if (request.DTE_MergerOfTheCourseList.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_MergerOfTheCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_MergerOfTheCourseList, "ApplyNocParameterMasterList_MergerOfTheCourse"));
+                }
+            }
             //DTE Deparment Apply NOC End
 
             // action

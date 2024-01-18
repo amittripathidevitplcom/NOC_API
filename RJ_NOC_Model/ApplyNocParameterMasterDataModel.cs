@@ -63,6 +63,11 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse>? DTE_IncreaseInIntake_AdditionofCourse_List { get; set; }
 
 
+        public List<ApplyNocParameterMasterList_ClosureOfProgram>? DTE_ClosureOfProgramList { get; set; }
+        public List<ApplyNocParameterMasterList_ClosureOfCourses>? DTE_ClosureOfCoursesList { get; set; }
+        public List<ApplyNocParameterMasterList_MergerOfTheCourse>? DTE_MergerOfTheCourseList { get; set; }
+
+
 
     }
     public class ApplyNocParameterMaster_ddl
@@ -504,5 +509,40 @@ namespace RJ_NOC_Model
         public int Intake { get; set; }
         public int UpdatedIntake { get; set; }
         public decimal FeeAmount { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ClosureOfProgram
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string CourseName { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ClosureOfCourses
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int CurrentIntake { get; set; }
+        public int ReducedIntake { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string CourseName { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_MergerOfTheCourse
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public  decimal FeeAmount { get; set; }
+        public string CourseName { get; set; }
     }
 }
