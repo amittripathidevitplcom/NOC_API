@@ -28,7 +28,7 @@ namespace RJ_NOC_Model
         public decimal LateFee { get; set; }
         public string ExistingLetterofEOA { get; set; }
 
-        public string DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
+        public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
         //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Dis_FileName { get; set; }
         //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Path { get; set; }
 
