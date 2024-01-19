@@ -11,7 +11,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<AddCourseMasterDataModel> GetCourseIDWise(int CourseID);
         bool SaveData(AddCourseMasterDataModel request);       
         bool DeleteData(int SubjectID);
-        bool IfExists(int DepartmentID,int CourseID, string CourseName, int UniversityID, int StreamID);
+        bool IfExists(int DepartmentID,int CourseID, string CourseName, int UniversityID, int StreamID,int CourseLevelID);
 
 
     }

@@ -68,9 +68,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public bool IfExists(int DepartmentID,int CourseID, string CourseName,int UniversityID,int StreamID)
+        public bool IfExists(int DepartmentID,int CourseID, string CourseName,int UniversityID,int StreamID, int CourseLevelID)
         {
-            string SqlQuery = "USP_IfExistsCourse @CourseID='" + CourseID + "',@DepartmentID='" + DepartmentID + "',@UniversityID='" + UniversityID + "',@CourseName='" + CourseName + "',@StreamID='" + StreamID + "'";
+            string SqlQuery = "USP_IfExistsCourse @CourseID='" + CourseID + "',@DepartmentID='" + DepartmentID + "',@UniversityID='" + UniversityID + "',@CourseName='" + CourseName + "',@StreamID='" + StreamID + "',@CourseLevelID='" + CourseLevelID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "AddCourseMasterService.IfExists");
             if (dataTable.Rows.Count > 0)
