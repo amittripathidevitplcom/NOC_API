@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace RJ_NOC_API.Controllers
 {
+
     [Route("api/AadharService")]
     [ApiController]
     public class AadharServiceController : RJ_NOC_ControllerBase
