@@ -134,7 +134,7 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpPost("ValidateAadharOTP")]
+        [HttpPost("ValidateAadharOTP")] 
         public DataTable ValidateAadharOTP(CommonDataModel_AadharDataModel Model)
         {
             var urldt = new System.Data.DataTable("tableName");
