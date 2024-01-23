@@ -28,7 +28,7 @@ namespace RJ_NOC_Model
         public decimal LateFee { get; set; }
         public string ExistingLetterofEOA { get; set; }
 
-        public string DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
+        public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
         //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Dis_FileName { get; set; }
         //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Path { get; set; }
 
@@ -51,8 +51,21 @@ namespace RJ_NOC_Model
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
 
         public ApplyNocParameterMasterList_BankDetails? DTE_BankDetails { get; set; }
-        public ApplyNocParameterMasterList_MergerofInstitutions DTE_MergerofInstitutions { get; set; }
-        public ApplyNocParameterMasterList_ChangeinNameofSociety DTE_ChangeinNameofSociety { get; set; }
+        public ApplyNocParameterMasterList_MergerofInstitutions? DTE_MergerofInstitutions { get; set; }
+        public ApplyNocParameterMasterList_ChangeinNameofSociety? DTE_ChangeinNameofSociety { get; set; }
+        public List<ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse>? DTE_IncreaseinIntakeAdditionofCourse_List { get; set; }
+        public List<ApplyNocParameterMasterList_AdditionofIntegratedDualDegree>? DTE_AdditionofIntegratedDualDegreeList { get; set; }
+        public List<ApplyNocParameterMasterList_ChangeInNameOfCourse>? DTE_ChangeInNameOfCourseList { get; set; }
+        public List<ApplyNocParameterMasterList_ReductionInIntake>? DTE_ReductionInIntakeList { get; set; }
+        public List<ApplyNocParameterMasterList_TostartNewProgramme>? DTE_TostartNewProgramme_List { get; set; }
+        public ApplyNocParameterMasterList_ChangeInNameofInstitution? DTE_ChangeInNameofInstitution { get; set; }
+        public ApplyNocParameterMasterList_ChangeofSite_Location? DTE_ChangeofSite_Location { get; set; }
+        public List<ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse>? DTE_IncreaseInIntake_AdditionofCourse_List { get; set; }
+
+
+        public List<ApplyNocParameterMasterList_ClosureOfProgram>? DTE_ClosureOfProgramList { get; set; }
+        public List<ApplyNocParameterMasterList_ClosureOfCourses>? DTE_ClosureOfCoursesList { get; set; }
+        public List<ApplyNocParameterMasterList_MergerOfTheCourse>? DTE_MergerOfTheCourseList { get; set; }
 
 
 
@@ -406,5 +419,132 @@ namespace RJ_NOC_Model
         public string CurrentName { get; set; }
         public string NewName { get; set; }
         public decimal FeeAmount { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int Intake { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_AdditionofIntegratedDualDegree
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int Intake { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+    public class ApplyNocParameterMasterList_ChangeInNameOfCourse
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public string NewCourseName { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+    public class ApplyNocParameterMasterList_ReductionInIntake
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int CurrentIntake { get; set; }
+        public int ReducedIntake { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_TostartNewProgramme
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string CourseName { get; set; }
+        public int CourseID { get; set; }
+        public int Intake { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+    public class ApplyNocParameterMasterList_ChangeInNameofInstitution
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string CurrentCollegeName { get; set; }
+        public string NewCollegeName { get; set; }
+        public string NewCollegeNameHi { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ChangeofSite_Location
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+
+        public string CurrentAddress { get; set; }
+        public string NewAddress { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+    public class ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public string CourseName { get; set; }
+        public int CourseID { get; set; }
+        public int Intake { get; set; }
+        public int UpdatedIntake { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ClosureOfProgram
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string CourseName { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_ClosureOfCourses
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int CurrentIntake { get; set; }
+        public int ReducedIntake { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string CourseName { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_MergerOfTheCourse
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID1 { get; set; }
+        public int CourseID2 { get; set; }
+        public int MergerCourseID { get; set; }
+        public  decimal FeeAmount { get; set; }
+        public string CourseName { get; set; }
     }
 }
