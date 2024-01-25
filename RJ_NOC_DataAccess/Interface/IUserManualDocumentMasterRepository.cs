@@ -11,7 +11,7 @@ namespace RJ_NOC_DataAccess.Interface
     {
 
 
-        List<UserManualDocumentMasterDataModel_List> GetUserManualDocumentMasterList(int DepartmentID);
+        List<UserManualDocumentMasterDataModel_List> GetUserManualDocumentMasterList(int DepartmentID,string Type);
         List<UserManualDocumentMasterDataModel> GetUserManualDocumentMasterIDWise(int ID);
         bool SaveData(UserManualDocumentMasterDataModel request);
        

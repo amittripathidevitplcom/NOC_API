@@ -21,9 +21,9 @@ namespace RJ_NOC_DataAccess.Repositories
             _commonHelper = commonHelper;
         }
 
-        public List<UserManualDocumentMasterDataModel_List> GetUserManualDocumentMasterList(int DepartmentID)
+        public List<UserManualDocumentMasterDataModel_List> GetUserManualDocumentMasterList(int DepartmentID, string Type)
         {
-            string SqlQuery = " exec USP_UserManualDocumentMaster_GetDataList @DepartmentID='"+ DepartmentID + "'";
+            string SqlQuery = " exec USP_UserManualDocumentMaster_GetDataList @DepartmentID='"+ DepartmentID + "',@Type='"+ Type + "'";
            
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "UserManualDocumentMaster.GetUserManualDocumentMasterList"); 

@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
 
     }
 
-        public List<UserManualDocumentMasterDataModel_List> GetUserManualDocumentMasterList(int DepartmentID)
+        public List<UserManualDocumentMasterDataModel_List> GetUserManualDocumentMasterList(int DepartmentID, string Type)
         {
-            return UnitOfWork.UserManualDocumentMasterRepository.GetUserManualDocumentMasterList(DepartmentID);
+            return UnitOfWork.UserManualDocumentMasterRepository.GetUserManualDocumentMasterList(DepartmentID,Type);
         }
 
         public List<UserManualDocumentMasterDataModel> GetUserManualDocumentMasterIDWise(int ID)

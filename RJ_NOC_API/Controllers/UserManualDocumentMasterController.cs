@@ -16,14 +16,14 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("GetUserManualDocumentMasterList/{DepartmentID}")]
-        public async Task<OperationResult<List<UserManualDocumentMasterDataModel_List>>> GetUserManualDocumentMasterList(int DepartmentID)
+        [HttpGet("GetUserManualDocumentMasterList/{DepartmentID}/{Type}")]
+        public async Task<OperationResult<List<UserManualDocumentMasterDataModel_List>>> GetUserManualDocumentMasterList(int DepartmentID,string Type)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "UserManualDocumentMaster");
             var result = new OperationResult<List<UserManualDocumentMasterDataModel_List>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.UserManualDocumentMasterUtility.GetUserManualDocumentMasterList(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.UserManualDocumentMasterUtility.GetUserManualDocumentMasterList(DepartmentID, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
