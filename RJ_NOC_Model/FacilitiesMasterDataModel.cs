@@ -12,6 +12,7 @@ namespace RJ_NOC_Model
         public string FacilitiesName { get; set; }
         public decimal MinSize { get; set; }
         public string Unit { get; set; }
+public string IsYesNoOption { get; set; }
         public int UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
