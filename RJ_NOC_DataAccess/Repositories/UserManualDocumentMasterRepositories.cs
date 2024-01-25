@@ -60,7 +60,8 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @TitleHindi='" + request.TitleHindi + "',";
             SqlQuery += " @IsShow='" + request.IsShow + "',";
             SqlQuery += " @IsNew='" + request.IsNew + "',";
-            SqlQuery += " @DocumentName='" + request.DocumentName + "'";  
+            SqlQuery += " @DocumentName='" + request.DocumentName + "',";  
+            SqlQuery += " @OrderBy='" + request.OrderBy + "'";  
        
 
 

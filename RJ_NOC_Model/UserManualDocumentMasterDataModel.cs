@@ -21,6 +21,7 @@ namespace RJ_NOC_Model
         public bool IsShow { get; set; }
         public int CreatedBy { get; set; }
         public int ModifyBy { get; set; }
+        public int OrderBy { get; set; }
     }
 
     public class UserManualDocumentMasterDataModel_List
