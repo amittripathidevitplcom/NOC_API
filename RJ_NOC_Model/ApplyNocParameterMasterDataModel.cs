@@ -546,5 +546,10 @@ namespace RJ_NOC_Model
         public int MergerCourseID { get; set; }
         public  decimal FeeAmount { get; set; }
         public string CourseName { get; set; }
+
+
+        public int CourseIntake1 { get; set; }
+        public int CourseIntake2 { get; set; }
+        public int MergerIntake { get; set; }
     }
 }
