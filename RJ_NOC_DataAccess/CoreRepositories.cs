@@ -399,6 +399,11 @@ namespace RJ_NOC_DataAccess.Repository
         public IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository
         {
             get { return departmentoftechnicaldocumentscrutinyrepository; }
+        }      
+        private IUserManualDocumentMasterRepository userManualDocumentMasterRepository;
+        public IUserManualDocumentMasterRepository UserManualDocumentMasterRepository
+        {
+            get { return userManualDocumentMasterRepository; }
         }
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
@@ -464,6 +469,7 @@ namespace RJ_NOC_DataAccess.Repository
             grievanceRepository = new GrievanceRepository(commonHelper);
             departmentoftechnicaldocumentscrutinyrepository = new DepartmentOfTechnicalDocumentScrutinyRepository(commonHelper);
             dTECommitteeMasterRepository = new DTECommitteeMasterRepository(commonHelper);
+            userManualDocumentMasterRepository = new UserManualDocumentMasterRepository(commonHelper);
         }
     }
 }
