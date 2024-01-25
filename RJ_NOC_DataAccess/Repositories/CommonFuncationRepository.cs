@@ -11,6 +11,7 @@ using RJ_NOC_DataAccess.Common;
 using Newtonsoft.Json;
 using System.Net.NetworkInformation;
 using System.Xml.Linq;
+using System.Drawing.Drawing2D;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -1431,9 +1432,9 @@ namespace RJ_NOC_DataAccess.Repository
 
 
 
-        public List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID)
+        public List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID, string GetType)
         {
-            string SqlQuery = " exec USP_GetProgrammeByCollegeDTE @CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_GetProgrammeByCollegeDTE @CollegeID='" + CollegeID + "',@GetType='" + GetType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetProgrammeByCollegeDTE");
 
@@ -1443,9 +1444,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID)
+        public List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType)
         {
-            string SqlQuery = " exec USP_GetCourseLevelByCollegeDTE @CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_GetCourseLevelByCollegeDTE @CollegeID='" + CollegeID + "',@GetType='" + GetType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCourseLevelByCollegeDTE");
 
@@ -1455,9 +1456,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-                public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID)
+                public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType)
         {
-            string SqlQuery = " exec USP_GetCourseByCollegeProgrammeDTE @CollegeID='" + CollegeID + "',@ProgrammeID='" + ProgrammeID + "',@CourseLevelID='"+ CourseLevelID + "'";
+            string SqlQuery = " exec USP_GetCourseByCollegeProgrammeDTE @CollegeID='" + CollegeID + "',@ProgrammeID='" + ProgrammeID + "',@CourseLevelID='"+ CourseLevelID + "',@GetType='" + GetType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCourseByCollegeProgrammeDTE");
 

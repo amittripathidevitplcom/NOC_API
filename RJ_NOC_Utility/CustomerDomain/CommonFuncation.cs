@@ -511,18 +511,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
 
 
-        public List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID)
+        public List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID, string GetType)
         {
 
-            return UnitOfWork.CommonFuncationRepository.GetProgrammeByCollegeDTE(CollegeID);
+            return UnitOfWork.CommonFuncationRepository.GetProgrammeByCollegeDTE(CollegeID, GetType);
         }
-        public List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID)
+        public List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCourseLevelByCollegeDTE(CollegeID);
+            return UnitOfWork.CommonFuncationRepository.GetCourseLevelByCollegeDTE(CollegeID, GetType);
         }
-        public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID,int CourseLevelID)
+        public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID,int CourseLevelID, string GetType)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID, CourseLevelID);
+            return UnitOfWork.CommonFuncationRepository.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID, CourseLevelID, GetType);
         }
     }
 }

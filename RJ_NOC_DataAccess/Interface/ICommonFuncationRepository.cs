@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_Model;
 using System.Linq;
 using System.Data;
+using System.Drawing.Drawing2D;
 
 namespace RJ_NOC_DataAccess.Interface
 {
@@ -157,9 +158,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID, int CourseID);
 
 
-        List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID);
-        List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID);
-        List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID,int ProgrammeID, int CourseLevelID);
+        List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID,string GetType);
+        List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType);
+        List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID,int ProgrammeID, int CourseLevelID, string GetType);
     }
 }
 

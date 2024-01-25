@@ -449,7 +449,7 @@ namespace RJ_NOC_Model
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
         public int CourseID { get; set; }
-        public string NewCourseName { get; set; }
+        public int NewCourseID { get; set; }
         public decimal FeeAmount { get; set; }
     }
     public class ApplyNocParameterMasterList_ReductionInIntake

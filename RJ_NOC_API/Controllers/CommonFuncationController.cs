@@ -3451,13 +3451,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetProgrammeByCollegeDTE/{CollegeID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetProgrammeByCollegeDTE(int CollegeID)
+        [HttpGet("GetProgrammeByCollegeDTE/{CollegeID}/{GetType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetProgrammeByCollegeDTE(int CollegeID,string GetType)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetProgrammeByCollegeDTE(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetProgrammeByCollegeDTE(CollegeID, GetType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -3482,13 +3482,13 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetCourseLevelByCollegeDTE/{CollegeID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseLevelByCollegeDTE(int CollegeID)
+        [HttpGet("GetCourseLevelByCollegeDTE/{CollegeID}/{GetType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseLevelByCollegeDTE(int CollegeID, string GetType)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseLevelByCollegeDTE(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseLevelByCollegeDTE(CollegeID, GetType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -3513,13 +3513,13 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetCourseByCollegeProgrammeDTE/{CollegeID}/{ProgrammeID}/{CourseLevelID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID)
+        [HttpGet("GetCourseByCollegeProgrammeDTE/{CollegeID}/{ProgrammeID}/{CourseLevelID}/{GetType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID,CourseLevelID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID,CourseLevelID, GetType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
