@@ -14,7 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
 
         List<CommonDataModel_DepartmentMasterList> GetDepartmentList();
-
+List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication();
         List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID);
 
         List<CommonDataModel_ModuleMasterList> GetModuleList();

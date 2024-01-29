@@ -53,6 +53,18 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
 
         }
+        public List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication()
+        {
+            string SqlQuery = "exec USP_GetDepartmentList_IsOpenNOCApplication";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDepartmentList");
+
+            List<CommonDataModel_DepartmentMasterList> dataModels = new List<CommonDataModel_DepartmentMasterList>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DepartmentMasterList>>(JsonDataTable_Data);
+            return dataModels;
+
+        }
         public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)
         {
             string SqlQuery = "exec USP_GetSchemeListByDepartment @DepatmentID=" + DepatmentID;
