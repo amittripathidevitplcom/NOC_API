@@ -502,11 +502,14 @@ namespace RJ_NOC_Utility.CustomerDomain
             if (request.DTE_MergerofInstitutions != null)
             {
                 sb.AppendFormat("@ApplyNocParameterMasterList_MergerofInstitutions='{0}',",
-                    "select ''"+ request.DepartmentID + "''" + " as DepartmentID, " +
+                    "select ''" + request.DepartmentID + "''" + " as DepartmentID, " +
                     "''" + request.CollegeID + "''" + " as CollegeID, " +
                     "''" + request.DTE_MergerofInstitutions.InstituteID1 + "''" + " as InstituteID1, " +
                     "''" + request.DTE_MergerofInstitutions.InstituteID2 + "''" + " as InstituteID2, " +
                     "''" + request.DTE_MergerofInstitutions.MergeInstituteID + "''" + " as MergeInstituteID, " +
+                    "''" + request.DTE_MergerofInstitutions.TrustType + "''" + " as TrustType, " +
+                    "''" + request.DTE_MergerofInstitutions.NewTrustName + "''" + " as NewTrustName, " +
+                    "''" + request.DTE_MergerofInstitutions.NewInstituteName + "''" + " as NewInstituteName, " +
                     "''" + request.DTE_MergerofInstitutions.FeeAmount + "''" + " as FeeAmount");
             }
 
@@ -517,6 +520,9 @@ namespace RJ_NOC_Utility.CustomerDomain
                     "''" + request.CollegeID + "''" + " as CollegeID, " +
                     "''" + request.DTE_ChangeinNameofSociety.CurrentName + "''" + " as CurrentName, " +
                     "''" + request.DTE_ChangeinNameofSociety.NewName + "''" + " as NewName, " +
+                    "''" + request.DTE_ChangeinNameofSociety.ChangeType + "''" + " as ChangeType, " +
+                    "''" + request.DTE_ChangeinNameofSociety.OldAddress + "''" + " as OldAddress, " +
+                    "''" + request.DTE_ChangeinNameofSociety.NewAddress + "''" + " as NewAddress, " +
                     "''" + request.DTE_ChangeinNameofSociety.FeeAmount + "''" + " as FeeAmount");
             }
 
@@ -603,6 +609,20 @@ namespace RJ_NOC_Utility.CustomerDomain
                 if (request.DTE_MergerOfTheCourseList.Count > 0)
                 {
                     sb.AppendFormat("@ApplyNocParameterMasterList_MergerOfTheCourse='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_MergerOfTheCourseList, "ApplyNocParameterMasterList_MergerOfTheCourse"));
+                }
+            }
+            if (request.DTE_IntroductionOffCampus_List != null)
+            {
+                if (request.DTE_IntroductionOffCampus_List.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_IntroductionOffCampus='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_IntroductionOffCampus_List, "ApplyNocParameterMasterList_IntroductionOffCampus"));
+                }
+            }
+            if (request.DTE_CoursesforWorkingProfessionals_List != null)
+            {
+                if (request.DTE_CoursesforWorkingProfessionals_List.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_CoursesforWorkingProfessionals='{0}',", CommonHelper.GetDetailsTableQry(request.DTE_CoursesforWorkingProfessionals_List, "ApplyNocParameterMasterList_CoursesforWorkingProfessionals"));
                 }
             }
             //DTE Deparment Apply NOC End

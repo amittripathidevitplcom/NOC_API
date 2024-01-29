@@ -67,6 +67,9 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterMasterList_ClosureOfCourses>? DTE_ClosureOfCoursesList { get; set; }
         public List<ApplyNocParameterMasterList_MergerOfTheCourse>? DTE_MergerOfTheCourseList { get; set; }
 
+        public List<ApplyNocParameterMasterList_IntroductionOffCampus>? DTE_IntroductionOffCampus_List { get; set; }
+        public List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>? DTE_CoursesforWorkingProfessionals_List { get; set; }
+
 
 
     }
@@ -408,6 +411,10 @@ namespace RJ_NOC_Model
         public int InstituteID2 { get; set; }
         public int MergeInstituteID { get; set; }
         public decimal FeeAmount { get; set; }
+
+        public string TrustType { get; set; }
+        public string NewTrustName { get; set; }
+        public string NewInstituteName { get; set; }
     }
     public class ApplyNocParameterMasterList_ChangeinNameofSociety
     {
@@ -419,6 +426,10 @@ namespace RJ_NOC_Model
         public string CurrentName { get; set; }
         public string NewName { get; set; }
         public decimal FeeAmount { get; set; }
+
+        public string ChangeType { get; set; }
+        public string OldAddress { get; set; }
+        public string NewAddress { get; set; }
     }
 
     public class ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse
@@ -544,7 +555,7 @@ namespace RJ_NOC_Model
         public int CourseID1 { get; set; }
         public int CourseID2 { get; set; }
         public int MergerCourseID { get; set; }
-        public  decimal FeeAmount { get; set; }
+        public decimal FeeAmount { get; set; }
         public string CourseName { get; set; }
 
 
@@ -552,4 +563,28 @@ namespace RJ_NOC_Model
         public int CourseIntake2 { get; set; }
         public int MergerIntake { get; set; }
     }
+
+    public class ApplyNocParameterMasterList_IntroductionOffCampus
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int Intake { get; set; }
+        public decimal FeeAmount { get; set; }
+        public string DocumentName { get; set; }
+    }
+
+    public class ApplyNocParameterMasterList_CoursesforWorkingProfessionals
+    {
+        public int DetailID { get; set; }
+        public int ApplyNocID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int CourseID { get; set; }
+        public int Intake { get; set; }
+        public decimal FeeAmount { get; set; }
+    }
+
 }
