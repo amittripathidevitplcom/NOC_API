@@ -708,6 +708,25 @@ namespace RJ_NOC_Utility.CustomerDomain
                     model.ChangeInGirlstoCoedList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInGirlstoCoed>>(ds.Tables[6]);
                     model.MergerCollegeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_MergerCollege>>(ds.Tables[7]);
                     model.ChangeInCollegeManagementList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInCollegeManagement>>(ds.Tables[8]);
+
+                    //DTE
+                    model.DTE_ChangeofSite_Location= CommonHelper.ConvertDataTable<ApplyNocParameterMasterList_ChangeofSite_Location>(ds.Tables[9]);
+                    model.DTE_IncreaseInIntake_AdditionofCourse_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse>>(ds.Tables[10]);
+                    model.DTE_AdditionofIntegratedDualDegreeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_AdditionofIntegratedDualDegree>>(ds.Tables[11]);
+                    model.DTE_ChangeInNameOfCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ChangeInNameOfCourse>>(ds.Tables[12]);
+                    model.DTE_ChangeInNameofInstitution = CommonHelper.ConvertDataTable<ApplyNocParameterMasterList_ChangeInNameofInstitution>(ds.Tables[13]);
+                    model.DTE_ChangeinNameofSociety = CommonHelper.ConvertDataTable<ApplyNocParameterMasterList_ChangeinNameofSociety>(ds.Tables[14]);
+
+                    model.DTE_TostartNewProgramme_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_TostartNewProgramme>>(ds.Tables[15]);
+                    model.DTE_MergerofInstitutions = CommonHelper.ConvertDataTable<ApplyNocParameterMasterList_MergerofInstitutions>(ds.Tables[16]);
+                    model.DTE_BankDetails = CommonHelper.ConvertDataTable<ApplyNocParameterMasterList_BankDetails>(ds.Tables[17]);
+                    model.DTE_ReductionInIntakeList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ReductionInIntake>>(ds.Tables[18]);
+                    model.DTE_ClosureOfProgramList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ClosureOfProgram>>(ds.Tables[19]);
+                    model.DTE_ClosureOfCoursesList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_ClosureOfCourses>>(ds.Tables[20]);
+                    model.DTE_MergerOfTheCourseList = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_MergerOfTheCourse>>(ds.Tables[21]);
+                    model.DTE_IncreaseinIntakeAdditionofCourse_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse>>(ds.Tables[22]);
+                    model.DTE_IntroductionOffCampus_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_IntroductionOffCampus>>(ds.Tables[23]);
+                    model.DTE_CoursesforWorkingProfessionals_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>>(ds.Tables[24]);
                 }
             }
             return model;

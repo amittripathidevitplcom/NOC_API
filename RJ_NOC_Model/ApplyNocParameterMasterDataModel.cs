@@ -182,6 +182,8 @@ namespace RJ_NOC_Model
         public int ServiceId { get; set; }
         public int? PVStage { get; set; }
 
+        public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
+        public string? ManagementType { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 
@@ -194,6 +196,26 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterMasterList_ChangeInCollegeManagement>? ChangeInCollegeManagementList { get; set; }
         public List<ApplyNocParameterMasterList_MergerCollege>? MergerCollegeList { get; set; }
 
+        //DTE
+        public ApplyNocParameterMasterList_BankDetails? DTE_BankDetails { get; set; }
+        public ApplyNocParameterMasterList_MergerofInstitutions? DTE_MergerofInstitutions { get; set; }
+        public ApplyNocParameterMasterList_ChangeinNameofSociety? DTE_ChangeinNameofSociety { get; set; }
+        public List<ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse>? DTE_IncreaseinIntakeAdditionofCourse_List { get; set; }
+        public List<ApplyNocParameterMasterList_AdditionofIntegratedDualDegree>? DTE_AdditionofIntegratedDualDegreeList { get; set; }
+        public List<ApplyNocParameterMasterList_ChangeInNameOfCourse>? DTE_ChangeInNameOfCourseList { get; set; }
+        public List<ApplyNocParameterMasterList_ReductionInIntake>? DTE_ReductionInIntakeList { get; set; }
+        public List<ApplyNocParameterMasterList_TostartNewProgramme>? DTE_TostartNewProgramme_List { get; set; }
+        public ApplyNocParameterMasterList_ChangeInNameofInstitution? DTE_ChangeInNameofInstitution { get; set; }
+        public ApplyNocParameterMasterList_ChangeofSite_Location? DTE_ChangeofSite_Location { get; set; }
+        public List<ApplyNocParameterMasterList_IncreaseInIntake_AdditionofCourse>? DTE_IncreaseInIntake_AdditionofCourse_List { get; set; }
+
+
+        public List<ApplyNocParameterMasterList_ClosureOfProgram>? DTE_ClosureOfProgramList { get; set; }
+        public List<ApplyNocParameterMasterList_ClosureOfCourses>? DTE_ClosureOfCoursesList { get; set; }
+        public List<ApplyNocParameterMasterList_MergerOfTheCourse>? DTE_MergerOfTheCourseList { get; set; }
+
+        public List<ApplyNocParameterMasterList_IntroductionOffCampus>? DTE_IntroductionOffCampus_List { get; set; }
+        public List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>? DTE_CoursesforWorkingProfessionals_List { get; set; }
 
     }
 
@@ -441,6 +463,10 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int Intake { get; set; }
         public decimal FeeAmount { get; set; }
+
+        public string? CourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_AdditionofIntegratedDualDegree
@@ -452,6 +478,11 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int Intake { get; set; }
         public decimal FeeAmount { get; set; }
+
+
+        public string? CourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
     public class ApplyNocParameterMasterList_ChangeInNameOfCourse
     {
@@ -462,6 +493,10 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int NewCourseID { get; set; }
         public decimal FeeAmount { get; set; }
+        public string? CourseName { get; set; }
+        public string? NewCourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
     public class ApplyNocParameterMasterList_ReductionInIntake
     {
@@ -473,6 +508,10 @@ namespace RJ_NOC_Model
         public int CurrentIntake { get; set; }
         public int ReducedIntake { get; set; }
         public decimal FeeAmount { get; set; }
+
+        public string? CourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_TostartNewProgramme
@@ -485,6 +524,9 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int Intake { get; set; }
         public decimal FeeAmount { get; set; }
+
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
     public class ApplyNocParameterMasterList_ChangeInNameofInstitution
     {
@@ -520,6 +562,11 @@ namespace RJ_NOC_Model
         public int Intake { get; set; }
         public int UpdatedIntake { get; set; }
         public decimal FeeAmount { get; set; }
+
+
+
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_ClosureOfProgram
@@ -531,6 +578,8 @@ namespace RJ_NOC_Model
         public int StreamID { get; set; }
         public int CourseLevelID { get; set; }
         public decimal FeeAmount { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_ClosureOfCourses
@@ -544,6 +593,8 @@ namespace RJ_NOC_Model
         public int ReducedIntake { get; set; }
         public decimal FeeAmount { get; set; }
         public string CourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_MergerOfTheCourse
@@ -562,6 +613,10 @@ namespace RJ_NOC_Model
         public int CourseIntake1 { get; set; }
         public int CourseIntake2 { get; set; }
         public int MergerIntake { get; set; }
+        public string? CourseName2 { get; set; }
+        public string? MergeCourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_IntroductionOffCampus
@@ -574,6 +629,11 @@ namespace RJ_NOC_Model
         public int Intake { get; set; }
         public decimal FeeAmount { get; set; }
         public string DocumentName { get; set; }
+        public string? DocumentPath { get; set; }
+
+        public string? CourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
     public class ApplyNocParameterMasterList_CoursesforWorkingProfessionals
@@ -585,6 +645,9 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public int Intake { get; set; }
         public decimal FeeAmount { get; set; }
+        public string? CourseName { get; set; }
+        public string? StreamName { get; set; }
+        public string? CourseLevelName { get; set; }
     }
 
 }
