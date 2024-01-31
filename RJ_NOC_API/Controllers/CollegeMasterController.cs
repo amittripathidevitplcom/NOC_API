@@ -169,13 +169,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("CollegeDetails/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CollegeDetails(string LoginSSOID)
+        [HttpGet("CollegeDetails/{LoginSSOID}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CollegeDetails(string LoginSSOID,string Type)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.CollegeDetails(LoginSSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.CollegeDetails(LoginSSOID,Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

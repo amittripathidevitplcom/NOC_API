@@ -25,9 +25,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.StatisticsCollegeList(LoginSSOID);
         }
-        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID)
+        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type)
         {
-            return UnitOfWork.CollegeMasterRepository.CollegeDetails(LoginSSOID);
+            return UnitOfWork.CollegeMasterRepository.CollegeDetails(LoginSSOID,Type);
         }
         public CollegeMasterDataModel GetCollegeById(int collegeId)
         {

@@ -140,9 +140,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID)
+        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type)
         {
-            string SqlQuery = "exec USP_CollegeDetailsList @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = "exec USP_CollegeDetailsList @LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.CollegeDetails");
 

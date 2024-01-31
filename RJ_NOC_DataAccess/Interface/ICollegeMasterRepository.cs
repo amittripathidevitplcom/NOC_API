@@ -11,7 +11,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(CollegeMasterDataModel request);
         List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID);
         List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID);
-        List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID);
+        List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type);
         CollegeMasterDataModel GetCollegeById(int collegeId);
         bool DeleteData(int CollegeId, int modifiedBy);
         bool LOIFinalSubmit_OTPVerification(int CollegeID);
