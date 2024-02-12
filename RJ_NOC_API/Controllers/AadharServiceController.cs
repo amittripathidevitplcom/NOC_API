@@ -139,7 +139,7 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpPost("ValidateAadharOTPOLD")] 
+        [HttpPost("ValidateAadharOTPOLD")]
         public DataTable ValidateAadharOTPOLD(CommonDataModel_AadharDataModel Model)
         {
             var urldt = new System.Data.DataTable("tableName");
@@ -277,7 +277,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("eSignPDF/{PDFFileName}/{OTPTransactionID}/{DepartmentID}/{ParamID}")]
-        public async Task<DataTable> eSignPDF(string PDFFileName, string OTPTransactionID,int DepartmentID,int ParamID)
+        public async Task<DataTable> eSignPDF(string PDFFileName, string OTPTransactionID, int DepartmentID, int ParamID)
         {
             var urldt = new System.Data.DataTable("tableName");
             // create fields
@@ -285,7 +285,7 @@ namespace RJ_NOC_API.Controllers
             urldt.Columns.Add("status", typeof(int));
             try
             {
-                string str = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID,  DepartmentID,  ParamID, _configuration));
+                string str = await Task.Run(() => UtilityHelper.AadharServiceUtility.eSignPDF(PDFFileName, OTPTransactionID, DepartmentID, ParamID, _configuration));
                 if (str == "Success")
                 {
                     urldt.Rows.Add(new Object[]{
@@ -323,6 +323,7 @@ namespace RJ_NOC_API.Controllers
             urldt.Columns.Add("message", typeof(string));
             urldt.Columns.Add("status", typeof(int));
             urldt.Columns.Add("data", typeof(string));
+            urldt.Columns.Add("optionMsg", typeof(string));
             try
             {
                 var options = new RestClientOptions("https://rajkisan.rajasthan.gov.in")
@@ -330,16 +331,17 @@ namespace RJ_NOC_API.Controllers
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/rajkisanapp/Service/ChatBotAppService", Method.Post);
+                var request = new RestRequest("/Service/ChatBotAppService", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Access-Control-Allow-Origin", "*");
 
+                var body = new
+                {
+                    obj = new { usrnm = "rajkisan", psw = "rajkisan@123", AppType = "ChatbotAPIs", Aadhaar = Model.AadharNo, srvnm = "ChatbotAPIs", srvmethodnm = "SendOtpByAadharNoCB" }
+                };
 
-
-                var body = "{\"obj\":{\"usrnm\":\"rajkisan\",\"psw\":\"rajkisan@123\",\"AppType\":\"ChatbotAPIs\",\"Aadhaar\":\""+ Model.AadharNo + "\",\"srvnm\":\"ChatbotAPIs\",\"srvmethodnm\":\"SendOtpByAadharNoCB\"}}";
-
-
-                request.AddStringBody(body, DataFormat.Json);
-                RestResponse response =client.Execute(request);
+                request.AddJsonBody(body);
+                RestResponse response = client.Execute(request);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var response1 = JsonSerializer.Deserialize<List<ResponseDataModal>>(response.Content);
@@ -349,13 +351,13 @@ namespace RJ_NOC_API.Controllers
 
                         urldt.Rows.Add(new Object[]{
                              response1.FirstOrDefault().message,0,
-                              response1.FirstOrDefault().data });
+                              response1.FirstOrDefault().data,"optionMsg" });
                     }
-                    else 
-                    { 
-                     urldt.Rows.Add(new Object[]{
+                    else
+                    {
+                        urldt.Rows.Add(new Object[]{
                                 "Please try again",1,
-                                "Please try again"
+                                "Please try again","optionMsg"
                                 });
                     }
 
@@ -364,16 +366,16 @@ namespace RJ_NOC_API.Controllers
                 {
                     urldt.Rows.Add(new Object[]{
                                 "Please try again",1,
-                                "Please try again"
+                                "Please try again","optionMsg"
                                 });
-                }     
+                }
 
             }
             catch (Exception ex)
             {
                 urldt.Rows.Add(new Object[]{
                                 "Please try again",1,
-                                "Please try again"
+                                ex.Message,"optionMsg"
                                 });
             }
             return urldt;
@@ -397,7 +399,7 @@ namespace RJ_NOC_API.Controllers
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/rajkisanapp/Service/ChatBotAppService", Method.Post);
+                var request = new RestRequest("/Service/ChatBotAppService", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
 
                 var body = "{\"obj\":{\"usrnm\":\"rajkisan\",\"psw\":\"rajkisan@123\",\"AppType\":\"ChatbotAPIs\",\"Aadhaar\":\"" + Model.AadharNo + "\",\"otp\":\"" + Model.OTP + "\",\"txn\":\"" + Model.TransactionNo + "\",\"srvnm\":\"ChatbotAPIs\",\"srvmethodnm\":\"VerifyAadhaarOTPCB\"}}";
