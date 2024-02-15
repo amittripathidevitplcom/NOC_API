@@ -10,7 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface ISocietyMaster
     {
-        List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID);
+        List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID, int ApplyNOCIDs);
         List<SocietyMasterDataModel> GetSocietyByID(int SocietyID);
         bool SaveData(SocietyMasterDataModel request);
         bool UpdateData(SocietyMasterDataModel request);

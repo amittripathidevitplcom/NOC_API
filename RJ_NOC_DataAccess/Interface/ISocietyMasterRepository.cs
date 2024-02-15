@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface ISocietyMasterRepository
     {
-        List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID);
+        List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID, int ApplyNOCID);
         List<SocietyMasterDataModel> GetSocietyByID(int SocietyID);
         bool SaveData(SocietyMasterDataModel request);
         bool UpdateData(SocietyMasterDataModel request);

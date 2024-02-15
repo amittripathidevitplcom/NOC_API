@@ -110,4 +110,14 @@ namespace RJ_NOC_Model
         public int? IsNOCIssued { get; set; }
 
     }
+
+    public class GenerateDocument_DTE
+    {
+        public int CollegeID { get; set; }
+        public int DepartmentID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public int UserID { get; set; }
+        public string DocumentName { get; set; }
+        public bool IsEsign { get; set; }
+    }
 }

@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public SocietyMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID)
+        public List<SocietyMasterDataModels> GetSocietyAllList(int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.SocietyMasterRepository.GetSocietyAllList(CollegeID);
+            return UnitOfWork.SocietyMasterRepository.GetSocietyAllList(CollegeID, ApplyNOCID);
         }
         public List<SocietyMasterDataModel> GetSocietyByID(int SocietyID)
         {
