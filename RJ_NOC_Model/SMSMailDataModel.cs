@@ -51,6 +51,7 @@ namespace RJ_NOC_Model
         public string Language { get; set; }
         public string Message { get; set; }
         public List<string> MobileNo { get; set; }
+        public string templateID { get; set; }
     }
     public class SmsResponseModel
     {

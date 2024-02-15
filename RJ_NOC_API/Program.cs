@@ -102,8 +102,12 @@ namespace RJ_NOC_API
 
             builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
             {
-                builder.WithOrigins("http://172.22.33.75:80", "http://172.22.33.75:81", "http://172.22.33.75", "https://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in/API", "http://rajonc.rajasthan.gov.in").AllowAnyMethod().AllowAnyHeader();
-
+                builder.WithOrigins("http://172.22.33.75:80", "http://172.22.33.75:81", "http://172.22.33.75", "https://nocapi.rajasthan.gov.in", "https://nocapi.rajasthan.gov.in/API",
+                    "http://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in/API", "http://rajnoc.rajasthan.gov.in", "https://rajnoc.rajasthan.gov.in",
+                    "http://rajkisan.rajasthan.gov.in", "https://rajkisan.rajasthan.gov.in", "https://103.122.36.192", "http://172.21.81.57", "https://172.21.81.57","http://172.21.81.57/API", "https://172.21.81.57/API",
+                    "http://103.122.36.192", "https://rajasthan.gov.in", "http://rajasthan.gov.in", "https://nocapi.rajasthan.gov.in/API/api/AadharService/SendAadharOTP",
+                    "https://rajkisan.rajasthan.gov.in/Service/ChatBotAppService", "http://rajkisan.rajasthan.gov.in/Service/ChatBotAppService").AllowAnyMethod().AllowAnyHeader();
+                //builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 //builder.WithOrigins("https://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in", "http://nocapi.rajasthan.gov.in/API").AllowAnyMethod().AllowAnyHeader();
             }));
 
@@ -111,7 +115,7 @@ namespace RJ_NOC_API
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
-            builder.Services.AddDirectoryBrowser();
+            //builder.Services.AddDirectoryBrowser();
             builder.Services.AddMvc();
             builder.Services.AddSystemWebAdapters();
 
@@ -153,31 +157,11 @@ namespace RJ_NOC_API
                                 Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF")),
                 RequestPath = "/SystemGeneratedPDF"
             });
-            //Enable directory browsing
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                            Path.Combine(Directory.GetCurrentDirectory(), "ImageFile")),
-                RequestPath = "/ImageFile"
-            }); 
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                            Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF")),
-                RequestPath = "/SystemGeneratedPDF"
-            });
-
-            //app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //                Path.Combine(Directory.GetCurrentDirectory(), "DecFiles")),
-            //    RequestPath = "/DecFiles"
-            //});
             app.UseSession();
             app.UseCookiePolicy();
             app.UseRouting();
             app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-            //app.UseCors("corsapp");
+            //app.UseCors("corsapp");            
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

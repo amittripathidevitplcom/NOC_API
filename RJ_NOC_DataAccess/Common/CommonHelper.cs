@@ -208,7 +208,8 @@ namespace RJ_NOC_DataAccess.Common
                     Message = Message,
                     MobileNo = new List<string> { MobileNo },
                     ServiceName = sMSConfigurationSetting.ServiceName,
-                    UniqueID = sMSConfigurationSetting.UniqueID
+                    UniqueID = sMSConfigurationSetting.UniqueID,
+                    templateID = TemplateID
                 };
 
                 var response = string.Empty;

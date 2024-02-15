@@ -30,7 +30,7 @@ namespace RJ_NOC_Model
         public string StaffStatus { get; set; }
         public string PFDeduction { get; set; }
         public string ESINumber { get; set; }
-        public string UANNumber { get; set; }
+        public string? UANNumber { get; set; }
         public string ResearchGuide { get; set; }
         public int? ProfessionalQualificationID { get; set; }
         public string? StreamSubject { get; set; }
@@ -42,11 +42,11 @@ namespace RJ_NOC_Model
         public string? ProfilePhoto_Dis_FileName { get; set; }
         public string AadhaarCard { get; set; }
         public string? AadhaarCardPath { get; set; }
-        public string? AadhaarCard_Dis_FileName  { get; set; }
+        public string? AadhaarCard_Dis_FileName { get; set; }
         public string PANCard { get; set; }
         public string PANNo { get; set; }
         public string? PANCardPath { get; set; }
-        public string? PANCard_Dis_FileName  { get; set; }
+        public string? PANCard_Dis_FileName { get; set; }
         public string ExperienceCertificate { get; set; }
         public string? ExperienceCertificatePath { get; set; }
         public string? ExperienceCertificate_Dis_FileName { get; set; }
@@ -66,6 +66,12 @@ namespace RJ_NOC_Model
         public string? S_Remark { get; set; }
         public string? Gender { get; set; }
         public List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails { get; set; }
+    }
+    public class StaffDetailDataModel_Excel
+    {
+        public string FileName { get; set; }
+        public List<StaffDetailDataModel> AllStaffExcelData { get; set; }
+
     }
 
     public class EducationalQualificationDetails_StaffDetail

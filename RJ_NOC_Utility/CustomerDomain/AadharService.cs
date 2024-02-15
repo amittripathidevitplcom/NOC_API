@@ -18,6 +18,7 @@ using Newtonsoft.Json.Linq;
 using static System.Net.WebRequestMethods;
 using System.ServiceModel.Channels;
 using System.Collections;
+using Newtonsoft.Json;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -115,7 +116,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             {
                 errormsg = "Fill Aadhar ID!";
             }
-            dt.Rows.Add(new Object[] { _txnid});
+            dt.Rows.Add(new Object[] { _txnid });
             return dt;
         }
 
@@ -574,64 +575,79 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         #endregion
 
-        public string eSignPDF(string PDFFileName, string OTPTransactionID,int DepartmentID, int ParamID, IConfiguration _configuration)
+        public string eSignPDF(string PDFFileName, string OTPTransactionID, int DepartmentID, int ParamID, IConfiguration _configuration)
         {
             string pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF") + "/" + PDFFileName;
-            var str = GenerateEsign_PDF(pdfPath, OTPTransactionID,  DepartmentID,  ParamID, "MSKY", _configuration);
+            var str = GenerateEsign_PDF(pdfPath, OTPTransactionID, DepartmentID, ParamID, "MSKY", _configuration);
             return str;
         }
 
         public string GenerateEsign_PDF(string pdfPath, string txn, int DepartmentID, int ParamID, string formType, IConfiguration _configuration)
         {
-           
             string final_status = "";
             string final_document = "";
             string succmsg = string.Empty;
-            byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfPath);
-            string pdfBase64 = Convert.ToBase64String(pdfBytes);
-            string url = _configuration["AadharServiceDetails:eSignMultipleSignAgri"].ToString();
-            string json2 = "";
+            try
+            {
 
-            if (DepartmentID == 5)
-            {
-                json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"370\",\"lly\":\"230\",\"positionX\":\"420\",\"positionY\":\"170\",\"mode\":\"1\"}";
-            }
-            else
-            {
-                json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"350\",\"lly\":\"100\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
-            }
-            string ss2 = WebRequestinJson(url, json2, "application/json");
-            // string ss2 = WebRequestinJson(url, json2, "multipart/form-data");
-            JObject root2 = (JObject)JObject.Parse(ss2);
-            foreach (var item in root2)
-            {
-                if (item.Key.ToLower() == "status")
+                byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfPath);
+                string pdfBase64 = Convert.ToBase64String(pdfBytes);
+                string url = _configuration["AadharServiceDetails:eSignMultipleSignAgri"].ToString();
+                string json2 = "";
+
+                if (DepartmentID == 5)
                 {
-                    final_status = item.Value.ToString();
+                    json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"370\",\"lly\":\"230\",\"positionX\":\"420\",\"positionY\":\"170\",\"mode\":\"1\"}";
                 }
-                if (item.Key.ToLower() == "errormessage")
+                else
                 {
-                    if (item.Value.ToString() == "The signature already exists")
+                    json2 = "{\"inputJson\":{\"File\":\"" + pdfBase64 + "\"},\"transactionid\":\"" + txn + "\",\"docname\":\"" + Path.GetFileName(pdfPath) + "\",\"designation\": \"\",\"status\":\"SelfAttested\",\"llx\":\"350\",\"lly\":\"100\",\"positionX\":\"50\",\"positionY\":\"100\",\"mode\":\"1\"}";
+                }
+                string ss2 = WebRequestinJson(url, json2, "application/json");
+                CommonDataAccessHelper.Insert_ErrorLog("AadharService.GenerateEsign_PDF", ss2);
+                // string ss2 = WebRequestinJson(url, json2, "multipart/form-data");
+                JObject root2 = (JObject)JObject.Parse(ss2);
+                foreach (var item in root2)
+                {
+                    if (item.Key.ToLower() == "status")
                     {
+                        final_status = item.Value.ToString();
+                    }
+                    else if (item.Key.ToLower() == "errormessage")
+                    {
+                        if (item.Value.ToString() == "The signature already exists")
+                        {
+                            succmsg = "Success";
+                        }
+
+                    }
+                    else if (item.Key.ToLower() == "document")
+                    {
+                        final_document = item.Value.ToString().Replace("\"", "");
+                        byte[] sPDFDecoded = Convert.FromBase64String(final_document);
+                        string filepath = string.Empty;
+                        filepath = "SystemGeneratedPDF/" + Path.GetFileName(pdfPath);
+
+                        filepath = Path.Combine(Directory.GetCurrentDirectory(), filepath); //System.Web.Hosting.HostingEnvironment.MapPath("~/" + filepath);
+                        FileStream stream = new FileStream(filepath, FileMode.Create);
+                        BinaryWriter writer = new BinaryWriter(stream);
+                        writer.Write(sPDFDecoded, 0, sPDFDecoded.Length);
+                        writer.Close();
+                        FileInfo fi = new FileInfo(filepath);
                         succmsg = "Success";
                     }
-                    
+                    else
+                    {
+                        //CommonDataAccessHelper.Insert_ErrorLog("AadharService.GenerateEsign_PDF", ss2);
+                    }
                 }
-                if (item.Key.ToLower() == "document")
-                {
-                    final_document = item.Value.ToString().Replace("\"", "");
-                    byte[] sPDFDecoded = Convert.FromBase64String(final_document);
-                    string filepath = string.Empty;
-                    filepath = "SystemGeneratedPDF/" + Path.GetFileName(pdfPath);
 
-                    filepath = Path.Combine(Directory.GetCurrentDirectory(), filepath); //System.Web.Hosting.HostingEnvironment.MapPath("~/" + filepath);
-                    FileStream stream = new FileStream(filepath, FileMode.Create);
-                    BinaryWriter writer = new BinaryWriter(stream);
-                    writer.Write(sPDFDecoded, 0, sPDFDecoded.Length);
-                    writer.Close();
-                    FileInfo fi = new FileInfo(filepath);
-                    succmsg = "Success";
-                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AadharService.GenerateEsign_PDF", ex.ToString());
+                succmsg = ex.Message.ToString();
+                throw;
             }
             return succmsg;
         }
@@ -669,6 +685,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             catch (WebException wex)
             {
+                CommonDataAccessHelper.Insert_ErrorLog("AadharService.WebRequestinJson", wex.ToString());
             }
             return ret;
         }

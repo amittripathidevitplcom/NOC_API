@@ -24,10 +24,10 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.StaffDetailID,request.CollegeID,request.RoleID);
+                IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.StaffDetailID, request.CollegeID, request.RoleID);
                 if (IfExits == false)
                 {
-                    result.Data= await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData(request));
+                    result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData(request));
                     if (result.Data)
                     {
                         result.State = OperationState.Success;
@@ -54,7 +54,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage ="Principal is Already Exist, It Can't Not Be Duplicate.!";
+                    result.ErrorMessage = "Principal is Already Exist, It Can't Not Be Duplicate.!";
                 }
             }
             catch (Exception e)
@@ -71,13 +71,68 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpPost("SaveData_ExcelData")]
+        public async Task<OperationResult<bool>> SaveData_ExcelData( StaffDetailDataModel_Excel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                //bool IfExits = false;
+                //IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.StaffDetailID, request.CollegeID, request.RoleID);
+                //if (IfExits == false)
+                //{
+                result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData_ExcelData(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    //if (request.StaffDetailID == 0)
+                    //{
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "Save", 0, "LegalEntity");
+                    result.SuccessMessage = "Saved successfully .!";
+                    //}
+                    //else
+                    //{
+                    //    CommonDataAccessHelper.Insert_TrnUserLog(request.StaffDetailID, "Update", request.StaffDetailID, "LegalEntity");
+                    //    result.SuccessMessage = "Updated successfully .!";
+                    //}
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error adding data.!";
+                }
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //    result.ErrorMessage = "Principal is Already Exist, It Can't Not Be Duplicate.!";
+                //}
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("StaffDetailController.SaveData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
         [HttpGet("GetStaffDetailList_DepartmentCollegeWise/{DepartmentID}/{CollegeID}/{StaffDetailID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<StaffDetailDataModel>>> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID,int ApplyNOCID)
+        public async Task<OperationResult<List<StaffDetailDataModel>>> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID, int ApplyNOCID)
         {
             var result = new OperationResult<List<StaffDetailDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.GetStaffDetailList_DepartmentCollegeWise(DepartmentID,CollegeID,StaffDetailID, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.GetStaffDetailList_DepartmentCollegeWise(DepartmentID, CollegeID, StaffDetailID, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -143,7 +198,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_DataSet>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.GetStaffDetailListForPDF( DepartmentID, CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.GetStaffDetailListForPDF(DepartmentID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
