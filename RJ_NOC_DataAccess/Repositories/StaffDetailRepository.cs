@@ -21,7 +21,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public bool IfExistsPrincipal(int StaffDetailID, int CollegeID, int DesignationID)
         {
-            string SqlQuery = " USP_IfExistsPrincipalStaffDetail @CollegeID='"+CollegeID+ "',@StaffDetailID='" + StaffDetailID + "',@DesignationID='" + DesignationID + "'";
+            string SqlQuery = " USP_IfExistsPrincipalStaffDetail @CollegeID='" + CollegeID + "',@StaffDetailID='" + StaffDetailID + "',@DesignationID='" + DesignationID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StaffDetail.IfExistsPrincipal");
             if (dataTable.Rows.Count > 0)
@@ -33,11 +33,11 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 
-            string EducationalQualificationDetail_Str = request.EducationalQualificationDetails.Count>0? CommonHelper.GetDetailsTableQry(request.EducationalQualificationDetails, "Temp_EducationalQualificationDetail_StaffDetail") :"";
+            string EducationalQualificationDetail_Str = request.EducationalQualificationDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.EducationalQualificationDetails, "Temp_EducationalQualificationDetail_StaffDetail") : "";
             string SqlQuery = " exec USP_SaveStaffDetail_IU  ";
-            SqlQuery += "@StaffDetailID='"+request.StaffDetailID+"',@TeachingType='"+request.TeachingType+"',@SubjectID='"+request.SubjectID+"',@PersonName='"+request.PersonName+"',@RoleID='"+request.RoleID+"',@MobileNo='"+request.MobileNo+"',@Email='"+request.Email+"',";
-            SqlQuery += "@HighestQualification='"+request.HighestQualification+"',@NumberofExperience='"+request.NumberofExperience+"',@AadhaarNo='"+request.AadhaarNo+"',@DateOfBirth='"+request.DateOfBirth+"',@DateOfAppointment='"+request.DateOfAppointment+"',@DateOfJoining='"+request.DateOfJoining+"',";
-            SqlQuery += "@SpecializationSubject='"+request.SpecializationSubject+"',@RoleMapping='"+request.RoleMapping+"',@Salary='"+request.Salary+"',@StaffStatus='"+request.StaffStatus+"',@PFDeduction='"+request.PFDeduction+"',@UANNumber='"+request.UANNumber+"',@ResearchGuide='"+request.ResearchGuide+"',";
+            SqlQuery += "@StaffDetailID='" + request.StaffDetailID + "',@TeachingType='" + request.TeachingType + "',@SubjectID='" + request.SubjectID + "',@PersonName='" + request.PersonName + "',@RoleID='" + request.RoleID + "',@MobileNo='" + request.MobileNo + "',@Email='" + request.Email + "',";
+            SqlQuery += "@HighestQualification='" + request.HighestQualification + "',@NumberofExperience='" + request.NumberofExperience + "',@AadhaarNo='" + request.AadhaarNo + "',@DateOfBirth='" + request.DateOfBirth + "',@DateOfAppointment='" + request.DateOfAppointment + "',@DateOfJoining='" + request.DateOfJoining + "',";
+            SqlQuery += "@SpecializationSubject='" + request.SpecializationSubject + "',@RoleMapping='" + request.RoleMapping + "',@Salary='" + request.Salary + "',@StaffStatus='" + request.StaffStatus + "',@PFDeduction='" + request.PFDeduction + "',@UANNumber='" + request.UANNumber + "',@ResearchGuide='" + request.ResearchGuide + "',";
             SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "',@Gender='" + request.Gender + "',@ESINumber='" + request.ESINumber + "',@PANNo='" + request.PANNo + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StaffDetail.SaveData");
             if (Rows > 0)
@@ -98,7 +98,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
                     dataModels.Salary = Convert.ToDecimal(dataSet.Tables[0].Rows[0]["Salary"]);
                     dataModels.RoleName = dataSet.Tables[0].Rows[0]["RoleName"].ToString();
-                    dataModels.CreatedBy = Convert.ToInt32( dataSet.Tables[0].Rows[0]["CreatedBy"]);
+                    dataModels.CreatedBy = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CreatedBy"]);
                     dataModels.ModifyBy = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ModifyBy"]);
                     dataModels.IPAddress = dataSet.Tables[0].Rows[0]["IPAddress"].ToString();
                     dataModels.HighestQualificationName = dataSet.Tables[0].Rows[0]["HighestQualificationName"].ToString();
@@ -117,7 +117,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public bool DeleteStaffDetail(int StaffDetailID)
         {
-            string SqlQuery = "exec USP_DeleteStaffDetail @StaffDetailID='"+ StaffDetailID + "'";
+            string SqlQuery = "exec USP_DeleteStaffDetail @StaffDetailID='" + StaffDetailID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StaffDetail.DeleteStaffDetail");
             if (Rows > 0)
                 return true;
@@ -140,6 +140,31 @@ namespace RJ_NOC_DataAccess.Repositories
             }
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+
+
+        public bool SaveData_ExcelData(StaffDetailDataModel_Excel request_Model)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = "";
+            foreach (var request in request_Model.AllStaffExcelData)
+            {
+                string EducationalQualificationDetail_Str = request.EducationalQualificationDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.EducationalQualificationDetails, "Temp_EducationalQualificationDetail_StaffDetail") : "";
+                 
+                SqlQuery += " exec USP_SaveStaffDetail_IU  ";
+                SqlQuery += "@StaffDetailID='" + request.StaffDetailID + "',@TeachingType='" + request.TeachingType + "',@SubjectID='" + request.SubjectID + "',@PersonName='" + request.PersonName + "',@RoleID='" + request.RoleID + "',@MobileNo='" + request.MobileNo + "',@Email='" + request.Email + "',";
+                SqlQuery += "@HighestQualification='" + request.HighestQualification + "',@NumberofExperience='" + request.NumberofExperience + "',@AadhaarNo='" + request.AadhaarNo + "',@DateOfBirth='" + request.DateOfBirth + "',@DateOfAppointment='" + request.DateOfAppointment + "',@DateOfJoining='" + request.DateOfJoining + "',";
+                SqlQuery += "@SpecializationSubject='" + request.SpecializationSubject + "',@RoleMapping='" + request.RoleMapping + "',@Salary='" + request.Salary + "',@StaffStatus='" + request.StaffStatus + "',@PFDeduction='" + request.PFDeduction + "',@UANNumber='" + request.UANNumber + "',@ResearchGuide='" + request.ResearchGuide + "',";
+                SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "',@Gender='" + request.Gender + "',@ESINumber='" + request.ESINumber + "',@PANNo='" + request.PANNo + "'";
+
+            }
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "StaffDetail.SaveData_ExcelData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

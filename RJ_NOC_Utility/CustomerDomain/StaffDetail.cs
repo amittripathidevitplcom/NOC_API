@@ -38,5 +38,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffDetailRepository.GetStaffDetailListForPDF(DepartmentID,  CollegeID);
         }
+
+        public bool SaveData_ExcelData(StaffDetailDataModel_Excel request)
+        {
+            return UnitOfWork.StaffDetailRepository.SaveData_ExcelData(request);
+        }
     }
 }

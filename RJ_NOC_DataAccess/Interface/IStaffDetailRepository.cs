@@ -11,6 +11,7 @@ namespace RJ_NOC_DataAccess.Interface
     {
         bool IfExistsPrincipal(int StaffDetailID, int CollegeID,int DesignationID);
         bool SaveData(StaffDetailDataModel request);
+        bool SaveData_ExcelData(StaffDetailDataModel_Excel request);
         List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID,int CollegeID,int StaffDetailID,int ApplyNOCID);
         bool DeleteStaffDetail(int StaffDetailID);
         List<CommonDataModel_DataSet> GetStaffDetailListForPDF(int DepartmentID, int CollegeID);

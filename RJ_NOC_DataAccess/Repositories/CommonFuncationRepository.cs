@@ -723,7 +723,7 @@ namespace RJ_NOC_DataAccess.Repository
                 }
                 dataModels.Add(datamodel);
             }
-            return dataModels;
+            return dataModels; 
         }
 
         public List<CommonDataModel_DesignationDDL> GetAllDesignation()
