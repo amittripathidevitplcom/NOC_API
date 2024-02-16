@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet1">
+    <DataSet Name="DTE_ConsolidatedReport">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -76,7 +76,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>C:\Rishi kapoor\Running Project\NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Deepak Project\API15022024\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>DTE_ConsolidatedReport_Details</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -797,14 +797,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="AmountAndDetails">
+                        <Textbox Name="AffiliatingUniversity">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!AmountAndDetails.Value</Value>
+                                  <Value>=Fields!AffiliatingUniversity.Value</Value>
                                   <Style>
                                     <FontFamily>times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -814,7 +814,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>AmountAndDetails</rd:DefaultName>
+                          <rd:DefaultName>AffiliatingUniversity</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -826,6 +826,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -954,11 +955,11 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>DataSet1</DataSetName>
+            <DataSetName>DTE_ConsolidatedReport</DataSetName>
             <Top>3.5687cm</Top>
             <Left>0.28787cm</Left>
             <Height>1.70271cm</Height>
-            <Width>16.52042cm</Width>
+            <Width>16.52043cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
