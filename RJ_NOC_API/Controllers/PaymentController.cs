@@ -924,6 +924,7 @@ namespace RJ_NOC_API.Controllers
                 result.Data.ENCDATA = ENCDATA1;
                 result.Data.AUIN = PRN;
                 //result.Data.PaymentRequestURL = "https://egras.rajasthan.gov.in/samplemerchantprelogin.aspx";
+
                 result.Data.PaymentRequestURL = "http://10.68.69.46:62778/api/Payment/GRAS_PaymentRequest";
 
                  
