@@ -104,7 +104,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.QualificationMasterUtility.IfExists(request.QualificationID, request.DepartmentID,  request.QualificationName);
+                IfExits = UtilityHelper.QualificationMasterUtility.IfExists(request.QualificationID, request.DepartmentID,  request.QualificationName,request.IsTeaching);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.QualificationMasterUtility.SaveData(request));

@@ -14,7 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(QualificationMasterDataModel request);
         bool DeleteData(int QualificationID);
 
-        bool IfExists(int QualificationID, int DepartmentID, string QualificationName);
+        bool IfExists(int QualificationID, int DepartmentID, string QualificationName, string Type);
     }
 }
 
