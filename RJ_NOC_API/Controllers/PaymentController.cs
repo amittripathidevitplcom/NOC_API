@@ -964,6 +964,36 @@ namespace RJ_NOC_API.Controllers
         }
         #endregion
 
-
+        [HttpGet("GetOfflinePaymentDetails/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetOfflinePaymentDetails(int CollegeID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetOfflinePaymentDetails(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetOfflinePaymentDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
