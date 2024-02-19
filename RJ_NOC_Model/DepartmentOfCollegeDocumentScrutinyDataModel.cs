@@ -127,4 +127,16 @@ namespace RJ_NOC_Model
         public int ApplicationStatusID { get; set; }
         public int YearNewExistingID { get; set; }
     }
-}
+
+
+    public class GrievanceReportSearchFilterDataModel
+    {
+
+       
+      public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        
+
+    }
+
+    }

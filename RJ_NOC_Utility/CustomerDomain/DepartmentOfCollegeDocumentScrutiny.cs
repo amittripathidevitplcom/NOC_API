@@ -130,5 +130,11 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetDCENOCReportData(request);
         }
 
+
+        public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetGrievanceReport(FromDate, ToDate);
+        }
+
     }
 }
