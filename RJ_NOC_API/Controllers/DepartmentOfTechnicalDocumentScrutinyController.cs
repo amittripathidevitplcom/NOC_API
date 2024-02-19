@@ -782,7 +782,7 @@ namespace RJ_NOC_API.Controllers
                     ds.Tables[0].Rows[0]["Society_Trust"] = ds.Tables[0].Rows[0]["Society_Trust"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
                     ds.Tables[0].Rows[0]["NameofInstitute"] = ds.Tables[0].Rows[0]["NameofInstitute"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
                     ds.Tables[0].Rows[0]["AmountAndDetails"] = ds.Tables[0].Rows[0]["AmountAndDetails"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
-                    ds.Tables[0].Rows[0]["ActionRequired"] = ds.Tables[0].Rows[0]["ActionRequired"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
+                    ds.Tables[0].Rows[0]["ActionRequired"] = ds.Tables[0].Rows[0]["ActionRequired"].ToString().Replace("||", System.Environment.NewLine+ System.Environment.NewLine).Replace("#", "    ");
                 }
                 localReport.AddDataSource("DTE_ConsolidatedReport", ds.Tables[0]);
 
