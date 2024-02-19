@@ -64,6 +64,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @IsDocCompulsory='" + request.IsDocCompulsory + "',";
             SqlQuery += " @Orderby='" + request.Orderby + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
+            SqlQuery += " @IsTeaching='" + request.IsTeaching + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "QualificationMaster.SaveData");

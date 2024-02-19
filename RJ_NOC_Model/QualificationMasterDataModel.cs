@@ -15,5 +15,6 @@ namespace RJ_NOC_Model
         public int Orderby { get; set; }
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
+        public string IsTeaching { get; set; }
     }
 }

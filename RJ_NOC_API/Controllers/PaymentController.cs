@@ -906,6 +906,7 @@ namespace RJ_NOC_API.Controllers
     
 
 
+                //string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Head_Amount1 + "|N*($%^$#)il^%$OC", keypath);
                 string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Head_Amount1 + "|N*($%^$#)il^%$OC", keypath);
                 //string paystring = "AUIN=" + ds.Tables[0].Rows[0]["AUIN"].ToString() + "|Head_Name1=" + ds.Tables[0].Rows[0]["Head_Name1"].ToString() + "|Head_Amount1=" + ds.Tables[0].Rows[0]["Head_Amount1"].ToString() + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=Abc Chemicals|Discount=0|TotalAmount=100|MerchantCode=32|PaymentMode=N|REGTINNO=302004|Location=" + ds.Tables[0].Rows[0]["Location"].ToString() + "|DistrictCode=" + ds.Tables[0].Rows[0]["DistrictCode"].ToString() + "|OfficeCode=" + ds.Tables[0].Rows[0]["OfficeCode"].ToString() + "|DepartmentCode=32|FromDate=2018/12/03|ToDate=2019/12/31|Address=Jhalana Industrial area jaipur|PIN=302004|City=Jaipur|Remarks=SampleRemark|Filler=A|ChallanYear=1819|Checksum=" + CHECKSUM + "";
 
@@ -923,6 +924,9 @@ namespace RJ_NOC_API.Controllers
                 result.Data.ENCDATA = ENCDATA1;
                 result.Data.AUIN = PRN;
                 result.Data.PaymentRequestURL = "https://egras.rajasthan.gov.in/samplemerchantprelogin.aspx";
+
+                 
+
 
                 //data.Add("Merchant_code", "32");
                 //data.Add("AUIN", ds.Tables[0].Rows[0]["PRN"].ToString());
