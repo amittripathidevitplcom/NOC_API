@@ -129,7 +129,7 @@ namespace RJ_NOC_Model
         public string BankName { get; set; }
         public string BranchName { get; set; }
         public string IFSCCode { get; set; }
-        public int FDRNumber { get; set; }
+        public string FDRNumber { get; set; }
         public decimal FDRAmount { get; set; }
         public string FDRDate { get; set; }
         public string PeriodOfFDR { get; set; }
