@@ -1159,7 +1159,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
+        [HttpGet("CountTotalRevertDCE/{ApplyNOCID}/{RoleID}/{UserID}")]
+        public async Task<OperationResult<int>> CountTotalRevertDCE(int ApplyNOCID,int RoleID,int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "CountTotalRevertDCE", 0, "ApplyNOCController");
+            var result = new OperationResult<int>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.CountTotalRevertDCE(ApplyNOCID, RoleID, UserID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.CountTotalRevertDCE", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 
 }

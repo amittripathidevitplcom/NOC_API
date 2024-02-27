@@ -42,5 +42,6 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
+        int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID);
     }
 }

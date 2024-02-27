@@ -130,6 +130,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutinyLOI(request);
+        }        
+        public int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID)
+        {
+            return UnitOfWork.ApplyNOCRepository.CountTotalRevertDCE(ApplyNOCID,RoleID,UserID);
         }
     }
 }

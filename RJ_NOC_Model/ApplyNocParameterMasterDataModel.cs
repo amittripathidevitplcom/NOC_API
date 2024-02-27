@@ -649,5 +649,9 @@ namespace RJ_NOC_Model
         public string? StreamName { get; set; }
         public string? CourseLevelName { get; set; }
     }
-
+    public class ApplyNoc_MinisterFile
+    {
+        public int ApplyNocID { get; set; }
+        public string? MinisterFile { get; set; }
+    }
 }

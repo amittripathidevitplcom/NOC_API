@@ -810,5 +810,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             return applyNOCCourseList;
         }
+        public bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNocMinisterFile(request);
+        }
+
     }
 }
