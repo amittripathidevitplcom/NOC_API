@@ -65,9 +65,9 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        public List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID, string Type)
         {
-            string SqlQuery = " exec USP_APPApplicationCollege_DashboardCount @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = " exec USP_APPApplicationCollege_DashboardCount @LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.GetAPPApplicationCollege_DashboardCount");
 
@@ -96,6 +96,35 @@ namespace RJ_NOC_DataAccess.Repositories
                 return true;
             else
                 return false;
+        }
+        public bool ReadNotification(NotificationDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("@NotificationID='{0}'", request.NotificationID);
+
+            string SqlQuery = $" exec USP_UpdateNotification  {sb.ToString()}";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "GeoTagging.ReadNotification");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<CommonDataModel_DataTable> AppNotificationList(string LoginSSOID)
+        {
+            string SqlQuery = " exec USP_AppNotificationList @LoginSSOID = '" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.AppNotificationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+
         }
     }
 }

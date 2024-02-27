@@ -26,9 +26,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollegeList(LoginSSOID, Type);
         }
-        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID, string Type)
         {
-            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollege_DashboardCount(LoginSSOID);
+            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollege_DashboardCount(LoginSSOID, Type);
         }
         public bool SaveData(GeoTaggingDataModel request)
         {
@@ -91,6 +91,14 @@ namespace RJ_NOC_Utility.CustomerDomain
                 //return new ServiceResponse() { data = "", IsSuccess = false, Message = "Success" };
             }
             return ssoInfo;
+        }
+        public bool ReadNotification(NotificationDataModel request)
+        {
+            return UnitOfWork.GeoTaggingRepository.ReadNotification(request);
+        }
+        public List<CommonDataModel_DataTable> AppNotificationList(string LoginSSOID)
+        {
+            return UnitOfWork.GeoTaggingRepository.AppNotificationList(LoginSSOID);
         }
     }
 }

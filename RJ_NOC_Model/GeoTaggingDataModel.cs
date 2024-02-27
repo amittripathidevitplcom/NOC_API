@@ -30,5 +30,8 @@ namespace RJ_NOC_Model
         public int ModifyBy { get; set; }
 
     }
-    
+    public class NotificationDataModel
+    {
+        public int NotificationID { get; set; }
+    }
 }
