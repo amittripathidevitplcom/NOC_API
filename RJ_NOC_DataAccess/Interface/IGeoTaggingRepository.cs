@@ -15,5 +15,6 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(GeoTaggingDataModel request);
         bool ReadNotification(NotificationDataModel request);
         List<CommonDataModel_DataTable> AppNotificationList(string LoginSSOID);
+        bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request);
     }
 }

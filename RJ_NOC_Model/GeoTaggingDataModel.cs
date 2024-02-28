@@ -34,4 +34,15 @@ namespace RJ_NOC_Model
     {
         public int NotificationID { get; set; }
     }
+    public class InspectionGeoTaggingDataModel
+    {
+        public int ApplicationID { get; set; }
+        public string GT_Image1 { get; set; }
+        public string GT_Image2 { get; set; }
+        public string GT_Latitude { get; set; }
+        public string GT_Longitude { get; set; }
+        public bool IsGeoTagging { get; set; }
+        public int GT_CreatedBy { get; set; }
+
+    }
 }

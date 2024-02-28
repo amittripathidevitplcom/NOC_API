@@ -300,5 +300,34 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("SaveInspectionGeoTagging")]
+        public async Task<OperationResult<bool>> SaveInspectionGeoTagging([FromBody] InspectionGeoTaggingDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.SaveInspectionGeoTagging(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.GT_CreatedBy, "Save", 0, "SaveInspectionGeoTagging");
+                    result.SuccessMessage = "Saved successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error updating data.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("GeoTaggingController.SaveInspectionGeoTagging", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+
+            }
+            return result;
+        }
     }
 }

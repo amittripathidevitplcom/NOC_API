@@ -126,5 +126,24 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
         }
+
+        public bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("@ApplicationID='{0}',", request.ApplicationID);
+            sb.AppendFormat("@GT_Latitude='{0}',", request.GT_Latitude);
+            sb.AppendFormat("@GT_Longitude='{0}',", request.GT_Longitude);
+            sb.AppendFormat("@GT_Image1='{0}',", request.GT_Image1);
+            sb.AppendFormat("@GT_Image2='{0}',", request.GT_Image2);
+            sb.AppendFormat("@GT_CreatedBy='{0}'", request.GT_CreatedBy);
+            string SqlQuery = $" exec USP_APPApplicationCollege_Add  {sb.ToString()}";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "GeoTagging.SaveInspectionGeoTagging");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

@@ -100,5 +100,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.GeoTaggingRepository.AppNotificationList(LoginSSOID);
         }
+        public bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request)
+        {
+            return UnitOfWork.GeoTaggingRepository.SaveInspectionGeoTagging(request);
+        }
     }
 }
