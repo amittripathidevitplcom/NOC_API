@@ -10,7 +10,7 @@ namespace RJ_NOC_Model
 {
     public class GeoTaggingDataModels
     {
-        public DataTable data { get; set; }       
+        public DataTable data { get; set; }
     }
     public class GeoTaggingDataModel
     {
@@ -19,8 +19,9 @@ namespace RJ_NOC_Model
         //public string UserName { get; set; }
         //public string Token { get; set; }
         //public string Type { get; set; }
+        public string Geo_Type { get; set; } = "UpdateCollegeData";
         public int CollegeID { get; set; }
-        public int DepartmentID { get; set; }       
+        public int DepartmentID { get; set; }
         public string Image1 { get; set; }
         public string Image2 { get; set; }
         public string? TGC_Latitude { get; set; }
@@ -30,6 +31,8 @@ namespace RJ_NOC_Model
         public int ModifyBy { get; set; }
 
     }
+
+}
     public class NotificationDataModel
     {
         public int NotificationID { get; set; }
