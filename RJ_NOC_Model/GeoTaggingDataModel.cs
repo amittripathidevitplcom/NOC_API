@@ -32,7 +32,7 @@ namespace RJ_NOC_Model
 
     }
 
-}
+
     public class NotificationDataModel
     {
         public int NotificationID { get; set; }

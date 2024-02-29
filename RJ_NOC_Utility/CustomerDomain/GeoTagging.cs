@@ -22,13 +22,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.GeoTaggingRepository.AppCollegeSSOLogin(LoginSSOID);
         }
-        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollegeList(string LoginSSOID, string Type, string ViewType)
         {
-            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollegeList(LoginSSOID, Type);
+            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollegeList(LoginSSOID, Type,ViewType);
         }
         List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID, string Type)
         {
             return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollege_DashboardCount(LoginSSOID, Type);
+        }
+        List<CommonDataModel_DataTable> IGeoTagging.AppNotGetCollegeWiseAllDocumnetsificationList(int CollegeID)
+        {
+            return UnitOfWork.GeoTaggingRepository.AppNotGetCollegeWiseAllDocumnetsificationList(  CollegeID);
         }
         public bool SaveData(GeoTaggingDataModel request)
         {

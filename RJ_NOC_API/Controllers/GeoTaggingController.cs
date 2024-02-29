@@ -103,14 +103,14 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetAPPApplicationCollegeList/{LoginSSOID}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        [HttpGet("GetAPPApplicationCollegeList/{LoginSSOID}/{Type}/{ViewType}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAPPApplicationCollegeList(string LoginSSOID, string Type, string ViewType)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "GetAllData", 0, "GeoTagging");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.GetAPPApplicationCollegeList(LoginSSOID, Type));
+                result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.GetAPPApplicationCollegeList(LoginSSOID, Type, ViewType));
                 result.State = OperationState.Success;
                 if (result.Data[0].data != null)
                 {
@@ -329,5 +329,50 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpPost("GetCollegeWiseAllDocumnets/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> AppNotGetCollegeWiseAllDocumnetsificationList(int CollegeID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "AppNotGetCollegeWiseAllDocumnetsificationList", 0, "GeoTagging");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppNotGetCollegeWiseAllDocumnetsificationList(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data[0].data != null)
+                {
+                    if (result.Data[0].data.Rows.Count > 0)
+                    {
+                        result.State = OperationState.Success;
+                        result.SuccessMessage = "Data Load successfully  .!";
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "No record found.!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("GeoTaggingController.AppNotGetCollegeWiseAllDocumnetsificationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
     }
 }
