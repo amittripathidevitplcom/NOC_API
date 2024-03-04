@@ -18,9 +18,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CourseMasterRepository.GetAllCourse(LoginSSOID, CollegeID);
         }
-        public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID, int CollegeID)
+        public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID, int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.CourseMasterRepository.GetAllCourseDTE(LoginSSOID,  CollegeWiseCourseID,  CollegeID);
+            return UnitOfWork.CourseMasterRepository.GetAllCourseDTE(LoginSSOID,  CollegeWiseCourseID,  CollegeID, ApplyNOCID);
         }
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
