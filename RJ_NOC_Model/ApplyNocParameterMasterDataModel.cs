@@ -184,6 +184,8 @@ namespace RJ_NOC_Model
 
         public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
         public string? ManagementType { get; set; }
+        public string? GenerateReceipt_DTE { get; set; }
+        public string? GenerateReceiptPath_DTE { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 
