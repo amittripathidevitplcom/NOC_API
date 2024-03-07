@@ -660,6 +660,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
+        {
+            string SqlQuery = " Exec USP_ActivityMaster_GetList_DepartmentCollegeWise @DepartmentID='" + DepartmentID.ToString() + "',@CollegeID='" + CollegeID.ToString() + "',@FacilitieID='" + FacilitieID.ToString() + "',@Type='" + Type + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetActivityMasterList_DepartmentCollegeAndTypeWise");
+
+            List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> dataModels = new List<CommonDataModel_ActivityMasterDepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ActivityMasterDepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
         {
             string SqlQuery = " Exec USP_FacilitiesMaster_GetList @FacilitieID='" + FacilitieID.ToString() + "'";

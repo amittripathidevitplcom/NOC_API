@@ -5,6 +5,7 @@ using RJ_NOC_DataAccess.Interface;
 using Microsoft.Extensions.Configuration;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Repositories;
+using System.Diagnostics;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -405,6 +406,16 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return userManualDocumentMasterRepository; }
         }
+
+        private IActivityDetailsRepository activityDetailsRepository;
+        public IActivityDetailsRepository ActivityDetailsRepository
+        {
+            get { return activityDetailsRepository; }
+        }
+        /// <summary>
+        /// /////////
+        /// </summary>
+        /// <param name="commonHelper"></param>
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -470,6 +481,7 @@ namespace RJ_NOC_DataAccess.Repository
             departmentoftechnicaldocumentscrutinyrepository = new DepartmentOfTechnicalDocumentScrutinyRepository(commonHelper);
             dTECommitteeMasterRepository = new DTECommitteeMasterRepository(commonHelper);
             userManualDocumentMasterRepository = new UserManualDocumentMasterRepository(commonHelper);
+            activityDetailsRepository = new ActivityDetailsRepository(commonHelper);
         }
     }
 }

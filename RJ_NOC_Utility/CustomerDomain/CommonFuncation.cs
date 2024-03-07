@@ -267,6 +267,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
         }
+        public List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetActivityMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
+        }
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
         {
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);

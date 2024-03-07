@@ -80,5 +80,6 @@ namespace RJ_NOC_Utility
         IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; }
         IDTECommitteeMaster DTECommitteeMasterUtility { get; }
         IUserManualDocumentMaster UserManualDocumentMasterUtility { get; }
+        IActivityDetails ActivityDetailsUtility { get; }
     }
 }

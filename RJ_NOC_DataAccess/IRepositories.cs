@@ -77,5 +77,6 @@ namespace RJ_NOC_DataAccess.Interface
         IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository { get; }
         IDTECommitteeMasterRepository DTECommitteeMasterRepository { get; }
         IUserManualDocumentMasterRepository UserManualDocumentMasterRepository { get; }
+        IActivityDetailsRepository ActivityDetailsRepository { get; }
     }
 }
