@@ -776,12 +776,15 @@ namespace RJ_NOC_API.Controllers
                 //dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
                 ReportPath += "\\ConsolidatedReport_DTE.rdlc";
                 localReport = new LocalReport(ReportPath);
-                ds.Tables[0].Rows[0]["ApplicationNoAndSubmitDate"] = ds.Tables[0].Rows[0]["ApplicationNoAndSubmitDate"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
-                ds.Tables[0].Rows[0]["AppliedNOC"] = ds.Tables[0].Rows[0]["AppliedNOC"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
-                ds.Tables[0].Rows[0]["NameAddressEmailPhone"] = ds.Tables[0].Rows[0]["NameAddressEmailPhone"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
-
-                localReport.AddDataSource("GenerateReceiptDataSet", ds.Tables[0]);
-                localReport.AddDataSource("GeneralDetails_DTE", ds.Tables[1]);
+                if (ds != null)
+                {
+                    ds.Tables[0].Rows[0]["FormNo_Date"] = ds.Tables[0].Rows[0]["FormNo_Date"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
+                    ds.Tables[0].Rows[0]["Society_Trust"] = ds.Tables[0].Rows[0]["Society_Trust"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
+                    ds.Tables[0].Rows[0]["NameofInstitute"] = ds.Tables[0].Rows[0]["NameofInstitute"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
+                    ds.Tables[0].Rows[0]["AmountAndDetails"] = ds.Tables[0].Rows[0]["AmountAndDetails"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
+                    ds.Tables[0].Rows[0]["ActionRequired"] = ds.Tables[0].Rows[0]["ActionRequired"].ToString().Replace("||", System.Environment.NewLine+ System.Environment.NewLine).Replace("#", "    ");
+                }
+                localReport.AddDataSource("DTE_ConsolidatedReport", ds.Tables[0]);
 
 
                 //Dictionary<string, string> parameters = new Dictionary<string, string>();

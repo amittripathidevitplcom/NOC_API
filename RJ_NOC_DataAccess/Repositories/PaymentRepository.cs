@@ -413,6 +413,16 @@ namespace RJ_NOC_DataAccess.Repositories
 
         #endregion
 
-
+        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetOfflinePaymentDetails @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetOfflinePaymentDetails");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

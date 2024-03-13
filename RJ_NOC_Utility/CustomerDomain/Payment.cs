@@ -62,6 +62,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.GetRPPTransactionList(Model);
         }
+        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID)
+        {
+            return UnitOfWork.PaymentRepository.GetOfflinePaymentDetails(CollegeID);
+        }
 
         #region "Emitra Section"
         public EmitraRequstParameters GetEmitraServiceDetails(EmitraRequestDetails model)

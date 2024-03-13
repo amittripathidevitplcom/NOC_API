@@ -114,6 +114,15 @@ namespace RJ_NOC_Utility
 
         public IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; private set; }
         public IUserManualDocumentMaster UserManualDocumentMasterUtility { get; private set; }
+        public IActivityDetails ActivityDetailsUtility { get; private set; }
+        public IDTEStatistics_OfficersDetails DTEStatistics_OfficersDetailsUtility { get; private set; }
+
+
+        /// <summary>
+        /// //////////
+        /// </summary>
+        /// <param name="configuration"></param>
+
         public UtilityHelper(IConfiguration configuration)
         {
             UnitOfWork = new CoreRepositories(configuration);
@@ -187,6 +196,8 @@ namespace RJ_NOC_Utility
             DepartmentOfTechnicalScrutinyUtility = new DepartmentOfTechnicalDocumentScrutiny(UnitOfWork);
             DTECommitteeMasterUtility = new DTECommitteeMaster(UnitOfWork);
             UserManualDocumentMasterUtility = new UserManualDocumentMaster(UnitOfWork);
+            ActivityDetailsUtility = new ActivityDetails(UnitOfWork);
+            DTEStatistics_OfficersDetailsUtility = new DTEStatistics_OfficersDetails(UnitOfWork);
         }
     }
 }

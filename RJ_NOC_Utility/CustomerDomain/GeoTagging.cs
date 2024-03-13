@@ -22,13 +22,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.GeoTaggingRepository.AppCollegeSSOLogin(LoginSSOID);
         }
-        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollegeList(string LoginSSOID, string Type, string ViewType)
         {
-            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollegeList(LoginSSOID, Type);
+            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollegeList(LoginSSOID, Type,ViewType);
         }
-        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        List<CommonDataModel_DataTable> IGeoTagging.GetAPPApplicationCollege_DashboardCount(string LoginSSOID, string Type)
         {
-            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollege_DashboardCount(LoginSSOID);
+            return UnitOfWork.GeoTaggingRepository.GetAPPApplicationCollege_DashboardCount(LoginSSOID, Type);
+        }
+        List<CommonDataModel_DataTable> IGeoTagging.AppNotGetCollegeWiseAllDocumnetsificationList(int CollegeID)
+        {
+            return UnitOfWork.GeoTaggingRepository.AppNotGetCollegeWiseAllDocumnetsificationList(  CollegeID);
         }
         public bool SaveData(GeoTaggingDataModel request)
         {
@@ -91,6 +95,18 @@ namespace RJ_NOC_Utility.CustomerDomain
                 //return new ServiceResponse() { data = "", IsSuccess = false, Message = "Success" };
             }
             return ssoInfo;
+        }
+        public bool ReadNotification(NotificationDataModel request)
+        {
+            return UnitOfWork.GeoTaggingRepository.ReadNotification(request);
+        }
+        public List<CommonDataModel_DataTable> AppNotificationList(string LoginSSOID)
+        {
+            return UnitOfWork.GeoTaggingRepository.AppNotificationList(LoginSSOID);
+        }
+        public bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request)
+        {
+            return UnitOfWork.GeoTaggingRepository.SaveInspectionGeoTagging(request);
         }
     }
 }

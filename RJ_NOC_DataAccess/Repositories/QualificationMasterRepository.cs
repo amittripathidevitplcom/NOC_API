@@ -64,6 +64,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @IsDocCompulsory='" + request.IsDocCompulsory + "',";
             SqlQuery += " @Orderby='" + request.Orderby + "',";
             SqlQuery += " @ActiveStatus='" + request.ActiveStatus + "',";
+            SqlQuery += " @IsTeaching='" + request.IsTeaching + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "QualificationMaster.SaveData");
@@ -82,9 +83,9 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool IfExists(int QualificationID, int DepartmentID, string QualificationName)
+        public bool IfExists(int QualificationID, int DepartmentID, string QualificationName,string Type)
         {
-            string SqlQuery = " select QualificationName from M_QualificationMaster Where QualificationName='" + QualificationName.Trim() + "'  and DepartmentID ='" + DepartmentID + "' and QualificationID !='" + QualificationID + "' and DeleteStatus=0";
+            string SqlQuery = " select QualificationName from M_QualificationMaster Where QualificationName='" + QualificationName.Trim() + "'  and DepartmentID ='" + DepartmentID + "' and QualificationID !='" + QualificationID + "' and DeleteStatus=0 and IsTeaching='"+Type+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "QualificationMaster.IfExists");
             if (dataTable.Rows.Count > 0)

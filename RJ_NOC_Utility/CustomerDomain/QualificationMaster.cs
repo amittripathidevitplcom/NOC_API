@@ -32,9 +32,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.QualificationMasterRepository.DeleteData(QualificationID);
         }
 
-        public bool IfExists(int QualificationID, int DistrictID, string QualificationName)
+        public bool IfExists(int QualificationID, int DistrictID, string QualificationName, string Type)
         {
-            return UnitOfWork.QualificationMasterRepository.IfExists(QualificationID, DistrictID, QualificationName);
+            return UnitOfWork.QualificationMasterRepository.IfExists(QualificationID, DistrictID, QualificationName,Type);
         }
 
     }

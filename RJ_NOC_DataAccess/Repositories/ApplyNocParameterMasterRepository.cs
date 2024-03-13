@@ -188,5 +188,15 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveApplyNoc_MinisterFile @ApplyNOCID='" + request.ApplyNocID + "',@MinisterFile='" + request.MinisterFile + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNocParameter.SaveApplyNocMinisterFile");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

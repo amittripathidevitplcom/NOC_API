@@ -37,5 +37,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID);
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
+        int CountTotalRevertDCE(int ApplyNOCID,int RoleID,int UserID);
     }
 }

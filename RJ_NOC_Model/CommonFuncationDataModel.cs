@@ -122,6 +122,14 @@ namespace RJ_NOC_Model
         public string Unit { get; set; }
         public string IsYesNoOption { get; set; }
     }
+    public class CommonDataModel_ActivityMasterDepartmentAndTypeWise
+    {
+        public int ActivityID { get; set; }
+        public string ActivityName { get; set; }
+        public int MinSize { get; set; }
+        public string Unit { get; set; }
+        public string IsYesNoOption { get; set; }
+    }
     //public class CommonDataModel_DashBoard
     //{
     //    public int TotalCollege { get; set; }

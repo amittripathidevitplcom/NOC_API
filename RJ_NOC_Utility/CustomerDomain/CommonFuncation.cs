@@ -267,6 +267,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
         }
+        public List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetActivityMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
+        }
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
         {
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
@@ -279,6 +283,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DesignationDDL> GetAllDesignation()
         {
             return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
+        }
+        public List<CommonDataModel_DesignationDDL> GetDesignation_OfficersDetails(string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDesignation_OfficersDetails(Type);
         }
         public List<CommonDataModel_OccupationDDL> GetAllOccupation()
         {

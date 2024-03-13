@@ -27,6 +27,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID);
 
         List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
-
+        bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request);
     }
 }

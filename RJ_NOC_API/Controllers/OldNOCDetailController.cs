@@ -24,9 +24,9 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits =UtilityHelper.OldNOCDetailUtility.IfExists(request.OldNocID, request.NOCNumber);
-                if (IfExits == false)
-                {
+                //IfExits =UtilityHelper.OldNOCDetailUtility.IfExists(request.OldNocID, request.NOCNumber);
+                //if (IfExits == false)
+                //{
                     result.Data= await Task.Run(() => UtilityHelper.OldNOCDetailUtility.SaveData(request));
                     if (result.Data)
                     {
@@ -50,12 +50,12 @@ namespace RJ_NOC_API.Controllers
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = request.NOCNumber + " is Already Exist, It Can't Not Be Duplicate.!";
-                }
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //    result.ErrorMessage = request.NOCNumber + " is Already Exist, It Can't Not Be Duplicate.!";
+                //}
             }
             catch (Exception e)
             {

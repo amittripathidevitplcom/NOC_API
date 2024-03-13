@@ -453,5 +453,19 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+
+        public int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID)
+        {
+            int Result = -1;
+            string SqlQuery = " exec USP_CountTotalRevertDCE @ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "'";
+            DataTable dt = new DataTable();
+            dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.CountTotalRevertDCE");
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                Result = Convert.ToInt32(dt.Rows[0]["TotalRevertCount"]);
+            }
+            return Result;
+        }
     }
 }

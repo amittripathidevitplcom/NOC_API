@@ -53,9 +53,9 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
         }
-        public List<CommonDataModel_DataTable> GetAPPApplicationCollegeList(string LoginSSOID, string Type)
+        public List<CommonDataModel_DataTable> GetAPPApplicationCollegeList(string LoginSSOID, string Type,string ViewType)
         {
-            string SqlQuery = " exec USP_APPApplicationCollegeList @LoginSSOID='" + LoginSSOID + "',@Type='"+ Type + "'";
+            string SqlQuery = " exec USP_APPApplicationCollegeList @LoginSSOID='" + LoginSSOID + "',@Type='"+ Type + "',@ViewType='"+ ViewType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.GetDataList");
 
@@ -65,9 +65,21 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID)
+        public List<CommonDataModel_DataTable> AppNotGetCollegeWiseAllDocumnetsificationList(int CollegeID)
         {
-            string SqlQuery = " exec USP_APPApplicationCollege_DashboardCount @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = " exec USP_GetCollegeWiseAllDocumnets @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.AppNotGetCollegeWiseAllDocumnetsificationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetAPPApplicationCollege_DashboardCount(string LoginSSOID, string Type)
+        {
+            string SqlQuery = " exec USP_APPApplicationCollege_DashboardCount @LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.GetAPPApplicationCollege_DashboardCount");
 
@@ -87,11 +99,59 @@ namespace RJ_NOC_DataAccess.Repositories
             sb.AppendFormat("@Image2='{0}',", request.Image2);
             sb.AppendFormat("@TGC_Latitude='{0}',", request.TGC_Latitude);
             sb.AppendFormat("@TGC_Longitude='{0}',", request.TGC_Longitude);
-            sb.AppendFormat("@Action='{0}'", "UpdateCollegeData");
+            sb.AppendFormat("@Action='{0}'", request.Geo_Type);
 
             string SqlQuery = $" exec USP_APPApplicationCollege_Add  {sb.ToString()}";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "GeoTagging.SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool ReadNotification(NotificationDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("@NotificationID='{0}'", request.NotificationID);
+
+            string SqlQuery = $" exec USP_UpdateNotification  {sb.ToString()}";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "GeoTagging.ReadNotification");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<CommonDataModel_DataTable> AppNotificationList(string LoginSSOID)
+        {
+            string SqlQuery = " exec USP_AppNotificationList @LoginSSOID = '" + LoginSSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GeoTagging.AppNotificationList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+
+        }
+
+        public bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("@ApplicationID='{0}',", request.ApplicationID);
+            sb.AppendFormat("@GT_Latitude='{0}',", request.GT_Latitude);
+            sb.AppendFormat("@GT_Longitude='{0}',", request.GT_Longitude);
+            sb.AppendFormat("@GT_Image1='{0}',", request.GT_Image1);
+            sb.AppendFormat("@GT_Image2='{0}',", request.GT_Image2);
+            sb.AppendFormat("@GT_CreatedBy='{0}'", request.GT_CreatedBy);
+            string SqlQuery = $" exec USP_AppSaveInspectionGeoTagging  {sb.ToString()}";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "GeoTagging.SaveInspectionGeoTagging");
             if (Rows > 0)
                 return true;
             else

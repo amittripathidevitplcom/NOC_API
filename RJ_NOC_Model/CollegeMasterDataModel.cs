@@ -74,6 +74,7 @@ namespace RJ_NOC_Model
         public string? FundingSourcesPath { get; set; }
         public string? FundingSources_Dis_FileName { get; set; }
         public int? LegalEntityID { get; set; }
+        public string? CollegeLevelName { get; set; }
     }
     public class ContactDetailsDataModel
     {

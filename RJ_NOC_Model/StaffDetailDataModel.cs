@@ -16,7 +16,7 @@ namespace RJ_NOC_Model
         public string PersonName { get; set; }
         public int RoleID { get; set; }
         public string MobileNo { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public int HighestQualification { get; set; }
         public string? HighestQualificationName { get; set; }
         public int NumberofExperience { get; set; }
@@ -43,8 +43,8 @@ namespace RJ_NOC_Model
         public string AadhaarCard { get; set; }
         public string? AadhaarCardPath { get; set; }
         public string? AadhaarCard_Dis_FileName { get; set; }
-        public string PANCard { get; set; }
-        public string PANNo { get; set; }
+        public string? PANCard { get; set; }
+        public string? PANNo { get; set; }
         public string? PANCardPath { get; set; }
         public string? PANCard_Dis_FileName { get; set; }
         public string ExperienceCertificate { get; set; }

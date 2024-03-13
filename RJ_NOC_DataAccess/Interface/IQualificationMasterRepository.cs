@@ -13,7 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<QualificationMasterDataModel> GetQualificationMasterIDWise(int QualificationID);
         bool SaveData(QualificationMasterDataModel request);
         bool DeleteData(int QualificationID);
-        bool IfExists(int QualificationID, int DepartmentID, string QualificationName);
+        bool IfExists(int QualificationID, int DepartmentID, string QualificationName, string Type);
     }
 
 }

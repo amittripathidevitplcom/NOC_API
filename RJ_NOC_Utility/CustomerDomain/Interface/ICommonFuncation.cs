@@ -52,6 +52,7 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type);
         List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_DesignationDDL> GetAllDesignation();
+        List<CommonDataModel_DesignationDDL> GetDesignation_OfficersDetails(string Type);
         List<CommonDataModel_OccupationDDL> GetAllOccupation();
 
         List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType);
@@ -80,6 +81,7 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
 
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
+        List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);

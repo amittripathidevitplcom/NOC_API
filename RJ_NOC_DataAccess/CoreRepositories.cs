@@ -5,6 +5,7 @@ using RJ_NOC_DataAccess.Interface;
 using Microsoft.Extensions.Configuration;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Repositories;
+using System.Diagnostics;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -405,6 +406,22 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return userManualDocumentMasterRepository; }
         }
+
+        private IActivityDetailsRepository activityDetailsRepository;
+        public IActivityDetailsRepository ActivityDetailsRepository
+        {
+            get { return activityDetailsRepository; }
+        }
+
+        private IDTEStatistics_OfficersDetailsRepository dTEStatistics_OfficersDetailsRepository;
+        public IDTEStatistics_OfficersDetailsRepository DTEStatistics_OfficersDetailsRepository
+        {
+            get { return dTEStatistics_OfficersDetailsRepository; }
+        }
+        /// <summary>
+        /// /////////
+        /// </summary>
+        /// <param name="commonHelper"></param>
         public void IntializeRepositories(CommonDataAccessHelper commonHelper)
         {
             commonFuncationRepository = new CommonFuncationRepository(commonHelper);
@@ -470,6 +487,8 @@ namespace RJ_NOC_DataAccess.Repository
             departmentoftechnicaldocumentscrutinyrepository = new DepartmentOfTechnicalDocumentScrutinyRepository(commonHelper);
             dTECommitteeMasterRepository = new DTECommitteeMasterRepository(commonHelper);
             userManualDocumentMasterRepository = new UserManualDocumentMasterRepository(commonHelper);
+            activityDetailsRepository = new ActivityDetailsRepository(commonHelper);
+            dTEStatistics_OfficersDetailsRepository = new DTEStatistics_OfficersDetailsRepository(commonHelper);
         }
     }
 }

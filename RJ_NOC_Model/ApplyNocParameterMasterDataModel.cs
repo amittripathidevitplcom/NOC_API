@@ -129,7 +129,7 @@ namespace RJ_NOC_Model
         public string BankName { get; set; }
         public string BranchName { get; set; }
         public string IFSCCode { get; set; }
-        public int FDRNumber { get; set; }
+        public string FDRNumber { get; set; }
         public decimal FDRAmount { get; set; }
         public string FDRDate { get; set; }
         public string PeriodOfFDR { get; set; }
@@ -184,6 +184,8 @@ namespace RJ_NOC_Model
 
         public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
         public string? ManagementType { get; set; }
+        public string? GenerateReceipt_DTE { get; set; }
+        public string? GenerateReceiptPath_DTE { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 
@@ -649,5 +651,9 @@ namespace RJ_NOC_Model
         public string? StreamName { get; set; }
         public string? CourseLevelName { get; set; }
     }
-
+    public class ApplyNoc_MinisterFile
+    {
+        public int ApplyNocID { get; set; }
+        public string? MinisterFile { get; set; }
+    }
 }
