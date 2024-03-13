@@ -78,5 +78,6 @@ namespace RJ_NOC_DataAccess.Interface
         IDTECommitteeMasterRepository DTECommitteeMasterRepository { get; }
         IUserManualDocumentMasterRepository UserManualDocumentMasterRepository { get; }
         IActivityDetailsRepository ActivityDetailsRepository { get; }
+        IDTEStatistics_OfficersDetailsRepository DTEStatistics_OfficersDetailsRepository { get; }
     }
 }

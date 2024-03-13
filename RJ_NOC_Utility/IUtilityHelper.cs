@@ -81,5 +81,6 @@ namespace RJ_NOC_Utility
         IDTECommitteeMaster DTECommitteeMasterUtility { get; }
         IUserManualDocumentMaster UserManualDocumentMasterUtility { get; }
         IActivityDetails ActivityDetailsUtility { get; }
+        IDTEStatistics_OfficersDetails DTEStatistics_OfficersDetailsUtility { get; }
     }
 }

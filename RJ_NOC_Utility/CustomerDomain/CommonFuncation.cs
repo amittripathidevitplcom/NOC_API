@@ -284,6 +284,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAllDesignation();
         }
+        public List<CommonDataModel_DesignationDDL> GetDesignation_OfficersDetails(string Type)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDesignation_OfficersDetails(Type);
+        }
         public List<CommonDataModel_OccupationDDL> GetAllOccupation()
         {
             return UnitOfWork.CommonFuncationRepository.GetAllOccupation();

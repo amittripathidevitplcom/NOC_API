@@ -1280,6 +1280,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetDesignation_OfficersDetails/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_DesignationDDL>>> GetDesignation_OfficersDetails(string Type)
+        {
+            var result = new OperationResult<List<CommonDataModel_DesignationDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDesignation_OfficersDetails(Type));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDesignation_OfficersDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
         [HttpGet("GetAllOccupation")]
         public async Task<OperationResult<List<CommonDataModel_OccupationDDL>>> GetAllOccupation()
         {

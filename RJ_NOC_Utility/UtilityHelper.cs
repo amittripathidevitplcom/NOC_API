@@ -115,6 +115,7 @@ namespace RJ_NOC_Utility
         public IDepartmentOfTechnicalDocumentScrutiny DepartmentOfTechnicalScrutinyUtility { get; private set; }
         public IUserManualDocumentMaster UserManualDocumentMasterUtility { get; private set; }
         public IActivityDetails ActivityDetailsUtility { get; private set; }
+        public IDTEStatistics_OfficersDetails DTEStatistics_OfficersDetailsUtility { get; private set; }
 
 
         /// <summary>
@@ -196,6 +197,7 @@ namespace RJ_NOC_Utility
             DTECommitteeMasterUtility = new DTECommitteeMaster(UnitOfWork);
             UserManualDocumentMasterUtility = new UserManualDocumentMaster(UnitOfWork);
             ActivityDetailsUtility = new ActivityDetails(UnitOfWork);
+            DTEStatistics_OfficersDetailsUtility = new DTEStatistics_OfficersDetails(UnitOfWork);
         }
     }
 }

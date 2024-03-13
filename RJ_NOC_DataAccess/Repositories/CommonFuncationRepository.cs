@@ -718,29 +718,38 @@ namespace RJ_NOC_DataAccess.Repository
             //string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             //dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DashBoard>>(JsonDataTable_Data);
             //return dataModels;
-            CommonDataModel_DashBoard datamodel=new CommonDataModel_DashBoard();
+            CommonDataModel_DashBoard datamodel = new CommonDataModel_DashBoard();
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
 
             if (dataSet != null)
             {
-                if(dataSet.Tables.Count>0)
+                if (dataSet.Tables.Count > 0)
                 {
                     datamodel.DashBoardCount = dataSet.Tables[0];
                 }
-                if(dataSet.Tables.Count>1)
+                if (dataSet.Tables.Count > 1)
                 {
                     datamodel.AllDepartmentCommonCount = dataSet.Tables[1];
                 }
                 dataModels.Add(datamodel);
             }
-            return dataModels; 
+            return dataModels;
         }
 
         public List<CommonDataModel_DesignationDDL> GetAllDesignation()
         {
             string SqlQuery = "Exec USP_DesignationMaster @Action='GetAllDesignation'";
             var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllDesignation");
+
+            var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DesignationDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_DesignationDDL> GetDesignation_OfficersDetails(string Type)
+        {
+            string SqlQuery = "Exec USP_Designation_OfficersDetails @Type='" + Type + "'";
+            var dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDesignation_OfficersDetails");
 
             var JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             var dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DesignationDDL>>(JsonDataTable_Data);
@@ -794,7 +803,7 @@ namespace RJ_NOC_DataAccess.Repository
 
 
         }
-        
+
         public List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID)
         {
             string SqlQuery = " exec USP_GetDistrictByStateID @StateID='" + StateID + "'";
@@ -1392,7 +1401,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
-            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='"+request.DepartmentID+ "',@UniversityID='" + request.UniversityID+ "',@DivisionID='" + request.DivisionID+ "',@DistrictID='" + request.DistrictID+"',@Status='" + request.Status+"',@CollegeName='" + request.CollegeName+"'";
+            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@Status='" + request.Status + "',@CollegeName='" + request.CollegeName + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTotalApplicationListByDepartment");
 
@@ -1439,8 +1448,8 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }     
-        public List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID,int CourseID)
+        }
+        public List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID, int CourseID)
         {
             string SqlQuery = " exec USP_GetIntakeByCollegeCourse @CollegeID='" + CollegeID + "',@CourseID='" + CourseID + "'";
             DataTable dataTable = new DataTable();
@@ -1479,9 +1488,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-                public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType)
+        public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType)
         {
-            string SqlQuery = " exec USP_GetCourseByCollegeProgrammeDTE @CollegeID='" + CollegeID + "',@ProgrammeID='" + ProgrammeID + "',@CourseLevelID='"+ CourseLevelID + "',@GetType='" + GetType + "'";
+            string SqlQuery = " exec USP_GetCourseByCollegeProgrammeDTE @CollegeID='" + CollegeID + "',@ProgrammeID='" + ProgrammeID + "',@CourseLevelID='" + CourseLevelID + "',@GetType='" + GetType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCourseByCollegeProgrammeDTE");
 

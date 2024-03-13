@@ -412,6 +412,12 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return activityDetailsRepository; }
         }
+
+        private IDTEStatistics_OfficersDetailsRepository dTEStatistics_OfficersDetailsRepository;
+        public IDTEStatistics_OfficersDetailsRepository DTEStatistics_OfficersDetailsRepository
+        {
+            get { return dTEStatistics_OfficersDetailsRepository; }
+        }
         /// <summary>
         /// /////////
         /// </summary>
@@ -482,6 +488,7 @@ namespace RJ_NOC_DataAccess.Repository
             dTECommitteeMasterRepository = new DTECommitteeMasterRepository(commonHelper);
             userManualDocumentMasterRepository = new UserManualDocumentMasterRepository(commonHelper);
             activityDetailsRepository = new ActivityDetailsRepository(commonHelper);
+            dTEStatistics_OfficersDetailsRepository = new DTEStatistics_OfficersDetailsRepository(commonHelper);
         }
     }
 }
