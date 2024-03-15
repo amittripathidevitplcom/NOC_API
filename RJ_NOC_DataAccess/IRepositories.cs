@@ -79,5 +79,12 @@ namespace RJ_NOC_DataAccess.Interface
         IUserManualDocumentMasterRepository UserManualDocumentMasterRepository { get; }
         IActivityDetailsRepository ActivityDetailsRepository { get; }
         IDTEStatistics_OfficersDetailsRepository DTEStatistics_OfficersDetailsRepository { get; }
+        IDTEStatistics_AddressRepository DTEStatistics_AddressRepository { get; }
+        IDTEStatistics_ResidentialFacilityRepository DTEStatistics_ResidentialFacilityRepository { get; }
+        IDTEStatistics_RegionalCentersRepository DTEStatistics_RegionalCentersRepository { get; }
+        IDTEStatistics_OffShoreCenterRepository DTEStatistics_OffShoreCenterRepository { get; }
+        IDTEStatistics_FacultyRepository DTEStatistics_FacultyRepository { get; }
+        IDTEStatistics_DepartmentRepository DTEStatistics_DepartmentRepository { get; }
+        IDTEStatistics_RegularModeRepository DTEStatistics_RegularModeRepository { get; }
     }
 }

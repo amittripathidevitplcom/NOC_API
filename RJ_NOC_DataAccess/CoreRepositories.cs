@@ -418,6 +418,45 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_OfficersDetailsRepository; }
         }
+        
+        private IDTEStatistics_AddressRepository dTEStatistics_AddressRepository;
+        public IDTEStatistics_AddressRepository DTEStatistics_AddressRepository
+        {
+            get { return dTEStatistics_AddressRepository; }
+        }
+        
+        private IDTEStatistics_ResidentialFacilityRepository dTEStatistics_ResidentialFacilityRepository;
+        public IDTEStatistics_ResidentialFacilityRepository DTEStatistics_ResidentialFacilityRepository
+        {
+            get { return dTEStatistics_ResidentialFacilityRepository; }
+        }
+        private IDTEStatistics_RegionalCentersRepository dTEStatistics_RegionalCentersRepository;
+        public IDTEStatistics_RegionalCentersRepository DTEStatistics_RegionalCentersRepository
+        {
+            get { return dTEStatistics_RegionalCentersRepository; }
+        }
+        
+        private IDTEStatistics_OffShoreCenterRepository dTEStatistics_OffShoreCenterRepository;
+        public IDTEStatistics_OffShoreCenterRepository DTEStatistics_OffShoreCenterRepository
+        {
+            get { return dTEStatistics_OffShoreCenterRepository; }
+        }
+        private IDTEStatistics_FacultyRepository dTEStatistics_FacultyRepository;
+        public IDTEStatistics_FacultyRepository DTEStatistics_FacultyRepository
+        {
+            get { return dTEStatistics_FacultyRepository; }
+        }
+        private IDTEStatistics_DepartmentRepository dTEStatistics_DepartmentRepository;
+        public IDTEStatistics_DepartmentRepository DTEStatistics_DepartmentRepository
+        {
+            get { return dTEStatistics_DepartmentRepository; }
+        }
+        
+        private IDTEStatistics_RegularModeRepository dTEStatistics_RegularModeRepository;
+        public IDTEStatistics_RegularModeRepository DTEStatistics_RegularModeRepository
+        {
+            get { return dTEStatistics_RegularModeRepository; }
+        }
         /// <summary>
         /// /////////
         /// </summary>
@@ -489,6 +528,13 @@ namespace RJ_NOC_DataAccess.Repository
             userManualDocumentMasterRepository = new UserManualDocumentMasterRepository(commonHelper);
             activityDetailsRepository = new ActivityDetailsRepository(commonHelper);
             dTEStatistics_OfficersDetailsRepository = new DTEStatistics_OfficersDetailsRepository(commonHelper);
+            dTEStatistics_AddressRepository = new DTEStatistics_AddressRepository(commonHelper);
+            dTEStatistics_ResidentialFacilityRepository = new DTEStatistics_ResidentialFacilityRepository(commonHelper);
+            dTEStatistics_RegionalCentersRepository = new DTEStatistics_RegionalCentersRepository(commonHelper);
+            dTEStatistics_OffShoreCenterRepository = new DTEStatistics_OffShoreCenterRepository(commonHelper);
+            dTEStatistics_FacultyRepository = new DTEStatistics_FacultyRepository(commonHelper);
+            dTEStatistics_DepartmentRepository = new DTEStatistics_DepartmentRepository(commonHelper);
+            dTEStatistics_RegularModeRepository = new DTEStatistics_RegularModeRepository(commonHelper);
         }
     }
 }

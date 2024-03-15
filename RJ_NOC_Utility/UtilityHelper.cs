@@ -116,6 +116,13 @@ namespace RJ_NOC_Utility
         public IUserManualDocumentMaster UserManualDocumentMasterUtility { get; private set; }
         public IActivityDetails ActivityDetailsUtility { get; private set; }
         public IDTEStatistics_OfficersDetails DTEStatistics_OfficersDetailsUtility { get; private set; }
+        public IDTEStatistics_Address DTEStatistics_AddressUtility { get; private set; }
+        public IDTEStatistics_ResidentialFacility DTEStatistics_ResidentialFacilityUtility { get; private set; }
+        public IDTEStatistics_RegionalCenters DTEStatistics_RegionalCentersUtility { get; private set; }
+        public IDTEStatistics_OffShoreCenter DTEStatistics_OffShoreCenterUtility { get; private set; }
+        public IDTEStatistics_Faculty DTEStatistics_FacultyUtility { get; private set; }
+        public IDTEStatistics_Department DTEStatistics_DepartmentUtility { get; private set; }
+        public IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; private set; }
 
 
         /// <summary>
@@ -198,6 +205,13 @@ namespace RJ_NOC_Utility
             UserManualDocumentMasterUtility = new UserManualDocumentMaster(UnitOfWork);
             ActivityDetailsUtility = new ActivityDetails(UnitOfWork);
             DTEStatistics_OfficersDetailsUtility = new DTEStatistics_OfficersDetails(UnitOfWork);
+            DTEStatistics_AddressUtility = new DTEStatistics_Address(UnitOfWork);
+            DTEStatistics_ResidentialFacilityUtility = new DTEStatistics_ResidentialFacility(UnitOfWork);
+            DTEStatistics_RegionalCentersUtility = new DTEStatistics_RegionalCenters(UnitOfWork);
+            DTEStatistics_OffShoreCenterUtility = new DTEStatistics_OffShoreCenter(UnitOfWork);
+            DTEStatistics_FacultyUtility = new DTEStatistics_Faculty(UnitOfWork);
+            DTEStatistics_DepartmentUtility = new DTEStatistics_Department(UnitOfWork);
+            DTEStatistics_RegularModeUtility = new DTEStatistics_RegularMode(UnitOfWork);
         }
     }
 }

@@ -82,5 +82,12 @@ namespace RJ_NOC_Utility
         IUserManualDocumentMaster UserManualDocumentMasterUtility { get; }
         IActivityDetails ActivityDetailsUtility { get; }
         IDTEStatistics_OfficersDetails DTEStatistics_OfficersDetailsUtility { get; }
+        IDTEStatistics_Address DTEStatistics_AddressUtility { get; }
+        IDTEStatistics_ResidentialFacility DTEStatistics_ResidentialFacilityUtility { get; }
+        IDTEStatistics_RegionalCenters DTEStatistics_RegionalCentersUtility { get; }
+        IDTEStatistics_OffShoreCenter DTEStatistics_OffShoreCenterUtility { get; }
+        IDTEStatistics_Faculty DTEStatistics_FacultyUtility { get; }
+        IDTEStatistics_Department DTEStatistics_DepartmentUtility { get; }
+        IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }
     }
 }
