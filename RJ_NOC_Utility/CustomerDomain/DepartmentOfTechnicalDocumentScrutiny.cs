@@ -126,6 +126,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool UploadInspectionReport(GenerateDocument_DTE request)
         {
             return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.UploadInspectionReport(request);
+        }   
+        public DataSet GenerateDTEActionSummaryPDF(int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfTechnicalDocumentScrutinyRepository.GenerateDTEActionSummaryPDF(ApplyNOCID);
         }
     }
 }

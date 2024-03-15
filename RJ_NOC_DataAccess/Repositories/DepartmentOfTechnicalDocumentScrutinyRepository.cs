@@ -523,5 +523,14 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public DataSet GenerateDTEActionSummaryPDF(int ApplyNOCID)
+        {
+            string SqlQuery = "exec DTE_ActionSummaryDetils @ApplyNOCID='" + ApplyNOCID + "'";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.GenerateDTEActionSummaryPDF");
+            return dataset;
+        }
+
     }
 }

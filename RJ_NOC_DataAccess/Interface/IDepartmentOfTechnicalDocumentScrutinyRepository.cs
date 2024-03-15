@@ -38,6 +38,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetConsolidatedReportByApplyNOCID(int ApplyNOCID);
         bool UploadConsolidatedReport(GenerateDocument_DTE request);
         bool UploadInspectionReport(GenerateDocument_DTE request);
+        DataSet GenerateDTEActionSummaryPDF(int ApplyNOCID);
     }
 
 }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Text;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -663,13 +664,35 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         public List<ApplyNocApplicationDataModel> GetApplyNocApplicationList(string SSOID)
         {
-            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID);
-            List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
-            if (dt != null)
+            //var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID);
+            //List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
+            //if (dt != null)
+            //{
+            //    model = CommonHelper.ConvertDataTable<List<ApplyNocApplicationDataModel>>(dt);
+            //}
+            //return model;
+
+            DataSet dataSet = new DataSet();
+            dataSet = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID);
+            List<ApplyNocApplicationDataModel> listdataModels = new List<ApplyNocApplicationDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDataModel>>(JsonDataTable_Data);
+
+            if (dataSet.Tables.Count > 1 && dataSet.Tables[1].Rows.Count > 0)
             {
-                model = CommonHelper.ConvertDataTable<List<ApplyNocApplicationDataModel>>(dt);
+                List<NOCPdfFileDataModel> NOCPdfFileDataModel = new List<NOCPdfFileDataModel>();
+                string JsonDataTable_PDFData = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                NOCPdfFileDataModel = JsonConvert.DeserializeObject<List<NOCPdfFileDataModel>>(JsonDataTable_PDFData);
+                for (int i = 0; i < listdataModels.Count; i++)
+                {
+                    var Data = NOCPdfFileDataModel.Where(w => w.ApplyNOCID == listdataModels[i].ApplyNocApplicationID).ToList();
+                    if (Data != null && Data.Count > 0)
+                    {
+                        listdataModels[i].NOCPdfFileDataModel = Data;
+                    }
+                }
             }
-            return model;
+            return listdataModels;
         }
 
         public ApplyNocApplicationDataModel GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)

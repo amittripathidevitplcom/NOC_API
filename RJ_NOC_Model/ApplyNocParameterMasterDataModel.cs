@@ -219,6 +219,10 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterMasterList_IntroductionOffCampus>? DTE_IntroductionOffCampus_List { get; set; }
         public List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>? DTE_CoursesforWorkingProfessionals_List { get; set; }
 
+
+
+        public List<NOCPdfFileDataModel>? NOCPdfFileDataModel { get; set; }
+
     }
 
     public class ApplyNocApplicationParameterDataModel

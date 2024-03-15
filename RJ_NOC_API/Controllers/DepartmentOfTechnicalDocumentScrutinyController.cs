@@ -586,7 +586,7 @@ namespace RJ_NOC_API.Controllers
                         //dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
                         ReportPath += "\\HTENOC_Print.rdlc";
                         localReport = new LocalReport(ReportPath);
-                        //localReport.AddDataSource("MedicalGroupLOI", dataset.Tables[0]);
+                        localReport.AddDataSource("DTENOCData", dataset.Tables[0]);
 
 
                         //Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -677,7 +677,7 @@ namespace RJ_NOC_API.Controllers
                 //dataset.Tables[0].Rows[0]["LOIQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["LOIQRCodeLink"].ToString());
                 ReportPath += "\\GenerateReceipt_DTE.rdlc";
                 localReport = new LocalReport(ReportPath);
-                ds.Tables[0].Rows[0]["ApplicationNoAndSubmitDate"]=ds.Tables[0].Rows[0]["ApplicationNoAndSubmitDate"].ToString().Replace("||", System.Environment.NewLine).Replace("#","    ");
+                ds.Tables[0].Rows[0]["ApplicationNoAndSubmitDate"] = ds.Tables[0].Rows[0]["ApplicationNoAndSubmitDate"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
                 ds.Tables[0].Rows[0]["AppliedNOC"] = ds.Tables[0].Rows[0]["AppliedNOC"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
                 ds.Tables[0].Rows[0]["NameAddressEmailPhone"] = ds.Tables[0].Rows[0]["NameAddressEmailPhone"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
 
@@ -782,7 +782,7 @@ namespace RJ_NOC_API.Controllers
                     ds.Tables[0].Rows[0]["Society_Trust"] = ds.Tables[0].Rows[0]["Society_Trust"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
                     ds.Tables[0].Rows[0]["NameofInstitute"] = ds.Tables[0].Rows[0]["NameofInstitute"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
                     ds.Tables[0].Rows[0]["AmountAndDetails"] = ds.Tables[0].Rows[0]["AmountAndDetails"].ToString().Replace("||", System.Environment.NewLine).Replace("#", "    ");
-                    ds.Tables[0].Rows[0]["ActionRequired"] = ds.Tables[0].Rows[0]["ActionRequired"].ToString().Replace("||", System.Environment.NewLine+ System.Environment.NewLine).Replace("#", "    ");
+                    ds.Tables[0].Rows[0]["ActionRequired"] = ds.Tables[0].Rows[0]["ActionRequired"].ToString().Replace("||", System.Environment.NewLine + System.Environment.NewLine).Replace("#", "    ");
                 }
                 localReport.AddDataSource("DTE_ConsolidatedReport", ds.Tables[0]);
 
@@ -831,7 +831,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GetConsolidatedReportByApplyNOCID( ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GetConsolidatedReportByApplyNOCID(ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -911,6 +911,54 @@ namespace RJ_NOC_API.Controllers
                 CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfTechnicalDocumentScrutinyController.UploadInspectionReport", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+        [HttpGet("GenerateDTEActionSummaryPDF/{ApplyNOCID}")]
+        public async Task<OperationResult<string>> GenerateDTEActionSummaryPDF(int ApplyNOCID)
+        {
+            var result = new OperationResult<string>();
+            try
+            {
+
+                LocalReport localReport = null;
+                List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
+                DataSet dataset = new DataSet();
+
+                StringBuilder sb = new StringBuilder();
+                var fileName = "DTEActionSummary_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+
+                dataset = UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GenerateDTEActionSummaryPDF(ApplyNOCID);
+                string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                string mimetype = "";
+                int extension = 1;
+                string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                ReportPath += "\\DTEActionSummaryPDF.rdlc";
+                localReport = new LocalReport(ReportPath);
+                localReport.AddDataSource("DTE_ActionSummary", dataset.Tables[0]);
+                localReport.AddDataSource("ApplyNOCCommonDetails", dataset.Tables[1]);
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                var pdfResult = localReport.Execute(RenderType.Pdf, extension, null, mimetype);
+                System.IO.File.WriteAllBytes(filepath, pdfResult.MainStream);
+                result.State = OperationState.Success;
+                result.SuccessMessage = "Action Summary Generated Successfully .!";
+                result.Data = fileName.ToString();
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfTechnicalDocumentScrutinyController.GenerateDTEActionSummaryPDF", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
             }
             finally
             {
