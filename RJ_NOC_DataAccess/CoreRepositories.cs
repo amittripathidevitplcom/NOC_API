@@ -457,6 +457,17 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_RegularModeRepository; }
         }
+        private IDTEStatistics_PlacementDetailsRepository dTEStatistics_PlacementDetailsRepository;
+        public IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository
+        {
+            get { return dTEStatistics_PlacementDetailsRepository; }
+        }
+        
+        private IDTEStatistics_FinancialDetailsRepository dTEStatistics_FinancialDetailsRepository;
+        public IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository
+        {
+            get { return dTEStatistics_FinancialDetailsRepository; }
+        }
         /// <summary>
         /// /////////
         /// </summary>
@@ -535,6 +546,8 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_FacultyRepository = new DTEStatistics_FacultyRepository(commonHelper);
             dTEStatistics_DepartmentRepository = new DTEStatistics_DepartmentRepository(commonHelper);
             dTEStatistics_RegularModeRepository = new DTEStatistics_RegularModeRepository(commonHelper);
+            dTEStatistics_PlacementDetailsRepository = new DTEStatistics_PlacementDetailsRepository(commonHelper);
+            dTEStatistics_FinancialDetailsRepository = new DTEStatistics_FinancialDetailsRepository(commonHelper);
         }
     }
 }
