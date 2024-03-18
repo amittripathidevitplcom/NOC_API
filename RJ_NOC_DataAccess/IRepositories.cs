@@ -86,5 +86,7 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_FacultyRepository DTEStatistics_FacultyRepository { get; }
         IDTEStatistics_DepartmentRepository DTEStatistics_DepartmentRepository { get; }
         IDTEStatistics_RegularModeRepository DTEStatistics_RegularModeRepository { get; }
+        IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
+        IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
     }
 }
