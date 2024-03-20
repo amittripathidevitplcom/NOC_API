@@ -91,5 +91,8 @@ namespace RJ_NOC_Utility
         IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }
         IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
         IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
+        IDTEStatistics_InfrastructureDetails DTEStatistics_InfrastructureDetailsUtility { get; }
+        IDTEStatistics_RegulatoryInformation DTEStatistics_RegulatoryInformationUtility { get; }
+        IDTEStatistics_StudentEnrollmentDistanceMode DTEStatistics_StudentEnrollmentDistanceModeUtility { get; }
     }
 }

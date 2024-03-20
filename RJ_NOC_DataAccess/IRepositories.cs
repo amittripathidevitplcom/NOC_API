@@ -88,5 +88,8 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_RegularModeRepository DTEStatistics_RegularModeRepository { get; }
         IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
         IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
+        IDTEStatistics_InfrastructureDetailsRepository DTEStatistics_InfrastructureDetailsRepository { get; }
+        IDTEStatistics_RegulatoryInformationRepository DTEStatistics_RegulatoryInformationRepository { get; }
+        IDTEStatistics_StudentEnrollmentDistanceModeRepository DTEStatistics_StudentEnrollmentDistanceModeRepository { get; }
     }
 }

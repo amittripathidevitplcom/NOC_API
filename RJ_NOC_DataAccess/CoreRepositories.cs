@@ -468,6 +468,22 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_FinancialDetailsRepository; }
         }
+        
+        private IDTEStatistics_InfrastructureDetailsRepository dTEStatistics_InfrastructureDetailsRepository;
+        public IDTEStatistics_InfrastructureDetailsRepository DTEStatistics_InfrastructureDetailsRepository
+        {
+            get { return dTEStatistics_InfrastructureDetailsRepository; }
+        }
+        private IDTEStatistics_RegulatoryInformationRepository dTEStatistics_RegulatoryInformationRepository;
+        public IDTEStatistics_RegulatoryInformationRepository DTEStatistics_RegulatoryInformationRepository
+        {
+            get { return dTEStatistics_RegulatoryInformationRepository; }
+        }
+        private IDTEStatistics_StudentEnrollmentDistanceModeRepository dTEStatistics_StudentEnrollmentDistanceModeRepository;
+        public IDTEStatistics_StudentEnrollmentDistanceModeRepository DTEStatistics_StudentEnrollmentDistanceModeRepository
+        {
+            get { return dTEStatistics_StudentEnrollmentDistanceModeRepository; }
+        }
         /// <summary>
         /// /////////
         /// </summary>
@@ -548,6 +564,9 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_RegularModeRepository = new DTEStatistics_RegularModeRepository(commonHelper);
             dTEStatistics_PlacementDetailsRepository = new DTEStatistics_PlacementDetailsRepository(commonHelper);
             dTEStatistics_FinancialDetailsRepository = new DTEStatistics_FinancialDetailsRepository(commonHelper);
+            dTEStatistics_InfrastructureDetailsRepository = new DTEStatistics_InfrastructureDetailsRepository(commonHelper);
+            dTEStatistics_RegulatoryInformationRepository = new DTEStatistics_RegulatoryInformationRepository(commonHelper);
+            dTEStatistics_StudentEnrollmentDistanceModeRepository = new DTEStatistics_StudentEnrollmentDistanceModeRepository(commonHelper);
         }
     }
 }
