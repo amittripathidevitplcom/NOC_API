@@ -14,6 +14,8 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public string DepartmentName { get; set; }
         public string CollegeName { get; set; }
+        public string? CollegeMobileNo { get; set; }
+        public string? CollegeLogo { get;}
     }
     public class DocumentScrutinyDataModel
     {

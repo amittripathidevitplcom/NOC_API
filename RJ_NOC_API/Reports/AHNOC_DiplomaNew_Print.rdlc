@@ -7,16 +7,44 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>712632d5-8e3f-4f95-ac5a-e0384ff36c6a</rd:DataSourceID>
+      <rd:DataSourceID>ea6178ad-d7a5-427d-b4f9-07679c95c1cd</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DTENOCData">
+    <DataSet Name="AHNOCPrint">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="CollegeNameHi">
+          <DataField>CollegeNameHi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeMobileNo">
+          <DataField>CollegeMobileNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeEmail">
+          <DataField>CollegeEmail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NocQRCode">
+          <DataField>NocQRCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalFeeAmount">
+          <DataField>TotalFeeAmount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DepartmentNameHi">
+          <DataField>DepartmentNameHi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DepartmentNameEn">
+          <DataField>DepartmentNameEn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ApplicationNo">
           <DataField>ApplicationNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -25,31 +53,23 @@
           <DataField>Date</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CollegeName">
-          <DataField>CollegeName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="CollegeAddress">
           <DataField>CollegeAddress</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="NOCSubject">
-          <DataField>NOCSubject</DataField>
+        <Field Name="CollegeNameEng">
+          <DataField>CollegeNameEng</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Content">
-          <DataField>Content</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SecretaryName">
-          <DataField>SecretaryName</DataField>
+        <Field Name="NOCIssueFinancialYear">
+          <DataField>NOCIssueFinancialYear</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
         <rd:SchemaPath>C:\Deepak Project\API19022024\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
-        <rd:TableName>DTENOC</rd:TableName>
+        <rd:TableName>AHCollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -60,7 +80,7 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox1">
+          <Textbox Name="Textbox3">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -69,12 +89,10 @@
                   <TextRun>
                     <Value>राजस्थान सरकार</Value>
                     <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Roboto</FontFamily>
+                      <FontFamily>Kruti Dev 010</FontFamily>
                       <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -82,35 +100,14 @@
                   <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>6.58495cm</Left>
-            <Height>0.81167cm</Height>
-            <Width>6.31cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>तकनीकी शिक्षा विभाग</Value>
+                    <Value>पशुपालन विभाग</Value>
                     <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Roboto</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -119,12 +116,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.67056cm</Top>
-            <Left>6.58495cm</Left>
-            <Height>0.62646cm</Height>
-            <Width>6.31cm</Width>
-            <ZIndex>1</ZIndex>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.3175cm</Top>
+            <Left>2.18791cm</Left>
+            <Height>1.85773cm</Height>
+            <Width>13.44906cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -135,7 +131,20 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox3">
+          <Line Name="Line2">
+            <Top>2.182cm</Top>
+            <Left>0.15558cm</Left>
+            <Height>0cm</Height>
+            <Width>17.105cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox8">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -143,17 +152,27 @@
                 <TextRuns>
                   <TextRun>
                     <Value>क्रमांक</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> : </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!ApplicationNo.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>1.48731cm</Top>
-            <Left>0.28787cm</Left>
-            <Height>0.65292cm</Height>
-            <Width>1.36229cm</Width>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>2.77495cm</Top>
+            <Left>0.26141cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.48979cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -165,25 +184,36 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox4">
+          <Textbox Name="Textbox9">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>जयपुर, दिनांक</Value>
+                    <Value>दिनांक</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> - </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Date.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Top>1.48731cm</Top>
-            <Left>14.09912cm</Left>
-            <Height>0.86458cm</Height>
-            <Width>2.55764cm</Width>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>2.77495cm</Top>
+            <Left>12.52844cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.28593cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -195,64 +225,106 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox5">
+          <Textbox Name="Textbox10">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Director/Principal,</Value>
-                    <Style />
+                    <Value>अनापत्ति प्रमाण पत्र</Value>
+                    <Style>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>2.6162cm</Top>
-            <Left>0.28787cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.06646cm</Width>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.19646cm</Top>
+            <Left>6.65469cm</Left>
+            <Height>0.8075cm</Height>
+            <Width>4.56375cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox7">
+          <Textbox Name="Textbox11">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>विषय-</Value>
-                    <Style />
+                    <Value>    पशुपालन डिप्लोमा संस्थान की स्थापना/संचालन हेतु विभागीय प्रक्रिया/दिशा निर्देश/नीति-2022</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
                   </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
                   <TextRun>
-                    <Value />
-                    <Style />
+                    <Value> अतंर्गत निजी क्षेत्र में दो वर्षीय पशुपालन डिप्लोमा पाठ्यक्रम संचालन हेतु संस्थाओं को अनापत्ति प्रमाण पत्र (एनओसी) के संबंध में जारी विज्ञाप्ति दिनांक </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Date.Value</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> के क्रम में प्राप्त आवेदन के पूर्ण परीक्षण / भौतिक निरीक्षण एवं राज्य सरकार द्वारा गठित समिति की सिफारिशों के आधार पर निम्नलिखित शर्तों के अध्याधीन संस्था </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeNameEng.Value</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> को स्थान </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeAddress.Value</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> हेतु अनापत्ति प्रमाण पत्र जारी किया जाता है:-</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>4.70641cm</Top>
-            <Left>0.72002cm</Left>
-            <Height>0.6cm</Height>
-            <Width>1.36229cm</Width>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>4.32146cm</Top>
+            <Left>0.02687cm</Left>
+            <Height>2.29876cm</Height>
+            <Width>16.7875cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -264,42 +336,36 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox8">
+          <Textbox Name="Textbox13">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>महोदय,</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>        उपरोक्त विषयान्तर्गत निर्देशानुसार लेख है कि आपके द्वारा प्रस्तुत्त प्रस्ताव एवं निदेशक, तकनीकी शिक्षा, जोधपुर से अभिशंषानुसार आपके संस्थान को </Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!Content.Value</Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style />
+                    <Value>1. संबंधित संस्था, पशुपालन विभाग, राज्य सरकार द्वारा निर्धारित मापदण्ड के अनुसार तकनीकी संसाधनों से अपने संस्थान को विद्यालय प्रारंभ करने से पूर्व आवश्यक रूप से सुसज्जित करेगी। मापदण्डों की अवहेलना की स्थिति में संस्था को प्रदत्त अनापत्ति समाप्त की जा सकेगी।
+2. छात्रों की शैक्षणिक योग्यता, पाठ्यक्रम एवं परीक्षा पद्धति राज्य सरकार / विश्वविद्यालय द्वारा निर्धारित नियमों के
+अनुसार होगी। इस संबंध में कोई परिवर्तन स्वीकार्य नहीं होगा। 
+3. माननीय न्यायालय द्वारा निजी संस्थाओं के संबंध में समय-समय पर जारी निर्देशों की संस्था को पालना करनी होगी।
+4. शुल्क निर्धारण एवं प्रवेश संबंधी प्रक्रिया राज्य सरकार एवं राजस्थान पशुचिकित्सा एवं पशुविज्ञान विश्वविद्यालय, बीकानेर द्वारा जारी निर्देशों अनुसार होगा।
+5. संस्था को राज्य सरकार द्वारा किसी भी प्रकार की वित्तीय सहायता, गारंटी व अनुदान देय नहीं होगा।
+6. संस्था राजस्थान पशुचिकित्सा एवं पशुविज्ञान विश्वविद्यालय, बीकानेर से संबद्धता / मान्यता अपने स्तर पर प्राप्त करेगी।
+7. संस्था और प्रशिक्षणार्थियों के संबंध में उत्तरदायित्वों के लिए संस्था पूर्णरूपेण जिम्मेदार होगी।
+8. राज्य सरकार / निदेशक, पशुपालन विभाग, राजस्थान / विश्वविद्यालय अथवा उसके द्वारा नामित व्यक्ति संस्था का किसी भी समय निरीक्षण करने हेतु अधिकृत रहेगें।
+9. संस्था को मात्र 50 प्रशिक्षणार्थियों (छात्र/छात्राएँ) की भर्ती हेतु अनापत्ति प्रदान की जाती है।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>5.4828cm</Top>
-            <Left>0.28787cm</Left>
-            <Height>2.13458cm</Height>
-            <Width>18.63959cm</Width>
+            <Top>6.90245cm</Top>
+            <Left>0.02687cm</Left>
+            <Height>6.29397cm</Height>
+            <Width>16.7875cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -311,57 +377,78 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="ApplicationNo">
+          <Textbox Name="Textbox21">
             <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ApplicationNo.Value, "DTENOCData")</Value>
-                    <Style />
+                    <Value>शासन उप सचिव</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Roboto</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>ApplicationNo</rd:DefaultName>
-            <Top>1.54023cm</Top>
-            <Left>2.06057cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.17229cm</Width>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>13.56995cm</Top>
+            <Left>11.2779cm</Left>
+            <Height>0.67938cm</Height>
+            <Width>5.53647cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="CollegeName">
+          <Textbox Name="Textbox22">
             <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CollegeName.Value, "DTENOCData")</Value>
-                    <Style />
+                    <Value>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+1. निजी सचिव, सचिव राज्यपाल महोदय, राजस्थान, जयपुर।
+2. निजी सचिव, माननीय मुख्यमंत्री महोदय, राजस्थान, जयपुर।
+3. विशिष्ठ सहायक, माननीय पशुपालन मंत्री महोदय, राजस्थान, जयपुर।
+4. निजी सचिव, मुख्य सचिव, राजस्थान, जयपुर।
+5. निजी सचिव, प्रमुख शासन सचिव/शासन सचिव, पशुपालन विभाग।
+6. रजिस्ट्रार, राजस्थान पशु चिकित्सा एवं पशु विज्ञान विश्वविद्यालय, बीकानेर, राजस्थान ।
+7. संबंधित संस्था.
+8. रक्षित पंजिका।</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>CollegeName</rd:DefaultName>
-            <Top>3.28676cm</Top>
-            <Left>0.28787cm</Left>
-            <Height>0.6cm</Height>
-            <Width>18.63959cm</Width>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>15.1533cm</Top>
+            <Left>0.15558cm</Left>
+            <Height>4.00431cm</Height>
+            <Width>16.65879cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -373,27 +460,52 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="CollegeAddress">
+          <Image Name="Image5">
+            <Source>Database</Source>
+            <Value>=First(Fields!NocQRCode.Value, "AHNOCPrint")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>19.29872cm</Top>
+            <Left>0.26141cm</Left>
+            <Height>3.10444cm</Height>
+            <Width>4.14042cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox12">
             <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CollegeAddress.Value, "DTENOCData")</Value>
+                    <Value>क्रमांक</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> : </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!ApplicationNo.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>CollegeAddress</rd:DefaultName>
-            <Top>3.99259cm</Top>
-            <Left>0.28787cm</Left>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>14.20651cm</Top>
+            <Left>0.02687cm</Left>
             <Height>0.6cm</Height>
-            <Width>18.63959cm</Width>
-            <ZIndex>9</ZIndex>
+            <Width>5.48979cm</Width>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -406,264 +518,89 @@
           </Textbox>
           <Textbox Name="Textbox14">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>        उक्त अनुमति इस शर्त के साथ प्रदान की जाती है कि उक्त किए जाने पर छात्रों के अध्यापन, फीस, फीस संबंधी एवं </Value>
+                    <Value>दिनांक</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> - </Value>
                     <Style />
                   </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
                   <TextRun>
-                    <Value>लीगल संबंधी समस्त जिम्मेदारी स्वयं संस्थान की रहेगी तथा एआईसीटीई आरटीयू कोटा/बीटीयू, बीकानेर एवं राज्य स्तरीय </Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>शुल्क निर्धारण समिति द्वारा जारी गाईडलाईन एवं आदेशों की पालना भी सुनिश्चित की जाये।
-यह सक्षम स्वर से अनुमादित है।</Value>
+                    <Value>=Fields!Date.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>7.82849cm</Top>
-            <Left>0.28787cm</Left>
-            <Height>2.45208cm</Height>
-            <Width>18.63959cm</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox15">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>संयुक्त सचिव त.शि.</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox15</rd:DefaultName>
-            <Top>11.16224cm</Top>
-            <Left>14.01974cm</Left>
-            <Height>0.81167cm</Height>
-            <Width>4.90771cm</Width>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>14.20651cm</Top>
+            <Left>12.10511cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.28593cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox17">
+          <Textbox Name="Textbox23">
             <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-
-1 विशिष्ट सहायक, माननीय मंत्री महोदय, त.शि. 
-2. निजी सचिव शासन सचिव, तकनीकी शिक्षा विभाग।
-3 निजी सचिव, अध्यक्ष राज्य स्तरीय शुल्क निर्धारण समिति, तकनीकी शिक्षा भवयन, झालाना डूंगरी, जयपुर।
-4. अध्यक्ष, अखिल भारतीय तकनीकी शिक्षा परिषद, नई दिल्ली।
-5. क्षेत्रीय अधिकारी, अखिल भारतीय तकनीकी शिक्षा परिषद, चंडीगढ़।
-6. रजिस्ट्रार, राजस्थान तकनीकी विश्वविद्यालय, कोटा
-7. रजिस्ट्रार, बीकानेर तकनीकी विश्वविद्यालय, बीकानेर
-8. निदेशक, तकनीकी शिक्षा, जोधपुर।
-9. निदेशक, सेन्टर फोर ई-गवर्नेन्स, जयपुर।
-10. रक्षित पत्रावली।</Value>
-                    <Style />
+                    <Value>शासन उप सचिव</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Roboto</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox17</rd:DefaultName>
-            <Top>12.11474cm</Top>
-            <Left>0.28787cm</Left>
-            <Height>6.73833cm</Height>
-            <Width>18.63959cm</Width>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>21.24156cm</Top>
+            <Left>11.40661cm</Left>
+            <Height>0.67938cm</Height>
+            <Width>5.53647cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox16">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>संयुक्त सचिव त.शि.</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox15</rd:DefaultName>
-            <Top>19.30315cm</Top>
-            <Left>14.01974cm</Left>
-            <Height>0.81167cm</Height>
-            <Width>4.90771cm</Width>
-            <ZIndex>13</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="SecretaryName">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!SecretaryName.Value, "DTENOCData")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>SecretaryName</rd:DefaultName>
-            <Top>10.47433cm</Top>
-            <Left>14.01974cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.90771cm</Width>
-            <ZIndex>14</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Date">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Date.Value, "DTENOCData")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Date</rd:DefaultName>
-            <Top>1.54023cm</Top>
-            <Left>16.69203cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.23542cm</Width>
-            <ZIndex>15</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="NOCSubject">
-            <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!NOCSubject.Value, "DTENOCData")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>NOCSubject</rd:DefaultName>
-            <Top>4.76898cm</Top>
-            <Left>2.2587cm</Left>
-            <Height>0.6cm</Height>
-            <Width>16.66875cm</Width>
-            <ZIndex>16</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>20.35542cm</Height>
+        <Height>22.60438cm</Height>
         <Style />
       </Body>
-      <Width>20.32975cm</Width>
+      <Width>17.26058cm</Width>
       <Page>
-        <PageHeight>25cm</PageHeight>
+        <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>0cm</LeftMargin>
-        <RightMargin>0cm</RightMargin>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
         <TopMargin>0cm</TopMargin>
         <BottomMargin>0cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
@@ -671,10 +608,25 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="test">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>test</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <EmbeddedImages>
