@@ -4,6 +4,7 @@ using System.Data;
 using Newtonsoft.Json;
 using RJ_NOC_DataAccess.Common;
 using static iTextSharp.text.pdf.events.IndexEvents;
+using static iTextSharp.text.pdf.AcroFields;
 
 
 namespace RJ_NOC_DataAccess.Repository
@@ -31,10 +32,94 @@ namespace RJ_NOC_DataAccess.Repository
                 dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
                 dataModels.SelectedCollegeEntryTypeName = dataSet.Tables[0].Rows[0]["SelectedCollegeEntryTypeName"].ToString();
                 dataModels.FYearID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["FYearID"]);
+                dataModels.EntryType = dataSet.Tables[0].Rows[0]["EntryType"].ToString();
+
+                List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails>? items = new List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails>();
+                foreach (DataRow row in dataSet.Tables[0].Rows)
+                {
+                    DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails? item = new DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails();
+
+                    item.AID = Convert.ToInt32(row["AID"]);
+                    item.Faculty_School = row["Faculty_School"].ToString();
+                    item.Department_Centre = row["Department_Centre"].ToString();
+                    item.LevelID = Convert.ToInt32(row["LevelID"]);
+                    item.LevelName = row["LevelName"].ToString();
+                    item.Discipline = row["Discipline"].ToString();
+                    item.Year = Convert.ToInt32(row["Year"]);
+                    item.Month = Convert.ToInt32(row["Month"]);
+
+
+                    item.Category = row["Category"].ToString();
+                    item.GeneralCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row["GeneralCategorySeatsEarmarkedAsPerGOI"]);
+                    item.GeneralCategoryMale = Convert.ToInt32(row["GeneralCategoryMale"]);
+                    item.GeneralCategoryFemale = Convert.ToInt32(row["GeneralCategoryFemale"]);
+                    item.GeneralCategoryTransGender = Convert.ToInt32(row["GeneralCategoryTransGender"]);
+                    item.EWSCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row["EWSCategorySeatsEarmarkedAsPerGOI"]);
+                    item.EWSCategoryMale = Convert.ToInt32(row["EWSCategoryMale"]);
+                    item.EWSCategoryFemale = Convert.ToInt32(row["EWSCategoryFemale"]);
+                    item.EWSCategoryTransGender = Convert.ToInt32(row["EWSCategoryTransGender"]);
+                    item.SCCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row["SCCategorySeatsEarmarkedAsPerGOI"]);
+                    item.SCCategoryMale = Convert.ToInt32(row["SCCategoryMale"]);
+                    item.SCCategoryFemale = Convert.ToInt32(row["SCCategoryFemale"]);
+                    item.SCCategoryTransGender = Convert.ToInt32(row["SCCategoryTransGender"]);
+                    item.STCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row["STCategorySeatsEarmarkedAsPerGOI"]);
+                    item.STCategoryMale = Convert.ToInt32(row["STCategoryMale"]);
+                    item.STCategoryFemale = Convert.ToInt32(row["STCategoryFemale"]);
+                    item.STCategoryTransGender = Convert.ToInt32(row["STCategoryTransGender"]);
+                    item.OBCCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row["OBCCategorySeatsEarmarkedAsPerGOI"]);
+                    item.OBCCategoryMale = Convert.ToInt32(row["OBCCategoryMale"]);
+                    item.OBCCategoryFemale = Convert.ToInt32(row["OBCCategoryFemale"]);
+                    item.OBCCategoryTransGender = Convert.ToInt32(row["OBCCategoryTransGender"]);
+                    item.TotalCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row["TotalCategorySeatsEarmarkedAsPerGOI"]);
+                    item.TotalCategoryMale = Convert.ToInt32(row["TotalCategoryMale"]);
+                    item.TotalCategoryFemale = Convert.ToInt32(row["TotalCategoryFemale"]);
+                    item.TotalCategoryTransGender = Convert.ToInt32(row["TotalCategoryTransGender"]);
+                    item.Remark = row["Remark"].ToString();
+
+                    string SqlQuery_StudentDetails = " select top 3 * from Trn_DTEStatistics_StudentEnrollmentDistanceMode ";
+                    SqlQuery_StudentDetails += " Where AID>'" + item.AID + "' and EntryID='" + dataModels.EntryID + "' ";
+                    DataTable datatable = new DataTable();
+                    datatable = _commonHelper.Fill_DataTable(SqlQuery_StudentDetails, "DTEStatistics_RegionalCenters.GetByID");
+
+                    List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails>? item_Student = new List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails>();
+                    foreach (DataRow row_Sub in datatable.Rows)
+                    {
+                        DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails? item_Sub = new DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails();
+
+                        item_Sub.Category = row_Sub["Category"].ToString();
+                        item_Sub.GeneralCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row_Sub["GeneralCategorySeatsEarmarkedAsPerGOI"]);
+                        item_Sub.GeneralCategoryMale = Convert.ToInt32(row_Sub["GeneralCategoryMale"]);
+                        item_Sub.GeneralCategoryFemale = Convert.ToInt32(row_Sub["GeneralCategoryFemale"]);
+                        item_Sub.GeneralCategoryTransGender = Convert.ToInt32(row_Sub["GeneralCategoryTransGender"]);
+                        item_Sub.EWSCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row_Sub["EWSCategorySeatsEarmarkedAsPerGOI"]);
+                        item_Sub.EWSCategoryMale = Convert.ToInt32(row_Sub["EWSCategoryMale"]);
+                        item_Sub.EWSCategoryFemale = Convert.ToInt32(row_Sub["EWSCategoryFemale"]);
+                        item_Sub.EWSCategoryTransGender = Convert.ToInt32(row_Sub["EWSCategoryTransGender"]);
+                        item_Sub.SCCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row_Sub["SCCategorySeatsEarmarkedAsPerGOI"]);
+                        item_Sub.SCCategoryMale = Convert.ToInt32(row_Sub["SCCategoryMale"]);
+                        item_Sub.SCCategoryFemale = Convert.ToInt32(row_Sub["SCCategoryFemale"]);
+                        item_Sub.SCCategoryTransGender = Convert.ToInt32(row_Sub["SCCategoryTransGender"]);
+                        item_Sub.STCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row_Sub["STCategorySeatsEarmarkedAsPerGOI"]);
+                        item_Sub.STCategoryMale = Convert.ToInt32(row_Sub["STCategoryMale"]);
+                        item_Sub.STCategoryFemale = Convert.ToInt32(row_Sub["STCategoryFemale"]);
+                        item_Sub.STCategoryTransGender = Convert.ToInt32(row_Sub["STCategoryTransGender"]);
+                        item_Sub.OBCCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row_Sub["OBCCategorySeatsEarmarkedAsPerGOI"]);
+                        item_Sub.OBCCategoryMale = Convert.ToInt32(row_Sub["OBCCategoryMale"]);
+                        item_Sub.OBCCategoryFemale = Convert.ToInt32(row_Sub["OBCCategoryFemale"]);
+                        item_Sub.OBCCategoryTransGender = Convert.ToInt32(row_Sub["OBCCategoryTransGender"]);
+                        item_Sub.TotalCategorySeatsEarmarkedAsPerGOI = Convert.ToInt32(row_Sub["TotalCategorySeatsEarmarkedAsPerGOI"]);
+                        item_Sub.TotalCategoryMale = Convert.ToInt32(row_Sub["TotalCategoryMale"]);
+                        item_Sub.TotalCategoryFemale = Convert.ToInt32(row_Sub["TotalCategoryFemale"]);
+                        item_Sub.TotalCategoryTransGender = Convert.ToInt32(row_Sub["TotalCategoryTransGender"]);
+
+                        item_Student.Add(item_Sub);
+                    }
+                    item.StudentDetails = item_Student;
+                    items.Add(item);
+                }
+                dataModels.ProgrammesDetails = items;
+
             }
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails> EducationalQualificationDetails_StaffDetail_Item = JsonConvert.DeserializeObject<List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails>>(JsonDataTable_Data);
-            dataModels.ProgrammesDetails = EducationalQualificationDetails_StaffDetail_Item;
             return dataModels;
 
         }
@@ -47,6 +132,18 @@ namespace RJ_NOC_DataAccess.Repository
             foreach (var row in request.ProgrammesDetails)
             {
                 DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails_Data item = new DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails_Data();
+
+
+
+                item.Faculty_School = row.Faculty_School.ToString();
+                item.Department_Centre = row.Department_Centre.ToString();
+                item.LevelID = row.LevelID;
+                item.LevelName = row.LevelName;
+                item.Discipline = row.Discipline.ToString();
+                item.Year = row.Year;
+                item.Month = row.Month;
+
+
 
                 item.Category = row.Category.ToString();
                 item.GeneralCategorySeatsEarmarkedAsPerGOI = row.GeneralCategorySeatsEarmarkedAsPerGOI;
@@ -80,8 +177,16 @@ namespace RJ_NOC_DataAccess.Repository
                 {
                     DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails_Data item_Sub = new DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails_Data();
 
-                    item_Sub.Category = row_Sub.Category.ToString();
 
+                    item.Faculty_School = row.Faculty_School.ToString();
+                    item.Department_Centre = row.Department_Centre.ToString();
+                    item.LevelID = row.LevelID;
+                    item.LevelName = row.LevelName;
+                    item.Discipline = row.Discipline.ToString();
+                    item.Year = row.Year;
+                    item.Month = row.Month;
+
+                    item_Sub.Category = row_Sub.Category.ToString();
                     item_Sub.GeneralCategorySeatsEarmarkedAsPerGOI = row_Sub.GeneralCategorySeatsEarmarkedAsPerGOI;
                     item_Sub.GeneralCategoryMale = row_Sub.GeneralCategoryMale;
                     item_Sub.GeneralCategoryFemale = row_Sub.GeneralCategoryFemale;
@@ -107,7 +212,7 @@ namespace RJ_NOC_DataAccess.Repository
                     item_Sub.TotalCategoryFemale = row_Sub.TotalCategoryFemale;
                     item_Sub.TotalCategoryTransGender = row_Sub.TotalCategoryTransGender;
 
-                    items.Add(item);
+                    items.Add(item_Sub);
 
                 }
             }
