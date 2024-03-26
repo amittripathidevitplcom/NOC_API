@@ -128,6 +128,8 @@ namespace RJ_NOC_Utility
         public IDTEStatistics_InfrastructureDetails DTEStatistics_InfrastructureDetailsUtility { get; private set; }
         public IDTEStatistics_RegulatoryInformation DTEStatistics_RegulatoryInformationUtility { get; private set; }
         public IDTEStatistics_StudentEnrollmentDistanceMode DTEStatistics_StudentEnrollmentDistanceModeUtility { get; private set; }
+        public IDTEStatistics_RegularForeignStudentEnrolment DTEStatistics_RegularForeignStudentEnrolmentUtility { get; private set; }
+        public IDTEStatistics_ExaminationResults DTEStatistics_ExaminationResultsUtility { get; private set; }
 
 
         /// <summary>
@@ -222,6 +224,8 @@ namespace RJ_NOC_Utility
             DTEStatistics_InfrastructureDetailsUtility = new DTEStatistics_InfrastructureDetails(UnitOfWork);
             DTEStatistics_RegulatoryInformationUtility = new DTEStatistics_RegulatoryInformation(UnitOfWork);
             DTEStatistics_StudentEnrollmentDistanceModeUtility = new DTEStatistics_StudentEnrollmentDistanceMode(UnitOfWork);
+            DTEStatistics_RegularForeignStudentEnrolmentUtility = new DTEStatistics_RegularForeignStudentEnrolment(UnitOfWork);
+            DTEStatistics_ExaminationResultsUtility = new DTEStatistics_ExaminationResults(UnitOfWork);
         }
     }
 }

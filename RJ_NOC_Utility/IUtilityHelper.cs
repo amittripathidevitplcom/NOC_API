@@ -94,5 +94,7 @@ namespace RJ_NOC_Utility
         IDTEStatistics_InfrastructureDetails DTEStatistics_InfrastructureDetailsUtility { get; }
         IDTEStatistics_RegulatoryInformation DTEStatistics_RegulatoryInformationUtility { get; }
         IDTEStatistics_StudentEnrollmentDistanceMode DTEStatistics_StudentEnrollmentDistanceModeUtility { get; }
+        IDTEStatistics_RegularForeignStudentEnrolment DTEStatistics_RegularForeignStudentEnrolmentUtility { get; }
+        IDTEStatistics_ExaminationResults DTEStatistics_ExaminationResultsUtility { get; }
     }
 }

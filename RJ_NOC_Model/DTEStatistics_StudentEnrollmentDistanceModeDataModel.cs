@@ -18,16 +18,13 @@ namespace RJ_NOC_Model
         public List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails>? ProgrammesDetails { get; set; }
 
 
-
-
-
-
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int ModifyBy { get; set; }
     }
     public class DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails
     {
+        public int AID { get; set; }
         public string Faculty_School { get; set; }
         public string Department_Centre { get; set; }
         public int LevelID { get; set; }
@@ -102,12 +99,20 @@ namespace RJ_NOC_Model
         public int TotalCategoryMale { get; set; }
         public int TotalCategoryFemale { get; set; }
         public int TotalCategoryTransGender { get; set; }
-        
+
     }
 
 
     public class DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails_Data
     {
+
+        public string Faculty_School { get; set; }
+        public string Department_Centre { get; set; }
+        public int LevelID { get; set; }
+        public string LevelName { get; set; }
+        public string Discipline { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
 
         public string Category { get; set; }
         public int GeneralCategorySeatsEarmarkedAsPerGOI { get; set; }
