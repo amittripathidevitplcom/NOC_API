@@ -384,3 +384,4 @@ FodyWeavers.xsd
 /RJ_NOC_Model/DTEStatistics_RegularModeDataModel - Copy.cs
 /RJ_NOC_Utility/CustomerDomain/DTEStatistics_RegularMode - Copy.cs
 /RJ_NOC_Utility/CustomerDomain/Interface/IDTEStatistics_RegularMode - Copy.cs
+/RJ_NOC_DataAccess/CoreRepositories.cs
