@@ -585,6 +585,7 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_RegularForeignStudentEnrolmentRepository = new DTEStatistics_RegularForeignStudentEnrolmentRepository(commonHelper);
             dTEStatistics_ExaminationResultsRepository = new DTEStatistics_ExaminationResultsRepository(commonHelper);
             dTEStatistics_ScholarshipFellowshipLoanAccRepository = new DTEStatistics_ScholarshipFellowshipLoanAccRepository(commonHelper);
+
         }
     }
 }
