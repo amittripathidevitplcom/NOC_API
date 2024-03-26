@@ -15,22 +15,41 @@ namespace RJ_NOC_Model
         public int FYearID { get; set; }
         public string EntryType { get; set; }
 
-        public List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_ScholarshipFellowshipLoanAcc>? ScholarshipFellowshipLoanAcc_A { get; set; }
-        public List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_ScholarshipFellowshipLoanAcc>? ScholarshipFellowshipLoanAcc_B { get; set; }
-
-
+        public List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship>? Scholarship { get; set; }
+        public List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship>? Fellowship { get; set; }
+        public List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship>? Loan { get; set; } 
+        
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int ModifyBy { get; set; }
     }
-    public class DTEStatistics_ScholarshipFellowshipLoanAccDataModel_ScholarshipFellowshipLoanAcc
+    public class DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship
     {
-        public string FID { get; set; }
-        public string EntryType { get; set; }
-        public string SNoText { get; set; }
-        public string Item { get; set; }
-        public string Value { get; set; }
+        public int SID { get; set; }
+        public string Type { get; set; }
+        public string Category { get; set; }
+        public int General_Total { get; set; }
+        public int General_Female { get; set; }
+        public int General_TransGender { get; set; }
+        public int EWS_Total { get; set; }
+        public int EWS_Female { get; set; }
+        public int EWS_TransGender { get; set; }
+        public int SC_Total { get; set; }
+        public int SC_Female { get; set; }
+        public int SC_TransGender { get; set; }
+        public int ST_Total { get; set; }
+        public int ST_Female { get; set; }
+        public int ST_TransGender { get; set; }
+        public int OBC_Total { get; set; }
+        public int OBC_Female { get; set; }
+        public int OBC_TransGender { get; set; }
+        public int TOTAL_Total { get; set; }
+        public int TOTAL_Female { get; set; }
+        public int TOTAL_TransGender { get; set; }
+        public string Remarks { get; set; }
     }
+
+     
 }
 
 
