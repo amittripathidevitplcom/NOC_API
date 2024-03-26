@@ -498,6 +498,11 @@ namespace RJ_NOC_DataAccess.Repository
         public IDTEStatistics_ScholarshipFellowshipLoanAccRepository DTEStatistics_ScholarshipFellowshipLoanAccRepository
         {
             get { return dTEStatistics_ScholarshipFellowshipLoanAccRepository; }
+        }      
+        private IDTEStatistics_BasicDetailsRepository dTEStatistics_BasicDetailsRepository;
+        public IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository
+        {
+            get { return dTEStatistics_BasicDetailsRepository; }
         }
         /// <summary>
         /// /////////
@@ -585,6 +590,7 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_RegularForeignStudentEnrolmentRepository = new DTEStatistics_RegularForeignStudentEnrolmentRepository(commonHelper);
             dTEStatistics_ExaminationResultsRepository = new DTEStatistics_ExaminationResultsRepository(commonHelper);
             dTEStatistics_ScholarshipFellowshipLoanAccRepository = new DTEStatistics_ScholarshipFellowshipLoanAccRepository(commonHelper);
+            dTEStatistics_BasicDetailsRepository = new DTEStatistics_BasicDetailsRepository(commonHelper);
 
         }
     }

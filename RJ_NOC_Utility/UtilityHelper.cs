@@ -131,6 +131,7 @@ namespace RJ_NOC_Utility
         public IDTEStatistics_RegularForeignStudentEnrolment DTEStatistics_RegularForeignStudentEnrolmentUtility { get; private set; }
         public IDTEStatistics_ExaminationResults DTEStatistics_ExaminationResultsUtility { get; private set; }
         public IDTEStatistics_ScholarshipFellowshipLoanAcc DTEStatistics_ScholarshipFellowshipLoanAccUtility { get; private set; }
+        public IDTEStatistics_BasicDetails DTEStatistics_BasicDetailsUtility { get; private set; }
 
 
         /// <summary>
@@ -228,6 +229,7 @@ namespace RJ_NOC_Utility
             DTEStatistics_RegularForeignStudentEnrolmentUtility = new DTEStatistics_RegularForeignStudentEnrolment(UnitOfWork);
             DTEStatistics_ExaminationResultsUtility = new DTEStatistics_ExaminationResults(UnitOfWork);
             DTEStatistics_ScholarshipFellowshipLoanAccUtility = new DTEStatistics_ScholarshipFellowshipLoanAcc(UnitOfWork);
+            DTEStatistics_BasicDetailsUtility = new DTEStatistics_BasicDetails(UnitOfWork);
         }
     }
 }

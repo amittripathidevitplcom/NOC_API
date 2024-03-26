@@ -94,6 +94,7 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_RegularForeignStudentEnrolmentRepository DTEStatistics_RegularForeignStudentEnrolmentRepository { get; }
         IDTEStatistics_ExaminationResultsRepository DTEStatistics_ExaminationResultsRepository { get; }
         IDTEStatistics_ScholarshipFellowshipLoanAccRepository DTEStatistics_ScholarshipFellowshipLoanAccRepository { get; }
+        IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository { get; }
 
     }
 }
