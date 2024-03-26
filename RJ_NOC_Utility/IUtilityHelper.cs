@@ -96,5 +96,6 @@ namespace RJ_NOC_Utility
         IDTEStatistics_StudentEnrollmentDistanceMode DTEStatistics_StudentEnrollmentDistanceModeUtility { get; }
         IDTEStatistics_RegularForeignStudentEnrolment DTEStatistics_RegularForeignStudentEnrolmentUtility { get; }
         IDTEStatistics_ExaminationResults DTEStatistics_ExaminationResultsUtility { get; }
+        IDTEStatistics_ScholarshipFellowshipLoanAcc DTEStatistics_ScholarshipFellowshipLoanAccUtility { get; }
     }
 }
