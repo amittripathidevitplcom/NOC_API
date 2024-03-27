@@ -62,9 +62,14 @@ namespace RJ_NOC_DataAccess.Repository
             List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship> FellowshipJson = JsonConvert.DeserializeObject<List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship>>(JsonDataTable_Data_Fellowship);
             dataModels.Fellowship = FellowshipJson;
 
-            string JsonDataTable_Data_Loan = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
+            string JsonDataTable_Data_Loan = CommonHelper.ConvertDataTable(dataSet.Tables[3]);
             List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship> LoanJson = JsonConvert.DeserializeObject<List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_Scholarship>>(JsonDataTable_Data_Loan);
             dataModels.Loan = LoanJson;
+            
+            
+            string JsonDataTable_Data_ACC = CommonHelper.ConvertDataTable(dataSet.Tables[4]);
+            List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_ACC> ACCJson = JsonConvert.DeserializeObject<List<DTEStatistics_ScholarshipFellowshipLoanAccDataModel_ACC>>(JsonDataTable_Data_ACC);
+            dataModels.ACC = ACCJson;
 
 
             return dataModels;
@@ -74,11 +79,13 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
 
-            string ScholarshipFellowshipLoanAcc_Scholarship_Str = request.Scholarship.Count > 0 ? CommonHelper.GetDetailsTableQry(request.Scholarship, "Temp_DTEStatistics_ScholarshipFellowshipLoanAcc_Scholarship") : "";
+            string ScholarshipFellowshipLoanAcc_Scholarship_Str = request.Scholarship.Count > 0 ? CommonHelper.GetDetailsTableQry(request.Scholarship, "Temp_DTEStatistics_ScholarshipData_Scholarship") : "";
 
-            string ScholarshipFellowshipLoanAcc_Fellowship_Str = request.Fellowship.Count > 0 ? CommonHelper.GetDetailsTableQry(request.Fellowship, "Temp_DTEStatistics_ScholarshipFellowshipLoanAcc_Fellowship") : "";
+            string ScholarshipFellowshipLoanAcc_Fellowship_Str = request.Fellowship.Count > 0 ? CommonHelper.GetDetailsTableQry(request.Fellowship, "Temp_DTEStatistics_ScholarshipData_Fellowship") : "";
 
-            string ScholarshipFellowshipLoanAcc_Loan_Str = request.Loan.Count > 0 ? CommonHelper.GetDetailsTableQry(request.Loan, "Temp_DTEStatistics_ScholarshipFellowshipLoanAcc_Loan") : "";
+            string ScholarshipFellowshipLoanAcc_Loan_Str = request.Loan.Count > 0 ? CommonHelper.GetDetailsTableQry(request.Loan, "Temp_DTEStatistics_ScholarshipData_Loan") : "";
+            
+            string Scholarship_ACC_Str = request.ACC.Count > 0 ? CommonHelper.GetDetailsTableQry(request.ACC, "Temp_DTEStatistics_ScholarshipData_ACC") : "";
 
             string SqlQuery = " exec UPS_DTEStatistics_ScholarshipFellowshipLoanAcc_IU";
 
@@ -87,11 +94,11 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @CollegeID='" + request.CollegeID + "', ";
             SqlQuery += " @SelectedCollegeEntryTypeName='" + request.SelectedCollegeEntryTypeName + "', ";
             SqlQuery += " @FYearID='" + request.FYearID + "', ";
-            SqlQuery += " @EntryType='" + request.EntryType + "', ";
 
-            SqlQuery += " @ScholarshipFellowshipLoanAcc_Scholarship_Str='" + ScholarshipFellowshipLoanAcc_Scholarship_Str + "', ";
-            SqlQuery += " @ScholarshipFellowshipLoanAcc_Fellowship_Str='" + ScholarshipFellowshipLoanAcc_Fellowship_Str + "', ";
-            SqlQuery += " @ScholarshipFellowshipLoanAcc_Loan_Str='" + ScholarshipFellowshipLoanAcc_Loan_Str + "', ";
+            SqlQuery += " @ScholarshipData_Scholarship_Str='" + ScholarshipFellowshipLoanAcc_Scholarship_Str + "', ";
+            SqlQuery += " @ScholarshipData_Fellowship_Str='" + ScholarshipFellowshipLoanAcc_Fellowship_Str + "', ";
+            SqlQuery += " @ScholarshipData_Loan_Str='" + ScholarshipFellowshipLoanAcc_Loan_Str + "', ";
+            SqlQuery += " @ScholarshipData_ACC_Str='" + Scholarship_ACC_Str + "', ";
 
 
 
