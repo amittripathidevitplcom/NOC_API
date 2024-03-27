@@ -1970,6 +1970,42 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("CheckTabsEntry_StatisticsEntry/{CollegID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckTabsEntry_StatisticsEntry(int CollegID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.CheckTabsEntry_StatisticsEntry(CollegID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.CheckTabsEntry_StatisticsEntry", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
         [HttpPost("DraftFinalSubmit/{CollegeID}/{IsDraftSubmited}")]
         public async Task<OperationResult<bool>> DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
         {

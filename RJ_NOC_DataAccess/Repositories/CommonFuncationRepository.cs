@@ -839,6 +839,21 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public List<CommonDataModel_DataTable> CheckTabsEntry_StatisticsEntry(int CollegID)
+        {
+            string SqlQuery = " exec USP_CheckTabsEntry_StatisticsEntry @CollegeID='" + CollegID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.CheckTabsEntry_StatisticsEntry");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+
         public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
