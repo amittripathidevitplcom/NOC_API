@@ -24,6 +24,6 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DataTable> CollegeList_StatisticsNotFilledReport(TotalNotFilledStatics_DataModel_Filter request);
 
-
+        bool GetCollegeStatisticsFinalSubmitStatus(int CollegeID);
     }
 }

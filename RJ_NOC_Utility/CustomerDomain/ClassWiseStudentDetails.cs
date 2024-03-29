@@ -55,6 +55,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ClassWiseStudentDetailsRepository.CollegeList_StatisticsNotFilledReport(request);
         }
+        public bool GetCollegeStatisticsFinalSubmitStatus(int CollegeID)
+        {
+            return UnitOfWork.ClassWiseStudentDetailsRepository.GetCollegeStatisticsFinalSubmitStatus(CollegeID);
+        }
 
     }
 }
