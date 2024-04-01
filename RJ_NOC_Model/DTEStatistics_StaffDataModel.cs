@@ -100,9 +100,9 @@ namespace RJ_NOC_Model
     public class DTEStatistics_NonTeachingDataModel_StudentDetails_Data
     {
 
-        public string StaffType { get; set; }
-        public string GroupName { get; set; }
-        public string SanctionedStrength { get; set; }
+        public string? StaffType { get; set; }
+        public string? GroupName { get; set; }
+        public string? SanctionedStrength { get; set; }
 
         public string Category { get; set; }
         public int GeneralCategoryMale { get; set; }
@@ -128,7 +128,7 @@ namespace RJ_NOC_Model
         public int TotalCategoryMale { get; set; }
         public int TotalCategoryFemale { get; set; }
         public int TotalCategoryTransGender { get; set; }
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }
 

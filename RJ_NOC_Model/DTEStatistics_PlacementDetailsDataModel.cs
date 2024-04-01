@@ -8,12 +8,12 @@ namespace RJ_NOC_Model
     public class DTEStatistics_PlacementDetailsDataModel
     {
         public int EntryID { get; set; }
-        public string EntryDate { get; set; }
+        public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
-        public string SelectedCollegeEntryTypeName { get; set; }
+        public string? SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
-        public string EntryType { get; set; }
+        public string? EntryType { get; set; }
 
         public List<DTEStatistics_PlacementDetailsDataModel_PlacementDetails>? PlacementDetails { get; set; }
 

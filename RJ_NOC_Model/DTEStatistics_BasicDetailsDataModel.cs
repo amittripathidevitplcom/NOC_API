@@ -68,7 +68,7 @@ namespace RJ_NOC_Model
     {
         public int EntryID { get; set; }
         public int AID { get; set; }
-        public string Specialisation { get; set; }
+        public string? Specialisation { get; set; }
         public int NoOfCollegesPermanentAffiliation { get; set; }
         public int NoOfCollegesTemporaryAffiliation { get; set; }
         public int Total { get; set; }
@@ -79,7 +79,7 @@ namespace RJ_NOC_Model
         public int EntryID { get; set; }
         public int AID { get; set; }
         public int FID { get; set; }
-        public string College { get; set; }
+        public string? College { get; set; }
         public int NoOfColleges { get; set; }
     }
 
