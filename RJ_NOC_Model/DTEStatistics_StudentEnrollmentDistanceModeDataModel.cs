@@ -11,7 +11,7 @@ namespace RJ_NOC_Model
         public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
-        public string SelectedCollegeEntryTypeName { get; set; }
+        public string? SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
         public string? EntryType { get; set; }
 
