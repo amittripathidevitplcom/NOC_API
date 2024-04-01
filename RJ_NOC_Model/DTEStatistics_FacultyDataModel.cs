@@ -8,10 +8,10 @@ namespace RJ_NOC_Model
     public class DTEStatistics_FacultyDataModel
     {
         public int EntryID { get; set; }
-        public string EntryDate { get; set; }
+        public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
-        public string SelectedCollegeEntryTypeName { get; set; }
+        public string? SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
 
         public List<Faculty_FacultyDetails>? FacultyDetails { get; set; }
@@ -23,7 +23,7 @@ namespace RJ_NOC_Model
     }
     public class Faculty_FacultyDetails
     {
-        public string NameofFaculty { get; set; }
+        public string? NameofFaculty { get; set; }
     }
 }
 

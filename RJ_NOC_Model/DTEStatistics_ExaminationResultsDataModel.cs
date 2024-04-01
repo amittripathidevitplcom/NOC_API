@@ -8,12 +8,12 @@ namespace RJ_NOC_Model
     public class DTEStatistics_ExaminationResultsDataModel
     {
         public int EntryID { get; set; }
-        public string EntryDate { get; set; }
+        public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
-        public string SelectedCollegeEntryTypeName { get; set; }
+        public string? SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
-        public string EntryType { get; set; }
+        public string? EntryType { get; set; }
 
         public List<DTEStatistics_ExaminationResultsDataModel_ProgrammesDetails>? ProgrammesDetails { get; set; }
 
@@ -25,15 +25,15 @@ namespace RJ_NOC_Model
     public class DTEStatistics_ExaminationResultsDataModel_ProgrammesDetails
     {
         public int AID { get; set; }
-        public string Faculty_School { get; set; }
-        public string Department_Centre { get; set; }
+        public string? Faculty_School { get; set; }
+        public string? Department_Centre { get; set; }
         public int LevelID { get; set; }
-        public string LevelName { get; set; }
-        public string Discipline { get; set; }
+        public string? LevelName { get; set; }
+        public string? Discipline { get; set; }
 
 
 
-        public string AppeardCategory { get; set; }
+        public string? AppeardCategory { get; set; }
         public int AppeardGeneralCategoryMale { get; set; }
         public int AppeardGeneralCategoryFemale { get; set; }
         public int AppeardGeneralCategoryTransGender { get; set; }
@@ -58,8 +58,8 @@ namespace RJ_NOC_Model
         public int AppeardTotalCategoryFemale { get; set; }
         public int AppeardTotalCategoryTransGender { get; set; }
 
-        public string AppeardRemark { get; set; }
-        public string trCss { get; set; }
+        public string? AppeardRemark { get; set; }
+        public string? trCss { get; set; }
 
 
         //Total Number of Students Passed/Awarded Degree
@@ -88,10 +88,10 @@ namespace RJ_NOC_Model
         public int PassedTotalCategoryFemale { get; set; }
         public int PassedTotalCategoryTransGender { get; set; }
 
-        public string PassedRemark { get; set; }
+        public string? PassedRemark { get; set; }
 
         //Out of Total, Number of Students Passed with 60% or above
-        public string OutofTotalPassedCategory { get; set; }
+        public string? OutofTotalPassedCategory { get; set; }
         public int OutofTotalPassedGeneralCategoryMale { get; set; }
         public int OutofTotalPassedGeneralCategoryFemale { get; set; }
         public int OutofTotalPassedGeneralCategoryTransGender { get; set; }
@@ -116,12 +116,12 @@ namespace RJ_NOC_Model
         public int OutofTotalPassedTotalCategoryFemale { get; set; }
         public int OutofTotalPassedTotalCategoryTransGender { get; set; }
 
-        public string OutofTotalPassedRemark { get; set; }
+        public string? OutofTotalPassedRemark { get; set; }
         public List<DTEStatistics_ExaminationResultsDataModel_StudentDetails>? StudentDetails { get; set; }
     }
     public class DTEStatistics_ExaminationResultsDataModel_StudentDetails
     {
-        public string AppeardCategory { get; set; }
+        public string? AppeardCategory { get; set; }
         public int AppeardGeneralCategoryMale { get; set; }
         public int AppeardGeneralCategoryFemale { get; set; }
         public int AppeardGeneralCategoryTransGender { get; set; }
@@ -149,7 +149,7 @@ namespace RJ_NOC_Model
 
 
         //Total Number of Students Passed/Awarded Degree
-        public string PassedCategory { get; set; }
+        public string? PassedCategory { get; set; }
         public int PassedGeneralCategoryMale { get; set; }
         public int PassedGeneralCategoryFemale { get; set; }
         public int PassedGeneralCategoryTransGender { get; set; }
@@ -176,7 +176,7 @@ namespace RJ_NOC_Model
          
 
         //Out of Total, Number of Students Passed with 60% or above
-        public string OutofTotalPassedCategory { get; set; }
+        public string? OutofTotalPassedCategory { get; set; }
         public int OutofTotalPassedGeneralCategoryMale { get; set; }
         public int OutofTotalPassedGeneralCategoryFemale { get; set; }
         public int OutofTotalPassedGeneralCategoryTransGender { get; set; }
@@ -206,13 +206,13 @@ namespace RJ_NOC_Model
 
     public class DTEStatistics_ExaminationResultsDataModel_StudentDetails_Data
     {
-        public string Faculty_School { get; set; }
+        public string? Faculty_School { get; set; }
         public string Department_Centre { get; set; }
         public int LevelID { get; set; }
-        public string LevelName { get; set; }
-        public string Discipline { get; set; }
+        public string? LevelName { get; set; }
+        public string? Discipline { get; set; }
 
-        public string AppeardCategory { get; set; }
+        public string? AppeardCategory { get; set; }
         public int AppeardGeneralCategoryMale { get; set; }
         public int AppeardGeneralCategoryFemale { get; set; }
         public int AppeardGeneralCategoryTransGender { get; set; }
@@ -237,12 +237,12 @@ namespace RJ_NOC_Model
         public int AppeardTotalCategoryFemale { get; set; }
         public int AppeardTotalCategoryTransGender { get; set; }
 
-        public string AppeardRemark { get; set; }
+        public string? AppeardRemark { get; set; }
         public string trCss { get; set; }
 
 
         //Total Number of Students Passed/Awarded Degree
-        public string PassedCategory { get; set; }
+        public string? PassedCategory { get; set; }
         public int PassedGeneralCategoryMale { get; set; }
         public int PassedGeneralCategoryFemale { get; set; }
         public int PassedGeneralCategoryTransGender { get; set; }
@@ -267,10 +267,10 @@ namespace RJ_NOC_Model
         public int PassedTotalCategoryFemale { get; set; }
         public int PassedTotalCategoryTransGender { get; set; }
 
-        public string PassedRemark { get; set; }
+        public string? PassedRemark { get; set; }
 
         //Out of Total, Number of Students Passed with 60% or above
-        public string OutofTotalPassedCategory { get; set; }
+        public string? OutofTotalPassedCategory { get; set; }
         public int OutofTotalPassedGeneralCategoryMale { get; set; }
         public int OutofTotalPassedGeneralCategoryFemale { get; set; }
         public int OutofTotalPassedGeneralCategoryTransGender { get; set; }
@@ -295,7 +295,7 @@ namespace RJ_NOC_Model
         public int OutofTotalPassedTotalCategoryFemale { get; set; }
         public int OutofTotalPassedTotalCategoryTransGender { get; set; }
 
-        public string OutofTotalPassedRemark { get; set; }
+        public string? OutofTotalPassedRemark { get; set; }
     }
 }
 

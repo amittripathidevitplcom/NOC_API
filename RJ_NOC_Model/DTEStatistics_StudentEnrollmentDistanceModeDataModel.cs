@@ -8,12 +8,12 @@ namespace RJ_NOC_Model
     public class DTEStatistics_StudentEnrollmentDistanceModeDataModel
     {
         public int EntryID { get; set; }
-        public string EntryDate { get; set; }
+        public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
         public string SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
-        public string EntryType { get; set; }
+        public string? EntryType { get; set; }
 
         public List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails>? ProgrammesDetails { get; set; }
 
@@ -25,15 +25,15 @@ namespace RJ_NOC_Model
     public class DTEStatistics_StudentEnrollmentDistanceModeDataModel_ProgrammesDetails
     {
         public int AID { get; set; }
-        public string Faculty_School { get; set; }
-        public string Department_Centre { get; set; }
+        public string? Faculty_School { get; set; }
+        public string? Department_Centre { get; set; }
         public int LevelID { get; set; }
-        public string LevelName { get; set; }
-        public string Discipline { get; set; }
+        public string? LevelName { get; set; }
+        public string? Discipline { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
 
-        public string Category { get; set; }
+        public string? Category { get; set; }
         public int GeneralCategorySeatsEarmarkedAsPerGOI { get; set; }
         public int GeneralCategoryMale { get; set; }
         public int GeneralCategoryFemale { get; set; }
@@ -63,13 +63,13 @@ namespace RJ_NOC_Model
         public int TotalCategoryMale { get; set; }
         public int TotalCategoryFemale { get; set; }
         public int TotalCategoryTransGender { get; set; }
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
         public List<DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails>? StudentDetails { get; set; }
     }
     public class DTEStatistics_StudentEnrollmentDistanceModeDataModel_StudentDetails
     {
 
-        public string Category { get; set; }
+        public string? Category { get; set; }
         public int GeneralCategorySeatsEarmarkedAsPerGOI { get; set; }
         public int GeneralCategoryMale { get; set; }
         public int GeneralCategoryFemale { get; set; }
