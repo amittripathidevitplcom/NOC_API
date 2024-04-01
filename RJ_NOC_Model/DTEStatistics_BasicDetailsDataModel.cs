@@ -40,6 +40,29 @@ namespace RJ_NOC_Model
         public List<BasicDetails_SpecialisationDetailsDataModel>? SpecialisationDetails { get; set; }
         public List<BasicDetails_CollegeUnderUniversityDetailsDataModel>? CollegeUnderUniversityDetails { get; set; }
 
+
+        public BasicDetails_InstituteHeadDetailsDataModel InstituteHeadDetails { get; set; }
+        public BasicDetails_NodalOfficerDetailsDataModel NodalOfficerDetails { get; set; }
+        public BasicDetails_AffiliationDetailsDataModel AffiliationDetails { get; set; }
+
+
+        public string ManagementOfTheInstitution { get; set; }
+        public string IsEveningCollege { get; set; }
+        public string AutonomousInstitute { get; set; }
+        public string MinorityCommunityType { get; set; }
+
+        public int EnrolledStudentInNCCOtherInstitute { get; set; }
+        public int EnrolledFemaleStudentInNCCOtherInstitute { get; set; }
+
+
+        public string SpecialisedUniversity { get; set; }
+        public string OtherSpecialisedUniversity { get; set; }
+        public string WhetherTheCollegeRunningDiplomaLevelCourse { get; set; }
+        public string DiplomaLevelCourse { get; set; }
+        public string OtherDiplomaCourse { get; set; }
+        public string WhetherAwardsDegreethroughAnyUniversity { get; set; }
+        public string OtherUniversityName { get; set; }
+
     }
     public class BasicDetails_SpecialisationDetailsDataModel
     {
@@ -58,5 +81,38 @@ namespace RJ_NOC_Model
         public int FID { get; set; }
         public string College { get; set; }
         public int NoOfColleges { get; set; }
+    }
+
+
+
+    public class BasicDetails_InstituteHeadDetailsDataModel
+    {
+        public int EntryID { get; set; }
+        public int AID { get; set; }
+        public string NameOfUniversityNodalOfficerForAISHE { get; set; }
+        public string Email { get; set; }
+        public int DesignationID { get; set; }
+        public string DesignationName { get; set; }
+        public string MobileNo { get; set; }
+        public string TelephoneNo { get; set; }
+    }
+    public class BasicDetails_NodalOfficerDetailsDataModel
+    {
+        public int EntryID { get; set; }
+        public int AID { get; set; }
+        public string NameOfUniversityNodalOfficerForAISHE { get; set; }
+        public string Email { get; set; }
+        public int DesignationID { get; set; }
+        public string DesignationName { get; set; }
+        public string MobileNo { get; set; }
+        public string TelephoneNo { get; set; }
+    }
+    public class BasicDetails_AffiliationDetailsDataModel
+    {
+        public int EntryID { get; set; }
+        public int AID { get; set; }
+        public string NameStatutorybody { get; set; }
+        public string AffiliationYear { get; set; }
+        public string AffiliatedOtherUniversity { get; set; }
     }
 }

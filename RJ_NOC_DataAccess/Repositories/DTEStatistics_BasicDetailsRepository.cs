@@ -35,6 +35,9 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data1 = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
             List<BasicDetails_CollegeUnderUniversityDetailsDataModel> CollegeUnderUniversityDetails = JsonConvert.DeserializeObject<List<BasicDetails_CollegeUnderUniversityDetailsDataModel>>(JsonDataTable_Data1);
             dataModels.CollegeUnderUniversityDetails = CollegeUnderUniversityDetails;
+            dataModels.InstituteHeadDetails = CommonHelper.ConvertDataTable<BasicDetails_InstituteHeadDetailsDataModel>(dataSet.Tables[3]);
+            dataModels.NodalOfficerDetails = CommonHelper.ConvertDataTable<BasicDetails_NodalOfficerDetailsDataModel>(dataSet.Tables[4]);
+            dataModels.AffiliationDetails = CommonHelper.ConvertDataTable<BasicDetails_AffiliationDetailsDataModel>(dataSet.Tables[5]);
 
             return dataModels;
         }
@@ -77,12 +80,52 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @EnrolledTotalStudentInNSS='" + request.EnrolledTotalStudentInNSS + "', ";
             SqlQuery += " @IsspecializedUniversity='" + request.IsspecializedUniversity + "', ";
             SqlQuery += " @AffiliatedInstitutions='" + request.AffiliatedInstitutions + "', ";
-           
+
 
             SqlQuery += " @SpecialisationDetailsStr='" + SpecialisationDetailsStr + "', ";
             SqlQuery += " @CollegeUnderUniversityDetailsStr='" + CollegeUnderUniversityDetailsStr + "', ";
 
-            SqlQuery += " @IPAddress='" + IPAddress + "' ";
+            SqlQuery += " @IPAddress='" + IPAddress + "', ";
+
+            SqlQuery += " @ManagementOfTheInstitution='" + request.ManagementOfTheInstitution + "', ";
+            SqlQuery += " @IsEveningCollege='" + request.IsEveningCollege + "', ";
+            SqlQuery += " @AutonomousInstitute='" + request.AutonomousInstitute + "', ";
+            SqlQuery += " @MinorityCommunityType='" + request.MinorityCommunityType + "', ";
+            SqlQuery += " @EnrolledStudentInNCCOtherInstitute='" + request.EnrolledStudentInNCCOtherInstitute + "', ";
+            SqlQuery += " @EnrolledFemaleStudentInNCCOtherInstitute='" + request.EnrolledFemaleStudentInNCCOtherInstitute + "', ";
+            SqlQuery += " @SpecialisedUniversity='" + request.SpecialisedUniversity + "', ";
+            SqlQuery += " @OtherSpecialisedUniversity='" + request.OtherSpecialisedUniversity + "', ";
+            SqlQuery += " @WhetherTheCollegeRunningDiplomaLevelCourse='" + request.WhetherTheCollegeRunningDiplomaLevelCourse + "', ";
+            SqlQuery += " @DiplomaLevelCourse='" + request.DiplomaLevelCourse + "', ";
+            SqlQuery += " @OtherDiplomaCourse='" + request.OtherDiplomaCourse + "', ";
+            SqlQuery += " @WhetherAwardsDegreethroughAnyUniversity='" + request.WhetherAwardsDegreethroughAnyUniversity + "', ";
+            if (request.InstituteHeadDetails != null)
+            {
+                SqlQuery += "@InstituteHeadDetails='select ''" + request.InstituteHeadDetails.NameOfUniversityNodalOfficerForAISHE + "''" + " as NameOfUniversityNodalOfficerForAISHE, " +
+                    "''" + request.InstituteHeadDetails.Email + "''" + " as Email, " +
+                    "''" + request.InstituteHeadDetails.DesignationID + "''" + " as DesignationID, " +
+                    "''" + request.InstituteHeadDetails.DesignationName + "''" + " as DesignationName,"+
+                    "''" + request.InstituteHeadDetails.MobileNo + "''" + " as MobileNo,"+
+                    "''" + request.InstituteHeadDetails.TelephoneNo + "''" + " as TelephoneNo',";
+            }     
+            if (request.NodalOfficerDetails != null)
+            {
+                SqlQuery += "@NodalOfficerDetails='select ''" + request.NodalOfficerDetails.NameOfUniversityNodalOfficerForAISHE + "''" + " as NameOfUniversityNodalOfficerForAISHE, " +
+                    "''" + request.NodalOfficerDetails.Email + "''" + " as Email, " +
+                    "''" + request.NodalOfficerDetails.DesignationID + "''" + " as DesignationID, " +
+                    "''" + request.NodalOfficerDetails.DesignationName + "''" + " as DesignationName,"+
+                    "''" + request.NodalOfficerDetails.MobileNo + "''" + " as MobileNo,"+
+                    "''" + request.NodalOfficerDetails.TelephoneNo + "''" + " as TelephoneNo',";
+            }    
+            if (request.AffiliationDetails != null)
+            {
+                SqlQuery += "@AffiliationDetails='select ''" + request.AffiliationDetails.NameStatutorybody + "''" + " as NameStatutorybody, " +
+                    "''" + request.AffiliationDetails.AffiliationYear + "''" + " as AffiliationYear, " +
+                    "''" + request.AffiliationDetails.AffiliatedOtherUniversity + "''" + " as AffiliatedOtherUniversity' ,";
+            }
+            SqlQuery += " @OtherUniversityName='" + request.OtherUniversityName + "' ";
+
+
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEStatistics_RegionalCenters.SaveData");
             if (Rows > 0)
                 return true;
