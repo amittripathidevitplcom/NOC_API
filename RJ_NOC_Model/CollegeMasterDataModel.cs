@@ -39,6 +39,7 @@ namespace RJ_NOC_Model
         public int AssemblyAreaID { get; set; }
         public string CityTownVillage { get; set; }
         public int YearofEstablishment { get; set; }
+        public string? YearofEstablishmentName { get; set; }
         public int Pincode { get; set; }
         public string? WebsiteLink { get; set; }
         public int GCD_DesignationID { get; set; }

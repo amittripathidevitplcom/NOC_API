@@ -186,6 +186,7 @@ namespace RJ_NOC_Model
         public string? ManagementType { get; set; }
         public string? GenerateReceipt_DTE { get; set; }
         public string? GenerateReceiptPath_DTE { get; set; }
+        public string? ExistingLetterofEOA { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 

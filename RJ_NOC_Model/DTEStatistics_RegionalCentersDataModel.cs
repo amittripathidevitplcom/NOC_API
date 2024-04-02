@@ -8,15 +8,15 @@ namespace RJ_NOC_Model
     public class DTEStatistics_RegionalCentersDataModel
     {
         public int EntryID { get; set; }
-        public string EntryDate { get; set; }
+        public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
-        public string SelectedCollegeEntryTypeName { get; set; }
+        public string? SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
 
-        public string DistanceEducationMode { get; set; }
-        public string PrivateExternalProgramme { get; set; }
-        public string RegionalCenters { get; set; }
+        public string? DistanceEducationMode { get; set; }
+        public string? PrivateExternalProgramme { get; set; }
+        public string? RegionalCenters { get; set; }
 
         public List<RegionalCenters_RegionalCentersDetails>? RegionalCentersDetails { get; set; }
 
@@ -27,11 +27,11 @@ namespace RJ_NOC_Model
     }
     public class RegionalCenters_RegionalCentersDetails
     {
-        public string NameOfRegionalCenter { get; set; }
+        public string? NameOfRegionalCenter { get; set; }
         public int StateID { get; set; }
-        public string StateName { get; set; }
+        public string? StateName { get; set; }
         public int DistrictID { get; set; }
-        public string DistrictName { get; set; }
+        public string? DistrictName { get; set; }
         public int NoofStudyCenters { get; set; }
     } 
 }

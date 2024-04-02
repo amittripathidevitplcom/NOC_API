@@ -915,7 +915,7 @@ namespace RJ_NOC_API.Controllers
                     if (request.Status == "Release NOC")
                         result.SuccessMessage = "NOC Relesed Successfully .!";
                     else
-                        result.SuccessMessage = "NOC Rejected Successfully .!"; 
+                        result.SuccessMessage = "NOC Rejected Successfully .!";
                 }
                 else
                 {
@@ -944,13 +944,19 @@ namespace RJ_NOC_API.Controllers
             var fileName = Guid.NewGuid().ToString().Replace("/", "").Replace("-", "").ToUpper() + ".pdf";
             StringBuilder sbhtml = new StringBuilder();
             string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+            var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\AHNOC_Print.rdlc";
             if (dt[0].data.Rows.Count > 0)
             {
                 dt[0].data.Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dt[0].data.Rows[0]["NocQRCodeLink"].ToString());
+                if (dt[0].data.Rows[0]["CollegeLevel"].ToString() == "Diploma" && dt[0].data.Rows[0]["CollegeType"].ToString() == "New")
+                {
+                    path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\AHNOC_DiplomaNew_Print.rdlc";
+                }
             }
             string mimetype = "";
             int extension = 1;
-            var path = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports")) + "\\AHNOC_Print.rdlc";
+
+
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("test", "");
             string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;

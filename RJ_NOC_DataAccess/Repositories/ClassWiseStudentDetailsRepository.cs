@@ -43,7 +43,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
 
 
-      
+
         public bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
@@ -72,19 +72,19 @@ namespace RJ_NOC_DataAccess.Repositories
         public bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_StatisticsFinalSubmit_Save @CollegeID='"+ model.CollegeID+ "',@SSOID='"+ model.SSOID+ "',@Confirmation='" + model.Confirmation + "'";
+            string SqlQuery = " exec USP_StatisticsFinalSubmit_Save @CollegeID='" + model.CollegeID + "',@SSOID='" + model.SSOID + "',@Confirmation='" + model.Confirmation + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ClassWiseStudentDetailsRepository.StatisticsFinalSubmit_Save");
             if (Rows > 0)
                 return true;
             else
                 return false;
         }
-         
+
 
         List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited(CollegeList_StatisticsDraftSubmitedDataModel_Filter model)
         {
-            string SqlQuery = " exec USP_CollegeList_StatisticsDraftSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='"+ model.CollegeName + "'";
-            
+            string SqlQuery = " exec USP_CollegeList_StatisticsDraftSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "'";
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited");
             List<DataTable> dataModels = new List<DataTable>();
@@ -96,7 +96,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter model)
         {
-            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='"+ model.CollegeName + "'";
+            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "'";
 
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited");
@@ -118,6 +118,18 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+        public bool GetCollegeStatisticsFinalSubmitStatus(int CollegeID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_GetCollegeStatisticsFinalSubmitStatus";
+            SqlQuery += " @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetCollegeStatisticsFinalSubmitStatus");
+            if (dataTable != null && dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

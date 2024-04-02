@@ -305,6 +305,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.CheckTabsEntry(CollegID);
         }
+        public List<CommonDataModel_DataTable> CheckTabsEntry_StatisticsEntry(int CollegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.CheckTabsEntry_StatisticsEntry(CollegID);
+        }
         public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
         {
             return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(CollegeID, IsDraftSubmited);

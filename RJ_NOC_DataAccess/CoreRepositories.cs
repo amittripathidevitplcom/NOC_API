@@ -218,7 +218,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return buildingDetailsMasterRepository; }
         }
-         private ISSOAPIRepository sSOAPIRepository;
+        private ISSOAPIRepository sSOAPIRepository;
         public ISSOAPIRepository SSOAPIRepository
         {
             get { return sSOAPIRepository; }
@@ -276,7 +276,7 @@ namespace RJ_NOC_DataAccess.Repository
         //{
         //    get { return scurtenyComitteeRepository; }
         //}
-        
+
 
         private ICommitteeMasterRepository committeeMasterRepository;
         public ICommitteeMasterRepository CommitteeMasterRepository
@@ -376,20 +376,20 @@ namespace RJ_NOC_DataAccess.Repository
         public ISeatInformationMasterRepository SeatInformationMasterRepository
         {
             get { return seatInformationMasterRepository; }
-        }       
+        }
         private IMGOneDocumentScrutinyRepository mgoneDocumentScrutinyRepository;
         public IMGOneDocumentScrutinyRepository MGOneDocumentScrutinyRepository
         {
             get { return mgoneDocumentScrutinyRepository; }
         }
-        
+
         private IGrievanceRepository grievanceRepository;
         public IGrievanceRepository GrievanceRepository
         {
             get { return grievanceRepository; }
         }
 
-         private IDTECommitteeMasterRepository dTECommitteeMasterRepository;
+        private IDTECommitteeMasterRepository dTECommitteeMasterRepository;
         public IDTECommitteeMasterRepository DTECommitteeMasterRepository
         {
             get { return dTECommitteeMasterRepository; }
@@ -400,7 +400,7 @@ namespace RJ_NOC_DataAccess.Repository
         public IDepartmentOfTechnicalDocumentScrutinyRepository DepartmentOfTechnicalDocumentScrutinyRepository
         {
             get { return departmentoftechnicaldocumentscrutinyrepository; }
-        }      
+        }
         private IUserManualDocumentMasterRepository userManualDocumentMasterRepository;
         public IUserManualDocumentMasterRepository UserManualDocumentMasterRepository
         {
@@ -418,13 +418,13 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_OfficersDetailsRepository; }
         }
-        
+
         private IDTEStatistics_AddressRepository dTEStatistics_AddressRepository;
         public IDTEStatistics_AddressRepository DTEStatistics_AddressRepository
         {
             get { return dTEStatistics_AddressRepository; }
         }
-        
+
         private IDTEStatistics_ResidentialFacilityRepository dTEStatistics_ResidentialFacilityRepository;
         public IDTEStatistics_ResidentialFacilityRepository DTEStatistics_ResidentialFacilityRepository
         {
@@ -435,7 +435,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_RegionalCentersRepository; }
         }
-        
+
         private IDTEStatistics_OffShoreCenterRepository dTEStatistics_OffShoreCenterRepository;
         public IDTEStatistics_OffShoreCenterRepository DTEStatistics_OffShoreCenterRepository
         {
@@ -451,7 +451,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_DepartmentRepository; }
         }
-        
+
         private IDTEStatistics_RegularModeRepository dTEStatistics_RegularModeRepository;
         public IDTEStatistics_RegularModeRepository DTEStatistics_RegularModeRepository
         {
@@ -461,6 +461,55 @@ namespace RJ_NOC_DataAccess.Repository
         public IDTEStatistics_OtherMinorityDataRepository DTEStatistics_OtherMinorityDataRepository
         {
             get { return dTEStatistics_OtherMinorityDataRepository; }
+        }
+
+        private IDTEStatistics_FinancialDetailsRepository dTEStatistics_FinancialDetailsRepository;
+        public IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository
+        {
+            get { return dTEStatistics_FinancialDetailsRepository; }
+        }
+
+        private IDTEStatistics_InfrastructureDetailsRepository dTEStatistics_InfrastructureDetailsRepository;
+        public IDTEStatistics_InfrastructureDetailsRepository DTEStatistics_InfrastructureDetailsRepository
+        {
+            get { return dTEStatistics_InfrastructureDetailsRepository; }
+        }
+        private IDTEStatistics_RegulatoryInformationRepository dTEStatistics_RegulatoryInformationRepository;
+        public IDTEStatistics_RegulatoryInformationRepository DTEStatistics_RegulatoryInformationRepository
+        {
+            get { return dTEStatistics_RegulatoryInformationRepository; }
+        }
+        private IDTEStatistics_StudentEnrollmentDistanceModeRepository dTEStatistics_StudentEnrollmentDistanceModeRepository;
+        public IDTEStatistics_StudentEnrollmentDistanceModeRepository DTEStatistics_StudentEnrollmentDistanceModeRepository
+        {
+            get { return dTEStatistics_StudentEnrollmentDistanceModeRepository; }
+        }
+        private IDTEStatistics_RegularForeignStudentEnrolmentRepository dTEStatistics_RegularForeignStudentEnrolmentRepository;
+        public IDTEStatistics_RegularForeignStudentEnrolmentRepository DTEStatistics_RegularForeignStudentEnrolmentRepository
+        {
+            get { return dTEStatistics_RegularForeignStudentEnrolmentRepository; }
+        }
+        private IDTEStatistics_ExaminationResultsRepository dTEStatistics_ExaminationResultsRepository;
+        public IDTEStatistics_ExaminationResultsRepository DTEStatistics_ExaminationResultsRepository
+        {
+            get { return dTEStatistics_ExaminationResultsRepository; }
+        }
+        private IDTEStatistics_ScholarshipFellowshipLoanAccRepository dTEStatistics_ScholarshipFellowshipLoanAccRepository;
+        public IDTEStatistics_ScholarshipFellowshipLoanAccRepository DTEStatistics_ScholarshipFellowshipLoanAccRepository
+        {
+            get { return dTEStatistics_ScholarshipFellowshipLoanAccRepository; }
+        }
+        private IDTEStatistics_StaffRepository dTEStatistics_StaffRepository;
+        public IDTEStatistics_StaffRepository DTEStatistics_StaffRepository
+        {
+            get { return dTEStatistics_StaffRepository; }
+        }
+
+
+        private IDTEStatistics_BasicDetailsRepository dTEStatistics_BasicDetailsRepository;
+        public IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository
+        {
+            get { return dTEStatistics_BasicDetailsRepository; }
         }
         //private IDTEStatistics_PlacementDetailsRepository dTEStatistics_PlacementDetailsRepository;
         //public IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository
@@ -522,14 +571,14 @@ namespace RJ_NOC_DataAccess.Repository
             rNCCheckListMasterRepository = new RNCCheckListMasterRepository(commonHelper);
             animalMasterRepository = new AnimalMasterRepository(commonHelper);
             streamMasterRepository = new StreamMasterRepository(commonHelper);
-            
-            loginMasterRepository = new LoginMasterRepository(commonHelper); 
+
+            loginMasterRepository = new LoginMasterRepository(commonHelper);
             veterinaryHospitalRepository = new VeterinaryHospitalRepository(commonHelper);
-            streamsubjectmappingdetailsrepository = new  StreamSubjectMappingDetailsRepository(commonHelper);
-            farmLandDetailsRepository = new  FarmLandDetailsRepositories(commonHelper);
+            streamsubjectmappingdetailsrepository = new StreamSubjectMappingDetailsRepository(commonHelper);
+            farmLandDetailsRepository = new FarmLandDetailsRepositories(commonHelper);
             addCourseMasterRepository = new AddCourseMasterRepository(commonHelper);
-            paramedicalHospitalRepository = new  ParamedicalHospitalRepository(commonHelper);
-            classwisestudentdetailsrepository = new  ClassWiseStudentDetailsRepository(commonHelper);
+            paramedicalHospitalRepository = new ParamedicalHospitalRepository(commonHelper);
+            classwisestudentdetailsrepository = new ClassWiseStudentDetailsRepository(commonHelper);
             animalDocumentScrutinyRepository = new AnimalDocumentScrutinyRepository(commonHelper);
             agricultureDocumentScrutinyRepository = new AgricultureDocumentScrutinyRepository(commonHelper);
             departmentofcollegedocumentscrutinyrepository = new DepartmentOfCollegeDocumentScrutinyRepository(commonHelper);
@@ -551,6 +600,17 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_FacultyRepository = new DTEStatistics_FacultyRepository(commonHelper);
             dTEStatistics_DepartmentRepository = new DTEStatistics_DepartmentRepository(commonHelper);
             dTEStatistics_RegularModeRepository = new DTEStatistics_RegularModeRepository(commonHelper);
+            dTEStatistics_PlacementDetailsRepository = new DTEStatistics_PlacementDetailsRepository(commonHelper);
+            dTEStatistics_FinancialDetailsRepository = new DTEStatistics_FinancialDetailsRepository(commonHelper);
+            dTEStatistics_InfrastructureDetailsRepository = new DTEStatistics_InfrastructureDetailsRepository(commonHelper);
+            dTEStatistics_RegulatoryInformationRepository = new DTEStatistics_RegulatoryInformationRepository(commonHelper);
+            dTEStatistics_StudentEnrollmentDistanceModeRepository = new DTEStatistics_StudentEnrollmentDistanceModeRepository(commonHelper);
+            dTEStatistics_RegularForeignStudentEnrolmentRepository = new DTEStatistics_RegularForeignStudentEnrolmentRepository(commonHelper);
+            dTEStatistics_ExaminationResultsRepository = new DTEStatistics_ExaminationResultsRepository(commonHelper);
+            dTEStatistics_ScholarshipFellowshipLoanAccRepository = new DTEStatistics_ScholarshipFellowshipLoanAccRepository(commonHelper);
+            dTEStatistics_StaffRepository = new DTEStatistics_StaffRepository(commonHelper);
+            dTEStatistics_BasicDetailsRepository = new DTEStatistics_BasicDetailsRepository(commonHelper);
+
             dTEStatistics_OtherMinorityDataRepository = new DTEStatistics_OtherMinorityDataRepository(commonHelper);
             //dTEStatistics_PlacementDetailsRepository = new DTEStatistics_PlacementDetailsRepository(commonHelper);
             //dTEStatistics_FinancialDetailsRepository = new DTEStatistics_FinancialDetailsRepository(commonHelper);

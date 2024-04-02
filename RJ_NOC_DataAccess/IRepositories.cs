@@ -86,6 +86,17 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_FacultyRepository DTEStatistics_FacultyRepository { get; }
         IDTEStatistics_DepartmentRepository DTEStatistics_DepartmentRepository { get; }
         IDTEStatistics_RegularModeRepository DTEStatistics_RegularModeRepository { get; }
+        IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
+        IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
+        IDTEStatistics_InfrastructureDetailsRepository DTEStatistics_InfrastructureDetailsRepository { get; }
+        IDTEStatistics_RegulatoryInformationRepository DTEStatistics_RegulatoryInformationRepository { get; }
+        IDTEStatistics_StudentEnrollmentDistanceModeRepository DTEStatistics_StudentEnrollmentDistanceModeRepository { get; }
+        IDTEStatistics_RegularForeignStudentEnrolmentRepository DTEStatistics_RegularForeignStudentEnrolmentRepository { get; }
+        IDTEStatistics_ExaminationResultsRepository DTEStatistics_ExaminationResultsRepository { get; }
+        IDTEStatistics_ScholarshipFellowshipLoanAccRepository DTEStatistics_ScholarshipFellowshipLoanAccRepository { get; }
+        IDTEStatistics_StaffRepository DTEStatistics_StaffRepository { get; }
+        IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository { get; }
+
         IDTEStatistics_OtherMinorityDataRepository DTEStatistics_OtherMinorityDataRepository { get; }
         //IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
         //IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
