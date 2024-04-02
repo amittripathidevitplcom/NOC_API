@@ -99,6 +99,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @DiplomaLevelCourse='" + request.DiplomaLevelCourse + "', ";
             SqlQuery += " @OtherDiplomaCourse='" + request.OtherDiplomaCourse + "', ";
             SqlQuery += " @WhetherAwardsDegreethroughAnyUniversity='" + request.WhetherAwardsDegreethroughAnyUniversity + "', ";
+            SqlQuery += " @YearofRecognition='" + request.YearofRecognition + "', ";
+
             if (request.InstituteHeadDetails != null)
             {
                 SqlQuery += "@InstituteHeadDetails='select ''" + request.InstituteHeadDetails.NameOfUniversityNodalOfficerForAISHE + "''" + " as NameOfUniversityNodalOfficerForAISHE, " +

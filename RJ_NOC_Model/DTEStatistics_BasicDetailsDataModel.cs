@@ -62,6 +62,7 @@ namespace RJ_NOC_Model
         public string OtherDiplomaCourse { get; set; }
         public string WhetherAwardsDegreethroughAnyUniversity { get; set; }
         public string OtherUniversityName { get; set; }
+        public string YearofRecognition { get; set; }
 
     }
     public class BasicDetails_SpecialisationDetailsDataModel
