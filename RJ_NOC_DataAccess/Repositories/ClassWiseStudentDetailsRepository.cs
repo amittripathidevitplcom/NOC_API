@@ -72,7 +72,7 @@ namespace RJ_NOC_DataAccess.Repositories
         public bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_StatisticsFinalSubmit_Save @CollegeID='" + model.CollegeID + "',@SSOID='" + model.SSOID + "',@Confirmation='" + model.Confirmation + "'";
+            string SqlQuery = " exec USP_StatisticsFinalSubmit_Save @CollegeID='" + model.CollegeID + "',@SSOID='" + model.SSOID + "',@Confirmation='" + model.Confirmation + "',@SelectedCollegeEntryType='" + model.SelectedCollegeEntryType + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ClassWiseStudentDetailsRepository.StatisticsFinalSubmit_Save");
             if (Rows > 0)
                 return true;

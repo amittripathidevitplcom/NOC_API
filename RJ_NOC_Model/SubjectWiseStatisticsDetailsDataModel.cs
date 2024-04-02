@@ -49,5 +49,6 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public string SSOID { get; set; }
         public string Confirmation { get; set; }
+        public string SelectedCollegeEntryType { get; set; }
     }
 }
