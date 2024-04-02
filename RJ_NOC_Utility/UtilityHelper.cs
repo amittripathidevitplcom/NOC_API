@@ -123,8 +123,10 @@ namespace RJ_NOC_Utility
         public IDTEStatistics_Faculty DTEStatistics_FacultyUtility { get; private set; }
         public IDTEStatistics_Department DTEStatistics_DepartmentUtility { get; private set; }
         public IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; private set; }
-        public IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; private set; }
-        public IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; private set; }
+        public IDTEStatistics_OtherMinorityData DTEStatistics_OtherMinorityDataUtility { get; private set; }
+        
+        //public IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; private set; }
+        //public IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; private set; }
 
 
         /// <summary>
@@ -214,8 +216,10 @@ namespace RJ_NOC_Utility
             DTEStatistics_FacultyUtility = new DTEStatistics_Faculty(UnitOfWork);
             DTEStatistics_DepartmentUtility = new DTEStatistics_Department(UnitOfWork);
             DTEStatistics_RegularModeUtility = new DTEStatistics_RegularMode(UnitOfWork);
-            DTEStatistics_PlacementDetailsUtility = new DTEStatistics_PlacementDetails(UnitOfWork);
-            DTEStatistics_FinancialDetailsUtility = new DTEStatistics_FinancialDetails(UnitOfWork);
+            DTEStatistics_OtherMinorityDataUtility = new DTEStatistics_OtherMinorityData(UnitOfWork);
+            
+            //DTEStatistics_PlacementDetailsUtility = new DTEStatistics_PlacementDetails(UnitOfWork);
+            //DTEStatistics_FinancialDetailsUtility = new DTEStatistics_FinancialDetails(UnitOfWork);
         }
     }
 }

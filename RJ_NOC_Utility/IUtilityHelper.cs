@@ -89,7 +89,9 @@ namespace RJ_NOC_Utility
         IDTEStatistics_Faculty DTEStatistics_FacultyUtility { get; }
         IDTEStatistics_Department DTEStatistics_DepartmentUtility { get; }
         IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }
-        IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
-        IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
+        IDTEStatistics_OtherMinorityData DTEStatistics_OtherMinorityDataUtility { get; }
+        //IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
+        //IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
+        //IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }
     }
 }
