@@ -511,17 +511,12 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_BasicDetailsRepository; }
         }
-        //private IDTEStatistics_PlacementDetailsRepository dTEStatistics_PlacementDetailsRepository;
-        //public IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository
-        //{
-        //    get { return dTEStatistics_PlacementDetailsRepository; }
-        //}
+        private IDTEStatistics_PlacementDetailsRepository dTEStatistics_PlacementDetailsRepository;
+        public IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository
+        {
+            get { return dTEStatistics_PlacementDetailsRepository; }
+        }
 
-        //private IDTEStatistics_FinancialDetailsRepository dTEStatistics_FinancialDetailsRepository;
-        //public IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository
-        //{
-        //    get { return dTEStatistics_FinancialDetailsRepository; }
-        //}
         /// <summary>
         /// /////////
         /// </summary>
@@ -612,8 +607,6 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_BasicDetailsRepository = new DTEStatistics_BasicDetailsRepository(commonHelper);
 
             dTEStatistics_OtherMinorityDataRepository = new DTEStatistics_OtherMinorityDataRepository(commonHelper);
-            //dTEStatistics_PlacementDetailsRepository = new DTEStatistics_PlacementDetailsRepository(commonHelper);
-            //dTEStatistics_FinancialDetailsRepository = new DTEStatistics_FinancialDetailsRepository(commonHelper);
         }
     }
 }
