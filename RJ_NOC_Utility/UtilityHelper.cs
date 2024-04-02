@@ -134,6 +134,11 @@ namespace RJ_NOC_Utility
         public IDTEStatistics_Staff DTEStatistics_StaffUtility { get; private set; }
         public IDTEStatistics_BasicDetails DTEStatistics_BasicDetailsUtility { get; private set; }
 
+        public IDTEStatistics_OtherMinorityData DTEStatistics_OtherMinorityDataUtility { get; private set; }
+        
+        //public IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; private set; }
+        //public IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; private set; }
+
 
         /// <summary>
         /// //////////
@@ -232,6 +237,10 @@ namespace RJ_NOC_Utility
             DTEStatistics_ScholarshipFellowshipLoanAccUtility = new DTEStatistics_ScholarshipFellowshipLoanAcc(UnitOfWork);
             DTEStatistics_StaffUtility = new DTEStatistics_Staff(UnitOfWork);
             DTEStatistics_BasicDetailsUtility = new DTEStatistics_BasicDetails(UnitOfWork);
+            DTEStatistics_OtherMinorityDataUtility = new DTEStatistics_OtherMinorityData(UnitOfWork);
+            
+            //DTEStatistics_PlacementDetailsUtility = new DTEStatistics_PlacementDetails(UnitOfWork);
+            //DTEStatistics_FinancialDetailsUtility = new DTEStatistics_FinancialDetails(UnitOfWork);
         }
     }
 }

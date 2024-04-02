@@ -97,5 +97,8 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_StaffRepository DTEStatistics_StaffRepository { get; }
         IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository { get; }
 
+        IDTEStatistics_OtherMinorityDataRepository DTEStatistics_OtherMinorityDataRepository { get; }
+        //IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
+        //IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
     }
 }

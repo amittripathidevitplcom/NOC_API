@@ -99,5 +99,9 @@ namespace RJ_NOC_Utility
         IDTEStatistics_ScholarshipFellowshipLoanAcc DTEStatistics_ScholarshipFellowshipLoanAccUtility { get; }
         IDTEStatistics_Staff DTEStatistics_StaffUtility { get; }
         IDTEStatistics_BasicDetails DTEStatistics_BasicDetailsUtility { get; }
+        IDTEStatistics_OtherMinorityData DTEStatistics_OtherMinorityDataUtility { get; }
+        //IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
+        //IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
+        //IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }
     }
 }
