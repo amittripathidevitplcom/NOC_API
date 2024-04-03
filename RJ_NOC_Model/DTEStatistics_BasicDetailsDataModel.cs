@@ -11,7 +11,7 @@ namespace RJ_NOC_Model
         public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
-        public string SelectedCollegeEntryTypeName { get; set; }
+        public string? SelectedCollegeEntryTypeName { get; set; }
         public int FYearID { get; set; }
 
 
@@ -46,23 +46,23 @@ namespace RJ_NOC_Model
         public BasicDetails_AffiliationDetailsDataModel AffiliationDetails { get; set; }
 
 
-        public string ManagementOfTheInstitution { get; set; }
-        public string IsEveningCollege { get; set; }
-        public string AutonomousInstitute { get; set; }
-        public string MinorityCommunityType { get; set; }
+        public string? ManagementOfTheInstitution { get; set; }
+        public string? IsEveningCollege { get; set; }
+        public string? AutonomousInstitute { get; set; }
+        public string? MinorityCommunityType { get; set; }
 
         public int EnrolledStudentInNCCOtherInstitute { get; set; }
         public int EnrolledFemaleStudentInNCCOtherInstitute { get; set; }
 
 
-        public string SpecialisedUniversity { get; set; }
-        public string OtherSpecialisedUniversity { get; set; }
-        public string WhetherTheCollegeRunningDiplomaLevelCourse { get; set; }
-        public string DiplomaLevelCourse { get; set; }
-        public string OtherDiplomaCourse { get; set; }
-        public string WhetherAwardsDegreethroughAnyUniversity { get; set; }
-        public string OtherUniversityName { get; set; }
-        public string YearofRecognition { get; set; }
+        public string? SpecialisedUniversity { get; set; }
+        public string? OtherSpecialisedUniversity { get; set; }
+        public string? WhetherTheCollegeRunningDiplomaLevelCourse { get; set; }
+        public string? DiplomaLevelCourse { get; set; }
+        public string? OtherDiplomaCourse { get; set; }
+        public string? WhetherAwardsDegreethroughAnyUniversity { get; set; }
+        public string? OtherUniversityName { get; set; }
+        public string? YearofRecognition { get; set; }
 
     }
     public class BasicDetails_SpecialisationDetailsDataModel
@@ -90,30 +90,30 @@ namespace RJ_NOC_Model
     {
         public int EntryID { get; set; }
         public int AID { get; set; }
-        public string NameOfUniversityNodalOfficerForAISHE { get; set; }
-        public string Email { get; set; }
+        public string? NameOfUniversityNodalOfficerForAISHE { get; set; }
+        public string? Email { get; set; }
         public int DesignationID { get; set; }
-        public string DesignationName { get; set; }
-        public string MobileNo { get; set; }
-        public string TelephoneNo { get; set; }
+        public string? DesignationName { get; set; }
+        public string? MobileNo { get; set; }
+        public string? TelephoneNo { get; set; }
     }
     public class BasicDetails_NodalOfficerDetailsDataModel
     {
         public int EntryID { get; set; }
         public int AID { get; set; }
-        public string NameOfUniversityNodalOfficerForAISHE { get; set; }
-        public string Email { get; set; }
+        public string? NameOfUniversityNodalOfficerForAISHE { get; set; }
+        public string? Email { get; set; }
         public int DesignationID { get; set; }
-        public string DesignationName { get; set; }
-        public string MobileNo { get; set; }
-        public string TelephoneNo { get; set; }
+        public string? DesignationName { get; set; }
+        public string? MobileNo { get; set; }
+        public string? TelephoneNo { get; set; }
     }
     public class BasicDetails_AffiliationDetailsDataModel
     {
         public int EntryID { get; set; }
         public int AID { get; set; }
-        public string NameStatutorybody { get; set; }
-        public string AffiliationYear { get; set; }
-        public string AffiliatedOtherUniversity { get; set; }
+        public string? NameStatutorybody { get; set; }
+        public string? AffiliationYear { get; set; }
+        public string? AffiliatedOtherUniversity { get; set; }
     }
 }
