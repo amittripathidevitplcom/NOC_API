@@ -206,7 +206,7 @@ namespace RJ_NOC_DataAccess.Common
 
 
         #region Sys Log and Track funcaiton
-        public static void Insert_TrnUserLog(int UserID, string Action, int PrimaryKey_ID, string CurrentPageName)
+        public static void Insert_TrnUserLog(int? UserID, string Action, int? PrimaryKey_ID, string CurrentPageName)
         {
             try
             {

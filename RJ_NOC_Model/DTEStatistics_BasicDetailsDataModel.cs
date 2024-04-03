@@ -7,7 +7,7 @@ namespace RJ_NOC_Model
 {
     public class DTEStatistics_BasicDetailsDataModel
     {
-        public int EntryID { get; set; }
+        public int? EntryID { get; set; }
         public string? EntryDate { get; set; }
         public int Department { get; set; }
         public int CollegeID { get; set; }
@@ -27,13 +27,13 @@ namespace RJ_NOC_Model
         public string? InstituteUnnatBharatScheme { get; set; }
         public string? MinorityManagedInstitution { get; set; }
         public string? IsInstitutionNCC { get; set; }
-        public int EnrolledStudentInNCC { get; set; }
-        public int EnrolledFemaleStudentInNCC { get; set; }
-        public int EnrolledTotalStudentInNCC { get; set; }
+        public int? EnrolledStudentInNCC { get; set; }
+        public int? EnrolledFemaleStudentInNCC { get; set; }
+        public int? EnrolledTotalStudentInNCC { get; set; }
         public string? IsInstitutionNSS { get; set; }
-        public int EnrolledStudentInNSS { get; set; }
-        public int EnrolledFemaleStudentInNSS { get; set; }
-        public int EnrolledTotalStudentInNSS { get; set; }
+        public int? EnrolledStudentInNSS { get; set; }
+        public int? EnrolledFemaleStudentInNSS { get; set; }
+        public int? EnrolledTotalStudentInNSS { get; set; }
         public string? IsspecializedUniversity { get; set; }
         public string? AffiliatedInstitutions { get; set; }
 
@@ -51,8 +51,8 @@ namespace RJ_NOC_Model
         public string? AutonomousInstitute { get; set; }
         public string? MinorityCommunityType { get; set; }
 
-        public int EnrolledStudentInNCCOtherInstitute { get; set; }
-        public int EnrolledFemaleStudentInNCCOtherInstitute { get; set; }
+        public int? EnrolledStudentInNCCOtherInstitute { get; set; }
+        public int? EnrolledFemaleStudentInNCCOtherInstitute { get; set; }
 
 
         public string? SpecialisedUniversity { get; set; }
@@ -67,21 +67,21 @@ namespace RJ_NOC_Model
     }
     public class BasicDetails_SpecialisationDetailsDataModel
     {
-        public int EntryID { get; set; }
-        public int AID { get; set; }
+        public int? EntryID { get; set; }
+        public int? AID { get; set; }
         public string? Specialisation { get; set; }
-        public int NoOfCollegesPermanentAffiliation { get; set; }
-        public int NoOfCollegesTemporaryAffiliation { get; set; }
-        public int Total { get; set; }
+        public int? NoOfCollegesPermanentAffiliation { get; set; }
+        public int? NoOfCollegesTemporaryAffiliation { get; set; }
+        public int? Total { get; set; }
     }
 
     public class BasicDetails_CollegeUnderUniversityDetailsDataModel
     {
-        public int EntryID { get; set; }
-        public int AID { get; set; }
-        public int FID { get; set; }
+        public int? EntryID { get; set; }
+        public int? AID { get; set; }
+        public int? FID { get; set; }
         public string? College { get; set; }
-        public int NoOfColleges { get; set; }
+        public int? NoOfColleges { get; set; }
     }
 
 
