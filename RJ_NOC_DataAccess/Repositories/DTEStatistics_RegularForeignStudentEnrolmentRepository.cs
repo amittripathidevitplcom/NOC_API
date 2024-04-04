@@ -34,6 +34,11 @@ namespace RJ_NOC_DataAccess.Repository
 
                 dataModels.ForeignStudentEnrolledInTheinstitution = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ForeignStudentEnrolledInTheinstitution"]);
                 dataModels.ApprovedIntakeCapacityOfInternationalStudents = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ApprovedIntakeCapacityOfInternationalStudents"]);
+
+
+                dataModels.AlsoIncludeTemporaryContractualVisitingTeacherData = Convert.ToInt32(dataSet.Tables[0].Rows[0]["AlsoIncludeTemporaryContractualVisitingTeacherData"]);
+
+                dataModels.ForeignRegularStudentEnrollementThroughProgrammesOfferedByInstitution = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ForeignRegularStudentEnrollementThroughProgrammesOfferedByInstitution"]);
             }
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             List<DTEStatistics_RegularForeignStudentEnrolmentDataModel_RegularForeignStudentEnrolment> EducationalQualificationDetails_StaffDetail_Item = JsonConvert.DeserializeObject<List<DTEStatistics_RegularForeignStudentEnrolmentDataModel_RegularForeignStudentEnrolment>>(JsonDataTable_Data);
