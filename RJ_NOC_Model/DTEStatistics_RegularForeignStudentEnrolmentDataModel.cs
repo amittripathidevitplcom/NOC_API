@@ -18,6 +18,9 @@ namespace RJ_NOC_Model
         public int? ForeignStudentEnrolledInTheinstitution { get; set; }
         public int? ApprovedIntakeCapacityOfInternationalStudents { get; set; }
 
+        public int? AlsoIncludeTemporaryContractualVisitingTeacherData { get; set; }
+        public int? ForeignRegularStudentEnrollementThroughProgrammesOfferedByInstitution { get; set; }
+         
         public List<DTEStatistics_RegularForeignStudentEnrolmentDataModel_RegularForeignStudentEnrolment>? RegularForeignStudentEnrolment { get; set; }
 
 

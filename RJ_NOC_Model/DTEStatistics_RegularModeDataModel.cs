@@ -41,6 +41,10 @@ namespace RJ_NOC_Model
         public string? Type { get; set; }
         public string? WhetherVocationalCourse { get; set; }
         public string? YearofStart { get; set; }
+
+        public string? StatuatoryBodyThroughWhichApproved { get; set; }
+        public string? UniversityThroughWhichApproved { get; set; }
+
         public string? AccreditationStatus { get; set; }
     }
 }
