@@ -58,6 +58,8 @@ namespace RJ_NOC_DataAccess.Repository
 
             SqlQuery += " @ForeignStudentEnrolledInTheinstitution='" + request.ForeignStudentEnrolledInTheinstitution + "', ";
             SqlQuery += " @ApprovedIntakeCapacityOfInternationalStudents='" + request.ApprovedIntakeCapacityOfInternationalStudents + "', ";
+            SqlQuery += " @AlsoIncludeTemporaryContractualVisitingTeacherData='" + request.AlsoIncludeTemporaryContractualVisitingTeacherData + "', ";
+            SqlQuery += " @ForeignRegularStudentEnrollementThroughProgrammesOfferedByInstitution='" + request.ForeignRegularStudentEnrollementThroughProgrammesOfferedByInstitution + "', ";
 
             SqlQuery += " @FacultyDetails_Str='" + FacultyDetails_Str + "', ";
 
