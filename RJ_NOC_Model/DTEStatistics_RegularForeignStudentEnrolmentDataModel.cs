@@ -30,6 +30,10 @@ namespace RJ_NOC_Model
     }
     public class DTEStatistics_RegularForeignStudentEnrolmentDataModel_RegularForeignStudentEnrolment
     {
+        public int? LevelID { get; set; }
+        public string? LevelName { get; set; }
+        public int? ProgrammeID { get; set; }
+        public string? NameOfTheProgramme { get; set; }
         public string? Country { get; set; }
         public string? Faculty_School { get; set; }
         public string? Department_Centre { get; set; }

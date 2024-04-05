@@ -23,6 +23,8 @@ namespace RJ_NOC_Model
     }
     public class DTEStatistics_OtherMinorityDataModel_OtherMinorityDetails
     {
+        public int? LevelID { get; set; }
+        public string? LevelName { get; set; }
         public string Discipline { get; set; }
         public int? Year { get; set; }
         public int? General_Male { get; set; }
