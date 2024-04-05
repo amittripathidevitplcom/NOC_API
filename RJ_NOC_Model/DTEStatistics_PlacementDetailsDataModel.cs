@@ -31,6 +31,7 @@ namespace RJ_NOC_Model
         public int? NoOfStudentsSelectedForHigherStudies_Female { get; set; }
         public int? NoOfStudentsSelectedForHigherStudies_Total { get; set; }
         public decimal MedianAnnualSalaryforPlacedStudents { get; set; }
+        public string SelfEmployed { get; set; }
     }
 }
 

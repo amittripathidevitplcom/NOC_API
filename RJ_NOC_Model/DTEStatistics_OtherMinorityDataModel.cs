@@ -45,6 +45,7 @@ namespace RJ_NOC_Model
         public int? Total_Male { get; set; }
         public int? Total_Female { get; set; }
         public int? Total_Transgender { get; set; }
+        public string Type { get; set; }
     }
 }
 
