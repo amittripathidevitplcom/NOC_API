@@ -27,6 +27,7 @@ namespace RJ_NOC_DataAccess.Repository
                 dataModels = CommonHelper.ConvertDataTable<DTEStatistics_BasicDetailsDataModel>(dataSet.Tables[0]);
             }
 
+
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
             List<BasicDetails_SpecialisationDetailsDataModel> SpecialisationDetails = JsonConvert.DeserializeObject<List<BasicDetails_SpecialisationDetailsDataModel>>(JsonDataTable_Data);
             dataModels.SpecialisationDetails = SpecialisationDetails;
