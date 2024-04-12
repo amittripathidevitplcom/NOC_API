@@ -85,6 +85,7 @@ namespace RJ_NOC_Model
         public string? MinisterFile { get; set; }
         public string? MinisterFilePath { get; set; }
         public List<NOCPdfFileDataModel> NOCPdfFileDataModel { get; set; }
+        public bool? IsOpenNOCApplication { get; set; }
     }
 
     public class LOIApplicationDetails_DataModel
