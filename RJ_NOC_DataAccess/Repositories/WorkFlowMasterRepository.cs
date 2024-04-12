@@ -33,7 +33,7 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string WorkFlowMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.WorkFlowMasterDetailList, "Temp_WorkFlowMasterDetail");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveWorkFlowMaster @WorkFlowMasterID='" + request.WorkFlowMasterID + "',@DepartmentID='" + request.DepartmentID + "',";
+            string SqlQuery = " exec USP_SaveWorkFlowMaster @WorkFlowMasterID='" + request.WorkFlowMasterID + "',@DepartmentID='" + request.DepartmentID + "',@NOCTypeID='" + request.NOCTypeID + "',";
             SqlQuery += "@RoleLevelID = '" + request.RoleLevelID + "',@RoleID = '" + request.RoleID + "',@IPAddress = '" + IPAddress + "',@WorkFlowMasterDetail_Str='" + WorkFlowMasterDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "WorkFlowMastreMaster.SaveData");
             if (Rows > 0)
