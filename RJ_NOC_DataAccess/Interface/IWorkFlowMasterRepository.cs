@@ -12,6 +12,9 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(WorkFlowMasterDataModel request);
         bool IfExists(int WorkFlowMasterID, int RoleID, int DepartmentID);
         List<WorkFlowMasterDataModel> GetWorkFlowMasterList(int WorkFlowMasterID);
+
+        List<DataTable> GetWorkFlowformat3(int DepartmentID, string ReportType);
+        
     }
 
 }

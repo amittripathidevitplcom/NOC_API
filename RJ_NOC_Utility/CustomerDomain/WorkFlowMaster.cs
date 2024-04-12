@@ -28,5 +28,12 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.WorkFlowMasterRepository.GetWorkFlowMasterList(WorkFlowMasterID);
         }
-}
+        public List<DataTable> GetWorkFlowformat3(int DepartmentID, string ReportType)
+        {
+            return UnitOfWork.WorkFlowMasterRepository.GetWorkFlowformat3(DepartmentID,ReportType);
+        }
+
+
+        
+    }
 }

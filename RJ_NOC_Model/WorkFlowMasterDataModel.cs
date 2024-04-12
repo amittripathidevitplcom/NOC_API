@@ -17,6 +17,8 @@ namespace RJ_NOC_Model
         public string DepartmentName { get; set; }
         public string RoleLevelName { get; set; }
         public string RoleName { get; set; }
+        public string ReportType { get; set; }
+
         public List<WorkFlowMasterDetail> WorkFlowMasterDetailList { get; set; }
     }
     public class WorkFlowMasterDetail
@@ -38,6 +40,8 @@ namespace RJ_NOC_Model
         public string? RoleLevelName { get; set; }
         public string? NextRoleName { get; set; }
         public string? OfficeGroupName { get; set; }
+        public string RoleName { get; set; }
+        public int DepartmentID { get; set; }
 
     }
 }

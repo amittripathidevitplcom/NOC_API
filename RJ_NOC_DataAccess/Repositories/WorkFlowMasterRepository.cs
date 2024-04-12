@@ -87,5 +87,22 @@ namespace RJ_NOC_DataAccess.Repository
             return listdataModels;
         }
 
+      
+
+
+
+        public List<DataTable> GetWorkFlowformat3(int DepartmentID, string ReportType)
+        {
+            string SqlQuery = " exec USP_GetWorkFlowFormat3  @DepartmentID='" + DepartmentID + "',@ReportType='" + ReportType + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "WorkFlowMaster.GetWorkFlowformat3");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+
     }
 }
