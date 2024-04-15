@@ -15,7 +15,7 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         List<CommonDataModel_DepartmentMasterList> GetDepartmentList();
-  List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication();
+        List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication();
         List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID);
         List<CommonDataModel_ModuleMasterList> GetModuleList();
         List<CommonDataModel_SubModuleListByModule> GetSubModuleListByModule(int ModuleID);
@@ -27,7 +27,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DepartmentMaster> GetDepartmentMaster();
         List<CommonDataModel_DepartmentAndLoginSSOIDWiseCollageMaster> GetCollageList_DepartmentAndSSOIDWise(int DepartmentID, string LoginSSOID, string Type);
-        List<CommonDataModel_CourseMaster> GetAddCourseList_DepartmentIDWise(int DepartmentID,int CourseLevelID);
+        List<CommonDataModel_CourseMaster> GetAddCourseList_DepartmentIDWise(int DepartmentID, int CourseLevelID);
         List<CommonDataModel_CourseMaster> GetCourseList_DepartmentIDWise(int DepartmentID);
         List<CommonDataModel_SubjectMaster> GetSubjectList_CourseIDWise(int CourseID);
         List<CommonDataModel_SeatInformationMaster> GetSeatInformation_CourseIDWise(int CourseID);
@@ -40,7 +40,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DistrictList> GetDistrictListByStateID(int StateID);
         List<CommonDataModel_DistrictList> GetDistrictByDivsionId(int divisionId);
         List<CommonDataModel_DivisionDDL> GetAllDivision();
-        List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId,int IsLaw);
+        List<CommonDataModel_UniversityDDL> GetUniversityByDepartmentId(int departmentId, int IsLaw);
         List<CommonDataModel_SuvdivisionDDL> GetSuvdivisionByDistrictId(int districtId);
         List<CommonDataModel_TehsilDDL> GetTehsilByDistrictId(int districtId);
         List<CommonDataModel_PanchyatSamitiDDL> GetPanchyatSamitiByDistrictId(int districtId);
@@ -51,21 +51,21 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_OldNOC(int CollegeID);
         List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID);
-       
+
         List<CommonDataModel_LandDocumentTypeMasterList_DepartmentWise> GetLandDoucmentTypeMasterList_DepartmentWise(int DepartmentID);
         List<CommonDataModel_DesignationDDL> GetAllDesignation();
         List<CommonDataModel_DesignationDDL> GetDesignation_OfficersDetails(string Type);
         List<CommonDataModel_OccupationDDL> GetAllOccupation();
-        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID,string CourseType);
-        List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type,int CourseID,int OldNocID);
-        List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type,int CourseID);
-        List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type,int CourseID);
+        List<CommonDataModel_CollegeWiseCourseList> GetCourseList_CollegeWise(int CollegID, string CourseType);
+        List<DataTable> Get_CollegeWiseCourse_Subject_OldNOC(int CollegeID, string Type, int CourseID, int OldNocID);
+        List<DataTable> GetCollegeWise_SubjectList_StaffDetails(int CollegeID, string Type, int CourseID);
+        List<DataTable> GetCollegeWise_CourseList_AcademicInformation(int CollegeID, string Type, int CourseID);
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
-        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID,int OtherInformationID, string Type);
+        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
-        
+
         List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID);
         List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId);
 
@@ -75,13 +75,13 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID);
 
 
-        List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID,int IsTeaching,string Type);
+        List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type);
 
         List<CommonDataModel_CollegeWiseSubject> GetCollegeWiseSubjectList(int CollegeID);
 
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
-        
+
         List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
 
@@ -90,7 +90,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser();
-        
+
         List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID);
         List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
@@ -104,9 +104,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_CommitteeList> GetCommitteeList();
 
         //Roles
-        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID,int DepartmentID);
+        List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID);
         List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID);
-        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type,int DepartmentID );
+        List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
         List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID);
@@ -124,7 +124,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetMappedStreamListByID(int DepartmetntID);
 
 
-        List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID,int UniversityID);
+        List<CommonDataModel_DataTable> GetCourseByStreamID(int StreamID, int DepartmentID, int CourseLevelID, int UniversityID);
 
         List<CommonDataModel_LandSqureMeterMappingDetails_DepartmentWise> GetLandSqureMeterMappingDetails_DepartmentWise(int DepartmentID, int CollageID, int LandAreaId);
 
@@ -133,15 +133,15 @@ namespace RJ_NOC_DataAccess.Interface
         List<CollegeLandTypeDetailsDataModel> GetLandTypeDetails_CollegeWise(int DepartmentID, string Type, int LandTypeID);
         List<CommonDataModel_UniversityDDL> GetUniversityDepartmentWise(int DepartmentId);
         List<CommonDataModel_SubjectMaster> GetSubjectDepartmentWise(int DepartmentID);
-        List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID,int DepartmentID);
-        List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailID,string Type);
+        List<CommonDataModel_DataTable> GetCollegeInspectionFee(int CollegID, int DepartmentID);
+        List<CollegeLandConversionDetailsDataModel> GetCollegeLandConversionDetail(int DepartmentID, int LandDetailID, string Type);
         List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWises(int DepartmentID, int CollageID, string Type);
         List<CommonDataModel_DataTable> GetCityByDistrict(int DistrictID);
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
-        List<CommonDataModel_DataTable> GetDownloadPdfDetails( int DepartmentID, int CollageID);
+        List<CommonDataModel_DataTable> GetDownloadPdfDetails(int DepartmentID, int CollageID);
         List<CommonDataModel_DataTable> GetPaymentMode();
 
-        bool SaveExcelData(List<MemberDataModel> request,int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
+        bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID);
         bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID);
         List<CommonDataModel_DataTable> GetImportExcelData(string SSOID, int DeptId, int collegeID, int StaticsFileID, string ActionType);
 
@@ -162,9 +162,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID, int CourseID);
 
 
-        List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID,string GetType);
+        List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType);
-        List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID,int ProgrammeID, int CourseLevelID, string GetType);
+        List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType);
     }
 }
 
