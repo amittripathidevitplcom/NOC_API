@@ -223,6 +223,7 @@ namespace RJ_NOC_Model
 
 
         public List<NOCPdfFileDataModel>? NOCPdfFileDataModel { get; set; }
+        public bool? IsOpenNOCApplication { get; set; }
 
     }
 
