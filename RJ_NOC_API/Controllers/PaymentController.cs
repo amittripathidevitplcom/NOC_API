@@ -885,8 +885,8 @@ namespace RJ_NOC_API.Controllers
                 // Server.MapPath("~/SystemGeneratedPDF/rajnoc.key");
                 string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
 
-                string Head_Amount1 = "10000.00";
-                string Head_Name1 = "040100800500100000";
+                string Head_Amount1 = "50500.00";
+                string Head_Name1 = "0210-03-105-03-00";
 
                 string dtFrom = DateTime.Now.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture);
                 string dtTo = DateTime.Now.AddYears(1).ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture);
