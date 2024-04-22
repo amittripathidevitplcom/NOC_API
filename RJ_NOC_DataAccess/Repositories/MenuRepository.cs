@@ -134,5 +134,33 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public List<MenuModel> GetUserWiseMenuNew(int UserID)
+        {
+
+            string SqlQuery = " exec Usp_MenuUserWise @UserID=" + UserID + "";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery);
+
+            MenuModel dataModels ;
+            List<MenuModel> dataModels1 = new List<MenuModel>();
+            //string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            //dataModels = JsonConvert.DeserializeObject<List<MenuModelData>>(JsonDataTable_Data);
+
+        if(dataTable!=null)
+            {
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    dataModels = new MenuModel();
+                    dataModels.MenuId = Convert.ToInt32(dataTable.Rows[i]["MenuId"]);
+                    dataModels.name = dataTable.Rows[i]["MenuName"].ToString();
+                    dataModels.icon = dataTable.Rows[i]["Icon"].ToString();
+                    dataModels.ParentId = Convert.ToInt32(dataTable.Rows[i]["ParentId"]);
+                    dataModels1.Add(dataModels);
+                }
+
+            }
+            return dataModels1;
+        }
+
     }
 }

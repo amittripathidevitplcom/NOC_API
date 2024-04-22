@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -16,7 +17,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<MenuDataModel_List> GetAllMenu()
         {
             return UnitOfWork.MenuRepository.GetAllMenu();
-        } 
+        }
         public List<MenuDataModel_List> GetUserWiseMenu(int UserID)
         {
             return UnitOfWork.MenuRepository.GetUserWiseMenu(UserID);
@@ -46,7 +47,41 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MenuRepository.GetAllMenuUserRoleRightsRoleWise(RoleID);
         }
+        public List<MenuModel> GetUserWiseMenuNew(int UserId)
+        {
+            return UnitOfWork.MenuRepository.GetUserWiseMenuNew(UserId);
+        }
+        public List<MenuModel> list1 = new List<MenuModel>();
+        public List<MenuModel> GetUserAllMenu(int UserId)
+        {
+            List<MenuModel> menuItems = new List<MenuModel>();
+            List<MenuModel> menu = new List<MenuModel>();
+            menu = UnitOfWork.MenuRepository.GetUserWiseMenuNew(UserId);
+            Dictionary<int, MenuModel> menuItemMap = new Dictionary<int, MenuModel>();
+            foreach (var item in menu)
+            {
+                MenuModel menuItem = new MenuModel { MenuId = item.MenuId, name = item.name };
+                if (!menuItemMap.ContainsKey(item.MenuId))
+                {
+                    menuItemMap.Add(item.MenuId, menuItem);
+                }
+                if (menuItemMap.ContainsKey(item.ParentId))
+                {
+                    MenuModel parent = menuItemMap[item.ParentId];
+                    if (parent.sub == null)
+                    {
+                        parent.sub = new List<MenuModel>();
+                    }
+                    parent.sub.Add(menuItem);
+                }
+                else
+                {
+                    menuItems.Add(menuItem);
+                }
 
+            }
+            return menuItems;
+        }
     }
 }
 

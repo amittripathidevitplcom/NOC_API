@@ -274,6 +274,41 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        /// <summary>
+        /// Menu JSON multi level
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <returns></returns>
+        [HttpGet("GetUserWiseMenuNew/{UserID}")]
+        public async Task<OperationResult<List<MenuModel>>> GetUserWiseMenuNew(int UserID)
+        {
+            var result = new OperationResult<List<MenuModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MenuUtility.GetUserAllMenu(UserID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 
