@@ -60,9 +60,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             Dictionary<int, MenuModel> menuItemMap = new Dictionary<int, MenuModel>();
             foreach (var item in menu)
             {
-                MenuModel menuItem = new MenuModel { MenuId = item.MenuId, name = item.name };
+                MenuModel menuItem = new MenuModel { MenuId = item.MenuId, name = item.name,ParentId=item.ParentId,icon=item.icon};
                 if (!menuItemMap.ContainsKey(item.MenuId))
                 {
+                    menuItem.type = "link";
                     menuItemMap.Add(item.MenuId, menuItem);
                 }
                 if (menuItemMap.ContainsKey(item.ParentId))
@@ -72,6 +73,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                     {
                         parent.sub = new List<MenuModel>();
                     }
+                    parent.type= "dropDown";
                     parent.sub.Add(menuItem);
                 }
                 else
