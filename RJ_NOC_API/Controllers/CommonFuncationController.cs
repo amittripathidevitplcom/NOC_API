@@ -2006,16 +2006,16 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpPost("DraftFinalSubmit/{CollegeID}/{IsDraftSubmited}")]
-        public async Task<OperationResult<bool>> DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        [HttpPost("DraftFinalSubmit")]
+        public async Task<OperationResult<bool>> DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DraftFinalSubmit(CollegeID, IsDraftSubmited));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DraftFinalSubmit(request));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(IsDraftSubmited, "DraftFinalSubmit", CollegeID, "CommonFuncation");
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.IsDraftSubmited, "DraftFinalSubmit", request.CollegeID, "CommonFuncation");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Draft Final Save successfully .!";
                 }

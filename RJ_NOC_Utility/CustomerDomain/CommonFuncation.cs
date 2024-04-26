@@ -309,9 +309,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.CheckTabsEntry_StatisticsEntry(CollegID);
         }
-        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        public bool DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request)
         {
-            return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(CollegeID, IsDraftSubmited);
+            return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(request);
         }
         public bool LOIFinalSubmit(int CollegeID)
         {

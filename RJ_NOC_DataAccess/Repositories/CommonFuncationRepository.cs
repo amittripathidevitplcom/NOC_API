@@ -854,11 +854,11 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        public bool DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_DraftFinalSubmit";
-            SqlQuery += " @CollegeID='" + CollegeID + "',@IsDraftSubmited='" + IsDraftSubmited + "'";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',@IsDraftSubmited='" + request.IsDraftSubmited + "',@Deficiency='" + request.Deficiency + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.DraftFinalSubmit");
             if (Rows > 0)
                 return true;

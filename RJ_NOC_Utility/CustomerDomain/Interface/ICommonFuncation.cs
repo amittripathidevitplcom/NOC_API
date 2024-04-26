@@ -92,7 +92,7 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
         List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
         List<CommonDataModel_DataTable> CheckTabsEntry_StatisticsEntry(int CollegID);
-        bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
+        bool DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request);
         bool LOIFinalSubmit(int CollegeID);
         List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int LevelID);
         List<CommonDataModel_GetConnectionString> GetConnectionString();
