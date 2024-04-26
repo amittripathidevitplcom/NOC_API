@@ -540,5 +540,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID, CourseLevelID, GetType);
         }
+
+        public List<CommonDataModel_DataTable> GetCollegeDeficiency(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeDeficiency(CollegeID);
+        }
     }
 }
