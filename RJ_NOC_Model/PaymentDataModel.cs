@@ -96,15 +96,25 @@ namespace RJ_NOC_Model
 
     public class RequestDetails
     {
-        public string AMOUNT { get; set; }
+        public decimal AMOUNT { get; set; }
         public string PURPOSE { get; set; }
         public string USERNAME { get; set; }
         public string USERMOBILE { get; set; }
         public string USEREMAIL { get; set; }
-        public string ApplyNocApplicationID { get; set; }
-        public int DepartmentID { get; set; }
+
         public string CreatedBy { get; set; }
         public string SSOID { get; set; }
+
+
+        /////
+        public string ApplyNocApplicationID { get; set; }
+        public int DepartmentID { get; set; }
+        public string RemitterName { get; set; }
+        public string REGTINNO { get; set; }
+        public string DistrictCode { get; set; }
+        public string Adrees { get; set; }
+        public string City { get; set; }
+        public string Pincode { get; set; }
 
     }
 
@@ -315,7 +325,7 @@ namespace RJ_NOC_Model
         public int DepartmentID { get; set; }
         public int? CollegeID { get; set; }
         public int? TransactionID { get; set; }
-        public string? PRN  { get; set; }
+        public string? PRN { get; set; }
         public string? RPPTranID { get; set; }
         public string Key { get; set; }
         public string? RefundID { get; set; }
