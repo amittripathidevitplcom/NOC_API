@@ -79,10 +79,10 @@ namespace RJ_NOC_Model
 
 
 
-        public int? AffiliationDocument { get; set; }
-        public string? AffiliationDocumentCertificate { get; set; }
-        public string? AffiliationDocumentCertificatePath { get; set; }
-        public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }
+        public string? AffiliationDocument { get; set; }
+        public string? AffiliationDocumentPath { get; set; }
+        public string? AffiliationDocument_Dis_FileName { get; set; }
+        //public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }
 
 
     }

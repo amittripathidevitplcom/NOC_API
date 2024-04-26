@@ -224,6 +224,7 @@ namespace RJ_NOC_Model
     {
         public int CourseID { get; set; }
         public string CourseName { get; set; }
+        public string? CourseOldNew { get; set; }
     }
 
 
