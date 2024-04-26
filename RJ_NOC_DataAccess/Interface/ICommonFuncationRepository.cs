@@ -165,6 +165,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType);
+        List<CommonDataModel_DataTable> GetCollegeDeficiency(int CollegeID);
     }
 }
 

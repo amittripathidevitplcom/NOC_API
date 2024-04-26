@@ -18,8 +18,8 @@ namespace RJ_NOC_API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.WebHost.UseKestrel(option => option.AddServerHeader = false);
-
+            //builder.WebHost.UseKestrel(option => option.AddServerHeader = false);
+            
             // Add services to the container.
             var configuration = builder.Configuration;
 
@@ -134,7 +134,6 @@ namespace RJ_NOC_API
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions
             {
