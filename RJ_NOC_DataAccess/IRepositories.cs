@@ -101,7 +101,7 @@ namespace RJ_NOC_DataAccess.Interface
         //IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
         //IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
 
-        IClassOverViewMasterRepository ClassOverViewMasterRepository { get; }
+        //IClassOverViewMasterRepository ClassOverViewMasterRepository { get; }
         
     }
 }

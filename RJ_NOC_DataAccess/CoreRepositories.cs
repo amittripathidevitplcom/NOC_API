@@ -517,11 +517,11 @@ namespace RJ_NOC_DataAccess.Repository
             get { return dTEStatistics_PlacementDetailsRepository; }
         }
 
-        private IClassOverViewMasterRepository classOverViewMasterRepository;
-        public IClassOverViewMasterRepository ClassOverViewMasterRepository
-        {
-            get { return classOverViewMasterRepository; }
-        }
+        //private IClassOverViewMasterRepository classOverViewMasterRepository;
+        //public IClassOverViewMasterRepository ClassOverViewMasterRepository
+        //{
+        //    get { return classOverViewMasterRepository; }
+        //}
 
         /// <summary>
         /// /////////
@@ -613,7 +613,7 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_BasicDetailsRepository = new DTEStatistics_BasicDetailsRepository(commonHelper);
 
             dTEStatistics_OtherMinorityDataRepository = new DTEStatistics_OtherMinorityDataRepository(commonHelper);
-            classOverViewMasterRepository = new ClassOverViewMasterRepository(commonHelper);
+            //classOverViewMasterRepository = new ClassOverViewMasterRepository(commonHelper);
         }
     }
 }
