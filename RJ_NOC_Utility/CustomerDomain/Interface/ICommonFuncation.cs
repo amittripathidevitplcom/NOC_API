@@ -153,6 +153,10 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
         List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType);
+
+        bool SSOUpdateSubmit(int CollegeID, string SSOID);
+        List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID);
+
     }
 
 

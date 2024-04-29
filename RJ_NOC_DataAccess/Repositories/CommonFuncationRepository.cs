@@ -1515,6 +1515,43 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        //public bool SSOUpdateSubmit(int CollegeID, string NewSSOID)
+        //{
+        //    string IPAddress = CommonHelper.GetVisitorIPAddress();
+        //    string SqlQuery = " exec USP_UpdateSSOID";
+        //    SqlQuery += " @CollegeID='" + CollegeID + "',@NewSSO'" + NewSSOID + "'";
+        //    int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SSOUpdateSubmit");
+        //    if (Rows > 0)
+        //        return true;
+        //    else
+        //        return false;
+        //}
+
+
+        public bool SSOUpdateSubmit(int CollegeID, string SSOID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_UpdateSSOID @CollegeID={CollegeID},@NewSSOID='{SSOID}'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.DeleteData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetSSOIDByCollegeID @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "NewsUpdateMaster.GetDataIDWise");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DataTable>>(JsonDataTable_Data);
+            return dataModels;
+        }
     }
 }
 

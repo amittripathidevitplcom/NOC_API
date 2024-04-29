@@ -3677,5 +3677,74 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpPost("SSOUpdateSubmit/{CollegeID}/{SSOID}")]
+        public async Task<OperationResult<bool>> SSOUpdateSubmit(int CollegeID, string SSOID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SSOUpdateSubmit(CollegeID, SSOID));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "SSO UpdateSubmit", CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "SSO Update successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Same SSOID Already Exist.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SSOUpdateSubmit", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("{CollegeID}/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetSSOByCollegeIDWise(int CollegeID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", CollegeID, "CommonFuncation");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetSSOByCollegeIDWise(CollegeID));
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetSSOByCollegeIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
     }
 }

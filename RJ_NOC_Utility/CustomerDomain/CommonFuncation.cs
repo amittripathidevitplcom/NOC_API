@@ -540,5 +540,16 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID, CourseLevelID, GetType);
         }
+
+        public bool SSOUpdateSubmit(int CollegeID, string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.SSOUpdateSubmit(CollegeID, SSOID);
+        }
+
+
+        public List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetSSOByCollegeIDWise(CollegeID);
+        }
     }
 }

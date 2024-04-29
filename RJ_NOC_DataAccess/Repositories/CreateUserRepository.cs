@@ -92,7 +92,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public bool IfExists(int UId, string SSOID, int DepartmentID, int RoleID)
         {
-            string SqlQuery = " select Name from M_UserMaster Where  SSOID ='" + SSOID + "' and UId !='" + UId + "'and DepartmentID ='" + DepartmentID + "'and RoleID ='" + RoleID + "' and DeleteStatus=0";
+            string SqlQuery = " select Name from M_UserMaster Where  SSOID ='" + SSOID + "' and UId !='" + UId + "'and DepartmentID ='" + DepartmentID + "'and RoleID ='" + RoleID + "' and ActiveStatus=1";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CreateUser.IfExists");
             if (dataTable.Rows.Count > 0)
