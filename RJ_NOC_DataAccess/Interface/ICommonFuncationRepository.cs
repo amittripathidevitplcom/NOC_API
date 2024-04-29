@@ -95,7 +95,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
         List<CommonDataModel_DataTable> CheckTabsEntry_StatisticsEntry(int CollegID);
-        bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited);
+        bool DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request);
         bool LOIFinalSubmit(int CollegeID);
         List<CommonDataModel_RoleListByLevel> GetRoleListByLevelID(int RoleID);
 
@@ -165,6 +165,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetProgrammeByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseLevelByCollegeDTE(int CollegeID, string GetType);
         List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType);
+        List<CommonDataModel_DataTable> GetCollegeDeficiency(int CollegeID);
 
         bool SSOUpdateSubmit(int CollegeID, string SSOID);
 

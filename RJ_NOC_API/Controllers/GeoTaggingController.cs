@@ -5,6 +5,8 @@ using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain;
 using System.Net;
 using Microsoft.AspNetCore.Rewrite;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -21,6 +23,7 @@ namespace RJ_NOC_API.Controllers
         [HttpPost("GetSSOUserLogionDetails")]
         public async Task<OperationResult<SSOUserDetailData>> AppLogin(SSOLandingDataDataModel sSOLandingDataDataModel)
         {
+            sSOLandingDataDataModel.Password = UtilityHelper.GeoTaggingUtility.DecryptStringAES(sSOLandingDataDataModel.Password);
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
             var result = new OperationResult<SSOUserDetailData>();
@@ -372,7 +375,5 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-
     }
 }

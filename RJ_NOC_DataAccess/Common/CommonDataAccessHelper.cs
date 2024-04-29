@@ -286,5 +286,38 @@ namespace RJ_NOC_DataAccess.Common
         #endregion
 
 
+        //Get
+        public static DataTable GetEgrassDetails_DepartmentWise(int DepartmentID)
+        {
+            string SqlQuery = "select * from M_EGrassDetails Where DepartmentID=" + DepartmentID + " and ActiveStatus=1 and DeleteStatus=0 order by aid desc";
+            using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
+                    {
+                        using (DataTable dataTable = new DataTable())
+                        {
+                            sda.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CommonDataAccessHelper.Insert_ErrorLog("GetEgrassDetails_DepartmentWise", ex.ToString());
+                    throw new Exception(ex.ToString());
+
+                    //throw;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+            }
+        }
+
     }
 }

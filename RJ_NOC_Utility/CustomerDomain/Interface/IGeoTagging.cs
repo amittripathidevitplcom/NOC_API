@@ -18,5 +18,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool ReadNotification(NotificationDataModel request);
         List<CommonDataModel_DataTable> AppNotificationList(string LoginSSOID);
         bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request);
+        string DecryptStringAES(string cipherText);
     }
 }

@@ -2006,16 +2006,16 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpPost("DraftFinalSubmit/{CollegeID}/{IsDraftSubmited}")]
-        public async Task<OperationResult<bool>> DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        [HttpPost("DraftFinalSubmit")]
+        public async Task<OperationResult<bool>> DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DraftFinalSubmit(CollegeID, IsDraftSubmited));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.DraftFinalSubmit(request));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(IsDraftSubmited, "DraftFinalSubmit", CollegeID, "CommonFuncation");
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.IsDraftSubmited, "DraftFinalSubmit", request.CollegeID, "CommonFuncation");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Draft Final Save successfully .!";
                 }
@@ -3677,6 +3677,42 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpGet("GetCollegeDeficiency/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCollegeDeficiency(int CollegeID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeDeficiency(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetCollegeDeficiency", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
 
 
         [HttpPost("SSOUpdateSubmit/{CollegeID}/{SSOID}")]

@@ -22,7 +22,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_School_AcademicInformationDetails_IU  ";
-            SqlQuery += " @AcademicInformationID='" + request.AcademicInformationID + "',@YearID='" + request.YearID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@ResultID='" + request.ResultID + "',@AdmittedStudent='" + request.AdmittedStudent + "',@AppearedStudent='" + request.AppearedStudent + "',@PassedStudent='" + request.PassedStudent + "',@FailedStudent='" + request.FailedStudent + "',@OtherStudent='" + request.OtherStudent + "',@UserID='" + request.UserID + "'";
+            SqlQuery += " @AcademicInformationID='" + request.AcademicInformationID + "',@YearID='" + request.YearID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@ResultID='" + request.ResultID + "',@AdmittedStudent='" + request.AdmittedStudent + "',@AppearedStudent='" + request.AppearedStudent + "',@PassedStudent='" + request.PassedStudent + "',@FailedStudent='" + request.FailedStudent + "',@OtherStudent='" + request.OtherStudent + "',@UserID='" + request.UserID + "',@CourseType='" + request.CourseType + "',@SemesterNo='" + request.SemesterNo + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "AcademicInformationDetails.SaveData");
             if (Rows > 0)
                 return true;

@@ -854,11 +854,11 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        public bool DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_DraftFinalSubmit";
-            SqlQuery += " @CollegeID='" + CollegeID + "',@IsDraftSubmited='" + IsDraftSubmited + "'";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',@IsDraftSubmited='" + request.IsDraftSubmited + "',@Deficiency='" + request.Deficiency + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.DraftFinalSubmit");
             if (Rows > 0)
                 return true;
@@ -1508,6 +1508,19 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " exec USP_GetCourseByCollegeProgrammeDTE @CollegeID='" + CollegeID + "',@ProgrammeID='" + ProgrammeID + "',@CourseLevelID='" + CourseLevelID + "',@GetType='" + GetType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCourseByCollegeProgrammeDTE");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public List<CommonDataModel_DataTable> GetCollegeDeficiency(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetCollegeDeficiency @CollegeID='"+ CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeDeficiency");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();

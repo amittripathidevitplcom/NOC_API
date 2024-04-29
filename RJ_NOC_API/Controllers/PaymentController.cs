@@ -25,6 +25,9 @@ using System.Drawing;
 using System.Web.Http;
 using sun.net.idn;
 using System.Collections.Specialized;
+using System;
+using System.Globalization;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -53,12 +56,12 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<PaymentRequest>();
             Random rnd = new Random();
             //string PRN = "PRN" + rnd.Next(100000, 999999)+ rnd.Next(100000, 999999);
-            string PRN = "TXN"+ CommonHelper.GenerateTransactionNumber();
+            string PRN = "TXN" + CommonHelper.GenerateTransactionNumber();
             try
             {
                 if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, request.AMOUNT, request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID, data));
+                    result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, Convert.ToDecimal(request.AMOUNT).ToString(), request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID, data));
                     if (result.Data != null)
                     {
                         result.Data.CreatedBy = request.CreatedBy;
@@ -83,7 +86,7 @@ namespace RJ_NOC_API.Controllers
                         result.ErrorMessage = "There was an error payment.!";
                     }
                 }
-                else 
+                else
                 {
                     result.State = OperationState.Error;
                     result.Data = new PaymentRequest();
@@ -301,13 +304,13 @@ namespace RJ_NOC_API.Controllers
             {
                 string APINAME = "TXNREFUND";
                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-               
+
                 //get payment details form database
                 PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
                 dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
                 dataModel.DepartmentID = Model.DepartmentID;
                 var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
-     
+
                 if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
                     //Save Data in database
@@ -317,13 +320,13 @@ namespace RJ_NOC_API.Controllers
 
                     Model.SubOrderID = paymentRequest.REQUESTPARAMETERS.PRN;
                     paymentRequest.REQUESTJSON = JsonConvert.SerializeObject(Model);
-                    paymentRequest.REQUESTPARAMETERS.UDF1= Model.ApplyNocApplicationID;
+                    paymentRequest.REQUESTPARAMETERS.UDF1 = Model.ApplyNocApplicationID;
                     paymentRequest.REQUESTPARAMETERS.RequestType = (int)enmPaymetRequest.RefundRequest;
-                    paymentRequest.REQUESTPARAMETERS.PRN ="RFD"+ CommonHelper.GenerateTransactionNumber();
+                    paymentRequest.REQUESTPARAMETERS.PRN = "RFD" + CommonHelper.GenerateTransactionNumber();
                     paymentRequest.REQUESTPARAMETERS.AMOUNT = Model.AMOUNT;
                     paymentRequest.REQUESTPARAMETERS.MERCHANTCODE = data.MerchantCode;
                     paymentRequest.REQUESTPARAMETERS.RPPTXNID = Model.RPPTXNID;
-                    paymentRequest.SSOID= Model.SSOID;
+                    paymentRequest.SSOID = Model.SSOID;
                     bool isSuccess = UtilityHelper.PaymentUtility.CreatePaymentRequest(paymentRequest);
                     if (isSuccess)
                     {
@@ -362,7 +365,7 @@ namespace RJ_NOC_API.Controllers
                                     obj.RESPONSEPARAMETERS.REMARKS = RESPONSEPARAMS.REMARKS;
                                     obj.RESPONSEPARAMETERS.RESPONSEMESSAGE = RESPONSEPARAMS.REFUNDSTATUS;
                                     obj.RESPONSEPARAMETERS.REFUNDSTATUS = RESPONSEPARAMS.REFUNDSTATUS;
-                                    obj.RESPONSEPARAMETERS.RPPTXNID= Model.RPPTXNID;
+                                    obj.RESPONSEPARAMETERS.RPPTXNID = Model.RPPTXNID;
                                     UtilityHelper.PaymentUtility.UpdateRefundStatus(obj);
                                     #endregion
                                 }
@@ -434,7 +437,7 @@ namespace RJ_NOC_API.Controllers
 
                 if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
-                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.RefundStatusURL + "?MERCHANTCODE=" + data.MerchantCode + "&RPPTXNID=" + Model.RPPTXNID + "&APINAME=" + APINAME );
+                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.RefundStatusURL + "?MERCHANTCODE=" + data.MerchantCode + "&RPPTXNID=" + Model.RPPTXNID + "&APINAME=" + APINAME);
                     webrequest.Method = "POST";
                     webrequest.ContentType = "application/x-www-form-urlencoded";
                     webrequest.ContentLength = 0;
@@ -501,7 +504,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-   
+
         [HttpPost("RPPTransactionCallback")]
         public IActionResult RPPTransactionCallback()
         {
@@ -875,68 +878,47 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<PaymentRequest>();
             result.Data = new PaymentRequest();
             Random rnd = new Random();
-            // string PRN = "TXN" + CommonHelper.GenerateTransactionNumber();
-            string PRN = DateTime.Now.ToString("yyyyMMddHHmmss");
-
             try
             {
-                EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
 
-                // Server.MapPath("~/SystemGeneratedPDF/rajnoc.key");
-                string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
+                DataTable dataTable = new DataTable();
+                dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID);
+                if (dataTable != null)
+                {
+                    string PRN = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    string key = "N*($%^$#)il^%$OC";
+                    //System.Threading.Thread.Sleep(10000); 
+                    string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
+                    EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
+                    string dtFrom = DateTime.Now.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+                    string dtTo = DateTime.Now.AddYears(1).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+                    dtFrom = "2019/04/01";
+                    dtTo = "2020/03/31";
 
-                string Head_Amount1 = "10000.00";
-                string Head_Name1 = "040100800500100000";
+                    string finyear = FinancialYear.Current.ToString();
+                    string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Convert.ToDecimal(request.AMOUNT).ToString() + ".00" + "|" + key, keypath);
+                    request.City = "Jaipur";
+                    // string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|30000.00|" + key, keypath);
 
-                string dtFrom = DateTime.Now.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture);
-                string dtTo = DateTime.Now.AddYears(1).ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture);
-
-                string factAdrees = "Jaipur";
-                string Pincode = "302020";
-                string city = "Jaipur";
-                string RemitterName = "Jaipur";
-
-                string finyear = FinancialYear.Current.ToString();
-
-                //F@bE*D$g^s# 
-                //N*($%^$#)il^%$OC
-
-
-
-
-                //string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Head_Amount1 + "|N*($%^$#)il^%$OC", keypath);
-                string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Head_Amount1 + "|N*($%^$#)il^%$OC", keypath);
-                //string paystring = "AUIN=" + ds.Tables[0].Rows[0]["AUIN"].ToString() + "|Head_Name1=" + ds.Tables[0].Rows[0]["Head_Name1"].ToString() + "|Head_Amount1=" + ds.Tables[0].Rows[0]["Head_Amount1"].ToString() + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=Abc Chemicals|Discount=0|TotalAmount=100|MerchantCode=32|PaymentMode=N|REGTINNO=302004|Location=" + ds.Tables[0].Rows[0]["Location"].ToString() + "|DistrictCode=" + ds.Tables[0].Rows[0]["DistrictCode"].ToString() + "|OfficeCode=" + ds.Tables[0].Rows[0]["OfficeCode"].ToString() + "|DepartmentCode=32|FromDate=2018/12/03|ToDate=2019/12/31|Address=Jhalana Industrial area jaipur|PIN=302004|City=Jaipur|Remarks=SampleRemark|Filler=A|ChallanYear=1819|Checksum=" + CHECKSUM + "";
-
-                string paystring = "AUIN=" + PRN + "|Head_Name1=" + Head_Name1 + "|Head_Amount1=" + Head_Amount1 + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=" + RemitterName + "|Discount=0|TotalAmount=" + Head_Amount1 + "|MerchantCode=15|PaymentMode=N|REGTINNO=302004|Location=2100|DistrictCode=12|OfficeCode=395|DepartmentCode=32|FromDate=" + dtFrom + "|ToDate=" + dtTo + "|Address=" + factAdrees + "|PIN=" + Pincode + "|City=" + city + "|Remarks=SampleRemark|Filler=A|ChallanYear=" + finyear + "|Checksum=" + CHECKSUM + "";
-
-                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_RawRequest",
-                    string.Format("paystring = {0} ", paystring));
-
-                string ENCDATA1 = oEgrassFabEncrypt.Encrypt(paystring, keypath);
-                //this.AUIN.Value = ds.Tables[0].Rows[0]["AUIN"].ToString();
-                //this.ENCDATA.Value = ENCDATA1;
-                NameValueCollection data = new NameValueCollection();
-
-                result.Data.MERCHANTCODE = "15";
-                result.Data.ENCDATA = ENCDATA1;
-                result.Data.AUIN = PRN;
-                // result.Data.PaymentRequestURL = "https://egras.rajasthan.gov.in/samplemerchantprelogin.aspx";
-                //result.Data.PaymentRequestURL = "http://164.100.153.101/egrassectest/samplemerchantprelogin.aspx";
-                result.Data.PaymentRequestURL = "http://164.100.153.105/egras105/samplemerchantprelogin2.aspx";
-                 //result.Data.PaymentRequestURL = "http://10.68.69.46:62778/api/Payment/GRAS_PaymentRequest";
+                    string paystring = "AUIN=" + PRN + "|Head_Name1=" + dataTable.Rows[0]["Head_Name1"].ToString() + "|Head_Amount1=" + Convert.ToDecimal(request.AMOUNT).ToString() + ".00" + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=" + request.RemitterName + "|Discount=0|TotalAmount=" + Convert.ToDecimal(request.AMOUNT).ToString() + ".00" + "|MerchantCode=" + dataTable.Rows[0]["MerchantCode"].ToString() + "|PaymentMode=N|REGTINNO=" + request.REGTINNO + "|Location=" + dataTable.Rows[0]["Location"].ToString() + "|DistrictCode=12|OfficeCode=" + dataTable.Rows[0]["OfficeCode"].ToString() + "|DepartmentCode=" + dataTable.Rows[0]["DepartmentCode"].ToString() + "|FromDate=" + dtFrom + "|ToDate=" + dtTo + "|Address=" + request.Adrees + "|PIN=" + request.Pincode + "|City=" + request.City + "|Remarks=SampleRemark|Filler=A|ChallanYear=2019|Checksum=" + CHECKSUM + "";
 
 
+                    string ENCDATA1 = oEgrassFabEncrypt.Encrypt(paystring, keypath);
+                    string decriptString = oEgrassFabEncrypt.Decrypt(ENCDATA1, keypath);
 
-                //data.Add("Merchant_code", "32");
-                //data.Add("AUIN", ds.Tables[0].Rows[0]["PRN"].ToString());
-                //data.Add("ENCDATA", ENCDATA1);
-                //RedirectAndPOST(this.Page, "https://egras.rajasthan.gov.in/samplemerchantprelogin.aspx", data);
+                    result.Data.MERCHANTCODE = dataTable.Rows[0]["MerchantCode"].ToString();
+                    result.Data.ENCDATA = ENCDATA1;
+                    result.Data.AUIN = PRN;
+                    result.Data.PaymentRequestURL = dataTable.Rows[0]["PaymentRequestURL"].ToString();
 
-
-                string json = JsonConvert.SerializeObject(result);
-                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentRequestENC", string.Format("Request String = {0}", json));
-
+                    string json = JsonConvert.SerializeObject(result);
+                    CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentRequestENC", string.Format("Request String = {0}", json));
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "E-Grass Budget Head Details Not Found.!";
+                }
 
             }
             catch (System.Exception ex)
@@ -952,104 +934,35 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        //[HttpPost("GRAS_PaymentRequest")]
-        //public async Task<OperationResult<PaymentRequest>> GRAS_PaymentRequest(RequestDetails request)
-        //{
-        //    var result = new OperationResult<PaymentRequest>();
-        //    result.Data = new PaymentRequest();
-        //    Random rnd = new Random();
-        //   // string PRN = "TXN" + CommonHelper.GenerateTransactionNumber();
-        //    string PRN =  DateTime.Now.ToString("yyyyMMddHHmmss");
-
-        //    try
-        //    {
-        //        EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
-
-        //        // Server.MapPath("~/SystemGeneratedPDF/rajnoc.key");
-        //        string keypath= Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey","rajnoc.key");
-
-        //        string Head_Amount1 = "10000.00";
-        //        string Head_Name1 = "040100800500100000";
-
-        //        string dtFrom = DateTime.Now.ToString("yyyy/MM/dd");
-        //        string dtTo = DateTime.Now.ToString("yyyy/MM/dd");
-        //        dtFrom = "2023/12/08";
-        //        dtTo = "2024/12/08";
-
-        //        string factAdrees = "Jaipur";
-        //        string Pincode = "302020";
-        //        string city = "Jaipur";
-        //        string RemitterName = "Jaipur";
-
-        //        string finyear = FinancialYear.Current.ToString();
-
-        //        //F@bE*D$g^s# 
-        //        //N*($%^$#)il^%$OC
-
-
-
-
-        //        //string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Head_Amount1 + "|N*($%^$#)il^%$OC", keypath);
-        //        string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Head_Amount1 + "|N*($%^$#)il^%$OC", keypath);
-        //        //string paystring = "AUIN=" + ds.Tables[0].Rows[0]["AUIN"].ToString() + "|Head_Name1=" + ds.Tables[0].Rows[0]["Head_Name1"].ToString() + "|Head_Amount1=" + ds.Tables[0].Rows[0]["Head_Amount1"].ToString() + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=Abc Chemicals|Discount=0|TotalAmount=100|MerchantCode=32|PaymentMode=N|REGTINNO=302004|Location=" + ds.Tables[0].Rows[0]["Location"].ToString() + "|DistrictCode=" + ds.Tables[0].Rows[0]["DistrictCode"].ToString() + "|OfficeCode=" + ds.Tables[0].Rows[0]["OfficeCode"].ToString() + "|DepartmentCode=32|FromDate=2018/12/03|ToDate=2019/12/31|Address=Jhalana Industrial area jaipur|PIN=302004|City=Jaipur|Remarks=SampleRemark|Filler=A|ChallanYear=1819|Checksum=" + CHECKSUM + "";
-
-        //        string paystring = "AUIN=" + PRN + "|Head_Name1=" + Head_Name1 + "|Head_Amount1=" + Head_Amount1 + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=" + RemitterName + "|Discount=0|TotalAmount=" + Head_Amount1 + "|MerchantCode=15|PaymentMode=N|REGTINNO=302004|Location=2100|DistrictCode=12|OfficeCode=395|DepartmentCode=32|FromDate=" + dtFrom + "|ToDate=" + dtTo + "|Address=" + factAdrees + "|PIN=" + Pincode + "|City=" + city + "|Remarks=SampleRemark|Filler=A|ChallanYear="+ finyear + "|Checksum=" + CHECKSUM + "";
-
-        //        CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_RawRequest",
-        //            string.Format("paystring = {0} ", paystring));
-
-        //        string ENCDATA1 = oEgrassFabEncrypt.Encrypt(paystring, keypath);
-        //        //this.AUIN.Value = ds.Tables[0].Rows[0]["AUIN"].ToString();
-        //        //this.ENCDATA.Value = ENCDATA1;
-        //        NameValueCollection data = new NameValueCollection();
-
-        //        result.Data.MERCHANTCODE = "15";
-        //        result.Data.ENCDATA = ENCDATA1;
-        //        result.Data.AUIN = PRN;
-        //        //result.Data.PaymentRequestURL = "https://egras.rajasthan.gov.in/samplemerchantprelogin.aspx";
-
-        //        result.Data.PaymentRequestURL = "http://10.68.69.46:62778/api/Payment/GRAS_PaymentRequest";
-
-
-
-
-        //        //data.Add("Merchant_code", "32");
-        //        //data.Add("AUIN", ds.Tables[0].Rows[0]["PRN"].ToString());
-        //        //data.Add("ENCDATA", ENCDATA1);
-        //        //RedirectAndPOST(this.Page, "https://egras.rajasthan.gov.in/samplemerchantprelogin.aspx", data);
-
-
-        //        string json = JsonConvert.SerializeObject(result);
-        //        CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentRequestENC", string.Format("Request String = {0}",json));
-
-
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentRequest", ex.ToString());
-        //        result.State = OperationState.Error;
-        //        result.ErrorMessage = ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        //UnitOfWork.Dispose();
-        //    }
-        //    return result;
-        //}
 
         [HttpPost("GRAS_PaymentResponse")]
         public IActionResult GRAS_PaymentResponse()
         {
             try
             {
-                string ENCDATA = Request.Form["ENCDATA"];
+                //string ENCDATA = Request.Form["ENCDATA"];
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", "Redirect Success");
+                //CommonDataAccessHelper.Insert_ErrorLog(obj.ToString(), "Redirect Success obj");
+                //CommonDataAccessHelper.Insert_ErrorLog(ENCDATA.ToString(), "Redirect Success ENCDATA");
+
             }
             catch (System.Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", ex.ToString());
             }
-           return Redirect("http://172.22.33.75:81/paymentsuccess/1235480");
+            string URLType = Request.GetDisplayUrl();
+            if (URLType.Contains("localhost"))
+            {
+                return Redirect("http://localhost:4200/paymentsuccess/1235480");
+            }
+            else if (URLType.Contains("172.22.33.75"))
+            {
+                return Redirect("http://172.22.33.75:81/paymentsuccess/1235480");
+            }
+            else
+            {
+                return Redirect("https://rajnoc.rajasthan.gov.in/paymentsuccess/1235480");
+            }
         }
         #endregion
 

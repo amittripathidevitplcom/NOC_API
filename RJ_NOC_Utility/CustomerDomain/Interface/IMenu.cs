@@ -17,5 +17,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool IfExists(int AccountID, string GroupName);
         List<UserRoleRightsDataModel> GetAllMenuUserRoleRightsRoleWise(int RoleID);
 
+        List<MenuModel> GetUserAllMenu(int UserId);
+        List<MenuModel> GetUserWiseMenuNew(int UserID);
+
     }
 }
+
+

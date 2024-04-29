@@ -309,9 +309,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.CheckTabsEntry_StatisticsEntry(CollegID);
         }
-        public bool DraftFinalSubmit(int CollegeID, int IsDraftSubmited)
+        public bool DraftFinalSubmit(CommonDataModel_CollegeDraftFinal request)
         {
-            return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(CollegeID, IsDraftSubmited);
+            return UnitOfWork.CommonFuncationRepository.DraftFinalSubmit(request);
         }
         public bool LOIFinalSubmit(int CollegeID)
         {
@@ -539,6 +539,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID,int CourseLevelID, string GetType)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID, CourseLevelID, GetType);
+        }
+
+        public List<CommonDataModel_DataTable> GetCollegeDeficiency(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetCollegeDeficiency(CollegeID);
         }
 
         public bool SSOUpdateSubmit(int CollegeID, string SSOID)

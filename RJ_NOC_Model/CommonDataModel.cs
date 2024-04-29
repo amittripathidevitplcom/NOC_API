@@ -224,6 +224,7 @@ namespace RJ_NOC_Model
     {
         public int CourseID { get; set; }
         public string CourseName { get; set; }
+        public string? CourseOldNew { get; set; }
     }
 
 
@@ -338,5 +339,11 @@ namespace RJ_NOC_Model
         public string RequiredSquareMeter { get; set; }
         public string AreaType { get; set; }
     }
+    public class CommonDataModel_CollegeDraftFinal
+    {
+        public int CollegeID { get; set; }
+        public int IsDraftSubmited { get; set; }
+        public string Deficiency { get; set; }
 
+    }
 }
