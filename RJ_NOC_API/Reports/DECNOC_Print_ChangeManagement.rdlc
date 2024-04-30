@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>1</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DCENOC_Print">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>5f12e0ec-ff2f-4780-acda-772e03be8d03</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DCENOC1654">
+      <Query>
+        <DataSourceName>DCENOC_Print</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="NOCIssueNo">
+          <DataField>NOCIssueNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOCIssueFinancialYear">
+          <DataField>NOCIssueFinancialYear</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img">
+          <DataField>img</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NocQRCode">
+          <DataField>NocQRCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNameHi">
+          <DataField>CollegeNameHi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNameEng">
+          <DataField>CollegeNameEng</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DepartmentNameHi">
+          <DataField>DepartmentNameHi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DepartmentNameEn">
+          <DataField>DepartmentNameEn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeAddress">
+          <DataField>CollegeAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOCType">
+          <DataField>NOCType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LegalentitywithAddress">
+          <DataField>LegalentitywithAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewName">
+          <DataField>CollegeNewName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeDistrict">
+          <DataField>CollegeDistrict</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewAddress">
+          <DataField>CollegeNewAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NewLegalEntity">
+          <DataField>NewLegalEntity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DCENOC_Print</rd:DataSetName>
+        <rd:SchemaPath>C:\Deepak Project\API10042024\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:TableName>CollegeDetails</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>राजस्थान सरकार</Value>
+                    <Style>
+                      <FontFamily>Kruti Dev 010</FontFamily>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>आयुक्तालय, कालेज शिक्षा, राजस्थान, जयपुर</Value>
+                    <Style>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Block-4, RKS Sankul, JLN Road, Jaipur- 302015, Rajasthan</Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Website: http://hte.rajasthan.gov.in/dept/dce/</Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>e-mail: </Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>jdpi.cce@gmail.com</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Ph.: 0141-2706736(0)</Value>
+                    <Style>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.3175cm</Top>
+            <Left>2.55833cm</Left>
+            <Height>2.87542cm</Height>
+            <Width>14.21635cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line2">
+            <Top>3.1345cm</Top>
+            <Left>3.53261cm</Left>
+            <Height>0cm</Height>
+            <Width>13.24208cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+            </Style>
+          </Line>
+          <Image Name="Image1">
+            <Source>Embedded</Source>
+            <Value>dce_logo</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.33549cm</Top>
+            <Height>2.40743cm</Height>
+            <Width>2.74509cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>क्रमांक : एफ4 (35) आकाशि / नि.सं./</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.43641cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>0.69984cm</Height>
+            <Width>6.04183cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>दिनांक - </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>3.43641cm</Top>
+            <Left>12.48875cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.5475cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>आदेश </Value>
+                    <Style>
+                      <FontSize>10.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>4.40083cm</Top>
+            <Left>7.80203cm</Left>
+            <Height>0.8075cm</Height>
+            <Width>1.5475cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">    </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">    </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>इस विभाग के आदेश क्रमांकः</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!NOCIssueNo.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>दिनांक -</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Date.Value</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>द्वारा </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!LegalentitywithAddress.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> को सत्र 2013-14 से नवीन महाविद्यालय </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeNameEng.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>, </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeAddress.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> प्रारम्भ करने हेतु अस्थायी अनापत्ति प्रमाण पत्र जारी किया गया था, </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>का प्रबन्ध</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> अन्तरण सत्र </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!NOCIssueFinancialYear.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> से </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!LegalentitywithAddress.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>" </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>से </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!NewLegalEntity.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> के पक्ष में किया जाता है।</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>5.20833cm</Top>
+            <Left>0.02688cm</Left>
+            <Height>1.98127cm</Height>
+            <Width>16.74781cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox21">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>आयुक्त, </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>कॉलेज शिक्षा, राजस्थान,</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>जयपुर</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>7.53873cm</Top>
+            <Left>11.76738cm</Left>
+            <Height>1.34084cm</Height>
+            <Width>5.0073cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox22">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>1. विशिष्ट सहायक, मा० उच्च शिक्षा मंत्री महोदया, राजस्थान, जयपुर । </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>2. निजी सचिव, अति० मुख्य सचिव, उच्च शिक्षा विभाग, राजस्थान, जयपुर । </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>3. जिला कलेक्टर, प्रतापगढ़। </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>4. कुल सचिव, मोहनलाल सुखाड़िया विश्वविद्यालय, उदयपुर। </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>5. ट्रिनिटी एकेडमी शिक्षण संस्थान, ग्राम/पोस्ट ढलोट, तह० अरनोद, जिला प्रतापगढ़। </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>6. माही फाउण्डेशन ट्रस्ट, बांसवाड़ा। </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>7. सम्बन्धित संस्था / महाविद्यालय । </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>8. सांख्यिकी शाखा, आयुक्तालय, कॉलेज शिक्षा, राजस्थान, जयपुर । </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>9. रक्षित पत्रावली</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>9.72052cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>4.48938cm</Height>
+            <Width>11.58259cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="Image5">
+            <Source>Database</Source>
+            <Value>=First(Fields!NocQRCode.Value, "DCENOC1654")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>14.5715cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>1.67569cm</Height>
+            <Width>3.48438cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="NOCIssueNo">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOC1654")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>NOCIssueNo</rd:DefaultName>
+            <Top>3.53625cm</Top>
+            <Left>6.32447cm</Left>
+            <Height>0.69984cm</Height>
+            <Width>4.89397cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Date">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Date.Value, "DCENOC1654")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Date</rd:DefaultName>
+            <Top>3.53625cm</Top>
+            <Left>14.21264cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox23">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>संयुक्त निदेशक (नि०सं०)</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>कॉलेज शिक्षा राजस्थान जयपुर</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>14.254cm</Top>
+            <Left>11.82995cm</Left>
+            <Height>0.99688cm</Height>
+            <Width>5.0073cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>क्रमांक : एफ4 (35) आकाशि / नि.सं./</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>9.05596cm</Top>
+            <Left>0.10625cm</Left>
+            <Height>0.69984cm</Height>
+            <Width>6.04183cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>दिनांक - </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>9.05596cm</Top>
+            <Left>12.48875cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.5475cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="NOCIssueNo2">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOC1654")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>NOCIssueNo</rd:DefaultName>
+            <Top>9.1558cm</Top>
+            <Left>6.32447cm</Left>
+            <Height>0.69984cm</Height>
+            <Width>4.89397cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Date2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Date.Value, "DCENOC1654")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Date</rd:DefaultName>
+            <Top>9.1558cm</Top>
+            <Left>14.21264cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>25.7cm</Height>
+        <Style />
+      </Body>
+      <Width>17.33995cm</Width>
+      <Page>
+        <PageHeight>29cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="test">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>test</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="dce_logo">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>9106acdb-8e4c-4731-904e-3e33e8590c33</rd:ReportID>
+</Report>

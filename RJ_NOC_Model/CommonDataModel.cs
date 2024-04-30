@@ -343,7 +343,7 @@ namespace RJ_NOC_Model
     {
         public int CollegeID { get; set; }
         public int IsDraftSubmited { get; set; }
-        public string Deficiency { get; set; }
+        public string? Deficiency { get; set; }
 
     }
 }

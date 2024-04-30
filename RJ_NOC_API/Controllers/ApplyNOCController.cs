@@ -775,8 +775,12 @@ namespace RJ_NOC_API.Controllers
                     }
                     else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangePlace")
                     {
-                        ReportPath += "";
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_ChangePlace.rdlc";
                         localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
                     }   
                     else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_CoedToGirls")
                     {
@@ -799,8 +803,12 @@ namespace RJ_NOC_API.Controllers
                     }
                     else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangeManagement")
                     {
-                        ReportPath += "";
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_ChangeManagement.rdlc";
                         localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
                     }       
                     else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject" || dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
                     {
