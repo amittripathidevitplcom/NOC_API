@@ -57,8 +57,8 @@ namespace RJ_NOC_Utility.CustomerDomain
                     {
                         var EmpResponse = Res.Content.ReadAsStringAsync().Result;
                         ssoInfo = JsonConvert.DeserializeObject<SSOUserDetailData>(EmpResponse);
-                        CommonDataAccessHelper.Insert_ErrorLog("SSO Json Responce", EmpResponse);
-                        CommonDataAccessHelper.Insert_ErrorLog("SSO AdharID", ssoInfo.AadhaarId);
+                        //CommonDataAccessHelper.Insert_ErrorLog("SSO Json Responce", EmpResponse);
+                        //CommonDataAccessHelper.Insert_ErrorLog("SSO AdharID", ssoInfo.AadhaarId);
                     }
                     else
                     { }
