@@ -170,6 +170,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SSOUpdateSubmit(int CollegeID, string SSOID);
 
         List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID);
+        List<DataTable> HomePage_IncreaseDate();
     }
 }
 

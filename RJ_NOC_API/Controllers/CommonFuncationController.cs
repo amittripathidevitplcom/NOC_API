@@ -3781,6 +3781,39 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+        [HttpGet("HomePage_IncreaseDate")]
+        public async Task<OperationResult<List<DataTable>>> HomePage_IncreaseDate()
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "HomePage_IncreaseDate", 0, "CommonFuncation");
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.HomePage_IncreaseDate());
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.HomePage_IncreaseDate", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
     }
 }

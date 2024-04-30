@@ -556,5 +556,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetSSOByCollegeIDWise(CollegeID);
         }
+
+        public List<DataTable> HomePage_IncreaseDate()
+        {
+            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate();
+        }
     }
 }

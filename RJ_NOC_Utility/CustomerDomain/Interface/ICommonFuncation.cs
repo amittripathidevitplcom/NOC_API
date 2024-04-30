@@ -14,7 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
 
         List<CommonDataModel_DepartmentMasterList> GetDepartmentList();
-List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication();
+        List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication();
         List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID);
 
         List<CommonDataModel_ModuleMasterList> GetModuleList();
@@ -62,7 +62,7 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
 
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
-        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID,int OtherInformationID, string Type);
+        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
 
@@ -87,7 +87,7 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser();
-        
+
         List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID);
         List<CommonDataModel_TabField> GetTabFieldByTabName(string TabName);
         List<CommonDataModel_DataTable> CheckTabsEntry(int CollegID);
@@ -130,10 +130,10 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
         List<CommonDataModel_DataTable> GetNOCApplicationStepList(int ApplyNocID, int CurrentActionID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetDownloadPdfDetails(int DepartmentID, int CollegeID);
         List<CommonDataModel_DataTable> GetPaymentMode();
-        bool SaveExcelData(List<MemberDataModel> request,int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID);
+        bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID);
         bool UpdateSingleRow(MemberDataModel request, int DeptId, int collegeID, string SSOID);
 
-        List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType);
+        List<CommonDataModel_DataTable> GetImportExcelData(string SSOID, int DeptId, int collegeID, int StaticsFileID, string ActionType);
         List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID);
 
         List<DataTable> CheckExistsDETGovernmentCollege(string SSOID);
@@ -158,7 +158,7 @@ List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplicatio
 
         bool SSOUpdateSubmit(int CollegeID, string SSOID);
         List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID);
-
+        List<DataTable> HomePage_IncreaseDate();
     }
 
 

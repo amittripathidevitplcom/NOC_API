@@ -1565,6 +1565,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DataTable>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public List<DataTable> HomePage_IncreaseDate()
+        {
+            string SqlQuery = " select DepartmentID,Type,Content from M_HomePage_IncreaseDate  Where ActiveStatus=1 and DeleteStatus=0 order by OrderBy asc ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.HomePage_IncreaseDate");
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
 

@@ -28,6 +28,7 @@ using System.Collections.Specialized;
 using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Http.Extensions;
+using iTextSharp.text.pdf;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -938,10 +939,23 @@ namespace RJ_NOC_API.Controllers
         [HttpPost("GRAS_PaymentResponse")]
         public IActionResult GRAS_PaymentResponse()
         {
+            string ENCDATA = "";
             try
             {
-                //string ENCDATA = Request.Form["ENCDATA"];
-                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", "Redirect Success");
+                string key = "N*($%^$#)il^%$OC";
+                //ENCDATA = Request.Form["ENCDATA"];
+                ENCDATA = "jv0RGXsPvHWL2%2B4K37hgVa1OqIp2oazvppCu%2BXpF9UButnT3ybK581WkclOOC7TbXUaKlmxJL5%2Bobp7/h%2B3zKGz5MXzaEbl58j2v%2BycdsjDFvLtqLHJe418RvYCBl4e%2BGqqjBY7N5NNs%2BMHVPcXSgydkzpZyzXUXAfiluhWejxQXTT0Aj6i/wQgJP%2BpPj%2BiHeYuK9IIVY62WgigAHq9OYtcvMqdCZTLYuux1hJWXHH3ysNeN3pVV65/Bbfy9Ds8U";
+
+                //CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", ENCDATA);
+                //CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", "Redirect Success");
+                EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
+                string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
+                string EncryptString = oEgrassFabEncrypt.Encrypt(ENCDATA, keypath);
+
+                //string CHECKSUM = oEgrassFabEncrypt.Encrypt(ENCDATA + "|" + key, keypath);
+
+                string ENCDATA1 = oEgrassFabEncrypt.Encrypt(ENCDATA, keypath);
+
                 //CommonDataAccessHelper.Insert_ErrorLog(obj.ToString(), "Redirect Success obj");
                 //CommonDataAccessHelper.Insert_ErrorLog(ENCDATA.ToString(), "Redirect Success ENCDATA");
 
@@ -957,7 +971,7 @@ namespace RJ_NOC_API.Controllers
             }
             else if (URLType.Contains("172.22.33.75"))
             {
-                return Redirect("http://172.22.33.75:81/paymentsuccess/1235480");
+                return Redirect("http://172.22.33.75:81/paymentsuccess/"+ ENCDATA);
             }
             else
             {
