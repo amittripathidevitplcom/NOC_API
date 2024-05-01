@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using RJ_NOC_Model;
 
 
 namespace RJ_NOC_DataAccess.Common
@@ -250,6 +251,46 @@ namespace RJ_NOC_DataAccess.Common
             {
             }
         }
+
+        public static int EGrassPaymentDetails_Req_Res(EGrassPaymentDetails_Req_Res req_Res)
+        {
+            int Rows = 0;
+            try
+            {
+                string SqlQry = " exec USP_EGrassPaymentDetails_Req_Res_Save ";
+                SqlQry += " @ApplyNocApplicationID='" + req_Res.ApplyNocApplicationID + "', ";
+                SqlQry += " @DepartmentID='" + req_Res.DepartmentID + "',";
+                SqlQry += " @Head_Name='" + req_Res.Head_Name + "',@Request_AUIN='" + req_Res.Request_AUIN + "', ";
+                SqlQry += " @Request_CollegeName='" + req_Res.Request_CollegeName + "',";
+                SqlQry += " @Request_SSOID='" + req_Res.Request_SSOID + "',";
+                SqlQry += " @Request_AMOUNT='" + req_Res.Request_AMOUNT + "',";
+                SqlQry += " @Request_MerchantCode='" + req_Res.Request_MerchantCode + "', ";
+                SqlQry += " @Request_REGTINNO='" + req_Res.Request_REGTINNO + "',";
+                SqlQry += " @Request_OfficeCode='" + req_Res.Request_OfficeCode + "',";
+                SqlQry += " @Request_DepartmentCode='" + req_Res.Request_DepartmentCode + "',";
+                SqlQry += " @Request_Checksum='" + req_Res.Request_Checksum + "', ";
+                SqlQry += " @Request_ENCAUIN='" + req_Res.Request_ENCAUIN + "',";
+                SqlQry += " @Request_Json='" + req_Res.Request_Json + "',";
+                SqlQry += " @Request_JsonENC='" + req_Res.Request_JsonENC + "',";
+                SqlQry += " @Response_CIN='" + req_Res.Response_CIN + "',";
+                SqlQry += " @Response_BankReferenceNo='" + req_Res.Response_BankReferenceNo + "', ";
+                SqlQry += " @Response_BANK_CODE='" + req_Res.Response_BANK_CODE + "',";
+                SqlQry += " @Response_BankDate='" + req_Res.Response_BankDate + "',";
+                SqlQry += " @Response_GRN='" + req_Res.Response_GRN + "',";
+                SqlQry += " @Response_Amount='" + req_Res.Response_Amount + "',";
+                SqlQry += " @Response_Status='" + req_Res.Response_Status + "', ";
+                SqlQry += " @Response_checkSum='" + req_Res.Response_checkSum + "',@Response_Json='" + req_Res.Response_Json + "', ";
+                SqlQry += " @Response_JsonENC='" + req_Res.Response_JsonENC + "' ";
+                Rows = NonQuerrySys(SqlQry);
+            }
+            catch (Exception ex)
+            {
+                Insert_ErrorLog("PaymentController.EGrassPaymentDetails_Req_Res", ex.ToString());
+                Rows = 0;
+            }
+            return Rows;
+        }
+
         #endregion
 
         #region "Common convert file to base64 Function"

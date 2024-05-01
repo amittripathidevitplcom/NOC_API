@@ -76,6 +76,7 @@ namespace RJ_NOC_Model
         public string CreatedBy { get; set; }
         public string SSOID { get; set; }
         public string AUIN { get; set; }
+        public bool RequestStatus { get; set; }
 
     }
 
@@ -107,7 +108,7 @@ namespace RJ_NOC_Model
 
 
         /////
-        public string ApplyNocApplicationID { get; set; }
+        public int ApplyNocApplicationID { get; set; }
         public int DepartmentID { get; set; }
         public string RemitterName { get; set; }
         public string REGTINNO { get; set; }
@@ -130,6 +131,36 @@ namespace RJ_NOC_Model
         public string SSOID { get; set; }
 
     }
+    public class EGrassPaymentDetails_Req_Res
+    {
+        public int ApplyNocApplicationID { get; set; }
+        public int DepartmentID { get; set; }
+        public string? Head_Name { get; set; }
+        public string? Request_AUIN { get; set; }
+        public string? Request_CollegeName { get; set; }
+        public string? Request_SSOID { get; set; }
+        public decimal? Request_AMOUNT { get; set; }
+        public string? Request_MerchantCode { get; set; }
+        public string? Request_REGTINNO { get; set; }
+        public string? Request_OfficeCode { get; set; }
+        public string? Request_DepartmentCode { get; set; }
+        public string? Request_Checksum { get; set; }
+        public string? Request_ENCAUIN { get; set; }
+        public string? Request_Json { get; set; }
+        public string? Request_JsonENC { get; set; }
+        public string? Response_CIN { get; set; }
+        public string? Response_BankReferenceNo { get; set; }
+        public string? Response_BANK_CODE { get; set; }
+        public string? Response_BankDate { get; set; }
+        public string? Response_GRN { get; set; }
+        public decimal? Response_Amount { get; set; }
+        public string? Response_Status { get; set; }
+        public string? Response_checkSum { get; set; }
+        public string? Response_Json { get; set; }
+        public string? Response_JsonENC { get; set; }
+    }
+
+
 
     #region "EMITRA MODEL"
     public class EmitraRequstParameters
