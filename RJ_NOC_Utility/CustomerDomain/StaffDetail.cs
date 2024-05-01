@@ -21,6 +21,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffDetailRepository.IfExistsPrincipal(StaffDetailID, CollegeID, DesignationID);
         }
+        public bool IfExistsAadhar(int StaffDetailID, int CollegeID, string AadharCard)
+        {
+            return UnitOfWork.StaffDetailRepository.IfExistsAadhar(StaffDetailID, CollegeID, AadharCard);
+        }
 
         public bool SaveData(StaffDetailDataModel request)
         {
@@ -28,15 +32,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID, int ApplyNOCID)
         {
-            return UnitOfWork.StaffDetailRepository.GetStaffDetailList_DepartmentCollegeWise(DepartmentID,CollegeID,StaffDetailID, ApplyNOCID);
-        }   
+            return UnitOfWork.StaffDetailRepository.GetStaffDetailList_DepartmentCollegeWise(DepartmentID, CollegeID, StaffDetailID, ApplyNOCID);
+        }
         public bool DeleteStaffDetail(int StaffDetailID)
         {
             return UnitOfWork.StaffDetailRepository.DeleteStaffDetail(StaffDetailID);
         }
         public List<CommonDataModel_DataSet> GetStaffDetailListForPDF(int DepartmentID, int CollegeID)
         {
-            return UnitOfWork.StaffDetailRepository.GetStaffDetailListForPDF(DepartmentID,  CollegeID);
+            return UnitOfWork.StaffDetailRepository.GetStaffDetailListForPDF(DepartmentID, CollegeID);
         }
 
         public bool SaveData_ExcelData(StaffDetailDataModel_Excel request)

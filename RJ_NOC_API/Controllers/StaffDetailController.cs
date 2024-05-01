@@ -24,37 +24,47 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
+                bool IfExitsAadhar = false;
+                IfExitsAadhar = UtilityHelper.StaffDetailUtility.IfExistsAadhar(request.StaffDetailID, request.CollegeID, request.AadhaarNo);
                 IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.StaffDetailID, request.CollegeID, request.RoleID);
-                if (IfExits == false)
+                if (IfExitsAadhar == false)
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData(request));
-                    if (result.Data)
+                    if (IfExits == false)
                     {
-                        result.State = OperationState.Success;
-                        if (request.StaffDetailID == 0)
+                        result.Data = await Task.Run(() => UtilityHelper.StaffDetailUtility.SaveData(request));
+                        if (result.Data)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.StaffDetailID, "Save", 0, "LegalEntity");
-                            result.SuccessMessage = "Saved successfully .!";
+                            result.State = OperationState.Success;
+                            if (request.StaffDetailID == 0)
+                            {
+                                CommonDataAccessHelper.Insert_TrnUserLog(request.StaffDetailID, "Save", 0, "LegalEntity");
+                                result.SuccessMessage = "Saved successfully .!";
+                            }
+                            else
+                            {
+                                CommonDataAccessHelper.Insert_TrnUserLog(request.StaffDetailID, "Update", request.StaffDetailID, "LegalEntity");
+                                result.SuccessMessage = "Updated successfully .!";
+                            }
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.StaffDetailID, "Update", request.StaffDetailID, "LegalEntity");
-                            result.SuccessMessage = "Updated successfully .!";
+                            result.State = OperationState.Error;
+                            if (request.StaffDetailID == 0)
+                                result.ErrorMessage = "There was an error adding data.!";
+                            else
+                                result.ErrorMessage = "There was an error updating data.!";
                         }
                     }
                     else
                     {
-                        result.State = OperationState.Error;
-                        if (request.StaffDetailID == 0)
-                            result.ErrorMessage = "There was an error adding data.!";
-                        else
-                            result.ErrorMessage = "There was an error updating data.!";
+                        result.State = OperationState.Warning;
+                        result.ErrorMessage = "Principal is Already Exist, It Can't Not Be Duplicate.!";
                     }
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = "Principal is Already Exist, It Can't Not Be Duplicate.!";
+                    result.ErrorMessage = "Aadhaar card number is Already Exist, It Can't Not Be Duplicate.!";
                 }
             }
             catch (Exception e)
