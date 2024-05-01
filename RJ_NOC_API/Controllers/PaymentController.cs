@@ -942,23 +942,31 @@ namespace RJ_NOC_API.Controllers
             string ENCDATA = "";
             try
             {
-                string key = "N*($%^$#)il^%$OC";
-                //ENCDATA = Request.Form["ENCDATA"];
-                ENCDATA = "jv0RGXsPvHWL2%2B4K37hgVa1OqIp2oazvppCu%2BXpF9UButnT3ybK581WkclOOC7TbXUaKlmxJL5%2Bobp7/h%2B3zKGz5MXzaEbl58j2v%2BycdsjDFvLtqLHJe418RvYCBl4e%2BGqqjBY7N5NNs%2BMHVPcXSgydkzpZyzXUXAfiluhWejxQXTT0Aj6i/wQgJP%2BpPj%2BiHeYuK9IIVY62WgigAHq9OYtcvMqdCZTLYuux1hJWXHH3ysNeN3pVV65/Bbfy9Ds8U";
+                ENCDATA = Request.Form["ENCDATA"];
+                if (ENCDATA != null)
+                {
+                    //foreach (var item in keyValuePairs)
+                    //{
+                    //    CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse1", ENCDATA);
+                    //    CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse2", item.Key);
+                    //    CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse3", item.Value);
 
-                //CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", ENCDATA);
-                //CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", "Redirect Success");
-                EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
-                string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
-                string EncryptString = oEgrassFabEncrypt.Encrypt(ENCDATA, keypath);
+                    //}
+                    ENCDATA = "IR5pwusG/z+u6lxLszC9Pi8AYp7+oOcE03lHMSv9pY1uO8TY9HkuBKWNh5YwoFf1+Bq/YxF00kq1HQKdraZjeAUofEvoNYGzqAHjum4ZpEHdZtmK6Vt0RvQUF9osOZ3giy8mk0Djg7izgPmNA5OHIR7caU3AKWq5crhde3ZLJTz41DvyzixLALGm+cgmtfN+Vz3EDCVfo6HgtqJYvWFBNR6Hz8OcPLBR8rU1bSnQC2PskY5hJ0MGK+Mu0G+J6Nd8";
 
-                //string CHECKSUM = oEgrassFabEncrypt.Encrypt(ENCDATA + "|" + key, keypath);
+                    //CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", ENCDATA);
+                    //CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_PaymentResponse", "Redirect Success");
+                    EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
+                    string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
+                    string EncryptString = oEgrassFabEncrypt.Decrypt(ENCDATA, keypath);
 
-                string ENCDATA1 = oEgrassFabEncrypt.Encrypt(ENCDATA, keypath);
+                    //string CHECKSUM = oEgrassFabEncrypt.Encrypt(ENCDATA + "|" + key, keypath);
 
-                //CommonDataAccessHelper.Insert_ErrorLog(obj.ToString(), "Redirect Success obj");
-                //CommonDataAccessHelper.Insert_ErrorLog(ENCDATA.ToString(), "Redirect Success ENCDATA");
+                    //string ENCDATA1 = oEgrassFabEncrypt.Decrypt(ENCDATA, keypath);
 
+                    //CommonDataAccessHelper.Insert_ErrorLog(obj.ToString(), "Redirect Success obj");
+                    //CommonDataAccessHelper.Insert_ErrorLog(ENCDATA.ToString(), "Redirect Success ENCDATA");
+                }
             }
             catch (System.Exception ex)
             {
@@ -971,7 +979,7 @@ namespace RJ_NOC_API.Controllers
             }
             else if (URLType.Contains("172.22.33.75"))
             {
-                return Redirect("http://172.22.33.75:81/paymentsuccess/"+ ENCDATA);
+                return Redirect("http://172.22.33.75:81/paymentsuccess/" + ENCDATA);
             }
             else
             {
