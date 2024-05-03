@@ -3815,5 +3815,67 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+        [HttpPost("GetOnlinePaymentDetailsByDepartment")]
+        public async Task<OperationResult<List<DataTable>>> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetOnlinePaymentDetailsByDepartment(request));
+                if (result.Data.Count>0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetOnlinePaymentDetailsByDepartment", request.DepartmentID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error in get data !";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetOnlinePaymentDetailsByDepartment", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("GetTotalDraftentryCollege")]
+        public async Task<OperationResult<List<DataTable>>> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetTotalDraftentryCollege(request));
+                if (result.Data.Count>0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetTotalDraftentryCollege", request.DepartmentID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error in get data !";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetTotalDraftentryCollege", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -159,6 +159,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SSOUpdateSubmit(int CollegeID, string SSOID);
         List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID);
         List<DataTable> HomePage_IncreaseDate();
+        List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request);
+        List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
     }
 
 

@@ -560,6 +560,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> HomePage_IncreaseDate()
         {
             return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate();
+        }      
+        public List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetOnlinePaymentDetailsByDepartment(request);
+        }
+        public List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetTotalDraftentryCollege(request);
         }
     }
 }

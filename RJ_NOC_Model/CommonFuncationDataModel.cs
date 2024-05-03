@@ -261,5 +261,25 @@ namespace RJ_NOC_Model
         public string Status { get; set; }
         public string CollegeName { get; set; }
     }
+    public class PaymentDetailsDataModel_Filter
+    {
+        public string? SearchBy { get; set; }
+        public string PaymentStatus { get; set; }
+        public string? FromDate { get; set; }
+        public string? ToDate { get; set; }
+        public int DepartmentID { get; set; }
+
+    }   
+    public class CommonDataModel_TotalDraftEntrySearchFilter
+    {
+        public int DepartmentID { get; set; }
+        public int? CollegeID { get; set; }
+        public int? UniversityID { get; set; }
+        public int? DivisionID { get; set; }
+        public int? DistrictID { get; set; }
+        public string? CollegeName { get; set; }
+        public string? Type { get; set; }
+
+    }
 
 }
