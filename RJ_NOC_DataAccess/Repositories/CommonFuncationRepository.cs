@@ -1593,7 +1593,7 @@ namespace RJ_NOC_DataAccess.Repository
         }    
         public List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request)
         {
-            string SqlQuery = "exec USP_TotalDraftEntryColleges @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@Type='" + request.Type + "'";
+            string SqlQuery = "exec USP_TotalDraftEntryColleges @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@Type='" + request.Type + "',@CollegeID='" + request.CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetTotalDraftentryCollege");
 
