@@ -373,7 +373,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpPost("GeneratePDFForJointSecretary/{ApplyNOCID}/{DepartmentID}/{RoleID}/{UserID}/{NOCIssuedRemark}")]
+        [HttpPost("GeneratePDFForJointSecretary")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GeneratePDFForJointSecretary(GenerateNOC_DataModel request)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "GeneratePDFForJointSecretary", request.ApplyNOCID, "ApplyNOCController");

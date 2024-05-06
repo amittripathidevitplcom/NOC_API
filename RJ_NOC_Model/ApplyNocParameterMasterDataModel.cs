@@ -181,6 +181,14 @@ namespace RJ_NOC_Model
         public decimal ApplicationFeeAmount { get; set; }
         public int ServiceId { get; set; }
         public int? PVStage { get; set; }
+         
+        public string? RemitterName { get; set; }
+        public string? REGTINNO { get; set; }
+        public string? DistrictCode { get; set; }
+        public string? Adrees { get; set; }
+        public string? City { get; set; }
+        public string? Pincode { get; set; }
+
 
         public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
         public string? ManagementType { get; set; }

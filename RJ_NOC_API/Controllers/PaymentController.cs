@@ -884,7 +884,6 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 EGrassPaymentDetails_Req_Res eGrassPaymentDetails_Req_Res = new EGrassPaymentDetails_Req_Res();
-
                 DataTable dataTable = new DataTable();
                 dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID);
                 if (dataTable != null)
@@ -903,7 +902,7 @@ namespace RJ_NOC_API.Controllers
                     string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|" + Convert.ToDecimal(request.AMOUNT).ToString() + ".00" + "|" + key, keypath);
                     request.City = "Jaipur";
                     // string CHECKSUM = oEgrassFabEncrypt.Encrypt(PRN + "|30000.00|" + key, keypath);
-                    string encAUIN = oEgrassFabEncrypt.Encrypt("AUIN=" + PRN + "|MERCHANTCODE=" + dataTable.Rows[0]["MerchantCode"].ToString() + "|TOTALAMOUNT=" + request.AMOUNT.ToString(), keypath);
+                    string encAUIN = oEgrassFabEncrypt.Encrypt("AUIN=" + PRN + "|MERCHANTCODE=" + dataTable.Rows[0]["MerchantCode"].ToString() + "|TOTALAMOUNT=" + request.AMOUNT.ToString() + ".00", keypath);
 
                     string paystring = "AUIN=" + PRN + "|Head_Name1=" + dataTable.Rows[0]["Head_Name1"].ToString() + "|Head_Amount1=" + Convert.ToDecimal(request.AMOUNT).ToString() + ".00" + "|Head_Name2=0|Head_Amount2=0|Head_Name3=0|Head_Amount3=0|Head_Name4=0|Head_Amount4=0|Head_Name5=0|Head_Amount5=0|Head_Name6=0|Head_Amount6=0|Head_Name7=0|Head_Amount7=0|Head_Name8=0|Head_Amount8=0|Head_Name9=0|Head_Amount9=0|RemitterName=" + request.RemitterName + "|Discount=0|TotalAmount=" + Convert.ToDecimal(request.AMOUNT).ToString() + ".00" + "|MerchantCode=" + dataTable.Rows[0]["MerchantCode"].ToString() + "|PaymentMode=N|REGTINNO=" + request.REGTINNO + "|Location=" + dataTable.Rows[0]["Location"].ToString() + "|DistrictCode=12|OfficeCode=" + dataTable.Rows[0]["OfficeCode"].ToString() + "|DepartmentCode=" + dataTable.Rows[0]["DepartmentCode"].ToString() + "|FromDate=" + dtFrom + "|ToDate=" + dtTo + "|Address=" + request.Adrees + "|PIN=" + request.Pincode + "|City=" + request.City + "|Remarks=SampleRemark|Filler=A|ChallanYear=2019|Checksum=" + CHECKSUM + "";
 
