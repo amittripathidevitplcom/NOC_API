@@ -105,6 +105,7 @@ namespace RJ_NOC_DataAccess.Repository
                 sb.AppendFormat("@DTECollegeLevel_College='{0}',", CommonHelper.GetDetailsTableQry(request.CollegeLevelDetails, "Temp_DTECollegeLevel_College"));
             }
             sb.AppendFormat("@AffiliationDocument='{0}',", request.AffiliationDocument);
+            sb.AppendFormat("@WebsiteImage='{0}',", request.WebsiteImage);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveCollegeData");
 

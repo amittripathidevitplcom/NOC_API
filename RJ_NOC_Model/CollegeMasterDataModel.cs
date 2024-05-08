@@ -82,6 +82,13 @@ namespace RJ_NOC_Model
         public string? AffiliationDocument { get; set; }
         public string? AffiliationDocumentPath { get; set; }
         public string? AffiliationDocument_Dis_FileName { get; set; }
+
+        public string? WebsiteImage { get; set; }
+        public string? WebsiteImagePath { get; set; }
+        public string? WebsiteImage_Dis_FileName { get; set; }
+
+
+
         //public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }
 
 
