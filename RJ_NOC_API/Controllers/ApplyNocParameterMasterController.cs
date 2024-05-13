@@ -378,7 +378,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Error;
-                    result.SuccessMessage = "There was an error in final submit.!";
+                    result.ErrorMessage = "There was an error in final submit.!";
                     CommonDataAccessHelper.Insert_TrnUserLog(ModifyBy, "Delete", 0, "ApplyNocParameterMaster");
                 }
             }
