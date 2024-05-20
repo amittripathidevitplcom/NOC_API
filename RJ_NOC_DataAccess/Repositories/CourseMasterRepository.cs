@@ -28,9 +28,9 @@ namespace RJ_NOC_DataAccess.Repository
         {
             _commonHelper = commonHelper;
         }
-        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID,int CollegeID)
+        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID, int CollegeID)
         {
-            string SqlQuery = " exec USP_CourseMaster_GetData  @LoginSSOID='" + LoginSSOID + "',@CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_CourseMaster_GetData  @LoginSSOID='" + LoginSSOID + "',@CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.GetAllData");
 
@@ -100,6 +100,12 @@ namespace RJ_NOC_DataAccess.Repository
 
         public bool SaveData(CourseMasterDataModel request)
         {
+            var SubjectList = "";
+            if (request.SelectedSubjectDetails.Count > 0)
+            {
+                SubjectList = CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails");
+            }
+
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_CollegeWiseCourse_AddUpdate  ";
             SqlQuery += " @CollegeWiseCourseID='" + request.CollegeWiseCourseID + "',";
@@ -113,7 +119,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @IPAddress='" + IPAddress + "',";
             SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
             SqlQuery += " @StreamID='" + request.StreamID + "',";
-            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + CommonHelper.GetDetailsTableQry(request.SelectedSubjectDetails, "CollegeWiseCourse_SubjectDetails") + "'";
+            SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + SubjectList + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
             if (Rows > 0)
                 return true;
@@ -155,7 +161,7 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID,int StreamMasterID)
+        public bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID, int StreamMasterID)
         {
             string query = string.Empty;
 
@@ -190,9 +196,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public DataTable IfExists_CheckCourseandSubject(string Action,int CollegeWiseCourseID,string Subject_Ids)
+        public DataTable IfExists_CheckCourseandSubject(string Action, int CollegeWiseCourseID, string Subject_Ids)
         {
-            string SqlQuery = " EXEC USP_CheckSubjectCan_EditDelete @Action='"+ Action + "',@CollegeWiseCourseID='"+ CollegeWiseCourseID + "',@Subject_Ids='"+ Subject_Ids + "'";
+            string SqlQuery = " EXEC USP_CheckSubjectCan_EditDelete @Action='" + Action + "',@CollegeWiseCourseID='" + CollegeWiseCourseID + "',@Subject_Ids='" + Subject_Ids + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.IfExists_CheckCourseandSubject");
 

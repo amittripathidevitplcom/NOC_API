@@ -454,8 +454,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                         foreach (var item1 in item.ApplyNocParameterSubjectList)
                         {
                             sb1.Append(" select");
-                            sb1.AppendFormat(" ApplyNocApplicationDChangeInNameOfCollege" +
-                                "etailID={0},", 0);
+                            sb1.AppendFormat(" ApplyNocApplicationDetailID={0},", 0);
                             sb1.AppendFormat(" ApplyNocParameterID={0},", request.ApplyNocParameterMasterList_PNOCOfSubject.ApplyNocID);
                             sb1.AppendFormat(" ApplyNocApplicationID={0},", 0);
                             sb1.AppendFormat(" CourseID={0},", item.CourseID);

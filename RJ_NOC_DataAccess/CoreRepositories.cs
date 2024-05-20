@@ -516,6 +516,16 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_PlacementDetailsRepository; }
         }
+        private IDuplicateAadharReportRepository duplicateAadharReportRepository;
+        public IDuplicateAadharReportRepository DuplicateAadharReportRepository
+        {
+            get { return duplicateAadharReportRepository; }
+        }
+        private IBEdRoomDetailRepository bEdRoomDetailRepository;
+        public IBEdRoomDetailRepository BEdRoomDetailRepository
+        {
+            get { return bEdRoomDetailRepository; }
+        }
 
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
@@ -613,7 +623,9 @@ namespace RJ_NOC_DataAccess.Repository
             dTEStatistics_BasicDetailsRepository = new DTEStatistics_BasicDetailsRepository(commonHelper);
 
             dTEStatistics_OtherMinorityDataRepository = new DTEStatistics_OtherMinorityDataRepository(commonHelper);
+            duplicateAadharReportRepository = new DuplicateAadharReportRepository(commonHelper);
             //classOverViewMasterRepository = new ClassOverViewMasterRepository(commonHelper);
+            bEdRoomDetailRepository = new BEdRoomDetailRepository(commonHelper);
         }
     }
 }

@@ -98,10 +98,12 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository { get; }
 
         IDTEStatistics_OtherMinorityDataRepository DTEStatistics_OtherMinorityDataRepository { get; }
+        IDuplicateAadharReportRepository DuplicateAadharReportRepository { get; }
+        IBEdRoomDetailRepository BEdRoomDetailRepository { get; }
         //IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
         //IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
 
         //IClassOverViewMasterRepository ClassOverViewMasterRepository { get; }
-        
+
     }
 }
