@@ -2332,13 +2332,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetUserDetailsByRoleID/{RoleID}/{DepartmentID}")]
-        public async Task<OperationResult<List<CreateUserDataModel>>> GetUserDetailsByRoleID(int RoleID, int DepartmentID)
+        [HttpGet("GetUserDetailsByRoleID/{RoleID}/{DepartmentID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CreateUserDataModel>>> GetUserDetailsByRoleID(int RoleID, int DepartmentID,int ApplyNOCID)
         {
             var result = new OperationResult<List<CreateUserDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUserDetailsByRoleID(RoleID, DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUserDetailsByRoleID(RoleID, DepartmentID, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -3868,6 +3868,39 @@ namespace RJ_NOC_API.Controllers
             catch (Exception e)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetTotalDraftentryCollege", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetDeficiencyAction/{ApplyNOCID}/{RoleID}")]
+        public async Task<OperationResult<List<DataTable>>> GetDeficiencyAction(int ApplyNOCID,int RoleID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDeficiencyAction(ApplyNOCID, RoleID));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetDeficiencyAction", ApplyNOCID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error in get data !";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDeficiencyAction", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }

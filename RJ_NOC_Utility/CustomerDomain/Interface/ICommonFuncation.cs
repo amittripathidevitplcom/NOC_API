@@ -99,7 +99,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_CommitteeList> GetCommitteeList();
 
         List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID);
-        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID);
+        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID, int ApplyNOCID);
 
         List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
@@ -161,6 +161,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> HomePage_IncreaseDate();
         List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request);
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
+        List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
     }
 
 

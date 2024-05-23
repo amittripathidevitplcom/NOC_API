@@ -350,9 +350,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval(RoleID, DepartmentID);
         }
 
-        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID)
+        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID,int ApplyNOCID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID, DepartmentID);
+            return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID, DepartmentID, ApplyNOCID);
         }
         public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID)
         {
@@ -568,6 +568,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request)
         {
             return UnitOfWork.CommonFuncationRepository.GetTotalDraftentryCollege(request);
+        }
+        public List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDeficiencyAction(ApplyNOCID, RoleID);
         }
     }
 }

@@ -929,9 +929,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID)
+        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID,int ApplyNOCID)
         {
-            string SqlQuery = "exec USP_CommonDataList @Key='GetUserDetailsByRoleID',@RoleID='" + RoleID + "',@DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = "exec USP_CommonDataList @Key='GetUserDetailsByRoleID',@RoleID='" + RoleID + "',@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUserDetailsByRoleID");
             List<CreateUserDataModel> dataModels = new List<CreateUserDataModel>();
@@ -1518,7 +1518,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetCollegeDeficiency(int CollegeID)
         {
-            string SqlQuery = " exec USP_GetCollegeDeficiency @CollegeID='"+ CollegeID + "'";
+            string SqlQuery = " exec USP_GetCollegeDeficiency @CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetCollegeDeficiency");
 
@@ -1581,7 +1581,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
         {
-            string SqlQuery = "exec USP_GetOnlinePaymentDetailsByDepartment @DepartmentID='"+ request.DepartmentID + "',@FromDate='"+ request.FromDate + "',@ToDate='"+ request.ToDate + "',@SearchBy='"+ request.SearchBy + "',@PaymentStatus='"+ request.PaymentStatus + "'";
+            string SqlQuery = "exec USP_GetOnlinePaymentDetailsByDepartment @DepartmentID='" + request.DepartmentID + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@SearchBy='" + request.SearchBy + "',@PaymentStatus='" + request.PaymentStatus + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetOnlinePaymentDetailsByDepartment");
 
@@ -1590,12 +1590,24 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }    
+        }
         public List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request)
         {
             string SqlQuery = "exec USP_TotalDraftEntryColleges @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@Type='" + request.Type + "',@CollegeID='" + request.CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetTotalDraftentryCollege");
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID)
+        {
+            string SqlQuery = " exec USP_GetDeficiencyAction @ApplyNOCID='" + ApplyNOCID + "',@RoleID='" + RoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetDeficiencyAction");
 
             List<DataTable> dataModels = new List<DataTable>();
             DataTable dataModel = new DataTable();

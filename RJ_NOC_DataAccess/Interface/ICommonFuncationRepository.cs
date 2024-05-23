@@ -105,7 +105,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         //Roles
         List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID);
-        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID);
+        List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID, int ApplyNOCID);
         List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
@@ -173,6 +173,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> HomePage_IncreaseDate();
         List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request);
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
+        List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
     }
 }
 

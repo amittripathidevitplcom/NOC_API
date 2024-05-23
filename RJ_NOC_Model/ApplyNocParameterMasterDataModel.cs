@@ -232,6 +232,12 @@ namespace RJ_NOC_Model
 
         public List<NOCPdfFileDataModel>? NOCPdfFileDataModel { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
+        
+         
+        public string? NodelSSOID { get; set; }
+        public string? NodelName { get; set; }
+        public string? NodelMobileNo { get; set; }
+        public string? NodelCollegeName { get; set; }
 
     }
 
