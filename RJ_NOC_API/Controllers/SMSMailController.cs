@@ -27,15 +27,14 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("SendMessage/{MobileNo}/{MessageType}")]
 
-
-        public async Task<OperationResult<string>> SendMessage(string MobileNo,string MessageType)
+        [HttpGet("SendMessage/{MobileNo}/{MessageType}/{ID}")]
+        public async Task<OperationResult<string>> SendMessage(string MobileNo,string MessageType,int ID)
         {
             var result = new OperationResult<string>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SMSMailUtility.SendMessage(MobileNo, MessageType));
+                result.Data = await Task.Run(() => UtilityHelper.SMSMailUtility.SendMessage(MobileNo, MessageType,ID));
 
                 result.State = OperationState.Success;
                 if (result.Data!=null)

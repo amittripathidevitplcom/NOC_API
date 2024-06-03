@@ -29,9 +29,9 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool IfExistsAadhar(int StaffDetailID, int CollegeID, string AadharCard)
+        public bool IfExistsAadhar(int DepartmentID,int StaffDetailID, int CollegeID, string AadharCard)
         {
-            string SqlQuery = "select AadhaarNo from Trn_StaffDetail Where AadhaarNo='"+ AadharCard + "' and StaffDetailID != '"+ StaffDetailID + "' and ActiveStatus=1 and DeleteStatus=0";
+            string SqlQuery = "exec USP_IfExistsAadhar @AadhaarNo='"+ AadharCard + "',@StaffDetailID='" + StaffDetailID + "',@CollegeID='" + CollegeID + "',@DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "StaffDetail.IfExistsAadhar");
             if (dataTable.Rows.Count > 0)

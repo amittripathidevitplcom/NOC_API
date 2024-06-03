@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         }
 
-        public string SendMessage(string MobileNo, string MessageType)
+        public string SendMessage(string MobileNo, string MessageType, int ID)
         {
-            return UnitOfWork.SMSMailRepository.SendMessage(MobileNo, MessageType);
+            return UnitOfWork.SMSMailRepository.SendMessage(MobileNo, MessageType,ID);
         }
 
     }

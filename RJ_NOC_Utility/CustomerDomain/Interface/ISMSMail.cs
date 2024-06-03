@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface ISMSMail
     {
-       string SendMessage(string MobileNo,string MessageType);
+       string SendMessage(string MobileNo,string MessageType,int ID);
 
     }
 }

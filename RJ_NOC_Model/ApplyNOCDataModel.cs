@@ -56,6 +56,7 @@ namespace RJ_NOC_Model
         public int NextRoleID { get; set; }
         public int NextUserID { get; set; }
         public int NextActionID { get; set; }
+        public string? UploadDocument { get; set; }
     }
 
     public class CommiteeInspection_RNCCheckList_DataModel
@@ -86,6 +87,8 @@ namespace RJ_NOC_Model
         public string? MinisterFilePath { get; set; }
         public List<NOCPdfFileDataModel> NOCPdfFileDataModel { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
+        public string? L2UploadDocument { get; set; }
+        public string? L2UploadDocumentPath { get; set; }
     }
 
     public class LOIApplicationDetails_DataModel

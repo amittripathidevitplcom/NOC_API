@@ -179,14 +179,14 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetUserRoleList/{SSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetUserRoleList(string SSOID)
+        [HttpGet("GetUserRoleList/{SSOID}/{IsWeb=false}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetUserRoleList(string SSOID,bool IsWeb=false)
         {
 
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetUserRoleList(SSOID));
+                result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetUserRoleList(SSOID, IsWeb));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

@@ -66,6 +66,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.NOCTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["NOCTypeID"]);
                     dataModels.SessionYear = Convert.ToInt32(dataSet.Tables[0].Rows[i]["SessionYear"]);
                     dataModels.IssuedYear = Convert.ToInt32(dataSet.Tables[0].Rows[i]["IssuedYear"]);
+                    dataModels.IssuedYearName = dataSet.Tables[0].Rows[i]["IssuedYearName"].ToString();
                     dataModels.NOCNumber = dataSet.Tables[0].Rows[i]["NOCNumber"].ToString();
                     dataModels.NOCReceivedDate = dataSet.Tables[0].Rows[i]["NOCReceivedDate"].ToString();
                     dataModels.NOCExpireDate = dataSet.Tables[0].Rows[i]["NOCExpireDate"].ToString();
@@ -103,6 +104,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.NOCTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["NOCTypeID"]);
                     dataModels.SessionYear = Convert.ToInt32(dataSet.Tables[0].Rows[0]["SessionYear"]);
                     dataModels.IssuedYear = Convert.ToInt32(dataSet.Tables[0].Rows[0]["IssuedYear"]);
+                    dataModels.IssuedYearName = dataSet.Tables[0].Rows[0]["IssuedYearName"].ToString();
                     dataModels.NOCNumber = dataSet.Tables[0].Rows[0]["NOCNumber"].ToString();
                     dataModels.NOCReceivedDate = dataSet.Tables[0].Rows[0]["NOCReceivedDate"].ToString();
                     dataModels.NOCExpireDate = dataSet.Tables[0].Rows[0]["NOCExpireDate"].ToString();

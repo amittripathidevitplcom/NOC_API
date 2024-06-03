@@ -26,9 +26,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> GetUserRoleList(string SSOID)
+        public List<CommonDataModel_DataTable> GetUserRoleList(string SSOID, bool IsWeb)
         {
-            string SqlQuery = " exec USP_GetUserRole @SSOID='" + SSOID + "'";
+            string SqlQuery = " exec USP_GetUserRole @SSOID='" + SSOID + "',@IsWeb='" + IsWeb + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SubjectMasterService.GetDepartmentByCourse");
 

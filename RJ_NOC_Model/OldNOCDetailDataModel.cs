@@ -19,6 +19,7 @@ namespace RJ_NOC_Model
         public int SessionYear { get; set; }
         public string? FinancialYearName { get; set; }
         public int IssuedYear { get; set; }
+        public string IssuedYearName { get; set; }
         public string NOCNumber { get; set; }
         public string NOCReceivedDate { get; set; }
         public string? NOCExpireDate { get; set; }

@@ -34,7 +34,7 @@ namespace RJ_NOC_DataAccess.Repository
             return mSConfigurationSetting;
         }
 
-        public string SendMessage(string MobileNo, string MessageType)
+        public string SendMessage(string MobileNo, string MessageType, int ID)
         {
             string ReturnOTP = "";
             string MessageBody = "";
@@ -42,7 +42,8 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " exec USP_GetSMSTemplateByMessageType @MessageType='" + MessageType + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SMSMail.GetTemplateByKey");
-
+            SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
+            mSConfigurationSetting = this.GetConfigurationSetting();
             List<SMSTemplateDataModel> dataModels = new List<SMSTemplateDataModel>();
             if (dataTable.Rows.Count > 0)
             {
@@ -51,10 +52,21 @@ namespace RJ_NOC_DataAccess.Repository
             }
             if (MessageType == "OTP")
             {
-                SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
-                mSConfigurationSetting = this.GetConfigurationSetting();
                 ReturnOTP = GenerateNewRandom();
                 MessageBody = MessageBody.Replace("{#OTP#}", ReturnOTP);
+                CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
+            }
+            if (MessageType == "AppFinalSubmit")
+            {
+                var ds = this.GetApplyNocApplicationByApplicationID(ID);
+                if (ds != null && ds.Tables.Count >= 1)
+                {
+                    MessageBody = MessageBody.Replace("{#ApplicationNo#}", ds.Tables[0].Rows[0]["ApplicationNo"].ToString());
+                }
+
+                MessageBody = MessageBody.Replace("{#College/Institute#}", "College/Institute");
+                MessageBody = MessageBody.Replace("{#MobileAppLink#}", "https://rajnoc.rajasthan.gov.in/assets/MobileApp/RajNocMobileApp.rar");
+                MessageBody = MessageBody.Replace("{#WebLink#}", "https://rajnoc.rajasthan.gov.in/");
                 CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
             }
             return ReturnOTP;
@@ -68,6 +80,12 @@ namespace RJ_NOC_DataAccess.Repository
                 r = GenerateNewRandom();
             }
             return r;
+        }
+        public DataSet GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)
+        {
+            string SqlQuery = $"exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationTrnByApplicationID',@ApplyNocApplicationID={ApplyNocApplicationID}";
+            var ds = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationList");
+            return ds;
         }
     }
 }

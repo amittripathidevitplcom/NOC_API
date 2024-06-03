@@ -10,7 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IStaffDetail
     {
         bool IfExistsPrincipal(int StaffDetailID,int CollegeID, int DesignationID);
-        bool IfExistsAadhar(int StaffDetailID, int CollegeID,string AadharCard);
+        bool IfExistsAadhar(int DepartmentID,int StaffDetailID, int CollegeID,string AadharCard);
         bool SaveData(StaffDetailDataModel request);
         List<StaffDetailDataModel> GetStaffDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int StaffDetailID, int ApplyNOCID);
         bool DeleteStaffDetail(int StaffDetailID);

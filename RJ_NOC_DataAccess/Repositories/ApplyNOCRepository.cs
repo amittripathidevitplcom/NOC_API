@@ -24,7 +24,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='" + request.Remark + "',@NextActionID='" + request.NextActionID + "'";
+            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='" + request.Remark + "',@NextActionID='" + request.NextActionID + "',@UploadDocument='" + request.UploadDocument + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
             if (Rows > 0)
                 return true;

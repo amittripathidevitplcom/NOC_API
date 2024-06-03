@@ -35,6 +35,7 @@ namespace RJ_NOC_Model
         public int UId { get; set; }
         public string Name { get; set; }
         public string SSOID { get; set; }
+        public string MobileNo { get; set; }
     }
 
 }

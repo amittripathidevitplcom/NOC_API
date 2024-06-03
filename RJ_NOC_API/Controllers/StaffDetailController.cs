@@ -25,7 +25,7 @@ namespace RJ_NOC_API.Controllers
             {
                 bool IfExits = false;
                 bool IfExitsAadhar = false;
-                IfExitsAadhar = UtilityHelper.StaffDetailUtility.IfExistsAadhar(request.StaffDetailID, request.CollegeID, request.AadhaarNo);
+                IfExitsAadhar = UtilityHelper.StaffDetailUtility.IfExistsAadhar(request.DepartmentID,request.StaffDetailID, request.CollegeID, request.AadhaarNo);
                 IfExits = UtilityHelper.StaffDetailUtility.IfExistsPrincipal(request.StaffDetailID, request.CollegeID, request.RoleID);
                 if (IfExitsAadhar == false)
                 {

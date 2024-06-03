@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     public interface ISSOAPIRepository
     {
         List<CommonDataModel_DataTable> Check_SSOIDWise_LegalEntity(string SSOID);
-        List<CommonDataModel_DataTable> GetUserRoleList(string SSOID);
+        List<CommonDataModel_DataTable> GetUserRoleList(string SSOID, bool IsWeb);
     }
 
 }

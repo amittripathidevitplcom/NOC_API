@@ -21,9 +21,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.StaffDetailRepository.IfExistsPrincipal(StaffDetailID, CollegeID, DesignationID);
         }
-        public bool IfExistsAadhar(int StaffDetailID, int CollegeID, string AadharCard)
+        public bool IfExistsAadhar(int DepartmentID, int StaffDetailID, int CollegeID, string AadharCard)
         {
-            return UnitOfWork.StaffDetailRepository.IfExistsAadhar(StaffDetailID, CollegeID, AadharCard);
+            return UnitOfWork.StaffDetailRepository.IfExistsAadhar(DepartmentID,StaffDetailID, CollegeID, AadharCard);
         }
 
         public bool SaveData(StaffDetailDataModel request)

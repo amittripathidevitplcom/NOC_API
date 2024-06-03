@@ -31,9 +31,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.SSOAPIRepository.Check_SSOIDWise_LegalEntity(SSOID);
         }
-        public List<CommonDataModel_DataTable> GetUserRoleList(string SSOID)
+        public List<CommonDataModel_DataTable> GetUserRoleList(string SSOID, bool IsWeb)
         {
-            return UnitOfWork.SSOAPIRepository.GetUserRoleList(SSOID);
+            return UnitOfWork.SSOAPIRepository.GetUserRoleList(SSOID, IsWeb);
         }
 
         public async Task<SSOUserDetailData> GetSSOUserLogionDetails(string SSOID, string LoginType, IConfiguration _configuration)
