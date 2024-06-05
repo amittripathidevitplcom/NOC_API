@@ -28,8 +28,8 @@ namespace RJ_NOC_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("SendMessage/{MobileNo}/{MessageType}/{ID}")]
-        public async Task<OperationResult<string>> SendMessage(string MobileNo,string MessageType,int ID)
+        [HttpGet("SendMessage/{MobileNo}/{MessageType}/{ID=0}")]
+        public async Task<OperationResult<string>> SendMessage(string MobileNo,string MessageType,int ID=0)
         {
             var result = new OperationResult<string>();
             try
