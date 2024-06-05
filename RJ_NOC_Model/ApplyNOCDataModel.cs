@@ -89,6 +89,9 @@ namespace RJ_NOC_Model
         public bool? IsOpenNOCApplication { get; set; }
         public string? L2UploadDocument { get; set; }
         public string? L2UploadDocumentPath { get; set; }
+        public string? L1UploadDocument { get; set; }
+        public string? L1UploadDocumentPath { get; set; }
+        public string? Penalty { get; set; }
     }
 
     public class LOIApplicationDetails_DataModel
@@ -180,5 +183,20 @@ namespace RJ_NOC_Model
         public int ParameterID { get; set; }
         public int ApplyNOCID { get; set; }
         public string PDFPath { get; set; }
+    }
+
+
+    public class ApplicationPenaltyDataModel
+    {
+
+        public int PenaltyID { get; set; }
+        public int DepartmentID { get; set; }
+        public int CollegeID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public string Penaltyfor { get; set; }
+        public decimal PenaltyAmount { get; set; }
+        public bool? IsPayment { get; set; }
+        public int CreatedBy { get; set; }
+
     }
 }

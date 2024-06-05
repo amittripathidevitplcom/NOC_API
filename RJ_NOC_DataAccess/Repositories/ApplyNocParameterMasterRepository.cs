@@ -61,7 +61,7 @@ namespace RJ_NOC_DataAccess.Repository
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_OfflinePaymentDetails @ApplyNOCID='" + request.ApplyNOCID + "',@PaymentOfflineID='" + request.ID + "',";
             SqlQuery += "@CollegeID = '" + request.CollegeID + "',@BankName = '" + request.BankName + "',@DepartmentId = '" + request.DepartmentID + "',@PaymentMode = '" + request.PaymentMode + "',";
-            SqlQuery += "@Amount = '" + request.Amount + "',@DateofIssuance = '" + request.DateofIssuance + "',@DateofExpiry = '" + request.DateofExpiry + "',@FileName = '" + request.FileName + "',@ActionName = 'InsertUpdate'";
+            SqlQuery += "@Amount = '" + request.Amount + "',@DateofIssuance = '" + request.DateofIssuance + "',@DateofExpiry = '" + request.DateofExpiry + "',@FileName = '" + request.FileName + "',@ActionName = 'InsertUpdate',@PaymentType = '" + request.PaymentType + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNocParameterMaster.SaveOfflinePaymnetDetail");
             if (Rows > 0)

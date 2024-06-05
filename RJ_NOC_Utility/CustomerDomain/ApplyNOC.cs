@@ -30,6 +30,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutiny(request);
         }
+        public bool SaveApplicationPenalty(ApplicationPenaltyDataModel request)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveApplicationPenalty(request);
+        }
         public List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID, int RoleID)
         {
             return UnitOfWork.ApplyNOCRepository.GetDocumentScrutinyData_TabNameCollegeWise(TabName, CollegeID, RoleID);
@@ -134,6 +138,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID)
         {
             return UnitOfWork.ApplyNOCRepository.CountTotalRevertDCE(ApplyNOCID,RoleID,UserID);
+        }
+        public List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetApplicationPenalty(ApplyNOCID);
+        }
+        public List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetApplicationPenaltyList(SSOID);
         }
     }
 }

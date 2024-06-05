@@ -13,6 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID,int UserID,int DepartmentID);
         bool DocumentScrutiny(DocumentScrutinySave_DataModel request);
         bool SaveDocumentScrutiny(DocumentScrutinyDataModel request);
+        bool SaveApplicationPenalty(ApplicationPenaltyDataModel request);
         List<DocumentScrutinyDataModel> GetDocumentScrutinyData_TabNameCollegeWise(string TabName, int CollegeID,int RoleID);
         List<ApplyNocParameterDataModel> GetRevertApplyNOCApplicationDepartmentRoleWise(int DepartmentID, int RoleID);
 
@@ -43,5 +44,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
         int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID);
+
+        List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID);
+        List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID);
     }
 }

@@ -54,6 +54,24 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+        public bool SaveApplicationPenalty(ApplicationPenaltyDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_ApplicationPenalty_IU";
+
+            SqlQuery += " @PenaltyID='" + request.PenaltyID + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',";
+            SqlQuery += " @Penaltyfor='" + request.Penaltyfor + "',";
+            SqlQuery += " @PenaltyAmount='" + request.PenaltyAmount + "',";
+            SqlQuery += " @CreatedBy='" + request.CreatedBy + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveApplicationPenalty");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
 
         public List<ApplyNOCDataModel> GetApplyNOCApplicationListByRole(int RoleID, int UserID, int DepartmentID)
         {
@@ -338,7 +356,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public bool SaveDCENOCData(NOCIssuedRequestDataModel model)
         {
-            string IssuedNOCData_Str = model.NOCDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(model.NOCDetails, "Temp_IssuedNOCData"):"";
+            string IssuedNOCData_Str = model.NOCDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(model.NOCDetails, "Temp_IssuedNOCData") : "";
             string GenerateNOCParameter_str = CommonHelper.GetDetailsTableQry(model.AppliedNOCFor, "Temp_GenerateNOCParameter");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='Save',@IssuedNOCData_str='{IssuedNOCData_Str}',@GenerateNOCParameter_str='{GenerateNOCParameter_str}'";
@@ -348,7 +366,7 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID,int ParameterID)
+        public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID, int ParameterID)
         {
             string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='GetNOCIssuedDetail',@NOCID={ApplyNOCID},@ParameterID={ParameterID}";
             DataSet dataset = new DataSet();
@@ -421,6 +439,30 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_GetAppliedParameterNOCForByApplyNOCID @ApplyNOCID ='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetAppliedParameterNOCForByApplyNOCID");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetApplicationPenalty @ApplyNOCID ='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplicationPenalty");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }       
+        public List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID)
+        {
+            string SqlQuery = " exec USP_GetApplicationPenaltyList @SSOID ='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplicationPenaltyList");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();

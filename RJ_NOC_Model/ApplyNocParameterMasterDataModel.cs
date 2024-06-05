@@ -423,6 +423,7 @@ namespace RJ_NOC_Model
         public string Dis_FileName { get; set; }
         public string FilePath { get; set; }
         public string ActionName { get; set; }
+        public string? PaymentType { get; set; }
     }
 
 
