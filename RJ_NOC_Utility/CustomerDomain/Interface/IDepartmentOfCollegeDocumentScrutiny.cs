@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using RJ_NOC_Model;
 
@@ -41,6 +42,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetSubjectWiseStaticReport(SearchFilterDataModel request);
         List<CommonDataModel_DataTable> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request);
         List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate);
-        
+
+        List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID,int RoleID);
+
     }
 }

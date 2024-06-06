@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_Model;
 using System.Linq;
+using System.Data;
 
 
 namespace RJ_NOC_DataAccess.Interface
@@ -51,7 +52,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate);
 
-        
+        List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID);
     }
 
 }
