@@ -526,6 +526,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return bEdRoomDetailRepository; }
         }
+        private IDefaulterCollegeRequestRepository defaulterCollegeRequestRepository;
+        public IDefaulterCollegeRequestRepository DefaulterCollegeRequestRepository
+        {
+            get { return defaulterCollegeRequestRepository; }
+        }
 
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
@@ -626,6 +631,7 @@ namespace RJ_NOC_DataAccess.Repository
             duplicateAadharReportRepository = new DuplicateAadharReportRepository(commonHelper);
             //classOverViewMasterRepository = new ClassOverViewMasterRepository(commonHelper);
             bEdRoomDetailRepository = new BEdRoomDetailRepository(commonHelper);
+            defaulterCollegeRequestRepository = new DefaulterCollegeRequestRepository(commonHelper);
         }
     }
 }
