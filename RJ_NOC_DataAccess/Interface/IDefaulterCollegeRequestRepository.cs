@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace RJ_NOC_DataAccess.Interface
 {
-    public interface IRNCCheckListMasterRepository
+    public interface IDefaulterCollegeRequestRepository
     {
-        List<CommonDataModel_DataTable> GetRNCCheckListData();
-        List<RNCCheckListMasterDataModel> GetByID(int RNCCheckListID);
-        bool SaveData(RNCCheckListMasterDataModel request);       
+        List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData();
+        List<DefaulterCollegeRequestDataModel> GetByID(int RNCCheckListID);
+        bool SaveData(DefaulterCollegeRequestDataModel request);       
         bool DeleteData(int RNCCheckListID);
         bool IfExists(int RNCCheckListID,int DepartmentID, string UniversityName);
       

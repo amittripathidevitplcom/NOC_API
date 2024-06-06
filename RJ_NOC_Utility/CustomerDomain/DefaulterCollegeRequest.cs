@@ -8,31 +8,31 @@ using RJ_NOC_DataAccess.Interface;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
-    public class RNCCheckListMaster : UtilityBase, IRNCCheckListMaster
+    public class DefaulterCollegeRequest : UtilityBase, IDefaulterCollegeRequest
     {
-        public RNCCheckListMaster(IRepositories unitOfWork) : base(unitOfWork)
+        public DefaulterCollegeRequest(IRepositories unitOfWork) : base(unitOfWork)
         {
         }       
-        public List<CommonDataModel_DataTable> GetRNCCheckListData()
+        public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData()
         {
-            return UnitOfWork.RNCCheckListMasterRepository.GetRNCCheckListData();
+            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterCollegeRequestData();
         }
-        public List<RNCCheckListMasterDataModel> GetByID(int RNCCheckListID)
+        public List<DefaulterCollegeRequestDataModel> GetByID(int DefaulterCollegeRequestID)
         {
-            return UnitOfWork.RNCCheckListMasterRepository.GetByID(RNCCheckListID);
+            return UnitOfWork.DefaulterCollegeRequestRepository.GetByID(DefaulterCollegeRequestID);
         }
-        public bool SaveData(RNCCheckListMasterDataModel request)
+        public bool SaveData(DefaulterCollegeRequestDataModel request)
         {
-            return UnitOfWork.RNCCheckListMasterRepository.SaveData(request);
+            return UnitOfWork.DefaulterCollegeRequestRepository.SaveData(request);
         }       
-        public bool DeleteData(int RNCCheckListID)
+        public bool DeleteData(int DefaulterCollegeRequestID)
         {
-            return UnitOfWork.RNCCheckListMasterRepository.DeleteData(RNCCheckListID);
+            return UnitOfWork.DefaulterCollegeRequestRepository.DeleteData(DefaulterCollegeRequestID);
         }
         
-        public bool IfExists(int RNCCheckListID, int DepartmentID, string Name)
+        public bool IfExists(int DefaulterCollegeRequestID, int DepartmentID, string Name)
         {
-            return UnitOfWork.RNCCheckListMasterRepository.IfExists(RNCCheckListID, DepartmentID, Name);
+            return UnitOfWork.DefaulterCollegeRequestRepository.IfExists(DefaulterCollegeRequestID, DepartmentID, Name);
         }
 
        

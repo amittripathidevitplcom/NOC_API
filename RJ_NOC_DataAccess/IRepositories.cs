@@ -100,6 +100,7 @@ namespace RJ_NOC_DataAccess.Interface
         IDTEStatistics_OtherMinorityDataRepository DTEStatistics_OtherMinorityDataRepository { get; }
         IDuplicateAadharReportRepository DuplicateAadharReportRepository { get; }
         IBEdRoomDetailRepository BEdRoomDetailRepository { get; }
+        IDefaulterCollegeRequestRepository DefaulterCollegeRequestRepository { get; }
         //IDTEStatistics_PlacementDetailsRepository DTEStatistics_PlacementDetailsRepository { get; }
         //IDTEStatistics_FinancialDetailsRepository DTEStatistics_FinancialDetailsRepository { get; }
 

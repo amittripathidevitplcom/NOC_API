@@ -7,23 +7,23 @@ using Microsoft.AspNetCore.Http;
 
 namespace RJ_NOC_API.Controllers
 {
-    [Route("api/RNCCheckListMaster")]
+    [Route("api/DefaulterCollegeRequest")]
     [ApiController]
-    public class RNCCheckListMasterController : RJ_NOC_ControllerBase
+    public class DefaulterCollegeRequestController : RJ_NOC_ControllerBase
     {
         private IConfiguration _configuration;
-        public RNCCheckListMasterController(IConfiguration configuration) : base(configuration)
+        public DefaulterCollegeRequestController(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
         [HttpGet("{UserID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetRNCCheckListData(int UserID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "RNCCheckListMaster");
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DefaulterCollegeRequest");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RNCCheckListMasterUtility.GetRNCCheckListData());
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetDefaulterCollegeRequestData());
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -38,7 +38,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RNCCheckListMasterController.GetRNCCheckListData", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.GetRNCCheckListData", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -49,13 +49,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("{RNCCheckListID}/{UserID}")]
-        public async Task<OperationResult<List<RNCCheckListMasterDataModel>>> GetByID(int RNCCheckListID, int UserID)
+        public async Task<OperationResult<List<DefaulterCollegeRequestDataModel>>> GetByID(int RNCCheckListID, int UserID)
         {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", RNCCheckListID, "RNCCheckListMaster");
-            var result = new OperationResult<List<RNCCheckListMasterDataModel>>();
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", RNCCheckListID, "DefaulterCollegeRequest");
+            var result = new OperationResult<List<DefaulterCollegeRequestDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RNCCheckListMasterUtility.GetByID(RNCCheckListID));
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetByID(RNCCheckListID));
                 if (result.Data.Count > 0)
                 {
 
@@ -70,7 +70,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RNCCheckListMasterController.GetByID", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.GetByID", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -81,49 +81,49 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpPost]
-        public async Task<OperationResult<bool>> SaveData(RNCCheckListMasterDataModel request)
+        public async Task<OperationResult<bool>> SaveData(DefaulterCollegeRequestDataModel request)
         {
             var result = new OperationResult<bool>();
 
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.RNCCheckListMasterUtility.IfExists(request.RNCCheckListID,request.DepartmentID, request.RNCCheckListName);
-                if (IfExits == false)
-                {
-                    result.Data = await Task.Run(() => UtilityHelper.RNCCheckListMasterUtility.SaveData(request));
+                //IfExits = UtilityHelper.DefaulterCollegeRequestUtility.IfExists(request.RNCCheckListID,request.DepartmentID, request.RNCCheckListName);
+                //if (IfExits == false)
+                //{
+                    result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
                     if (result.Data)
                     {
                         result.State = OperationState.Success;
-                        if (request.RNCCheckListID == 0)
+                        if (request.RequestID == 0)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RNCCheckListID, "RNCCheckListMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
                             result.SuccessMessage = "Saved successfully .!";
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RNCCheckListID, "RNCCheckListMaster");
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
                             result.SuccessMessage = "Updated successfully .!";
                         }
                     }
                     else
                     {
                         result.State = OperationState.Error;
-                        if (request.RNCCheckListID == 0)
+                        if (request.RequestID == 0)
                             result.ErrorMessage = "There was an error adding data.!";
                         else
                             result.ErrorMessage = "There was an error updating data.!";
                     }
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = request.RNCCheckListName + " is Already Exist, It Can't Not Be Duplicate.!";
-                }
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //    result.ErrorMessage = request.RNCCheckListName + " is Already Exist, It Can't Not Be Duplicate.!";
+                //}
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RNCCheckListMasterController.SaveData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.SaveData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
 
@@ -141,10 +141,10 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<bool>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.RNCCheckListMasterUtility.DeleteData(RNCCheckListID));
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.DeleteData(RNCCheckListID));
                 if (result.Data)
                 {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", RNCCheckListID, "RNCCheckListMaster");
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", RNCCheckListID, "DefaulterCollegeRequest");
                     result.State = OperationState.Success;
                     result.SuccessMessage = "Deleted successfully .!";
                 }
@@ -156,7 +156,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception e)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("RNCCheckListMasterController.DeleteData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.DeleteData", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }
