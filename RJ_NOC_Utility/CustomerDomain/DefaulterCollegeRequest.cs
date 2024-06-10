@@ -5,6 +5,7 @@ using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_Utility;
 using RJ_NOC_DataAccess.Interface;
+using Azure.Core;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -13,18 +14,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         public DefaulterCollegeRequest(IRepositories unitOfWork) : base(unitOfWork)
         {
         }       
-        public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData()
+        public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
         {
-            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterCollegeRequestData();
-        }
-        public List<DefaulterCollegeRequestDataModel> GetByID(int DefaulterCollegeRequestID)
-        {
-            return UnitOfWork.DefaulterCollegeRequestRepository.GetByID(DefaulterCollegeRequestID);
+            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterCollegeRequestData(request);
         }
         public bool SaveData(DefaulterCollegeRequestDataModel request)
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.SaveData(request);
-        }   
-       
+        }
+        public bool DeleteData(int RequestID)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.DeleteData(RequestID);
+        }
+
     }
 }

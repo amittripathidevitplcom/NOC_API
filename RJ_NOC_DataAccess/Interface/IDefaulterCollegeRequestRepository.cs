@@ -9,11 +9,9 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IDefaulterCollegeRequestRepository
     {
-        List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData();
-        List<DefaulterCollegeRequestDataModel> GetByID(int RNCCheckListID);
-        bool SaveData(DefaulterCollegeRequestDataModel request);       
-      
-
+        List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request);
+        bool SaveData(DefaulterCollegeRequestDataModel request);
+        public bool DeleteData(int RequestID);
     }
 
 }

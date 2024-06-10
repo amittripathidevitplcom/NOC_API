@@ -55,4 +55,11 @@ namespace RJ_NOC_Model
         public bool DeleteStatus { get; set; }
         public int? UserID { get; set; }
     }
+    public class DefaulterCollegeSearchFilterDataModel
+    {
+        public int? UserID { get; set; }
+        public int? DepartmentID { get; set; }
+        public int? RequestID { get; set; }
+        public string? SSOID { get; set; }
+    }
 }

@@ -8,8 +8,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IDefaulterCollegeRequest
     {
         
-        List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData();
-        List<DefaulterCollegeRequestDataModel> GetByID(int RNCCheckListID);
-        bool SaveData(DefaulterCollegeRequestDataModel request); 
+        List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request);
+        bool SaveData(DefaulterCollegeRequestDataModel request);
+        public bool DeleteData(int RequestID);
     }
 }

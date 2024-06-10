@@ -70,6 +70,69 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
+        [HttpPost("GetDefaulterCollegeRequestData")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "GetDefaulterCollegeRequestData", 0, "DefaulterCollegeRequest");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetDefaulterCollegeRequestData(request));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequest.GetDefaulterCollegeRequestData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
+        [HttpPost("Delete/{RequestID}/{UserID}")]
+        public async Task<OperationResult<bool>> DeleteData(int RequestID, int UserID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.DeleteData(RequestID));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", RequestID, "DefaulterCollegeRequest");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error deleting data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.DeleteData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -16,27 +16,16 @@ namespace RJ_NOC_DataAccess.Repository
             _commonHelper = commonHelper;
         }
         
-        public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData()
+        public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
         {
-            string SqlQuery = " exec USP_GetDefaulterCollegeRequestData";
+            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request .RequestID+ "',@DepartmentID='" + request .DepartmentID+ "',@SSOID='" + request .SSOID+ "'";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetRNCCheckListData");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterCollegeRequestData");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
-            return dataModels;
-        }
-        public List<DefaulterCollegeRequestDataModel> GetByID(int RNCCheckListID)
-        {
-            string SqlQuery = " exec USP_GetDefaulterCollegeRequestData @RNCCheckListID='" + RNCCheckListID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetByRNCCheckListID");
-
-            List<DefaulterCollegeRequestDataModel> dataModels = new List<DefaulterCollegeRequestDataModel>();
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
-            dataModels = JsonConvert.DeserializeObject<List<DefaulterCollegeRequestDataModel>>(JsonDataTable_Data);
             return dataModels;
         }
         public bool SaveData(DefaulterCollegeRequestDataModel request)
@@ -81,7 +70,15 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-
+        public bool DeleteData(int RequestID)
+        {
+            string SqlQuery = "update Trn_College_DefaulterRequest SET DeleteStatus=1,ModifyDate   WHERE RequestID='" + RequestID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DefaulterCollegeRequest.DeleteData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
 
     }
 }
