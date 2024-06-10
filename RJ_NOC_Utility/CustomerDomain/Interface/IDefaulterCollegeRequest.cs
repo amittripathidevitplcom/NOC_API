@@ -10,10 +10,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         
         List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData();
         List<DefaulterCollegeRequestDataModel> GetByID(int RNCCheckListID);
-        bool SaveData(DefaulterCollegeRequestDataModel request);       
-        bool DeleteData(int RNCCheckListID);
-        bool IfExists(int RNCCheckListID, int DepartmentID, string UniversityName);
-
-
+        bool SaveData(DefaulterCollegeRequestDataModel request); 
     }
 }

@@ -24,17 +24,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveData(DefaulterCollegeRequestDataModel request)
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.SaveData(request);
-        }       
-        public bool DeleteData(int DefaulterCollegeRequestID)
-        {
-            return UnitOfWork.DefaulterCollegeRequestRepository.DeleteData(DefaulterCollegeRequestID);
-        }
-        
-        public bool IfExists(int DefaulterCollegeRequestID, int DepartmentID, string Name)
-        {
-            return UnitOfWork.DefaulterCollegeRequestRepository.IfExists(DefaulterCollegeRequestID, DepartmentID, Name);
-        }
-
+        }   
        
     }
 }

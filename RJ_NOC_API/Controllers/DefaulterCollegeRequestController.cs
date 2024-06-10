@@ -16,72 +16,8 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("{UserID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetRNCCheckListData(int UserID)
-        {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DefaulterCollegeRequest");
-            var result = new OperationResult<List<CommonDataModel_DataTable>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetDefaulterCollegeRequestData());
-                result.State = OperationState.Success;
-                if (result.Data.Count > 0)
-                {
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.SuccessMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.GetRNCCheckListData", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
-        [HttpGet("{RNCCheckListID}/{UserID}")]
-        public async Task<OperationResult<List<DefaulterCollegeRequestDataModel>>> GetByID(int RNCCheckListID, int UserID)
-        {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", RNCCheckListID, "DefaulterCollegeRequest");
-            var result = new OperationResult<List<DefaulterCollegeRequestDataModel>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetByID(RNCCheckListID));
-                if (result.Data.Count > 0)
-                {
-
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.GetByID", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
-        [HttpPost]
-        public async Task<OperationResult<bool>> SaveData(DefaulterCollegeRequestDataModel request)
+        [HttpPost("SaveData")]
+        public async Task<OperationResult<bool>> SaveData([FromBody] DefaulterCollegeRequestDataModel request)
         {
             var result = new OperationResult<bool>();
 
@@ -127,38 +63,6 @@ namespace RJ_NOC_API.Controllers
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
 
-            }
-            finally
-            {
-                //UnitOfWork.Dispose();
-            }
-            return result;
-        }
-
-        [HttpPost("Delete/{RNCCheckListID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int RNCCheckListID, int UserID)
-        {
-            var result = new OperationResult<bool>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.DeleteData(RNCCheckListID));
-                if (result.Data)
-                {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", RNCCheckListID, "DefaulterCollegeRequest");
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Deleted successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error deleting data.!";
-                }
-            }
-            catch (Exception e)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("DefaulterCollegeRequestController.DeleteData", e.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = e.Message.ToString();
             }
             finally
             {
