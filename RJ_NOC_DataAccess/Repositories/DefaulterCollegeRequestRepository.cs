@@ -72,7 +72,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public bool DeleteData(int RequestID)
         {
-            string SqlQuery = "update Trn_College_DefaulterRequest SET DeleteStatus=1,ModifyDate   WHERE RequestID='" + RequestID + "'";
+            string SqlQuery = "Exec [USP_DeleteDefaulterCollegeRequest] @RequestID='" + RequestID + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DefaulterCollegeRequest.DeleteData");
             if (Rows > 0)
                 return true;
