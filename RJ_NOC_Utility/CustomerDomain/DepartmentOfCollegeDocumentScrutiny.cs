@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -134,6 +135,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetGrievanceReport(FromDate, ToDate);
+        }
+        public List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertApplicationRemarkByDepartment(DepartmentID,ApplicationID,RoleID);
         }
 
     }

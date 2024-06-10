@@ -612,6 +612,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID)
+        {
+            string SqlQuery = " exec USP_GetRevertApplicationRemarkByDepartment @DepartmentID ='" + DepartmentID + "',@ApplicationID ='" + ApplicationID + "',@RoleID ='" + RoleID + "'";
+           
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.USP_GetRevertApplicationRemarkByDepartment");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
 
     }
 }

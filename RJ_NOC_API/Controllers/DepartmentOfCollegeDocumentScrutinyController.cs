@@ -951,6 +951,38 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpGet("GetRevertApplicationRemarkByDepartment/{DepartmentID}/{ApplicationID}/{RoleID}")]
+        public async Task<OperationResult<List<DataTable>>> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID,int RoleID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetRevertApplicationRemarkByDepartment(DepartmentID, ApplicationID,RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetRevertApplicationRemarkByDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

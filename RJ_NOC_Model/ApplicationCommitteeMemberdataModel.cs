@@ -20,22 +20,26 @@ namespace RJ_NOC_Model
         public bool? DeleteStatus { get; set; }
         public string? AadhaarNo { get; set; }
         public string? CommitteeType { get; set; }
-    }
+        public string? CommitteeDocument { get; set; }
+        public string? CommitteeDocumentPath { get; set; }
+        public string? CommitteeDocument_DisName { get; set; }
+}
 
-    public class PostApplicationCommitteeMemberdataModel
-    {
-        public int? CommitteeMemberID { get; set; }
-        public int? CollegeID { get; set; }
-        public int? ApplyNocApplicationID { get; set; }
-        public int? UserID { get; set; }
-        public List<ApplicationCommitteeMemberdataModel>? ApplicationCommitteeList { get; set; }
-    }
-    public class NodelOfficerDetails_DCE
-    {
-        public int UId { get; set; }
-        public string Name { get; set; }
-        public string SSOID { get; set; }
-        public string MobileNo { get; set; }
-    }
+public class PostApplicationCommitteeMemberdataModel
+{
+    public int? CommitteeMemberID { get; set; }
+    public int? CollegeID { get; set; }
+    public int? ApplyNocApplicationID { get; set; }
+    public int? UserID { get; set; }
+    public string? CommitteeDocument { get; set; }
+    public List<ApplicationCommitteeMemberdataModel>? ApplicationCommitteeList { get; set; }
+}
+public class NodelOfficerDetails_DCE
+{
+    public int UId { get; set; }
+    public string Name { get; set; }
+    public string SSOID { get; set; }
+    public string MobileNo { get; set; }
+}
 
 }
