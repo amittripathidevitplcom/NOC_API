@@ -80,5 +80,45 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
+        public bool SaveDefaulterCollegePenalty(ApplicationPenaltyDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_DefaulterCollegePenalty_IU";
+
+            SqlQuery += " @PenaltyID='" + request.PenaltyID + "',";
+            SqlQuery += " @RequestID='" + request.ApplyNOCID + "',";
+            SqlQuery += " @Penaltyfor='" + request.Penaltyfor + "',";
+            SqlQuery += " @PenaltyAmount='" + request.PenaltyAmount + "',";
+            SqlQuery += " @CreatedBy='" + request.CreatedBy + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DefaulterCollege.SaveDefaulterCollegePenalty");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<CommonDataModel_DataTable> GetDefaulterCollegePenalty(int RequestID,int PenaltyID)
+        {
+            string SqlQuery = " exec USP_GetDefaulterCollegePenalty @PenaltyID='" + PenaltyID + "', @RequestID ='" + RequestID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollege.GetDefaulterCollegePenalty");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+        public bool DeleteDefaulterCollegePenalty(int PenaltyID)
+        {
+            string SqlQuery = "update Trn_DefaulterCollegePenalty SET ActiveStatus=0, DeleteStatus=1,ModifyDate=getdate()   WHERE PenaltyID='" + PenaltyID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DefaulterCollegeRequest.DeleteDefaulterCollegePenalty");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }

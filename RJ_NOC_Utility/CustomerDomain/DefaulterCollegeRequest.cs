@@ -13,7 +13,7 @@ namespace RJ_NOC_Utility.CustomerDomain
     {
         public DefaulterCollegeRequest(IRepositories unitOfWork) : base(unitOfWork)
         {
-        }       
+        }
         public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterCollegeRequestData(request);
@@ -25,6 +25,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool DeleteData(int RequestID)
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.DeleteData(RequestID);
+        }
+        public bool SaveDefaulterCollegePenalty(ApplicationPenaltyDataModel request)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.SaveDefaulterCollegePenalty(request);
+        }
+        public List<CommonDataModel_DataTable> GetDefaulterCollegePenalty(int RequestID, int PenaltyID)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterCollegePenalty(RequestID, PenaltyID);
+        }
+        public bool DeleteDefaulterCollegePenalty(int PenaltyID)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.DeleteDefaulterCollegePenalty(PenaltyID);
         }
 
     }
