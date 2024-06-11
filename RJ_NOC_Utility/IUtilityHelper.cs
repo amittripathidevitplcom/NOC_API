@@ -102,7 +102,11 @@ namespace RJ_NOC_Utility
         IDTEStatistics_OtherMinorityData DTEStatistics_OtherMinorityDataUtility { get; }
         IDuplicateAadharReport DuplicateAadharReportUtility { get; }
         IBEdRoomDetail BEdRoomDetailUtility { get; }
+        IDCEStaffReports DCEStaffReportsUtility { get; }
+
         IDefaulterCollegeRequest DefaulterCollegeRequestUtility { get; }
+
+
         //IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
         //IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
         //IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }

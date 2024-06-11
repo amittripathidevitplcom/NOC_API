@@ -531,6 +531,12 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return defaulterCollegeRequestRepository; }
         }
+        
+        private IDCEStaffReportsRepository dCEStaffReportsRepository;
+        public IDCEStaffReportsRepository DCEStaffReportsRepository
+        {
+            get { return dCEStaffReportsRepository; }
+        }
 
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
@@ -632,6 +638,7 @@ namespace RJ_NOC_DataAccess.Repository
             //classOverViewMasterRepository = new ClassOverViewMasterRepository(commonHelper);
             bEdRoomDetailRepository = new BEdRoomDetailRepository(commonHelper);
             defaulterCollegeRequestRepository = new DefaulterCollegeRequestRepository(commonHelper);
+            dCEStaffReportsRepository = new DCEStaffReportsRepository(commonHelper);
         }
     }
 }

@@ -14,13 +14,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CourseMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID,int CollegeID)
+        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID, int CollegeID)
         {
             return UnitOfWork.CourseMasterRepository.GetAllCourse(LoginSSOID, CollegeID);
         }
         public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID, int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.CourseMasterRepository.GetAllCourseDTE(LoginSSOID,  CollegeWiseCourseID,  CollegeID, ApplyNOCID);
+            return UnitOfWork.CourseMasterRepository.GetAllCourseDTE(LoginSSOID, CollegeWiseCourseID, CollegeID, ApplyNOCID);
         }
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
         {
@@ -49,11 +49,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public DataTable IfExists_CheckCourseandSubject(string Action, int CollegeWiseCourseID, string Subject_Ids)
         {
-            return UnitOfWork.CourseMasterRepository.IfExists_CheckCourseandSubject(Action,   CollegeWiseCourseID,   Subject_Ids);
+            return UnitOfWork.CourseMasterRepository.IfExists_CheckCourseandSubject(Action, CollegeWiseCourseID, Subject_Ids);
         }
-    public List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID)
-    {
-        return UnitOfWork.CourseMasterRepository.GetCoursesByCollegeID(CollegeID);
+        public List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID)
+        {
+            return UnitOfWork.CourseMasterRepository.GetCoursesByCollegeID(CollegeID);
+        }
+        public List<CommonDataModel_DataTable> CoursesReport(CourseReportSearchFilter request)
+        {
+            return UnitOfWork.CourseMasterRepository.CoursesReport(request);
+        }
     }
-}
 }

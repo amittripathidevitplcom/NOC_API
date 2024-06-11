@@ -18,5 +18,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool IfExists(int CourseID, int DepartmentID, int CollegeWiseCourseID, int CollegeID, int StreamMasterID);
         DataTable IfExists_CheckCourseandSubject(string Action, int CollegeWiseCourseID, string Subject_Ids);
         List<CommonDataModel_DataTable> GetCoursesByCollegeID(int CollegeID);
+        List<CommonDataModel_DataTable> CoursesReport(CourseReportSearchFilter request);
     }
 }
