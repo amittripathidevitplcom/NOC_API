@@ -493,6 +493,41 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("DefaulterCollegePenalty/{CollegeID}/{Other1}/{Other2}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> DefaulterCollegePenalty(int CollegeID, string Other1, string Other2)
+        {
+
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DefaulterCollegePenalty(CollegeID, Other1, Other2));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.DefaulterCollegePenalty", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
         [HttpGet("GetApplyNocApplicationLists/{SelectedCollageID}/{SelectedDepartmentID}")]
         public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID)
         {

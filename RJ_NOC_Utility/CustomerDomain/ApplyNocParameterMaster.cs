@@ -159,6 +159,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@TotalFeeAmount={0},", request.TotalFeeAmount + dNewCourseFees + dNewSubjectFees);
             sb.AppendFormat("@TotalNocFee={0},", request.TotalNocFee);
             sb.AppendFormat("@LateFee={0},", request.LateFee);
+            sb.AppendFormat("@TotalDefaulterCollegePenalty={0},", request.TotalDefaulterCollegePenalty);
             sb.AppendFormat("@CreatedBy={0},", request.CreatedBy);
             sb.AppendFormat("@ModifyBy={0},", request.ModifyBy);
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
@@ -478,6 +479,14 @@ namespace RJ_NOC_Utility.CustomerDomain
                 if (request.ApplyNocLateFeeDetailList.Count > 0)
                 {
                     sb.AppendFormat("@ApplyNocLateFeeDetails='{0}',", CommonHelper.GetDetailsTableQry(request.ApplyNocLateFeeDetailList, "ApplyNocLateFeeDetails"));
+                }
+            }
+            //DefaulterCollegePenaltyDetailList
+            if (request.DefaulterCollegePenaltyDetailList != null)
+            {
+                if (request.DefaulterCollegePenaltyDetailList.Count > 0)
+                {
+                    sb.AppendFormat("@DefaulterCollegePenaltyDetailList='{0}',", CommonHelper.GetDetailsTableQry(request.DefaulterCollegePenaltyDetailList, "DefaulterCollegePenaltyDetailList"));
                 }
             }
 

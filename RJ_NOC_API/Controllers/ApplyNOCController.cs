@@ -423,9 +423,9 @@ namespace RJ_NOC_API.Controllers
 
                 if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(request)))
                 {
-                    List<DCENOCPDFPathDataModel> PdfPathList= GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
+                    List<DCENOCPDFPathDataModel> PdfPathList = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
                     //string Path = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
-                    if (PdfPathList.Count>0)
+                    if (PdfPathList.Count > 0)
                     {
                         bool result1 = false;
                         result1 = UtilityHelper.ApplyNOCUtility.UpdateNOCPDFPath(PdfPathList);
@@ -744,6 +744,43 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+        [HttpGet("DefaulterCollegePenalty/{CollegeID}/{Other1}/{Other2}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> DefaulterCollegePenalty(int CollegeID, string Other1, string Other2)
+        {
+
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.DefaulterCollegePenalty(CollegeID, Other1, Other2));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.DefaulterCollegePenalty", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+
+
         [HttpGet("GeneratePDFDCE")]
         public List<DCENOCPDFPathDataModel> GeneratePDFDCE(int ApplyNOCID)
         {
@@ -751,7 +788,7 @@ namespace RJ_NOC_API.Controllers
             List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
             DataSet dataset = new DataSet();
             DataSet Subjectdataset = null;
-            dataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID,0);
+            dataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, 0);
             if (dataset.Tables[2].Rows.Count > 0)
             {
                 for (int i = 0; i < dataset.Tables[2].Rows.Count; i++)
@@ -771,9 +808,9 @@ namespace RJ_NOC_API.Controllers
                         ReportPath += "\\DECNOC_Print_ChangeName.rdlc";
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
-                        
+
                     }
-                    else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangePlace")
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_ChangePlace")
                     {
                         dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
                         dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
@@ -781,8 +818,8 @@ namespace RJ_NOC_API.Controllers
                         ReportPath += "\\DECNOC_Print_ChangePlace.rdlc";
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
-                    }   
-                    else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_CoedToGirls")
+                    }
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_CoedToGirls")
                     {
                         dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
                         dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
@@ -790,8 +827,8 @@ namespace RJ_NOC_API.Controllers
                         ReportPath += "\\DECNOC_Print_ChangeGirlsCo_Ed.rdlc";
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DCENOC1599", dataset.Tables[0]);
-                    }   
-                    else if(dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_GilsToCoed")
+                    }
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_GilsToCoed")
                     {
                         ReportPath += "";
                         localReport = new LocalReport(ReportPath);
@@ -809,7 +846,7 @@ namespace RJ_NOC_API.Controllers
                         ReportPath += "\\DECNOC_Print_ChangeManagement.rdlc";
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
-                    }       
+                    }
                     else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject" || dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
                     {
                         int ParameterID = 0;
@@ -824,7 +861,7 @@ namespace RJ_NOC_API.Controllers
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
                         localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
-                    }    
+                    }
                     else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_TNOCExtOfSubject")
                     {
                         int ParameterID = 0;
@@ -846,19 +883,20 @@ namespace RJ_NOC_API.Controllers
                     string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
                     parameters.Add("test", "");
                     System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-                    
+
                     var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
 
                     //return File(result.MainStream, "application/pdf");
                     System.IO.File.WriteAllBytes(filepath, result.MainStream);
-                    PdfPathList.Add(new DCENOCPDFPathDataModel() {
-                        AID =Convert.ToInt32(dataset.Tables[2].Rows[i]["AID"]),
-                        ParameterID= Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]),
+                    PdfPathList.Add(new DCENOCPDFPathDataModel()
+                    {
+                        AID = Convert.ToInt32(dataset.Tables[2].Rows[i]["AID"]),
+                        ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]),
                         ApplyNOCID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNOCID"]),
                         PDFPath = fileName
                     });
                 }
-                
+
             }
             //StringBuilder sb = new StringBuilder();
             //var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
@@ -878,7 +916,7 @@ namespace RJ_NOC_API.Controllers
             //localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
             //localReport.AddDataSource("DataSet_CourseAndSubjectDetails", dataset.Tables[1]);
             //var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-             
+
             ////return File(result.MainStream, "application/pdf");
             //System.IO.File.WriteAllBytes(filepath, result.MainStream);
 
@@ -1168,7 +1206,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
         [HttpGet("CountTotalRevertDCE/{ApplyNOCID}/{RoleID}/{UserID}")]
-        public async Task<OperationResult<int>> CountTotalRevertDCE(int ApplyNOCID,int RoleID,int UserID)
+        public async Task<OperationResult<int>> CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "CountTotalRevertDCE", 0, "ApplyNOCController");
             var result = new OperationResult<int>();

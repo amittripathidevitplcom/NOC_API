@@ -28,6 +28,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         int CheckAppliedNOCCollegeWise(int CollegeID);
         List<CommonDataModel_DataTable> GetIssuedNOCReportList(int UserID, string ActionName, int RoleID, int DepartmentID);
         List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID);
+        List<CommonDataModel_DataTable> DefaulterCollegePenalty(int CollegeID, string Other1, string Other2);
         bool SubmitRevertApplication(SubmitRevertApplication request);
         List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request);
         bool SaveDCENOCData(NOCIssuedRequestDataModel model);
