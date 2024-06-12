@@ -97,6 +97,8 @@ namespace RJ_NOC_Model
         public int? CityID { get; set; }
         public string? CityName { get; set; }
 
+        public string? IsApproved { get; set; }
+
     }
     public class BuildingDetailsDataModelList
     {

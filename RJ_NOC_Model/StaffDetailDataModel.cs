@@ -65,6 +65,7 @@ namespace RJ_NOC_Model
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
         public string? Gender { get; set; }
+        public string? DesignationRegistrationNo { get; set; }
         public List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails { get; set; }
     }
     public class StaffDetailDataModel_Excel

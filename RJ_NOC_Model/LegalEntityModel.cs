@@ -59,6 +59,11 @@ namespace RJ_NOC_Model
 
 
 
+        public string? Dis_ByLawsDocumentName { get; set; }
+        public string? ByLawsDocumentPath { get; set; }
+        public string? ByLawsDocument { get; set; }
+
+
     }
 
     public class LegalEntityMemberDetailsDataModel

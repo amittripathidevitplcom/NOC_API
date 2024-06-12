@@ -45,7 +45,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
             string EducationalQualificationDetail_Str = request.EducationalQualificationDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.EducationalQualificationDetails, "Temp_EducationalQualificationDetail_StaffDetail") : "";
             string SqlQuery = " exec USP_SaveStaffDetail_IU  ";
-            SqlQuery += "@StaffDetailID='" + request.StaffDetailID + "',@TeachingType='" + request.TeachingType + "',@SubjectID='" + request.SubjectID + "',@PersonName='" + request.PersonName + "',@RoleID='" + request.RoleID + "',@MobileNo='" + request.MobileNo + "',@Email='" + request.Email + "',";
+            SqlQuery += "@StaffDetailID='" + request.StaffDetailID + "',@TeachingType='" + request.TeachingType + "',@SubjectID='" + request.SubjectID + "',@PersonName='" + request.PersonName + "',@DesignationRegistrationNo='" + request.DesignationRegistrationNo + "',@RoleID='" + request.RoleID + "',@MobileNo='" + request.MobileNo + "',@Email='" + request.Email + "',";
             SqlQuery += "@HighestQualification='" + request.HighestQualification + "',@NumberofExperience='" + request.NumberofExperience + "',@AadhaarNo='" + request.AadhaarNo + "',@DateOfBirth='" + request.DateOfBirth + "',@DateOfAppointment='" + request.DateOfAppointment + "',@DateOfJoining='" + request.DateOfJoining + "',";
             SqlQuery += "@SpecializationSubject='" + request.SpecializationSubject + "',@RoleMapping='" + request.RoleMapping + "',@Salary='" + request.Salary + "',@StaffStatus='" + request.StaffStatus + "',@PFDeduction='" + request.PFDeduction + "',@UANNumber='" + request.UANNumber + "',@ResearchGuide='" + request.ResearchGuide + "',";
             SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "',@Gender='" + request.Gender + "',@ESINumber='" + request.ESINumber + "',@PANNo='" + request.PANNo + "'";
@@ -115,6 +115,8 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.Gender = dataSet.Tables[0].Rows[0]["Gender"].ToString();
                     dataModels.ESINumber = dataSet.Tables[0].Rows[0]["ESINumber"].ToString();
                     dataModels.PANNo = dataSet.Tables[0].Rows[0]["PANNo"].ToString();
+                    dataModels.DesignationRegistrationNo = dataSet.Tables[0].Rows[0]["DesignationRegistrationNo"].ToString();
+
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails_StaffDetail_Item = JsonConvert.DeserializeObject<List<EducationalQualificationDetails_StaffDetail>>(JsonDataTable_Data);
