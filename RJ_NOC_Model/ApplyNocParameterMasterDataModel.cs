@@ -26,6 +26,7 @@ namespace RJ_NOC_Model
         public string? SSOID { get; set; }
         public decimal TotalNocFee { get; set; }
         public decimal LateFee { get; set; }
+        public decimal TotalDefaulterCollegePenalty { get; set; }
         public string ExistingLetterofEOA { get; set; }
 
         public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
@@ -49,6 +50,7 @@ namespace RJ_NOC_Model
         public ApplyNocParameterMaster_TNOCExtensionDataModel? ApplyNocParameterMasterList_PNOCOfSubject { get; set; }
         //noc applicaton late fees
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
+        public List<DefaulterCollegePenaltyDataModal>? DefaulterCollegePenaltyDetailList { get; set; }
 
         public ApplyNocParameterMasterList_BankDetails? DTE_BankDetails { get; set; }
         public ApplyNocParameterMasterList_MergerofInstitutions? DTE_MergerofInstitutions { get; set; }
@@ -73,6 +75,9 @@ namespace RJ_NOC_Model
 
 
     }
+
+
+
     public class ApplyNocParameterMaster_ddl
     {
         public int ApplyNocID { get; set; }
@@ -182,7 +187,7 @@ namespace RJ_NOC_Model
         public decimal ApplicationFeeAmount { get; set; }
         public int ServiceId { get; set; }
         public int? PVStage { get; set; }
-         
+
         public string? RemitterName { get; set; }
         public string? REGTINNO { get; set; }
         public string? DistrictCode { get; set; }
@@ -233,8 +238,8 @@ namespace RJ_NOC_Model
 
         public List<NOCPdfFileDataModel>? NOCPdfFileDataModel { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
-        
-         
+
+
         public string? NodelSSOID { get; set; }
         public string? NodelName { get; set; }
         public string? NodelMobileNo { get; set; }
@@ -385,6 +390,14 @@ namespace RJ_NOC_Model
         public decimal FeesAmount { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+    }
+    public class DefaulterCollegePenaltyDataModal
+    {
+        public int DepartmentID { get; set; }
+        public int PenaltyID { get; set; }
+        public int RequestID { get; set; }
+        public string Penaltyfor { get; set; }
+        public decimal PenaltyAmount { get; set; }
     }
     public class ApplyNOCCourseSubjectListDataModal
     {

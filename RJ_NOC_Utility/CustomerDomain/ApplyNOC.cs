@@ -48,23 +48,23 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public List<CommonDataModel_DataTable> GetApplyNOCRejectedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRejectedReport(UserID,ActionName, RoleID, DepartmentID);
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRejectedReport(UserID, ActionName, RoleID, DepartmentID);
         }
         public List<CommonDataModel_DataTable> GetForwardCommiteeAHList(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetForwardCommiteeAHList(UserID,ActionName, RoleID, DepartmentID);
+            return UnitOfWork.ApplyNOCRepository.GetForwardCommiteeAHList(UserID, ActionName, RoleID, DepartmentID);
         }
         public List<CommonDataModel_DataTable> GetApplyNOCCompletedReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID,ActionName , RoleID,  DepartmentID);
-        } 
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCCompletedReport(UserID, ActionName, RoleID, DepartmentID);
+        }
         public List<CommonDataModel_DataTable> GetApplyNOCRevertReport(int UserID, string ActionName, int RoleID, int DepartmentID)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRevertReport(UserID,ActionName , RoleID,  DepartmentID);
-        }     
+            return UnitOfWork.ApplyNOCRepository.GetApplyNOCRevertReport(UserID, ActionName, RoleID, DepartmentID);
+        }
         public List<CommonDataModel_DataTable> GetPendingMedicalApplications(int RoleID, int UserID, string ActionName)
         {
-            return UnitOfWork.ApplyNOCRepository.GetPendingMedicalApplications(RoleID, UserID,ActionName);
+            return UnitOfWork.ApplyNOCRepository.GetPendingMedicalApplications(RoleID, UserID, ActionName);
         }
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetApplyNOCApplicationType(int CollegeID)
         {
@@ -80,7 +80,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public bool SavePDFPath(string Path, int ApplyNOCID, int DepartmentID, int RoleID, int UserID, string NOCIssuedRemark)
         {
-            return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID,RoleID,UserID,NOCIssuedRemark);
+            return UnitOfWork.ApplyNOCRepository.SavePDFPath(Path, ApplyNOCID, DepartmentID, RoleID, UserID, NOCIssuedRemark);
         }
         public int CheckAppliedNOCCollegeWise(int CollegeID)
         {
@@ -94,7 +94,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetNocLateFees(int DepartmentID)
         {
             return UnitOfWork.ApplyNOCRepository.GetNocLateFees(DepartmentID);
-        }      
+        }
+        public List<CommonDataModel_DataTable> DefaulterCollegePenalty(int CollegeID, string Other1, string Other2)
+        {
+            return UnitOfWork.ApplyNOCRepository.DefaulterCollegePenalty(CollegeID, Other1, Other2);
+        }
         public bool SubmitRevertApplication(SubmitRevertApplication request)
         {
             return UnitOfWork.ApplyNOCRepository.SubmitRevertApplication(request);
@@ -106,7 +110,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveDCENOCData(NOCIssuedRequestDataModel model)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDCENOCData(model);
-        }          
+        }
         public bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList)
         {
             return UnitOfWork.ApplyNOCRepository.UpdateNOCPDFPath(PdfPathList);
@@ -114,7 +118,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool DeleteNOCIssuedDetails(int ApplyNOCID)
         {
             return UnitOfWork.ApplyNOCRepository.DeleteNOCIssuedDetails(ApplyNOCID);
-        }     
+        }
         public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID, int ParameterID)
         {
             return UnitOfWork.ApplyNOCRepository.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, ParameterID);
@@ -134,10 +138,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutinyLOI(request);
-        }        
+        }
         public int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID)
         {
-            return UnitOfWork.ApplyNOCRepository.CountTotalRevertDCE(ApplyNOCID,RoleID,UserID);
+            return UnitOfWork.ApplyNOCRepository.CountTotalRevertDCE(ApplyNOCID, RoleID, UserID);
         }
         public List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID)
         {

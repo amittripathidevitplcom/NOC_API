@@ -338,5 +338,26 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        public bool IfExistsDefaulterCollege(int DepartmentID,int CollegeID, string SSOID)
+        {
+            string SqlQuery = " USP_IfExistsDefaulterCollege @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "', @SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.IfExistsDefaulterCollege");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }        
+        public bool IfExistsDefaulterCollegePenalty(int DepartmentID,int CollegeID, string SSOID)
+        {
+            string SqlQuery = " USP_IfExistsDefaulterCollegePenalty @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "', @SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.IfExistsDefaulterCollegePenalty");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

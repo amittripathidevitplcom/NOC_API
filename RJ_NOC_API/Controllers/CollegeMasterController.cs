@@ -58,38 +58,59 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                bool IfExits = false;
-                IfExits = UtilityHelper.CollegeMasterUtility.IfExists(request.DepartmentID,request.CollegeID,request.MobileNumber,request.Email);
-                if (IfExits == false)
+
+                bool IfExistsDefaulterCollegePenalty = false;
+                IfExistsDefaulterCollegePenalty = UtilityHelper.CollegeMasterUtility.IfExistsDefaulterCollegePenalty(request.DepartmentID,request.CollegeID, request.MappingSSOID);
+                if (IfExistsDefaulterCollegePenalty == false)
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.SaveData(request));
-                    if (result.Data)
+                    bool IfExistsDefaulterCollege = false;
+                    IfExistsDefaulterCollege = UtilityHelper.CollegeMasterUtility.IfExistsDefaulterCollege(request.DepartmentID, request.CollegeID, request.MappingSSOID);
+                    if (IfExistsDefaulterCollege == false)
                     {
-                        result.State = OperationState.Success;
-                        if (request.CollegeID == 0)
+                        bool IfExits = false;
+                        IfExits = UtilityHelper.CollegeMasterUtility.IfExists(request.DepartmentID, request.CollegeID, request.MobileNumber, request.Email);
+                        if (IfExits == false)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "CollegeMaster");
-                            result.SuccessMessage = "Saved successfully .!";
+                            result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.SaveData(request));
+                            if (result.Data)
+                            {
+                                result.State = OperationState.Success;
+                                if (request.CollegeID == 0)
+                                {
+                                    CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Save", 0, "CollegeMaster");
+                                    result.SuccessMessage = "Saved successfully .!";
+                                }
+                                else
+                                {
+                                    CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "CollegeMaster");
+                                    result.SuccessMessage = "Updateed successfully .!";
+                                }
+                            }
+                            else
+                            {
+                                result.State = OperationState.Error;
+                                if (request.CollegeID == 0)
+                                    result.ErrorMessage = "There was an error adding data.!";
+                                else
+                                    result.ErrorMessage = "There was an error updating data.!";
+                            }
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "CollegeMaster");
-                            result.SuccessMessage = "Updateed successfully .!";
+                            result.State = OperationState.Warning;
+                            result.ErrorMessage = "this mobile No - " + request.MobileNumber + " or Email - " + request.Email + " is Already Exist, It Can't Not Be Duplicate.!";
                         }
                     }
                     else
                     {
-                        result.State = OperationState.Error;
-                        if (request.CollegeID == 0)
-                            result.ErrorMessage = "There was an error adding data.!";
-                        else
-                            result.ErrorMessage = "There was an error updating data.!";
+                        result.State = OperationState.Warning;
+                        result.ErrorMessage = "Defaulter College already exists.!";
                     }
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = "this mobile No - "+ request.MobileNumber+" or Email - "+request.Email+ " is Already Exist, It Can't Not Be Duplicate.!";
+                    result.ErrorMessage = "Defaulter fees have not been calculated by the department. Please contact the department.!";
                 }
             }
             catch (Exception ex)
