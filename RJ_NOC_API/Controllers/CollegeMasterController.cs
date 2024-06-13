@@ -83,7 +83,7 @@ namespace RJ_NOC_API.Controllers
                                 else
                                 {
                                     CommonDataAccessHelper.Insert_TrnUserLog(request.ModifyBy, "Update", 0, "CollegeMaster");
-                                    result.SuccessMessage = "Updateed successfully .!";
+                                    result.SuccessMessage = "Updated successfully .!";
                                 }
                             }
                             else
