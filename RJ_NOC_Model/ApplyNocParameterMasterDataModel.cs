@@ -237,6 +237,8 @@ namespace RJ_NOC_Model
 
 
         public List<NOCPdfFileDataModel>? NOCPdfFileDataModel { get; set; }
+        public List<DefaulterCollegePenaltyDataModal>? DefaulterCollegePenaltyDetailList { get; set; }
+        public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
 
 
@@ -390,6 +392,7 @@ namespace RJ_NOC_Model
         public decimal FeesAmount { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public decimal? TotalFeesAmount { get; set; }
     }
     public class DefaulterCollegePenaltyDataModal
     {
@@ -398,6 +401,7 @@ namespace RJ_NOC_Model
         public int RequestID { get; set; }
         public string Penaltyfor { get; set; }
         public decimal PenaltyAmount { get; set; }
+        public decimal? TotalPenaltyAmount { get; set; }
     }
     public class ApplyNOCCourseSubjectListDataModal
     {

@@ -758,6 +758,8 @@ namespace RJ_NOC_Utility.CustomerDomain
                     model.DTE_IncreaseinIntakeAdditionofCourse_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_IncreaseinIntakeAdditionofCourse>>(ds.Tables[22]);
                     model.DTE_IntroductionOffCampus_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_IntroductionOffCampus>>(ds.Tables[23]);
                     model.DTE_CoursesforWorkingProfessionals_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>>(ds.Tables[24]);
+                    model.DefaulterCollegePenaltyDetailList = CommonHelper.ConvertDataTable<List<DefaulterCollegePenaltyDataModal>>(ds.Tables[25]);
+                    model.ApplyNocLateFeeDetailList = CommonHelper.ConvertDataTable<List<ApplyNocLateFeeDetailDataModal>>(ds.Tables[26]);
                 }
             }
             return model;
