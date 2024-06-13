@@ -106,7 +106,7 @@ namespace RJ_NOC_Utility
 
         IDefaulterCollegeRequest DefaulterCollegeRequestUtility { get; }
 
-
+        ICourtOrder CourtOrderUtility { get; }
         //IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
         //IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
         //IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }

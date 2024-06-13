@@ -23,39 +23,29 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                bool IfExits = false;
-                //IfExits = UtilityHelper.DefaulterCollegeRequestUtility.IfExists(request.RNCCheckListID,request.DepartmentID, request.RNCCheckListName);
-                //if (IfExits == false)
-                //{
-                    result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
-                    if (result.Data)
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    if (request.RequestID == 0)
                     {
-                        result.State = OperationState.Success;
-                        if (request.RequestID == 0)
-                        {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
-                            result.SuccessMessage = "Saved successfully .!";
-                        }
-                        else
-                        {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
-                            result.SuccessMessage = "Updated successfully .!";
-                        }
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
+                        result.SuccessMessage = "Saved successfully .!";
                     }
                     else
                     {
-                        result.State = OperationState.Error;
-                        if (request.RequestID == 0)
-                            result.ErrorMessage = "There was an error adding data.!";
-                        else
-                            result.ErrorMessage = "There was an error updating data.!";
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
+                        result.SuccessMessage = "Updated successfully .!";
                     }
-                //}
-                //else
-                //{
-                //    result.State = OperationState.Warning;
-                //    result.ErrorMessage = request.RNCCheckListName + " is Already Exist, It Can't Not Be Duplicate.!";
-                //}
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    if (request.RequestID == 0)
+                        result.ErrorMessage = "There was an error adding data.!";
+                    else
+                        result.ErrorMessage = "There was an error updating data.!";
+                }
             }
             catch (Exception e)
             {
@@ -102,7 +92,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        
+
         [HttpPost("Delete/{RequestID}/{UserID}")]
         public async Task<OperationResult<bool>> DeleteData(int RequestID, int UserID)
         {
@@ -169,7 +159,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetDefaulterCollegePenalty/{RequestID}/{PenaltyID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDefaulterCollegePenalty(int RequestID,int PenaltyID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDefaulterCollegePenalty(int RequestID, int PenaltyID)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try

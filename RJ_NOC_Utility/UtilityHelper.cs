@@ -9,6 +9,7 @@ using RJ_NOC_DataAccess.Repository;
 using Microsoft.Extensions.Configuration;
 
 using RJ_NOC_DataAccess.Repositories;
+using Microsoft.Data.SqlClient;
 
 namespace RJ_NOC_Utility
 {
@@ -142,6 +143,7 @@ namespace RJ_NOC_Utility
 
 
         public IDCEStaffReports DCEStaffReportsUtility { get; private set; }
+        public ICourtOrder CourtOrderUtility { get; private set; }
 
         //public IClassOverViewMaster ClassOverViewMasterUtility { get; private set; }
 
@@ -252,6 +254,7 @@ namespace RJ_NOC_Utility
             DefaulterCollegeRequestUtility = new DefaulterCollegeRequest(UnitOfWork);
             //ClassOverViewMasterUtility = new ClassOverViewMaster(UnitOfWork);
             DCEStaffReportsUtility = new DCEStaffReports(UnitOfWork);
+            CourtOrderUtility=new CourtOrder(UnitOfWork);
             //DTEStatistics_PlacementDetailsUtility = new DTEStatistics_PlacementDetails(UnitOfWork);
             //DTEStatistics_FinancialDetailsUtility = new DTEStatistics_FinancialDetails(UnitOfWork);
         }
