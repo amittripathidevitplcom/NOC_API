@@ -238,7 +238,9 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += "@CourseTypeID='" + request.CourseTypeID + "', @UniversityID = '" + request.UniversityID + "',";
             SqlQuery += "@CourseID = '" + request.CourseID + "',@CourseNOCStatusID='" + request.CourseNOCStatusID + "',@SubjectID='" + request.SubjectID + "',";
             SqlQuery += "@EnrolledStudent = '" + request.EnrolledStudent + "',@SubjectNOCStatusID='" + request.SubjectNOCStatusID + "',@SubjectNOCOrderNo = '" + request.SubjectNOCOrderNo + "',";
-            SqlQuery += "@FromSubmittedNOCDate = '" + request.FromSubmittedNOCDate + "',@ToSubmittedNOCDate = '" + request.ToSubmittedNOCDate + "',@NOCStatusID='" + request.NOCStatusID + "'";
+            SqlQuery += " @FromSubmittedNOCDate = '" + request.FromSubmittedNOCDate + "',@ToSubmittedNOCDate = '" + request.ToSubmittedNOCDate + "',@NOCStatusID='" + request.NOCStatusID + "', ";
+            SqlQuery += "  @PageSize='" + request.PageSize + "',@PageNumber='" + request.PageNumber + "' ";
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourseMaster.CoursesReport");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
