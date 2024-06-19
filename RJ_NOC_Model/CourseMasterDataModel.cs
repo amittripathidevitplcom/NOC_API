@@ -69,6 +69,7 @@ namespace RJ_NOC_Model
         public string? FromSubmittedNOCDate { get; set; }
         public string? ToSubmittedNOCDate { get; set; }
         public int CollegeLevelID { get; set; }
-
+        public int PageSize { get; set; }
+        public int PageNumber { get; set; } 
     }
 }
