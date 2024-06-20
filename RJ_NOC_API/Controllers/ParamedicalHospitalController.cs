@@ -182,6 +182,36 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("DeleteData/{hospitalId}/{modifiedBy}")]
+        public async Task<OperationResult<bool>> DeleteData(int hospitalId, int modifiedBy)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ParamedicalHospitalUtility.DeleteData(hospitalId, modifiedBy));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(modifiedBy, "Delete", 0, "HospitalMaster");
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.SuccessMessage = "There was an error deleting data.!";
+                    CommonDataAccessHelper.Insert_TrnUserLog(modifiedBy, "Delete", 0, "HospitalMaster");
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ParamedicalHospitalController.DeleteData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+
+            }
+            return result;
+        }
     }
 }
 
