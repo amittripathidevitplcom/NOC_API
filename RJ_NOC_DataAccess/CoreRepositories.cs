@@ -542,6 +542,11 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return courtOrderRepository; }
         }
+        private IClinicalFacilityRepository clinicalFacilityRepository;
+        public IClinicalFacilityRepository ClinicalFacilityRepository
+        {
+            get { return clinicalFacilityRepository; }
+        }
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
         //{
@@ -644,6 +649,7 @@ namespace RJ_NOC_DataAccess.Repository
             defaulterCollegeRequestRepository = new DefaulterCollegeRequestRepository(commonHelper);
             dCEStaffReportsRepository = new DCEStaffReportsRepository(commonHelper);
             courtOrderRepository = new CourtOrderRepository(commonHelper);
+            clinicalFacilityRepository = new ClinicalFacilityRepository(commonHelper);
         }
     }
 }

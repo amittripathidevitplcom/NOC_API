@@ -11,5 +11,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     {
         public List<CommonDataModel_DataTable> GetCourseClinicalFacilityList(int CollegeID);
         public bool SaveData(ClinicalFacilityModel clinicalFacility);
+        public List<CommonDataModel_DataTable> GetCollegeClinicalFacilityList(int CollegeID);
     }
 }

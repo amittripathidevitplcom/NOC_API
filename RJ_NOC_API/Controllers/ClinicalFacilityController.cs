@@ -21,7 +21,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.AddCourseMasterUtility.GetAllCourseList(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.ClinicalFacility.GetCourseClinicalFacilityList(CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -36,7 +36,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("ClinicalFacility.GetAllClinicalFacilityList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("ClinicalFacility.GetCourseClinicalFacilityList", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -54,117 +54,74 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-
-                bool IfExits = false;
-                IfExits = UtilityHelper.BuildingDetailsMasterUtility.IfExists(clinicalFacility.SchoolBuildingDetailsID, buildingdetails.OwnerName);
-                if (IfExits == false)
+                result.Data = await Task.Run(() => UtilityHelper.ClinicalFacility.SaveData(clinicalFacility));
+                if (result.Data)
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.BuildingDetailsMasterUtility.SaveData(buildingdetails));
-                    if (result.Data)
+                    result.State = OperationState.Success;
+                    if (clinicalFacility.FacilityList.Select(a => a.CollegeFacilityID).FirstOrDefault() == 0)
                     {
-                        result.State = OperationState.Success;
-                        if (buildingdetails.SchoolBuildingDetailsID == 0)
-                        {
-                            CommonDataAccessHelper.Insert_TrnUserLog(buildingdetails.SchoolBuildingDetailsID, "Save", 0, "BuildingDetailsMasterService");
-                            result.SuccessMessage = "Saved successfully .!";
-                        }
-                        else
-                        {
-                            CommonDataAccessHelper.Insert_TrnUserLog(buildingdetails.SchoolBuildingDetailsID, "Update", buildingdetails.SchoolBuildingDetailsID, "BuildingDetailsMasterService");
-                            result.SuccessMessage = "Updated successfully .!";
-                        }
+                        CommonDataAccessHelper.Insert_TrnUserLog(clinicalFacility.UserId, "Save", 0, "ClinicalFacility");
+                        result.SuccessMessage = "Saved successfully .!";
                     }
                     else
                     {
-                        result.State = OperationState.Error;
-                        if (buildingdetails.SchoolBuildingDetailsID == 0)
-                            result.ErrorMessage = "There was an error adding data.!";
-                        else
-                            result.ErrorMessage = "There was an error updating data.!";
+                        CommonDataAccessHelper.Insert_TrnUserLog(clinicalFacility.UserId, "Update", clinicalFacility.CollegeID, "ClinicalFacility");
+                        result.SuccessMessage = "Updated successfully .!";
                     }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    if (clinicalFacility.FacilityList.Select(a=>a.CollegeFacilityID).FirstOrDefault() == 0)
+                        result.ErrorMessage = "There was an error adding data.!";
+                    else
+                        result.ErrorMessage = "There was an error updating data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ClinicalFacilityController.SaveData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetCollegeClinicalFacilityList/{UserID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetCollegeClinicalFacilityList(int UserID, int CollegeID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetCollegeClinicalFacilityList", 0, "ClinicalFacility");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ClinicalFacility.GetCollegeClinicalFacilityList(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
                 }
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = buildingdetails.OwnerName + " is Already Exist, It Can't Not Be Duplicate.!";
+                    result.SuccessMessage = "No record found.!";
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("BuildingDetailsMasterController.SaveData", e.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("ClinicalFacility.GetCollegeClinicalFacilityList", ex.ToString());
                 result.State = OperationState.Error;
-                result.ErrorMessage = e.Message.ToString();
-
+                result.ErrorMessage = ex.Message.ToString();
             }
             finally
             {
-                //UnitOfWork.Dispose();
+                // UnitOfWork.Dispose();
             }
             return result;
         }
-        [HttpPost("Delete/{SchoolBuildingDetailsID}/{UserID}")]
-        public async Task<OperationResult<bool>> DeleteData(int SchoolBuildingDetailsID, int UserID)
-        {
-            var result = new OperationResult<bool>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.BuildingDetailsMasterUtility.DeleteData(SchoolBuildingDetailsID));
-                if (result.Data)
-                {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", SchoolBuildingDetailsID, "BuildingDetailsMasterService");
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Deleted successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error deleting data.!";
-                }
-            }
-            catch (Exception e)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("BuildingDetailsMasterController.DeleteData", e.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = e.Message.ToString();
-            }
-            finally
-            {
-                //UnitOfWork.Dispose();
-            }
-            return result;
-        }
-        [HttpPost("StatusUpdate/{SchoolBuildingDetailsID}/{ActiveStatus}/{UserID}")]
-        public async Task<OperationResult<bool>> StatusUpdate(int SchoolBuildingDetailsID, bool ActiveStatus, int UserID)
-        {
-            var result = new OperationResult<bool>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.BuildingDetailsMasterUtility.StatusUpdate(SchoolBuildingDetailsID, ActiveStatus));
-                if (result.Data)
-                {
-                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "StatusUpdate", SchoolBuildingDetailsID, "BuildingDetailsMasterService");
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Update successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Error;
-                    result.ErrorMessage = "There was an error Updating data.!";
-                }
-            }
-            catch (Exception e)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("BuildingDetailsMasterController.StatusUpdate", e.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = e.Message.ToString();
-            }
-            finally
-            {
-                //UnitOfWork.Dispose();
-            }
-            return result;
-        }
-
-
     }
 }

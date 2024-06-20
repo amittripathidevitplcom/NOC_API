@@ -38,13 +38,25 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @CollegeID='" + clinicalFacility.CollegeID + "',";
             SqlQuery += " @UserId='" + clinicalFacility.UserId + "',";
             SqlQuery += " @IPAddress='" + IPAddress + "',";
-            SqlQuery += " @BuildingDetail_Document_Str='" + clinicalFacility_Str + "'";
+            SqlQuery += " @clinicalFacility_Str='" + clinicalFacility_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ClinicalFacility.SaveData");
             if (Rows > 0)
                 return true;
             else
                 return false;
+        }
+        public List<CommonDataModel_DataTable> GetCollegeClinicalFacilityList(int CollegeID)
+        {
+            string SqlQuery = "exec [USP_GetCollegeClinicalFacilityList] @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClinicalFacility.GetCollegeClinicalFacilityList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

@@ -107,6 +107,7 @@ namespace RJ_NOC_DataAccess.Interface
         //IClassOverViewMasterRepository ClassOverViewMasterRepository { get; }
         IDCEStaffReportsRepository DCEStaffReportsRepository { get; }
         ICourtOrderRepository CourtOrderRepository { get; }
+        IClinicalFacilityRepository ClinicalFacilityRepository { get; }
 
     }
 }

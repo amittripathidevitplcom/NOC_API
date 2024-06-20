@@ -16,7 +16,7 @@ namespace RJ_NOC_Model
     {
         public int CollegeFacilityID { get; set; }
         public int ClinicFacilityID { get; set; }
-        public string? FacilityName { get; set; }
+        public string? FacilityTitle { get; set; }
         public string? FacilityValue { get; set; }
     }
 }

@@ -144,6 +144,7 @@ namespace RJ_NOC_Utility
 
         public IDCEStaffReports DCEStaffReportsUtility { get; private set; }
         public ICourtOrder CourtOrderUtility { get; private set; }
+        public IClinicalFacility ClinicalFacility { get; private set; }
 
         //public IClassOverViewMaster ClassOverViewMasterUtility { get; private set; }
 
@@ -255,6 +256,7 @@ namespace RJ_NOC_Utility
             //ClassOverViewMasterUtility = new ClassOverViewMaster(UnitOfWork);
             DCEStaffReportsUtility = new DCEStaffReports(UnitOfWork);
             CourtOrderUtility=new CourtOrder(UnitOfWork);
+            ClinicalFacility = new ClinicalFacility(UnitOfWork);
             //DTEStatistics_PlacementDetailsUtility = new DTEStatistics_PlacementDetails(UnitOfWork);
             //DTEStatistics_FinancialDetailsUtility = new DTEStatistics_FinancialDetails(UnitOfWork);
         }
