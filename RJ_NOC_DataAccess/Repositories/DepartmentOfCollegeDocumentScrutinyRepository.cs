@@ -586,7 +586,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
         {
-            string SqlQuery = $" exec USP_GetDCENOCReportData @UniversirtyID={request.UniversityID},@DistrictID={request.DistrictID},@CollegeName='"+request.CollegeName+"',";
+            string SqlQuery = $" exec USP_GetDCENOCReportData @UniversirtyID={request.UniversityID},@DistrictID={request.DistrictID},@DivisionID={request.DivisionID},@SubDivisionID={request.SubDivisionID},@CollegeName='"+request.CollegeName+"',";
             SqlQuery += "@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='"+request.NOCStatusID+ "',@WorkFlowActionID='" + request.WorkFlowActionID+"',";
             SqlQuery += "@NodelOfficerID='" + request.NodelOfficerID + "',@CollegeTypeID='" + request.CollegeTypeID+ "',@FromSubmitDate='" + request.FromSubmitDate+"',";
             SqlQuery += "@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationTypeID='" + request.ApplicationTypeID+ "',@SearchStaticsID='" + request.SearchStaticsID+"',";

@@ -111,6 +111,8 @@ namespace RJ_NOC_Model
     public class DCENOCReportSearchFilterDataModel
     {
         public int DistrictID { get; set; }
+        public int DivisionID { get; set; }
+        public int SubDivisionID { get; set; }
         public int UniversityID { get; set; }
         public string? CollegeName { get; set; }
         public string? CollegeEmail { get; set; }
