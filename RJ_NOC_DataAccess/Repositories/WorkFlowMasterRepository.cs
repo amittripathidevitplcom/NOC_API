@@ -75,6 +75,8 @@ namespace RJ_NOC_DataAccess.Repository
                     dataModels.RoleLevelName = dataSet.Tables[0].Rows[0]["RoleLevelName"].ToString();
                     dataModels.RoleID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RoleID"]);
                     dataModels.RoleName = dataSet.Tables[0].Rows[0]["RoleName"].ToString();
+                    dataModels.NOCTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["NOCTypeID"]);
+                    dataModels.NOCTypeName = dataSet.Tables[0].Rows[0]["NOCTypeName"].ToString();
                     dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
                     dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
 
