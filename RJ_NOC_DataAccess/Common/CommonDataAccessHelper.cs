@@ -328,9 +328,9 @@ namespace RJ_NOC_DataAccess.Common
 
 
         //Get
-        public static DataTable GetEgrassDetails_DepartmentWise(int DepartmentID)
+        public static DataTable GetEgrassDetails_DepartmentWise(int DepartmentID,string PaymentType)
         {
-            string SqlQuery = "select * from M_EGrassDetails Where DepartmentID=" + DepartmentID + " and ActiveStatus=1 and DeleteStatus=0 order by aid desc";
+            string SqlQuery = "select * from M_EGrassDetails Where DepartmentID=" + DepartmentID + " and PaymentType='"+ PaymentType + "' and ActiveStatus=1 and DeleteStatus=0 order by aid desc";
             using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
             {
                 try

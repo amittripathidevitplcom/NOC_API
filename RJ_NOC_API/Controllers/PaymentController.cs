@@ -885,7 +885,7 @@ namespace RJ_NOC_API.Controllers
             {
                 EGrassPaymentDetails_Req_Res eGrassPaymentDetails_Req_Res = new EGrassPaymentDetails_Req_Res();
                 DataTable dataTable = new DataTable();
-                dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID);
+                dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID,request.PaymentType);
                 if (dataTable != null)
                 {
                     string PRN = DateTime.Now.ToString("yyyyMMddHHmmss");

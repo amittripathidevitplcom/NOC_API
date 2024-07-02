@@ -247,6 +247,9 @@ namespace RJ_NOC_Model
         public string? NodelName { get; set; }
         public string? NodelMobileNo { get; set; }
         public string? NodelCollegeName { get; set; }
+        public string? AHInspectionFeeAmount { get; set; }
+        public string? AHFDRFeeAmount { get; set; }
+        public bool? IsMakeInspectionPayment { get; set; }
 
     }
 

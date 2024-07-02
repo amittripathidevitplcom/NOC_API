@@ -116,6 +116,7 @@ namespace RJ_NOC_Model
         public string Adrees { get; set; }
         public string City { get; set; }
         public string Pincode { get; set; }
+        public string? PaymentType { get; set; }
 
     }
 
