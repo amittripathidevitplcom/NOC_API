@@ -240,6 +240,7 @@ namespace RJ_NOC_Model
         public List<DefaulterCollegePenaltyDataModal>? DefaulterCollegePenaltyDetailList { get; set; }
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
+        public string? IsOnlineOfflinePayment { get; set; }
 
 
         public string? NodelSSOID { get; set; }
