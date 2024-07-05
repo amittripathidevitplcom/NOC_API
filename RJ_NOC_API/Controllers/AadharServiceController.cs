@@ -129,10 +129,14 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
+                CommonDataAccessHelper.Insert_ErrorLog("Aadharservice.SendOtpByAadharNo_Esign", ex.ToString());
+                
+
                 urldt.Rows.Add(new Object[]{
                                 "Please try again",1,
                                 "Please try again"
                                 });
+
             }
             return urldt;
         }

@@ -31,6 +31,9 @@ using Microsoft.AspNetCore.Http.Extensions;
 using iTextSharp.text.pdf;
 using ikvm.lang;
 using java.util.zip;
+using Microsoft.AspNetCore.Http.HttpResults;
+using System.Xml;
+using iTextSharp.tool.xml.html.head;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -885,7 +888,7 @@ namespace RJ_NOC_API.Controllers
             {
                 EGrassPaymentDetails_Req_Res eGrassPaymentDetails_Req_Res = new EGrassPaymentDetails_Req_Res();
                 DataTable dataTable = new DataTable();
-                dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID,request.PaymentType);
+                dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID, request.PaymentType);
                 if (dataTable != null)
                 {
                     string PRN = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -1081,5 +1084,147 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpGet("GRAS_GetPaymentStatus/{EGrassPaymentAID}/{DepartmentID}/{PaymentType}")]
+        public async Task<OperationResult<ResponseParameters>> GRAS_GetPaymentStatus(int EGrassPaymentAID, int DepartmentID, string PaymentType)
+        {
+            var result = new OperationResult<ResponseParameters>();
+            try
+            {
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                //get payment details form database
+                DataTable dataTable = new DataTable();
+                dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(DepartmentID, PaymentType);
+                if (dataTable.Rows.Count>0)
+                {
+                    string ReqURL = dataTable.Rows[0]["VerificationTransactionURL"].ToString();
+                    //EGrass_AUIN_Verify_Data
+                    DataTable dt_AUIN_Verify_Data = new DataTable();
+                    dt_AUIN_Verify_Data = CommonDataAccessHelper.GetEGrass_AUIN_Verify_Data(EGrassPaymentAID);
+
+                    if (dt_AUIN_Verify_Data != null)
+                    {
+                        ReqURL = ReqURL.Replace("#encAUIN", dt_AUIN_Verify_Data.Rows[0]["Request_ENCAUIN"].ToString());
+                        ReqURL = ReqURL.Replace("#MerchantCode", dataTable.Rows[0]["MerchantCode"].ToString());
+
+                        HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(ReqURL);
+                        webrequest.Method = "GET";
+                        webrequest.ContentType = "application/x-www-form-urlencoded";
+                        webrequest.ContentLength = 0;
+
+                        //Stream stream = webrequest.GetRequestStream();
+                        //stream.Close();
+                        string RESPONSEJSON = "";
+                        using (WebResponse response = webrequest.GetResponse())
+                        {
+                            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                            {
+                                EGrassPaymentDetails_Req_Res eGrassPaymentDetails_Req_Res = new EGrassPaymentDetails_Req_Res();
+                                EgrassNocEncrypt oEgrassFabEncrypt = new EgrassNocEncrypt();
+                                RESPONSEJSON = reader.ReadToEnd();
+
+                                XmlDocument xmltest = new XmlDocument();
+                                xmltest.LoadXml(RESPONSEJSON);
+                                XmlNodeList elemlist = xmltest.GetElementsByTagName("string");
+                                string result11111 = elemlist[0].InnerXml;
+
+                                eGrassPaymentDetails_Req_Res.Request_JsonENC = ReqURL.ToString();
+                                eGrassPaymentDetails_Req_Res.Request_Json = ReqURL.ToString();
+
+
+
+                                string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
+                                string EncryptString = oEgrassFabEncrypt.Decrypt(result11111, keypath);
+
+                               
+                                eGrassPaymentDetails_Req_Res.Response_JsonENC = result11111;
+                                eGrassPaymentDetails_Req_Res.Response_Json = EncryptString;
+
+
+
+                                foreach (string kvp in EncryptString.Split('|'))
+                                {
+                                    
+
+                                    string Key = kvp.Split('=')[0];
+                                    string Value = kvp.Split('=')[1];
+                                    if (Key == "AUIN")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Request_AUIN = Value;
+                                    }
+                                    else if (Key == "CIN")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_CIN = Value;
+                                    }
+                                    else if (Key == "BankReferenceNo")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_BankReferenceNo = Value;
+                                    }
+                                    else if (Key == "BANK_CODE")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_BANK_CODE = Value;
+                                    }
+                                    else if (Key == "BankDate")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_BankDate = Value;
+                                    }
+                                    else if (Key == "GRN")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_GRN = Value;
+                                    }
+                                    else if (Key == "Amount")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_Amount = Convert.ToDecimal(Value);
+                                        eGrassPaymentDetails_Req_Res.Request_AMOUNT = Convert.ToDecimal(Value);
+                                    }
+                                    else if (Key == "Status")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_Status = Value;
+                                    }
+                                    else if (Key == "checkSum")
+                                    {
+                                        eGrassPaymentDetails_Req_Res.Response_checkSum = Value;
+                                    }
+
+                                }
+                                int row = CommonDataAccessHelper.GRAS_GetPaymentStatus_Req_Res(eGrassPaymentDetails_Req_Res);
+                                CommonDataAccessHelper.Insert_TrnUserLog(EGrassPaymentAID, "Save", 0, "Payment");
+                                result.State = 0;
+                                result.SuccessMessage = "Transaction Updated Successfully .!";
+
+
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        result.State = OperationState.Success;
+                        result.Data = new ResponseParameters();
+                        result.SuccessMessage = "Transaction Updated Successfully.!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Success;
+                    result.Data = new ResponseParameters();
+                    result.SuccessMessage = "Transaction Updated Successfully.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GRAS_GetPaymentStatus", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }

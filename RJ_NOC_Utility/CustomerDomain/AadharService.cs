@@ -87,6 +87,8 @@ namespace RJ_NOC_Utility.CustomerDomain
                     string auacode = _configuration["AadharServiceDetails:eSignOTP"].ToString();
                     string lickey = _configuration["AadharServiceDetails:AadhaarLicKey"].ToString();
                     ss = WebRequestinJson(auacode, json, "application/json");
+
+                    CommonDataAccessHelper.Insert_ErrorLog("Aadharservice.SendOtpByAadharNo_Esign", ss.ToString());
                     JObject root = (JObject)JObject.Parse(ss);
                     foreach (var item in root)
                     {
@@ -108,7 +110,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                 }
                 catch (Exception ex)
                 {
-
+                    CommonDataAccessHelper.Insert_ErrorLog("Aadharservice.SendOtpByAadharNo_Esign", ex.ToString());
                     _txnid = "NO" + "#" + ex.Message;
                 }
             }
