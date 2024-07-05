@@ -9,6 +9,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using RJ_NOC_Model;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 
 namespace RJ_NOC_DataAccess.Common
@@ -291,6 +292,35 @@ namespace RJ_NOC_DataAccess.Common
             return Rows;
         }
 
+        public static int GRAS_GetPaymentStatus_Req_Res(EGrassPaymentDetails_Req_Res req_Res)
+        {
+            int Rows = 0;
+            try
+            {
+                string SqlQry = "  ";
+                SqlQry += " exec USP_GRAS_PaymentStatusLog_Save  ";
+                SqlQry += " @RequestData = '" + req_Res.Request_Json + "', ";
+                SqlQry += " @ResponseDataEnc = '" + req_Res.Request_JsonENC + "', ";
+                SqlQry += " @ResponseData = '" + req_Res.Response_Json + "', ";
+                SqlQry += " @AUIN = '" + req_Res.Request_AUIN + "', ";
+                SqlQry += " @CIN = '" + req_Res.Response_CIN+ "', ";
+                SqlQry += " @BankReferenceNo = '" + req_Res.Response_BankReferenceNo + "', ";
+                SqlQry += " @BANK_CODE = '" + req_Res.Response_BANK_CODE + "', ";
+                SqlQry += " @BankDate = '" + req_Res.Response_BankDate + "', ";
+                SqlQry += " @GRN = '" + req_Res.Response_GRN + "', ";
+                SqlQry += " @Amount = '" + req_Res.Response_Amount + "', ";
+                SqlQry += " @Status = '" + req_Res.Response_Status + "', ";
+                SqlQry += " @checkSum = '" + req_Res.Response_checkSum + "' ";
+                Rows = NonQuerrySys(SqlQry);
+            }
+            catch (Exception ex)
+            {
+                Insert_ErrorLog("PaymentController.GRAS_GetPaymentStatus_Req_Res", ex.ToString());
+                Rows = 0;
+            }
+            return Rows;
+        }
+
         #endregion
 
         #region "Common convert file to base64 Function"
@@ -328,9 +358,9 @@ namespace RJ_NOC_DataAccess.Common
 
 
         //Get
-        public static DataTable GetEgrassDetails_DepartmentWise(int DepartmentID,string PaymentType)
+        public static DataTable GetEgrassDetails_DepartmentWise(int DepartmentID, string PaymentType)
         {
-            string SqlQuery = "select * from M_EGrassDetails Where DepartmentID=" + DepartmentID + " and PaymentType='"+ PaymentType + "' and ActiveStatus=1 and DeleteStatus=0 order by aid desc";
+            string SqlQuery = "select * from M_EGrassDetails Where DepartmentID=" + DepartmentID + " and PaymentType='" + PaymentType + "' and ActiveStatus=1 and DeleteStatus=0 order by aid desc";
             using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
             {
                 try
@@ -351,6 +381,35 @@ namespace RJ_NOC_DataAccess.Common
                     throw new Exception(ex.ToString());
 
                     //throw;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+            }
+        }
+        public static DataTable GetEGrass_AUIN_Verify_Data(int EGrassPaymentAID)
+        {
+            string SqlQuery = "exec USP_EGrass_AUIN_Verify_Data @AID='" + EGrassPaymentAID + "'";
+            using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
+                    {
+                        using (DataTable dataTable = new DataTable())
+                        {
+                            sda.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CommonDataAccessHelper.Insert_ErrorLog("GetEGrass_AUIN_Verify_Data", ex.ToString());
+                    throw new Exception(ex.ToString());
                 }
                 finally
                 {
