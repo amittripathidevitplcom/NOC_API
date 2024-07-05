@@ -1614,6 +1614,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        } 
+        public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetApplicationCountRoleWise @DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetApplicationCountRoleWise");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

@@ -547,6 +547,12 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return clinicalFacilityRepository; }
         }
+
+        private IPaymentReportRepository paymentReportRepository;
+        public IPaymentReportRepository PaymentReportRepository
+        {
+            get { return paymentReportRepository; }
+        }
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
         //{
@@ -650,6 +656,7 @@ namespace RJ_NOC_DataAccess.Repository
             dCEStaffReportsRepository = new DCEStaffReportsRepository(commonHelper);
             courtOrderRepository = new CourtOrderRepository(commonHelper);
             clinicalFacilityRepository = new ClinicalFacilityRepository(commonHelper);
+            paymentReportRepository = new PaymentReportRepository(commonHelper);
         }
     }
 }

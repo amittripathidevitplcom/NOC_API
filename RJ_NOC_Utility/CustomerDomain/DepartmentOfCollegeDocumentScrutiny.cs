@@ -126,7 +126,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetSubjectWiseStaticReport(request);
         }
-        public List<CommonDataModel_DataTable> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
+        public List<ApplyNocApplicationDataModel> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetDCENOCReportData(request);
         }

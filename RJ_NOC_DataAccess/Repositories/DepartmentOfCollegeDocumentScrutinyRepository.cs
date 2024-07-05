@@ -584,20 +584,34 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
+        public List<ApplyNocApplicationDataModel> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
         {
+            DataSet dataSet = new DataSet();
+            List<ApplyNocApplicationDataModel> listdataModels = new List<ApplyNocApplicationDataModel>();
             string SqlQuery = $" exec USP_GetDCENOCReportData @UniversirtyID={request.UniversityID},@DistrictID={request.DistrictID},@DivisionID={request.DivisionID},@SubDivisionID={request.SubDivisionID},@CollegeName='"+request.CollegeName+"',";
             SqlQuery += "@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='"+request.NOCStatusID+ "',@WorkFlowActionID='" + request.WorkFlowActionID+"',";
             SqlQuery += "@NodelOfficerID='" + request.NodelOfficerID + "',@CollegeTypeID='" + request.CollegeTypeID+ "',@FromSubmitDate='" + request.FromSubmitDate+"',";
             SqlQuery += "@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationTypeID='" + request.ApplicationTypeID+ "',@SearchStaticsID='" + request.SearchStaticsID+"',";
-            SqlQuery += "@ApplicationID='" + request.ApplicationID + "',@ApplicationStatusID='" + request.ApplicationStatusID + "',@YearNewExistingID='" + request.YearNewExistingID + "',@ReportStatus='"+request.ReportStatus+"'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList");
-            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
-            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
-            dataModel.data = dataTable;
-            dataModels.Add(dataModel);
-            return dataModels;
+            SqlQuery += "@ApplicationID='" + request.ApplicationID + "',@ApplicationStatusID='" + request.ApplicationStatusID + "',@YearNewExistingID='" + request.YearNewExistingID + "',@ReportStatus='"+request.ReportStatus+ "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "'";
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetDCENOCReportData");
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDataModel>>(JsonDataTable_Data);
+
+            if (dataSet.Tables.Count > 1 && dataSet.Tables[1].Rows.Count > 0)
+            {
+                List<NOCPdfFileDataModel> NOCPdfFileDataModel = new List<NOCPdfFileDataModel>();
+                string JsonDataTable_PDFData = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                NOCPdfFileDataModel = JsonConvert.DeserializeObject<List<NOCPdfFileDataModel>>(JsonDataTable_PDFData);
+                for (int i = 0; i < listdataModels.Count; i++)
+                {
+                    var Data = NOCPdfFileDataModel.Where(w => w.ApplyNOCID == listdataModels[i].ApplyNocApplicationID).ToList();
+                    if (Data != null && Data.Count > 0)
+                    {
+                        listdataModels[i].NOCPdfFileDataModel = Data;
+                    }
+                }
+            }
+            return listdataModels;
         }
 
         public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)

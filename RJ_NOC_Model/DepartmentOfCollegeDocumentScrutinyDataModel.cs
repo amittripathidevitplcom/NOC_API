@@ -128,6 +128,7 @@ namespace RJ_NOC_Model
         public string ReportStatus { get; set; }
         public int ApplicationStatusID { get; set; }
         public int YearNewExistingID { get; set; }
+        public int ApplicationCurrentRole { get; set; }
     }
 
 

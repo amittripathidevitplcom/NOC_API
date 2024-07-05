@@ -145,6 +145,7 @@ namespace RJ_NOC_Model
         public int ParameterID { get; set; }
         public int CreatedBy { get; set; }
         public string Remark { get; set; }
+        public int? NoOfIssuedYear { get; set; }
     }
 
     public class NOCIssuedRequestDataModel

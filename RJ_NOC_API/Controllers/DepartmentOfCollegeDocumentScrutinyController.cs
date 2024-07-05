@@ -888,9 +888,9 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpPost("GetDCENOCReportData")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request)
         {
-            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetDCENOCReportData(request));

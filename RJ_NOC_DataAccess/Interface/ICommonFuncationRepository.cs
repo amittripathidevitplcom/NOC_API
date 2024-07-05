@@ -174,6 +174,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request);
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
         List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
+        List<DataTable> GetApplicationCountRoleWise(int DepartmentID);
     }
 }
 

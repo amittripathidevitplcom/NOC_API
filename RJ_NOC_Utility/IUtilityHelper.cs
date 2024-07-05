@@ -108,6 +108,8 @@ namespace RJ_NOC_Utility
 
         ICourtOrder CourtOrderUtility { get; }
         IClinicalFacility ClinicalFacility { get; }
+
+        IPaymentReport PaymentReportUtility { get; }
         //IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
         //IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
         //IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }

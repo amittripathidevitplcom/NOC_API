@@ -250,6 +250,12 @@ namespace RJ_NOC_Model
         public string? AHInspectionFeeAmount { get; set; }
         public string? AHFDRFeeAmount { get; set; }
         public bool? IsMakeInspectionPayment { get; set; }
+        public string? DistrictName { get; set; }
+        public string? TehsilName { get; set; }
+        public string? NOCStatus { get; set; }
+        public string? Status { get; set; }
+        public string? RoleName { get; set; }
+        public string? SSOID { get; set; }
 
     }
 

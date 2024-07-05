@@ -872,7 +872,14 @@ namespace RJ_NOC_API.Controllers
                         dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
                         dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
                         dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
-                        ReportPath += "\\DECNOC_Print_TNOCExtention.rdlc";
+                        if (dataset.Tables[0].Rows[0]["NoOfIssuedYear"].ToString() == "2")
+                        {
+                            ReportPath += "\\DECNOC_Print_TNOCExtention2.rdlc";
+                        }
+                        else
+                        {
+                            ReportPath += "\\DECNOC_Print_TNOCExtention.rdlc";
+                        }
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DCENOC1686_CollegeDetails", dataset.Tables[0]);
                         localReport.AddDataSource("DCENOC1686_Subject_Details", Subjectdataset.Tables[1]);

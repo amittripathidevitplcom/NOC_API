@@ -573,5 +573,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDeficiencyAction(ApplyNOCID, RoleID);
         }
+        public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetApplicationCountRoleWise(DepartmentID);
+        }
     }
 }

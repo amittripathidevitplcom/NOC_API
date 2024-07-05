@@ -93,10 +93,6 @@
           <DataField>NoOfIssuedYear</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="TNOCFirstPoint">
-          <DataField>TNOCFirstPoint</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
@@ -787,116 +783,141 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>1.  </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!TNOCFirstPoint.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Value>1. संस्था अस्थायी अनापत्ति प्रमाण-पत्र प्राप्त प्रत्येक सत्र हेतु नियमानुसार मय निरीक्षण शुल्क आवेदन करेगी।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>2. संस्था द्वारा सावधि जमा राशि (एफ.डी.आर.) का प्रत्येक 5 वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा ।
-3. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकेगा तथा संस्था अधिकृत  </Value>
+                    <Value>2. संस्था सत्र 2026-27 में निर्धारित अवधि में नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करगी। </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>3. संस्था द्वारा सावधि जमा राशि (एफ.डी.आर.) का प्रत्येक 5 वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा ।
+4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकेगा तथा संस्था अधिकृत  </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>   अधिकारी द्वारा चाहा गया अभिलेख उपलब्ध करायेगी।
-4. संस्था को समय-समय पर यू.जी.सी. / राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप</Value>
+5. संस्था को समय-समय पर यू.जी.सी. / राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>   से करनी होगी।
-5. संस्था संबंधित विश्वविद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बी०सी०आई० से मान्यता व </Value>
+6. संस्था संबंधित विश्वविद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बी०सी०आई० से मान्यता व </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>   विश्वविद्यालय से संबद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।
-6. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर, आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी </Value>
+7. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर, आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>   तथा महाविद्यालय तदनुसार तय संख्या सीमा में ही प्रवेश दिया जाना सुनिश्चित करेगा।
-7. संस्था महाविद्यालय में अध्यापन कार्य हेतु यू.जी.सी. अर्हताधारी प्राचार्य एवं व्याख्याताओं तथा निर्धारित मानदण्डानुसार</Value>
+8. संस्था महाविद्यालय में अध्यापन कार्य हेतु यू.जी.सी. अर्हताधारी प्राचार्य एवं व्याख्याताओं तथा निर्धारित मानदण्डानुसार</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>   अशैक्षणिक स्टाफ की नियुक्ति के साथ-2 अन्य निर्धारित शर्तों की पालना करेगी ।
-8. राज्य सरकार की महाविद्यालय प्रवेश नीति 2024-25 तथा बाद में जारी होने वाली नीतियों का पालन करना होगा।
-9. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाऐं प्रवेश प्रक्रिया समाप्त
+9. राज्य सरकार की महाविद्यालय प्रवेश नीति 2024-25 तथा बाद में जारी होने वाली नीतियों का पालन करना होगा।
+10.संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाऐं प्रवेश प्रक्रिया समाप्त
    होने पर आयुक्तालय कॉलेज शिक्षा द्वारा निर्धारित अवधि में भरकर अपलोड़ करेगी। </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>10. मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर करवाकर </Value>
+                    <Value>11.मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर करवाकर </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>        DCF-II (Data Capture format-II) भरकर अपलोड करना अनिवार्य होगा। महाविद्यालय अपलोडेड प्रमाण-पत्र की हार्ड 
-    कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करेगें।</Value>
+                    <Value>      DCF-II (Data Capture format-II) भरकर अपलोड करना अनिवार्य होगा। महाविद्यालय अपलोडेड प्रमाण-पत्र की हार्ड 
+   कॉपी आवश्यकतानुसार आयुक्तालय में प्रस्तुत करेगें।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
               <Paragraph>
                 <TextRuns>
@@ -1226,7 +1247,7 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>23.66271cm</Height>
+        <Height>23.71562cm</Height>
         <Style />
       </Body>
       <Width>17cm</Width>
