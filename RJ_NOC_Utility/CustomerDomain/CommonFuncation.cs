@@ -576,6 +576,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetApplicationCountRoleWise(DepartmentID);
+        }     
+        public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetLegelEntityDepartmentWise(DepartmentID);
         }
     }
 }

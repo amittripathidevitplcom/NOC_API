@@ -163,6 +163,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
         List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
         List<DataTable> GetApplicationCountRoleWise(int DepartmentID);
+        List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID);
     }
 
 
