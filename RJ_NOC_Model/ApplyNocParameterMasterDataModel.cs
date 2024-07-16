@@ -154,6 +154,8 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         //College Add Detail
         public string? CollegeName { get; set; }
+        public string? Email { get; set; }
+        public string? MobileNumber { get; set; }
         public string? SocietyName { get; set; }
         public string? DepartmentName { get; set; }
         public string? CollegeStatus { get; set; }

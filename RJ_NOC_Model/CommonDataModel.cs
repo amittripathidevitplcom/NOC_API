@@ -296,6 +296,7 @@ namespace RJ_NOC_Model
         public string? IsChecked { get; set; }
         public string? Remark { get; set; }
         public string? FinalRemark { get; set; }
+        public string? CheckFinalRemark { get; set; }
         public string? FileUploadName_Dis_FileName { get; set; }
         public string? FileUploadNamePath { get; set; }
         public string? FileUploadName { get; set; }
