@@ -10,6 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     public interface ISMSMailRepository
     {
         string SendMessage(string MobileNo,string MessageType, int ID);
+        string SendMessage_Local();
         DataSet GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID);
     }
 

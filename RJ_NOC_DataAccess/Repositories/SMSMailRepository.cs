@@ -87,5 +87,36 @@ namespace RJ_NOC_DataAccess.Repository
             var ds = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationList");
             return ds;
         }
+
+
+        public string SendMessage_Local()
+        {
+            string ReturnOTP = "";
+            string MessageBody = "";
+            string TempletID = "";
+            string MobileNo = "";
+            string AID = "0";
+            string SqlQuery = " select * from Trn_SendSMS where IsSend=0";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SMSMail.SendMessage_Local");
+            SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
+            mSConfigurationSetting = this.GetConfigurationSetting();
+            List<SMSTemplateDataModel> dataModels = new List<SMSTemplateDataModel>();
+            foreach (DataRow item in dataTable.Rows)
+            {
+                AID = item["AID"].ToString();
+                MessageBody = item["SMSText"].ToString();
+                TempletID = item["TemplateID"].ToString();
+                MobileNo = item["MobileNo"].ToString();
+                try
+                {
+                    string Response = CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
+                    int Rows = _commonHelper.NonQuerry("update Trn_SendSMS set SMS_Status='" + Response + "',IsSend=1,Sending_RTS=Getdate() Where aid='" + AID + "'", "SMS.SendMessage_Local");
+                }
+                catch (Exception ex)
+                { }
+            }
+            return "Done";
+        }
     }
 }
