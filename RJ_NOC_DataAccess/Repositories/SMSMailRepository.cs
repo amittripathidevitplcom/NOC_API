@@ -91,11 +91,10 @@ namespace RJ_NOC_DataAccess.Repository
 
         public string SendMessage_Local()
         {
-            string ReturnOTP = "";
-            string MessageBody = "";
-            string TempletID = "";
-            string MobileNo = "";
-            string AID = "0";
+            string? MessageBody = "";
+            string? TempletID = "";
+            string? MobileNo = "";
+            string? AID = "0";
             string SqlQuery = " select * from Trn_SendSMS where IsSend=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SMSMail.SendMessage_Local");
