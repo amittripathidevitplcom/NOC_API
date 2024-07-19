@@ -60,6 +60,42 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("SendMessage_Local")]
+        public async Task<OperationResult<string>> SendMessage_Local()
+        {
+            var result = new OperationResult<string>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.SMSMailUtility.SendMessage_Local());
+
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "SMS Send successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("SMSMailController.SendMessage_Local", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
     }
 
 }
