@@ -1416,7 +1416,13 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
-            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@Status='" + request.Status + "',@CollegeName='" + request.CollegeName + "'";
+            string SqlQuery = " exec USP_GetTotalApplicationListByDepartment @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "'," +
+                "@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@Status='" + request.Status + "',@CollegeName='" + request.CollegeName + "'," +
+                "@SubDivisionID='" + request.SubDivisionID + "',@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='" + request.NOCStatusID + "',@WorkFlowActionID='" + request.WorkFlowActionID + "'," +
+                "@CollegeTypeID='" + request.CollegeTypeID + "',@FromSubmitDate='" + request.FromSubmitDate + "',@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationID='" + request.ApplicationID + "'," +
+                "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "'"
+                
+                ;
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTotalApplicationListByDepartment");
 

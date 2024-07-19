@@ -258,8 +258,18 @@ namespace RJ_NOC_Model
         public int UniversityID { get; set; }
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
-        public string Status { get; set; }
-        public string CollegeName { get; set; }
+        public string? Status { get; set; }
+        public string? CollegeName { get; set; }
+        public int SubDivisionID { get; set; }
+        public string? CollegeEmail { get; set; }
+        public int NOCStatusID { get; set; }
+        public int WorkFlowActionID { get; set; }
+        public int CollegeTypeID { get; set; }
+        public string? FromSubmitDate { get; set; }
+        public string? ToSubmitDate { get; set; }
+        public int ApplicationID { get; set; }
+        public int ApplicationStatusID { get; set; }
+        public int ApplicationCurrentRole { get; set; }
     }
     public class PaymentDetailsDataModel_Filter
     {
@@ -269,7 +279,7 @@ namespace RJ_NOC_Model
         public string? ToDate { get; set; }
         public int DepartmentID { get; set; }
 
-    }   
+    }
     public class CommonDataModel_TotalDraftEntrySearchFilter
     {
         public int DepartmentID { get; set; }
