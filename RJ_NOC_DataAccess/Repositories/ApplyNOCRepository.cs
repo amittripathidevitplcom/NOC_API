@@ -520,5 +520,25 @@ namespace RJ_NOC_DataAccess.Repositories
             }
             return Result;
         }
+
+        public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID,int NoOfIssuedYear)
+        {
+            string SqlQuery = " exec USP_GetDraftNOCDetailsByNOCIID @NOCID='"+ApplyNOCID+"',@ParameterID='"+ParameterID+ "',@NoOfIssuedYear='" + NoOfIssuedYear + "'";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetDraftNOCDetailsByNOCIID");
+            return dataset;
+        }
+
+        public bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model)
+        {
+            string GenerateNOCParameter_str = CommonHelper.GetDetailsTableQry(model.AppliedNOCFor, "Temp_GenerateDraftNOCParameter");
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = $" exec USP_SaveDCEDraftNOCData @GenerateNOCParameter_str='{GenerateNOCParameter_str}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SaveDCEDraftNOCData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

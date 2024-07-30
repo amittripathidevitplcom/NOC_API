@@ -48,5 +48,9 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID);
+
+
+        DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear);
+        bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
     }
 }

@@ -92,6 +92,10 @@ namespace RJ_NOC_Model
         public string? L1UploadDocument { get; set; }
         public string? L1UploadDocumentPath { get; set; }
         public string? Penalty { get; set; }
+
+
+
+        public List<NOCPdfFileDataModel>? DraftNOCPdfFileDataModel { get; set; }
     }
 
     public class LOIApplicationDetails_DataModel
@@ -146,6 +150,7 @@ namespace RJ_NOC_Model
         public int CreatedBy { get; set; }
         public string Remark { get; set; }
         public int? NoOfIssuedYear { get; set; }
+        public string? PdfFilePath { get; set; }
     }
 
     public class NOCIssuedRequestDataModel

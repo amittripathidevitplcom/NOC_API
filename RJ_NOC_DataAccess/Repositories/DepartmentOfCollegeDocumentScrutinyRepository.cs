@@ -438,6 +438,20 @@ namespace RJ_NOC_DataAccess.Repository
                     }
                 }
             }
+            if (dataSet.Tables.Count > 1 && dataSet.Tables[1].Rows.Count > 0 && Status== "Pending")
+            {
+                List<NOCPdfFileDataModel> DraftNOCPdfFileDataModel = new List<NOCPdfFileDataModel>();
+                string JsonDataTable_PDFData = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                DraftNOCPdfFileDataModel = JsonConvert.DeserializeObject<List<NOCPdfFileDataModel>>(JsonDataTable_PDFData);
+                for (int i = 0; i < listdataModels.Count; i++)
+                {
+                    var Data = DraftNOCPdfFileDataModel.Where(w => w.ApplyNOCID == listdataModels[i].ApplyNOCID).ToList();
+                    if (Data != null && Data.Count > 0)
+                    {
+                        listdataModels[i].DraftNOCPdfFileDataModel = Data;
+                    }
+                }
+            }
             return listdataModels;
         }
 

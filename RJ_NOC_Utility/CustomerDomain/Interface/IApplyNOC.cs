@@ -42,5 +42,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         int CountTotalRevertDCE(int ApplyNOCID,int RoleID,int UserID);
         List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID);
+
+
+        DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear);
+        bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
     }
 }

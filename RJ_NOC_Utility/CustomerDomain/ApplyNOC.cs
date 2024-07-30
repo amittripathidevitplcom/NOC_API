@@ -151,5 +151,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetApplicationPenaltyList(SSOID);
         }
+
+        public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetDraftNOCDetailsByNOCIID(ApplyNOCID, ParameterID, NoOfIssuedYear);
+        }
+        public bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveDCEDraftNOCData(model);
+        }
     }
 }

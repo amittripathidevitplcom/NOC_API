@@ -51,6 +51,7 @@ namespace RJ_NOC_DataAccess.Common
                     con.Open();
                     using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
                     {
+                        sda.SelectCommand.CommandTimeout = 600;
                         using (DataTable dataTable = new DataTable())
                         {
                             sda.Fill(dataTable);
@@ -81,6 +82,7 @@ namespace RJ_NOC_DataAccess.Common
                     con.Open();
                     using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
                     {
+                        sda.SelectCommand.CommandTimeout = 600;
                         using (DataSet dataSet = new DataSet())
                         {
                             sda.Fill(dataSet);
@@ -303,7 +305,7 @@ namespace RJ_NOC_DataAccess.Common
                 SqlQry += " @ResponseDataEnc = '" + req_Res.Request_JsonENC + "', ";
                 SqlQry += " @ResponseData = '" + req_Res.Response_Json + "', ";
                 SqlQry += " @AUIN = '" + req_Res.Request_AUIN + "', ";
-                SqlQry += " @CIN = '" + req_Res.Response_CIN+ "', ";
+                SqlQry += " @CIN = '" + req_Res.Response_CIN + "', ";
                 SqlQry += " @BankReferenceNo = '" + req_Res.Response_BankReferenceNo + "', ";
                 SqlQry += " @BANK_CODE = '" + req_Res.Response_BANK_CODE + "', ";
                 SqlQry += " @BankDate = '" + req_Res.Response_BankDate + "', ";
