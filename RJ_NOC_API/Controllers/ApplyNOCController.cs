@@ -1429,11 +1429,11 @@ namespace RJ_NOC_API.Controllers
                             int ParameterID = 0;
                             ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
                             Subjectdataset = new DataSet();
-                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID);
+                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(),Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]));
 
-                            dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
-                            dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
-                            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                            dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
                             ReportPath += "\\DECNOC_Print.rdlc";
                             localReport = new LocalReport(ReportPath);
                             localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
@@ -1444,11 +1444,11 @@ namespace RJ_NOC_API.Controllers
                             int ParameterID = 0;
                             ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
                             Subjectdataset = new DataSet();
-                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID);
+                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(), Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]));
 
-                            dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
-                            dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
-                            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
+                            dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
                             if (dataset.Tables[0].Rows[0]["NoOfIssuedYear"].ToString() == "2")
                             {
                                 ReportPath += "\\DECNOC_Print_TNOCExtention2.rdlc";
