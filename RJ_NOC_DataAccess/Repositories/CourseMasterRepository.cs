@@ -51,7 +51,7 @@ namespace RJ_NOC_DataAccess.Repository
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
-            return dataModels;
+            return dataModels; 
         }
 
         public List<CourseMasterDataModel> GetCollegeWiseCourseIDWise(int CollegeWiseCourseID, string LoginSSOID)
