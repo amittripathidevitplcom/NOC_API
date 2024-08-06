@@ -581,5 +581,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetLegelEntityDepartmentWise(DepartmentID);
         }
+        public bool ConvertBaseIntoImage()
+        {
+            return UnitOfWork.CommonFuncationRepository.ConvertBaseIntoImage();
+        }
     }
 }

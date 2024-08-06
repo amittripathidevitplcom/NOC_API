@@ -152,9 +152,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.ApplyNOCRepository.GetApplicationPenaltyList(SSOID);
         }
 
-        public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear)
+        public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear, string CourseIDs, string SubjectIDs)
         {
-            return UnitOfWork.ApplyNOCRepository.GetDraftNOCDetailsByNOCIID(ApplyNOCID, ParameterID, NoOfIssuedYear);
+            return UnitOfWork.ApplyNOCRepository.GetDraftNOCDetailsByNOCIID(ApplyNOCID, ParameterID, NoOfIssuedYear, CourseIDs, SubjectIDs);
         }
         public bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model)
         {

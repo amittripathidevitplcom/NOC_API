@@ -3975,5 +3975,51 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+
+
+
+
+
+
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="DepartmentID"></param>
+/// <returns></returns>
+
+        [HttpGet("ConvertBaseIntoImage")]
+        public async Task<OperationResult<bool>> ConvertBaseIntoImage()
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.ConvertBaseIntoImage());
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error in get data !";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.ConvertBaseIntoImage", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -847,7 +847,7 @@ namespace RJ_NOC_API.Controllers
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
                     }
-                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject" || dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject")
                     {
                         int ParameterID = 0;
                         ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
@@ -861,6 +861,36 @@ namespace RJ_NOC_API.Controllers
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
                         localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
+                    }
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
+                    {
+                        int ParameterID = 0;
+                        ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
+                        Subjectdataset = new DataSet();
+                        Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, ParameterID);
+
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
+                        localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
+                    }
+                    else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_PNOCSubject")
+                    {
+                        int ParameterID = 0;
+                        ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
+                        Subjectdataset = new DataSet();
+                        Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(ApplyNOCID, ParameterID);
+
+                        dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
+                        dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
+                        ReportPath += "\\DECNOC_Print_PNOC.rdlc";
+                        localReport = new LocalReport(ReportPath);
+                        localReport.AddDataSource("DCENOC1686_CollegeDetails", dataset.Tables[0]);
+                        localReport.AddDataSource("DCENOC1686_Subject_Details", Subjectdataset.Tables[1]);
                     }
                     else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_TNOCExtOfSubject")
                     {
@@ -1355,9 +1385,16 @@ namespace RJ_NOC_API.Controllers
             CommonDataAccessHelper.Insert_TrnUserLog(request.AppliedNOCFor[0].CreatedBy, "GenerateDraftNOCForDCE", request.AppliedNOCFor[0].ApplyNOCID, "ApplyNOCController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             string ParameterIDs = "";
+            string CourseIDs = "";
+            string SubjectIDs = "";
             for (int i = 0; i < request.AppliedNOCFor.Count; i++)
             {
                 ParameterIDs += ParameterIDs == "" ? request.AppliedNOCFor[i].ParameterID.ToString() : "," + request.AppliedNOCFor[i].ParameterID.ToString();
+            }
+            for (int i = 0; i < request.NOCDetails.Count; i++)
+            {
+                CourseIDs += CourseIDs == "" ? request.NOCDetails[i].CourseID.ToString() : "," + request.NOCDetails[i].CourseID.ToString();
+                SubjectIDs += SubjectIDs == "" ? request.NOCDetails[i].SubjectID.ToString() : "," + request.NOCDetails[i].SubjectID.ToString();
             }
             try
             {
@@ -1365,7 +1402,7 @@ namespace RJ_NOC_API.Controllers
                 List<DCENOCPDFPathDataModel> PdfPathList = new List<DCENOCPDFPathDataModel>();
                 DataSet dataset = new DataSet();
                 DataSet Subjectdataset = null;
-                dataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterIDs, request.AppliedNOCFor[0].NoOfIssuedYear.Value>0? request.AppliedNOCFor[0].NoOfIssuedYear.Value:0);
+                dataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterIDs, request.AppliedNOCFor[0].NoOfIssuedYear.Value>0? request.AppliedNOCFor[0].NoOfIssuedYear.Value:0,"0","0");
                 if (dataset.Tables[2].Rows.Count > 0)
                 {
                     for (int i = 0; i < dataset.Tables[2].Rows.Count; i++)
@@ -1424,12 +1461,12 @@ namespace RJ_NOC_API.Controllers
                             localReport = new LocalReport(ReportPath);
                             localReport.AddDataSource("DCENOC1654", dataset.Tables[0]);
                         }
-                        else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject" || dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
+                        else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewSubject")
                         {
                             int ParameterID = 0;
                             ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
                             Subjectdataset = new DataSet();
-                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(),Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]));
+                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(),Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]),CourseIDs,SubjectIDs);
 
                             dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
                             dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
@@ -1438,13 +1475,43 @@ namespace RJ_NOC_API.Controllers
                             localReport = new LocalReport(ReportPath);
                             localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
                             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
+                        }             
+                        else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_NewCourse")
+                        {
+                            int ParameterID = 0;
+                            ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
+                            Subjectdataset = new DataSet();
+                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(),Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]),CourseIDs,SubjectIDs);
+
+                            dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
+                            ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                            localReport = new LocalReport(ReportPath);
+                            localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
+                            localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
+                        }
+                        else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_PNOCSubject")
+                        {
+                            int ParameterID = 0;
+                            ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
+                            Subjectdataset = new DataSet();
+                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(),Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]),CourseIDs,SubjectIDs);
+
+                            dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
+                            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
+                            ReportPath += "\\DECNOC_Print_PNOC.rdlc";
+                            localReport = new LocalReport(ReportPath);
+                            localReport.AddDataSource("DCENOC1686_CollegeDetails", dataset.Tables[0]);
+                            localReport.AddDataSource("DCENOC1686_Subject_Details", Subjectdataset.Tables[1]);
                         }
                         else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_TNOCExtOfSubject")
                         {
                             int ParameterID = 0;
                             ParameterID = Convert.ToInt32(dataset.Tables[2].Rows[i]["ApplyNocParameterID"]);
                             Subjectdataset = new DataSet();
-                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(), Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]));
+                            Subjectdataset = UtilityHelper.ApplyNOCUtility.GetDraftNOCDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID.ToString(), Convert.ToInt32(dataset.Tables[0].Rows[0]["NoOfIssuedYear"]), CourseIDs, SubjectIDs);
 
                             dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
                             dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();

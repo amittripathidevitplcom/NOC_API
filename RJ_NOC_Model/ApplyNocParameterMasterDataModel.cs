@@ -258,6 +258,7 @@ namespace RJ_NOC_Model
         public string? Status { get; set; }
         public string? RoleName { get; set; }
         public string? SSOID { get; set; }
+        public string? NextUser { get; set; }
 
     }
 

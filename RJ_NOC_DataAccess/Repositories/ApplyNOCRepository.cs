@@ -521,9 +521,9 @@ namespace RJ_NOC_DataAccess.Repositories
             return Result;
         }
 
-        public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID,int NoOfIssuedYear)
+        public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID,int NoOfIssuedYear, string CourseIDs, string SubjectIDs)
         {
-            string SqlQuery = " exec USP_GetDraftNOCDetailsByNOCIID @NOCID='"+ApplyNOCID+"',@ParameterID='"+ParameterID+ "',@NoOfIssuedYear='" + NoOfIssuedYear + "'";
+            string SqlQuery = " exec USP_GetDraftNOCDetailsByNOCIID @NOCID='"+ApplyNOCID+"',@ParameterID='"+ParameterID+ "',@NoOfIssuedYear='" + NoOfIssuedYear + "',@CourseID='" + CourseIDs + "',@SubjectID='" + SubjectIDs + "'";
             DataSet dataset = new DataSet();
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetDraftNOCDetailsByNOCIID");
             return dataset;

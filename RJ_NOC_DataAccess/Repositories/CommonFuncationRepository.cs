@@ -1642,6 +1642,19 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }        
+        public bool ConvertBaseIntoImage()
+        {
+            bool result = false;
+            string SqlQuery = " exec USP_GetLegelEntityDepartmentWise";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetLegelEntityDepartmentWise");
+            List<DataTable> dataModels = new List<DataTable>();
+            //DataTable dataModel = new DataTable();
+            //dataModel = dataTable;
+            //dataModels.Add(dataModel);
+            //return dataModels;
+            return result;
         }
     }
 }
