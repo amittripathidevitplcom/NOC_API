@@ -889,8 +889,8 @@ namespace RJ_NOC_API.Controllers
                         dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
                         ReportPath += "\\DECNOC_Print_PNOC.rdlc";
                         localReport = new LocalReport(ReportPath);
-                        localReport.AddDataSource("DCENOC1686_CollegeDetails", dataset.Tables[0]);
-                        localReport.AddDataSource("DCENOC1686_Subject_Details", Subjectdataset.Tables[1]);
+                        localReport.AddDataSource("DCENOCPNOC_CollegeDetails", dataset.Tables[0]);
+                        localReport.AddDataSource("DCENOCPNOC_Subject_Details", Subjectdataset.Tables[1]);
                     }
                     else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_TNOCExtOfSubject")
                     {
@@ -1503,8 +1503,8 @@ namespace RJ_NOC_API.Controllers
                             dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
                             ReportPath += "\\DECNOC_Print_PNOC.rdlc";
                             localReport = new LocalReport(ReportPath);
-                            localReport.AddDataSource("DCENOC1686_CollegeDetails", dataset.Tables[0]);
-                            localReport.AddDataSource("DCENOC1686_Subject_Details", Subjectdataset.Tables[1]);
+                            localReport.AddDataSource("DCENOCPNOC_CollegeDetails", dataset.Tables[0]);
+                            localReport.AddDataSource("DCENOCPNOC_Subject_Details", Subjectdataset.Tables[1]);
                         }
                         else if (dataset.Tables[2].Rows[i]["ParameterCode"].ToString() == "DEC_TNOCExtOfSubject")
                         {

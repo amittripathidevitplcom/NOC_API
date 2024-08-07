@@ -834,7 +834,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> भरकर अपलोड करना अनिवार्य होगा महाविधालय अपलोडेड प्रमाण-पत्र की कॉपी            आवश्यकतानुसार आयुक्तालय में प्रस्तुत करे।</Value>
+                    <Value> भरकर अपलोड करना अनिवार्य होगा महाविद्यालय अपलोडेड प्रमाण-पत्र की कॉपी            आवश्यकतानुसार आयुक्तालय में प्रस्तुत करे।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -1226,8 +1226,8 @@
       </Body>
       <Width>17cm</Width>
       <Page>
-        <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
+        <PageHeight>35.56cm</PageHeight>
+        <PageWidth>21.59cm</PageWidth>
         <LeftMargin>2cm</LeftMargin>
         <RightMargin>2cm</RightMargin>
         <TopMargin>1cm</TopMargin>

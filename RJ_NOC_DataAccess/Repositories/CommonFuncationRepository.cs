@@ -12,6 +12,11 @@ using Newtonsoft.Json;
 using System.Net.NetworkInformation;
 using System.Xml.Linq;
 using System.Drawing.Drawing2D;
+using System.Drawing;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Data.SqlTypes;
+using System.Globalization;
+using System.Drawing.Imaging;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -929,7 +934,7 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID,int ApplyNOCID)
+        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID, int ApplyNOCID)
         {
             string SqlQuery = "exec USP_CommonDataList @Key='GetUserDetailsByRoleID',@RoleID='" + RoleID + "',@DepartmentID='" + DepartmentID + "',@ApplyNOCID='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
@@ -1421,7 +1426,7 @@ namespace RJ_NOC_DataAccess.Repository
                 "@SubDivisionID='" + request.SubDivisionID + "',@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='" + request.NOCStatusID + "',@WorkFlowActionID='" + request.WorkFlowActionID + "'," +
                 "@CollegeTypeID='" + request.CollegeTypeID + "',@FromSubmitDate='" + request.FromSubmitDate + "',@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationID='" + request.ApplicationID + "'," +
                 "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "'"
-                
+
                 ;
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetTotalApplicationListByDepartment");
@@ -1620,7 +1625,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        } 
+        }
         public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
         {
             string SqlQuery = " exec USP_GetApplicationCountRoleWise @DepartmentID='" + DepartmentID + "'";
@@ -1631,7 +1636,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        } 
+        }
         public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID)
         {
             string SqlQuery = " exec USP_GetLegelEntityDepartmentWise @DepartmentID='" + DepartmentID + "'";
@@ -1642,18 +1647,38 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }        
+        }
         public bool ConvertBaseIntoImage()
         {
             bool result = false;
-            string SqlQuery = " exec USP_GetLegelEntityDepartmentWise";
+            string SqlQuery = " exec USP_GetBase64ImageData";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetLegelEntityDepartmentWise");
-            List<DataTable> dataModels = new List<DataTable>();
-            //DataTable dataModel = new DataTable();
-            //dataModel = dataTable;
-            //dataModels.Add(dataModel);
-            //return dataModels;
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                string FileName = i.ToString().ToUpper() + "_" + dataTable.Rows[i]["iPK_IssueId"].ToString().ToString() + ".JPG";
+                var uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile");
+                var finalPath = Path.Combine(uploadFolder, FileName);
+
+                int PKID = 0;
+                string test = Convert.ToBase64String((byte[])(dataTable.Rows[i]["bAttachFile"]));
+                PKID = Convert.ToInt32(dataTable.Rows[i]["iPK_IssueId"]);
+                UpdatePhysicalFile(PKID, "");
+
+            }
+            return result;
+        }
+
+        public bool UpdatePhysicalFile(int PKID, string FilePath)
+        {
+            bool result = false;
+            string SqlQuery = " exec USP_UpdatePhysicalFile @PKID='" + PKID + "',@bPhysicalAttachFile='" + FilePath + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.UpdatePhysicalFile");
+            if (dataTable.Rows.Count > 0)
+            {
+                result = true;
+            }
             return result;
         }
     }

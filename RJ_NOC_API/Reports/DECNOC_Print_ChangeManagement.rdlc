@@ -828,7 +828,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>7. सम्बन्धित संस्था / महाविद्यालय । </Value>
+                    <Value>5. सम्बन्धित संस्था / महाविद्यालय । </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontSize>9pt</FontSize>
@@ -845,7 +845,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>8. सांख्यिकी शाखा, आयुक्तालय, कॉलेज शिक्षा, राजस्थान, जयपुर । </Value>
+                    <Value>6. सांख्यिकी शाखा, आयुक्तालय, कॉलेज शिक्षा, राजस्थान, जयपुर । </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontSize>9pt</FontSize>
@@ -862,7 +862,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>9. रक्षित पत्रावली</Value>
+                    <Value>7. रक्षित पत्रावली</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontSize>9pt</FontSize>

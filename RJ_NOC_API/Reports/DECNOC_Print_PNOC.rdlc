@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DCENOC1686_CollegeDetails">
+    <DataSet Name="DCENOCPNOC_CollegeDetails">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -107,7 +107,7 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
-    <DataSet Name="DCENOC1686_Subject_Details">
+    <DataSet Name="DCENOCPNOC_Subject_Details">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -140,7 +140,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>E:\Ravi Raj\RJ_NOC\RJ_NOC_API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Deepak Project\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>CourseAndSubjectDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -768,7 +768,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>DCENOC1686_Subject_Details</DataSetName>
+            <DataSetName>DCENOCPNOC_Subject_Details</DataSetName>
             <Top>6.57912cm</Top>
             <Left>0.02687cm</Left>
             <Height>1.2cm</Height>
@@ -951,7 +951,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!CollegeDistrict.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Value>=First(Fields!CollegeDistrict.Value, "DCENOCPNOC_CollegeDetails")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -976,7 +976,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!UniversityName.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Value>=First(Fields!UniversityName.Value, "DCENOCPNOC_CollegeDetails")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -1060,7 +1060,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Value>=First(Fields!NOCIssueNo.Value, "DCENOCPNOC_CollegeDetails")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1091,7 +1091,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Date.Value, "DCENOC1686_CollegeDetails")</Value>
+                    <Value>=First(Fields!Date.Value, "DCENOCPNOC_CollegeDetails")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1119,7 +1119,7 @@
           </Textbox>
           <Image Name="Image5">
             <Source>Database</Source>
-            <Value>=First(Fields!NocQRCode.Value, "DCENOC1686_CollegeDetails")</Value>
+            <Value>=First(Fields!NocQRCode.Value, "DCENOCPNOC_CollegeDetails")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Top>21.5565cm</Top>
