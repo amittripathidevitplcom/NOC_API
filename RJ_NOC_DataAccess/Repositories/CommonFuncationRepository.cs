@@ -1656,14 +1656,23 @@ namespace RJ_NOC_DataAccess.Repository
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetLegelEntityDepartmentWise");
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                string FileName = i.ToString().ToUpper() + "_" + dataTable.Rows[i]["iPK_IssueId"].ToString().ToString() + ".JPG";
+                string FileName = Guid.NewGuid + i.ToString().ToUpper() + "_" + dataTable.Rows[i]["iPK_IssueId"].ToString().ToString() + ".Jpeg";
                 var uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "ImageFile");
                 var finalPath = Path.Combine(uploadFolder, FileName);
 
                 int PKID = 0;
-                string test = Convert.ToBase64String((byte[])(dataTable.Rows[i]["bAttachFile"]));
+                string base64String = Convert.ToBase64String((byte[])(dataTable.Rows[i]["bAttachFile"]));
+                byte[] bytes = Convert.FromBase64String(base64String);
+
+                Image image;
+                using (MemoryStream ms = new MemoryStream(bytes))
+                {
+                    image = Image.FromStream(ms);
+                }
+
+                image.Save(finalPath, System.Drawing.Imaging.ImageFormat.Jpeg);
                 PKID = Convert.ToInt32(dataTable.Rows[i]["iPK_IssueId"]);
-                UpdatePhysicalFile(PKID, "");
+                UpdatePhysicalFile(PKID, FileName);
 
             }
             return result;
