@@ -394,20 +394,20 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>सत्र 2024-25 से 2026-27 (तीन सत्र)</Value>
+                    <Value>सत्र 2024-25 से</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> के लिए स्नातक </Value>
+                    <Value> स्नाकोत्तर </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>स्तर पर नवीन संकाय व विषय में अस्थाई अनापत्ति प्रमाण पत्र </Value>
+                    <Value>स्तर पर नवीन संकाय में स्थाई अनापत्ति प्रमाण पत्र </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -775,20 +775,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>1. संस्था अस्थाई अनापत्ति प्रमाण-पत्र प्राप्त प्रत्येक सत्र हेतु नियमानुसार मय निरीक्षण शुल्क आवेदन करेगी।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>2. संस्था सत्र 2027-28 में निर्धारित अवधि में नियमानुसार अस्थाई अनापत्ति प्रमाण पत्र अभिवृद्धि/स्थायी अनापत्ति हेतु आवेदन    करेगी।
-3. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।
-4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता है|</Value>
+                    <Value>1. संस्था प्रत्येक सत्र हेतु नियमानुसार मय निरीक्षण शुल्क आवेदन करेगी।
+2. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।
+3. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता है|</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -802,18 +791,18 @@
                   </TextRun>
                   <TextRun>
                     <Value>अधिकृत अधिकारी     द्वारा मांगा गया अभिलेख उपलब्ध करायेगी।
-5. संस्था को समय-समय पर यू.जी.सी. / राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप    से करनी होगी।
-6. संस्था संबंधित विश्वविद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में BCI से मान्यता व विश्वविद्यालय से    समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।
-7. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी       तथा महाविद्यालय तदनुसार तय संख्या सीमा में प्रवेश दिया जाना सुनिश्चित करेगा।
-8. संस्था महाविद्यालय में अध्यापन कार्य हेतु यू.जी.सी. अर्हताधारी प्राचार्य एवं व्याख्याताओं तथा निर्धारित मानदण्डानुसार          अशैक्षणिक स्टाफ की नियुक्ति के साथ-साथ अन्य निर्धारित शर्तों की पालना करेगी ।
-9. राज्य सरकार की महाविद्यालय प्रवेश नीति 2024-25 तथा बाद में जारी होने वाली नीतियों का पालन करना होगा |</Value>
+4. संस्था को समय-समय पर यू.जी.सी. / राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप    से करनी होगी।
+5. संस्था संबंधित विश्वविद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में BCI से मान्यता व विश्वविद्यालय से    समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।
+6. संस्था संकाय व विषयवार सीटों का आवंटन विश्वविद्यालय द्वारा प्राप्त कर आयुक्तालय कॉलेज शिक्षा विभाग को सूचित करेगी       तथा महाविद्यालय तदनुसार तय संख्या सीमा में प्रवेश दिया जाना सुनिश्चित करेगा।
+7. संस्था महाविद्यालय में अध्यापन कार्य हेतु यू.जी.सी. अर्हताधारी प्राचार्य एवं व्याख्याताओं तथा निर्धारित मानदण्डानुसार          अशैक्षणिक स्टाफ की नियुक्ति के साथ-साथ अन्य निर्धारित शर्तों की पालना करेगी ।
+8. राज्य सरकार की महाविद्यालय प्रवेश नीति 2024-25 तथा बाद में जारी होने वाली नीतियों का पालन करना होगा |</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>
-10.संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाएं निर्धारित अवधि     मे भरकर अपलोड़ करेगी।</Value>
+9. संस्था प्रति वर्ष विभाग के NOC पोर्टल पर आवश्यक सांख्यिकी एवं महाविद्यालय की सूचनाएं निर्धारित अवधि     मे भरकर अपलोड़ करेगी।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -821,7 +810,7 @@
                   </TextRun>
                   <TextRun>
                     <Value>
-11.मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर करवाकर          </Value>
+10.मानव संसाधन विकास मंत्रालय, भारत सरकार के वेबपोर्टल www.aishe.nic.in पर महाविद्यालय को रजिस्टर करवाकर          </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -840,13 +829,41 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>11. स्थाई मान्यता प्राप्त संस्थाएँ गुणवत्ता संवर्धन हेतु NAAC से  प्रत्यायन प्राप्त करना सुनिश्चित करें |</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>12.राज्य सरकार संस्था को वर्तमान और भविष्य में इस हेतु कोई वित्तीय सहायता नहीं देगी। </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>7.98322cm</Top>
             <Left>0.10625cm</Left>
-            <Height>7.77564cm</Height>
+            <Height>8.67735cm</Height>
             <Width>16.7875cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -893,7 +910,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>16.9672cm</Top>
+            <Top>17.9197cm</Top>
             <Left>11.76645cm</Left>
             <Height>0.99688cm</Height>
             <Width>5.0073cm</Width>
@@ -1046,7 +1063,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>17.02302cm</Top>
+            <Top>17.97552cm</Top>
             <Left>0.10625cm</Left>
             <Height>4.03959cm</Height>
             <Width>11.11219cm</Width>
@@ -1095,7 +1112,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>21.44156cm</Top>
+            <Top>22.39406cm</Top>
             <Left>11.80707cm</Left>
             <Height>1.31438cm</Height>
             <Width>5.00729cm</Width>
@@ -1176,7 +1193,7 @@
             <Value>=First(Fields!NocQRCode.Value, "DataSet_CollegeDetails")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>21.239cm</Top>
+            <Top>22.1915cm</Top>
             <Left>0.10625cm</Left>
             <Height>1.67569cm</Height>
             <Width>3.48438cm</Width>
@@ -1194,7 +1211,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
+                    <Value>उपर्युक्त शतों की पालना नहीं करने पर स्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1205,7 +1222,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>15.88446cm</Top>
+            <Top>16.83696cm</Top>
             <Left>0.19791cm</Left>
             <Height>0.59265cm</Height>
             <Width>16.51327cm</Width>

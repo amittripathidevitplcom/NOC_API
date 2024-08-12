@@ -87,6 +87,12 @@ namespace RJ_NOC_Model
         public string? WebsiteImagePath { get; set; }
         public string? WebsiteImage_Dis_FileName { get; set; }
 
+        public string? AppliedICAR { get; set; }
+        public string? ApprovedICAR { get; set; }
+        public string? ICARDocument { get; set; }
+        public string? ICARDocumentPath { get; set; }
+        public string? ICARDocument_Dis_FileName { get; set; }
+
 
 
         //public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }

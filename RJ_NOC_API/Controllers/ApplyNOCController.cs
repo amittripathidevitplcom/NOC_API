@@ -872,7 +872,28 @@ namespace RJ_NOC_API.Controllers
                         dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
                         dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
                         dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
-                        ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                        if (dataset.Tables.Count > 3)
+                        {
+                            if (dataset.Tables[3].Rows.Count > 0)
+                            {
+                                if (dataset.Tables[3].Rows[0]["CourseLevel"].ToString() == "PG" && dataset.Tables[3].Rows[0]["CollegePresentStatus"].ToString() == "PNOC Holder")
+                                {
+                                    ReportPath += "\\DECNOC_Print_NewCourse_PG.rdlc";
+                                }
+                                else
+                                {
+                                    ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                                }
+                            }
+                            else
+                            {
+                                ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                            }
+                        }
+                        else
+                        {
+                            ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                        }
                         localReport = new LocalReport(ReportPath);
                         localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
                         localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
@@ -1486,7 +1507,28 @@ namespace RJ_NOC_API.Controllers
                             dataset.Tables[0].Rows[0]["NOCIssueNo"] = Subjectdataset.Tables[2].Rows[0]["NOCIssueNo"].ToString();
                             dataset.Tables[0].Rows[0]["NocQRCodeLink"] = Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString();
                             dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(Subjectdataset.Tables[2].Rows[0]["NocQRCodeLink"].ToString());
-                            ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                            if(dataset.Tables.Count>3)
+                            {
+                                if (dataset.Tables[3].Rows.Count>0)
+                                {
+                                    if (dataset.Tables[3].Rows[0]["CourseLevel"].ToString()=="PG" && dataset.Tables[3].Rows[0]["CollegePresentStatus"].ToString() == "PNOC Holder")
+                                    {
+                                        ReportPath += "\\DECNOC_Print_NewCourse_PG.rdlc";
+                                    }
+                                    else
+                                    {
+                                        ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                                    }
+                                }
+                                else
+                                {
+                                    ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                                }
+                            }
+                            else
+                            {
+                                ReportPath += "\\DECNOC_Print_NewCourse.rdlc";
+                            }
                             localReport = new LocalReport(ReportPath);
                             localReport.AddDataSource("DataSet_CollegeDetails", dataset.Tables[0]);
                             localReport.AddDataSource("DataSet_CourseAndSubjectDetails", Subjectdataset.Tables[1]);
