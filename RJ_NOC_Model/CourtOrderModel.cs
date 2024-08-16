@@ -12,6 +12,8 @@ namespace RJ_NOC_Model
         public int DepartmentID { get; set; }
         public int CollegeID { get; set; }
         public string? OrderName { get; set; }
+        public string? CourtName { get; set; }
+        public string? CivilPetitionNo { get; set; }
         public string? OrderDate { get; set; }
         public string? OrderDocumentName { get; set; }
         public string? OrderDocumentNamePath { get; set; }
