@@ -617,9 +617,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type)
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type,int DesignationID)
         {
-            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "',@Type='" + Type + "'";
+            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "',@Type='" + Type + "',@DesignationID='" + DesignationID +"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentWise");
 

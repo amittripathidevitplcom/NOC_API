@@ -42,5 +42,9 @@ namespace RJ_NOC_Model
         public string? S_Remark { get; set; }
 
         public int NoOfRooms { get; set; }
+
+        public string? BookInvoiceFileName { get; set; }
+        public string? BookInvoiceFilePath { get; set; }
+        public string? BookInvoice_Dis_FileName { get; set; }
     }
 }

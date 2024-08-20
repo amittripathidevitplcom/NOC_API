@@ -75,7 +75,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_Annexure> GetAnnexureDataList_DepartmentWise(int DepartmentID, int LandDocumentTypeID, int LandConvertedID);
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID, int CollageID);
 
-        List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type);
+        List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type, int DesignationID);
 
         List<CommonDataModel_CollegeWiseSubject> GetCollegeWiseSubjectList(int CollegeID);
 

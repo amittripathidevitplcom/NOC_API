@@ -37,6 +37,8 @@ namespace RJ_NOC_DataAccess.Repositories
             sb.AppendFormat("@DepartmentID='{0}',", request.DepartmentID);
             sb.AppendFormat("@CollegeID='{0}',", request.CollegeID);
             sb.AppendFormat("@OrderName='{0}',", request.OrderName);
+            sb.AppendFormat("@CourtName='{0}',", request.CourtName);
+            sb.AppendFormat("@CivilPetitionNo='{0}',", request.CivilPetitionNo);
             sb.AppendFormat("@OrderDate='{0}',", request.OrderDate);
             sb.AppendFormat("@OrderDocumentName='{0}',", request.OrderDocumentName);
             sb.AppendFormat("@UserID='{0}',", request.UserID);
