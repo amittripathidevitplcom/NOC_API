@@ -18,10 +18,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_LandDetails(CollageID, RoleID, ApplyNOCID);
         }
-        
+
         public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyCollegeDocument> DocumentScrutiny_CollegeDocument(int DepartmentID, int CollageID, int RoleID, int ApplyNOCID, string Type)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_CollegeDocument(DepartmentID,CollageID, RoleID, ApplyNOCID,Type);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_CollegeDocument(DepartmentID, CollageID, RoleID, ApplyNOCID, Type);
         }
         public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyOtherInformation> DocumentScrutiny_OtherInformation(int CollageID, int RoleID, int ApplyNOCID)
         {
@@ -76,7 +76,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_ParamedicalHospitalDetail(CollageID, RoleID, ApplyNOCID);
         }
 
-        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID,int CollegeID)
+        public List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID, CollegeID);
         }
@@ -88,7 +88,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<ApplyNocApplicationDetails_DataModel> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID, Status, ActionName);
-        }       
+        }
         public bool FinalSubmitInspectionCommittee(int ApplyNOCID, int CreatedBy)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.FinalSubmitInspectionCommittee(ApplyNOCID, CreatedBy);
@@ -96,7 +96,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetApplicationPvDetails(int ApplyNOCID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetApplicationPvDetails(ApplyNOCID);
-        }  
+        }
         public List<DepartmentOfCollegeDocumentScrutinyDataModel_DocumentScrutinyClassWiseStudentDetails> DocumentScrutiny_ClassWiseStudentDetail(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_ClassWiseStudentDetail(CollageID, RoleID, ApplyNOCID);
@@ -121,7 +121,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetClassWiseStaticReport(request);
-        }     
+        }
         public List<CommonDataModel_DataTable> GetSubjectWiseStaticReport(SearchFilterDataModel request)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetSubjectWiseStaticReport(request);
@@ -138,7 +138,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertApplicationRemarkByDepartment(DepartmentID,ApplicationID,RoleID);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetRevertApplicationRemarkByDepartment(DepartmentID, ApplicationID, RoleID);
+        }
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails> DocumentScrutiny_FDRDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_FDRDetail(CollageID, RoleID, ApplyNOCID);
+        }
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> DocumentScrutiny_PaymentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_PaymentDetail(CollageID, RoleID, ApplyNOCID);
         }
 
     }

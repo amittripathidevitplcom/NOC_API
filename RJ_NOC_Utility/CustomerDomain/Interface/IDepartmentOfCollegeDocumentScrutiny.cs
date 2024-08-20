@@ -45,5 +45,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID,int RoleID);
 
+        List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails> DocumentScrutiny_FDRDetail(int CollageID, int RoleID, int ApplyNOCID);
+        List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> DocumentScrutiny_PaymentDetail(int CollageID, int RoleID, int ApplyNOCID);
+
     }
 }

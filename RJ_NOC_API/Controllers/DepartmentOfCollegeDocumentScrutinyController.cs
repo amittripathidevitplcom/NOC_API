@@ -983,6 +983,72 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+
+        [HttpPost("DocumentScrutiny_FDRDetail/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails>>> DocumentScrutiny_FDRDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.DocumentScrutiny_FDRDetail(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error in data load.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_FDRDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("DocumentScrutiny_PaymentDetail/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails>>> DocumentScrutiny_PaymentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.DocumentScrutiny_PaymentDetail(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_RoomDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

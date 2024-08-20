@@ -69,6 +69,19 @@ namespace RJ_NOC_Model
         public List<RoomDetailsDataModel> RoomDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
+
+    public class DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails
+    {
+        public List<DataTable> FDRDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
+
+    public class DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails
+    {
+        public List<DataTable> OnlinePaymentDetails { get; set; }
+        public List<DataTable> OfflinePaymentDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
     public class DepartmentOfCollegeDocumentScrutinyDataModel_DocumentBuildingDetails
     {
         public List<BuildingDetailsDataModel> BuildingDetails { get; set; }

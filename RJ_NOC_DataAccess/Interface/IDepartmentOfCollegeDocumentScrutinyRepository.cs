@@ -53,6 +53,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate);
 
         List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID);
+
+        List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails> DocumentScrutiny_FDRDetail(int CollageID, int RoleID, int ApplyNOCID);
+        List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> DocumentScrutiny_PaymentDetail(int CollageID, int RoleID, int ApplyNOCID);
     }
 
 }
