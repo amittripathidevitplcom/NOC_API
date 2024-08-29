@@ -151,6 +151,7 @@ namespace RJ_NOC_Model
         public string Remark { get; set; }
         public int? NoOfIssuedYear { get; set; }
         public string? PdfFilePath { get; set; }
+        public string? NOCFormat { get; set; }
     }
 
     public class NOCIssuedRequestDataModel

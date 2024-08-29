@@ -177,6 +177,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetApplicationCountRoleWise(int DepartmentID);
         List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID);
         bool ConvertBaseIntoImage();
+        bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request);
+        List<DataTable> GetNOCFormatList(int NOCFormatID);
     }
 }
 

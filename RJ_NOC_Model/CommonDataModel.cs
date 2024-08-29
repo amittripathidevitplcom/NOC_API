@@ -346,5 +346,13 @@ namespace RJ_NOC_Model
         public int IsDraftSubmited { get; set; }
         public string? Deficiency { get; set; }
 
+    }    
+    public class CommonDataModel_NOCFormatMaster
+    {
+        public int NOCFormatID { get; set; }
+        public int DepartmentID { get; set; }
+        public int ParameterID { get; set; }
+        public string NOCFormat { get; set; }
+
     }
 }

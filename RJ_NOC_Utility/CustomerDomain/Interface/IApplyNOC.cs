@@ -46,5 +46,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear,string CourseIDs,string SubjectIDs);
         bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
+        bool ForwardToEsignDCE(int ApplyNOCID,int UserId);
     }
 }

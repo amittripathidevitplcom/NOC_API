@@ -1690,6 +1690,30 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return result;
         }
+
+        public bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveNOCFormatMaster";
+            SqlQuery += " @NOCFormatID='" + request.NOCFormatID + "',@DepartmentID='" + request.DepartmentID + "',@ParameterID='" + request.ParameterID + "',@NOCFormat=N'" + request.NOCFormat + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveNOCFormatMaster");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<DataTable> GetNOCFormatList(int NOCFormatID)
+        {
+            string SqlQuery = " exec USP_GetNOCFormatList @NOCFormatID='" + NOCFormatID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetNOCFormatList");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
 

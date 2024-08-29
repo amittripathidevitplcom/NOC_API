@@ -160,5 +160,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SaveDCEDraftNOCData(model);
         }
+        public bool ForwardToEsignDCE(int ApplyNOCID, int UserId)
+        {
+            return UnitOfWork.ApplyNOCRepository.ForwardToEsignDCE(ApplyNOCID,UserId);
+        }
     }
 }

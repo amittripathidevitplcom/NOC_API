@@ -585,5 +585,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.ConvertBaseIntoImage();
         }
+        public bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveNOCFormatMaster(request);
+        }
+        public List<DataTable> GetNOCFormatList(int NOCFormatID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetNOCFormatList(NOCFormatID);
+        }
     }
 }

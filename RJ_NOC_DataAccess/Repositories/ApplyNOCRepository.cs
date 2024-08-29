@@ -539,6 +539,16 @@ namespace RJ_NOC_DataAccess.Repositories
                 return true;
             else
                 return false;
+        }   
+        public bool ForwardToEsignDCE(int ApplyNOCID, int UserId)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = "exec USP_SaveDCENOCData @NOCID='" + ApplyNOCID+ "',@EsignBy='" + UserId+ "',@ActionType='ForwardToEsign'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.ForwardToEsignDCE");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
