@@ -16,6 +16,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveDefaulterCollegePenalty(ApplicationPenaltyDataModel request);
         List<CommonDataModel_DataTable> GetDefaulterCollegePenalty(int RequestID,int PenaltyID);
         public bool DeleteDefaulterCollegePenalty(int PenaltyID);
+        bool IfExists(string ApplicationNo, string SubmittedDate);
     }
 
 }

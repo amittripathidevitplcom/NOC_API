@@ -91,6 +91,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetDepartmentList_IsOpenDefaulter")]
+        public async Task<OperationResult<List<CommonDataModel_DepartmentMasterList>>> GetDepartmentList_IsOpenDefaulter()
+        {
+            var result = new OperationResult<List<CommonDataModel_DepartmentMasterList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDepartmentList_IsOpenDefaulter());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDepartmentList_IsOpenDefaulter", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
 
         [HttpGet("GetSchemeListByDepartment/{DepartmentID}")]
         public async Task<OperationResult<List<CommonDataModel_SchemeListByDepartment>>> GetSchemeListByDepartment(int DepartmentID)

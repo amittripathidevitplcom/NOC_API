@@ -38,6 +38,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.DeleteDefaulterCollegePenalty(PenaltyID);
         }
+        public bool IfExists(string ApplicationNo, string SubmittedDate)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.IfExists(ApplicationNo, SubmittedDate);
+        }
 
     }
 }

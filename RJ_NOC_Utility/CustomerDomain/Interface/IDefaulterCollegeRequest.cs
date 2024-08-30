@@ -12,7 +12,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(DefaulterCollegeRequestDataModel request);
         public bool DeleteData(int RequestID);
 
-
+        bool IfExists(string ApplicationNo, string SubmittedDate);
         bool SaveDefaulterCollegePenalty(ApplicationPenaltyDataModel request);
         List<CommonDataModel_DataTable> GetDefaulterCollegePenalty(int RequestID,int PenaltyID);
         public bool DeleteDefaulterCollegePenalty(int PenaltyID);

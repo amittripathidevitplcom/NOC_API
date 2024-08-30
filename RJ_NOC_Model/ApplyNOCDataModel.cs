@@ -204,6 +204,7 @@ namespace RJ_NOC_Model
         public decimal PenaltyAmount { get; set; }
         public bool? IsPayment { get; set; }
         public int CreatedBy { get; set; }
+        public string? ApproveReject { get; set; }
 
     }
 }

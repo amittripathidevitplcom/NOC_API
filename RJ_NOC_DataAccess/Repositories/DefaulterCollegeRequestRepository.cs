@@ -89,7 +89,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @RequestID='" + request.ApplyNOCID + "',";
             SqlQuery += " @Penaltyfor='" + request.Penaltyfor + "',";
             SqlQuery += " @PenaltyAmount='" + request.PenaltyAmount + "',";
-            SqlQuery += " @CreatedBy='" + request.CreatedBy + "'";
+            SqlQuery += " @CreatedBy='" + request.CreatedBy + "',";
+            SqlQuery += " @ApproveReject='" + request.ApproveReject + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DefaulterCollege.SaveDefaulterCollegePenalty");
             if (Rows > 0)
                 return true;
@@ -118,7 +119,16 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-
+        public bool IfExists(string ApplicationNo, string SubmittedDate)
+        {
+            string SqlQuery = "USP_IfExistsOldDefaulterCollege @ApplicationNo='" + ApplicationNo + "', @SubmittedDate='" + SubmittedDate + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
 
     }
 }

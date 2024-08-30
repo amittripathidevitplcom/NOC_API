@@ -38,6 +38,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication()
         {
             return UnitOfWork.CommonFuncationRepository.GetDepartmentList_IsOpenNOCApplication();
+        }       
+        public List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenDefaulter()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDepartmentList_IsOpenDefaulter();
         }
 
         public List<CommonDataModel_SchemeListByDepartment> GetSchemeListByDepartment(int DepatmentID)

@@ -23,29 +23,69 @@ namespace RJ_NOC_API.Controllers
 
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
-                if (result.Data)
+                if (request.EverAppliedNOC == "Yes")
                 {
-                    result.State = OperationState.Success;
-                    if (request.RequestID == 0)
+                    bool IfExits = false;
+                    IfExits = UtilityHelper.DefaulterCollegeRequestUtility.IfExists(request.LastApplicationNo, request.LastApplicationSubmittedDate);
+                    if (IfExits == true)
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
-                        result.SuccessMessage = "Saved successfully .!";
+                        result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
+                        if (result.Data)
+                        {
+                            result.State = OperationState.Success;
+                            if (request.RequestID == 0)
+                            {
+                                CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
+                                result.SuccessMessage = "Saved successfully .!";
+                            }
+                            else
+                            {
+                                CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
+                                result.SuccessMessage = "Updated successfully .!";
+                            }
+                        }
+                        else
+                        {
+                            result.State = OperationState.Error;
+                            if (request.RequestID == 0)
+                                result.ErrorMessage = "There was an error adding data.!";
+                            else
+                                result.ErrorMessage = "There was an error updating data.!";
+                        }
                     }
                     else
                     {
-                        CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
-                        result.SuccessMessage = "Updated successfully .!";
+                        result.State = OperationState.Warning;
+                        result.ErrorMessage = "this Last Application Number - " + request.LastApplicationNo + " or Submitted Application Date - " + request.LastApplicationSubmittedDate + " data not found.!";
                     }
                 }
                 else
                 {
-                    result.State = OperationState.Error;
-                    if (request.RequestID == 0)
-                        result.ErrorMessage = "There was an error adding data.!";
+                    result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
+                    if (result.Data)
+                    {
+                        result.State = OperationState.Success;
+                        if (request.RequestID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
+                            result.SuccessMessage = "Updated successfully .!";
+                        }
+                    }
                     else
-                        result.ErrorMessage = "There was an error updating data.!";
+                    {
+                        result.State = OperationState.Error;
+                        if (request.RequestID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
+                    }
                 }
+
             }
             catch (Exception e)
             {
