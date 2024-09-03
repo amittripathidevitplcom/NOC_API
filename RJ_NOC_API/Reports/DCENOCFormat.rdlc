@@ -426,7 +426,9 @@
                   <TextRun>
                     <Value>=First(Fields!NOCFormat.Value, "NOCFormat_DCE")</Value>
                     <MarkupType>HTML</MarkupType>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />

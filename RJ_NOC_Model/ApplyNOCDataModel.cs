@@ -92,6 +92,7 @@ namespace RJ_NOC_Model
         public string? L1UploadDocument { get; set; }
         public string? L1UploadDocumentPath { get; set; }
         public string? Penalty { get; set; }
+        public string? ApplicationTypes { get; set; }
 
 
 

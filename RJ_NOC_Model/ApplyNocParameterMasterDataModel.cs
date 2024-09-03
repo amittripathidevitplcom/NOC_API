@@ -127,8 +127,8 @@ namespace RJ_NOC_Model
         public int ApplyNocID { get; set; }
         public int CollegeID { get; set; }
         public string CollegeName { get; set; }
-        public string CourseType { get; set; }
-        public string CollegeType { get; set; }
+        public string? CourseType { get; set; }
+        public string? CollegeType { get; set; }
         public int DepartmentID { get; set; }
         public decimal Amount { get; set; }
         public string BankName { get; set; }
@@ -143,6 +143,7 @@ namespace RJ_NOC_Model
         public string FDRDocumentPath { get; set; }
         public string FDRDocument_Dis_FileName { get; set; }
         public string FDRExpriyDate { get; set; }
+        public string? Action { get; set; }
     }
 
     // application details
