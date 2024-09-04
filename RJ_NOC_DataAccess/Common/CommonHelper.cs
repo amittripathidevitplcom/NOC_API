@@ -92,7 +92,14 @@ namespace RJ_NOC_DataAccess.Common
                 {
                     var Key = property.Name;
                     var Value = property.GetValue(item, null);
-                    CandidateInfo_Str += "''" + AvoidSQLInjection_Char(Value?.ToString()) + "'' as ''" + Key + "'',";
+                    if (Key == "Remark" || Key == "FinalRemark")
+                    {
+                        CandidateInfo_Str += "N''" + AvoidSQLInjection_Char(Value?.ToString()) + "'' as ''" + Key + "'',";
+                    }
+                    else
+                    {
+                        CandidateInfo_Str += "''" + AvoidSQLInjection_Char(Value?.ToString()) + "'' as ''" + Key + "'',";
+                    }
                 }
                 if (CandidateInfo_Str != "")
                 {
@@ -118,8 +125,8 @@ namespace RJ_NOC_DataAccess.Common
             return str;
         }
 
-        private static string _privateKey= "DevITNOT";
-        private static string _publicKey= "DevITNOT";
+        private static string _privateKey = "DevITNOT";
+        private static string _publicKey = "DevITNOT";
         private static UnicodeEncoding _encoder = new UnicodeEncoding();
         public static string Encrypt(string textToEncrypt, string EncryptionPassword = "DevITNOT")
         {

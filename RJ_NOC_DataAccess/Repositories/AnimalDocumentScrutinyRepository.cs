@@ -438,7 +438,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_FinalSubmitPreVerification_AH";
-            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "',@Remarks='" + Remarks + "'";
+            SqlQuery += " @ApplyNOCID='" + ApplyNOCID + "',@DepartmentID='" + DepartmentID + "',@createdBy='" + UserID + "',@ActionName='" + ActionName + "',@Remarks=N'" + Remarks + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "AnimalDocumentScrutiny.FinalSubmitPreVerification");
             if (Rows > 0)
                 return true;

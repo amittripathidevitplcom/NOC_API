@@ -24,7 +24,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_ApplyNOC_IU  ";
-            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark='" + request.Remark + "',@NextActionID='" + request.NextActionID + "',@UploadDocument='" + request.UploadDocument + "'";
+            SqlQuery += "@ApplyNOCID='" + request.ApplyNOCID + "',@RoleID='" + request.RoleID + "',@NextRoleID='" + request.NextRoleID + "',@UserID='" + request.UserID + "',@NextUserID='" + request.NextUserID + "',@ActionID='" + request.ActionID + "',@DepartmentID='" + request.DepartmentID + "',@Remark=N'" + request.Remark + "',@NextActionID='" + request.NextActionID + "',@UploadDocument='" + request.UploadDocument + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.DocumentScrutiny");
             if (Rows > 0)
                 return true;
@@ -40,7 +40,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @DocumentScrutinyID=0,";
             SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',";
             SqlQuery += " @TabName='" + request.TabName + "',";
-            SqlQuery += " @Remark='" + request.FinalRemark + "',";
+            SqlQuery += " @Remark=N'" + request.FinalRemark + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
             SqlQuery += " @CollegeID='" + request.CollegeID + "',";
             SqlQuery += " @RoleID='" + request.RoleID + "',";
@@ -186,7 +186,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string CommiteeInspection_RNCCheckList = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_CommiteeInspection_RNCCheckList") : "";
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveCommiteeInspection_RNCCheckList @CommiteeInspection_RNCCheckList='" + CommiteeInspection_RNCCheckList + "'";
+            string SqlQuery = " exec USP_SaveCommiteeInspection_RNCCheckList @CommiteeInspection_RNCCheckList=N'" + CommiteeInspection_RNCCheckList + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveCommiteeInspectionRNCCheckList");
             if (Rows > 0)
