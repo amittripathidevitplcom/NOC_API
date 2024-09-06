@@ -395,13 +395,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetApplyNocPaymentHistoryApplicationID/{ApplyNocApplicationID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        [HttpGet("GetApplyNocPaymentHistoryApplicationID/{ApplyNocApplicationID}/{PaymentFor}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID,string PaymentFor)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID, PaymentFor));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {

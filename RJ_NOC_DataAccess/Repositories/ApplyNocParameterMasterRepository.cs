@@ -119,9 +119,9 @@ namespace RJ_NOC_DataAccess.Repository
             }
         }
 
-        public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID, string PaymentFor)
         {
-            string SqlQuery = $"exec USP_Trn_GetApplyNocPaymentHistory @ApplyNocApplicationID={ApplyNocApplicationID}";
+            string SqlQuery = $"exec USP_Trn_GetApplyNocPaymentHistory @ApplyNocApplicationID={ApplyNocApplicationID}, @PaymentFor = '"+ PaymentFor + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocPaymentHistoryApplicationID");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

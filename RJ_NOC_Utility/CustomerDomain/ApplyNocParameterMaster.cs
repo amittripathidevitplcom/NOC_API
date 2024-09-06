@@ -776,9 +776,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.ApplyNocParameterMasterRepository.FinalSubmitApplyNocApplicationByApplicationID(ApplyNocApplicationID, ModifyBy, IPAddress);
         }
 
-        public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID)
+        public List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID, string PaymentFor)
         {
-            return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID);
+            return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID, PaymentFor);
         }
 
         public List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID)

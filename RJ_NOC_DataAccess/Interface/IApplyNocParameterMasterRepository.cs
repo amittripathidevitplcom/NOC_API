@@ -19,7 +19,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveOfflinePaymnetDetail(ApplyNocOfflinePaymentModal request);
         DataTable GetApplyNocFDRDetails(int ApplyNocFDRID,int ApplyNocID);
         bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy, string IpAddress);
-        List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID);
+        List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID, string PaymentFor);
         List<ApplyNocParameterFeesDataModel> GetDCECourseSubjectFees(int ApplyNOCParameterID);
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
 
