@@ -18,7 +18,7 @@ namespace RJ_NOC_DataAccess.Repository
         
         public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
         {
-            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request .RequestID+ "',@DepartmentID='" + request .DepartmentID+ "',@SSOID='" + request .SSOID+ "'";
+            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request.RequestID+ "',@DepartmentID='" + request.DepartmentID+ "',@SSOID='" + request.SSOID+ "',@ApplicationStatus='" + request.ApplicationStatus + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterCollegeRequestData");
 
@@ -89,6 +89,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @RequestID='" + request.ApplyNOCID + "',";
             SqlQuery += " @Penaltyfor='" + request.Penaltyfor + "',";
             SqlQuery += " @PenaltyAmount='" + request.PenaltyAmount + "',";
+            SqlQuery += " @PenaltyDoc='" + request.PenaltyDoc + "',";
             SqlQuery += " @CreatedBy='" + request.CreatedBy + "',";
             SqlQuery += " @ApproveReject='" + request.ApproveReject + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DefaulterCollege.SaveDefaulterCollegePenalty");
@@ -123,11 +124,23 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string SqlQuery = "USP_IfExistsOldDefaulterCollege @ApplicationNo='" + ApplicationNo + "', @SubmittedDate='" + SubmittedDate + "'";
             DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.IfExists");
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.IfExists");
             if (dataTable.Rows.Count > 0)
                 return true;
             else
                 return false;
+        }
+
+        public List<DataTable> GetDefaulterRequestCount(int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetDefaulterRequestCount @DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterRequestCount");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
 
     }

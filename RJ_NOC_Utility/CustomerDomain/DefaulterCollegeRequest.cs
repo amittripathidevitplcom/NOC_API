@@ -6,6 +6,7 @@ using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_Utility;
 using RJ_NOC_DataAccess.Interface;
 using Azure.Core;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -41,6 +42,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool IfExists(string ApplicationNo, string SubmittedDate)
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.IfExists(ApplicationNo, SubmittedDate);
+        }
+        public List<DataTable> GetDefaulterRequestCount(int DepartmentID)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterRequestCount(DepartmentID);
         }
 
     }

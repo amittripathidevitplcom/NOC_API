@@ -40,6 +40,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }     
+        public List<CommonDataModel_DataTable> GetOtherDocumentByID(int OtherDocumentID)
+        {
+            string SqlQuery = " exec USP_GetOtherDocumentByID @OtherDocumentID='" + OtherDocumentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeDocument.GetOtherDocumentByID");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
         public bool Delete(int AID)
         {

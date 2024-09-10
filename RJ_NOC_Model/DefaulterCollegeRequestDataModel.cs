@@ -61,5 +61,6 @@ namespace RJ_NOC_Model
         public int? DepartmentID { get; set; }
         public int? RequestID { get; set; }
         public string? SSOID { get; set; }
+        public string? ApplicationStatus { get; set; }
     }
 }

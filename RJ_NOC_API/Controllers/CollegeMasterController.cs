@@ -110,7 +110,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = "Defaulter fees have not been calculated by the department. Please contact the department.!";
+                    result.ErrorMessage = "Your Defaulter Application has not been approved by the department. Please contact the department.!";
                 }
             }
             catch (Exception ex)

@@ -15,7 +15,7 @@ namespace RJ_NOC_Model
         public string DepartmentName { get; set; }
         public string CollegeName { get; set; }
         public string? CollegeMobileNo { get; set; }
-        public string? CollegeLogo { get;}
+        public string? CollegeLogo { get; }
     }
     public class DocumentScrutinyDataModel
     {
@@ -207,6 +207,9 @@ namespace RJ_NOC_Model
         public bool? IsPayment { get; set; }
         public int CreatedBy { get; set; }
         public string? ApproveReject { get; set; }
+        public string? PenaltyDoc { get; set; }
+        public string? PenaltyDoc_DisName { get; set; }
+        public string? PenaltyDocPath { get; set; }
 
     }
 }

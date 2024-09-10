@@ -4018,11 +4018,11 @@ namespace RJ_NOC_API.Controllers
 
 
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="DepartmentID"></param>
-/// <returns></returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="DepartmentID"></param>
+        /// <returns></returns>
 
         [HttpGet("ConvertBaseIntoImage")]
         public async Task<OperationResult<bool>> ConvertBaseIntoImage()
