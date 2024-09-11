@@ -243,6 +243,8 @@ namespace RJ_NOC_Model
         public List<DefaulterCollegePenaltyDataModal>? DefaulterCollegePenaltyDetailList { get; set; }
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
+        public bool? IsOpenDefaulter { get; set; }
+        public bool? IsDefaulter { get; set; }
         public string? IsOnlineOfflinePayment { get; set; }
 
 

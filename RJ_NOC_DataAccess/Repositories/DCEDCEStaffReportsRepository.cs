@@ -41,7 +41,8 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @PresentCollegeStatusID='" + request.PresentCollegeStatusID + "',";
             SqlQuery += " @DateOfAppointment='" + request.DateOfAppointment + "',";
             SqlQuery += " @DuplicateAdharID='" + request.DuplicateAdharID + "',";
-            SqlQuery += " @DateOfJoining='" + request.DateOfJoining + "'";
+            SqlQuery += " @DateOfJoining='" + request.DateOfJoining + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DCEDCEStaffReports.DCEStaffDetailsList");
             List<DCEStaffReportsDataModel_list> dataModels = new List<DCEStaffReportsDataModel_list>();
@@ -66,9 +67,9 @@ namespace RJ_NOC_DataAccess.Repositories
 
         }
 
-        public List<DCEStaffReports_SubjectList> GetStaffDuplicateAdharList()
+        public List<DCEStaffReports_SubjectList> GetStaffDuplicateAdharList(int DepartmentID)
         {
-            string SqlQuery = "exec USP_StaffDuplicateAdharList";
+            string SqlQuery = "exec USP_StaffDuplicateAdharList @DepartmentID='"+DepartmentID+"'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "GetStaffDuplicateAdharList.GetStaffPFStatusList");
 

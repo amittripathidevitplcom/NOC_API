@@ -29,9 +29,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DCEStaffReportsRepository.GetSubjectList();
         }
 
-        public List<DCEStaffReports_SubjectList> GetStaffDuplicateAdharList()
+        public List<DCEStaffReports_SubjectList> GetStaffDuplicateAdharList(int DepartmentID)
         {
-            return UnitOfWork.DCEStaffReportsRepository.GetStaffDuplicateAdharList();
+            return UnitOfWork.DCEStaffReportsRepository.GetStaffDuplicateAdharList(DepartmentID);
         }
 
     }

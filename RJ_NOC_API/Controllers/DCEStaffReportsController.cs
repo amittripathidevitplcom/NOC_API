@@ -87,13 +87,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetStaffDuplicateAdharList")]
-        public async Task<OperationResult<List<DCEStaffReports_SubjectList>>> GetStaffDuplicateAdharList()
+        [HttpGet("GetStaffDuplicateAdharList/{DepartmentID}")]
+        public async Task<OperationResult<List<DCEStaffReports_SubjectList>>> GetStaffDuplicateAdharList(int DepartmentID)
         {
             var result = new OperationResult<List<DCEStaffReports_SubjectList>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DCEStaffReportsUtility.GetStaffDuplicateAdharList());
+                result.Data = await Task.Run(() => UtilityHelper.DCEStaffReportsUtility.GetStaffDuplicateAdharList(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

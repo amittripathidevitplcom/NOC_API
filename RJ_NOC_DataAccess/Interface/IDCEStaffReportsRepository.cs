@@ -13,7 +13,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DCEStaffReportsDataModel_list> DCEStaffDetailsList(DCEStaffReportsDataModel request);
         List<DCEStaffReports_SubjectList> GetSubjectList();
-        List<DCEStaffReports_SubjectList> GetStaffDuplicateAdharList();
+        List<DCEStaffReports_SubjectList> GetStaffDuplicateAdharList(int DepartmentID);
 
 
     }
