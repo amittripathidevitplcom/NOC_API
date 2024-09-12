@@ -17,7 +17,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> GetDuplicateAadhaarReportDatail(DuplicateAadharReportDataModel request)
         {
-            string SqlQuery = "exec USP_Get_Data_For_DuplicateAadharReport @AadhaarNo='" + request.AadhaarNo + "', @CollegeTypeID='" + request.CollegeTypeID + "',@DateOfAppointment='" + request.DateOfAppointment + "',@DateOfJoining='" + request.DateOfJoining + "',@StaffTypeID='" + request.StaffTypeID + "',@DesignationID='" + request.DesignationID + "',@FaculityFatherName='" + request.FaculityFatherName + "',@FaculityMobileNo='" + request.FaculityMobileNo + "',@FaculityName='" + request.FaculityName + "',@Gender='" + request.Gender + "',@MonthlySalary='" + request.MonthlySalary + "',@ResearchGuide='" + request.ResearchGuide + "'";
+            string SqlQuery = "exec USP_Get_Data_For_DuplicateAadharReport @AadhaarNo='" + request.AadhaarNo + "', @CollegeTypeID='" + request.CollegeTypeID + "',@DateOfAppointment='" + request.DateOfAppointment + "',@DateOfJoining='" + request.DateOfJoining + "',@StaffTypeID='" + request.StaffTypeID + "',@DesignationID='" + request.DesignationID + "',@FaculityFatherName='" + request.FaculityFatherName + "',@FaculityMobileNo='" + request.FaculityMobileNo + "',@FaculityName='" + request.FaculityName + "',@Gender='" + request.Gender + "',@MonthlySalary='" + request.MonthlySalary + "',@ResearchGuide='" + request.ResearchGuide + "',@DepartmentID='" + request.DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DuplicateAadharReport.GetDuplicateAadhaarReportDatail");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

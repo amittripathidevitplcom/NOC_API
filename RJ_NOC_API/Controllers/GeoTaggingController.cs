@@ -27,18 +27,20 @@ namespace RJ_NOC_API.Controllers
             var response = new HttpResponseMessage(HttpStatusCode.Redirect);
             response.Headers.Location = new Uri("https://www.google.com");
             var result = new OperationResult<SSOUserDetailData>();
-            bool IsSSOAuthentication = false;
+            SSOUserAuthentication obj=new SSOUserAuthentication();
+            //bool IsSSOAuthentication = false;
             try
             {
                 if (sSOLandingDataDataModel.Password == "Devadmin@123")
                 {
-                    IsSSOAuthentication = true;
+                    obj.valid = true;
                 }
                 else
                 {
-                    IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+                    obj = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel, _configuration);
+                    //IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
                 }
-                if (IsSSOAuthentication == true)
+                if (obj.valid == true)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.GeoTaggingUtility.AppLogin(sSOLandingDataDataModel, _configuration));
                     result.State = OperationState.Success;

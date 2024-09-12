@@ -9,6 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IGeoTagging
     {
         Task<SSOUserDetailData> AppLogin(SSOLandingDataDataModel sSOLandingDataDataModel, IConfiguration _configuration);
+        Task<SSOUserAuthentication> SSOAuthentication(SSOLandingDataDataModel sSOLandingDataDataModel, IConfiguration _configuration);
         Task<bool> SSOAuthentication(SSOLandingDataDataModel sSOLandingDataDataModel);
         List<CommonDataModel_DataTable> AppCollegeSSOLogin(string LoginSSOID);
         List<CommonDataModel_DataTable> GetAPPApplicationCollegeList(string LoginSSOID, string Type, string ViewType);

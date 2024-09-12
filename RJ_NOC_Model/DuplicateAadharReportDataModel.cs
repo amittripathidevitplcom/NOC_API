@@ -7,6 +7,7 @@ namespace RJ_NOC_Model
     {
         public string Gender { get; set; }
         public int DesignationID { get; set; }
+        public int DepartmentID { get; set; }
         public string StaffTypeID { get; set; }
         public string ResearchGuide { get; set; }
         public string DateOfAppointment { get; set; }

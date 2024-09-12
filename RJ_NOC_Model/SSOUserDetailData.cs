@@ -39,7 +39,7 @@ namespace RJ_NOC_Model
         public string JanaadhaarId { get; set; }
         public string ManaadhaarMemberId { get; set; }
         public string UserType { get; set; }
-        public string Mfa { get; set; } 
+        public string Mfa { get; set; }
 
     }
 
@@ -48,7 +48,12 @@ namespace RJ_NOC_Model
         public string Username { get; set; }
         public string LoginType { get; set; }
         public string Password { get; set; }
-    } 
+    }
+    public class SSOUserAuthentication
+    {
+        public bool valid { get; set; }
+        public string message { get; set; }
+        public string userType { get; set; }
+    }
 }
 
- 

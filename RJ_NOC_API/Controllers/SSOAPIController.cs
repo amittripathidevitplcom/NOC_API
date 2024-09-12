@@ -64,18 +64,19 @@ namespace RJ_NOC_API.Controllers
 
             string QueryStringData = "";
             var result = new OperationResult<SSOUserDetailData>();
-            bool IsSSOAuthentication = false;
+            //bool IsSSOAuthentication = false;
+            SSOUserAuthentication obj = new SSOUserAuthentication();
             try
             {
-
-                IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
+                obj = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel, _configuration);
+                //IsSSOAuthentication = await UtilityHelper.GeoTaggingUtility.SSOAuthentication(sSOLandingDataDataModel);
 
 
                 if (sSOLandingDataDataModel.LoginType.ToString() == "-999")
                 {
-                    IsSSOAuthentication = true;
+                    obj.valid = true;
                 }
-                if (IsSSOAuthentication == true)
+                if (obj.valid == true)
                 {
 
                     result.Data = await Task.Run(() => UtilityHelper.SSOAPIUtility.GetSSOUserLogionDetails(SSOID, LoginType, _configuration));
@@ -94,7 +95,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.SuccessMessage = "Please enter valid username or password.!";
+                    result.SuccessMessage = obj.message;//"Please enter valid username or password.!";
                 }
             }
             catch (Exception ex)
