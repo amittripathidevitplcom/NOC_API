@@ -105,6 +105,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID);
         List<CommonDataModel_RNCCheckListData> GetRNCCheckListByTypeDepartment(string Type, int DepartmentID, int ApplyNOCID, int CreatedBy, int RoleID);
         List<CommonDataModel_ApplicationTrail> GetApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
+        List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
         List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID, int DepartmentID);
 
         List<CommonDataModel_Stream> GetStreamList_CourseIDWise(int DepartmentID, int CourseLevelID, int CourseID);
@@ -168,6 +169,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool ConvertBaseIntoImage();
         bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request);
         List<DataTable> GetNOCFormatList(int NOCFormatID);
+        bool UnlockApplication(UnlockApplicationDataModel request);
     }
 
 

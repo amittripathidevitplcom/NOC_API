@@ -180,6 +180,8 @@ namespace RJ_NOC_DataAccess.Interface
         bool ConvertBaseIntoImage();
         bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request);
         List<DataTable> GetNOCFormatList(int NOCFormatID);
+        bool UnlockApplication(UnlockApplicationDataModel request);
+        List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
     }
 }
 

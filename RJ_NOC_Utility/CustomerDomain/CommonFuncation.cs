@@ -597,5 +597,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetNOCFormatList(NOCFormatID);
         }
+        public bool UnlockApplication(UnlockApplicationDataModel request)
+        {
+            return UnitOfWork.CommonFuncationRepository.UnlockApplication(request);
+        }    
+        public List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetUnlockApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID);
+        }
     }
 }

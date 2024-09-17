@@ -47,6 +47,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails> DocumentScrutiny_FDRDetail(int CollageID, int RoleID, int ApplyNOCID);
         List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> DocumentScrutiny_PaymentDetail(int CollageID, int RoleID, int ApplyNOCID);
-
+        List<DataTable> GetUnlockApplication(int DepartmentID);
     }
 }

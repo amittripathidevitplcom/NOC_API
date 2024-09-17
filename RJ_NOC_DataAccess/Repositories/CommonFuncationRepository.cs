@@ -991,6 +991,17 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ApplicationTrail>>(JsonDataTable_Data);
             return dataModels;
+        }       
+        public List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
+        {
+            string SqlQuery = "exec USP_GetUnlockApplicationTrail_DepartmentApplicationWise @ApplicationID='" + ApplicationID + "' ,@DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetUnlockApplicationTrail_DepartmentApplicationWise");
+            List<CommonDataModel_ApplicationTrail> dataModels = new List<CommonDataModel_ApplicationTrail>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ApplicationTrail>>(JsonDataTable_Data);
+            return dataModels;
         }
         public List<CommonDataModel_CourseMaster> GetCourseList_ByCourseLevelIDWise(int CourseLevelID, int DepartmentID)
         {
@@ -1725,6 +1736,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+
+        public bool UnlockApplication(UnlockApplicationDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_UnlockApplication";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@ApplyNOCID='" + request.ApplyNOCID + "',@CreatedBy='" + request.CreatedBy + "',@SSOID='" + request.UnlockSSOID + "',@Reason=N'" + request.Reason + "',@UnlockDoc=N'" + request.UnlockDoc + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.UnlockApplication");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -148,6 +148,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.DocumentScrutiny_PaymentDetail(CollageID, RoleID, ApplyNOCID);
         }
+        public List<DataTable> GetUnlockApplication(int DepartmentID)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetUnlockApplication(DepartmentID);
+        }
 
     }
 }

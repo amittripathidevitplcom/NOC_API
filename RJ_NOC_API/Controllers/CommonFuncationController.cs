@@ -2492,6 +2492,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetUnlockApplicationTrail_DepartmentApplicationWise/{ApplicationID}/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_ApplicationTrail>>> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_ApplicationTrail>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetUnlockApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetUnlockApplicationTrail_DepartmentApplicationWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("GetCourseList_ByCourseLevelIDWise/{CourseLevelID}/{DepartmentID}")]
         public async Task<OperationResult<List<CommonDataModel_CourseMaster>>> GetCourseList_ByCourseLevelIDWise(int CourseLevelID, int DepartmentID)
         {
@@ -4118,6 +4149,38 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("UnlockApplication")]
+        public async Task<OperationResult<bool>> UnlockApplication(UnlockApplicationDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.UnlockApplication(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.CreatedBy, "UnlockApplication", request.ApplyNOCID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Application Unlock successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.UnlockApplication", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
             }
             return result;
         }

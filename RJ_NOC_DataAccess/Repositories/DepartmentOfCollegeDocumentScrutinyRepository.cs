@@ -701,6 +701,17 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
+        public List<DataTable> GetUnlockApplication(int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetUnlockApplicationData @DepartmentID ='" + DepartmentID + "'";
 
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetUnlockApplication");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
