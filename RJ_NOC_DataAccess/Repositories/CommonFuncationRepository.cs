@@ -1461,6 +1461,25 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DataTable> GetPreviousTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
+        {
+            string SqlQuery = " exec USP_GetPreviousTotalApplicationListByDepartment @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "'," +
+                "@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@Status='" + request.Status + "',@CollegeName='" + request.CollegeName + "'," +
+                "@SubDivisionID='" + request.SubDivisionID + "',@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='" + request.NOCStatusID + "',@WorkFlowActionID='" + request.WorkFlowActionID + "'," +
+                "@CollegeTypeID='" + request.CollegeTypeID + "',@FromSubmitDate='" + request.FromSubmitDate + "',@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationID='" + request.ApplicationID + "'," +
+                "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "'"
+
+                ;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetPreviousTotalApplicationListByDepartment");
+
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
         public List<CommonDataModel_ApplicationTrail> GetLOIApplicationTrail(int ApplicationID, int DepartmentID)
         {
             string SqlQuery = "exec USP_GetLOIApplicationTrail @ApplicationID='" + ApplicationID + "' ,@DepartmentID='" + DepartmentID + "'";

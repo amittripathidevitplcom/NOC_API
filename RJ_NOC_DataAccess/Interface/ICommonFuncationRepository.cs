@@ -157,6 +157,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID);
         List<CommonDataModel_DataTable> WebsiteDetails();
         List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request);
+        List<CommonDataModel_DataTable> GetPreviousTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request);
         List<CommonDataModel_ApplicationTrail> GetLOIApplicationTrail(int ApplicationID, int DepartmentID);
         List<CommonDataModel_DataTable> GetLOIDocumentScritintyTaril(int ID, int NOCApplyID, int CollageID, int DepartmentID, string ActionType);
         List<CommonDataModel_DataTable> GetSocietyByCollege(int CollegeID);

@@ -512,6 +512,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
             return UnitOfWork.CommonFuncationRepository.GetTotalApplicationListByDepartment(request);
+        }    
+        public List<CommonDataModel_DataTable> GetPreviousTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetPreviousTotalApplicationListByDepartment(request);
         }
         public List<CommonDataModel_ApplicationTrail> GetLOIApplicationTrail(int ApplicationID, int DepartmentID)
         {
