@@ -264,13 +264,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetDefaulterRequestCount/{DepartmentID}")]
-        public async Task<OperationResult<List<DataTable>>> GetDefaulterRequestCount(int DepartmentID)
+        [HttpGet("GetDefaulterRequestCount/{DepartmentID}/{UserID}")]
+        public async Task<OperationResult<List<DataTable>>> GetDefaulterRequestCount(int DepartmentID,int UserID)
         {
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetDefaulterRequestCount(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.GetDefaulterRequestCount(DepartmentID, UserID));
                 if (result.Data.Count > 0)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "GetApplicationCountRoleWise", DepartmentID, "CommonFuncation");

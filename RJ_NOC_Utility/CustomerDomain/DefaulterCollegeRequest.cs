@@ -43,9 +43,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.IfExists(ApplicationNo, SubmittedDate);
         }
-        public List<DataTable> GetDefaulterRequestCount(int DepartmentID)
+        public List<DataTable> GetDefaulterRequestCount(int DepartmentID, int UserID)
         {
-            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterRequestCount(DepartmentID);
+            return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterRequestCount(DepartmentID, UserID);
         }
 
     }

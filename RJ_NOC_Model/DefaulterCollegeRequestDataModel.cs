@@ -54,6 +54,10 @@ namespace RJ_NOC_Model
         public bool ActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int? UserID { get; set; }
+        public string? PendingCaseNOC { get; set; }
+        public string? PendingCaseDoc { get; set; }
+        public string? PendingCaseDocPath { get; set; }
+        public string? PendingCaseDoc_DisName { get; set; }
     }
     public class DefaulterCollegeSearchFilterDataModel
     {

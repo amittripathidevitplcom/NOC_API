@@ -18,7 +18,7 @@ namespace RJ_NOC_DataAccess.Repository
         
         public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
         {
-            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request.RequestID+ "',@DepartmentID='" + request.DepartmentID+ "',@SSOID='" + request.SSOID+ "',@ApplicationStatus='" + request.ApplicationStatus + "'";
+            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request.RequestID+ "',@DepartmentID='" + request.DepartmentID+ "',@SSOID='" + request.SSOID+ "',@ApplicationStatus='" + request.ApplicationStatus + "',@UserID='" + request.UserID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterCollegeRequestData");
 
@@ -60,6 +60,8 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@ActiveStatus='{0}',", request.ActiveStatus);
             sb.AppendFormat("@DeleteStatus='{0}',", request.DeleteStatus);
             sb.AppendFormat("@UserID='{0}',", request.UserID);
+            sb.AppendFormat("@PendingCaseNOC='{0}',", request.PendingCaseNOC);
+            sb.AppendFormat("@PendingCaseDoc='{0}',", request.PendingCaseDoc);
             sb.AppendFormat("@IPAddress='{0}'", IPAddress);
 
             string SqlQuery = $" exec USP_Trn_College_DefaulterRequest_IU  {sb.ToString()}";
@@ -131,9 +133,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public List<DataTable> GetDefaulterRequestCount(int DepartmentID)
+        public List<DataTable> GetDefaulterRequestCount(int DepartmentID, int UserID)
         {
-            string SqlQuery = " exec USP_GetDefaulterRequestCount @DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = " exec USP_GetDefaulterRequestCount @DepartmentID='" + DepartmentID + "',@UserID='" + UserID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterRequestCount");
             List<DataTable> dataModels = new List<DataTable>();
