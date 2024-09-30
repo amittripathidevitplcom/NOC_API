@@ -145,5 +145,17 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
+        public bool CompareCollegeName(string SSOID, string CollegeName)
+        {
+            string SqlQuery = "USP_CompareCollegeNameDefaulterRequest @SSOID='" + SSOID + "', @CollegeName='" + CollegeName + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.CompareCollegeName");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }

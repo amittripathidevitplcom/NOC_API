@@ -47,6 +47,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DefaulterCollegeRequestRepository.GetDefaulterRequestCount(DepartmentID, UserID);
         }
+        public bool CompareCollegeName(string SSOID, string CollegeName)
+        {
+            return UnitOfWork.DefaulterCollegeRequestRepository.CompareCollegeName(SSOID, CollegeName);
+        }
 
     }
 }

@@ -89,6 +89,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool IfExistsDefaulterCollegePenalty(int DepartmentID, int CollegeID, string SSOID)
         {
             return UnitOfWork.CollegeMasterRepository.IfExistsDefaulterCollegePenalty(DepartmentID,CollegeID,SSOID);
+        }      
+        public bool  CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID, int DivisionID, int DistrictID)
+        {
+            return UnitOfWork.CollegeMasterRepository.CompareDefaulterCollegeName(DepartmentID, CurrentCollegeName, SSOID, DivisionID, DistrictID);
         }
     }
 }

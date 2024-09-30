@@ -61,28 +61,39 @@ namespace RJ_NOC_API.Controllers
                 }
                 else
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
-                    if (result.Data)
+                    bool CompareCollegeName = false;
+                    CompareCollegeName = UtilityHelper.DefaulterCollegeRequestUtility.CompareCollegeName(request.SSOID, request.CollegeName);
+                    if (CompareCollegeName == false)
                     {
-                        result.State = OperationState.Success;
-                        if (request.RequestID == 0)
+                        result.Data = await Task.Run(() => UtilityHelper.DefaulterCollegeRequestUtility.SaveData(request));
+                        if (result.Data)
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
-                            result.SuccessMessage = "Saved successfully .!";
+                            result.State = OperationState.Success;
+                            if (request.RequestID == 0)
+                            {
+                                CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.RequestID, "DefaulterCollegeRequest");
+                                result.SuccessMessage = "Saved successfully .!";
+                            }
+                            else
+                            {
+                                CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
+                                result.SuccessMessage = "Updated successfully .!";
+                            }
                         }
                         else
                         {
-                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.RequestID, "DefaulterCollegeRequest");
-                            result.SuccessMessage = "Updated successfully .!";
+                            result.State = OperationState.Error;
+                            if (request.RequestID == 0)
+                                result.ErrorMessage = "There was an error adding data.!";
+                            else
+                                result.ErrorMessage = "There was an error updating data.!";
                         }
                     }
                     else
                     {
-                        result.State = OperationState.Error;
-                        if (request.RequestID == 0)
-                            result.ErrorMessage = "There was an error adding data.!";
-                        else
-                            result.ErrorMessage = "There was an error updating data.!";
+                        result.State = OperationState.Warning;
+                        result.ErrorMessage = "Your College name is not match according to your college profile";
+
                     }
                 }
 
@@ -265,7 +276,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("GetDefaulterRequestCount/{DepartmentID}/{UserID}")]
-        public async Task<OperationResult<List<DataTable>>> GetDefaulterRequestCount(int DepartmentID,int UserID)
+        public async Task<OperationResult<List<DataTable>>> GetDefaulterRequestCount(int DepartmentID, int UserID)
         {
             var result = new OperationResult<List<DataTable>>();
             try

@@ -263,6 +263,13 @@ namespace RJ_NOC_Model
         public string? SSOID { get; set; }
         public string? NextUser { get; set; }
 
+
+        public bool IsApplicationGeoTag { get; set; }
+        public string? ApplicationGeoImage1Path { get; set; }
+        public string? ApplicationGeoImage2Path { get; set; }
+        public string? ApplicationGeoLatitude { get; set; }
+        public string? ApplicationGeoLongitude { get; set; }
+
     }
 
     public class ApplyNocApplicationParameterDataModel

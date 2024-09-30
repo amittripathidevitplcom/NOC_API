@@ -363,5 +363,16 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public bool CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID, int DivisionID, int DistrictID)
+        {
+            string SqlQuery = " USP_CompareDefaulterRequestCollegeName @DepartmentID='" + DepartmentID + "',@CurrentCollegeName='" + CurrentCollegeName + "', @SSOID='" + SSOID + "', @DivisionID='" + DivisionID + "', @DistrictID='" + DistrictID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.CompareDefaulterCollegeName");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

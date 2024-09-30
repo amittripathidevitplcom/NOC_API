@@ -27,5 +27,6 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> CollegesReport(DCECollegesReportSearchFilter request);
         bool IfExistsDefaulterCollege(int DepartmentID, int CollegeID, string SSOID);
         bool IfExistsDefaulterCollegePenalty(int DepartmentID, int CollegeID, string SSOID);
+        bool CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID,int DivisionID,int DistrictID);
     }
 }

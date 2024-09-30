@@ -19,6 +19,7 @@ namespace RJ_NOC_DataAccess.Interface
         public bool DeleteDefaulterCollegePenalty(int PenaltyID);
         bool IfExists(string ApplicationNo, string SubmittedDate);
         List<DataTable> GetDefaulterRequestCount(int DepartmentID, int UserID);
+        bool CompareCollegeName(string SSOID, string CollegeName);
     }
 
 }

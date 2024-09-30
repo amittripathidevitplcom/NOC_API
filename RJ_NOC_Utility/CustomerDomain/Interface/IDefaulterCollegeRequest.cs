@@ -18,5 +18,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetDefaulterCollegePenalty(int RequestID,int PenaltyID);
         public bool DeleteDefaulterCollegePenalty(int PenaltyID);
         List<DataTable> GetDefaulterRequestCount(int DepartmentID,int UserID);
+        bool CompareCollegeName(string SSOID, string CollegeName);
     }
 }
