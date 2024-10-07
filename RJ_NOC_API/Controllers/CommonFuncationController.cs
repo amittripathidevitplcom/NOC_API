@@ -2332,13 +2332,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetRoleListForApporval/{RoleID}/{DepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID, int DepartmentID)
+        [HttpGet("GetRoleListForApporval/{RoleID}/{DepartmentID}/{NOCType=NOC}")]
+        public async Task<OperationResult<List<CommonDataModel_RoleListByLevel>>> GetRoleListForApporval(int RoleID, int DepartmentID,string NOCType)
         {
             var result = new OperationResult<List<CommonDataModel_RoleListByLevel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListForApporval(RoleID, DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRoleListForApporval(RoleID, DepartmentID, NOCType));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -2397,13 +2397,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetWorkFlowActionListByRole/{RoleID}/{Type}/{DepartmentID}")]
-        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID)
+        [HttpGet("GetWorkFlowActionListByRole/{RoleID}/{Type}/{DepartmentID}/{NOCType=NOC}/{ApplyNOCID=0}")]
+        public async Task<OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID,string NOCType, int ApplyNOCID)
         {
             var result = new OperationResult<List<CommonDataModel_WorkFlowActionsByRole>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type, DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkFlowActionListByRole(RoleID, Type, DepartmentID, NOCType, ApplyNOCID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

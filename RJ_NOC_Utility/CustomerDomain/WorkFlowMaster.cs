@@ -15,9 +15,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public bool IfExists(int WorkFlowMasterID,  int RoleID, int DepartmentID)
+        public bool IfExists(int WorkFlowMasterID,  int RoleID, int DepartmentID, string NOCType)
         {
-            return UnitOfWork.WorkFlowMasterRepository.IfExists(WorkFlowMasterID,RoleID, DepartmentID);
+            return UnitOfWork.WorkFlowMasterRepository.IfExists(WorkFlowMasterID,RoleID, DepartmentID, NOCType);
         }
 
         public bool SaveData(WorkFlowMasterDataModel request)

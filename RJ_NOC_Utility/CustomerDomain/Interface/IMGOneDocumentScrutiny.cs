@@ -14,6 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<MGOneDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID);
         List<MGOneDocumentScrutinyDataModel_DocumentScrutinyLegalEntity> DocumentScrutiny_LegalEntity(int CollegeID, int RoleID, int ApplyNOCID);
         List<MGOneDocumentScrutinyDataModel_DocumentScrutinyCollegeDetail> DocumentScrutiny_CollegeDetail(int CollegeID, int RoleID, int ApplyNOCID);
+
+        List<MGOneDocumentScrutinyDataModel_FDRDetail> DocumentScrutiny_FDRDetails(int CollegeID, int RoleID, int ApplyNOCID);
+        List<MGOneDocumentScrutinyDataModel_PaymentDetail> DocumentScrutiny_PaymentDetails(int CollegeID, int RoleID, int ApplyNOCID);
         List<MGOneDocumentScrutinyDataModel_DocumentBuildingDetails> DocumentScrutiny_BuildingDetails(int CollageID, int RoleID, int ApplyNOCID);
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID);
         List<LOIApplicationDetails_DataModel> GetLOIApplicationList(int RoleID, int UserID, string Status, string ActionName);

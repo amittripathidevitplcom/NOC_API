@@ -109,6 +109,8 @@ namespace RJ_NOC_DataAccess.Interface
         ICourtOrderRepository CourtOrderRepository { get; }
         IClinicalFacilityRepository ClinicalFacilityRepository { get; }
         IPaymentReportRepository PaymentReportRepository { get; }
+        IMGOneNOCRepository MGOneNOCRepository { get; }
+        IDentalChairsMGOneNOCRepository DentalChairsMGOneNOCRepository { get; }
 
     }
 }
