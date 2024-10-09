@@ -171,7 +171,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request);
         List<DataTable> GetNOCFormatList(int NOCFormatID);
         bool UnlockApplication(UnlockApplicationDataModel request);
-        List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Action);
+        List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Type);
     }
 
 

@@ -4216,13 +4216,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetCollegeTabData_History/{ID}/{Action}")]
-        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetCollegeTabData_History( int ID,string Action)
+        [HttpGet("GetCollegeTabData_History/{ID}/{Type}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetCollegeTabData_History( int ID,string Type)
         {
             var result = new OperationResult<List<CommonDataModel_DataSet>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeTabData_History(ID, Action));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeTabData_History(ID, Type));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

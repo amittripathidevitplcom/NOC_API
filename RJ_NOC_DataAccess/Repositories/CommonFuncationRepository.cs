@@ -1768,9 +1768,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Action)
+        public List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Type)
         {
-            string SqlQuery = " exec USP_GetCollegeTabData_History @ID='" + ID + "',@Action='" + Action + "'";
+            string SqlQuery = " exec USP_GetCollegeTabData_History @ID='" + ID + "',@Action='" + Type + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.GetCollegeTabData_History");
 
