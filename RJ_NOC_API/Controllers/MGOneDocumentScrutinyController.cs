@@ -21,6 +21,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using RJ_NOC_DataAccess.Common;
 using AspNetCore.Reporting;
+using RJ_NOC_Utility.CustomerDomain;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -211,6 +212,68 @@ namespace RJ_NOC_API.Controllers
             catch (Exception e)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_CollegeDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("DocumentScrutiny_FDRDetails/{CollegeID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MGOneDocumentScrutinyDataModel_FDRDetail>>> DocumentScrutiny_FDRDetails(int CollegeID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MGOneDocumentScrutinyDataModel_FDRDetail>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.DocumentScrutiny_FDRDetails(CollegeID,RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.DocumentScrutiny_FDRDetails", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("DocumentScrutiny_PaymentDetails/{CollegeID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MGOneDocumentScrutinyDataModel_PaymentDetail>>> DocumentScrutiny_PaymentDetails(int CollegeID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MGOneDocumentScrutinyDataModel_PaymentDetail>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MGOneScrutinyUtility.DocumentScrutiny_PaymentDetails(CollegeID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MGOneDocumentScrutiny.DocumentScrutiny_PaymentDetails", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }

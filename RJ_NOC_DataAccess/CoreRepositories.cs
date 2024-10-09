@@ -553,6 +553,16 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return paymentReportRepository; }
         }
+        private IMGOneNOCRepository mgoneNOCRepository;
+        public IMGOneNOCRepository MGOneNOCRepository
+        {
+            get { return mgoneNOCRepository; }
+        }
+        private IDentalChairsMGOneNOCRepository dentalChairsMGOneNOCRepository;
+        public IDentalChairsMGOneNOCRepository DentalChairsMGOneNOCRepository
+        {
+            get { return dentalChairsMGOneNOCRepository; }
+        }
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
         //{
@@ -656,7 +666,6 @@ namespace RJ_NOC_DataAccess.Repository
             dCEStaffReportsRepository = new DCEStaffReportsRepository(commonHelper);
             courtOrderRepository = new CourtOrderRepository(commonHelper);
             clinicalFacilityRepository = new ClinicalFacilityRepository(commonHelper);
-            paymentReportRepository = new PaymentReportRepository(commonHelper);
         }
     }
 }

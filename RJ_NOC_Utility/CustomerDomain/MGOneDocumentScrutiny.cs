@@ -27,6 +27,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.DocumentScrutiny_HospitalDetail(CollageID, RoleID, ApplyNOCID);
         }
+        public List<MGOneDocumentScrutinyDataModel_FDRDetail> DocumentScrutiny_FDRDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.DocumentScrutiny_FDRDetails(CollageID, RoleID, ApplyNOCID);
+        }
+        public List<MGOneDocumentScrutinyDataModel_PaymentDetail> DocumentScrutiny_PaymentDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.MGOneDocumentScrutinyRepository.DocumentScrutiny_PaymentDetails(CollageID, RoleID, ApplyNOCID);
+        }
         public List<MGOneDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.MGOneDocumentScrutinyRepository.DocumentScrutiny_CollegeManagementSociety(CollageID, RoleID, ApplyNOCID);

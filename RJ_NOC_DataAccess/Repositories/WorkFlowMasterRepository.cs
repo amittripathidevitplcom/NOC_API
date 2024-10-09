@@ -42,9 +42,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public bool IfExists(int WorkFlowMasterID, int RoleID, int DepartmentID)
+        public bool IfExists(int WorkFlowMasterID, int RoleID, int DepartmentID, string NOCType)
         {
-            string SqlQuery = " USP_IfExistsWorkFlowMaster @RoleID='" + RoleID + "',@DepartmentID = '" + DepartmentID + "',@WorkFlowMasterID='" + WorkFlowMasterID + "' ";
+            string SqlQuery = " USP_IfExistsWorkFlowMaster @RoleID='" + RoleID + "',@DepartmentID = '" + DepartmentID + "',@WorkFlowMasterID='" + WorkFlowMasterID + "',@NOCType='" + NOCType + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "WorkFlowMaster.IfExists");
             if (dataTable.Rows.Count > 0)

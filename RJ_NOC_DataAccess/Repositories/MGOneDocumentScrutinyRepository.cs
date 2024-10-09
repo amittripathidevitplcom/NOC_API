@@ -124,7 +124,49 @@ namespace RJ_NOC_DataAccess.Repository
             return listdataModels;
         }
 
+        public List<MGOneDocumentScrutinyDataModel_FDRDetail> DocumentScrutiny_FDRDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_FDRDetails_MGOne @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MGOneDocumentScrutiny.DocumentScrutiny_FDRDetails");
 
+            List<MGOneDocumentScrutinyDataModel_FDRDetail> listdataModels = new List<MGOneDocumentScrutinyDataModel_FDRDetail>();
+            MGOneDocumentScrutinyDataModel_FDRDetail dataModels = new MGOneDocumentScrutinyDataModel_FDRDetail();
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[0]);
+            dataModels.FDRDetails = dataModel;
+
+            List<DataTable> dataModel1 = new List<DataTable>();
+            dataModel1.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel1;
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
+
+        public List<MGOneDocumentScrutinyDataModel_PaymentDetail> DocumentScrutiny_PaymentDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_PaymentDetails_MGOne @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MGOneDocumentScrutiny.DocumentScrutiny_PaymentDetails");
+
+            List<MGOneDocumentScrutinyDataModel_PaymentDetail> listdataModels = new List<MGOneDocumentScrutinyDataModel_PaymentDetail>();
+            MGOneDocumentScrutinyDataModel_PaymentDetail dataModels = new MGOneDocumentScrutinyDataModel_PaymentDetail();
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[0]);
+            dataModels.PaymentDetail = dataModel;
+
+            List<DataTable> dataModel1 = new List<DataTable>();
+            dataModel1.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel1;
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
         public List<MGOneDocumentScrutinyDataModel_DocumentScrutinyCollegeManagementSociety> DocumentScrutiny_CollegeManagementSociety(int CollageID, int RoleID, int ApplyNOCID)
         {
             string SqlQuery = " exec USP_DocumentScrutiny_CollegeManagementSociety_MGOne @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
@@ -220,6 +262,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.Add(dataSet.Tables[3]);
             dataModels.DocumentScrutinyFinalRemarkList = dataModel;
 
+            List<DataTable> CollegeGeoTaggingdataModel = new List<DataTable>();
+            CollegeGeoTaggingdataModel.Add(dataSet.Tables[4]);
+            dataModels.CollegeGeoTaggingDetails = CollegeGeoTaggingdataModel;
 
             listdataModels.Add(dataModels);
 

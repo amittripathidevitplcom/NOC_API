@@ -934,9 +934,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID)
+        public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID, string NOCType)
         {
-            string SqlQuery = "exec USP_ActionDataList @RoleID='" + RoleID + "',@DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = "exec USP_ActionDataList @RoleID='" + RoleID + "',@DepartmentID='" + DepartmentID + "',@NOCType='" + NOCType + "'";
             DataTable dataTable = new DataTable();
 
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRoleListForApporval");
@@ -958,9 +958,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID)
+        public List<CommonDataModel_WorkFlowActionsByRole> GetWorkFlowActionListByRole(int RoleID, string Type, int DepartmentID, string NOCType, int ApplyNOCID)
         {
-            string SqlQuery = "exec USP_GetWorkFlowActionListByRole @RoleID='" + RoleID + "',@Type='" + Type + "',@DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = "exec USP_GetWorkFlowActionListByRole @RoleID='" + RoleID + "',@Type='" + Type + "',@DepartmentID='" + DepartmentID + "',@NOCType='" + NOCType + "',@ApplyNocId='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
 
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.USP_GetWorkFlowActionListByRole");
