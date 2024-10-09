@@ -183,7 +183,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetNOCFormatList(int NOCFormatID);
         bool UnlockApplication(UnlockApplicationDataModel request);
         List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
-        List<CommonDataModel_DataSet> GetDocumentScrutiny_History(int ID, string Action);
+        List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Action);
     }
 }
 

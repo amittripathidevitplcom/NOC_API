@@ -610,9 +610,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetUnlockApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID);
         }
-        public List<CommonDataModel_DataSet> GetDocumentScrutiny_History(int ID, string Action)
+        public List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Action)
         {
-            return UnitOfWork.CommonFuncationRepository.GetDocumentScrutiny_History(ID, Action);
+            return UnitOfWork.CommonFuncationRepository.GetCollegeTabData_History(ID, Action);
         }
     }
 }
