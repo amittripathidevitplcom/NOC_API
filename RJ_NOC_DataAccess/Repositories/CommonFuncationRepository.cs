@@ -1768,6 +1768,18 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public List<CommonDataModel_DataSet> GetHistoryReport(int DepartmentID, int ID, string Action)
+        {
+            string SqlQuery = " exec USP_GetHistoryReport @DepartmentID='" + DepartmentID + "',@ID='" + ID + "',@Action='" + Action + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.USP_GetHistoryReport");
+
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }
 

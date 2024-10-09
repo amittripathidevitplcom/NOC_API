@@ -11,6 +11,7 @@ using static Azure.Core.HttpHeader;
 using Newtonsoft.Json.Linq;
 using System.Web.Http.Common;
 using System.Net;
+using RJ_NOC_DataAccess.Common;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -38,7 +39,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenNOCApplication()
         {
             return UnitOfWork.CommonFuncationRepository.GetDepartmentList_IsOpenNOCApplication();
-        }       
+        }
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenDefaulter()
         {
             return UnitOfWork.CommonFuncationRepository.GetDepartmentList_IsOpenDefaulter();
@@ -216,8 +217,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentAndTypeWise(DepartmentID, Type);
-        } 
-        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID,int OtherInformationID, string Type)
+        }
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, OtherInformationID, Type);
         }
@@ -269,11 +270,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
+            return UnitOfWork.CommonFuncationRepository.GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, FacilitieID, Type);
         }
         public List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetActivityMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID,FacilitieID, Type);
+            return UnitOfWork.CommonFuncationRepository.GetActivityMasterList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, FacilitieID, Type);
         }
         public List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID)
         {
@@ -330,7 +331,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetRoleList_CreateUser();
         }
 
-        
+
         public List<CommonDataModel_DistrictList> Load_StateWise_DistrictMaster(int StateID)
         {
             return UnitOfWork.CommonFuncationRepository.Load_StateWise_DistrictMaster(StateID);
@@ -351,10 +352,10 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID, string NOCType)
         {
-            return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval(RoleID, DepartmentID,NOCType);
+            return UnitOfWork.CommonFuncationRepository.GetRoleListForApporval(RoleID, DepartmentID, NOCType);
         }
 
-        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID,int ApplyNOCID)
+        public List<CreateUserDataModel> GetUserDetailsByRoleID(int RoleID, int DepartmentID, int ApplyNOCID)
         {
             return UnitOfWork.CommonFuncationRepository.GetUserDetailsByRoleID(RoleID, DepartmentID, ApplyNOCID);
         }
@@ -458,8 +459,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetPaymentMode();
         }
-       
-        public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID,int DeptId, int collegeID, int courseID, string FinYear, string FileName,string SSOID)
+
+        public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID)
         {
             return UnitOfWork.CommonFuncationRepository.SaveExcelData(request, StaticsFileID, DeptId, collegeID, courseID, FinYear, FileName, SSOID);
         }
@@ -467,9 +468,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.UpdateSingleRow(request, DeptId, collegeID, SSOID);
         }
-        public List<CommonDataModel_DataTable> GetImportExcelData(string SSOID,int DeptId, int collegeID, int StaticsFileID, string ActionType)
+        public List<CommonDataModel_DataTable> GetImportExcelData(string SSOID, int DeptId, int collegeID, int StaticsFileID, string ActionType)
         {
-            return UnitOfWork.CommonFuncationRepository.GetImportExcelData( SSOID,DeptId, collegeID, StaticsFileID, ActionType);
+            return UnitOfWork.CommonFuncationRepository.GetImportExcelData(SSOID, DeptId, collegeID, StaticsFileID, ActionType);
         }
         public List<CommonDataModel_CollegeWiseCourseList> GetOldNOCCourseList_CollegeWise(int CollegID)
         {
@@ -495,12 +496,12 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
         public List<CommonDataModel_DataTable> GetUsersByRoleDepartment(int DepartmentID, int RoleID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetUsersByRoleDepartment(DepartmentID,RoleID);
-        }    
+            return UnitOfWork.CommonFuncationRepository.GetUsersByRoleDepartment(DepartmentID, RoleID);
+        }
         public List<CommonDataModel_DataTable> GetWorkFlowStatusbyDepartment(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetWorkFlowStatusbyDepartment(DepartmentID);
-        } 
+        }
         public List<CommonDataModel_DataTable> GetApplyNOCParameterbyDepartment(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetApplyNOCParameterbyDepartment(DepartmentID);
@@ -508,11 +509,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> WebsiteDetails()
         {
             return UnitOfWork.CommonFuncationRepository.WebsiteDetails();
-        }        
+        }
         public List<CommonDataModel_DataTable> GetTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
             return UnitOfWork.CommonFuncationRepository.GetTotalApplicationListByDepartment(request);
-        }    
+        }
         public List<CommonDataModel_DataTable> GetPreviousTotalApplicationListByDepartment(CommonDataModel_TotalApplicationSearchFilter request)
         {
             return UnitOfWork.CommonFuncationRepository.GetPreviousTotalApplicationListByDepartment(request);
@@ -528,8 +529,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetSocietyByCollege(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetSocietyByCollege(CollegeID);
-        }        
-        public List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID,int CourseID)
+        }
+        public List<CommonDataModel_DataTable> GetIntakeByCollegeCourse(int CollegeID, int CourseID)
         {
             return UnitOfWork.CommonFuncationRepository.GetIntakeByCollegeCourse(CollegeID, CourseID);
         }
@@ -544,7 +545,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseLevelByCollegeDTE(CollegeID, GetType);
         }
-        public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID,int CourseLevelID, string GetType)
+        public List<CommonDataModel_DataTable> GetCourseByCollegeProgrammeDTE(int CollegeID, int ProgrammeID, int CourseLevelID, string GetType)
         {
             return UnitOfWork.CommonFuncationRepository.GetCourseByCollegeProgrammeDTE(CollegeID, ProgrammeID, CourseLevelID, GetType);
         }
@@ -568,7 +569,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> HomePage_IncreaseDate()
         {
             return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate();
-        }      
+        }
         public List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
         {
             return UnitOfWork.CommonFuncationRepository.GetOnlinePaymentDetailsByDepartment(request);
@@ -584,7 +585,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetApplicationCountRoleWise(DepartmentID);
-        }     
+        }
         public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetLegelEntityDepartmentWise(DepartmentID);
@@ -604,10 +605,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool UnlockApplication(UnlockApplicationDataModel request)
         {
             return UnitOfWork.CommonFuncationRepository.UnlockApplication(request);
-        }    
+        }
         public List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
         {
             return UnitOfWork.CommonFuncationRepository.GetUnlockApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID);
+        }
+        public List<CommonDataModel_DataSet> GetHistoryReport(int DepartmentID, int ID, string Action)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetHistoryReport(DepartmentID, ID, Action);
         }
     }
 }
