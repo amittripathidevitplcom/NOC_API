@@ -457,7 +457,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
         {
-            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList @SSOID ='" + request.SSOID + "',@Status ='" + request.Status + "' ";
+            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList @SSOID ='" + request.SSOID + "',@Status ='" + request.Status + "',@IsWeb ='" + request.IsWeb + "' ";
             //string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList");

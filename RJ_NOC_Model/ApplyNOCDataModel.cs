@@ -129,6 +129,7 @@ namespace RJ_NOC_Model
         public int? RoleID { get; set; }
         public int? DepartmentID { get; set; }
         public string? Status { get; set; }
+        public bool? IsWeb { get; set; } = false;
     }
 
     public class GenerateNOC_DataModel
@@ -152,6 +153,7 @@ namespace RJ_NOC_Model
         public int CreatedBy { get; set; }
         public string Remark { get; set; }
         public int? NoOfIssuedYear { get; set; }
+        public bool? ChangeIntoTNOC { get; set; } = false;
         public string? PdfFilePath { get; set; }
         public string? NOCFormat { get; set; }
     }
