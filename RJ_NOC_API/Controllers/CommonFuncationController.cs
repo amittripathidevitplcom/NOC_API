@@ -4216,13 +4216,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetHistoryReport/{DepartmentID}/{ID}/{Action}")]
-        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetHistoryReport(int DepartmentID, int ID,string Action)
+        [HttpGet("GetDocumentScrutiny_History/{ID}/{Action}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetDocumentScrutiny_History( int ID,string Action)
         {
             var result = new OperationResult<List<CommonDataModel_DataSet>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetHistoryReport(DepartmentID, ID, Action));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDocumentScrutiny_History(ID, Action));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -4237,7 +4237,7 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetHistoryReport", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDocumentScrutiny_History", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

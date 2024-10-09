@@ -1768,11 +1768,11 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public List<CommonDataModel_DataSet> GetHistoryReport(int DepartmentID, int ID, string Action)
+        public List<CommonDataModel_DataSet> GetDocumentScrutiny_History(int ID, string Action)
         {
-            string SqlQuery = " exec USP_GetHistoryReport @DepartmentID='" + DepartmentID + "',@ID='" + ID + "',@Action='" + Action + "'";
+            string SqlQuery = " exec USP_GetDocumentScrutiny_History @ID='" + ID + "',@Action='" + Action + "'";
             DataSet dataSet = new DataSet();
-            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.USP_GetHistoryReport");
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.GetDocumentScrutiny_History");
 
             List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
             CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
