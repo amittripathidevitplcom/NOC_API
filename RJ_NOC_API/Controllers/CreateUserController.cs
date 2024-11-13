@@ -104,7 +104,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.CreateUserUtility.IfExists(request.UId, request.SSOID, request.DepartmentID, request.RoleID);
+                IfExits = UtilityHelper.CreateUserUtility.IfExists(request.UId, request.SSOID, request.DepartmentID, request.RoleID,request.MemberType,request.DistrictID,request.TehsilID);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.CreateUserUtility.SaveData(request));

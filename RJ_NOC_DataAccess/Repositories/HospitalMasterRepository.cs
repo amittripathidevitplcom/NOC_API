@@ -149,6 +149,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@CityID_ManageBy='{0}',", request.CityID_ManageBy);
             sb.AppendFormat("@CityID_Owner='{0}',", request.CityID_Owner);
             sb.AppendFormat("@CityID_Other='{0}',", request.CityID_Other);
+            sb.AppendFormat("@IsAffiliatedHospital='{0}',", request.IsAffiliatedHospital);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
 

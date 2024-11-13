@@ -14,7 +14,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(CreateUserDataModel request);
         bool DeleteData(int UId);
 
-        bool IfExists(int UId, string SSOID,int DepartmentID, int RoleID);
+        bool IfExists(int UId, string SSOID,int DepartmentID, int RoleID,string MemberType,int DistrictID,int TehsilID);
     }
 }
 

@@ -171,6 +171,7 @@ namespace RJ_NOC_Model
         public string? CityName_Owner { get; set; }
         public int? CityID_Other { get; set; }
         public string? CityName_Other { get; set; }
+        public string? IsAffiliatedHospital { get; set; }
     }
     public class HospitalAreaValidation
     {

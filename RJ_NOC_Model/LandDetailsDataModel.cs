@@ -55,6 +55,22 @@ namespace RJ_NOC_Model
         public string? LeaseDate { get; set; }
         public string? NameOfLandPurchasedAllotted { get; set; }
 
+
+
+
+
+        public int? LandOwnerShipID { get; set; }
+        public string? LandOwnerShipName { get; set; }
+        public int? SocietyMemberID { get; set; }
+        public string? SocietyMemberName { get; set; }
+        public string? FromLeaseDate { get; set; }
+        public string? ToLeaseDate { get; set; }
+        public string? FromRentDate { get; set; }
+        public string? ToRentDate { get; set; }
+        public string? LeaseDocument { get; set; }
+        public string? Dis_LeaseDocument { get; set; }
+        public string? LeaseDocumentPath { get; set; }
+
     }
 
     //public class LandDetailDocumentDataModel:document

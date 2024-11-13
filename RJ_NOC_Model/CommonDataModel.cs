@@ -23,6 +23,14 @@ namespace RJ_NOC_Model
         public bool Status { get; set; }
         public bool ForEmployeeCode { get; set; }
     }
+    public class CommonDataModel_TabHistory
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public string Type { get; set; }
+        public string? DocumentName { get; set; }
+    }
+   
 
     public class CommonDataModel_EmployeeDocumentList
     {

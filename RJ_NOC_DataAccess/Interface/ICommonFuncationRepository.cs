@@ -87,7 +87,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
 
         List<CommonDataModel_LandTypeMasterList_DepartmentWise> GetLandTypeMasterList_DepartmentAndLandConvertWise(int DepartmentID, string Type);
-        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID);
+        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser();
@@ -183,7 +183,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetNOCFormatList(int NOCFormatID);
         bool UnlockApplication(UnlockApplicationDataModel request);
         List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID);
-        List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Type);
+        List<CommonDataModel_DataSet> GetCollegeTabData_History(CommonDataModel_TabHistory request);
     }
 }
 

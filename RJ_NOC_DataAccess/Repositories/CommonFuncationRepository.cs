@@ -726,9 +726,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssemblyAreaDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb)
         {
-            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "'";
+            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@IsWeb='" + IsWeb + "'";
             List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
             //DataTable dataTable = new DataTable();
             //dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
@@ -1768,9 +1768,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Type)
+        public List<CommonDataModel_DataSet> GetCollegeTabData_History(CommonDataModel_TabHistory request)
         {
-            string SqlQuery = " exec USP_GetCollegeTabData_History @ID='" + ID + "',@Action='" + Type + "'";
+            string SqlQuery = " exec USP_GetCollegeTabData_History @ID='" + request.ID + "',@Action='" + request.Type + "',@CollegeID='" + request.CollegeID + "',@DocumentName='" + request.DocumentName + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.GetCollegeTabData_History");
 

@@ -281,9 +281,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
         }
 
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID,bool IsWeb)
         {
-            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID);
+            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb);
         }
         public List<CommonDataModel_DesignationDDL> GetAllDesignation()
         {
@@ -610,9 +610,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetUnlockApplicationTrail_DepartmentApplicationWise(ApplicationID, DepartmentID);
         }
-        public List<CommonDataModel_DataSet> GetCollegeTabData_History(int ID, string Type)
+        public List<CommonDataModel_DataSet> GetCollegeTabData_History(CommonDataModel_TabHistory request)
         {
-            return UnitOfWork.CommonFuncationRepository.GetCollegeTabData_History(ID, Type);
+            return UnitOfWork.CommonFuncationRepository.GetCollegeTabData_History(request);
         }
     }
 }

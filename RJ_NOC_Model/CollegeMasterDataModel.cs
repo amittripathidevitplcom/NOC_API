@@ -96,7 +96,8 @@ namespace RJ_NOC_Model
 
 
         //public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }
-
+        public string? IsAbbreviation { get; set; }
+        public string? AbbreviationName { get; set; }
 
     }
     public class ContactDetailsDataModel

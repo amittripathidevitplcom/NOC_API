@@ -99,6 +99,20 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.NameOfLandPurchasedAllotted = dataSet.Tables[0].Rows[0]["NameOfLandPurchasedAllotted"].ToString();
                     dataModels.MedicalGroupOneLandType = dataSet.Tables[0].Rows[0]["MedicalGroupOneLandType"].ToString();
                     dataModels.MedicalGroupOneLandUnit = dataSet.Tables[0].Rows[0]["MedicalGroupOneLandUnit"].ToString();
+
+
+                    dataModels.LandOwnerShipID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["LandOwnerShipID"]);
+                    dataModels.LandOwnerShipName = dataSet.Tables[0].Rows[0]["LandOwnerShipName"].ToString();
+                    dataModels.SocietyMemberID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["SocietyMemberID"]);
+                    dataModels.SocietyMemberName = dataSet.Tables[0].Rows[0]["SocietyMemberName"].ToString();
+                    dataModels.FromLeaseDate = dataSet.Tables[0].Rows[0]["FromLeaseDate"].ToString();
+                    dataModels.ToLeaseDate = dataSet.Tables[0].Rows[0]["ToLeaseDate"].ToString();
+                    dataModels.FromRentDate = dataSet.Tables[0].Rows[0]["FromRentDate"].ToString();
+                    dataModels.ToRentDate = dataSet.Tables[0].Rows[0]["ToRentDate"].ToString();
+                    dataModels.LeaseDocument = dataSet.Tables[0].Rows[0]["LeaseDocument"].ToString();
+                    dataModels.LeaseDocumentPath = dataSet.Tables[0].Rows[0]["LeaseDocumentPath"].ToString();
+                    dataModels.Dis_LeaseDocument = dataSet.Tables[0].Rows[0]["Dis_LeaseDocument"].ToString();
+
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<CommonDataModel_BuildingUploadDoc> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingUploadDoc>>(JsonDataTable_Data);
                     dataModels.LandDetailDocument = LandDetailDataModel_Item;
@@ -158,6 +172,16 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @MedicalGroupOneLandUnitID='" + request.MedicalGroupOneLandUnitID + "',";
             SqlQuery += " @LeaseDate='" + request.LeaseDate + "',";
             SqlQuery += " @NameOfLandPurchasedAllotted='" + request.NameOfLandPurchasedAllotted + "',";
+
+
+
+            SqlQuery += " @LandOwnerShipID='" + request.LandOwnerShipID + "',";
+            SqlQuery += " @SocietyMemberID='" + request.SocietyMemberID + "',";
+            SqlQuery += " @FromLeaseDate='" + request.FromLeaseDate + "',";
+            SqlQuery += " @ToLeaseDate='" + request.ToLeaseDate + "',";
+            SqlQuery += " @FromRentDate='" + request.FromRentDate + "',";
+            SqlQuery += " @ToRentDate='" + request.ToRentDate + "',";
+            SqlQuery += " @LeaseDocument='" + request.LeaseDocument + "',";
 
             SqlQuery += " @LandTypeDetails_str='" + CommonHelper.GetDetailsTableQry(request.CollegeLandTypeDetails.Where(f => f.IsLandSelected == true), "Temp_LandTypeDetails") + "',";
 

@@ -1904,13 +1904,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetDashboardDataSSOWise/{SSOID}/{DepartmentID}/{RoleID}/{UserID}")]
-        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID)
+        [HttpGet("GetDashboardDataSSOWise/{SSOID}/{DepartmentID}/{RoleID}/{UserID}/{IsWeb=false}")]
+        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb= false)
         {
             var result = new OperationResult<List<CommonDataModel_DashBoard>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -4216,13 +4216,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetCollegeTabData_History/{ID}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetCollegeTabData_History( int ID,string Type)
+        [HttpPost("GetCollegeTabData_History")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> GetCollegeTabData_History(CommonDataModel_TabHistory request)
         {
             var result = new OperationResult<List<CommonDataModel_DataSet>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeTabData_History(ID, Type));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetCollegeTabData_History(request));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

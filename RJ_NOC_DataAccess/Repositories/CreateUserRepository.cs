@@ -90,9 +90,9 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
-        public bool IfExists(int UId, string SSOID, int DepartmentID, int RoleID)
+        public bool IfExists(int UId, string SSOID, int DepartmentID, int RoleID, string MemberType, int DistrictID, int TehsilID)
         {
-            string SqlQuery = " select Name from M_UserMaster Where  SSOID ='" + SSOID + "' and UId !='" + UId + "'and DepartmentID ='" + DepartmentID + "'and RoleID ='" + RoleID + "' and ActiveStatus=1";
+            string SqlQuery = "exec USP_IfExistsUserDetails @UId='"+UId+ "',@SSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@MemberType='" + MemberType + "',@DistrictID='" + DistrictID + "',@TehsilID='" + TehsilID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CreateUser.IfExists");
             if (dataTable.Rows.Count > 0)
