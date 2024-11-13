@@ -36,7 +36,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_SaveOldNOCDetail_IU  ";
             SqlQuery += "@OldNocID='" + request.OldNocID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@NOCTypeID='" + request.NOCTypeID + "',@SessionYear='" + request.SessionYear + "',";
             SqlQuery += "@IssuedYear='" + request.IssuedYear + "',@NOCNumber='" + request.NOCNumber + "',@NOCReceivedDate='" + request.NOCReceivedDate + "',@NOCExpireDate='" + request.NOCExpireDate + "',";
-            SqlQuery += "@UploadNOCDoc='" + request.UploadNOCDoc + "',@Remark='" + request.Remark + "',@DepartmentID='" + request.DepartmentID + "',@SubjectDetail_Str='" + SubjectDetail_Str + "'";
+            SqlQuery += "@UploadNOCDoc='" + request.UploadNOCDoc + "',@Remark='" + request.Remark + "',@DepartmentID='" + request.DepartmentID + "',@FirstOrderNo='"+request.FirstOrderNo + "',@FirstOrderDate='"+request.FirstOrderDate + "',@FirstRecognitionUploadDoc='"+request.FirstRecognitionUploadDoc + "',@RevisedOrderNo='"+request.RevisedOrderNo + "',@RevisedOrderDate='"+request.RevisedOrderDate + "',@RevisedRecognitionUploadDoc='"+request.RevisedRecognitionUploadDoc + "',@StateOrderNo='"+request.StateOrderNo + "',@StateOrderDate='"+request.StateOrderDate + "',@StateRecognitionUploadDoc='"+request.StateRecognitionUploadDoc + "',@RevisedStateOrderNo='"+request.RevisedStateOrderNo + "',@RevisedStateOrderDate='"+request.RevisedStateOrderDate + "',@RevisedStateRecognitionUploadDoc='"+request.RevisedStateRecognitionUploadDoc + "',@SubjectDetail_Str='" + SubjectDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OldNOCDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -77,7 +77,26 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.CollegeName = dataSet.Tables[0].Rows[i]["CollegeName"].ToString();
                     dataModels.CourseName = dataSet.Tables[0].Rows[i]["CourseName"].ToString();
                     dataModels.NOCTypeName = dataSet.Tables[0].Rows[i]["NOCTypeName"].ToString();
-                    dataModels.FinancialYearName = dataSet.Tables[0].Rows[i]["FinancialYearName"].ToString();
+                    dataModels.FinancialYearName = dataSet.Tables[0].Rows[i]["FinancialYearName"].ToString(); dataModels.FirstOrderNo = dataSet.Tables[0].Rows[0]["FirstOrderNo"].ToString();
+                    dataModels.FirstOrderDate = dataSet.Tables[0].Rows[i]["FirstOrderDate"].ToString();
+                    dataModels.FirstRecognitionUploadDoc = dataSet.Tables[0].Rows[i]["FirstRecognitionUploadDoc"].ToString();
+                    dataModels.FirstRecognitionUploadDocPath = dataSet.Tables[0].Rows[i]["FirstRecognitionUploadDocPath"].ToString();
+                    dataModels.FirstRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[i]["FirstRecognitionUploadDoc_Dis_FileName"].ToString();
+                    dataModels.RevisedOrderNo = dataSet.Tables[0].Rows[i]["RevisedOrderNo"].ToString();
+                    dataModels.RevisedOrderDate = dataSet.Tables[0].Rows[i]["RevisedOrderDate"].ToString();
+                    dataModels.RevisedRecognitionUploadDoc = dataSet.Tables[0].Rows[i]["RevisedRecognitionUploadDoc"].ToString();
+                    dataModels.RevisedRecognitionUploadDocPath = dataSet.Tables[0].Rows[i]["RevisedRecognitionUploadDocPath"].ToString();
+                    dataModels.RevisedRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[i]["RevisedRecognitionUploadDoc_Dis_FileName"].ToString();
+                    dataModels.StateOrderNo = dataSet.Tables[0].Rows[i]["StateOrderNo"].ToString();
+                    dataModels.StateOrderDate = dataSet.Tables[0].Rows[i]["StateOrderDate"].ToString();
+                    dataModels.StateRecognitionUploadDoc = dataSet.Tables[0].Rows[i]["StateRecognitionUploadDoc"].ToString();
+                    dataModels.StateRecognitionUploadDocPath = dataSet.Tables[0].Rows[i]["StateRecognitionUploadDocPath"].ToString();
+                    dataModels.StateRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[i]["StateRecognitionUploadDoc_Dis_FileName"].ToString();
+                    dataModels.RevisedStateOrderNo = dataSet.Tables[0].Rows[i]["RevisedStateOrderNo"].ToString();
+                    dataModels.RevisedStateOrderDate = dataSet.Tables[0].Rows[i]["RevisedStateOrderDate"].ToString();
+                    dataModels.RevisedStateRecognitionUploadDoc = dataSet.Tables[0].Rows[i]["RevisedStateRecognitionUploadDoc"].ToString();
+                    dataModels.RevisedStateRecognitionUploadDocPath = dataSet.Tables[0].Rows[i]["RevisedStateRecognitionUploadDocPath"].ToString();
+                    dataModels.RevisedStateRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[i]["RevisedStateRecognitionUploadDoc_Dis_FileName"].ToString();
                     dataModels.Action = dataSet.Tables[0].Rows[i]["Action"].ToString();
                     for (int j = 0; j < dataSet.Tables[1].Rows.Count; j++)
                     {
@@ -116,6 +135,26 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.CourseName = dataSet.Tables[0].Rows[0]["CourseName"].ToString();
                     dataModels.NOCTypeName = dataSet.Tables[0].Rows[0]["NOCTypeName"].ToString();
                     dataModels.FinancialYearName = dataSet.Tables[0].Rows[0]["FinancialYearName"].ToString();
+                    dataModels.FirstOrderNo = dataSet.Tables[0].Rows[0]["FirstOrderNo"].ToString();
+                    dataModels.FirstOrderDate = dataSet.Tables[0].Rows[0]["FirstOrderDate"].ToString();
+                    dataModels.FirstRecognitionUploadDoc = dataSet.Tables[0].Rows[0]["FirstRecognitionUploadDoc"].ToString();
+                    dataModels.FirstRecognitionUploadDocPath = dataSet.Tables[0].Rows[0]["FirstRecognitionUploadDocPath"].ToString();
+                    dataModels.FirstRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[0]["FirstRecognitionUploadDoc_Dis_FileName"].ToString();
+                    dataModels.RevisedOrderNo = dataSet.Tables[0].Rows[0]["RevisedOrderNo"].ToString();
+                    dataModels.RevisedOrderDate = dataSet.Tables[0].Rows[0]["RevisedOrderDate"].ToString();
+                    dataModels.RevisedRecognitionUploadDoc = dataSet.Tables[0].Rows[0]["RevisedRecognitionUploadDoc"].ToString();
+                    dataModels.RevisedRecognitionUploadDocPath = dataSet.Tables[0].Rows[0]["RevisedRecognitionUploadDocPath"].ToString();
+                    dataModels.RevisedRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[0]["RevisedRecognitionUploadDoc_Dis_FileName"].ToString();
+                    dataModels.StateOrderNo = dataSet.Tables[0].Rows[0]["StateOrderNo"].ToString();
+                    dataModels.StateOrderDate = dataSet.Tables[0].Rows[0]["StateOrderDate"].ToString();
+                    dataModels.StateRecognitionUploadDoc = dataSet.Tables[0].Rows[0]["StateRecognitionUploadDoc"].ToString();
+                    dataModels.StateRecognitionUploadDocPath = dataSet.Tables[0].Rows[0]["StateRecognitionUploadDocPath"].ToString();
+                    dataModels.StateRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[0]["StateRecognitionUploadDoc_Dis_FileName"].ToString();
+                    dataModels.RevisedStateOrderNo = dataSet.Tables[0].Rows[0]["RevisedStateOrderNo"].ToString();
+                    dataModels.RevisedStateOrderDate = dataSet.Tables[0].Rows[0]["RevisedStateOrderDate"].ToString();
+                    dataModels.RevisedStateRecognitionUploadDoc = dataSet.Tables[0].Rows[0]["RevisedStateRecognitionUploadDoc"].ToString();
+                    dataModels.RevisedStateRecognitionUploadDocPath = dataSet.Tables[0].Rows[0]["RevisedStateRecognitionUploadDocPath"].ToString();
+                    dataModels.RevisedStateRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[0]["RevisedStateRecognitionUploadDoc_Dis_FileName"].ToString();
                     dataModels.Action = dataSet.Tables[0].Rows[0]["Action"].ToString();
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);

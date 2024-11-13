@@ -93,7 +93,12 @@ namespace RJ_NOC_Model
         public string? ICARDocumentPath { get; set; }
         public string? ICARDocument_Dis_FileName { get; set; }
 
-
+        public string? AffiliationUniversityDoc { get; set; }
+        public string? AffiliationUniversityDocPath{ get; set; }
+        public string? AffiliationUniversityDoc_Dis_FileName{get;set;}
+        public string? UniversityApproveTeachingFacultyDoc{ get; set; }
+        public string? UniversityApproveTeachingFacultyDocPath{ get; set; }
+        public string? UniversityApproveTeachingFacultyDoc_Dis_FileName{ get; set; }
 
         //public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }
         public string? IsAbbreviation { get; set; }

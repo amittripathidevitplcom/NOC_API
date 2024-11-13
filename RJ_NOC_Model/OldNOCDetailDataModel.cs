@@ -34,6 +34,27 @@ namespace RJ_NOC_Model
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
+
+        public string? FirstOrderNo { get; set; }
+        public string? FirstOrderDate{ get; set; }
+        public string? FirstRecognitionUploadDoc{ get; set; }
+        public string? FirstRecognitionUploadDocPath{ get; set; }
+        public string? FirstRecognitionUploadDoc_Dis_FileName{ get; set; }
+        public string? RevisedOrderNo{ get; set; }
+        public string? RevisedOrderDate{ get; set; }
+        public string? RevisedRecognitionUploadDoc{ get; set; }
+        public string? RevisedRecognitionUploadDocPath{ get; set; }
+        public string? RevisedRecognitionUploadDoc_Dis_FileName{ get; set; }
+        public string? StateOrderNo{ get; set; }
+        public string? StateOrderDate{ get; set; }
+        public string? StateRecognitionUploadDoc{ get; set; }
+        public string? StateRecognitionUploadDocPath{ get; set; }
+        public string? StateRecognitionUploadDoc_Dis_FileName{ get; set; }
+        public string? RevisedStateOrderNo{ get; set; }
+        public string? RevisedStateOrderDate{ get; set; }
+        public string? RevisedStateRecognitionUploadDoc{ get; set; }
+        public string? RevisedStateRecognitionUploadDocPath{ get; set; }
+        public string? RevisedStateRecognitionUploadDoc_Dis_FileName{ get; set; }
     }
     public class OldNocDetails_SubjectDataModel
     {

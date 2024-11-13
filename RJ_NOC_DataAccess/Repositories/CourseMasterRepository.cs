@@ -80,6 +80,10 @@ namespace RJ_NOC_DataAccess.Repository
                 dataModels.CourseTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseTypeID"]);
                 dataModels.Seats = Convert.ToInt32(dataSet.Tables[0].Rows[0]["Seats"]);
                 dataModels.NoOfEnrolledStudents = Convert.ToInt32(dataSet.Tables[0].Rows[0]["NoOfEnrolledStudents"]);
+                dataModels.SessionYear = Convert.ToInt32(dataSet.Tables[0].Rows[0]["FinancialYearID"]);
+                dataModels.CourseCategoryId = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CourseCategoryId"]);
+                dataModels.TotalSeatsCourseWise = Convert.ToString(dataSet.Tables[0].Rows[0]["TotalSeatsCourseWise"]);
+                dataModels.CompositeUnit = Convert.ToString(dataSet.Tables[0].Rows[0]["CompositeUnit"]);
                 dataModels.UserID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["UserID"]);
                 dataModels.ActiveStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["ActiveStatus"]);
                 dataModels.DeleteStatus = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["DeleteStatus"]);
@@ -119,6 +123,10 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @IPAddress='" + IPAddress + "',";
             SqlQuery += " @CourseLevelID='" + request.CourseLevelID + "',";
             SqlQuery += " @StreamID='" + request.StreamID + "',";
+            SqlQuery += " @EstablishmentYearID='" + request.SessionYear + "',";
+            SqlQuery += " @CourseCategoryId='" + request.CourseCategoryId + "',";
+            SqlQuery += " @TotalSeatsCourseWise='" + request.TotalSeatsCourseWise + "',";
+            SqlQuery += " @CompositeUnit='" + request.CompositeUnit + "',";
             SqlQuery += " @CollegeWiseCourse_SubjectDetails='" + SubjectList + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CourseMaster.SaveData");
             if (Rows > 0)

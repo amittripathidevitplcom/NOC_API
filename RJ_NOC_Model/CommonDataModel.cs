@@ -56,7 +56,7 @@ namespace RJ_NOC_Model
         public int SchemeID { get; set; }
         public int DepatmentID { get; set; }
         public string SchemeName { get; set; }
-    } 
+    }
     public class CommonDataModel_CollegeID_SearchRecordIDWise
     {
         public int CollegeID { get; set; }
@@ -70,7 +70,7 @@ namespace RJ_NOC_Model
 
     public class CommonDataModel_SubModuleListByModule
     {
-           
+
         public int SubModuleID { get; set; }
         public int ModuleID { get; set; }
         public string SubModuleName { get; set; }
@@ -88,7 +88,7 @@ namespace RJ_NOC_Model
     }
     public class CommonDataModel_RoleListByLevel
     {
-          
+
         public int RoleID { get; set; }
         public int LevelID { get; set; }
         public string RoleName { get; set; }
@@ -118,6 +118,8 @@ namespace RJ_NOC_Model
         public int CollegeID { get; set; }
         public int DepartmentID { get; set; }
         public string CollegeName { get; set; }
+        public string CourseCategoryName { get; set; }
+        public int CourseCategoryId { get; set; }
     }
 
 
@@ -126,7 +128,7 @@ namespace RJ_NOC_Model
         public int CourseID { get; set; }
         public string CourseName { get; set; }
         public int CourseLevelID { get; set; }
-        
+
     }
     public class CommonDataModel_SubjectMaster
     {
@@ -158,7 +160,7 @@ namespace RJ_NOC_Model
         public string FilePath { get; set; }
         public string SampleDocument { get; set; }
         public string DisplayName { get; set; }
-    } 
+    }
     public class CommonDataModel_LandAreaMasterList_DepartmentWise
     {
         public int LandAreaID { get; set; }
@@ -266,7 +268,7 @@ namespace RJ_NOC_Model
     {
         public int DesignationID { get; set; }
         public string DesignationName { get; set; }
-    }    
+    }
     public class CommonDataModel_TabField
     {
         public int TabFieldID { get; set; }
@@ -327,7 +329,7 @@ namespace RJ_NOC_Model
     }
 
     public class CommonDataModel_AadharDataModel
-    { 
+    {
         public string AadharNo { get; set; }
         public string TransactionNo { get; set; }
         public string OTP { get; set; }
@@ -354,13 +356,20 @@ namespace RJ_NOC_Model
         public int IsDraftSubmited { get; set; }
         public string? Deficiency { get; set; }
 
-    }    
+    }
     public class CommonDataModel_NOCFormatMaster
     {
         public int NOCFormatID { get; set; }
         public int DepartmentID { get; set; }
         public int ParameterID { get; set; }
         public string NOCFormat { get; set; }
+
+    }
+
+    public class CommonDataModel_Category
+    {
+        public int CategoryId { get; set; }       
+        public string CategoryName { get; set; }
 
     }
 }

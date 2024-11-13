@@ -98,6 +98,8 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@AppliedICAR='{0}',", request.AppliedICAR);
             sb.AppendFormat("@ApprovedICAR='{0}',", request.ApprovedICAR);
             sb.AppendFormat("@ICARDocument='{0}',", request.ICARDocument);
+            sb.AppendFormat("@AffiliationUniversityDoc='{0}',", request.AffiliationUniversityDoc);
+            sb.AppendFormat("@UniversityApproveTeachingFacultyDoc='{0}',", request.UniversityApproveTeachingFacultyDoc);            
             sb.AppendFormat("@IsAbbreviation='{0}',", request.IsAbbreviation);
             sb.AppendFormat("@AbbreviationName='{0}',", request.AbbreviationName);
             // child

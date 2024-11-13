@@ -21,8 +21,12 @@ namespace RJ_NOC_Model
         public bool DeleteStatus { get; set; }
         public int CourseLevelID { get; set; }
         public int StreamID { get; set; }
+        public int? SessionYear { get; set; }
+        public int? CourseCategoryId{ get; set; }
+        public string? TotalSeatsCourseWise { get; set; }
+        public string? CompositeUnit { get; set; }
 
-    }
+}
 
     public class CourseMasterDataModel_SubjectDetails
     {
