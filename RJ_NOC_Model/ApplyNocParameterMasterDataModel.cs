@@ -204,6 +204,8 @@ namespace RJ_NOC_Model
         public string? GenerateReceipt_DTE { get; set; }
         public string? GenerateReceiptPath_DTE { get; set; }
         public string? ExistingLetterofEOA { get; set; }
+        public int? OpenApplicationSession { get; set; }
+        public int? OpenDefaulterSession { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 

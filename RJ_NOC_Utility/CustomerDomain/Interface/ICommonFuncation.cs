@@ -84,7 +84,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitiesMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
         List<CommonDataModel_ActivityMasterDepartmentAndTypeWise> GetActivityMasterList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int FacilitieID, string Type);
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
-        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb);
+        List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb, int SessionYear);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser();
@@ -161,17 +161,24 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         bool SSOUpdateSubmit(int CollegeID, string SSOID);
         List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID);
-        List<DataTable> HomePage_IncreaseDate();
+        List<DataTable> HomePage_IncreaseDate(int DepartmentID);
         List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request);
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
         List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
-        List<DataTable> GetApplicationCountRoleWise(int DepartmentID);
+        List<DataTable> GetApplicationCountRoleWise(int DepartmentID,int SessionYear);
         List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID);
         bool ConvertBaseIntoImage();
         bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request);
         List<DataTable> GetNOCFormatList(int NOCFormatID);
         bool UnlockApplication(UnlockApplicationDataModel request);
         List<CommonDataModel_DataSet> GetCollegeTabData_History(CommonDataModel_TabHistory request);
+
+        List<CommonDataModel_FinancialYearDDL> GetDashBoardFinancialYear();
+        List<DataTable> GetAHDepartmentList();
+        List<AHDepartmentDataModel> GetAHFacilityDepartmentList(int DepartmentID, int CollegeID);
+
+        bool SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request);
+        List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID);
     }
 
 

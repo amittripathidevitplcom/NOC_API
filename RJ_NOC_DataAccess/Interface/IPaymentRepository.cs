@@ -22,7 +22,7 @@ namespace RJ_NOC_DataAccess.Interface
         //payment gaeway
         PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel Model);
 
-        List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID);
+        List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID,int SessionYear);
 
 
         //Emitra Section
@@ -31,7 +31,7 @@ namespace RJ_NOC_DataAccess.Interface
         EmitraTransactions CreateAddEmitraTransation(EmitraTransactions request);
         bool UpdateEmitraPaymentStatus(EmitraResponseParameters request);
         List<CommonDataModel_DataTable> GetEmitraTransactionDetails(string TransactionID);
-        List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID);
+        List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID,int SessionYear);
         
 
     }

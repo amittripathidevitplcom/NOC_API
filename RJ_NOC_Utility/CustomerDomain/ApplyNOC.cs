@@ -147,9 +147,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetApplicationPenalty(ApplyNOCID);
         }
-        public List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID)
+        public List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID, int SessionYear)
         {
-            return UnitOfWork.ApplyNOCRepository.GetApplicationPenaltyList(SSOID);
+            return UnitOfWork.ApplyNOCRepository.GetApplicationPenaltyList(SSOID, SessionYear);
         }
 
         public DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear, string CourseIDs, string SubjectIDs)

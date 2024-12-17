@@ -18,7 +18,7 @@ namespace RJ_NOC_DataAccess.Repository
         
         public List<CommonDataModel_DataTable> GetDefaulterCollegeRequestData(DefaulterCollegeSearchFilterDataModel request)
         {
-            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request.RequestID+ "',@DepartmentID='" + request.DepartmentID+ "',@SSOID='" + request.SSOID+ "',@ApplicationStatus='" + request.ApplicationStatus + "',@UserID='" + request.UserID + "'";
+            string SqlQuery = " exec [USP_GetDefaulterCollegeRequestData] @RequestID='" + request.RequestID+ "',@DepartmentID='" + request.DepartmentID+ "',@SSOID='" + request.SSOID+ "',@ApplicationStatus='" + request.ApplicationStatus + "',@UserID='" + request.UserID + "',@SessionYear='" + request.SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterCollegeRequestData");
 
@@ -133,9 +133,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public List<DataTable> GetDefaulterRequestCount(int DepartmentID, int UserID)
+        public List<DataTable> GetDefaulterRequestCount(int DepartmentID, int UserID,int SessionYear)
         {
-            string SqlQuery = " exec USP_GetDefaulterRequestCount @DepartmentID='" + DepartmentID + "',@UserID='" + UserID + "'";
+            string SqlQuery = " exec USP_GetDefaulterRequestCount @DepartmentID='" + DepartmentID + "',@UserID='" + UserID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DefaulterCollegeRequest.GetDefaulterRequestCount");
             List<DataTable> dataModels = new List<DataTable>();

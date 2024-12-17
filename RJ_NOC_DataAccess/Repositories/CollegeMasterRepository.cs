@@ -102,6 +102,10 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@UniversityApproveTeachingFacultyDoc='{0}',", request.UniversityApproveTeachingFacultyDoc);            
             sb.AppendFormat("@IsAbbreviation='{0}',", request.IsAbbreviation);
             sb.AppendFormat("@AbbreviationName='{0}',", request.AbbreviationName);
+
+            sb.AppendFormat("@FaxNo='{0}',", request.FaxNo);
+            sb.AppendFormat("@LiveStockFarmAddress='{0}',", request.LiveStockFarmAddress);
+            sb.AppendFormat("@VeternaryClinicalAddress='{0}',", request.VeternaryClinicalAddress);
             // child
             sb.AppendFormat("@ContactDetailsList='{0}',", CommonHelper.GetDetailsTableQry(request.ContactDetailsList, "ContactDetailsList"));
             if (request.NearestGovernmentHospitalsList.Count > 0)
@@ -126,9 +130,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID, int SessionYear)
         {
-            string SqlQuery = "exec USP_DraftApplicationList @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = "exec USP_DraftApplicationList @LoginSSOID='" + LoginSSOID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.DraftApplicationList");
 
@@ -138,9 +142,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID, int SessionYear)
         {
-            string SqlQuery = "exec USP_StatisticsCollegeList @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = "exec USP_StatisticsCollegeList @LoginSSOID='" + LoginSSOID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.DraftApplicationList");
 
@@ -150,9 +154,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type)
+        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type, int SessionYear)
         {
-            string SqlQuery = "exec USP_CollegeDetailsList @LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "'";
+            string SqlQuery = "exec USP_CollegeDetailsList @LoginSSOID='" + LoginSSOID + "',@Type='" + Type + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.CollegeDetails");
 
@@ -232,9 +236,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID, int SessionYear)
         {
-            string SqlQuery = "exec USP_DceCollegeRevertedApplicationList @LoginSSOID='" + LoginSSOID + "'";
+            string SqlQuery = "exec USP_DceCollegeRevertedApplicationList @LoginSSOID='" + LoginSSOID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.RevertApplicationList");
 
@@ -244,9 +248,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID, int SessionYear)
         {
-            string SqlQuery = "exec USP_GetCollegeApplyNOCRejected @SsoID='" + LoginSSOID + "'";
+            string SqlQuery = "exec USP_GetCollegeApplyNOCRejected @SsoID='" + LoginSSOID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.RejectedApplicationList");
 

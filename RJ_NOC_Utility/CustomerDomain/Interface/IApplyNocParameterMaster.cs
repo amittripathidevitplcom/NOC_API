@@ -12,7 +12,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         ApplyNocParameterMaster_AdditionOfNewSeats60DataModel GetApplyNocFor_AdditionOfNewSeats60(int CollegeID, string ApplyNocFor);
         List<ApplyNocParameterMaster_ddl> GetApplyNocParameterMaster(int CollegeID);
         bool SaveApplyNocApplication(ApplyNocParameterDataModel request);
-        List<ApplyNocApplicationDataModel> GetApplyNocApplicationList(string SSOID);  
+        List<ApplyNocApplicationDataModel> GetApplyNocApplicationList(string SSOID,int SessionYear);  
         ApplyNocApplicationDataModel GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID);
         bool DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy);
         List<ApplyNocFDRDetailsDataModel> GetApplyNoc_FDRMasterByCollegeID(int CollegeID);
@@ -23,8 +23,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID,string PaymentFor);
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName);
-        List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
-        List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID);
+        List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID,int SessionYear);
+        List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID,int SessionYear);
 
         List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
         bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request);

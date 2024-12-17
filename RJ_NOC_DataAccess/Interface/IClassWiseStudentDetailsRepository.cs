@@ -10,14 +10,14 @@ namespace RJ_NOC_DataAccess.Interface
 {
    public interface IClassWiseStudentDetailsRepository
     {
-        List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID);
+        List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID,int SessionYear);
 
         List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter request);
         List<DataTable> CollegeList_StatisticsDraftSubmited(CollegeList_StatisticsDraftSubmitedDataModel_Filter request);
         bool SaveData(PostClassWiseStudentDetailsDataModel model);
 
         //Save
-        List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID);
+        List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID, int SessionYear);
         bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel model);
         bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model);
 

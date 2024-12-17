@@ -670,7 +670,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return model;
         }
 
-        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationList(string SSOID)
+        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationList(string SSOID, int SessionYear)
         {
             //var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID);
             //List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
@@ -681,7 +681,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             //return model;
 
             DataSet dataSet = new DataSet();
-            dataSet = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID);
+            dataSet = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationList(SSOID, SessionYear);
             List<ApplyNocApplicationDataModel> listdataModels = new List<ApplyNocApplicationDataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDataModel>>(JsonDataTable_Data);
@@ -791,9 +791,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
 
 
-        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID)
+        public List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID, int SessionYear)
         {
-            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationLists(SelectedCollageID, SelectedDepartmentID);
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocApplicationLists(SelectedCollageID, SelectedDepartmentID, SessionYear);
             List<ApplyNocApplicationDataModel> model = new List<ApplyNocApplicationDataModel>();
             if (dt != null)
             {
@@ -801,9 +801,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             return model;
         }
-        public List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID)
+        public List<ApplyNocFDRDetailsDataModel> ViewApplyNocFDRDetailsByCollegeID(int CollegeID,int SessionYear)
         {
-            var dt = UnitOfWork.ApplyNocParameterMasterRepository.ViewApplyNocFDRDetailsByCollegeID(CollegeID);
+            var dt = UnitOfWork.ApplyNocParameterMasterRepository.ViewApplyNocFDRDetailsByCollegeID(CollegeID, SessionYear);
             List<ApplyNocFDRDetailsDataModel> model = new List<ApplyNocFDRDetailsDataModel>();
             if (dt != null)
             {

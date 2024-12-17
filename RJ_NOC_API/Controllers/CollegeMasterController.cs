@@ -134,13 +134,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("DraftApplicationList/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> DraftApplicationList(string LoginSSOID)
+        [HttpGet("DraftApplicationList/{LoginSSOID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> DraftApplicationList(string LoginSSOID,int SessionYear=0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.DraftApplicationList(LoginSSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.DraftApplicationList(LoginSSOID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -166,13 +166,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("StatisticsCollegeList/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> StatisticsCollegeList(string LoginSSOID)
+        [HttpGet("StatisticsCollegeList/{LoginSSOID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> StatisticsCollegeList(string LoginSSOID,int SessionYear=0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.StatisticsCollegeList(LoginSSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.StatisticsCollegeList(LoginSSOID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -201,13 +201,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("CollegeDetails/{LoginSSOID}/{Type}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CollegeDetails(string LoginSSOID,string Type)
+        [HttpGet("CollegeDetails/{LoginSSOID}/{Type}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CollegeDetails(string LoginSSOID,string Type,int SessionYear)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.CollegeDetails(LoginSSOID,Type));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.CollegeDetails(LoginSSOID,Type,SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -328,13 +328,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("RevertedApplicationList/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> RevertedApplicationList(string LoginSSOID)
+        [HttpGet("RevertedApplicationList/{LoginSSOID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> RevertedApplicationList(string LoginSSOID,int SessionYear=0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.RevertedApplicationList(LoginSSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.RevertedApplicationList(LoginSSOID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -419,13 +419,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("RejectedApplicationList/{LoginSSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> RejectedApplicationList(string LoginSSOID)
+        [HttpGet("RejectedApplicationList/{LoginSSOID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> RejectedApplicationList(string LoginSSOID,int SessionYear=0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.RejectedApplicationList(LoginSSOID));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.RejectedApplicationList(LoginSSOID,SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

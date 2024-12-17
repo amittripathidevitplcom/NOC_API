@@ -50,6 +50,12 @@ namespace RJ_NOC_Model
     {
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
+        public bool? IsOpenNOCApplication { get; set; }
+        public bool? IsOpenDefaulter { get; set; }
+        public bool? IsOpenStatistics { get; set; }
+        public int? OpenApplicationSession { get; set; }
+        public int? OpenDefaulterSession { get; set; }
+        public int? OpenStatisticsSession { get; set; }
     }
     public class CommonDataModel_SchemeListByDepartment
     {

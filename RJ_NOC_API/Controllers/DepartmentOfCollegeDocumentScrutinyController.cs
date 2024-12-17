@@ -528,13 +528,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetNodalOfficerApplyNOCApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}")]
-        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID,string Status,string ActionName)
+        [HttpGet("GetNodalOfficerApplyNOCApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetNodalOfficerApplyNOCApplicationList(int RoleID, int UserID,string Status,string ActionName,int SessionYear=0)
         {
             var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID,Status, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetNodalOfficerApplyNOCApplicationList(RoleID, UserID,Status, ActionName,SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

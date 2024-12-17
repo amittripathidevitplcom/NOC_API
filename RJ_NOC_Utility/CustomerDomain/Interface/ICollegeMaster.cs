@@ -9,16 +9,16 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ICollegeMaster
     {
         bool SaveData(CollegeMasterDataModel request);
-        List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID);
-        List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID);
-        List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type);
+        List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID,int SessionYear);
+        List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID,int SessionYear);
+        List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type, int SessionYear);
         CollegeMasterDataModel GetCollegeById(int collegeId);
         bool DeleteData(int CollegeId, int modifiedBy);
         bool LOIFinalSubmit_OTPVerification(int CollegeID);
         bool MapSSOIDInCollege(int CollegeId, int modifiedBy, string ssoId);
         List<CommonDataModel_DataSet> ViewTotalCollegeDataByID(int CollegeID);
-        List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID);
-        List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID);
+        List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID, int SessionYear);
+        List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID,int SessionYear);
         List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID);
         bool IfExists(int DepartmentID,int CollegeID, string MobileNo, string Email);
         bool SaveLOIWorkFlow(DocumentScrutinySave_DataModel request);

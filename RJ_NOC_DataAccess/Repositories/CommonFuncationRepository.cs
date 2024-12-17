@@ -69,7 +69,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DepartmentMasterList>>(JsonDataTable_Data);
             return dataModels;
 
-        }       
+        }
         public List<CommonDataModel_DepartmentMasterList> GetDepartmentList_IsOpenDefaulter()
         {
             string SqlQuery = "exec USP_GetDepartmentList_IsOpenDefaulter";
@@ -629,9 +629,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type,int DesignationID)
+        public List<CommonDataModel_QualificationMasterDepartmentWise> GetQualificationMasterList_DepartmentWise(int DepartmentID, int IsTeaching, string Type, int DesignationID)
         {
-            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "',@Type='" + Type + "',@DesignationID='" + DesignationID +"'";
+            string SqlQuery = " Exec USP_QualificationMasterList_DepartmentWise @DepartmentID='" + DepartmentID.ToString() + "',@IsTeaching='" + IsTeaching + "',@Type='" + Type + "',@DesignationID='" + DesignationID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetQualificationMasterList_DepartmentWise");
 
@@ -726,9 +726,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_AssemblyAreaDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb, int SessionYear)
         {
-            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@IsWeb='" + IsWeb + "'";
+            string SqlQuery = " Exec USP_GetDashboardData_SSOWise @LoginSSOID='" + SSOID + "',@DepartmentID='" + DepartmentID + "',@RoleID='" + RoleID + "',@UserID='" + UserID + "',@IsWeb='" + IsWeb + "',@SessionYear='" + SessionYear + "'";
             List<CommonDataModel_DashBoard> dataModels = new List<CommonDataModel_DashBoard>();
             //DataTable dataTable = new DataTable();
             //dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashboardDataSSOWise");
@@ -991,7 +991,7 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_ApplicationTrail>>(JsonDataTable_Data);
             return dataModels;
-        }       
+        }
         public List<CommonDataModel_ApplicationTrail> GetUnlockApplicationTrail_DepartmentApplicationWise(int ApplicationID, int DepartmentID)
         {
             string SqlQuery = "exec USP_GetUnlockApplicationTrail_DepartmentApplicationWise @ApplicationID='" + ApplicationID + "' ,@DepartmentID='" + DepartmentID + "'";
@@ -1448,7 +1448,7 @@ namespace RJ_NOC_DataAccess.Repository
                 "@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@Status='" + request.Status + "',@CollegeName='" + request.CollegeName + "'," +
                 "@SubDivisionID='" + request.SubDivisionID + "',@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='" + request.NOCStatusID + "',@WorkFlowActionID='" + request.WorkFlowActionID + "'," +
                 "@CollegeTypeID='" + request.CollegeTypeID + "',@FromSubmitDate='" + request.FromSubmitDate + "',@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationID='" + request.ApplicationID + "'," +
-                "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "'"
+                "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "',@SessionYear='" + request.SessionYear + "'"
 
                 ;
             DataTable dataTable = new DataTable();
@@ -1619,9 +1619,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<DataTable> HomePage_IncreaseDate()
+        public List<DataTable> HomePage_IncreaseDate(int DepartmentID)
         {
-            string SqlQuery = " select DepartmentID,Type,Content from M_HomePage_IncreaseDate  Where ActiveStatus=1 and DeleteStatus=0 order by OrderBy asc ";
+            string SqlQuery = "USP_GetHomePageData @DepartmentID='" + DepartmentID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.HomePage_IncreaseDate");
 
@@ -1668,9 +1668,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
+        public List<DataTable> GetApplicationCountRoleWise(int DepartmentID, int SessionYear = 0)
         {
-            string SqlQuery = " exec USP_GetApplicationCountRoleWise @DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = " exec USP_GetApplicationCountRoleWise @DepartmentID='" + DepartmentID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetApplicationCountRoleWise");
             List<DataTable> dataModels = new List<DataTable>();
@@ -1777,6 +1777,124 @@ namespace RJ_NOC_DataAccess.Repository
             List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
             CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
             dataModel.data = dataSet;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+
+        public List<CommonDataModel_FinancialYearDDL> GetDashBoardFinancialYear()
+        {
+            string SqlQuery = "exec USP_GetDashBoardFinancialYear";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDashBoardFinancialYear");
+
+            List<CommonDataModel_FinancialYearDDL> dataModels = new List<CommonDataModel_FinancialYearDDL>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FinancialYearDDL>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+
+        public List<DataTable> GetAHDepartmentList()
+        {
+            string SqlQuery = " exec USP_GetAHDepartmentList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetAHDepartmentList");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
+
+
+
+        public List<AHDepartmentDataModel> GetAHFacilityDepartmentList(int DepartmentID, int CollegeID)
+        {
+            List<AHDepartmentDataModel> dataModels = new List<AHDepartmentDataModel>();
+            List<AHFacilityDepartmentDataModel> data = new List<AHFacilityDepartmentDataModel>();
+            string SqlQuery = "exec GetAHFacilityDepartmentList @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            DataSet ds = new DataSet();
+            ds = _commonHelper.Fill_DataSet(SqlQuery, "CommonFuncation.GetAHFacilityDepartmentList");
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 1)
+                {
+                    string JsonDataTable_Data = CommonHelper.ConvertDataTable(ds.Tables[0]);
+                    dataModels = JsonConvert.DeserializeObject<List<AHDepartmentDataModel>>(JsonDataTable_Data);
+                    string JsonDataTable = CommonHelper.ConvertDataTable(ds.Tables[1]);
+                    data = JsonConvert.DeserializeObject<List<AHFacilityDepartmentDataModel>>(JsonDataTable);
+                    for (int i = 0; i < dataModels.Count; i++)
+                    {
+                        dataModels[i].AHFacilityDepartmentList = data.Where(w => w.AHDepartmentID == dataModels[i].ID).Select(s => new AHFacilityDepartmentDataModel()
+                        {
+                            ID = s.ID,
+                            AHDepartmentID = s.AHDepartmentID,
+                            ControlType = s.ControlType,
+                            IsMandatory = s.IsMandatory,
+                            MinQty = s.MinQty,
+                            Name = s.Name,
+                            Unit = s.Unit,
+                            Value = s.Value == null ? "" : s.Value,
+                            CollegeID = s.CollegeID,
+                            ParentID = s.ParentID,
+                            ValuePath = s.ValuePath,
+                            Value_Dis_FileName = s.Value_Dis_FileName,
+                            Annexure=s.Annexure,
+                            IsHide=s.ParentID>0?true:false
+                        }
+                        ).OrderBy(o =>o.ParentID).ThenBy(t=>t.Name).ToList();
+                    }
+
+                }
+            }
+
+            return dataModels;
+        }
+
+        public bool SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request)
+        {
+            List<AHFacilityDepartmentDataModel> AHFacilityDepartmentlst = new List<AHFacilityDepartmentDataModel>();
+            for (int i = 0; i < request.Count; i++)
+            {
+                AHFacilityDepartmentlst.AddRange(request[i].AHFacilityDepartmentList.Select(s => new AHFacilityDepartmentDataModel()
+                {
+                    ID = s.ID,
+                    AHDepartmentID = s.AHDepartmentID,
+                    ControlType = s.ControlType,
+                    IsMandatory = s.IsMandatory,
+                    MinQty = s.MinQty,
+                    Name = s.Name,
+                    Unit = s.Unit,
+                    Value = s.Value == null ? "" : s.Value,
+                    CollegeID = s.CollegeID,
+                    ParentID = s.ParentID,
+                    ValuePath = s.ValuePath,
+                    Value_Dis_FileName = s.Value_Dis_FileName
+                }).ToList());
+            }
+
+            string Detail_Str = AHFacilityDepartmentlst.Count > 0 ? CommonHelper.GetDetailsTableQry(AHFacilityDepartmentlst, "Temp_AHDepartmentInfrastructureDetail") : "";
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveAHDepartmentInfrastructure @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveAHDepartmentInfrastructure");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID)
+        {
+            string SqlQuery = " exec USP_CheckAHStaff @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SocietyMaster.CheckAHStaff");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
         }

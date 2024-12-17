@@ -270,6 +270,7 @@ namespace RJ_NOC_Model
         public int ApplicationID { get; set; }
         public int ApplicationStatusID { get; set; }
         public int ApplicationCurrentRole { get; set; }
+        public int? SessionYear { get; set; }
     }
     public class PaymentDetailsDataModel_Filter
     {
@@ -301,6 +302,30 @@ namespace RJ_NOC_Model
         public string UnlockSSOID { get; set; }
         public string UnlockDoc { get; set; }
 
+    }  
+    public class AHDepartmentDataModel
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public string? DepartmentName { get; set; }
+        public List<AHFacilityDepartmentDataModel>? AHFacilityDepartmentList { get; set; }
+    }
+    public class AHFacilityDepartmentDataModel
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public int? AHDepartmentID { get; set; }
+        public int? ParentID { get; set; }
+        public string? Name { get; set; }
+        public string? ControlType { get; set; }
+        public string? Unit { get; set; }
+        public string? Value { get; set; }
+        public int MinQty { get; set; }
+        public bool IsMandatory { get; set; }
+        public string? Value_Dis_FileName { get; set; }
+        public string? ValuePath { get; set; }
+        public string? Annexure { get; set; }
+        public bool? IsHide { get; set; }
     }
 
 }

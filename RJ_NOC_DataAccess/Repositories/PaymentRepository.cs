@@ -308,9 +308,9 @@ namespace RJ_NOC_DataAccess.Repositories
             return model;
         }
 
-        public List<ResponseParameters> GetPreviewPaymentDetails(int CollegeID)
+        public List<ResponseParameters> GetPreviewPaymentDetails(int CollegeID, int SessionYear)
         {
-            string SqlQuery = " exec USP_PaymentTransaction_GetData @CollegeID='" + CollegeID + "' ,@Key= 'GetPreviewPaymentDetails' ";
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @CollegeID='" + CollegeID + "'  ,@SessionYear='" + SessionYear + "' ,@Key= 'GetPreviewPaymentDetails' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetPaymentListIDWise");
 
@@ -413,9 +413,9 @@ namespace RJ_NOC_DataAccess.Repositories
 
         #endregion
 
-        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID)
+        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID, int SessionYear)
         {
-            string SqlQuery = " exec USP_GetOfflinePaymentDetails @CollegeID='" + CollegeID + "'";
+            string SqlQuery = " exec USP_GetOfflinePaymentDetails @CollegeID='" + CollegeID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetOfflinePaymentDetails");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

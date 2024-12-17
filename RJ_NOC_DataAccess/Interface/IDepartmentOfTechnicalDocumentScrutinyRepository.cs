@@ -25,7 +25,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DepartmentOfTechnicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID, string VerificationStep);
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID, string VerificationStep);
-        List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName);
+        List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName,int SessionYear);
         bool WorkflowInsertDTE(DocumentScrutinySave_DataModel request);
         bool SavePDFPath(string Path, int ApplyNOCID, int UserID, string Remark, int IsIssuedNOC);
         DataSet GeneratePDF_DTENOCData(GenerateDTENOCPDFDataModel request);

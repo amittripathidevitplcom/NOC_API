@@ -54,17 +54,17 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.PaymentRepository.GetpaymentGatewayDetails(model);
         }
 
-        public List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID )
+        public List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID,int SessionYear )
         {
-            return UnitOfWork.PaymentRepository.GetPreviewPaymentDetails(ApplyNocApplicationID);
+            return UnitOfWork.PaymentRepository.GetPreviewPaymentDetails(ApplyNocApplicationID, SessionYear);
         }
         public List<CommonDataModel_DataTable> GetRPPTransactionList(TransactionSearchFilterModel Model)
         {
             return UnitOfWork.PaymentRepository.GetRPPTransactionList(Model);
         }
-        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID)
+        public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID, int SessionYear)
         {
-            return UnitOfWork.PaymentRepository.GetOfflinePaymentDetails(CollegeID);
+            return UnitOfWork.PaymentRepository.GetOfflinePaymentDetails(CollegeID, SessionYear);
         }
 
         #region "Emitra Section"

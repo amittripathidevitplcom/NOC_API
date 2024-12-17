@@ -495,13 +495,13 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetApplyNOCApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}")]
-        public async Task<OperationResult<List<DataTable>>> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        [HttpGet("GetApplyNOCApplicationList/{RoleID}/{UserID}/{Status}/{ActionName}/{SessionYear=0}")]
+        public async Task<OperationResult<List<DataTable>>> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName,int SessionYear=0)
         {
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GetApplyNOCApplicationList(RoleID, UserID, Status, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfTechnicalScrutinyUtility.GetApplyNOCApplicationList(RoleID, UserID, Status, ActionName,SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

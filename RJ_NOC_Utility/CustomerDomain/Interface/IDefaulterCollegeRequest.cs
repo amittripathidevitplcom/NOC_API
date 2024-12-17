@@ -17,7 +17,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveDefaulterCollegePenalty(ApplicationPenaltyDataModel request);
         List<CommonDataModel_DataTable> GetDefaulterCollegePenalty(int RequestID,int PenaltyID);
         public bool DeleteDefaulterCollegePenalty(int PenaltyID);
-        List<DataTable> GetDefaulterRequestCount(int DepartmentID,int UserID);
+        List<DataTable> GetDefaulterRequestCount(int DepartmentID,int UserID, int SessionYear);
         bool CompareCollegeName(string SSOID, string CollegeName);
     }
 }

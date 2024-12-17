@@ -21,7 +21,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         //payment PaymentGatewayDataModel
         PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel Model);
 
-        List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID);
+        List<ResponseParameters> GetPreviewPaymentDetails(int ApplyNocApplicationID, int SessionYear);
         List<CommonDataModel_DataTable> GetRPPTransactionList(TransactionSearchFilterModel Model);
 
         //Emitra Section
@@ -31,6 +31,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool UpdateEmitraPaymentStatus(EmitraResponseParameters request);
         List<CommonDataModel_DataTable> GetEmitraTransactionDetails(string TransactionID);
 
-        List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID);
+        List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID, int SessionYear);
     }
 }

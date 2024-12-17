@@ -46,5 +46,18 @@ namespace RJ_NOC_Model
         public string? BookInvoiceFileName { get; set; }
         public string? BookInvoiceFilePath { get; set; }
         public string? BookInvoice_Dis_FileName { get; set; }
+
+
+
+        public string? FloorAreaofLibrary { get; set; }
+        public string? Professional { get; set; }
+        public string? Other { get; set; }
+        public string? PeriodicalsNo { get; set; }
+        public string? JournalsNo { get; set; }
+        public string? SeatingCapacity { get; set; }
+        public string? InternetFacility { get; set; }
+        public string? CounterforSale { get; set; }
+        public string? ComputerPrint { get; set; }
+        public string? RegistersMaintained { get; set; }
     }
 }

@@ -104,6 +104,12 @@ namespace RJ_NOC_Model
         public string? IsAbbreviation { get; set; }
         public string? AbbreviationName { get; set; }
 
+
+        //AH
+        public string? FaxNo { get; set; }
+        public string? LiveStockFarmAddress { get; set; }
+        public string? VeternaryClinicalAddress { get; set  ; }
+
     }
     public class ContactDetailsDataModel
     {

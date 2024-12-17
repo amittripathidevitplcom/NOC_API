@@ -62,6 +62,12 @@ namespace RJ_NOC_Model
         public string? Dis_ByLawsDocumentName { get; set; }
         public string? ByLawsDocumentPath { get; set; }
         public string? ByLawsDocument { get; set; }
+        public string? FirstInception { get; set; }
+
+
+        public string? Dis_FirstInceptionDocumentName { get; set; }
+        public string? FirstInceptionDocumentPath { get; set; }
+        public string? FirstInceptionDocument { get; set; }
 
 
     }
@@ -93,6 +99,8 @@ namespace RJ_NOC_Model
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
         public string? Dis_AadhaarNumber { get; set; }
+        public string? MemberAddress { get; set; }
+        public string? MemberQualification { get; set; }
 
     }
 

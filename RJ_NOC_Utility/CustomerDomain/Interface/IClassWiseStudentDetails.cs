@@ -10,10 +10,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IClassWiseStudentDetails
     {
-        List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID);
+        List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID,int SessionYear);
         bool SaveData(PostClassWiseStudentDetailsDataModel request);
         //Save
-        List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID);
+        List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID, int SessionYear);
         bool SaveDataSubjectWise(PostSubjectWiseStatisticsDetailsDataModel model);
         bool StatisticsFinalSubmit_Save(StatisticsFinalSubmitDataModel model);
         List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter request);

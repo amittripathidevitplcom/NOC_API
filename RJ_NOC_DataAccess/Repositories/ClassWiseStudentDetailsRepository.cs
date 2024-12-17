@@ -18,9 +18,9 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             _commonHelper = commonHelper;
         }
-        public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID)
+        public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID, int SessionYear = 0)
         {
-            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStudentDetails',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
+            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStudentDetails',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails");
             List<ClassWiseStudentDetailsDataModel> dataModels = new List<ClassWiseStudentDetailsDataModel>();
@@ -58,9 +58,9 @@ namespace RJ_NOC_DataAccess.Repositories
                 return false;
         }
 
-        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID)
+        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID,int SessionYear)
         {
-            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStudentDetailsSubjectWise',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
+            string SqlQuery = " exec USP_ClassWiseStudentDetails_GET  @Key='GetStudentDetailsSubjectWise',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "',@SessionYear='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.GetSubjetWiseStudenetDetails");
             List<SubjectWiseStatisticsDetailsDataModel> dataModels = new List<SubjectWiseStatisticsDetailsDataModel>();
@@ -83,7 +83,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited(CollegeList_StatisticsDraftSubmitedDataModel_Filter model)
         {
-            string SqlQuery = " exec USP_CollegeList_StatisticsDraftSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "'";
+            string SqlQuery = " exec USP_CollegeList_StatisticsDraftSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "',@SessionYear='" + model.SessionYear + "'";
 
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited");
@@ -96,7 +96,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public List<DataTable> CollegeList_StatisticsFinalSubmited(CollegeList_StatisticsFinalSubmitedDataModel_Filter model)
         {
-            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "'";
+            string SqlQuery = " exec USP_CollegeList_StatisticsFinalSubmited  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "',@SessionYear='" + model.SessionYear + "'";
 
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited");
@@ -109,7 +109,7 @@ namespace RJ_NOC_DataAccess.Repositories
 
         List<DataTable> IClassWiseStudentDetailsRepository.CollegeList_StatisticsNotFilledReport(TotalNotFilledStatics_DataModel_Filter model)
         {
-            string SqlQuery = " exec USP_CollegeList_NotFilledStatistics  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "'";
+            string SqlQuery = " exec USP_CollegeList_NotFilledStatistics  @DepartmentID = '" + model.DepartmentID + "',@UniversityID =   '" + model.UniversityID + "',@DivisionID =  '" + model.DivisionID + "',@DistrictID =  '" + model.DistrictID + "',@CollegeName='" + model.CollegeName + "',@SessionYear='" + model.SessionYear + "'";
 
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ClassWiseStudentDetailsRepository.CollegeList_StatisticsNotFilledReport");

@@ -41,7 +41,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
         int CountTotalRevertDCE(int ApplyNOCID,int RoleID,int UserID);
         List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID);
-        List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID);
+        List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID, int SessionYear);
 
 
         DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear,string CourseIDs,string SubjectIDs);

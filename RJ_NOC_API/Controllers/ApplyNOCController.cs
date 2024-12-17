@@ -1363,13 +1363,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetApplicationPenaltyList/{SSOID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPenaltyList(string SSOID)
+        [HttpGet("GetApplicationPenaltyList/{SSOID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPenaltyList(string SSOID,int SessionYear=0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplicationPenaltyList(SSOID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetApplicationPenaltyList(SSOID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

@@ -18,13 +18,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetCollegeWiseStudenetDetails/{collegeId}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<ClassWiseStudentDetailsDataModel>>> GetCollegeWiseStudenetDetails(int collegeId,int ApplyNOCID)
+        [HttpGet("GetCollegeWiseStudenetDetails/{collegeId}/{ApplyNOCID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ClassWiseStudentDetailsDataModel>>> GetCollegeWiseStudenetDetails(int collegeId,int ApplyNOCID,int SessionYear=0)
         {
             var result = new OperationResult<List<ClassWiseStudentDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetCollegeWiseStudenetDetails(collegeId, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetCollegeWiseStudenetDetails(collegeId, ApplyNOCID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -90,13 +90,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetSubjectWiseStudenetDetails/{collegeId}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>> GetSubjectWiseStudenetDetails(int collegeId,int ApplyNOCID)
+        [HttpGet("GetSubjectWiseStudenetDetails/{collegeId}/{ApplyNOCID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>> GetSubjectWiseStudenetDetails(int collegeId,int ApplyNOCID,int SessionYear=0)
         {
             var result = new OperationResult<List<SubjectWiseStatisticsDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetSubjectWiseStudenetDetails(collegeId, ApplyNOCID));
+                result.Data = await Task.Run(() => UtilityHelper.ClassWiseStudentDetailsUtility.GetSubjectWiseStudenetDetails(collegeId, ApplyNOCID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {

@@ -26,14 +26,14 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.ClassWiseStudentDetailsRepository.CollegeList_StatisticsDraftSubmited(request);
         }
 
-        public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID)
+        public List<ClassWiseStudentDetailsDataModel> GetCollegeWiseStudenetDetails(int CollegeID, int ApplyNOCID, int SessionYear)
         {
-            return UnitOfWork.ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails(CollegeID, ApplyNOCID);
+            return UnitOfWork.ClassWiseStudentDetailsRepository.GetCollegeWiseStudenetDetails(CollegeID, ApplyNOCID, SessionYear);
         }
 
-        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID)
+        public List<SubjectWiseStatisticsDetailsDataModel> GetSubjectWiseStudenetDetails(int CollegeID, int ApplyNOCID, int SessionYear)
         {
-            return UnitOfWork.ClassWiseStudentDetailsRepository.GetSubjectWiseStudenetDetails(CollegeID, ApplyNOCID);
+            return UnitOfWork.ClassWiseStudentDetailsRepository.GetSubjectWiseStudenetDetails(CollegeID, ApplyNOCID,SessionYear);
         }
 
         public bool SaveData(PostClassWiseStudentDetailsDataModel request)

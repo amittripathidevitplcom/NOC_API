@@ -10,7 +10,7 @@ namespace RJ_NOC_DataAccess.Interface
     {
         bool DeleteApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy, string IpAddress);
         DataSet GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID);
-        DataSet GetApplyNocApplicationList(string SSOID);
+        DataSet GetApplyNocApplicationList(string SSOID,int SessionYear);
         DataSet GetApplyNocForByParameter(int CollegeID, string ApplyNocFor);
         DataTable GetApplyNocParameterMaster(int CollegeID);
         bool SaveApplyNocApplication(string query);
@@ -24,8 +24,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
 
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName);
-        DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID);
-        DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID);
+        DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID,int SessionYear);
+        DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID,int SessionYear);
         DataTable GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
         bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request);
     }

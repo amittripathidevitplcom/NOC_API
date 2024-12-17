@@ -469,9 +469,9 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }       
-        public List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID)
+        public List<CommonDataModel_DataTable> GetApplicationPenaltyList(string SSOID,int SessionYear)
         {
-            string SqlQuery = " exec USP_GetApplicationPenaltyList @SSOID ='" + SSOID + "'";
+            string SqlQuery = " exec USP_GetApplicationPenaltyList @SSOID ='" + SSOID + "', @SessionYear ='" + SessionYear + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetApplicationPenaltyList");
 

@@ -23,7 +23,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_Trn_College_OtherInformation_IU  ";
             SqlQuery += " @CollegeWiseOtherInfoID='" + request.CollegeWiseOtherInfoID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@Width='" + request.Width + "',@Length='" + request.Length + "',@ImageFileName='" + request.ImageFileName + "',@ImageFilePath='" + request.ImageFilePath + "',@BookImageFileName='" + request.BookImageFileName + "',@BookImageFilePath='" + request.BookImageFilePath + "',@NoofBooks='" + request.NoofBooks + "',@ActiveStatus='" + request.ActiveStatus + "',@DeleteStatus='" + request.DeleteStatus + "',@UserID='" + request.UserID + "',@NoOfRooms='" + request.NoOfRooms + "',@NoofComputers='" + request.NoofComputers + "'";
-            SqlQuery += " ,@BookInvoiceFileName='" + request.BookInvoiceFileName + "', @BookInvoiceFilePath='" + request.BookInvoiceFilePath + "'";
+            SqlQuery += " ,@BookInvoiceFileName='" + request.BookInvoiceFileName + "', @BookInvoiceFilePath='" + request.BookInvoiceFilePath + "', @FloorAreaofLibrary='" + request.FloorAreaofLibrary + "', @Professional='" + request.Professional + "', @Other='" + request.Other + "', @PeriodicalsNo='" + request.PeriodicalsNo + "', @JournalsNo='" + request.JournalsNo + "', @SeatingCapacity='" + request.SeatingCapacity + "', @InternetFacility='" + request.InternetFacility + "', @CounterforSale='" + request.CounterforSale + "', @ComputerPrint='" + request.ComputerPrint + "', @RegistersMaintained='" + request.RegistersMaintained + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OtherInformation.SaveData");
             if (Rows > 0)
                 return true;
@@ -51,12 +51,10 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_Trn_College_OtherInformation_GetData @CollegeWiseOtherInfoID='" + CollegeWiseOtherInfoID + "', @CollegeID='" + CollegeID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "OtherInformation.GetOtherInformationByID");
-
             List<OtherInformationDataModel> dataModels = new List<OtherInformationDataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<OtherInformationDataModel>>(JsonDataTable_Data);
             return dataModels;
-
         }
         public bool DeleteData(int CollegeWiseOtherInfoID)
         {

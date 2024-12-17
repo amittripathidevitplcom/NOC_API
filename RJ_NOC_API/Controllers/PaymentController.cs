@@ -743,13 +743,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetPreviewPaymentDetails/{CollegeID}")]
-        public async Task<OperationResult<List<ResponseParameters>>> GetPreviewPaymentDetails(int CollegeID)
+        [HttpGet("GetPreviewPaymentDetails/{CollegeID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ResponseParameters>>> GetPreviewPaymentDetails(int CollegeID, int SessionYear)
         {
             var result = new OperationResult<List<ResponseParameters>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(CollegeID,SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -1053,13 +1053,13 @@ namespace RJ_NOC_API.Controllers
         }
         #endregion
 
-        [HttpGet("GetOfflinePaymentDetails/{CollegeID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetOfflinePaymentDetails(int CollegeID)
+        [HttpGet("GetOfflinePaymentDetails/{CollegeID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetOfflinePaymentDetails(int CollegeID,int SessionYear=0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetOfflinePaymentDetails(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetOfflinePaymentDetails(CollegeID,SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

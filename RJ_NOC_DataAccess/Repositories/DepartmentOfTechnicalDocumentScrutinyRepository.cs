@@ -387,9 +387,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName)
+        public List<DataTable> GetApplyNOCApplicationList(int RoleID, int UserID, string Status, string ActionName, int SessionYear = 0)
         {
-            string SqlQuery = " exec USP_GetApplyNOCApplicationList_DTE @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "',@ActionName='" + ActionName + "'";
+            string SqlQuery = " exec USP_GetApplyNOCApplicationList_DTE @RoleID='" + RoleID + "',@UserID='" + UserID + "',@Status='" + Status + "',@ActionName='" + ActionName + "',@SessionYear='" + SessionYear + "'";
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DTEDocumentScrutiny.GetApplyNOCApplicationList");
             List<DataTable> listdataModels = new List<DataTable>();

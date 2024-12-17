@@ -17,17 +17,17 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CollegeMasterRepository.SaveData(request);
         }
 
-        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID, int SessionYear)
         {
-            return UnitOfWork.CollegeMasterRepository.DraftApplicationList(LoginSSOID);
+            return UnitOfWork.CollegeMasterRepository.DraftApplicationList(LoginSSOID, SessionYear);
         }
-        public List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID, int SessionYear)
         {
-            return UnitOfWork.CollegeMasterRepository.StatisticsCollegeList(LoginSSOID);
+            return UnitOfWork.CollegeMasterRepository.StatisticsCollegeList(LoginSSOID, SessionYear);
         }
-        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type)
+        public List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type, int SessionYear)
         {
-            return UnitOfWork.CollegeMasterRepository.CollegeDetails(LoginSSOID,Type);
+            return UnitOfWork.CollegeMasterRepository.CollegeDetails(LoginSSOID,Type, SessionYear);
         }
         public CollegeMasterDataModel GetCollegeById(int collegeId)
         {
@@ -45,13 +45,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.ViewTotalCollegeDataByID(CollegeID);
         }
-        public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID, int SessionYear)
         {
-            return UnitOfWork.CollegeMasterRepository.RevertedApplicationList(LoginSSOID);
+            return UnitOfWork.CollegeMasterRepository.RevertedApplicationList(LoginSSOID, SessionYear);
         }
-        public List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID)
+        public List<CommonDataModel_DataTable> RejectedApplicationList(string LoginSSOID, int SessionYear)
         {
-            return UnitOfWork.CollegeMasterRepository.RejectedApplicationList(LoginSSOID);
+            return UnitOfWork.CollegeMasterRepository.RejectedApplicationList(LoginSSOID,SessionYear);
         }       
         public List<CommonDataModel_DataTable> LOIApplicationList(string LoginSSOID)
         {

@@ -1904,13 +1904,13 @@ namespace RJ_NOC_API.Controllers
 
 
 
-        [HttpGet("GetDashboardDataSSOWise/{SSOID}/{DepartmentID}/{RoleID}/{UserID}/{IsWeb=false}")]
-        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb= false)
+        [HttpGet("GetDashboardDataSSOWise/{SSOID}/{DepartmentID}/{RoleID}/{UserID}/{IsWeb=false}/{SessionYear=0}")]
+        public async Task<OperationResult<List<CommonDataModel_DashBoard>>> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb= false,int SessionYear =0)
         {
             var result = new OperationResult<List<CommonDataModel_DashBoard>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -3876,14 +3876,14 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("HomePage_IncreaseDate")]
-        public async Task<OperationResult<List<DataTable>>> HomePage_IncreaseDate()
+        [HttpGet("HomePage_IncreaseDate/{DepartmentID}")]
+        public async Task<OperationResult<List<DataTable>>> HomePage_IncreaseDate(int DepartmentID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "HomePage_IncreaseDate", 0, "CommonFuncation");
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.HomePage_IncreaseDate());
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.HomePage_IncreaseDate(DepartmentID));
                 if (result.Data.Count > 0)
                 {
 
@@ -4007,13 +4007,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetApplicationCountRoleWise/{DepartmentID}")]
-        public async Task<OperationResult<List<DataTable>>> GetApplicationCountRoleWise(int DepartmentID)
+        [HttpGet("GetApplicationCountRoleWise/{DepartmentID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<DataTable>>> GetApplicationCountRoleWise(int DepartmentID,int SessionYear=0)
         {
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetApplicationCountRoleWise(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetApplicationCountRoleWise(DepartmentID,SessionYear));
                 if (result.Data.Count > 0)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "GetApplicationCountRoleWise", DepartmentID, "CommonFuncation");
@@ -4247,5 +4247,172 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("GetDashBoardFinancialYear")]
+        public async Task<OperationResult<List<CommonDataModel_FinancialYearDDL>>> GetDashBoardFinancialYear()
+        {
+            var result = new OperationResult<List<CommonDataModel_FinancialYearDDL>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDashBoardFinancialYear());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDashBoardFinancialYear", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetAHDepartmentList")]
+        public async Task<OperationResult<List<DataTable>>> GetAHDepartmentList()
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAHDepartmentList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAHDepartmentList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetAHFacilityDepartmentList/{DepartmentID}/{CollegeID}")]
+        public async Task<OperationResult<List<AHDepartmentDataModel>>> GetAHFacilityDepartmentList(int DepartmentID,int CollegeID)
+        {
+            var result = new OperationResult<List<AHDepartmentDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAHFacilityDepartmentList(DepartmentID, CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetAHFacilityDepartmentList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+        [HttpPost("SaveAHDepartmentInfrastructure")]
+        public async Task<OperationResult<bool>> SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveAHDepartmentInfrastructure(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request[0].CollegeID, "SaveAHDepartmentInfrastructure", request[0].CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveAHDepartmentInfrastructure", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("CheckAHStaff/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckAHStaff(int CollegeID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.CheckAHStaff(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("SocietyMasterController.CheckAHStaff", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }

@@ -281,9 +281,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
         }
 
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID,bool IsWeb)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID,bool IsWeb, int SessionYear)
         {
-            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb);
+            return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb, SessionYear);
         }
         public List<CommonDataModel_DesignationDDL> GetAllDesignation()
         {
@@ -566,9 +566,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetSSOByCollegeIDWise(CollegeID);
         }
 
-        public List<DataTable> HomePage_IncreaseDate()
+        public List<DataTable> HomePage_IncreaseDate(int DepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate();
+            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate(DepartmentID);
         }
         public List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
         {
@@ -582,9 +582,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDeficiencyAction(ApplyNOCID, RoleID);
         }
-        public List<DataTable> GetApplicationCountRoleWise(int DepartmentID)
+        public List<DataTable> GetApplicationCountRoleWise(int DepartmentID, int SessionYear = 0)
         {
-            return UnitOfWork.CommonFuncationRepository.GetApplicationCountRoleWise(DepartmentID);
+            return UnitOfWork.CommonFuncationRepository.GetApplicationCountRoleWise(DepartmentID, SessionYear);
         }
         public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID)
         {
@@ -613,6 +613,26 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataSet> GetCollegeTabData_History(CommonDataModel_TabHistory request)
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeTabData_History(request);
+        }
+        public List<CommonDataModel_FinancialYearDDL> GetDashBoardFinancialYear()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDashBoardFinancialYear();
+        } 
+        public List<DataTable> GetAHDepartmentList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAHDepartmentList();
+        }
+        public List<AHDepartmentDataModel> GetAHFacilityDepartmentList(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAHFacilityDepartmentList(DepartmentID, CollegeID);
+        }
+        public bool SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveAHDepartmentInfrastructure(request);
+        }
+        public List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.CheckAHStaff(CollegeID);
         }
     }
 }

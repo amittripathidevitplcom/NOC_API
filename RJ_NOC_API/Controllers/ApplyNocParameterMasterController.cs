@@ -265,13 +265,13 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("GetApplyNocApplicationList/{SSOID}")]
-        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationList(string SSOID)
+        [HttpGet("GetApplyNocApplicationList/{SSOID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationList(string SSOID,int SessionYear=0)
         {
             var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList(SSOID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationList(SSOID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -528,13 +528,13 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("GetApplyNocApplicationLists/{SelectedCollageID}/{SelectedDepartmentID}")]
-        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID)
+        [HttpGet("GetApplyNocApplicationLists/{SelectedCollageID}/{SelectedDepartmentID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ApplyNocApplicationDataModel>>> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID,int SessionYear=0)
         {
             var result = new OperationResult<List<ApplyNocApplicationDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationLists(SelectedCollageID, SelectedDepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.GetApplyNocApplicationLists(SelectedCollageID, SelectedDepartmentID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -560,13 +560,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("ViewApplyNoc_FDRDetailsByCollegeID/{CollegeID}")]
-        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> ViewApplyNoc_FDRDetailsByCollegeID(int CollegeID)
+        [HttpGet("ViewApplyNoc_FDRDetailsByCollegeID/{CollegeID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ApplyNocFDRDetailsDataModel>>> ViewApplyNoc_FDRDetailsByCollegeID(int CollegeID,int SessionYear)
         {
             var result = new OperationResult<List<ApplyNocFDRDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.ViewApplyNocFDRDetailsByCollegeID(CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNocParameterMasterUtility.ViewApplyNocFDRDetailsByCollegeID(CollegeID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

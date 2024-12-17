@@ -77,9 +77,9 @@ namespace RJ_NOC_DataAccess.Repository
         }
 
 
-        public DataSet GetApplyNocApplicationList(string SSOID)
+        public DataSet GetApplyNocApplicationList(string SSOID, int SessionYear)
         {
-            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList',@SSOID='" + SSOID + "'";
+            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationList',@SSOID='" + SSOID + "',@SessionYear='" + SessionYear + "'";
             var dt = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationList");
             return dt;
         }
@@ -155,15 +155,15 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID)
+        public DataTable GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID, int SessionYear)
         {
-            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationLists',@CollegeID='" + SelectedCollageID + "',@DepartmentID='" + SelectedDepartmentID + "'";
+            string SqlQuery = "exec USP_Trn_ApplyNocApplication @action='GetApplyNocApplicationLists',@CollegeID='" + SelectedCollageID + "',@DepartmentID='" + SelectedDepartmentID + "',@SessionYear='" + SessionYear + "'";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyNocApplicationLists");
             return dt;
         }
-        public DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID)
+        public DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID, int SessionYear)
         {
-            string SqlQuery = $"exec USP_ApplyNocFDRMaster @action='ViewApplyNocFDRDetailsByCollegeID',@CollegeID={CollegeID}";
+            string SqlQuery = $"exec USP_ApplyNocFDRMaster @action='ViewApplyNocFDRDetailsByCollegeID',@CollegeID={CollegeID},@SessionYear={SessionYear}";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.ViewApplyNoc_FDRDetailsByCollegeID");
             return dt;
         }
