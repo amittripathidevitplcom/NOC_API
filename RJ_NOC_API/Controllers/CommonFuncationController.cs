@@ -4414,5 +4414,130 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+        [HttpGet("GetStartDateEndDateDepartmentwise/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_DepartmentWiseStartDateEndDate>>> GetStartDateEndDateDepartmentwise(int DepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DepartmentWiseStartDateEndDate>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetStartDateEndDateDepartmentwise(DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetStartDateEndDateDepartmentwise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        } 
+        [HttpGet("GetDTEAffiliationApply/{SSOID}")]
+        public async Task<OperationResult<List<CommonDataModel_DTEAffiliationApply>>> GetDTEAffiliationApply(string SSOID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DTEAffiliationApply>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDTEAffiliationApply(SSOID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDTEAffiliationApply", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetAffiliationRegistrationList/{SSOID}")]
+        public async Task<OperationResult<List<CommonDataModel_RegistrationDTEAffiliationApply>>> GetAffiliationRegistrationList(string SSOID)
+        {
+            var result = new OperationResult<List<CommonDataModel_RegistrationDTEAffiliationApply>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAffiliationRegistrationList(SSOID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDTEAffiliationApply", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetDteAffiliation_SearchRecordIDWise/{SearchRecordID}")]
+        public async Task<OperationResult<CommonDataModel_RegistrationDTEAffiliationApply>> GetDteAffiliation_SearchRecordIDWise(string SearchRecordID)
+        {
+            var result = new OperationResult<CommonDataModel_RegistrationDTEAffiliationApply>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDteAffiliation_SearchRecordIDWise(SearchRecordID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDteAffiliation_SearchRecordIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

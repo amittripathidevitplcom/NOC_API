@@ -149,6 +149,7 @@ namespace RJ_NOC_Utility
         public IDentalChairsMGOneNOC DentalChairsMGOneNOC { get; private set; }
 
         public IPaymentReport PaymentReportUtility { get; private set; }
+        public IDTEAffilitionMaster DTEAffilitionMasterUtility { get; private set; }
 
         //public IClassOverViewMaster ClassOverViewMasterUtility { get; private set; }
 
@@ -265,6 +266,8 @@ namespace RJ_NOC_Utility
             PaymentReportUtility = new PaymentReport(UnitOfWork);
             MGOneNOC = new MGOneNOC(UnitOfWork);
             DentalChairsMGOneNOC = new DentalChairsMGOneNOC(UnitOfWork);
+            DTEAffilitionMasterUtility = new DTEAffilitionMaster(UnitOfWork);
+
             //DTEStatistics_PlacementDetailsUtility = new DTEStatistics_PlacementDetails(UnitOfWork);
             //DTEStatistics_FinancialDetailsUtility = new DTEStatistics_FinancialDetails(UnitOfWork);
         }

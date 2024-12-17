@@ -489,7 +489,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAppliedNocInformation(SSOID);
         }
-
+       
         public CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeID_SearchRecordIDWise(SearchRecordID);
@@ -633,6 +633,23 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.CheckAHStaff(CollegeID);
+        }
+        public List<CommonDataModel_DepartmentWiseStartDateEndDate> GetStartDateEndDateDepartmentwise(int DepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetStartDateEndDateDepartmentwise(DepartmentID);
+        }
+        public List<CommonDataModel_DTEAffiliationApply> GetDTEAffiliationApply(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDTEAffiliationApply(SSOID);
+        }
+        public List<CommonDataModel_RegistrationDTEAffiliationApply> GetAffiliationRegistrationList(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetAffiliationRegistrationList(SSOID);
+        }
+       
+        public CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDteAffiliation_SearchRecordIDWise(SearchRecordID);
         }
     }
 }

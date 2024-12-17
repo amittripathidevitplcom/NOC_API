@@ -378,4 +378,35 @@ namespace RJ_NOC_Model
         public string CategoryName { get; set; }
 
     }
+    public class CommonDataModel_DepartmentWiseStartDateEndDate
+    {
+        public int DepartmentID { get; set; }       
+        public int ApplicationSession { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public bool IsOpen { get; set; }
+
+    }
+    public class CommonDataModel_DTEAffiliationApply
+    {
+        public string? DTEAffiliationApplyStatus { get; set; }
+        public int? FYID { get; set; }
+
+    }
+    public class CommonDataModel_RegistrationDTEAffiliationApply
+    {
+        public int ? DTE_ARId { get; set; }
+        public int ? CollegeStatusId { get; set; }
+        public int ? DepartmentID { get; set; }
+        public int ? AffiliationTypeID { get; set; }
+        public string ? AffiliationCategoryName { get; set; }
+        public string ? DepartmentName_English { get; set; }
+        public string ? AffiliationTypeName { get; set; }
+        public string ? SSOID { get; set; }
+        public string ? College_Name { get; set; }
+        public string ? Mobile_Number { get; set; }
+        public string? Email_Address { get; set; }
+        public DataTable? data { get; set; }
+
+    }
 }

@@ -25,7 +25,7 @@ namespace RJ_NOC_API.Controllers
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MGOneNOC.GetNOCApplicationList(RoleID, UserID, Status));
+                result.Data =  UtilityHelper.MGOneNOC.GetNOCApplicationList(RoleID, UserID, Status);
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

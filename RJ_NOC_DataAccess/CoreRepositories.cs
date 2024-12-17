@@ -504,8 +504,6 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dTEStatistics_StaffRepository; }
         }
-
-
         private IDTEStatistics_BasicDetailsRepository dTEStatistics_BasicDetailsRepository;
         public IDTEStatistics_BasicDetailsRepository DTEStatistics_BasicDetailsRepository
         {
@@ -563,6 +561,12 @@ namespace RJ_NOC_DataAccess.Repository
         {
             get { return dentalChairsMGOneNOCRepository; }
         }
+        private IDTEAffilitionMasterRepository dTEAffilitionMasterRepository;
+        public IDTEAffilitionMasterRepository DTEAllifitionMasterRepository
+        {
+            get { return dTEAffilitionMasterRepository; }
+        }
+
         //private IClassOverViewMasterRepository classOverViewMasterRepository;
         //public IClassOverViewMasterRepository ClassOverViewMasterRepository
         //{
@@ -666,6 +670,8 @@ namespace RJ_NOC_DataAccess.Repository
             dCEStaffReportsRepository = new DCEStaffReportsRepository(commonHelper);
             courtOrderRepository = new CourtOrderRepository(commonHelper);
             clinicalFacilityRepository = new ClinicalFacilityRepository(commonHelper);
+            dTEAffilitionMasterRepository = new DTEAffilitionMasterRepository(commonHelper);
+            mgoneNOCRepository = new MGOneNOCRepository(commonHelper);
         }
     }
 }

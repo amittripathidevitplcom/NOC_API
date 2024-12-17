@@ -111,6 +111,6 @@ namespace RJ_NOC_DataAccess.Interface
         IPaymentReportRepository PaymentReportRepository { get; }
         IMGOneNOCRepository MGOneNOCRepository { get; }
         IDentalChairsMGOneNOCRepository DentalChairsMGOneNOCRepository { get; }
-
+        IDTEAffilitionMasterRepository DTEAllifitionMasterRepository { get; }
     }
 }

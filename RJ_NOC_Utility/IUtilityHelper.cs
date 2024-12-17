@@ -112,6 +112,8 @@ namespace RJ_NOC_Utility
         IPaymentReport PaymentReportUtility { get; }
         IMGOneNOC MGOneNOC { get; }
         IDentalChairsMGOneNOC DentalChairsMGOneNOC { get; }
+        IDTEAffilitionMaster DTEAffilitionMasterUtility { get; }
+
         //IDTEStatistics_PlacementDetails DTEStatistics_PlacementDetailsUtility { get; }
         //IDTEStatistics_FinancialDetails DTEStatistics_FinancialDetailsUtility { get; }
         //IDTEStatistics_RegularMode DTEStatistics_RegularModeUtility { get; }

@@ -1898,6 +1898,52 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public List<CommonDataModel_DepartmentWiseStartDateEndDate> GetStartDateEndDateDepartmentwise(int DepartmentID)
+        {
+            string SqlQuery = " exec USP_GetDepartmentWiseStartDateEndDate @DepartmentID='" + DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetStartDateEndDateDepartmentwise");
+
+            List<CommonDataModel_DepartmentWiseStartDateEndDate> dataModels = new List<CommonDataModel_DepartmentWiseStartDateEndDate>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DepartmentWiseStartDateEndDate>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_DTEAffiliationApply> GetDTEAffiliationApply(string SSOID)
+        {
+            string SqlQuery = " exec USP_Get_DTEAffiliationApply @SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetDTEAffiliationApply");
+
+            List<CommonDataModel_DTEAffiliationApply> dataModels = new List<CommonDataModel_DTEAffiliationApply>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_DTEAffiliationApply>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<CommonDataModel_RegistrationDTEAffiliationApply> GetAffiliationRegistrationList(string SSOID)
+        {
+            string SqlQuery = "exec USP_GetRegistration_DTEAffiliation @SSOID='" + SSOID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetAffiliationRegistrationList");
+
+            List<CommonDataModel_RegistrationDTEAffiliationApply> dataModels = new List<CommonDataModel_RegistrationDTEAffiliationApply>();
+            CommonDataModel_RegistrationDTEAffiliationApply dataModel = new CommonDataModel_RegistrationDTEAffiliationApply();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+       
+        public CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID)
+        {
+            string SqlQuery = "select DTE_ARId,College_Name from Trn_Registration_DTEAffiliation where SearchRecordID='" + SearchRecordID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetDteAffiliation_SearchRecordIDWise");
+
+            CommonDataModel_RegistrationDTEAffiliationApply dataModels = new CommonDataModel_RegistrationDTEAffiliationApply();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<CommonDataModel_RegistrationDTEAffiliationApply>(JsonDataTable_Data.Replace("[", "").Replace("]", ""));
+            return dataModels;
+        }
     }
 }
 

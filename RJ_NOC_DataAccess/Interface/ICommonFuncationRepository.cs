@@ -192,6 +192,10 @@ namespace RJ_NOC_DataAccess.Interface
 
         bool SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request);
         List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID);
+        List<CommonDataModel_DepartmentWiseStartDateEndDate> GetStartDateEndDateDepartmentwise(int DepartmentID);
+        List<CommonDataModel_DTEAffiliationApply> GetDTEAffiliationApply(string SSOID);
+        List<CommonDataModel_RegistrationDTEAffiliationApply> GetAffiliationRegistrationList(string SSOID);
+        CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID);
     }
 }
 
