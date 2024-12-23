@@ -8,6 +8,7 @@ namespace RJ_NOC_Model
 {
     public class HostelDataModel
     {
+        public int? HostelTypeID { get; set; }
         public int HostelCategoryID { get; set; }
         public int HostelDetailID { get; set; }
         public string IsHostel { get; set; }
@@ -15,7 +16,7 @@ namespace RJ_NOC_Model
         public string HostelName { get; set; }
         public string ContactPersonName { get; set; }
         public string DistanceOfCollege { get; set; }
-        public string HostelType { get; set; }
+        public string? HostelType { get; set; }
         public string OwnerName { get; set; }
         public string OwnerContactNo { get; set; }
         public string RentDocument { get; set; }
@@ -54,6 +55,8 @@ namespace RJ_NOC_Model
         public string? S_Action { get; set; }
         public string? S_Remark { get; set; }
         public string? HostelCategory { get; set; }
+        public string? HostelCategoryType { get; set; }
+       
         public int? CityID { get; set; }
         public string? CityName { get; set; }
         public string? BuiltUpArea { get; set; }
