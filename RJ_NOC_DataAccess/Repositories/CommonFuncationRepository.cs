@@ -1842,9 +1842,10 @@ namespace RJ_NOC_DataAccess.Repository
                             ValuePath = s.ValuePath,
                             Value_Dis_FileName = s.Value_Dis_FileName,
                             Annexure=s.Annexure,
-                            IsHide=s.ParentID>0?true:false
+                            IsHide=s.ParentID>0?true:false,
+                            ContentOrder=s.ContentOrder
                         }
-                        ).OrderBy(o =>o.ParentID).ThenBy(t=>t.Name).ToList();
+                        ).OrderBy(o=>o.ContentOrder).ToList();
                     }
 
                 }
@@ -1853,12 +1854,12 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public bool SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request)
+        public bool SaveAHDepartmentInfrastructure(AHDepartmentDataModel request)
         {
             List<AHFacilityDepartmentDataModel> AHFacilityDepartmentlst = new List<AHFacilityDepartmentDataModel>();
-            for (int i = 0; i < request.Count; i++)
-            {
-                AHFacilityDepartmentlst.AddRange(request[i].AHFacilityDepartmentList.Select(s => new AHFacilityDepartmentDataModel()
+            //for (int i = 0; i < request.Count; i++)
+            //{
+                AHFacilityDepartmentlst.AddRange(request.AHFacilityDepartmentList.Select(s => new AHFacilityDepartmentDataModel()
                 {
                     ID = s.ID,
                     AHDepartmentID = s.AHDepartmentID,
@@ -1873,11 +1874,11 @@ namespace RJ_NOC_DataAccess.Repository
                     ValuePath = s.ValuePath,
                     Value_Dis_FileName = s.Value_Dis_FileName
                 }).ToList());
-            }
+            //}
 
             string Detail_Str = AHFacilityDepartmentlst.Count > 0 ? CommonHelper.GetDetailsTableQry(AHFacilityDepartmentlst, "Temp_AHDepartmentInfrastructureDetail") : "";
             //string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_SaveAHDepartmentInfrastructure @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
+            string SqlQuery = " exec USP_SaveAHDepartmentInfrastructure @CollegeID='" + request.CollegeID + "',@Detail_Str='" + Detail_Str + "',@DepartmentID='" + request.ID + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveAHDepartmentInfrastructure");
             if (Rows > 0)
@@ -1943,6 +1944,94 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<CommonDataModel_RegistrationDTEAffiliationApply>(JsonDataTable_Data.Replace("[", "").Replace("]", ""));
             return dataModels;
+        }
+
+
+        public List<DataTable> GetMGOneDepartmentList()
+        {
+            string SqlQuery = " exec USP_GetMGOneDepartmentList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetMGOneDepartmentList");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID)
+        {
+            List<MGOneDepartmentDataModel> dataModels = new List<MGOneDepartmentDataModel>();
+            List<MGOneFacilityDepartmentDataModel> data = new List<MGOneFacilityDepartmentDataModel>();
+            string SqlQuery = "exec GetMGOneFacilityDepartmentList @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            DataSet ds = new DataSet();
+            ds = _commonHelper.Fill_DataSet(SqlQuery, "CommonFuncation.GetMGOneFacilityDepartmentList");
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 1)
+                {
+                    string JsonDataTable_Data = CommonHelper.ConvertDataTable(ds.Tables[0]);
+                    dataModels = JsonConvert.DeserializeObject<List<MGOneDepartmentDataModel>>(JsonDataTable_Data);
+                    string JsonDataTable = CommonHelper.ConvertDataTable(ds.Tables[1]);
+                    data = JsonConvert.DeserializeObject<List<MGOneFacilityDepartmentDataModel>>(JsonDataTable);
+                    for (int i = 0; i < dataModels.Count; i++)
+                    {
+                        dataModels[i].MGOneFacilityDepartmentList = data.Where(w => w.MGOneDepartmentID == dataModels[i].ID).Select(s => new MGOneFacilityDepartmentDataModel()
+                        {
+                            ID = s.ID,
+                            MGOneDepartmentID = s.MGOneDepartmentID,
+                            ControlType = s.ControlType,
+                            IsMandatory = s.IsMandatory,
+                            MinQty = s.MinQty,
+                            Name = s.Name,
+                            Unit = s.Unit,
+                            Value = s.Value == null ? "" : s.Value,
+                            CollegeID = s.CollegeID,
+                            ParentID = s.ParentID,
+                            ValuePath = s.ValuePath,
+                            Value_Dis_FileName = s.Value_Dis_FileName,
+                            Annexure = s.Annexure,
+                            IsHide = s.ParentID > 0 ? true : false,
+                            ContentOrder = s.ContentOrder
+                        }
+                        ).OrderBy(o => o.ContentOrder).ToList();
+                    }
+
+                }
+            }
+
+            return dataModels;
+        }
+        public bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request)
+        {
+            List<MGOneFacilityDepartmentDataModel> MGOneFacilityDepartmentlst = new List<MGOneFacilityDepartmentDataModel>();
+            //for (int i = 0; i < request.Count; i++)
+            //{
+            MGOneFacilityDepartmentlst.AddRange(request.MGOneFacilityDepartmentList.Select(s => new MGOneFacilityDepartmentDataModel()
+            {
+                ID = s.ID,
+                MGOneDepartmentID = s.MGOneDepartmentID,
+                ControlType = s.ControlType,
+                IsMandatory = s.IsMandatory,
+                MinQty = s.MinQty,
+                Name = s.Name,
+                Unit = s.Unit,
+                Value = s.Value == null ? "" : s.Value,
+                CollegeID = s.CollegeID,
+                ParentID = s.ParentID,
+                ValuePath = s.ValuePath,
+                Value_Dis_FileName = s.Value_Dis_FileName
+            }).ToList());
+            //}
+
+            string Detail_Str = MGOneFacilityDepartmentlst.Count > 0 ? CommonHelper.GetDetailsTableQry(MGOneFacilityDepartmentlst, "Temp_MGOneDepartmentInfrastructureDetail") : "";
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveMGOneDepartmentInfrastructure @CollegeID='" + request.CollegeID + "',@Detail_Str='" + Detail_Str + "',@DepartmentID='" + request.ID + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGOneDepartmentInfrastructure");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

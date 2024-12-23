@@ -56,6 +56,7 @@ namespace RJ_NOC_Model
         public string? HostelCategory { get; set; }
         public int? CityID { get; set; }
         public string? CityName { get; set; }
+        public string? BuiltUpArea { get; set; }
 
 
     }

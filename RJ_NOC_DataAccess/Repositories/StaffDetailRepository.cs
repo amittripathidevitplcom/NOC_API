@@ -48,7 +48,7 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += "@StaffDetailID='" + request.StaffDetailID + "',@TeachingType='" + request.TeachingType + "',@SubjectID='" + request.SubjectID + "',@PersonName='" + request.PersonName + "',@DesignationRegistrationNo='" + request.DesignationRegistrationNo + "',@RoleID='" + request.RoleID + "',@MobileNo='" + request.MobileNo + "',@Email='" + request.Email + "',";
             SqlQuery += "@HighestQualification='" + request.HighestQualification + "',@NumberofExperience='" + request.NumberofExperience + "',@AadhaarNo='" + request.AadhaarNo + "',@DateOfBirth='" + request.DateOfBirth + "',@DateOfAppointment='" + request.DateOfAppointment + "',@DateOfJoining='" + request.DateOfJoining + "',";
             SqlQuery += "@SpecializationSubject='" + request.SpecializationSubject + "',@RoleMapping='" + request.RoleMapping + "',@Salary='" + request.Salary + "',@StaffStatus='" + request.StaffStatus + "',@PFDeduction='" + request.PFDeduction + "',@UANNumber='" + request.UANNumber + "',@ResearchGuide='" + request.ResearchGuide + "',";
-            SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "',@Gender='" + request.Gender + "',@ESINumber='" + request.ESINumber + "',@PANNo='" + request.PANNo + "',@DetailofJob='" + request.DetailofJob + "',@AHDepartmentID='" + request.AHDepartmentID + "',@NETQualified='" + request.NETQualified + "'";
+            SqlQuery += "@ProfilePhoto='" + request.ProfilePhoto + "',@AadhaarCard='" + request.AadhaarCard + "',@PANCard='" + request.PANCard + "',@ExperienceCertificate='" + request.ExperienceCertificate + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@EducationalQualificationDetail_Str='" + EducationalQualificationDetail_Str + "',@ModifyBy='" + request.ModifyBy + "',@CreatedBy='" + request.CreatedBy + "',@IPAddress='" + IPAddress + "',@Gender='" + request.Gender + "',@ESINumber='" + request.ESINumber + "',@PANNo='" + request.PANNo + "',@DetailofJob='" + request.DetailofJob + "',@AHDepartmentID='" + request.AHDepartmentID + "',@NETQualified='" + request.NETQualified + "',@HaveCouncilRegistration='" + request.HaveCouncilRegistration + "',@CouncilRegistrationNo='" + request.CouncilRegistrationNo + "',@CouncilRegCertificate='" + request.CouncilRegCertificate + "',@AppointmentLetter='" + request.AppointmentLetter + "',@StaffBankStatement='" + request.StaffBankStatement + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "StaffDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -117,8 +117,21 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.PANNo = dataSet.Tables[0].Rows[0]["PANNo"].ToString();
                     dataModels.DesignationRegistrationNo = dataSet.Tables[0].Rows[0]["DesignationRegistrationNo"].ToString();
                     dataModels.DetailofJob = dataSet.Tables[0].Rows[0]["DetailofJob"].ToString();
+                    dataModels.AHDepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["AHDepartmentID"]);
                     dataModels.DepartmentName = dataSet.Tables[0].Rows[0]["DepartmentName"].ToString();
                     dataModels.NETQualified = dataSet.Tables[0].Rows[0]["NETQualified"].ToString();
+
+                    dataModels.HaveCouncilRegistration = dataSet.Tables[0].Rows[0]["HaveCouncilRegistration"].ToString();
+                    dataModels.CouncilRegistrationNo = dataSet.Tables[0].Rows[0]["CouncilRegistrationNo"].ToString();
+                    dataModels.CouncilRegCertificate = dataSet.Tables[0].Rows[0]["CouncilRegCertificate"].ToString();
+                    dataModels.CouncilRegCertificatePath = dataSet.Tables[0].Rows[0]["CouncilRegCertificatePath"].ToString();
+                    dataModels.CouncilRegCertificate_Dis = dataSet.Tables[0].Rows[0]["CouncilRegCertificate_Dis"].ToString();
+                    dataModels.AppointmentLetter = dataSet.Tables[0].Rows[0]["AppointmentLetter"].ToString();
+                    dataModels.AppointmentLetterPath = dataSet.Tables[0].Rows[0]["AppointmentLetterPath"].ToString();
+                    dataModels.AppointmentLetter_Dis = dataSet.Tables[0].Rows[0]["AppointmentLetter_Dis"].ToString();
+                    dataModels.StaffBankStatement = dataSet.Tables[0].Rows[0]["StaffBankStatement"].ToString();
+                    dataModels.StaffBankStatementPath = dataSet.Tables[0].Rows[0]["StaffBankStatementPath"].ToString();
+                    dataModels.StaffBankStatement_Dis = dataSet.Tables[0].Rows[0]["StaffBankStatement_Dis"].ToString();
 
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);

@@ -59,5 +59,6 @@ namespace RJ_NOC_Model
         public string? CounterforSale { get; set; }
         public string? ComputerPrint { get; set; }
         public string? RegistersMaintained { get; set; }
+        public string? LibraryTiming { get; set; }
     }
 }

@@ -626,7 +626,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAHFacilityDepartmentList(DepartmentID, CollegeID);
         }
-        public bool SaveAHDepartmentInfrastructure(List<AHDepartmentDataModel> request)
+        public bool SaveAHDepartmentInfrastructure(AHDepartmentDataModel request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveAHDepartmentInfrastructure(request);
         }
@@ -650,6 +650,19 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID)
         {
             return UnitOfWork.CommonFuncationRepository.GetDteAffiliation_SearchRecordIDWise(SearchRecordID);
+        }
+
+        public List<DataTable> GetMGOneDepartmentList()
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGOneDepartmentList();
+        }
+        public List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGOneFacilityDepartmentList(DepartmentID, CollegeID);
+        }
+        public bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveMGOneDepartmentInfrastructure(request);
         }
     }
 }

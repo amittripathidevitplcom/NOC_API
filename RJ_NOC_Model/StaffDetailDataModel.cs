@@ -70,6 +70,19 @@ namespace RJ_NOC_Model
         public int? AHDepartmentID { get; set; }
         public string? NETQualified { get; set; }
         public string? DepartmentName { get; set; }
+
+        public string? HaveCouncilRegistration { get; set; }
+        public string? CouncilRegistrationNo { get; set; }
+        public string? CouncilRegCertificate { get; set; }
+        public string? CouncilRegCertificatePath { get; set; }
+        public string? CouncilRegCertificate_Dis { get; set; }
+        public string? AppointmentLetter { get; set; }
+        public string? AppointmentLetterPath { get; set; }
+        public string? AppointmentLetter_Dis { get; set; }
+        public string? StaffBankStatement { get; set; }
+        public string? StaffBankStatementPath { get; set; }
+        public string? StaffBankStatement_Dis { get; set; }
+
         public List<EducationalQualificationDetails_StaffDetail> EducationalQualificationDetails { get; set; }
     }
     public class StaffDetailDataModel_Excel
