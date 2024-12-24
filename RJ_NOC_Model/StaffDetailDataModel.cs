@@ -68,8 +68,10 @@ namespace RJ_NOC_Model
         public string? DesignationRegistrationNo { get; set; }
         public string? DetailofJob { get; set; }
         public int? AHDepartmentID { get; set; }
+        public int? MgoneDepartmentID { get; set; }
         public string? NETQualified { get; set; }
         public string? DepartmentName { get; set; }
+        public string? MGOneDepartmentName { get; set; }
 
         public string? HaveCouncilRegistration { get; set; }
         public string? CouncilRegistrationNo { get; set; }

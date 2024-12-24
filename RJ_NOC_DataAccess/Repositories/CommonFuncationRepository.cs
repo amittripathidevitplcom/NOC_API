@@ -2012,6 +2012,21 @@ namespace RJ_NOC_DataAccess.Repository
 
             return dataModels;
         }
+        public List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID)
+
+        {
+            List<MGOneClassRoomDepartmentDataModel> dataModels = new List<MGOneClassRoomDepartmentDataModel>();
+            string SqlQuery = "exec GetMGOneClassRoomDepartmentList @CollegeID='" + CollegeID + "'";
+            DataTable ds = new DataTable();
+            ds = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetMGOneClassRoomDepartmentList");
+            if (ds != null)
+            {
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(ds);
+                dataModels = JsonConvert.DeserializeObject<List<MGOneClassRoomDepartmentDataModel>>(JsonDataTable_Data);
+            }
+
+            return dataModels;
+        }
         public bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request)
         {
             List<MGOneFacilityDepartmentDataModel> MGOneFacilityDepartmentlst = new List<MGOneFacilityDepartmentDataModel>();

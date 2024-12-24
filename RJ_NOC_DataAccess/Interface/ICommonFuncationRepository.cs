@@ -199,7 +199,9 @@ namespace RJ_NOC_DataAccess.Interface
         CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID);
 
         List<DataTable> GetMGOneDepartmentList();
+       
         List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID);
+        List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID);
         bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request);
 
         List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID);

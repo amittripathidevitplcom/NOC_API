@@ -291,7 +291,7 @@ namespace RJ_NOC_Model
         public string? CollegeName { get; set; }
         public string? Type { get; set; }
 
-    }   
+    }
     public class UnlockApplicationDataModel
     {
         public int DepartmentID { get; set; }
@@ -302,7 +302,7 @@ namespace RJ_NOC_Model
         public string UnlockSSOID { get; set; }
         public string UnlockDoc { get; set; }
 
-    }  
+    }
     public class AHDepartmentDataModel
     {
         public int ID { get; set; }
@@ -352,6 +352,20 @@ namespace RJ_NOC_Model
         public string? ValuePath { get; set; }
         public string? Annexure { get; set; }
         public bool? IsHide { get; set; }
+    }
+    public class MGOneClassRoomDepartmentDataModel
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public string? Name { get; set; }
+        public string? ControlType { get; set; }
+        public string? Unit { get; set; }
+        public string? Value { get; set; }
+        public int MinQty { get; set; }
+        public int? OrderBy { get; set; }
+        public bool IsMandatory { get; set; }
+        public bool? IsHide { get; set; }
+        public int? ParentID { get; set; }
     }
 
 
