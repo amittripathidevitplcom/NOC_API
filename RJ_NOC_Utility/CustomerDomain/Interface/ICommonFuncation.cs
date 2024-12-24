@@ -64,6 +64,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_CourseRoomSize> GetCourseRoomSize(int CourseID, int CollegeID);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type);
+        List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_CourseID(int CourseID, int CollegeID, int OtherInformationID);
         List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID);
 
 
@@ -188,6 +189,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> GetMGOneDepartmentList();
         List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID);
         bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request);
+        List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID);
+        bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request);
     }
 
 

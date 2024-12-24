@@ -543,6 +543,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_CourseID(int CourseID, int CollegeID, int OtherInformationID)
+        {
+            string SqlQuery = " Exec USP_OtherInformationList_CourseID @CourseID='" + CourseID.ToString() + "',@CollegeID='" + CollegeID.ToString() + "',@OtherInformationID='" + OtherInformationID.ToString() + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.OtherInformationList_CourseID");
+
+            List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> dataModels = new List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise>>(JsonDataTable_Data);
+            return dataModels;
+        }
 
         public List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID)
         {
@@ -1841,11 +1852,11 @@ namespace RJ_NOC_DataAccess.Repository
                             ParentID = s.ParentID,
                             ValuePath = s.ValuePath,
                             Value_Dis_FileName = s.Value_Dis_FileName,
-                            Annexure=s.Annexure,
-                            IsHide=s.ParentID>0?true:false,
-                            ContentOrder=s.ContentOrder
+                            Annexure = s.Annexure,
+                            IsHide = s.ParentID > 0 ? true : false,
+                            ContentOrder = s.ContentOrder
                         }
-                        ).OrderBy(o=>o.ContentOrder).ToList();
+                        ).OrderBy(o => o.ContentOrder).ToList();
                     }
 
                 }
@@ -1859,21 +1870,21 @@ namespace RJ_NOC_DataAccess.Repository
             List<AHFacilityDepartmentDataModel> AHFacilityDepartmentlst = new List<AHFacilityDepartmentDataModel>();
             //for (int i = 0; i < request.Count; i++)
             //{
-                AHFacilityDepartmentlst.AddRange(request.AHFacilityDepartmentList.Select(s => new AHFacilityDepartmentDataModel()
-                {
-                    ID = s.ID,
-                    AHDepartmentID = s.AHDepartmentID,
-                    ControlType = s.ControlType,
-                    IsMandatory = s.IsMandatory,
-                    MinQty = s.MinQty,
-                    Name = s.Name,
-                    Unit = s.Unit,
-                    Value = s.Value == null ? "" : s.Value,
-                    CollegeID = s.CollegeID,
-                    ParentID = s.ParentID,
-                    ValuePath = s.ValuePath,
-                    Value_Dis_FileName = s.Value_Dis_FileName
-                }).ToList());
+            AHFacilityDepartmentlst.AddRange(request.AHFacilityDepartmentList.Select(s => new AHFacilityDepartmentDataModel()
+            {
+                ID = s.ID,
+                AHDepartmentID = s.AHDepartmentID,
+                ControlType = s.ControlType,
+                IsMandatory = s.IsMandatory,
+                MinQty = s.MinQty,
+                Name = s.Name,
+                Unit = s.Unit,
+                Value = s.Value == null ? "" : s.Value,
+                CollegeID = s.CollegeID,
+                ParentID = s.ParentID,
+                ValuePath = s.ValuePath,
+                Value_Dis_FileName = s.Value_Dis_FileName
+            }).ToList());
             //}
 
             string Detail_Str = AHFacilityDepartmentlst.Count > 0 ? CommonHelper.GetDetailsTableQry(AHFacilityDepartmentlst, "Temp_AHDepartmentInfrastructureDetail") : "";
@@ -1933,7 +1944,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-       
+
         public CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID)
         {
             string SqlQuery = "select DTE_ARId,College_Name from Trn_Registration_DTEAffiliation where SearchRecordID='" + SearchRecordID + "'";
@@ -2028,6 +2039,36 @@ namespace RJ_NOC_DataAccess.Repository
             string SqlQuery = " exec USP_SaveMGOneDepartmentInfrastructure @CollegeID='" + request.CollegeID + "',@Detail_Str='" + Detail_Str + "',@DepartmentID='" + request.ID + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGOneDepartmentInfrastructure");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+
+        public List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID)
+        {
+            List<MGOneClinicalLabDataModel> dataModels = new List<MGOneClinicalLabDataModel>();
+            string SqlQuery = "exec GetGetMGOneClinicalLabDetailsList @CollegeID='" + CollegeID + "'";
+            DataTable dt = new DataTable();
+            dt = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetMGOneFacilityDepartmentList");
+            if (dt != null)
+            {
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dt);
+                dataModels = JsonConvert.DeserializeObject<List<MGOneClinicalLabDataModel>>(JsonDataTable_Data);
+            }
+            return dataModels;
+        }
+
+        public bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request)
+        {
+            
+            string Detail_Str = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_MGOneClinicalLabDetails") : "";
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveMGOneClinicalLabDetails @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGOneClinicalLabDetails");
             if (Rows > 0)
                 return true;
             else

@@ -221,6 +221,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, OtherInformationID, Type);
+        } 
+        public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_CourseID(int CourseID, int CollegeID, int OtherInformationID)
+        {
+            return UnitOfWork.CommonFuncationRepository.OtherInformationList_CourseID(CourseID, CollegeID, OtherInformationID);
         }
 
         public List<CommonDataModel_OtherInformationSize> OtherInformationSize(int OtherInformationID)
@@ -663,6 +667,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneDepartmentInfrastructure(request);
+        }        
+        public List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGOneClinicalLabDetails(CollegeID);
+        }   
+        public bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveMGOneClinicalLabDetails(request);
         }
     }
 }
