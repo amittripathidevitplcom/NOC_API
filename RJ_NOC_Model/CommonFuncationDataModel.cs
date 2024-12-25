@@ -51,8 +51,11 @@ namespace RJ_NOC_Model
 
     public class CommonDataModel_BuildingType
     {
-        public int BuildingTypeID { get; set; }
-        public string BuildingTypeName { get; set; }
+        public int? BuildingTypeID { get; set; }
+
+        public string? BuildingTypeName { get; set; }
+        public int? MGOneIstheCampusUnitaryID { get; set; }
+        public string? MGOneIstheCampusUnitaryName { get; set; }
     }
     public class CommonDataModel_BuildingUploadDoc
     {
@@ -386,5 +389,22 @@ namespace RJ_NOC_Model
         public string? Annexure { get; set; }
         public bool? IsHide { get; set; }
     }
+    //public class MGOneClassRoomDataModel
+    //{
+    //    public int ID { get; set; }
+    //    public int? CollegeID { get; set; }
+    //    public int? ParentID { get; set; }
+    //    public string? Name { get; set; }
+    //    public string? ControlType { get; set; }
+    //    public string? Unit { get; set; }
+    //    public string? Value { get; set; }
+    //    public int MinQty { get; set; }
+    //    public int? ContentOrder { get; set; }
+    //    public bool IsMandatory { get; set; }
+    //    public string? Value_Dis_FileName { get; set; }
+    //    public string? ValuePath { get; set; }
+    //    public string? Annexure { get; set; }
+    //    public bool? IsHide { get; set; }
+    //}
 
 }

@@ -241,6 +241,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetBuildingTypeCheck(SelectedDepartmentID);
         }
+        public List<CommonDataModel_BuildingType> GetlstMGOneIstheCampusUnitaryChk(int SelectedDepartmentID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetlstMGOneIstheCampusUnitaryChk(SelectedDepartmentID);
+        }
         public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
             return UnitOfWork.CommonFuncationRepository.GetBuildingUploadDetails(DepartmentId);
@@ -676,10 +680,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneClinicalLabDetails(CollegeID);
-        }   
+        }
         public bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneClinicalLabDetails(request);
+        }
+        
+        public bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveMGOneClassRoomDetails(request);
         }
     }
 }

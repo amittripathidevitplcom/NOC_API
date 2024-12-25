@@ -68,6 +68,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @IPAddress='" + IPAddress + "',";
             SqlQuery += " @Rentvaliditydate='" + buildingdetails.Rentvaliditydate + "',";
             SqlQuery += " @CityID='" + buildingdetails.CityID + "',";
+            SqlQuery += " @MGOneIstheCampusUnitaryID='" + buildingdetails.MGOneIstheCampusUnitaryID + "',";
+            SqlQuery += " @Distance='" + buildingdetails.Distance + "',";
             SqlQuery += " @IsApproved='" + buildingdetails.IsApproved + "',";
             SqlQuery += " @BuildingDetail_Document_Str='" + BuildingDetail_Document_Str + "'";
 

@@ -592,6 +592,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingType>>(JsonDataTable_Data);
             return dataModels;
         }
+        public List<CommonDataModel_BuildingType> GetlstMGOneIstheCampusUnitaryChk(int SelectedDepartmentID)
+        {
+            string SqlQuery = "exec USP_BuildingDetails @ActionType='GetMGOneIstheCampusUnitary',@DepartmentID='" + SelectedDepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBuildingTypeCheck");
+
+            List<CommonDataModel_BuildingType> dataModels = new List<CommonDataModel_BuildingType>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_BuildingType>>(JsonDataTable_Data);
+            return dataModels;
+        }
         public List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId)
         {
             string SqlQuery = "exec USP_BuildingDetails @ActionType='GetBuildingDoctype',@DepartmentID='" + DepartmentId + "'";
@@ -2078,10 +2089,23 @@ namespace RJ_NOC_DataAccess.Repository
 
         public bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request)
         {
-            
+
             string Detail_Str = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_MGOneClinicalLabDetails") : "";
             //string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveMGOneClinicalLabDetails @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGOneClinicalLabDetails");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }        
+        public bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request)
+        {
+            
+            string Detail_Str = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_MGOneClassRoomDetails") : "";
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveMGOneClassRoomDetails @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGOneClinicalLabDetails");
             if (Rows > 0)

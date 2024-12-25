@@ -69,6 +69,7 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         List<CommonDataModel_BuildingType> GetBuildingTypeCheck(int SelectedDepartmentID);
+        List<CommonDataModel_BuildingType> GetlstMGOneIstheCampusUnitaryChk(int SelectedDepartmentID);
         List<CommonDataModel_BuildingUploadDoc> GetBuildingUploadDetails(int DepartmentId);
 
 
@@ -206,6 +207,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID);
         bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request);
+        bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request);
     }
 }
 

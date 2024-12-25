@@ -1544,6 +1544,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetlstMGOneIstheCampusUnitaryChk/{SelectedDepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_BuildingType>>> GetlstMGOneIstheCampusUnitaryChk(int SelectedDepartmentID)
+        {
+            var result = new OperationResult<List<CommonDataModel_BuildingType>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetlstMGOneIstheCampusUnitaryChk(SelectedDepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetBuildingTypeCheck", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
         [HttpGet("GetBuildingUploadDetails/{DepartmentId}")]
         public async Task<OperationResult<List<CommonDataModel_BuildingUploadDoc>>> GetBuildingUploadDetails(int DepartmentId = 0)
@@ -4773,9 +4804,40 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost("SaveMGOneDepartmentClassRoom")]
+        public async Task<OperationResult<bool>> SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveMGOneClassRoomDetails(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request[0].CollegeID, "SaveMGOneDepartmentInfrastructure", request[0].CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveMGOneDepartmentInfrastructure", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
-        
+
 
     }
 }
