@@ -660,9 +660,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneDepartmentList();
         }
+        
         public List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneFacilityDepartmentList(DepartmentID, CollegeID);
+        }
+        public List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGOneClassRoomDepartmentList(DepartmentID, CollegeID);
         }
         public bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request)
         {

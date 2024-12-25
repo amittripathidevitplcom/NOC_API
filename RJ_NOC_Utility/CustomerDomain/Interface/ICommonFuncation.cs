@@ -187,6 +187,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
 
         List<DataTable> GetMGOneDepartmentList();
+       
+        List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID);
         List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID);
         bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request);
         List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID);
