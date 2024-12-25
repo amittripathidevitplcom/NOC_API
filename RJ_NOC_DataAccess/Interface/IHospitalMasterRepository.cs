@@ -15,5 +15,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<HospitalAreaValidation> GetHospitalAreaValidation();
         bool SaveData(HospitalMasterDataModel request);
         List<HospitalMasterDataModel> GetHospitalDataListforPDF(int CollegeID);
+
+        bool SaveMGThreeHospitalData(MGThreeHospitalDataModel request);
     }
 }

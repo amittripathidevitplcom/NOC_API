@@ -38,6 +38,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<HospitalMasterDataModel> GetHospitalDataListforPDF(int CollegeID)
         {
             return UnitOfWork.HospitalMasterRepository.GetHospitalDataListforPDF(CollegeID);
+        }        
+        public bool SaveMGThreeHospitalData(MGThreeHospitalDataModel request)
+        {
+            return UnitOfWork.HospitalMasterRepository.SaveMGThreeHospitalData(request);
         }
     }
 }

@@ -246,6 +246,49 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+
+        [HttpPost("SaveMGThreeHospitalData")]
+        public async Task<OperationResult<bool>> SaveMGThreeHospitalData([FromBody] MGThreeHospitalDataModel request)
+        {
+            var result = new OperationResult<bool>();
+
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.HospitalMasterUtility.SaveMGThreeHospitalData(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    if (request.HospitalID == 0)
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.CollegeID, "Save", 0, "HospitalMaster");
+                        result.SuccessMessage = "Saved successfully .!";
+                    }
+                    else
+                    {
+                        CommonDataAccessHelper.Insert_TrnUserLog(request.CollegeID, "Update", 0, "HospitalMaster");
+                        result.SuccessMessage = "Updateed successfully .!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    if (request.HospitalID == 0)
+                        result.ErrorMessage = "There was an error adding data.!";
+                    else
+                        result.ErrorMessage = "There was an error updating data.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("HospitalMasterController.SaveMGThreeHospitalData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+
+            }
+            return result;
+        }
     }
 }
 

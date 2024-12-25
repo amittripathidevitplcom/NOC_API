@@ -226,5 +226,63 @@ namespace RJ_NOC_DataAccess.Repository
             return hospitalMasterDataList;
         }
 
+
+
+        public bool SaveMGThreeHospitalData(MGThreeHospitalDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            StringBuilder sb = new StringBuilder();
+            string Detail_Str = request.MGThreeAffiliatedHospitalList.Count > 0 ? CommonHelper.GetDetailsTableQry(request.MGThreeAffiliatedHospitalList, "Temp_MGThreeAffiliatedHospitalList") : "";
+            sb.AppendFormat("@HospitalID='{0}',", request.HospitalID);
+            sb.AppendFormat("@CollegeID='{0}',", request.CollegeID);
+            sb.AppendFormat("@IsHillytribalArea='{0}',", request.IsHillytribalArea);
+            sb.AppendFormat("@IsInstitutionParentHospital='{0}',", request.IsInstitutionParentHospital);
+            sb.AppendFormat("@HospitalStatus='{0}',", request.HospitalStatus);
+            sb.AppendFormat("@HospitalName='{0}',", request.HospitalName);
+            sb.AppendFormat("@RegistrationNo='{0}',", request.RegistrationNo);
+            sb.AppendFormat("@HospitalContactNo='{0}',", request.HospitalContactNo);
+            sb.AppendFormat("@HospitalEmailID='{0}',", request.HospitalEmailID);
+            sb.AppendFormat("@AddressLine1='{0}',", request.AddressLine1);
+            sb.AppendFormat("@AddressLine2='{0}',", request.AddressLine2);
+            sb.AppendFormat("@RuralUrban='{0}',", request.RuralUrban);
+            sb.AppendFormat("@DivisionID='{0}',", request.DivisionID);
+            sb.AppendFormat("@DistrictID='{0}',", request.DistrictID);
+            sb.AppendFormat("@TehsilID='{0}',", request.TehsilID);
+            sb.AppendFormat("@CityID='{0}',", request.CityID);
+            sb.AppendFormat("@PanchayatSamitiID='{0}',", request.PanchayatSamitiID);
+            sb.AppendFormat("@CityTownVillage='{0}',", request.CityTownVillage);
+            sb.AppendFormat("@Pincode='{0}',", request.Pincode);
+            sb.AppendFormat("@OwnerName='{0}',", request.OwnerName);
+            sb.AppendFormat("@SocietyMemberID='{0}',", request.SocietyMemberID);
+            sb.AppendFormat("@HospitalMOU='{0}',", request.HospitalMOU);
+            sb.AppendFormat("@BedCapacity='{0}',", request.BedCapacity);
+            sb.AppendFormat("@MedicalBeds='{0}',", request.MedicalBeds);
+            sb.AppendFormat("@SurgicalBeds='{0}',", request.SurgicalBeds);
+            sb.AppendFormat("@ObstetricsBeds='{0}',", request.ObstetricsBeds);
+            sb.AppendFormat("@PediatricsBeds='{0}',", request.PediatricsBeds);
+            sb.AppendFormat("@OrthoBeds='{0}',", request.OrthoBeds);
+            sb.AppendFormat("@EmergencyMedicineBeds='{0}',", request.EmergencyMedicineBeds);
+            sb.AppendFormat("@PsychiatryBeds='{0}',", request.PsychiatryBeds);
+            sb.AppendFormat("@NumberofDeliveries='{0}',", request.NumberofDeliveries);
+            sb.AppendFormat("@CollegeDistance='{0}',", request.CollegeDistance);
+            sb.AppendFormat("@BedOccupancy='{0}',", request.BedOccupancy);
+            sb.AppendFormat("@FireNOC='{0}',", request.FireNOC);
+            sb.AppendFormat("@PollutionCertificate='{0}',", request.PollutionCertificate);
+            sb.AppendFormat("@ClinicalEstablishment='{0}',", request.ClinicalEstablishment);
+            sb.AppendFormat("@NABH='{0}',", request.NABH);
+            sb.AppendFormat("@UndertakingNotAffiliated='{0}',", request.UndertakingNotAffiliated);
+            sb.AppendFormat("@StaffInformation='{0}',", request.StaffInformation);
+            
+            sb.AppendFormat("@Detail_Str='{0}'", Detail_Str);
+
+            string SqlQuery = $" exec USP_SaveMGThreeHospitalData  {sb.ToString()}";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "HospitalMaster.SaveMGThreeHospitalData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

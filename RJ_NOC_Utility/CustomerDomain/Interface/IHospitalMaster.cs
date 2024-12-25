@@ -15,5 +15,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool IsSuperSpecialtyHospital(int collegeId);
         bool SaveData(HospitalMasterDataModel request);
         List<HospitalMasterDataModel> GetHospitalDataListforPDF(int CollegeID);
+        bool SaveMGThreeHospitalData(MGThreeHospitalDataModel request);
     }
 }
