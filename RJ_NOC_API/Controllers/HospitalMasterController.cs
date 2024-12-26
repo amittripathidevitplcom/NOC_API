@@ -289,6 +289,39 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpGet("GetMGThreeHospitalDetailList_DepartmentCollegeWise/{DepartmentID}/{CollegeID}/{HospitalID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MGThreeHospitalDataModel>>> GetMGThreeHospitalDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HospitalID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MGThreeHospitalDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.HospitalMasterUtility.GetMGThreeHospitalDetailList_DepartmentCollegeWise(DepartmentID, CollegeID, HospitalID, ApplyNOCID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("HospitalMasterController.GetMGThreeHospitalDetailList_DepartmentCollegeWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

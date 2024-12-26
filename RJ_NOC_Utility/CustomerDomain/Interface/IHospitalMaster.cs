@@ -16,5 +16,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveData(HospitalMasterDataModel request);
         List<HospitalMasterDataModel> GetHospitalDataListforPDF(int CollegeID);
         bool SaveMGThreeHospitalData(MGThreeHospitalDataModel request);
+        List<MGThreeHospitalDataModel> GetMGThreeHospitalDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HospitalID, int ApplyNOCID);
     }
 }

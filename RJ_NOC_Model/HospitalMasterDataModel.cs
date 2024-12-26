@@ -250,7 +250,8 @@ namespace RJ_NOC_Model
     }
     public class MGThreeAffiliatedHospitalDataModel
     {
-        public int HospitalID { get; set; } 
+        public int? HospitalID { get; set; } 
+        public int? MGTHID { get; set; } 
         public int CollegeID { get; set; } 
         public string? AffiliatedHospitalName { get; set; } 
         public string? AffiliationReason { get; set; } 

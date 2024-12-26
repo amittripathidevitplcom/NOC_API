@@ -43,5 +43,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.HospitalMasterRepository.SaveMGThreeHospitalData(request);
         }
+        public List<MGThreeHospitalDataModel> GetMGThreeHospitalDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HospitalID, int ApplyNOCID)
+        {
+            return UnitOfWork.HospitalMasterRepository.GetMGThreeHospitalDetailList_DepartmentCollegeWise(DepartmentID,CollegeID, HospitalID,ApplyNOCID);
+        }
     }
 }

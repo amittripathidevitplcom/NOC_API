@@ -183,14 +183,14 @@ namespace RJ_NOC_DataAccess.Repository
             }
 
             return hospitalMasterDataModel;
-        }       
+        }
 
         public bool IsSuperSpecialtyHospital(int collegeId)
         {
             string SqlQuery = $"exec USP_CheckSuperHospital @CollegeID={collegeId}";
             var dt = _commonHelper.Fill_DataTable(SqlQuery, "IsSuperSpecialtyHospital.IsSuperSpecialtyHospital");
 
-            bool retval= false;
+            bool retval = false;
             if (dt != null)
             {
                 retval = Convert.ToBoolean(dt.Rows[0]["IsSuperSpecialtyHospital"]);
@@ -273,7 +273,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@NABH='{0}',", request.NABH);
             sb.AppendFormat("@UndertakingNotAffiliated='{0}',", request.UndertakingNotAffiliated);
             sb.AppendFormat("@StaffInformation='{0}',", request.StaffInformation);
-            
+
             sb.AppendFormat("@Detail_Str='{0}'", Detail_Str);
 
             string SqlQuery = $" exec USP_SaveMGThreeHospitalData  {sb.ToString()}";
@@ -284,5 +284,87 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
+
+        public List<MGThreeHospitalDataModel> GetMGThreeHospitalDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HospitalID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetMGThreeHospitalDetailList_DepartmentCollegeWise @HospitalID='" + HospitalID + "',@DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ApplyNOCID='" + ApplyNOCID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "HospitalMaster.GetMGThreeHospitalDetailList_DepartmentCollegeWise");
+            List<MGThreeHospitalDataModel> listdataModels = new List<MGThreeHospitalDataModel>();
+            MGThreeHospitalDataModel dataModels = new MGThreeHospitalDataModel();
+            if (HospitalID == 0)
+            {
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+                listdataModels = JsonConvert.DeserializeObject<List<MGThreeHospitalDataModel>>(JsonDataTable_Data);
+            }
+            else
+            {
+                if (dataSet.Tables[0].Rows.Count > 0)
+                {
+                    dataModels.HospitalID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["HospitalID"]);
+                    dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
+                    dataModels.IsHillytribalArea = dataSet.Tables[0].Rows[0]["IsHillytribalArea"].ToString();
+                    dataModels.IsInstitutionParentHospital = dataSet.Tables[0].Rows[0]["IsInstitutionParentHospital"].ToString();
+                    dataModels.HospitalStatus = dataSet.Tables[0].Rows[0]["HospitalStatus"].ToString();
+                    dataModels.HospitalName = dataSet.Tables[0].Rows[0]["HospitalName"].ToString();
+                    dataModels.RegistrationNo = dataSet.Tables[0].Rows[0]["RegistrationNo"].ToString();
+                    dataModels.HospitalContactNo = dataSet.Tables[0].Rows[0]["HospitalContactNo"].ToString();
+                    dataModels.HospitalEmailID = dataSet.Tables[0].Rows[0]["HospitalEmailID"].ToString();
+                    dataModels.AddressLine1 = dataSet.Tables[0].Rows[0]["AddressLine1"].ToString();
+                    dataModels.AddressLine2 = dataSet.Tables[0].Rows[0]["AddressLine2"].ToString();
+                    dataModels.RuralUrban = Convert.ToInt32(dataSet.Tables[0].Rows[0]["RuralUrban"].ToString());
+                    dataModels.DivisionID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DivisionID"].ToString());
+                    dataModels.DistrictID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DistrictID"].ToString());
+                    dataModels.TehsilID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["TehsilID"].ToString());
+                    dataModels.CityID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CityID"].ToString());
+                    dataModels.PanchayatSamitiID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["PanchayatSamitiID"].ToString());
+                    dataModels.CityTownVillage = dataSet.Tables[0].Rows[0]["CityTownVillage"].ToString();
+                    dataModels.Pincode = Convert.ToInt32(dataSet.Tables[0].Rows[0]["Pincode"].ToString());
+                    dataModels.OwnerName = dataSet.Tables[0].Rows[0]["OwnerName"].ToString();
+                    dataModels.SocietyMemberID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["SocietyMemberID"].ToString());
+                    dataModels.HospitalMOU = dataSet.Tables[0].Rows[0]["HospitalMOU"].ToString();
+                    dataModels.Dis_HospitalMOU = dataSet.Tables[0].Rows[0]["Dis_HospitalMOU"].ToString();
+                    dataModels.HospitalMOUPath = dataSet.Tables[0].Rows[0]["HospitalMOUPath"].ToString();
+                    dataModels.BedCapacity = Convert.ToInt32(dataSet.Tables[0].Rows[0]["BedCapacity"].ToString());
+                    dataModels.MedicalBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["MedicalBeds"].ToString());
+                    dataModels.SurgicalBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["SurgicalBeds"].ToString());
+                    dataModels.ObstetricsBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ObstetricsBeds"].ToString());
+                    dataModels.PediatricsBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["PediatricsBeds"].ToString());
+                    dataModels.OrthoBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["OrthoBeds"].ToString());
+                    dataModels.EmergencyMedicineBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["EmergencyMedicineBeds"].ToString());
+                    dataModels.PsychiatryBeds = Convert.ToInt32(dataSet.Tables[0].Rows[0]["PsychiatryBeds"].ToString());
+                    dataModels.NumberofDeliveries = Convert.ToInt32(dataSet.Tables[0].Rows[0]["NumberofDeliveries"].ToString());
+                    dataModels.CollegeDistance = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeDistance"].ToString());
+                    dataModels.BedOccupancy = dataSet.Tables[0].Rows[0]["BedOccupancy"].ToString();
+                    dataModels.Dis_BedOccupancy = dataSet.Tables[0].Rows[0]["Dis_BedOccupancy"].ToString();
+                    dataModels.BedOccupancyPath = dataSet.Tables[0].Rows[0]["BedOccupancyPath"].ToString();
+                    dataModels.FireNOC = dataSet.Tables[0].Rows[0]["FireNOC"].ToString();
+                    dataModels.Dis_FireNOC = dataSet.Tables[0].Rows[0]["Dis_FireNOC"].ToString();
+                    dataModels.FireNOCPath = dataSet.Tables[0].Rows[0]["FireNOCPath"].ToString();
+                    dataModels.PollutionCertificate = dataSet.Tables[0].Rows[0]["PollutionCertificate"].ToString();
+                    dataModels.Dis_PollutionCertificate = dataSet.Tables[0].Rows[0]["Dis_PollutionCertificate"].ToString();
+                    dataModels.PollutionCertificatePath = dataSet.Tables[0].Rows[0]["PollutionCertificatePath"].ToString();
+                    dataModels.ClinicalEstablishment = dataSet.Tables[0].Rows[0]["ClinicalEstablishment"].ToString();
+                    dataModels.Dis_ClinicalEstablishment = dataSet.Tables[0].Rows[0]["Dis_ClinicalEstablishment"].ToString();
+                    dataModels.ClinicalEstablishmentPath = dataSet.Tables[0].Rows[0]["ClinicalEstablishmentPath"].ToString();
+                    dataModels.NABH = dataSet.Tables[0].Rows[0]["NABH"].ToString();
+                    dataModels.Dis_NABH = dataSet.Tables[0].Rows[0]["Dis_NABH"].ToString();
+                    dataModels.NABHPath = dataSet.Tables[0].Rows[0]["NABHPath"].ToString();
+                    dataModels.UndertakingNotAffiliated = dataSet.Tables[0].Rows[0]["UndertakingNotAffiliated"].ToString();
+                    dataModels.Dis_UndertakingNotAffiliated = dataSet.Tables[0].Rows[0]["Dis_UndertakingNotAffiliated"].ToString();
+                    dataModels.UndertakingNotAffiliatedPath = dataSet.Tables[0].Rows[0]["UndertakingNotAffiliatedPath"].ToString();
+                    dataModels.StaffInformation = dataSet.Tables[0].Rows[0]["StaffInformation"].ToString();
+                    dataModels.Dis_StaffInformation = dataSet.Tables[0].Rows[0]["Dis_StaffInformation"].ToString();
+                    dataModels.StaffInformationPath = dataSet.Tables[0].Rows[0]["StaffInformationPath"].ToString();
+
+
+                    string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                    List<MGThreeAffiliatedHospitalDataModel> item = JsonConvert.DeserializeObject<List<MGThreeAffiliatedHospitalDataModel>>(JsonDataTable_Data);
+                    dataModels.MGThreeAffiliatedHospitalList = item;
+                    listdataModels.Add(dataModels);
+                }
+            }
+            return listdataModels;
+        }
     }
 }

@@ -56,8 +56,8 @@ namespace RJ_NOC_DataAccess.Repositories
             SqlQuery += " @UserTypeID='" + request.UserTypeID + "',";
             SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
           
-            SqlQuery += " @TitleEnglish='" + request.TitleEnglish + "',";
-            SqlQuery += " @TitleHindi='" + request.TitleHindi + "',";
+            SqlQuery += " @TitleEnglish=N'" + request.TitleEnglish + "',";
+            SqlQuery += " @TitleHindi=N'" + request.TitleHindi + "',";
             SqlQuery += " @IsShow='" + request.IsShow + "',";
             SqlQuery += " @IsNew='" + request.IsNew + "',";
             SqlQuery += " @DocumentName='" + request.DocumentName + "',";  
