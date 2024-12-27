@@ -85,7 +85,7 @@ namespace RJ_NOC_Model
         public string OtherFinancialResourcesFileUpload { get; set; }
         public string? Dis_OtherFinancialResourcesFileUpload { get; set; }
         public string? OtherFinancialResourcesFileUploadPath { get; set; }
-        public int? MGOneIstheCampusUnitaryID { get; set; }
+        public string? MGOneIstheCampusUnitary { get; set; }
         public string? MGOneIstheCampusUnitaryName { get; set; }
         public int? Distance { get; set; }
         public List<DocuemntBuildingDetailsDataModel> lstBuildingDocDetails { get; set; }
