@@ -88,6 +88,8 @@ namespace RJ_NOC_Model
         public string? MGOneIstheCampusUnitary { get; set; }
         public string? MGOneIstheCampusUnitaryName { get; set; }
         public int? Distance { get; set; }
+        public string? NameoftheAuthority { get; set; }
+        public string? AuthorityDateApproval { get; set; }
         public List<DocuemntBuildingDetailsDataModel> lstBuildingDocDetails { get; set; }
 
 

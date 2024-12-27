@@ -70,6 +70,8 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += " @CityID='" + buildingdetails.CityID + "',";
             SqlQuery += " @MGOneIstheCampusUnitary='" + buildingdetails.MGOneIstheCampusUnitary + "',";
             SqlQuery += " @Distance='" + buildingdetails.Distance + "',";
+            SqlQuery += " @NameoftheAuthority='" + buildingdetails.NameoftheAuthority + "',";
+            SqlQuery += " @AuthorityDateApproval='" + buildingdetails.AuthorityDateApproval + "',";
             SqlQuery += " @IsApproved='" + buildingdetails.IsApproved + "',";
             SqlQuery += " @BuildingDetail_Document_Str='" + BuildingDetail_Document_Str + "'";
 
