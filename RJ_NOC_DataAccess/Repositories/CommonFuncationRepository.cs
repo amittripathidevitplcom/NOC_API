@@ -2083,6 +2083,7 @@ namespace RJ_NOC_DataAccess.Repository
             {
                 string JsonDataTable_Data = CommonHelper.ConvertDataTable(dt);
                 dataModels = JsonConvert.DeserializeObject<List<MGOneClinicalLabDataModel>>(JsonDataTable_Data);
+                dataModels = dataModels.OrderBy(o => o.ContentOrder).ToList();
             }
             return dataModels;
         }
@@ -2099,10 +2100,10 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
-        }        
+        }
         public bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request)
         {
-            
+
             string Detail_Str = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_MGOneClassRoomDetails") : "";
             //string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveMGOneClassRoomDetails @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
@@ -2138,6 +2139,34 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID)
+
+        {
+            List<MGOneFacilityDataModel> dataModels = new List<MGOneFacilityDataModel>();
+            string SqlQuery = "exec GetMGOneFacilityList @CollegeID='" + CollegeID + "'";
+            DataTable ds = new DataTable();
+            ds = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetMGOneFacilityList");
+            if (ds != null)
+            {
+                string JsonDataTable_Data = CommonHelper.ConvertDataTable(ds);
+                dataModels = JsonConvert.DeserializeObject<List<MGOneFacilityDataModel>>(JsonDataTable_Data);
+            }
+
+            return dataModels;
+        }
+        public bool SaveMGOneFacility(List<MGOneFacilityDataModel> request)
+        {
+
+            string Detail_Str = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_MGOneFacilityDetails") : "";
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveMGOneFacilityDetails @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGOneFacility");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }        
     }
 }
 

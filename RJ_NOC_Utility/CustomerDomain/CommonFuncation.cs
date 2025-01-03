@@ -221,7 +221,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_DepartmentCollegeAndTypeWise(int DepartmentID, int CollegeID, int OtherInformationID, string Type)
         {
             return UnitOfWork.CommonFuncationRepository.OtherInformationList_DepartmentCollegeAndTypeWise(DepartmentID, CollegeID, OtherInformationID, Type);
-        } 
+        }
         public List<CommonDataModel_OtherInformationList_DepartmentAndTypeWise> OtherInformationList_CourseID(int CourseID, int CollegeID, int OtherInformationID)
         {
             return UnitOfWork.CommonFuncationRepository.OtherInformationList_CourseID(CourseID, CollegeID, OtherInformationID);
@@ -289,7 +289,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetFacilitesMinSize(FacilitieID);
         }
 
-        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID,bool IsWeb, int SessionYear)
+        public List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb, int SessionYear)
         {
             return UnitOfWork.CommonFuncationRepository.GetDashboardDataSSOWise(SSOID, DepartmentID, RoleID, UserID, IsWeb, SessionYear);
         }
@@ -497,7 +497,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAppliedNocInformation(SSOID);
         }
-       
+
         public CommonDataModel_CollegeID_SearchRecordIDWise GetCollegeID_SearchRecordIDWise(string SearchRecordID)
         {
             return UnitOfWork.CommonFuncationRepository.GetCollegeID_SearchRecordIDWise(SearchRecordID);
@@ -625,7 +625,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_FinancialYearDDL> GetDashBoardFinancialYear()
         {
             return UnitOfWork.CommonFuncationRepository.GetDashBoardFinancialYear();
-        } 
+        }
         public List<DataTable> GetAHDepartmentList()
         {
             return UnitOfWork.CommonFuncationRepository.GetAHDepartmentList();
@@ -654,7 +654,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAffiliationRegistrationList(SSOID);
         }
-       
+
         public CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID)
         {
             return UnitOfWork.CommonFuncationRepository.GetDteAffiliation_SearchRecordIDWise(SearchRecordID);
@@ -664,7 +664,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneDepartmentList();
         }
-        
+
         public List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneFacilityDepartmentList(DepartmentID, CollegeID);
@@ -676,7 +676,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneDepartmentInfrastructure(request);
-        }        
+        }
         public List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneClinicalLabDetails(CollegeID);
@@ -685,7 +685,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneClinicalLabDetails(request);
         }
-        
+
         public bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneClassRoomDetails(request);
@@ -698,5 +698,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGoneFacilityEach(request);
         }
+        public List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGOneFacilityList(DepartmentID, CollegeID);
+        }
+        public bool SaveMGOneFacility(List<MGOneFacilityDataModel> request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveMGOneFacility(request);
+        }        
     }
 }

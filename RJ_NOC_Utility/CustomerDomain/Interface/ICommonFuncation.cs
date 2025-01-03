@@ -197,6 +197,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request);
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
+        List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID);
+        bool SaveMGOneFacility(List<MGOneFacilityDataModel> request);
     }
 
 

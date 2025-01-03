@@ -89,10 +89,51 @@ namespace RJ_NOC_Model
         public string? MGOneIstheCampusUnitaryName { get; set; }
         public int? Distance { get; set; }
         public string? NameoftheAuthority { get; set; }
-        public string? AuthorityDateApproval { get; set; }
+        public string? AuthorityDateApproval { get; set; }       
+        public int?ResidentialBuildingTypeID { get; set; }
+        public string? MGOneResidentialIstheCampusUnitary { get; set; }
+        public string? ResidentialOwnerName { get; set; }
+        public string? ResidentialAddressLine1 { get; set; }
+        public string? ResidentialAddressLine2 { get; set; }
+        public string? ResidentialRuralUrban { get; set; }
+        public string? ResidentialDistance { get; set; }
+        public int? ResidentialDivisionID { get; set; }
+        public int?ResidentialDistrictID { get; set; }
+        public int?ResidentialTehsilID { get; set; }
+        public int?ResidentialCityID { get; set; }
+        public int?ResidentialPanchayatSamitiID { get; set; }
+        public string? ResidentialCityTownVillage { get; set; }
+        public string? ResidentialContactNo { get; set; }
+        public string? ResidentialPincode { get; set; }
+        public int?ResidentialBuildingHostelQuartersRoadArea { get; set; }
+        public string? ResidentialRentvaliditydate { get; set; }
+        public string? ResidentialbuildingOtherDoc1FileUpload { get; set; }
+        public string? ResidentialDis_buildingOtherDoc1FileUpload { get; set; }
+        public string? ResidentialbuildingOtherDoc1FileUploadPath { get; set; }
+        public string? ResidentialbuildingOtherDoc2FileUpload{ get; set; }
+        public string? ResidentialDis_buildingOtherDoc2FileUpload{ get; set; }
+        public string? ResidentialbuildingOtherDoc2FileUploadPath{ get; set; }
+        public string? ResidentialRentAgreementFileUpload{ get; set; }
+        public string? ResidentialDis_RentAgreementFileUpload{ get; set; }
+        public string? ResidentialRentAgreementFileUploadPath{ get; set; }
+        public string? AuthoritybuildingOtherDoc1FileUpload{ get; set; }
+        public string? AuthorityDis_buildingOtherDoc1FileUpload{ get; set; }
+        public string? AuthoritybuildingOtherDoc1FileUploadPath{ get; set; }
+        public string? MGOneDrainage{ get; set; }
+        public string? BuildingUseNameoftheAuthority { get; set; }
+        public string? BuildingUseOrderNo { get; set; }
+        public string? BuildingUseDateApproval { get; set; }
+        public string? buildingUseOtherDoc1FileUpload{ get; set; }
+        public string?Dis_buildingUseOtherDoc1FileUpload{ get; set; }
+        public string?buildingUseOtherDoc1FileUploadPath{ get; set; }
+       
+        public string? PollutionDateApproval { get; set; }
+        public string? ValidDateApproval{ get; set; }
+        public string?PollutionbuildingOtherDoc1FileUpload{ get; set; }
+        public string?PollutionDis_buildingOtherDoc1FileUpload{ get; set; }
+        public string? PollutionbuildingOtherDoc1FileUploadPath { get; set; }
+        public string? ResidentialBuildingName { get; set; }
         public List<DocuemntBuildingDetailsDataModel> lstBuildingDocDetails { get; set; }
-
-
         public string? C_Action { get; set; }
         public string? C_Remark { get; set; }
         public string? S_Action { get; set; }

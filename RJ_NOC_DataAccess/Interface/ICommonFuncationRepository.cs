@@ -211,6 +211,8 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
+        List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID);
+        bool SaveMGOneFacility(List<MGOneFacilityDataModel> request);
     }
 }
 
