@@ -8,7 +8,7 @@ namespace RJ_NOC_Model
 {
     public class HospitalMasterDataModel
     {
-        public int ParentHospitalID { get; set; }        
+        public int ParentHospitalID { get; set; }
         public int CollegeID { get; set; }
         public int HospitalID { get; set; }
         public int HospitalAreaID { get; set; }
@@ -172,6 +172,26 @@ namespace RJ_NOC_Model
         public int? CityID_Other { get; set; }
         public string? CityName_Other { get; set; }
         public string? IsAffiliatedHospital { get; set; }
+
+
+        public int? GeneralMedicinebed { get; set; }
+        public int? PaediatricsBed { get; set; }
+        public int? SkinandVDBed { get; set; }
+        public int? PsychiatryBed { get; set; }
+        public int? GeneralSurgeryBed { get; set; }
+        public int? SurgeryOrthopaedicsBed { get; set; }
+        public int? SurgeryOphthalmologyBed { get; set; }
+        public int? SurgeryOtorhinolaryngologyBed { get; set; }
+        public int? ObstetricsGynaecologyBed { get; set; }
+        public int? ICUBed { get; set; }
+        public int? ICCUBed { get; set; }
+        public int? RICUBed { get; set; }
+        public int? SICUBed { get; set; }
+        public int? NICUBed { get; set; }
+        public int? PICUBed { get; set; }
+        public int? ICUGrandTotalBed { get; set; }
+        public int? OTICUBed { get; set; }
+        public int? CasualtyBeds { get; set; }
     }
     public class HospitalAreaValidation
     {
@@ -186,115 +206,124 @@ namespace RJ_NOC_Model
     {
         public int HospitalID { get; set; }
         public int CollegeID { get; set; }
-        public string? IsHillytribalArea { get; set; } 
+        public string? IsHillytribalArea { get; set; }
         public string? IsInstitutionParentHospital { get; set; }
-        public string? HospitalStatus { get; set; } 
-        public string? HospitalName { get; set; } 
-        public string? RegistrationNo { get; set; } 
-        public string? HospitalContactNo { get; set; } 
-        public string? HospitalEmailID { get; set; } 
-        public string? AddressLine1 { get; set; } 
+        public string? HospitalStatus { get; set; }
+        public string? HospitalName { get; set; }
+        public string? RegistrationNo { get; set; }
+        public string? HospitalContactNo { get; set; }
+        public string? HospitalEmailID { get; set; }
+        public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
         public int? RuralUrban { get; set; }
-        public int? DivisionID { get; set; } 
+        public int? DivisionID { get; set; }
         public int? DistrictID { get; set; }
-        public int? TehsilID { get; set; } 
+        public int? TehsilID { get; set; }
         public int? CityID { get; set; }
         public int? PanchayatSamitiID { get; set; }
-        public string? CityTownVillage { get; set; } 
-        public int? Pincode { get; set; } 
-        public string? OwnerName { get; set; } 
+        public string? CityTownVillage { get; set; }
+        public int? Pincode { get; set; }
+        public string? OwnerName { get; set; }
         public int? SocietyMemberID { get; set; }
 
-        public string? HospitalMOU { get; set; } 
-        public string? Dis_HospitalMOU { get; set; } 
-        public string? HospitalMOUPath { get; set; } 
+        public string? HospitalMOU { get; set; }
+        public string? Dis_HospitalMOU { get; set; }
+        public string? HospitalMOUPath { get; set; }
         public int? BedCapacity { get; set; }
 
-        public int? MedicalBeds { get; set; } 
-        public int? SurgicalBeds { get; set; } 
-        public int? ObstetricsBeds { get; set; } 
+        public int? MedicalBeds { get; set; }
+        public int? SurgicalBeds { get; set; }
+        public int? ObstetricsBeds { get; set; }
         public int? PediatricsBeds { get; set; }
         public int? OrthoBeds { get; set; }
         public int? EmergencyMedicineBeds { get; set; }
-        public int? PsychiatryBeds { get; set; } 
+        public int? PsychiatryBeds { get; set; }
 
         public int? NumberofDeliveries { get; set; }
         public int? CollegeDistance { get; set; }
 
-        public string? BedOccupancy { get; set; } 
-        public string? Dis_BedOccupancy { get; set; } 
-        public string? BedOccupancyPath { get; set; } 
+        public string? BedOccupancy { get; set; }
+        public string? Dis_BedOccupancy { get; set; }
+        public string? BedOccupancyPath { get; set; }
         public string? FireNOC { get; set; }
         public string? Dis_FireNOC { get; set; }
-        public string? FireNOCPath { get; set; } 
-        public string? PollutionCertificate { get; set; } 
-        public string? Dis_PollutionCertificate { get; set; } 
-        public string? PollutionCertificatePath { get; set; } 
-                     
-        public string? ClinicalEstablishment { get; set; } 
-        public string? Dis_ClinicalEstablishment { get; set; } 
-        public string? ClinicalEstablishmentPath { get; set; } 
-        public string? NABH { get; set; } 
-        public string? Dis_NABH { get; set; } 
-        public string? NABHPath { get; set; } 
-        public string? UndertakingNotAffiliated { get; set; } 
-        public string? Dis_UndertakingNotAffiliated { get; set; } 
-        public string? UndertakingNotAffiliatedPath { get; set; } 
-        public string? StaffInformation { get; set; } 
-        public string? Dis_StaffInformation { get; set; } 
-        public string? StaffInformationPath { get; set; } 
+        public string? FireNOCPath { get; set; }
+        public string? PollutionCertificate { get; set; }
+        public string? Dis_PollutionCertificate { get; set; }
+        public string? PollutionCertificatePath { get; set; }
 
-        public List<MGThreeAffiliatedHospitalDataModel>? MGThreeAffiliatedHospitalList { get; set; } 
+        public string? ClinicalEstablishment { get; set; }
+        public string? Dis_ClinicalEstablishment { get; set; }
+        public string? ClinicalEstablishmentPath { get; set; }
+        public string? NABH { get; set; }
+        public string? Dis_NABH { get; set; }
+        public string? NABHPath { get; set; }
+        public string? UndertakingNotAffiliated { get; set; }
+        public string? Dis_UndertakingNotAffiliated { get; set; }
+        public string? UndertakingNotAffiliatedPath { get; set; }
+        public string? StaffInformation { get; set; }
+        public string? Dis_StaffInformation { get; set; }
+        public string? StaffInformationPath { get; set; }
+
+
+        public string? DivisionName { get; set; }
+        public string? DistrictName { get; set; }
+        public string? TehsilName { get; set; }
+        public string? PanchyatSamitiName { get; set; }
+        public string? CityName { get; set; }
+
+        public List<MGThreeAffiliatedHospitalDataModel>? MGThreeAffiliatedHospitalList { get; set; }
 
     }
     public class MGThreeAffiliatedHospitalDataModel
     {
-        public int? HospitalID { get; set; } 
-        public int? MGTHID { get; set; } 
-        public int CollegeID { get; set; } 
-        public string? AffiliatedHospitalName { get; set; } 
-        public string? AffiliationReason { get; set; } 
-        public string? SpecialtyAffiliation { get; set; } 
-        public string? OwnerName { get; set; } 
+        public int? HospitalID { get; set; }
+        public int? MGTHID { get; set; }
+        public int CollegeID { get; set; }
+        public string? AffiliatedHospitalName { get; set; }
+        public int? AffiliationReason { get; set; }
+        public string? AffiliationReasonName { get; set; }
+        public string? SpecialtyAffiliation { get; set; }
+        public string? OwnerName { get; set; }
         public int? BedCapacity { get; set; }
-        public int? NumberDeliveries { get; set; } 
-        public int? CollegeDistance { get; set; } 
+        public int? NumberDeliveries { get; set; }
+        public int? CollegeDistance { get; set; }
 
-        public string? HospitalMOU { get; set; } 
+        public string? HospitalMOU { get; set; }
         public string? Dis_HospitalMOU { get; set; }
         public string? HospitalMOUPath { get; set; }
 
-        public int? MedicalBeds { get; set; } 
+        public int? MedicalBeds { get; set; }
         public int? SurgicalBeds { get; set; }
         public int? ObstetricsBeds { get; set; }
         public int? PediatricsBeds { get; set; }
-        public int? OrthoBeds { get; set; } 
-        public int? PsychiatryBeds { get; set; } 
+        public int? OrthoBeds { get; set; }
+        public int? PsychiatryBeds { get; set; }
+        public int? EmergencyMedicineBeds { get; set; }
 
-        public string? BedOccupancy { get; set; } 
+        public string? BedOccupancy { get; set; }
         public string? Dis_BedOccupancy { get; set; }
         public string? BedOccupancyPath { get; set; }
-                     
+
         public string? FireNOC { get; set; }
-        public string? Dis_FireNOC { get; set; } 
-        public string? FireNOCPath { get; set; } 
-        public string? PollutionCertificate { get; set; } 
-        public string? Dis_PollutionCertificate { get; set; } 
-        public string? PollutionCertificatePath { get; set; } 
-                     
-        public string? ClinicalEstablishment { get; set; } 
+        public string? Dis_FireNOC { get; set; }
+        public string? FireNOCPath { get; set; }
+        public string? PollutionCertificate { get; set; }
+        public string? Dis_PollutionCertificate { get; set; }
+        public string? PollutionCertificatePath { get; set; }
+
+        public string? ClinicalEstablishment { get; set; }
         public string? Dis_ClinicalEstablishment { get; set; }
         public string? ClinicalEstablishmentPath { get; set; }
-        public string? NABH { get; set; } 
-        public string? Dis_NABH { get; set; } 
-        public string? NABHPath { get; set; } 
-        public string? UndertakingNotAffiliated { get; set; } 
-        public string? Dis_UndertakingNotAffiliated { get; set; } 
-        public string? UndertakingNotAffiliatedPath { get; set; } 
-        public string? StaffInformation { get; set; } 
-        public string? Dis_StaffInformation { get; set; } 
-        public string? StaffInformationPath { get; set; } 
+        public string? NABH { get; set; }
+        public string? Dis_NABH { get; set; }
+        public string? NABHPath { get; set; }
+        public string? UndertakingNotAffiliated { get; set; }
+        public string? Dis_UndertakingNotAffiliated { get; set; }
+        public string? UndertakingNotAffiliatedPath { get; set; }
+        public string? StaffInformation { get; set; }
+        public string? Dis_StaffInformation { get; set; }
+        public string? StaffInformationPath { get; set; }
     }
 
 

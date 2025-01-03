@@ -47,5 +47,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.HospitalMasterRepository.GetMGThreeHospitalDetailList_DepartmentCollegeWise(DepartmentID,CollegeID, HospitalID,ApplyNOCID);
         }
+        public bool DeleteHospitalDetail(int HospitalID)
+        {
+            return UnitOfWork.HospitalMasterRepository.DeleteHospitalDetail(HospitalID);
+        }
     }
 }

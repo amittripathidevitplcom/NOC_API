@@ -118,6 +118,7 @@ namespace RJ_NOC_Model
         public int SubdivisionID { get; set; }
         public int TehsilID { get; set; }
         public int ParliamentAreaID { get; set; }
+        public int? SessionID { get; set; }
         public string CollegeName { get; set; }
 
     }

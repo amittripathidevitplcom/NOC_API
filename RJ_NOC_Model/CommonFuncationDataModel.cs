@@ -406,5 +406,21 @@ namespace RJ_NOC_Model
     //    public string? Annexure { get; set; }
     //    public bool? IsHide { get; set; }
     //}
+    public class MGOneFacilityEachDataModel
+    {
+        public int CollegeID { get; set; }
+        public int ID { get; set; }
+        public string? Name { get; set; }
+        public string? Code { get; set; }
+        public int? MinSize { get; set; }
+        public int? MinCapacity { get; set; }
+        public int? MinRequired { get; set; }
+        public string? Unit { get; set; }
+        public int? Capacity { get; set; }
+        public int? Size { get; set; }
+        public bool? Showbutton { get; set; }
+        public bool? IsSubmitted { get; set; }
+
+    }
 
 }

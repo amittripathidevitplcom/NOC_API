@@ -18,5 +18,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         bool SaveMGThreeHospitalData(MGThreeHospitalDataModel request);
         List<MGThreeHospitalDataModel> GetMGThreeHospitalDetailList_DepartmentCollegeWise(int DepartmentID, int CollegeID, int HospitalID, int ApplyNOCID);
+
+        bool DeleteHospitalDetail(int HospitalID);
     }
 }

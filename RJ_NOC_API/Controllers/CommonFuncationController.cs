@@ -4838,6 +4838,69 @@ namespace RJ_NOC_API.Controllers
 
 
 
+        [HttpGet("GetMGoneFacilityEach/{CollegeID}")]
+        public async Task<OperationResult<List<DataTable>>> GetMGoneFacilityEach( int CollegeID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetMGoneFacilityEach(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetMGoneFacilityEach", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
+
+        [HttpPost("SaveMGoneFacilityEach")]
+        public async Task<OperationResult<bool>> SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveMGoneFacilityEach(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request[0].CollegeID, "SaveMGoneFacilityEach", request[0].CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveMGoneFacilityEach", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }

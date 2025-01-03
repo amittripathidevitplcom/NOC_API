@@ -690,5 +690,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneClassRoomDetails(request);
         }
+        public List<DataTable> GetMGoneFacilityEach(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGoneFacilityEach(CollegeID);
+        }        
+        public bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveMGoneFacilityEach(request);
+        }
     }
 }

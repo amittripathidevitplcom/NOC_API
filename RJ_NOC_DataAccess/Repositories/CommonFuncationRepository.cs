@@ -2113,6 +2113,31 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public List<DataTable> GetMGoneFacilityEach(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetMGoneFacilityEach @CollegeID="+CollegeID+"";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetMGoneFacilityEach");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
+        {
+
+            string Detail_Str = request.Count > 0 ? CommonHelper.GetDetailsTableQry(request, "Temp_MGoneFacilityEachDetails") : "";
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveMGoneFacilityEach @CollegeID='" + request[0].CollegeID + "',@Detail_Str='" + Detail_Str + "'";
+
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveMGoneFacilityEach");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
 

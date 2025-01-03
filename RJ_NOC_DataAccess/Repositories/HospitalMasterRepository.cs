@@ -4,6 +4,7 @@ using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Interface;
 using System.Data;
 using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -150,6 +151,27 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@CityID_Owner='{0}',", request.CityID_Owner);
             sb.AppendFormat("@CityID_Other='{0}',", request.CityID_Other);
             sb.AppendFormat("@IsAffiliatedHospital='{0}',", request.IsAffiliatedHospital);
+
+
+            sb.AppendFormat("@GeneralMedicinebed='{0}',", request.GeneralMedicinebed);
+            sb.AppendFormat("@PaediatricsBed='{0}',", request.PaediatricsBed);
+            sb.AppendFormat("@SkinandVDBed='{0}',", request.SkinandVDBed);
+            sb.AppendFormat("@PsychiatryBed='{0}',", request.PsychiatryBed);
+            sb.AppendFormat("@GeneralSurgeryBed='{0}',", request.GeneralSurgeryBed);
+            sb.AppendFormat("@SurgeryOrthopaedicsBed='{0}',", request.SurgeryOrthopaedicsBed);
+            sb.AppendFormat("@SurgeryOphthalmologyBed='{0}',", request.SurgeryOphthalmologyBed);
+            sb.AppendFormat("@SurgeryOtorhinolaryngologyBed='{0}',", request.SurgeryOtorhinolaryngologyBed);
+            sb.AppendFormat("@ObstetricsGynaecologyBed='{0}',", request.ObstetricsGynaecologyBed);
+            sb.AppendFormat("@ICUBed='{0}',", request.ICUBed);
+            sb.AppendFormat("@ICCUBed='{0}',", request.ICCUBed);
+            sb.AppendFormat("@RICUBed='{0}',", request.RICUBed);
+            sb.AppendFormat("@SICUBed='{0}',", request.SICUBed);
+            sb.AppendFormat("@NICUBed='{0}',", request.NICUBed);
+            sb.AppendFormat("@PICUBed='{0}',", request.PICUBed);
+            sb.AppendFormat("@ICUGrandTotalBed='{0}',", request.ICUGrandTotalBed);
+            sb.AppendFormat("@OTICUBed='{0}',", request.OTICUBed);
+            sb.AppendFormat("@CasualtyBeds='{0}',", request.CasualtyBeds);
+
             // action
             sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
 
@@ -291,11 +313,73 @@ namespace RJ_NOC_DataAccess.Repository
             DataSet dataSet = new DataSet();
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "HospitalMaster.GetMGThreeHospitalDetailList_DepartmentCollegeWise");
             List<MGThreeHospitalDataModel> listdataModels = new List<MGThreeHospitalDataModel>();
+            List<MGThreeAffiliatedHospitalDataModel> afflistdataModels = new List<MGThreeAffiliatedHospitalDataModel>();
             MGThreeHospitalDataModel dataModels = new MGThreeHospitalDataModel();
             if (HospitalID == 0)
             {
                 string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
                 listdataModels = JsonConvert.DeserializeObject<List<MGThreeHospitalDataModel>>(JsonDataTable_Data);
+                string item = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                afflistdataModels = JsonConvert.DeserializeObject<List<MGThreeAffiliatedHospitalDataModel>>(item);
+                for (int i = 0; i < listdataModels.Count(); i++)
+                {
+                    var count = afflistdataModels.Where(w => w.MGTHID == listdataModels[i].HospitalID).ToList().Count;
+                    if (count > 0)
+                    {
+                        if (listdataModels[i].MGThreeAffiliatedHospitalList == null)
+                        {
+                            listdataModels[i].MGThreeAffiliatedHospitalList = new List<MGThreeAffiliatedHospitalDataModel>();
+                        }
+
+                        listdataModels[i].MGThreeAffiliatedHospitalList.AddRange(
+                             afflistdataModels.Where(w => w.MGTHID == listdataModels[i].HospitalID).Select(s => new MGThreeAffiliatedHospitalDataModel()
+                             {
+                                 MGTHID = s.MGTHID,
+                                 HospitalID = s.HospitalID,
+                                 AffiliatedHospitalName = s.AffiliatedHospitalName,
+                                 AffiliationReason = s.AffiliationReason,
+                                 AffiliationReasonName = s.AffiliationReasonName,
+                                 BedCapacity = s.BedCapacity,
+                                 BedOccupancy = s.BedOccupancy,
+                                 BedOccupancyPath = s.BedOccupancyPath,
+                                 ClinicalEstablishment = s.BedOccupancyPath,
+                                 ClinicalEstablishmentPath = s.BedOccupancyPath,
+                                 CollegeDistance = s.CollegeDistance,
+                                 CollegeID = s.CollegeID,
+                                 Dis_BedOccupancy = s.Dis_BedOccupancy,
+                                 Dis_ClinicalEstablishment = s.Dis_ClinicalEstablishment,
+                                 Dis_FireNOC = s.Dis_FireNOC,
+                                 Dis_HospitalMOU = s.Dis_HospitalMOU,
+                                 Dis_NABH = s.Dis_NABH,
+                                 Dis_PollutionCertificate = s.Dis_PollutionCertificate,
+                                 Dis_StaffInformation = s.Dis_StaffInformation,
+                                 Dis_UndertakingNotAffiliated = s.Dis_UndertakingNotAffiliated,
+                                 EmergencyMedicineBeds = s.EmergencyMedicineBeds,
+                                 FireNOC = s.FireNOC,
+                                 FireNOCPath = s.FireNOCPath,
+                                 HospitalMOU = s.HospitalMOU,
+                                 HospitalMOUPath = s.HospitalMOUPath,
+                                 MedicalBeds = s.MedicalBeds,
+                                 NABH = s.NABH,
+                                 NABHPath = s.NABHPath,
+                                 NumberDeliveries = s.NumberDeliveries,
+                                 ObstetricsBeds = s.ObstetricsBeds,
+                                 OrthoBeds = s.OrthoBeds,
+                                 OwnerName = s.OwnerName,
+                                 PediatricsBeds = s.PediatricsBeds,
+                                 PollutionCertificate = s.PollutionCertificate,
+                                 PollutionCertificatePath = s.PollutionCertificatePath,
+                                 PsychiatryBeds = s.PsychiatryBeds,
+                                 SpecialtyAffiliation = s.SpecialtyAffiliation,
+                                 StaffInformation = s.StaffInformation,
+                                 StaffInformationPath = s.StaffInformationPath,
+                                 SurgicalBeds = s.SurgicalBeds,
+                                 UndertakingNotAffiliated = s.UndertakingNotAffiliated,
+                                 UndertakingNotAffiliatedPath = s.UndertakingNotAffiliatedPath
+                             }).ToList()
+                            );
+                    }
+                }
             }
             else
             {
@@ -357,6 +441,13 @@ namespace RJ_NOC_DataAccess.Repository
                     dataModels.Dis_StaffInformation = dataSet.Tables[0].Rows[0]["Dis_StaffInformation"].ToString();
                     dataModels.StaffInformationPath = dataSet.Tables[0].Rows[0]["StaffInformationPath"].ToString();
 
+                    dataModels.DivisionName = dataSet.Tables[0].Rows[0]["DivisionName"].ToString();
+                    dataModels.DistrictName = dataSet.Tables[0].Rows[0]["DistrictName"].ToString();
+                    dataModels.TehsilName = dataSet.Tables[0].Rows[0]["TehsilName"].ToString();
+                    dataModels.PanchyatSamitiName = dataSet.Tables[0].Rows[0]["PanchyatSamitiName"].ToString();
+                    dataModels.CityName = dataSet.Tables[0].Rows[0]["CityName"].ToString();
+
+
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<MGThreeAffiliatedHospitalDataModel> item = JsonConvert.DeserializeObject<List<MGThreeAffiliatedHospitalDataModel>>(JsonDataTable_Data);
@@ -365,6 +456,18 @@ namespace RJ_NOC_DataAccess.Repository
                 }
             }
             return listdataModels;
+        }
+
+        public bool DeleteHospitalDetail(int HospitalID)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_DeleteHospitalDetail @HospitalID={HospitalID}";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "HospitalMaster.DeleteHospitalDetail");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

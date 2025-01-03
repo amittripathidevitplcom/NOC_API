@@ -17,7 +17,10 @@ namespace RJ_NOC_Model
         public string? OrderDate { get; set; }
         public string? OrderDocumentName { get; set; }
         public string? OrderDocumentNamePath { get; set; }
-        public string? OrderDocumentName_DisName { get; set; }
+        public string? OrderDocumentName_DisName { get; set; }  
+        public string? PetitionDocument { get; set; }
+        public string? PetitionDocumentPath { get; set; }
+        public string? PetitionDocument_DisName { get; set; }
         public int UserID { get; set; }
     }
     public class CourtOrderSearchFilterDataModel
