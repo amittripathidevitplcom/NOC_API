@@ -163,6 +163,7 @@ namespace RJ_NOC_Model
         public int UniversityID { get; set; }
         public int DivisionID { get; set; }
         public int DistrictID { get; set; }
+        public int? IsDefaulter { get; set; }
         public string CollegeName { get; set; }
     }
 

@@ -30,7 +30,7 @@ namespace RJ_NOC_Model
         public string Type { get; set; }
         public string? DocumentName { get; set; }
     }
-   
+
 
     public class CommonDataModel_EmployeeDocumentList
     {
@@ -374,13 +374,13 @@ namespace RJ_NOC_Model
 
     public class CommonDataModel_Category
     {
-        public int CategoryId { get; set; }       
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
 
     }
     public class CommonDataModel_DepartmentWiseStartDateEndDate
     {
-        public int DepartmentID { get; set; }       
+        public int DepartmentID { get; set; }
         public int ApplicationSession { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
@@ -395,18 +395,29 @@ namespace RJ_NOC_Model
     }
     public class CommonDataModel_RegistrationDTEAffiliationApply
     {
-        public int ? DTE_ARId { get; set; }
-        public int ? CollegeStatusId { get; set; }
-        public int ? DepartmentID { get; set; }
-        public int ? AffiliationTypeID { get; set; }
-        public string ? AffiliationCategoryName { get; set; }
-        public string ? DepartmentName_English { get; set; }
-        public string ? AffiliationTypeName { get; set; }
-        public string ? SSOID { get; set; }
-        public string ? College_Name { get; set; }
-        public string ? Mobile_Number { get; set; }
+        public int? DTE_ARId { get; set; }
+        public int? CollegeStatusId { get; set; }
+        public int? DepartmentID { get; set; }
+        public int? AffiliationTypeID { get; set; }
+        public string? AffiliationCategoryName { get; set; }
+        public string? DepartmentName_English { get; set; }
+        public string? AffiliationTypeName { get; set; }
+        public string? SSOID { get; set; }
+        public string? College_Name { get; set; }
+        public string? Mobile_Number { get; set; }
         public string? Email_Address { get; set; }
         public DataTable? data { get; set; }
+
+    }
+
+    public class CommonDataModel_ApplicationListFilter
+    {
+        public int? RoleID { get; set; }
+        public int? UserID { get; set; }
+        public int? DepartmentID { get; set; }
+        public int? SessionYear { get; set; }
+        public string? Status { get; set; }
+        public string? ActionName { get; set; }
 
     }
 }

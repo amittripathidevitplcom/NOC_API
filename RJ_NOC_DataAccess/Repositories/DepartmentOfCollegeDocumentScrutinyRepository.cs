@@ -606,7 +606,7 @@ namespace RJ_NOC_DataAccess.Repository
             SqlQuery += "@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='"+request.NOCStatusID+ "',@WorkFlowActionID='" + request.WorkFlowActionID+"',";
             SqlQuery += "@NodelOfficerID='" + request.NodelOfficerID + "',@CollegeTypeID='" + request.CollegeTypeID+ "',@FromSubmitDate='" + request.FromSubmitDate+"',";
             SqlQuery += "@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationTypeID='" + request.ApplicationTypeID+ "',@SearchStaticsID='" + request.SearchStaticsID+"',";
-            SqlQuery += "@ApplicationID='" + request.ApplicationID + "',@ApplicationStatusID='" + request.ApplicationStatusID + "',@YearNewExistingID='" + request.YearNewExistingID + "',@ReportStatus='"+request.ReportStatus+ "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "',@SessionYear='" + request.SessionYear + "'";
+            SqlQuery += "@ApplicationID='" + request.ApplicationID + "',@ApplicationStatusID='" + request.ApplicationStatusID + "',@YearNewExistingID='" + request.YearNewExistingID + "',@ReportStatus='"+request.ReportStatus+ "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "',@SessionYear='" + request.SessionYear + "',@IsDefaulter='" + request.IsDefaulter + "'";
             dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetDCENOCReportData");
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDataModel>>(JsonDataTable_Data);

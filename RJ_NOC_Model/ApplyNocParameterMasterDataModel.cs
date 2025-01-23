@@ -206,6 +206,7 @@ namespace RJ_NOC_Model
         public string? ExistingLetterofEOA { get; set; }
         public int? OpenApplicationSession { get; set; }
         public int? OpenDefaulterSession { get; set; }
+        public int? PendingDays { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 

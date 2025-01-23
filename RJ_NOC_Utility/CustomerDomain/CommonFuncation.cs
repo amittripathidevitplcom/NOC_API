@@ -638,7 +638,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SaveAHDepartmentInfrastructure(request);
         }
-        public List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID)
+        public List<CommonDataModel_DataSet> CheckAHStaff(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.CheckAHStaff(CollegeID);
         }
@@ -697,6 +697,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGoneFacilityEach(request);
+        }     
+        public List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetWorkflowPermissions(DepartmentID, RoleID);
         }
     }
 }

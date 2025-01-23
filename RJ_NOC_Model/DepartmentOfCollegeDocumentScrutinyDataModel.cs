@@ -144,6 +144,7 @@ namespace RJ_NOC_Model
         public int YearNewExistingID { get; set; }
         public int ApplicationCurrentRole { get; set; }
         public int? SessionYear { get; set; }
+        public int? IsDefaulter { get; set; }
     }
 
 

@@ -180,7 +180,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<AHDepartmentDataModel> GetAHFacilityDepartmentList(int DepartmentID, int CollegeID);
 
         bool SaveAHDepartmentInfrastructure(AHDepartmentDataModel request);
-        List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID);
+        List<CommonDataModel_DataSet> CheckAHStaff(int CollegeID);
         List<CommonDataModel_DepartmentWiseStartDateEndDate> GetStartDateEndDateDepartmentwise(int DepartmentID);
         List<CommonDataModel_DTEAffiliationApply> GetDTEAffiliationApply(string SSOID);
         List<CommonDataModel_RegistrationDTEAffiliationApply> GetAffiliationRegistrationList(string SSOID);
@@ -197,6 +197,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request);
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
+        List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID);
     }
 
 

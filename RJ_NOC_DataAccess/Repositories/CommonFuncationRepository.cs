@@ -1909,15 +1909,16 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public List<CommonDataModel_DataTable> CheckAHStaff(int CollegeID)
+        public List<CommonDataModel_DataSet> CheckAHStaff(int CollegeID)
         {
-            string SqlQuery = " exec USP_CheckAHStaff @CollegeID='" + CollegeID + "'";
-            DataTable dataTable = new DataTable();
-            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SocietyMaster.CheckAHStaff");
 
-            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
-            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
-            dataModel.data = dataTable;
+            string SqlQuery = " exec USP_CheckAHStaff @CollegeID='" + CollegeID + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.CheckAHStaff");
+
+            List<CommonDataModel_DataSet> dataModels = new List<CommonDataModel_DataSet>();
+            CommonDataModel_DataSet dataModel = new CommonDataModel_DataSet();
+            dataModel.data = dataSet;
             dataModels.Add(dataModel);
             return dataModels;
         }
@@ -2137,6 +2138,17 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
+        }
+        public List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID)
+        {
+            string SqlQuery = " exec USP_GetWorkflowPermissionDepartmentRoleWise @DepartmentID=" + DepartmentID + ",@RoleID=" + RoleID + "";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetWorkflowPermissions");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

@@ -469,5 +469,15 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
+        {
+            string SqlQuery = " exec USP_GetApplyNOCApplicationList_MGThree @RoleID='" + request.RoleID + "',@UserID='" + request.UserID + "',@Status='" + request.Status + "',@ActionName='" + request.ActionName + "',@SessionYear='" + request.SessionYear + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetNodalOfficerApplyNOCApplicationList");
+            List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
     }
 }

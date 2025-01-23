@@ -311,6 +311,7 @@ namespace RJ_NOC_Model
         public int ID { get; set; }
         public int? CollegeID { get; set; }
         public string? DepartmentName { get; set; }
+        public bool? IsManadatory { get; set; }
         public List<AHFacilityDepartmentDataModel>? AHFacilityDepartmentList { get; set; }
     }
     public class AHFacilityDepartmentDataModel

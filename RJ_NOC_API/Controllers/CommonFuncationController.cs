@@ -4414,9 +4414,9 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("CheckAHStaff/{CollegeID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckAHStaff(int CollegeID)
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> CheckAHStaff(int CollegeID)
         {
-            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            var result = new OperationResult<List<CommonDataModel_DataSet>>();
             try
             {
                 result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.CheckAHStaff(CollegeID));
@@ -4902,5 +4902,40 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("GetWorkflowPermissions/{DepartmentID}/{RoleID}")]
+        public async Task<OperationResult<List<DataTable>>> GetWorkflowPermissions(int DepartmentID, int RoleID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetWorkflowPermissions(DepartmentID, RoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetWorkflowPermissions", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
     }
 }

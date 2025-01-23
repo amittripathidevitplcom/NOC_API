@@ -86,6 +86,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyFarmLandDetails> DocumentScrutiny_FarmLandDetails(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_FarmLandDetails(CollageID, RoleID, ApplyNOCID);
+        }    
+        public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.GetApplyNOCApplicationList(request);
         }
 
     }
