@@ -36,7 +36,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_SaveHostelDetail_IU  ";
             SqlQuery += "@HostelTypeID='"+request.HostelTypeID+ "',@HostelCategoryID='" + request.HostelCategoryID + "',@HostelDetailID = '"+request.HostelDetailID+"',@IsHostelCampus = '"+request.IsHostelCampus+ "',@IsHostel = '"+request.IsHostel+"',@HostelName = '" + request.HostelName+"',@AddressLine1 = '"+request.AddressLine1+"',@AddressLine2 = '"+request.AddressLine2+"',@IsRuralUrban = '"+request.IsRuralUrban+"',@DivisionId = '"+request.DivisionID+"',@DistrictID = '"+request.DistrictID+"',@TehsilID = '"+request.TehsilID+"',@PanchayatSamitiID = '"+request.PanchayatSamitiID+"',";
             SqlQuery += "@CityTownVillage='" + request.CityTownVillage + "',@Pincode='" + request.Pincode + "',@ContactPersonName='" + request.ContactPersonName + "',@ContactPersonNo='" + request.ContactPersonNo + "',";
-            SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',";
+            SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',@Furnished='" + request.Furnished + "',@Toilet='" + request.Toilet + "',@Mess='" + request.Mess + "',@Hygiene='" + request.Hygiene + "',@Commonroom='" + request.Commonroom + "',@Visitor='" + request.Visitor + "',";
             SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "',@CityID='" + request.CityID + "',@BuiltUpArea='" + request.BuiltUpArea + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "HostelDetail.SaveData");
             if (Rows > 0)
@@ -100,6 +100,12 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.HostelCategory = dataSet.Tables[0].Rows[0]["HostelCategory"].ToString();
                     dataModels.HostelCategoryType = dataSet.Tables[0].Rows[0]["HostelCategoryType"].ToString();
                     dataModels.BuiltUpArea = dataSet.Tables[0].Rows[0]["BuiltUpArea"].ToString();
+                    dataModels.Furnished = dataSet.Tables[0].Rows[0]["Furnished"].ToString();
+                    dataModels.Toilet = dataSet.Tables[0].Rows[0]["Toilet"].ToString();
+                    dataModels.Mess = dataSet.Tables[0].Rows[0]["Mess"].ToString();
+                    dataModels.Hygiene = dataSet.Tables[0].Rows[0]["Hygiene"].ToString();
+                    dataModels.Commonroom = dataSet.Tables[0].Rows[0]["Commonroom"].ToString();
+                    dataModels.Visitor = dataSet.Tables[0].Rows[0]["Visitor"].ToString();
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<HostelDetailsDataModel_Hostel> HostelDetailsDataModel_Hostel_Item = JsonConvert.DeserializeObject<List<HostelDetailsDataModel_Hostel>>(JsonDataTable_Data);

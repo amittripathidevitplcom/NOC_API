@@ -423,5 +423,19 @@ namespace RJ_NOC_Model
         public bool? IsSubmitted { get; set; }
 
     }
+    public class MGOneFacilityDataModel
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public string? Name { get; set; }
+        public string? ControlType { get; set; }
+        public string? Unit { get; set; }
+        public string? Value { get; set; }
+        public int MinQty { get; set; }
+        public int? OrderBy { get; set; }
+        public bool IsMandatory { get; set; }
+        public bool? IsHide { get; set; }
+        public int? ParentID { get; set; }
+    }
 
 }

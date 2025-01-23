@@ -4836,6 +4836,37 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpGet("GetMGOneFacilityList/{DepartmentID}/{CollegeID}")]
+        public async Task<OperationResult<List<MGOneFacilityDataModel>>> GetMGOneFacilityList(int DepartmentID, int CollegeID)
+        {
+            var result = new OperationResult<List<MGOneFacilityDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetMGOneFacilityList(DepartmentID, CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetMGOneFacilityList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
         [HttpGet("GetMGoneFacilityEach/{CollegeID}")]
@@ -4893,6 +4924,37 @@ namespace RJ_NOC_API.Controllers
             catch (Exception e)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveMGoneFacilityEach", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("SaveMGOneFacility")]
+        public async Task<OperationResult<bool>> SaveMGOneFacility(List<MGOneFacilityDataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveMGOneFacility(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request[0].CollegeID, "SaveSaveMGOneFacility", request[0].CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveMGOneFacility", e.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = e.Message.ToString();
             }

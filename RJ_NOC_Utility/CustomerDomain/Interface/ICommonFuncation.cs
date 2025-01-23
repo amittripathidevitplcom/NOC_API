@@ -198,6 +198,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
         List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID);
+        List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID);
+        bool SaveMGOneFacility(List<MGOneFacilityDataModel> request);
     }
 
 

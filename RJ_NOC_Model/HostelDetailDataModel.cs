@@ -40,7 +40,12 @@ namespace RJ_NOC_Model
         public int CreatedBy { get; set; }
         public int ModifyBy { get; set; }
 
-        
+        public string?Furnished { get; set; }
+        public string?Toilet{ get; set; }
+        public string?Mess{ get; set; }
+        public string?Hygiene{ get; set; }
+        public string?Commonroom{ get; set; }
+        public string?Visitor{ get; set; }
         public string? DivisionName { get; set; }
         public string? DistrictName { get; set; }
         public string? TehsilName { get; set; }
