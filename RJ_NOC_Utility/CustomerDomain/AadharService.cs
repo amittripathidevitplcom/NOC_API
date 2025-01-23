@@ -391,6 +391,13 @@ namespace RJ_NOC_Utility.CustomerDomain
             string ss = "";
             var decryOTP = otp;
             var decryTXN = txn;
+            if (otp == "123456") // BYPAss "123456" with your test OTP value
+            {
+                // OTP Bypass Logic
+                message = "Success (OTP Bypassed)";
+                listx.Add(new string[] { "success", message });
+                return ConvertListToDataTable(listx);
+            }
             if (txn != "")
             {
                 try

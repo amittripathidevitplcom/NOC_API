@@ -436,6 +436,9 @@ namespace RJ_NOC_Model
         public bool IsMandatory { get; set; }
         public bool? IsHide { get; set; }
         public int? ParentID { get; set; }
+        public string? Value_Dis_FileName { get; set; }
+        public string? ValuePath { get; set; }
+        public string? Annexure { get; set; }
     }
 
 }

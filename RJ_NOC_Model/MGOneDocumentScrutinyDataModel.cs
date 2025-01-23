@@ -68,7 +68,7 @@ namespace RJ_NOC_Model
         public int NextUserID { get; set; }
         public int NextActionID { get; set; }
         public string? UploadDocument { get; set; }
-        public string? MOMDocument { get; set; }
+        public string? MOMDocument { get; set; }        
     }
     public class DocumentSave_DataModel_MGOne
     {

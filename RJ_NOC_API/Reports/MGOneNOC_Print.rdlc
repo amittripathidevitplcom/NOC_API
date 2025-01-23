@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="AHNOCPrint">
+    <DataSet Name="MGOneNOCPrint">
       <Query>
         <DataSourceName>DCENOC_Print</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -68,7 +68,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Naresh_NOC\API\RJ_NOC_API\ReportDataset\AHNOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Deepak Project\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>AHCollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -87,7 +87,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>राजस्थान सरकार</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Kruti Dev 010</FontFamily>
                       <FontSize>10.5pt</FontSize>
@@ -103,66 +103,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>पशुपालन विभाग जयपुर राजस्थान</Value>
+                    <Value>Government of Rajasthan
+Department of Medical Education (Gr-1)</Value>
                     <Style>
-                      <FontSize>10.5pt</FontSize>
+                      <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Website</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>: https://animalhusbandry.rajasthan.gov.in/</Value>
-                    <Style>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>e-mail</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>: adp.jpr.ah@rajasthan.gov.in </Value>
-                    <Style>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>Ph</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>.: 0141-2742709</Value>
-                    <Style>
-                      <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
@@ -174,8 +119,8 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>0.3175cm</Top>
-            <Left>2.18791cm</Left>
-            <Height>2.59856cm</Height>
+            <Left>2.47854cm</Left>
+            <Height>2.35839cm</Height>
             <Width>13.44906cm</Width>
             <Style>
               <Border>
@@ -189,7 +134,7 @@
           </Textbox>
           <Line Name="Line2">
             <Top>2.817cm</Top>
-            <Left>0.15558cm</Left>
+            <Left>0.44621cm</Left>
             <Height>0cm</Height>
             <Width>17.105cm</Width>
             <ZIndex>1</ZIndex>
@@ -226,7 +171,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>3.40995cm</Top>
-            <Left>0.26141cm</Left>
+            <Left>0.55204cm</Left>
             <Height>0.6cm</Height>
             <Width>5.48979cm</Width>
             <ZIndex>2</ZIndex>
@@ -267,7 +212,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>3.40995cm</Top>
-            <Left>12.52844cm</Left>
+            <Left>12.81907cm</Left>
             <Height>0.6cm</Height>
             <Width>4.28593cm</Width>
             <ZIndex>3</ZIndex>
@@ -289,11 +234,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>अनापत्ति प्रमाण पत्र</Value>
+                    <Value>Sub: “Essentiality Certificate”- Regarding opening of Medical College</Value>
                     <Style>
                       <FontSize>10.5pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
+                      <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -303,10 +248,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.83146cm</Top>
-            <Left>6.65469cm</Left>
-            <Height>0.8075cm</Height>
-            <Width>4.56375cm</Width>
+            <Top>6.51257cm</Top>
+            <Left>0.29063cm</Left>
+            <Height>0.75458cm</Height>
+            <Width>14.77667cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -314,133 +259,42 @@
               </Border>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox11">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve">       </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!CollegeAddress.Value</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> (राजस्थान) में एक </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!CollegeNameHi.Value</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> कॉलेज की स्थापना के लिए आवेदन किया है। प्रस्ताव पर सावधानीपूर्वक विचार करने पर, राजस्थान सरकार को भारतीय पशु चिकित्सा परिषद के पशु चिकित्सा शिक्षा (बैचलर) के न्यूनतम मानकों के अनुसार एक पशु चिकित्सा कॉलेज की स्थापना के प्रति कोई आपत्ति नहीं है। पशु चिकित्सा विज्ञान और पशुपालन डिग्री पाठ्यक्रम) विनियमन 2016 समय-समय पर संशोधित किया गया है और यह अनापत्ति प्रमाण पत्र उसी प्रभाव से जारी किया जा रहा है</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.63896cm</Top>
-            <Left>0.02687cm</Left>
-            <Height>2.4046cm</Height>
-            <Width>16.7875cm</Width>
+          <Image Name="Image5">
+            <Source>Database</Source>
+            <Value>=First(Fields!NocQRCode.Value, "MGOneNOCPrint")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>38.24289cm</Top>
+            <Left>0.29063cm</Left>
+            <Height>3.10444cm</Height>
+            <Width>4.14042cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Textbox>
-          <Textbox Name="Textbox13">
+          </Image>
+          <Textbox Name="Textbox14">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>1. संस्था प्रत्येक सत्र में निरीक्षण करवाने हेतु नियमानुसार निर्धारित शुल्क जमा करवाकर ऑनलाइन प्रपत्र प्रस्तुत करेगी।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>2. संस्था सत्र </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!NOCIssueFinancialYear.Value</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value> में निर्धारित नियमानुसार स्थायी अनापत्ति प्रमाण पत्र हेतु आवेदन करेगी।
-3. संस्था द्वारा सावधि जमा राशि (एफडीआर) का प्रत्येक वर्ष में नवीनीकरण कराया जाना अनिवार्य होगा।
-4. आवश्यकतानुसार आयुक्तालय द्वारा अधिकृत अधिकारी द्वारा महाविद्यालय का निरीक्षण किया जा सकता अधिकृत अधिकारी द्वारा    गया अभिलेख उपलब्ध करायेगी।
-5. संस्था को समय-समय पर यू.जी.सी. राज्य सरकार / आयुक्तालय कॉलेज शिक्षा द्वारा जारी निर्देशों की पालना अनिवार्य रूप से    करनी होगी।
-6. संख्या संबंधित विद्यालय से संबद्धता प्राप्त करेगी तथा विधि महाविद्यालय के प्रकरण में बसे मान्यता व विश्वविद्यालय से          समद्धता पर अनुमोदन प्राप्त करेगी। तत्पश्चात् ही विद्यार्थियों को प्रवेश दिया जाये।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>उपर्युक्त शतों की पालना नहीं करने पर अस्थाई अनापत्ति प्रमाण पत्र को निरस्त कर दिया जायेगा।</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
+                    <Value>Yours faithfully,</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>7.53745cm</Top>
-            <Left>0.15558cm</Left>
-            <Height>5.52668cm</Height>
-            <Width>16.7875cm</Width>
+            <Top>35.77241cm</Top>
+            <Left>13.02874cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.28593cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -452,79 +306,60 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox21">
+          <Textbox Name="Textbox15">
             <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>सचिव/</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>उपकुल सचिव/संयुक्त सचिव</Value>
-                    <Style>
-                      <FontSize>9.5pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
+                    <Value>(SIGNATURE OF THE COMPETENT AUTHORITY)</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>14.20495cm</Top>
-            <Left>11.2779cm</Left>
-            <Height>0.67938cm</Height>
-            <Width>5.53647cm</Width>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>37.1747cm</Top>
+            <Left>8.90124cm</Left>
+            <Height>0.6cm</Height>
+            <Width>8.41343cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox22">
+          <Textbox Name="CollegeAddress">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>प्रतिलिपि निम्नलिखित को सूचनार्थ एवं आवश्यक कार्यवाही हेतु प्रेषित है-</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
+                    <Value>Chairman,</Value>
+                    <Style />
                   </TextRun>
                   <TextRun>
-                    <Value>
-1. सचिव भारतीय पशु चिकित्सा परिषद, नई दिल्ली।
-2. निदेशक पशुपालन राजस्थान, जयपुर।
-3.रजिस्ट्रार राजुवास बीकानेर राजस्थान।
-3.राजस्थान राज्य पशु चिकित्सा परिषद राजस्थान जयपुर।
-4.गार्ड फाइल. </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
+                    <Value>=First(Fields!CollegeAddress.Value, "MGOneNOCPrint")</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>16.1058cm</Top>
-            <Left>0.26141cm</Left>
-            <Height>3.19292cm</Height>
-            <Width>11.11219cm</Width>
+            <rd:DefaultName>CollegeAddress</rd:DefaultName>
+            <Top>5.12974cm</Top>
+            <Left>0.55204cm</Left>
+            <Height>0.99688cm</Height>
+            <Width>2.39417cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -536,27 +371,161 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Image Name="Image5">
-            <Source>Database</Source>
-            <Value>=First(Fields!NocQRCode.Value, "AHNOCPrint")</Value>
-            <MIMEType>image/png</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>19.61622cm</Top>
-            <Left>0.26141cm</Left>
-            <Height>3.10444cm</Height>
-            <Width>4.14042cm</Width>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Sir,
+The desired certificate is as follows:
+1. No. of institutions already existing in the State: 43
+2. No. of seats available in the MBBS Course in State: 6505
+3. No. of Doctors registered with the State Medical Council: 70613
+4. No. of Doctors in Government Service: 16261
+5. No. of posts vacant and these in rural/difficult areas: 6963/1772
+6. No. of Doctors registered with Employment Exchange: NA
+7. Doctor population ratio in State: 1:1198
+8. The establishment of college would help resolve the problem of deficiencies and
+improve the availability of such medical manpower in State. The number of trained
+and qualified Doctor will increase to take care of shortage. More State students will
+be available to serve the State as per State policy for domicile.
+9. The restriction imposed by the State Government, if any on students who are not
+domiciled in the State from obtaining admission in the State be specified. Restriction
+as per guidelines for admission by MCI/NMC, RUHS, State Government &amp; court
+orders.
+10. Full justification for opening of the proposed Medical College: We need more Staterun
+medical colleges to give chances to meritorious and socio-economically
+backward state students and achieve better doctor population ratio.
+11. Doctor population ratio proposed to be achieved: 1:1000
+
+</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>7.61683cm</Top>
+            <Left>0.29063cm</Left>
+            <Height>9.54292cm</Height>
+            <Width>17.02404cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Image>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The Indian Medical Trust has applied for establishment of Balvir Singh Tomar Institute of
+Medical Sciences and Research at Jaipur. On careful consideration of proposal,
+Government of Rajasthan has decided to issue an Essentiality Certificate to the applicant
+for establishment of Balvir Singh Tomar Institute of Medical Sciences and Research,
+Jaipur with 150 seats.</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>17.26558cm</Top>
+            <Left>0.29063cm</Left>
+            <Height>2.29333cm</Height>
+            <Width>17.02404cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>It is certified that:
+(a) The applicant owns and manages a functional 605 bedded hospital.
+(b) It is desirable to establish a Medical College in the public interest;</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>19.7353cm</Top>
+            <Left>0.29063cm</Left>
+            <Height>1.47257cm</Height>
+            <Width>17.02404cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>District:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>3.40995cm</Top>
+            <Left>9.83933cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>23.02771cm</Height>
+        <Height>41.34733cm</Height>
         <Style />
       </Body>
-      <Width>17.26058cm</Width>
+      <Width>17.55121cm</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>

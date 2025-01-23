@@ -34,7 +34,7 @@
               <xs:element name="UniversityName" msprop:Generator_ColumnPropNameInTable="UniversityNameColumn" msprop:Generator_ColumnPropNameInRow="UniversityName" msprop:Generator_UserColumnName="UniversityName" msprop:Generator_ColumnVarNameInTable="columnUniversityName" type="xs:string" minOccurs="0" />
               <xs:element name="NoOfNOCIssued" msprop:Generator_ColumnPropNameInTable="NoOfNOCIssuedColumn" msprop:Generator_ColumnPropNameInRow="NoOfNOCIssued" msprop:Generator_UserColumnName="NoOfNOCIssued" msprop:Generator_ColumnVarNameInTable="columnNoOfNOCIssued" type="xs:string" minOccurs="0" />
               <xs:element name="NoOfIssuedYear" msprop:Generator_ColumnPropNameInTable="NoOfIssuedYearColumn" msprop:Generator_ColumnPropNameInRow="NoOfIssuedYear" msprop:Generator_UserColumnName="NoOfIssuedYear" msprop:Generator_ColumnVarNameInTable="columnNoOfIssuedYear" type="xs:string" minOccurs="0" />
-              <xs:element name="TNOCFirstPoint" msprop:Generator_UserColumnName="TNOCFirstPoint" msprop:Generator_ColumnPropNameInTable="TNOCFirstPointColumn" msprop:Generator_ColumnPropNameInRow="TNOCFirstPoint" msprop:Generator_ColumnVarNameInTable="columnTNOCFirstPoint" type="xs:string" minOccurs="0" />
+              <xs:element name="TNOCFirstPoint" msprop:Generator_ColumnPropNameInTable="TNOCFirstPointColumn" msprop:Generator_ColumnPropNameInRow="TNOCFirstPoint" msprop:Generator_UserColumnName="TNOCFirstPoint" msprop:Generator_ColumnVarNameInTable="columnTNOCFirstPoint" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -175,12 +175,12 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NOCFormat" msprop:Generator_RowEvHandlerName="NOCFormatRowChangeEventHandler" msprop:Generator_RowDeletedName="NOCFormatRowDeleted" msprop:Generator_RowDeletingName="NOCFormatRowDeleting" msprop:Generator_RowEvArgName="NOCFormatRowChangeEvent" msprop:Generator_TablePropName="NOCFormat" msprop:Generator_RowChangedName="NOCFormatRowChanged" msprop:Generator_RowChangingName="NOCFormatRowChanging" msprop:Generator_TableClassName="NOCFormatDataTable" msprop:Generator_RowClassName="NOCFormatRow" msprop:Generator_TableVarName="tableNOCFormat" msprop:Generator_UserTableName="NOCFormat">
+        <xs:element name="NOCFormat" msprop:Generator_RowClassName="NOCFormatRow" msprop:Generator_RowEvHandlerName="NOCFormatRowChangeEventHandler" msprop:Generator_RowDeletedName="NOCFormatRowDeleted" msprop:Generator_RowDeletingName="NOCFormatRowDeleting" msprop:Generator_RowEvArgName="NOCFormatRowChangeEvent" msprop:Generator_TablePropName="NOCFormat" msprop:Generator_RowChangedName="NOCFormatRowChanged" msprop:Generator_UserTableName="NOCFormat" msprop:Generator_RowChangingName="NOCFormatRowChanging" msprop:Generator_TableClassName="NOCFormatDataTable" msprop:Generator_TableVarName="tableNOCFormat">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ParameterID" msprop:Generator_ColumnPropNameInRow="ParameterID" msprop:Generator_ColumnPropNameInTable="ParameterIDColumn" msprop:Generator_ColumnVarNameInTable="columnParameterID" msprop:Generator_UserColumnName="ParameterID" type="xs:string" minOccurs="0" />
-              <xs:element name="NOCFormat" msprop:Generator_ColumnPropNameInRow="NOCFormat" msprop:Generator_ColumnPropNameInTable="NOCFormatColumn" msprop:Generator_ColumnVarNameInTable="columnNOCFormat" msprop:Generator_UserColumnName="NOCFormat" type="xs:string" minOccurs="0" />
-              <xs:element name="DepartmentID" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" msprop:Generator_UserColumnName="DepartmentID" type="xs:string" minOccurs="0" />
+              <xs:element name="ParameterID" msprop:Generator_UserColumnName="ParameterID" msprop:Generator_ColumnPropNameInTable="ParameterIDColumn" msprop:Generator_ColumnPropNameInRow="ParameterID" msprop:Generator_ColumnVarNameInTable="columnParameterID" type="xs:string" minOccurs="0" />
+              <xs:element name="NOCFormat" msprop:Generator_UserColumnName="NOCFormat" msprop:Generator_ColumnPropNameInTable="NOCFormatColumn" msprop:Generator_ColumnPropNameInRow="NOCFormat" msprop:Generator_ColumnVarNameInTable="columnNOCFormat" type="xs:string" minOccurs="0" />
+              <xs:element name="DepartmentID" msprop:Generator_UserColumnName="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
