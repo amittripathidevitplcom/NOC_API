@@ -111,13 +111,28 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.SaveDCENOCData(model);
         }
+       
+        public bool GenerateEssentialityMgone(NOCIssuedForMGOneDataModel model)
+        {
+            return UnitOfWork.ApplyNOCRepository.GenerateEssentialityMgone(model);
+        }
         public bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList)
         {
             return UnitOfWork.ApplyNOCRepository.UpdateNOCPDFPath(PdfPathList);
         }
+     
+        public bool UpdateMgonePDFPath(NOCIssuedForMGOneDataModel PdfPathList)
+        {
+            return UnitOfWork.ApplyNOCRepository.UpdateMgonePDFPath(PdfPathList);
+        }
         public bool DeleteNOCIssuedDetails(int ApplyNOCID)
         {
             return UnitOfWork.ApplyNOCRepository.DeleteNOCIssuedDetails(ApplyNOCID);
+        }
+      
+        public bool DeleteMgoneIssuedDetails(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.DeleteMgoneIssuedDetails(ApplyNOCID);
         }
         public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID, int ParameterID)
         {
@@ -134,6 +149,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID)
         {
             return UnitOfWork.ApplyNOCRepository.GetAppliedParameterNOCForByApplyNOCID(ApplyNOCID);
+        }
+        
+        public List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForByApplyNOCID(ApplyNOCID);
         }
         public bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
         {
@@ -156,6 +176,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetDraftNOCDetailsByNOCIID(ApplyNOCID, ParameterID, NoOfIssuedYear, CourseIDs, SubjectIDs);
         }
+        public DataSet GetEssentialityDraftNOCDetailsByNOCIID(int ApplyNOCID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetEssentialityDraftNOCDetailsByNOCIID(ApplyNOCID);
+        }
+        
         public bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDCEDraftNOCData(model);

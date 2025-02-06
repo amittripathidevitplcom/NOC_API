@@ -35,14 +35,17 @@ namespace RJ_NOC_DataAccess.Interface
         bool SubmitRevertApplication(SubmitRevertApplication request);
         List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request);
         bool SaveDCENOCData(NOCIssuedRequestDataModel model);
-
+        bool GenerateEssentialityMgone(NOCIssuedForMGOneDataModel model);
         DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID,int ParameterID);
         bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList);
+        bool UpdateMgonePDFPath(NOCIssuedForMGOneDataModel PdfPathList);
         bool DeleteNOCIssuedDetails(int ApplyNOCID);
+        bool DeleteMgoneIssuedDetails(int ApplyNOCID);
         NocInformation GetNocInformation(Guid SearchRecordID);
         List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID);
 
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
+        List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID);
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
         int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID);
 
@@ -51,6 +54,7 @@ namespace RJ_NOC_DataAccess.Interface
 
 
         DataSet GetDraftNOCDetailsByNOCIID(int ApplyNOCID, string ParameterID, int NoOfIssuedYear, string CourseIDs, string SubjectIDs);
+        DataSet GetEssentialityDraftNOCDetailsByNOCIID(int ApplyNOCID);
         bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
 
         bool ForwardToEsignDCE(int ApplyNOCID, int UserId);

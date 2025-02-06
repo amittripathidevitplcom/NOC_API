@@ -376,6 +376,24 @@ namespace RJ_NOC_DataAccess.Repositories
                 return true;
             else
                 return false;
+        }       
+        public bool GenerateEssentialityMgone(NOCIssuedForMGOneDataModel model)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_GetNOCDetails_MGOne @ActionType='SaveData',@ApplyNocID='"+model.ApplyNOCID+"',@CollegeID='"+model.CollegeID+"'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MGOneNOC.FinalSavePDFPathandNOC");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+            //string IPAddress = CommonHelper.GetVisitorIPAddress();
+            //string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='SaveData'";
+            //int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SaveDCENOCData");
+            //if (Rows > 0)
+            //    return true;
+            //else
+            //    return false;
         }
         public DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID, int ParameterID)
         {
@@ -399,7 +417,26 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+       
+        public bool UpdateMgonePDFPath(NOCIssuedForMGOneDataModel PdfPathList)
+        {            
+            string SqlQuery = $" exec USP_UpdateNOCDetails_MGOne @ActionType='UpdateGeneratePDF',@ApplyNocID='"+ PdfPathList.ApplyNOCID+ "',@NOCFilePath='"+ PdfPathList.PdfFilePath+ "',@Remarks='"+ PdfPathList.Remark+ "'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateNOCPDFPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
         public bool DeleteNOCIssuedDetails(int ApplyNOCID)
+        {
+            string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='DeleteNOCIssuedDetails',@NOCID='{ApplyNOCID}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateNOCPDFPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }        
+        public bool DeleteMgoneIssuedDetails(int ApplyNOCID)
         {
             string SqlQuery = $" exec USP_SaveDCENOCData @ActionType='DeleteNOCIssuedDetails',@NOCID='{ApplyNOCID}'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateNOCPDFPath");
@@ -450,6 +487,19 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_GetAppliedParameterNOCForByApplyNOCID @ApplyNOCID ='" + ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetAppliedParameterNOCForByApplyNOCID");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        
+        public List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetAppliedParameterEssentialityForByApplyNOCID @ApplyNOCID ='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetAppliedParameterEssentialityForByApplyNOCID");
 
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
@@ -526,6 +576,13 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_GetDraftNOCDetailsByNOCIID @NOCID='"+ApplyNOCID+"',@ParameterID='"+ParameterID+ "',@NoOfIssuedYear='" + NoOfIssuedYear + "',@CourseID='" + CourseIDs + "',@SubjectID='" + SubjectIDs + "'";
             DataSet dataset = new DataSet();
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetDraftNOCDetailsByNOCIID");
+            return dataset;
+        }
+        public DataSet GetEssentialityDraftNOCDetailsByNOCIID(int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_MGONEEssentialityPDFPrint @NOCID='" + ApplyNOCID+"'";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetEssentialityDraftNOCDetailsByNOCIID");
             return dataset;
         }
 

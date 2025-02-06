@@ -210,6 +210,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request);
 
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
+        DataSet GetMGoneASSESSMENTREPORT(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
 
         List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID);

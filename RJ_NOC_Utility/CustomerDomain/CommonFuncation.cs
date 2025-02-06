@@ -693,6 +693,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetMGoneFacilityEach(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGoneFacilityEach(CollegeID);
+        } 
+        public DataSet GetMGoneASSESSMENTREPORT(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGoneASSESSMENTREPORT(CollegeID);
         }        
         public bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
         {

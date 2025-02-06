@@ -423,7 +423,7 @@ namespace RJ_NOC_API.Controllers
 
                 if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveDCENOCData(request)))
                 {
-                    List<DCENOCPDFPathDataModel> PdfPathList = GeneratePDFDCE( request);
+                    List<DCENOCPDFPathDataModel> PdfPathList = GeneratePDFDCE(request);
                     //string Path = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
                     if (PdfPathList.Count > 0)
                     {
@@ -1229,6 +1229,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetAppliedParameterEssentialityForByApplyNOCID/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID)
+        {
+            //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetNOCIssuedReportListForAdmin", 0, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.GetAppliedParameterEssentialityForByApplyNOCID(ApplyNOCID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GetAppliedParameterNOCForByApplyNOCID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
 
@@ -1364,7 +1396,7 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("GetApplicationPenaltyList/{SSOID}/{SessionYear=0}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPenaltyList(string SSOID,int SessionYear=0)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplicationPenaltyList(string SSOID, int SessionYear = 0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
@@ -1734,10 +1766,8 @@ namespace RJ_NOC_API.Controllers
                     string mimetype = "";
                     int extension = 1;
                     string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
-
                     Subjectdataset = new DataSet();
                     Subjectdataset = UtilityHelper.ApplyNOCUtility.GetNOCIssuedDetailsByNOCIID(request.AppliedNOCFor[0].ApplyNOCID, ParameterID);
-
                     dataset.Tables[0].Rows[0]["NOCIssueNo"] = dataset.Tables[2].Rows[i]["NOCIssueNo"].ToString();
                     dataset.Tables[0].Rows[0]["NocQRCodeLink"] = dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString();
                     dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[2].Rows[i]["NocQRCodeLink"].ToString());
@@ -1775,7 +1805,7 @@ namespace RJ_NOC_API.Controllers
 
 
         [HttpGet("ForwardToEsignDCE/{ApplyNOCID}/{UserId}")]
-        public async Task<OperationResult<bool>> ForwardToEsignDCE(int ApplyNOCID,int UserId)
+        public async Task<OperationResult<bool>> ForwardToEsignDCE(int ApplyNOCID, int UserId)
         {
             var result = new OperationResult<bool>();
             try
@@ -1804,6 +1834,162 @@ namespace RJ_NOC_API.Controllers
                 //UnitOfWork.Dispose();
             }
             return result;
+
+        }
+
+        [HttpPost("GenerateDraftEssentiality")]
+        public async Task<OperationResult<string>> GenerateDraftEssentiality(NOCIssuedForMGOneDataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.CreatedBy, "GenerateDraftEssentiality", request.ApplyNOCID, "ApplyNOCController");
+            var result = new OperationResult<string>();
+
+            try
+            {
+                LocalReport localReport = null;
+                DataSet dataset = new DataSet();
+                dataset = UtilityHelper.ApplyNOCUtility.GetEssentialityDraftNOCDetailsByNOCIID(request.ApplyNOCID);
+
+                var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+                string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                string mimetype = "";
+                int extension = 1;
+                string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+                dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["NocQRCodeLink"].ToString());
+                ReportPath += "\\MGOneNOC_Print.rdlc";
+                localReport = new LocalReport(ReportPath);
+                request.NOCFormat = request.NOCFormat.Replace("CollegeName", dataset.Tables[0].Rows[0]["CollegeNameEn"].ToString()).Replace("institutionsState", dataset.Tables[0].Rows[0]["institutionsState"].ToString()).Replace("seatsMBBSCourseState", dataset.Tables[0].Rows[0]["seatsMBBSCourseState"].ToString()).Replace("DoctorsregisteredStateMedicalCouncil", dataset.Tables[0].Rows[0]["DoctorsregisteredStateMedicalCouncil"].ToString()).Replace("DoctorsinGovernmentService", dataset.Tables[0].Rows[0]["DoctorsinGovernmentService"].ToString()).Replace("postsvacantinruraldifficultareas", dataset.Tables[0].Rows[0]["postsvacantinruraldifficultareas"].ToString()).Replace("DoctorsregisteredEmploymentExchange", dataset.Tables[0].Rows[0]["DoctorsregisteredEmploymentExchange"].ToString()).Replace("DoctorpopulationratioState", dataset.Tables[0].Rows[0]["DoctorpopulationratioState"].ToString()).Replace("Doctorpopulationratioachieved", dataset.Tables[0].Rows[0]["Doctorpopulationratioachieved"].ToString()).Replace("purposeson", dataset.Tables[0].Rows[0]["purposeson"].ToString()).Replace("ConsultingArchitect", dataset.Tables[0].Rows[0]["ConsultingArchitect"].ToString()).Replace("LegalEntityName", dataset.Tables[0].Rows[0]["TrustyName"].ToString());
+
+                dataset.Tables[0].Rows[0]["NOCFormat"] = request.NOCFormat;
+                localReport.AddDataSource("MGOneNOCPrint", dataset.Tables[0]);
+                //localReport.AddDataSource("CollegeDetails", dataset.Tables[0]);
+
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                parameters.Add("test", "");
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                var result1 = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+
+                //return File(result.MainStream, "application/pdf");
+                System.IO.File.WriteAllBytes(filepath, result1.MainStream);
+                result.Data = fileName;
+                result.State = OperationState.Success;
+                result.SuccessMessage = "PDF Generate Successfully .!";
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GenerateNOCForDCE", ex.ToString());
+                result.Data = ex.ToString();
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpPost("GenerateEssentialityMgone")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateEssentialityMgone(NOCIssuedForMGOneDataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.CreatedBy, "GenerateEssentialityMgone", request.ApplyNOCID, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                //string Path = GeneratePDFDCE(request[0].ApplyNOCID,request);
+
+
+                if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.GenerateEssentialityMgone(request)))
+                {
+                   
+                    List<NOCIssuedForMGOneDataModel> PdfPathList = GeneratePDFMgone(request);
+                    //string Path = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
+                    if (PdfPathList.Count > 0)
+                    {
+                        request.ApplyNOCID = PdfPathList[0].ApplyNOCID;
+                        request.PdfFilePath= PdfPathList[0].PdfFilePath;
+                        bool result1 = false;
+                        result1 = UtilityHelper.ApplyNOCUtility.UpdateMgonePDFPath(request);
+                        if (result1)
+                        {
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "PDF Generate Successfully .!";
+                        }
+                        else
+                        {
+                            result.State = OperationState.Warning;
+                            result.SuccessMessage = "There was an error Generate PDF!";
+                        }
+                    }
+                    else
+                    {
+                        UtilityHelper.ApplyNOCUtility.DeleteMgoneIssuedDetails(request.ApplyNOCID);
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "There was an error Generate PDF!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GenerateEssentialityMgone", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GeneratePDFMgone")]
+        public List<NOCIssuedForMGOneDataModel> GeneratePDFMgone(NOCIssuedForMGOneDataModel request)
+        {
+            LocalReport localReport = null;
+            List<NOCIssuedForMGOneDataModel> PdfPathList = new List<NOCIssuedForMGOneDataModel>();
+            DataSet dataset = new DataSet();           
+            dataset = UtilityHelper.ApplyNOCUtility.GetEssentialityDraftNOCDetailsByNOCIID(request.ApplyNOCID);
+
+            var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+            string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+            string mimetype = "";
+            int extension = 1;
+            string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+            dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["NocQRCodeLink"].ToString());
+            ReportPath += "\\MGOneNOC_Print.rdlc";
+            localReport = new LocalReport(ReportPath);
+            request.NOCFormat = request.NOCFormat.Replace("CollegeName", dataset.Tables[0].Rows[0]["CollegeNameEn"].ToString()).Replace("institutionsState", dataset.Tables[0].Rows[0]["institutionsState"].ToString()).Replace("seatsMBBSCourseState", dataset.Tables[0].Rows[0]["seatsMBBSCourseState"].ToString()).Replace("DoctorsregisteredStateMedicalCouncil", dataset.Tables[0].Rows[0]["DoctorsregisteredStateMedicalCouncil"].ToString()).Replace("DoctorsinGovernmentService", dataset.Tables[0].Rows[0]["DoctorsinGovernmentService"].ToString()).Replace("postsvacantinruraldifficultareas", dataset.Tables[0].Rows[0]["postsvacantinruraldifficultareas"].ToString()).Replace("DoctorsregisteredEmploymentExchange", dataset.Tables[0].Rows[0]["DoctorsregisteredEmploymentExchange"].ToString()).Replace("DoctorpopulationratioState", dataset.Tables[0].Rows[0]["DoctorpopulationratioState"].ToString()).Replace("Doctorpopulationratioachieved", dataset.Tables[0].Rows[0]["Doctorpopulationratioachieved"].ToString()).Replace("purposeson", dataset.Tables[0].Rows[0]["purposeson"].ToString()).Replace("ConsultingArchitect", dataset.Tables[0].Rows[0]["ConsultingArchitect"].ToString()).Replace("LegalEntityName", dataset.Tables[0].Rows[0]["TrustyName"].ToString());
+
+            dataset.Tables[0].Rows[0]["NOCFormat"] = request.NOCFormat;
+            localReport.AddDataSource("MGOneNOCPrint", dataset.Tables[0]);
+            //localReport.AddDataSource("CollegeDetails", dataset.Tables[0]);
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+            parameters.Add("test", "");
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            var result1 = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+            
+            PdfPathList.Add(new NOCIssuedForMGOneDataModel()
+                    {                      
+                       
+                        ApplyNOCID = Convert.ToInt32(dataset.Tables[0].Rows[0]["ApplyNOCID"]),
+                        PdfFilePath = fileName
+                    });        
+
+          
+
+            return PdfPathList;
 
         }
     }

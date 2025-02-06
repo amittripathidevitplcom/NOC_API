@@ -2127,6 +2127,29 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+        public DataSet GetMGoneASSESSMENTREPORT(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetMGoneassessmentreport @CollegeID=" + CollegeID + "";
+            var ds  = _commonHelper.Fill_DataSet(SqlQuery, "Common.GetMGoneASSESSMENTREPORT");
+            return ds;
+        }
+        //public List<MGoneASSESSMENTREPORT> GetMGoneASSESSMENTREPORT(int CollegeID)
+        //{
+        //    string SqlQuery = " exec USP_GetMGoneassessmentreport @CollegeID=" + CollegeID + "";
+        //    DataSet dataSet = new DataSet();
+        //    dataSet = _commonHelper.Fill_DataSet(SqlQuery, "Common.GetMGoneASSESSMENTREPORT");
+        //    List<MGoneASSESSMENTREPORT> dataModels = new List<MGoneASSESSMENTREPORT>();
+        //    if (dataSet.Tables[0].Rows.Count > 0)
+        //    {
+
+        //        MGoneASSESSMENTREPORT? dataModel = new MGoneASSESSMENTREPORT();
+
+
+        //        dataModels.Add(dataModel);
+        //    }
+        //    return dataModels;
+        //}
+
         public bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
         {
 
@@ -2179,6 +2202,8 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+        
     }
 }
 
