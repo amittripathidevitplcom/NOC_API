@@ -15,6 +15,7 @@ namespace RJ_NOC_Model
         public int MinSize { get; set; }
         public int MaxSize { get; set; }
         public bool IsCompulsory { get; set; }
+        public bool? IsDegree { get; set; }
         public bool IsActiveStatus { get; set; }
         public bool DeleteStatus { get; set; }
         public int UserID { get; set; } 

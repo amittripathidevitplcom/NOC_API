@@ -110,6 +110,12 @@ namespace RJ_NOC_Model
         public string? LiveStockFarmAddress { get; set; }
         public string? VeternaryClinicalAddress { get; set  ; }
 
+        public string? PrivateCollegeUniversityName { get; set; }
+        public string? PrivateCollegeEstablishmentDate { get; set; }
+        public string? PrivateCollegeEstabCertificate { get; set; }
+        public string? PrivateCollegeEstabCertificatePath { get; set; }
+        public string? Dis_PrivateCollegeEstabCertificateName { get; set; }
+
     }
     public class ContactDetailsDataModel
     {

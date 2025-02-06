@@ -587,6 +587,36 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("DocumentScrutiny_CourtCase/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase>>> DocumentScrutiny_CourtCase(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.DocumentScrutiny_CourtCase(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.DocumentScrutiny_CourtCase", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
 

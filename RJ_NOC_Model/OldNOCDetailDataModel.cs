@@ -55,6 +55,7 @@ namespace RJ_NOC_Model
         public string? RevisedStateRecognitionUploadDoc{ get; set; }
         public string? RevisedStateRecognitionUploadDocPath{ get; set; }
         public string? RevisedStateRecognitionUploadDoc_Dis_FileName{ get; set; }
+        public string? NumberofPresentSeat { get; set; }
     }
     public class OldNocDetails_SubjectDataModel
     {

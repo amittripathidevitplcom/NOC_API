@@ -118,6 +118,9 @@ namespace RJ_NOC_DataAccess.Repository
             }
             sb.AppendFormat("@AffiliationDocument='{0}',", request.AffiliationDocument);
             sb.AppendFormat("@WebsiteImage='{0}',", request.WebsiteImage);
+            sb.AppendFormat("@PrivateCollegeUniversityName='{0}',", request.PrivateCollegeUniversityName);
+            sb.AppendFormat("@PrivateCollegeEstablishmentDate='{0}',", request.PrivateCollegeEstablishmentDate);
+            sb.AppendFormat("@PrivateCollegeEstabCertificate='{0}',", request.PrivateCollegeEstabCertificate);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveCollegeData");
 

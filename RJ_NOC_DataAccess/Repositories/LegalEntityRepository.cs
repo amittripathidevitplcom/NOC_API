@@ -30,9 +30,9 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public bool IfExists(int LegalEntityID, string RegistrationNo, string AadhaarNo)
+        public bool IfExists(int LegalEntityID, string RegistrationNo, string AadhaarNo, string LegalEntityType)
         {
-            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "',@AadhaarNo='" + AadhaarNo + "'";
+            string SqlQuery = " USP_IfExistsLegalEntity @RegistrationNo='" + RegistrationNo + "',@LegalEntityID='" + LegalEntityID + "',@AadhaarNo='" + AadhaarNo + "',@LegalEntityType='" + LegalEntityType + "'";
             DataSet dataset = new DataSet();
             dataset = _commonHelper.Fill_DataSet(SqlQuery, "LegalEntity.IfExists");
             if (dataset != null)

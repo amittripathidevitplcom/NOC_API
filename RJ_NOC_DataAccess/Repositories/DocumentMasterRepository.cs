@@ -23,7 +23,7 @@ namespace RJ_NOC_DataAccess.Repositories
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_DocumentMaster_IU  ";
-            SqlQuery += " @DocumentMasterID='" + request.DocumentMasterID + "',@DepartmentID='" + request.DepartmentID + "',@DocumentTypeID='" + request.DocumentTypeID + "',@DocumentName='" + request.DocumentName + "',@MinSize='" + request.MinSize + "',@MaxSize='" + request.MaxSize + "',@IsCompulsory='" + request.IsCompulsory + "',@IsActiveStatus='" + request.IsActiveStatus + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            SqlQuery += " @DocumentMasterID='" + request.DocumentMasterID + "',@DepartmentID='" + request.DepartmentID + "',@DocumentTypeID='" + request.DocumentTypeID + "',@DocumentName='" + request.DocumentName + "',@MinSize='" + request.MinSize + "',@MaxSize='" + request.MaxSize + "',@IsCompulsory='" + request.IsCompulsory + "',@IsActiveStatus='" + request.IsActiveStatus + "',@IsDegree='" + request.IsDegree + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentMaster.SaveData");
             if (Rows > 0)
                 return true;

@@ -21,9 +21,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             throw new NotImplementedException();
         }
-        public bool IfExists(int LegalEntityID, string RegistrationNo, string AadhaarNo)
+        public bool IfExists(int LegalEntityID, string RegistrationNo, string AadhaarNo, string LegalEntityType)
         {
-            return UnitOfWork.LegalEntityRepository.IfExists(LegalEntityID, RegistrationNo,AadhaarNo);
+            return UnitOfWork.LegalEntityRepository.IfExists(LegalEntityID, RegistrationNo,AadhaarNo, LegalEntityType);
         }
         public bool SaveData(LegalEntityModel request)
         {

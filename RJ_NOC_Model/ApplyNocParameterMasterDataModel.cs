@@ -72,11 +72,22 @@ namespace RJ_NOC_Model
         public List<ApplyNocParameterMasterList_IntroductionOffCampus>? DTE_IntroductionOffCampus_List { get; set; }
         public List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>? DTE_CoursesforWorkingProfessionals_List { get; set; }
 
+        public List<ApplyNocParameterSeatEnhancement>? ApplyNocParameterSeatEnhancement { get; set; }
+
 
 
     }
 
-
+    public class ApplyNocParameterSeatEnhancement
+    {
+        public int ApplyNocID { get; set; }
+        public int CourseID { get; set; }
+        public string CourseName { get; set; }
+        public int SeatEnhancement { get; set; }
+        public int FeeAmount { get; set; }
+        public bool IsChecked { get; set; }
+        public bool IsDisabled { get; set; }
+    }
 
     public class ApplyNocParameterMaster_ddl
     {
@@ -207,6 +218,8 @@ namespace RJ_NOC_Model
         public int? OpenApplicationSession { get; set; }
         public int? OpenDefaulterSession { get; set; }
         public int? PendingDays { get; set; }
+        public string? OpeneLevel { get; set; }
+        public string? CollegeLevel { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 
@@ -245,6 +258,9 @@ namespace RJ_NOC_Model
         public List<NOCPdfFileDataModel>? NOCPdfFileDataModel { get; set; }
         public List<DefaulterCollegePenaltyDataModal>? DefaulterCollegePenaltyDetailList { get; set; }
         public List<ApplyNocLateFeeDetailDataModal>? ApplyNocLateFeeDetailList { get; set; }
+
+
+        public List<ApplyNocParameterSeatEnhancement>? ApplyNocParameterSeatEnhancement { get; set; }
         public bool? IsOpenNOCApplication { get; set; }
         public bool? IsOpenDefaulter { get; set; }
         public bool? IsDefaulter { get; set; }

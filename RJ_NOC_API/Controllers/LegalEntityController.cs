@@ -68,7 +68,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = await Task.Run(() => UtilityHelper.LegalEntity.IfExists(request.LegalEntityID, request.RegistrationNo,request.AadhaarNo));
+                IfExits = await Task.Run(() => UtilityHelper.LegalEntity.IfExists(request.LegalEntityID, request.RegistrationNo,request.AadhaarNo,request.LegalEntityType));
                 if (IfExits == false)
                 {
                     result.State = OperationState.Success;
@@ -76,7 +76,7 @@ namespace RJ_NOC_API.Controllers
                 else
                 {
                     result.State = OperationState.Warning;
-                    result.ErrorMessage = request.RegistrationNo +" or "+request.AadhaarNo+ " is Already Exist, It Can't Not Be Duplicate.!";
+                    result.ErrorMessage = request.RegistrationNo + " is Already Exist, It Can't Not Be Duplicate.!";
                 }
 
             }

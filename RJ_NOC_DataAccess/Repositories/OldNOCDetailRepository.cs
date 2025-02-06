@@ -36,7 +36,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_SaveOldNOCDetail_IU  ";
             SqlQuery += "@OldNocID='" + request.OldNocID + "',@CollegeID='" + request.CollegeID + "',@CourseID='" + request.CourseID + "',@NOCTypeID='" + request.NOCTypeID + "',@SessionYear='" + request.SessionYear + "',";
             SqlQuery += "@IssuedYear='" + request.IssuedYear + "',@NOCNumber='" + request.NOCNumber + "',@NOCReceivedDate='" + request.NOCReceivedDate + "',@NOCExpireDate='" + request.NOCExpireDate + "',";
-            SqlQuery += "@UploadNOCDoc='" + request.UploadNOCDoc + "',@Remark='" + request.Remark + "',@DepartmentID='" + request.DepartmentID + "',@FirstOrderNo='"+request.FirstOrderNo + "',@FirstOrderDate='"+request.FirstOrderDate + "',@FirstRecognitionUploadDoc='"+request.FirstRecognitionUploadDoc + "',@RevisedOrderNo='"+request.RevisedOrderNo + "',@RevisedOrderDate='"+request.RevisedOrderDate + "',@RevisedRecognitionUploadDoc='"+request.RevisedRecognitionUploadDoc + "',@StateOrderNo='"+request.StateOrderNo + "',@StateOrderDate='"+request.StateOrderDate + "',@StateRecognitionUploadDoc='"+request.StateRecognitionUploadDoc + "',@RevisedStateOrderNo='"+request.RevisedStateOrderNo + "',@RevisedStateOrderDate='"+request.RevisedStateOrderDate + "',@RevisedStateRecognitionUploadDoc='"+request.RevisedStateRecognitionUploadDoc + "',@SubjectDetail_Str='" + SubjectDetail_Str + "'";
+            SqlQuery += "@UploadNOCDoc='" + request.UploadNOCDoc + "',@Remark='" + request.Remark + "',@DepartmentID='" + request.DepartmentID + "',@FirstOrderNo='"+request.FirstOrderNo + "',@FirstOrderDate='"+request.FirstOrderDate + "',@FirstRecognitionUploadDoc='"+request.FirstRecognitionUploadDoc + "',@RevisedOrderNo='"+request.RevisedOrderNo + "',@RevisedOrderDate='"+request.RevisedOrderDate + "',@RevisedRecognitionUploadDoc='"+request.RevisedRecognitionUploadDoc + "',@StateOrderNo='"+request.StateOrderNo + "',@StateOrderDate='"+request.StateOrderDate + "',@StateRecognitionUploadDoc='"+request.StateRecognitionUploadDoc + "',@RevisedStateOrderNo='"+request.RevisedStateOrderNo + "',@RevisedStateOrderDate='"+request.RevisedStateOrderDate + "',@RevisedStateRecognitionUploadDoc='"+request.RevisedStateRecognitionUploadDoc + "',@NumberofPresentSeat='" + request.NumberofPresentSeat + "',@SubjectDetail_Str='" + SubjectDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "OldNOCDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -66,6 +66,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.NOCTypeID = Convert.ToInt32(dataSet.Tables[0].Rows[i]["NOCTypeID"]);
                     dataModels.SessionYear = Convert.ToInt32(dataSet.Tables[0].Rows[i]["SessionYear"]);
                     dataModels.IssuedYear = Convert.ToInt32(dataSet.Tables[0].Rows[i]["IssuedYear"]);
+                    dataModels.NumberofPresentSeat = dataSet.Tables[0].Rows[i]["NumberofPresentSeat"].ToString();
                     dataModels.IssuedYearName = dataSet.Tables[0].Rows[i]["IssuedYearName"].ToString();
                     dataModels.NOCNumber = dataSet.Tables[0].Rows[i]["NOCNumber"].ToString();
                     dataModels.NOCReceivedDate = dataSet.Tables[0].Rows[i]["NOCReceivedDate"].ToString();
@@ -156,6 +157,7 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.RevisedStateRecognitionUploadDocPath = dataSet.Tables[0].Rows[0]["RevisedStateRecognitionUploadDocPath"].ToString();
                     dataModels.RevisedStateRecognitionUploadDoc_Dis_FileName = dataSet.Tables[0].Rows[0]["RevisedStateRecognitionUploadDoc_Dis_FileName"].ToString();
                     dataModels.Action = dataSet.Tables[0].Rows[0]["Action"].ToString();
+                    dataModels.NumberofPresentSeat = dataSet.Tables[0].Rows[0]["NumberofPresentSeat"].ToString();
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<OldNocDetails_SubjectDataModel> OldNocDetails_SubjectDataModel_Item = JsonConvert.DeserializeObject<List<OldNocDetails_SubjectDataModel>>(JsonDataTable_Data);

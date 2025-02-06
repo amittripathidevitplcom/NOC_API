@@ -636,6 +636,15 @@ namespace RJ_NOC_Utility.CustomerDomain
             }
             //DTE Deparment Apply NOC End
 
+            //Medical Group 3 Seat Enhancement 
+            if (request.ApplyNocParameterSeatEnhancement != null)
+            {
+                if (request.ApplyNocParameterSeatEnhancement.Count > 0)
+                {
+                    sb.AppendFormat("@ApplyNocParameterMasterList_ApplyNocParameterSeatEnhancement='{0}',", CommonHelper.GetDetailsTableQry(request.ApplyNocParameterSeatEnhancement.Where(w=>w.IsChecked==true).ToList(), "ApplyNocParameterMasterList_ApplyNocParameterSeatEnhancement"));
+                }
+            }
+
             // action
             sb.AppendFormat("@Action='{0}'", "SaveApplyNocApplication");
             // execute
@@ -760,6 +769,7 @@ namespace RJ_NOC_Utility.CustomerDomain
                     model.DTE_CoursesforWorkingProfessionals_List = CommonHelper.ConvertDataTable<List<ApplyNocParameterMasterList_CoursesforWorkingProfessionals>>(ds.Tables[24]);
                     model.DefaulterCollegePenaltyDetailList = CommonHelper.ConvertDataTable<List<DefaulterCollegePenaltyDataModal>>(ds.Tables[25]);
                     model.ApplyNocLateFeeDetailList = CommonHelper.ConvertDataTable<List<ApplyNocLateFeeDetailDataModal>>(ds.Tables[26]);
+                    model.ApplyNocParameterSeatEnhancement = CommonHelper.ConvertDataTable<List<ApplyNocParameterSeatEnhancement>>(ds.Tables[27]);
                 }
             }
             return model;

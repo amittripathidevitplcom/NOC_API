@@ -39,8 +39,10 @@ namespace RJ_NOC_DataAccess.Repository
             MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyLandDetails();
 
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            List<LandDetailsDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LandDetailsDataModel>>(JsonDataTable_Data);
-            dataModels.LandDetails = LandDetailDataModel_Item;
+            List<DataTable> dataModel1 = new List<DataTable>();
+            dataModel1.Add(dataSet.Tables[0]);
+            //List<LandDetailsDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<LandDetailsDataModel>>(JsonDataTable_Data);
+            dataModels.LandDetails = dataModel1;
 
 
             List<DataTable> dataModel = new List<DataTable>();
@@ -247,19 +249,13 @@ namespace RJ_NOC_DataAccess.Repository
 
             List<MedicalDocumentScrutinyDataModel_DocumentScrutinyHospitalDetail> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyHospitalDetail>();
             MedicalDocumentScrutinyDataModel_DocumentScrutinyHospitalDetail dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyHospitalDetail();
-
-            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
-            List<HospitalMasterDataModel> LandDetailDataModel_Item = JsonConvert.DeserializeObject<List<HospitalMasterDataModel>>(JsonDataTable_Data);
-            dataModels.HospitalDetails = LandDetailDataModel_Item;
-
-
+            List<DataTable> dataModel1 = new List<DataTable>();
+            dataModel1.Add(dataSet.Tables[0]);
+            dataModels.HospitalDetails = dataModel1;
             List<DataTable> dataModel = new List<DataTable>();
             dataModel.Add(dataSet.Tables[1]);
             dataModels.DocumentScrutinyFinalRemarkList = dataModel;
-
-
             listdataModels.Add(dataModels);
-
             return listdataModels;
         }
 
@@ -477,6 +473,25 @@ namespace RJ_NOC_DataAccess.Repository
             List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
+
+
+        public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase> DocumentScrutiny_CourtCase(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_CourtCase @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_CourtCase");
+
+            List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase>();
+            MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase();
+            List<DataTable> dataModel1 = new List<DataTable>();
+            dataModel1.Add(dataSet.Tables[0]);
+            dataModels.CourtCase = dataModel1;
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+            listdataModels.Add(dataModels);
             return listdataModels;
         }
     }
