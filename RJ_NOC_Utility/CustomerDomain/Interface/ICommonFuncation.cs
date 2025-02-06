@@ -196,6 +196,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request);
         bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request);
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
+        DataSet GetMGoneASSESSMENTREPORT(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
         List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID);
         List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID);

@@ -17,24 +17,32 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="CollegeNameHi">
-          <DataField>CollegeNameHi</DataField>
+        <Field Name="NOCIssueNo">
+          <DataField>NOCIssueNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CollegeMobileNo">
-          <DataField>CollegeMobileNo</DataField>
+        <Field Name="Date">
+          <DataField>Date</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CollegeEmail">
-          <DataField>CollegeEmail</DataField>
+        <Field Name="NOCIssueFinancialYear">
+          <DataField>NOCIssueFinancialYear</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img">
+          <DataField>img</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NocQRCode">
           <DataField>NocQRCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="TotalFeeAmount">
-          <DataField>TotalFeeAmount</DataField>
+        <Field Name="CollegeNameHi">
+          <DataField>CollegeNameHi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNameEng">
+          <DataField>CollegeNameEng</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="DepartmentNameHi">
@@ -45,31 +53,107 @@
           <DataField>DepartmentNameEn</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ApplicationNo">
-          <DataField>ApplicationNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Date">
-          <DataField>Date</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="CollegeAddress">
           <DataField>CollegeAddress</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CollegeNameEng">
-          <DataField>CollegeNameEng</DataField>
+        <Field Name="NOCType">
+          <DataField>NOCType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="NOCIssueFinancialYear">
-          <DataField>NOCIssueFinancialYear</DataField>
+        <Field Name="LegalentitywithAddress">
+          <DataField>LegalentitywithAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewName">
+          <DataField>CollegeNewName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeDistrict">
+          <DataField>CollegeDistrict</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CollegeNewAddress">
+          <DataField>CollegeNewAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NewLegalEntity">
+          <DataField>NewLegalEntity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UniversityName">
+          <DataField>UniversityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NoOfNOCIssued">
+          <DataField>NoOfNOCIssued</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NoOfIssuedYear">
+          <DataField>NoOfIssuedYear</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TNOCFirstPoint">
+          <DataField>TNOCFirstPoint</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOCFormat">
+          <DataField>NOCFormat</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TrustyName">
+          <DataField>TrustyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StateName">
+          <DataField>StateName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="institutionsState">
+          <DataField>institutionsState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="seatsMBBSCourseState">
+          <DataField>seatsMBBSCourseState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DoctorsregisteredStateMedicalCouncil">
+          <DataField>DoctorsregisteredStateMedicalCouncil</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DoctorsinGovernmentService">
+          <DataField>DoctorsinGovernmentService</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="postsvacantinruraldifficultareas">
+          <DataField>postsvacantinruraldifficultareas</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DoctorsregisteredEmploymentExchange">
+          <DataField>DoctorsregisteredEmploymentExchange</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DoctorpopulationratioState">
+          <DataField>DoctorpopulationratioState</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Doctorpopulationratioachieved">
+          <DataField>Doctorpopulationratioachieved</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ConsultingArchitect">
+          <DataField>ConsultingArchitect</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="purposeson">
+          <DataField>purposeson</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>C:\Deepak Project\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
-        <rd:TableName>AHCollegeDetails</rd:TableName>
+        <rd:SchemaPath>D:\Lokesh\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:TableName>CollegeDetails</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -118,10 +202,9 @@ Department of Medical Education (Gr-1)</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.3175cm</Top>
             <Left>2.47854cm</Left>
-            <Height>2.35839cm</Height>
-            <Width>13.44906cm</Width>
+            <Height>1.85568cm</Height>
+            <Width>13.67396cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -133,8 +216,8 @@ Department of Medical Education (Gr-1)</Value>
             </Style>
           </Textbox>
           <Line Name="Line2">
-            <Top>2.817cm</Top>
-            <Left>0.44621cm</Left>
+            <Top>2.03207cm</Top>
+            <Left>0.55204cm</Left>
             <Height>0cm</Height>
             <Width>17.105cm</Width>
             <ZIndex>1</ZIndex>
@@ -152,17 +235,17 @@ Department of Medical Education (Gr-1)</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>क्रमांक</Value>
+                    <Value>Application No</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> : </Value>
+                    <Value>: </Value>
                     <Style />
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!ApplicationNo.Value</Value>
+                    <Value>=Fields!NOCIssueNo.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -170,7 +253,7 @@ Department of Medical Education (Gr-1)</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.40995cm</Top>
+            <Top>2.13995cm</Top>
             <Left>0.55204cm</Left>
             <Height>0.6cm</Height>
             <Width>5.48979cm</Width>
@@ -199,7 +282,7 @@ Department of Medical Education (Gr-1)</Value>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> - </Value>
+                    <Value>-</Value>
                     <Style />
                   </TextRun>
                   <TextRun>
@@ -211,91 +294,11 @@ Department of Medical Education (Gr-1)</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.40995cm</Top>
-            <Left>12.81907cm</Left>
+            <Top>2.13995cm</Top>
+            <Left>11.86657cm</Left>
             <Height>0.6cm</Height>
             <Width>4.28593cm</Width>
             <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox10">
-            <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Sub: “Essentiality Certificate”- Regarding opening of Medical College</Value>
-                    <Style>
-                      <FontSize>10.5pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>6.51257cm</Top>
-            <Left>0.29063cm</Left>
-            <Height>0.75458cm</Height>
-            <Width>14.77667cm</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Textbox>
-          <Image Name="Image5">
-            <Source>Database</Source>
-            <Value>=First(Fields!NocQRCode.Value, "MGOneNOCPrint")</Value>
-            <MIMEType>image/png</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>38.24289cm</Top>
-            <Left>0.29063cm</Left>
-            <Height>3.10444cm</Height>
-            <Width>4.14042cm</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="Textbox14">
-            <CanGrow>true</CanGrow>
-            <CanShrink>true</CanShrink>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Yours faithfully,</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>35.77241cm</Top>
-            <Left>13.02874cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.28593cm</Width>
-            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -322,11 +325,11 @@ Department of Medical Education (Gr-1)</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>37.1747cm</Top>
-            <Left>8.90124cm</Left>
-            <Height>0.6cm</Height>
-            <Width>8.41343cm</Width>
-            <ZIndex>7</ZIndex>
+            <Top>5.02782cm</Top>
+            <Left>8.69157cm</Left>
+            <Height>0.81167cm</Height>
+            <Width>8.04301cm</Width>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -344,11 +347,40 @@ Department of Medical Education (Gr-1)</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Chairman,</Value>
+                    <Value>Chairman,
+</Value>
                     <Style />
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!CollegeAddress.Value, "MGOneNOCPrint")</Value>
+                    <Value>=Fields!TrustyName.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>,</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeNameEng.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>,</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeDistrict.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>,(</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!StateName.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>)</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -356,129 +388,11 @@ Department of Medical Education (Gr-1)</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CollegeAddress</rd:DefaultName>
-            <Top>5.12974cm</Top>
+            <Top>3.11891cm</Top>
             <Left>0.55204cm</Left>
-            <Height>0.99688cm</Height>
-            <Width>2.39417cm</Width>
-            <ZIndex>8</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox4">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Sir,
-The desired certificate is as follows:
-1. No. of institutions already existing in the State: 43
-2. No. of seats available in the MBBS Course in State: 6505
-3. No. of Doctors registered with the State Medical Council: 70613
-4. No. of Doctors in Government Service: 16261
-5. No. of posts vacant and these in rural/difficult areas: 6963/1772
-6. No. of Doctors registered with Employment Exchange: NA
-7. Doctor population ratio in State: 1:1198
-8. The establishment of college would help resolve the problem of deficiencies and
-improve the availability of such medical manpower in State. The number of trained
-and qualified Doctor will increase to take care of shortage. More State students will
-be available to serve the State as per State policy for domicile.
-9. The restriction imposed by the State Government, if any on students who are not
-domiciled in the State from obtaining admission in the State be specified. Restriction
-as per guidelines for admission by MCI/NMC, RUHS, State Government &amp; court
-orders.
-10. Full justification for opening of the proposed Medical College: We need more Staterun
-medical colleges to give chances to meritorious and socio-economically
-backward state students and achieve better doctor population ratio.
-11. Doctor population ratio proposed to be achieved: 1:1000
-
-</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Top>7.61683cm</Top>
-            <Left>0.29063cm</Left>
-            <Height>9.54292cm</Height>
-            <Width>17.02404cm</Width>
-            <ZIndex>9</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox5">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>The Indian Medical Trust has applied for establishment of Balvir Singh Tomar Institute of
-Medical Sciences and Research at Jaipur. On careful consideration of proposal,
-Government of Rajasthan has decided to issue an Essentiality Certificate to the applicant
-for establishment of Balvir Singh Tomar Institute of Medical Sciences and Research,
-Jaipur with 150 seats.</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>17.26558cm</Top>
-            <Left>0.29063cm</Left>
-            <Height>2.29333cm</Height>
-            <Width>17.02404cm</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox6">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>It is certified that:
-(a) The applicant owns and manages a functional 605 bedded hospital.
-(b) It is desirable to establish a Medical College in the public interest;</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>19.7353cm</Top>
-            <Left>0.29063cm</Left>
-            <Height>1.47257cm</Height>
-            <Width>17.02404cm</Width>
-            <ZIndex>11</ZIndex>
+            <Height>0.5979cm</Height>
+            <Width>15.60046cm</Width>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -501,16 +415,22 @@ Jaipur with 150 seats.</Value>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
+                  <TextRun>
+                    <Value>=Fields!CollegeDistrict.Value</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.40995cm</Top>
-            <Left>9.83933cm</Left>
+            <Top>2.13995cm</Top>
+            <Left>8.88683cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -521,11 +441,59 @@ Jaipur with 150 seats.</Value>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!NOCFormat.Value</Value>
+                    <MarkupType>HTML</MarkupType>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>3.91266cm</Top>
+            <Left>0.76371cm</Left>
+            <Height>0.54708cm</Height>
+            <Width>15.38879cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="Image5">
+            <Source>Database</Source>
+            <Value>=First(Fields!NocQRCode.Value, "MGOneNOCPrint")</Value>
+            <MIMEType>image/png</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>4.71032cm</Top>
+            <Left>0.76371cm</Left>
+            <Height>1.67569cm</Height>
+            <Width>3.48438cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
         </ReportItems>
-        <Height>41.34733cm</Height>
+        <Height>6.71262cm</Height>
         <Style />
       </Body>
-      <Width>17.55121cm</Width>
+      <Width>17.65704cm</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
