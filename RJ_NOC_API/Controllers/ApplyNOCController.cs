@@ -1992,6 +1992,90 @@ namespace RJ_NOC_API.Controllers
             return PdfPathList;
 
         }
+
+
+
+        [HttpPost("GenerateNOCForAHDegree")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateNOCForAHDegree(NOCIssuedForAHDegreeDataModel request)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(request.CreatedBy, "GenerateNOCForDCE", request.ApplyNOCID, "ApplyNOCController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                //bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model);
+                if (await Task.Run(() => UtilityHelper.ApplyNOCUtility.SaveAHDegreeNOCData(request)))
+                {
+                    LocalReport localReport = null;
+                    DataSet dataset = new DataSet();
+                    dataset = UtilityHelper.ApplyNOCUtility.GetAHDegreeNOCDetailsNOCIID(request.ApplyNOCID, 0);
+                    string PdfPath=string.Empty;
+
+                    var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+                    string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                    string mimetype = "";
+                    int extension = 1;
+                    string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+                    dataset.Tables[0].Rows[0]["NocQRCode"] = CommonHelper.GenerateQrCode(dataset.Tables[0].Rows[0]["NocQRCodeLink"].ToString());
+                    ReportPath += "\\AHDegreeNOCFormat.rdlc";
+                    localReport = new LocalReport(ReportPath);
+                    //request.NOCFormat = request.NOCFormat.Replace("CollegeName", dataset.Tables[0].Rows[0]["CollegeNameEn"].ToString()).Replace("institutionsState", dataset.Tables[0].Rows[0]["institutionsState"].ToString()).Replace("seatsMBBSCourseState", dataset.Tables[0].Rows[0]["seatsMBBSCourseState"].ToString()).Replace("DoctorsregisteredStateMedicalCouncil", dataset.Tables[0].Rows[0]["DoctorsregisteredStateMedicalCouncil"].ToString()).Replace("DoctorsinGovernmentService", dataset.Tables[0].Rows[0]["DoctorsinGovernmentService"].ToString()).Replace("postsvacantinruraldifficultareas", dataset.Tables[0].Rows[0]["postsvacantinruraldifficultareas"].ToString()).Replace("DoctorsregisteredEmploymentExchange", dataset.Tables[0].Rows[0]["DoctorsregisteredEmploymentExchange"].ToString()).Replace("DoctorpopulationratioState", dataset.Tables[0].Rows[0]["DoctorpopulationratioState"].ToString()).Replace("Doctorpopulationratioachieved", dataset.Tables[0].Rows[0]["Doctorpopulationratioachieved"].ToString()).Replace("purposeson", dataset.Tables[0].Rows[0]["purposeson"].ToString()).Replace("ConsultingArchitect", dataset.Tables[0].Rows[0]["ConsultingArchitect"].ToString()).Replace("LegalEntityName", dataset.Tables[0].Rows[0]["TrustyName"].ToString());
+
+                    //dataset.Tables[0].Rows[0]["NOCFormat"] = request.NOCFormat;
+                    localReport.AddDataSource("AHDegreedt", dataset.Tables[0]);
+                    //localReport.AddDataSource("CollegeDetails", dataset.Tables[0]);
+
+                    Dictionary<string, string> parameters = new Dictionary<string, string>();
+                    string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                    parameters.Add("test", "");
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                    var result1 = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+
+                    //return File(result.MainStream, "application/pdf");
+                    System.IO.File.WriteAllBytes(filepath, result1.MainStream);
+                    PdfPath = fileName;
+
+                    if (string.IsNullOrEmpty(PdfPath))
+                    {
+                        bool result2 = false;
+                        result2 = UtilityHelper.ApplyNOCUtility.UpdateAHNOCPDFPath(PdfPath,request.ApplyNOCID,request.ParameterID);
+                        if (result2)
+                        {
+                            result.State = OperationState.Success;
+                            result.SuccessMessage = "PDF Generate Successfully .!";
+                        }
+                        else
+                        {
+                            result.State = OperationState.Warning;
+                            result.SuccessMessage = "There was an error Generate PDF!";
+                        }
+                    }
+                    else
+                    {
+                        UtilityHelper.ApplyNOCUtility.DeleteNOCIssuedDetails(request.ApplyNOCID);
+                        result.State = OperationState.Warning;
+                        result.SuccessMessage = "There was an error Generate PDF!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.GenerateNOCForAHDegree", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 
 }

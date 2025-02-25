@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IWorkFlowMaster
     {
         bool SaveData(WorkFlowMasterDataModel request);
-        bool IfExists(int WorkFlowMasterID, int RoleID,int DepartmentID,string NOCType);
+        bool IfExists(int WorkFlowMasterID, int RoleID,int DepartmentID,string NOCType,string CollegeType);
         List<WorkFlowMasterDataModel> GetWorkFlowMasterList(int WorkFlowMasterID);
 
         List<DataTable> GetWorkFlowformat3(int DepartmentID, string ReportType);

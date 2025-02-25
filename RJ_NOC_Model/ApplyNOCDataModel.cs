@@ -156,6 +156,17 @@ namespace RJ_NOC_Model
         public bool? ChangeIntoTNOC { get; set; } = false;
         public string? PdfFilePath { get; set; }
         public string? NOCFormat { get; set; }
+    } 
+    public class NOCIssuedForAHDegreeDataModel
+    {
+        public int DepartmentID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public int ParameterID { get; set; }
+        public int CreatedBy { get; set; }
+        public string Remark { get; set; }
+        public string ApproveReject { get; set; }
+        public string? PdfFilePath { get; set; }
+        public string? NOCFormat { get; set; }
     }    
     public class NOCIssuedForMGOneDataModel
     {

@@ -10,6 +10,8 @@ namespace RJ_NOC_Model
         public int WorkFlowMasterID { get; set; }
         public int DepartmentID { get; set; }
         public int NOCTypeID { get; set; }
+        public int? CollegeTypeID { get; set; }
+        public string? CollegeTypeName { get; set; }
         public string? NOCTypeName { get; set; }
         public int RoleLevelID { get; set; }
         public int RoleID { get; set; }

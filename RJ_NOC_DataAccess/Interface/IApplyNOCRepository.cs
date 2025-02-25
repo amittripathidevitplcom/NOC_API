@@ -43,7 +43,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool DeleteMgoneIssuedDetails(int ApplyNOCID);
         NocInformation GetNocInformation(Guid SearchRecordID);
         List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID);
-
+        bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model);
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID);
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
@@ -58,5 +58,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
 
         bool ForwardToEsignDCE(int ApplyNOCID, int UserId);
+        DataSet GetAHDegreeNOCDetailsNOCIID(int ApplyNOCID, int ParameterID);
+        bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID);
     }
 }

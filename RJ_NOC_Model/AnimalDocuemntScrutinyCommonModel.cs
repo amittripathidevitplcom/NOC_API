@@ -75,5 +75,10 @@ namespace RJ_NOC_Model
     {
         public List<VeterinaryHospitalDataModel> VeterinaryHospitals { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }    
+    public class AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure
+    {
+        public List<AHDepartmentDataModel> AHDepartmentList { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
 }

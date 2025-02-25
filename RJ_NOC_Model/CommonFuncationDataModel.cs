@@ -331,6 +331,9 @@ namespace RJ_NOC_Model
         public string? ValuePath { get; set; }
         public string? Annexure { get; set; }
         public bool? IsHide { get; set; }
+
+        public string? Action { get; set; }
+        public string? Remarks { get; set; }
     }
     public class MGOneDepartmentDataModel
     {

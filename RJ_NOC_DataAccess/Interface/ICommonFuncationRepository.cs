@@ -216,6 +216,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID);
         List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID);
         bool SaveMGOneFacility(List<MGOneFacilityDataModel> request);
+        List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor);
     }
 }
 

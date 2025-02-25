@@ -1040,5 +1040,77 @@ namespace RJ_NOC_API.Controllers
             return fileName;
 
         }
+
+
+
+
+
+
+
+        //Degree College Actions
+
+        [HttpPost("GetDegreeApplyNOCApplicationList")]
+        public async Task<OperationResult<List<ApplyNocApplicationDetails_DataModel>>> GetDegreeApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
+        {
+            var result = new OperationResult<List<ApplyNocApplicationDetails_DataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.GetDegreeApplyNOCApplicationList(request));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutiny.GetDegreeApplyNOCApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("DocumentScrutiny_DepartmentInfrastructure/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure>>> DocumentScrutiny_DepartmentInfrastructure(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.AnimalDocumentScrutinyUtility.DocumentScrutiny_DepartmentInfrastructure(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("AnimalDocumentScrutinyController.DocumentScrutiny_DepartmentInfrastructure", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }

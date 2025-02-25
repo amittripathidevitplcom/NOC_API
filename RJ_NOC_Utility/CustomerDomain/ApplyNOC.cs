@@ -188,6 +188,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool ForwardToEsignDCE(int ApplyNOCID, int UserId)
         {
             return UnitOfWork.ApplyNOCRepository.ForwardToEsignDCE(ApplyNOCID,UserId);
+        }        
+        public bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveAHDegreeNOCData(model);
+        }       
+        public DataSet GetAHDegreeNOCDetailsNOCIID(int ApplyNOCID, int ParameterID)
+        {
+            return UnitOfWork.ApplyNOCRepository.GetAHDegreeNOCDetailsNOCIID(ApplyNOCID,ParameterID);
+        }    
+        public bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID)
+        {
+            return UnitOfWork.ApplyNOCRepository.UpdateAHNOCPDFPath(PDFPath,ApplyNOCID, ParameterID);
         }
     }
 }

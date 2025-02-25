@@ -143,6 +143,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveNOCIssueData(int ApplyNocID, int DepartmentID, int CollegeID, string Action)
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.SaveNOCIssueData( ApplyNocID,  DepartmentID,  CollegeID,  Action);
+        }        
+        public List<ApplyNocApplicationDetails_DataModel> GetDegreeApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.GetDegreeApplyNOCApplicationList(request);
+        }     
+        public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure> DocumentScrutiny_DepartmentInfrastructure(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.DocumentScrutiny_DepartmentInfrastructure(CollageID, RoleID, ApplyNOCID);
         }
     }
 }

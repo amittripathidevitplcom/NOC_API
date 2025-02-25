@@ -540,5 +540,70 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
 
+        public List<ApplyNocApplicationDetails_DataModel> GetDegreeApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
+        {
+            string SqlQuery = " exec GetDegreeApplyNOCApplicationList @RoleID='" + request.RoleID + "',@UserID='" + request.UserID + "',@Status='" + request.Status + "',@ActionName='" + request.ActionName + "',@SessionYear='" + request.SessionYear + "'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "AnimalDocumentScrutiny.GetDegreeApplyNOCApplicationList");
+            List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+            return listdataModels;
+        }
+
+
+        public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure> DocumentScrutiny_DepartmentInfrastructure(int CollageID, int RoleID, int ApplyNOCID)
+        {
+
+            List<AHDepartmentDataModel> dataModels = new List<AHDepartmentDataModel>();
+            List<AHFacilityDepartmentDataModel> data = new List<AHFacilityDepartmentDataModel>();
+            string SqlQuery = "exec USP_DocumentScrutiny_DocumentScrutiny_DepartmentInfrastructure  @CollegeID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet ds = new DataSet();
+            ds = _commonHelper.Fill_DataSet(SqlQuery, "CommonFuncation.GetAHFacilityDepartmentList");
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 1)
+                {
+                    string JsonDataTable_Data = CommonHelper.ConvertDataTable(ds.Tables[0]);
+                    dataModels = JsonConvert.DeserializeObject<List<AHDepartmentDataModel>>(JsonDataTable_Data);
+                    string JsonDataTable = CommonHelper.ConvertDataTable(ds.Tables[1]);
+                    data = JsonConvert.DeserializeObject<List<AHFacilityDepartmentDataModel>>(JsonDataTable);
+                    for (int i = 0; i < dataModels.Count; i++)
+                    {
+                        dataModels[i].AHFacilityDepartmentList = data.Where(w => w.AHDepartmentID == dataModels[i].ID).Select(s => new AHFacilityDepartmentDataModel()
+                        {
+                            ID = s.ID,
+                            AHDepartmentID = s.AHDepartmentID,
+                            ControlType = s.ControlType,
+                            IsMandatory = s.IsMandatory,
+                            MinQty = s.MinQty,
+                            Name = s.Name,
+                            Unit = s.Unit,
+                            Value = s.Value == null ? "" : s.Value,
+                            CollegeID = s.CollegeID,
+                            ParentID = s.ParentID,
+                            ValuePath = s.ValuePath,
+                            Value_Dis_FileName = s.Value_Dis_FileName,
+                            Annexure = s.Annexure,
+                            IsHide = s.ParentID > 0 ? true : false,
+                            ContentOrder = s.ContentOrder,
+                            Action=s.Action,
+                            Remarks=s.Remarks
+                        }
+                        ).OrderBy(o => o.ContentOrder).ToList();
+                    }
+
+                }
+            }
+
+            List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure> listdataModels = new List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure>();
+            AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure dataModel = new AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure();
+            dataModel.AHDepartmentList = dataModels;
+            List<DataTable> dataModelds = new List<DataTable>();
+            dataModelds.Add(ds.Tables[2]);
+            dataModel.DocumentScrutinyFinalRemarkList = dataModelds;
+            listdataModels.Add(dataModel);
+            return listdataModels;
+        }
     }
 }

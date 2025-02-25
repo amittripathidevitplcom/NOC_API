@@ -2203,7 +2203,18 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        
+        public List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
+        {
+            string SqlQuery = " exec USP_GetNOCFormat @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ParameterID='" + ParameterID + "',@NOCFor='" + NOCFor + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.USP_GetNOCFormat");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+
     }
 }
 

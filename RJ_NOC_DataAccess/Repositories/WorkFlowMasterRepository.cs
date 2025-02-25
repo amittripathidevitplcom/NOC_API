@@ -34,7 +34,7 @@ namespace RJ_NOC_DataAccess.Repository
             string WorkFlowMasterDetail_Str = CommonHelper.GetDetailsTableQry(request.WorkFlowMasterDetailList, "Temp_WorkFlowMasterDetail");
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveWorkFlowMaster @WorkFlowMasterID='" + request.WorkFlowMasterID + "',@DepartmentID='" + request.DepartmentID + "',@NOCTypeID='" + request.NOCTypeID + "',";
-            SqlQuery += "@RoleLevelID = '" + request.RoleLevelID + "',@RoleID = '" + request.RoleID + "',@IPAddress = '" + IPAddress + "',@WorkFlowMasterDetail_Str='" + WorkFlowMasterDetail_Str + "'";
+            SqlQuery += "@RoleLevelID = '" + request.RoleLevelID + "',@RoleID = '" + request.RoleID + "',@IPAddress = '" + IPAddress + "',@CollegeTypeID = '" + request.CollegeTypeID + "',@WorkFlowMasterDetail_Str='" + WorkFlowMasterDetail_Str + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "WorkFlowMastreMaster.SaveData");
             if (Rows > 0)
                 return true;
@@ -42,9 +42,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public bool IfExists(int WorkFlowMasterID, int RoleID, int DepartmentID, string NOCType)
+        public bool IfExists(int WorkFlowMasterID, int RoleID, int DepartmentID, string NOCType, string CollegeType)
         {
-            string SqlQuery = " USP_IfExistsWorkFlowMaster @RoleID='" + RoleID + "',@DepartmentID = '" + DepartmentID + "',@WorkFlowMasterID='" + WorkFlowMasterID + "',@NOCType='" + NOCType + "' ";
+            string SqlQuery = " USP_IfExistsWorkFlowMaster @RoleID='" + RoleID + "',@DepartmentID = '" + DepartmentID + "',@WorkFlowMasterID='" + WorkFlowMasterID + "',@NOCType='" + NOCType + "' ,@CollegeType='" + CollegeType + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "WorkFlowMaster.IfExists");
             if (dataTable.Rows.Count > 0)

@@ -271,7 +271,8 @@ namespace RJ_NOC_Model
         public string? TehsilName { get; set; }
         public string? PanchyatSamitiName { get; set; }
         public string? CityName { get; set; }
-
+        public string? Action { get; set; }
+        public string? Remark { get; set; }
         public List<MGThreeAffiliatedHospitalDataModel>? MGThreeAffiliatedHospitalList { get; set; }
 
     }

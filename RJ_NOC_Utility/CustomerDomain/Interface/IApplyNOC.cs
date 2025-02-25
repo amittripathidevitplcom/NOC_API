@@ -32,8 +32,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SubmitRevertApplication(SubmitRevertApplication request);
         List<CommonDataModel_DataTable> GetParameterFeeMaster(ParameterFeeMaster request);
         bool SaveDCENOCData(NOCIssuedRequestDataModel model);
+        bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model);
         bool GenerateEssentialityMgone(NOCIssuedForMGOneDataModel model);
         DataSet GetNOCIssuedDetailsByNOCIID(int ApplyNOCID,int ParameterID);
+        DataSet GetAHDegreeNOCDetailsNOCIID(int ApplyNOCID, int ParameterID);
         bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList);
         bool UpdateMgonePDFPath(NOCIssuedForMGOneDataModel PdfPathList);
         bool DeleteNOCIssuedDetails(int ApplyNOCID);
@@ -52,5 +54,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         DataSet GetEssentialityDraftNOCDetailsByNOCIID(int ApplyNOCID);
         bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
         bool ForwardToEsignDCE(int ApplyNOCID,int UserId);
+        bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID);
     }
 }

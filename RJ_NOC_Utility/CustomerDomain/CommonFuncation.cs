@@ -713,6 +713,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveMGOneFacility(List<MGOneFacilityDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneFacility(request);
+        }      
+        public List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetNOCFormat(DepartmentID,CollegeID,ParameterID,NOCFor);
         }        
     }
 }

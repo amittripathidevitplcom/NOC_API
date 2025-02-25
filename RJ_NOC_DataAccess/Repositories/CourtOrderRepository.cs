@@ -19,7 +19,7 @@ namespace RJ_NOC_DataAccess.Repositories
         }
         public List<CommonDataModel_DataTable> GetCourtOrderData(CourtOrderSearchFilterDataModel request)
         {
-            string SqlQuery = " exec [USP_GetCourtOrderData] @CourtOrderID='" + request.CourtOrderID + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "'";
+            string SqlQuery = " exec [USP_GetCourtOrderData] @CourtOrderID='" + request.CourtOrderID + "',@DepartmentID='" + request.DepartmentID + "',@CollegeID='" + request.CollegeID + "',@ApplyNOCID='" + request.ApplyNOCID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CourtOrder.GetCourtOrderData");
 

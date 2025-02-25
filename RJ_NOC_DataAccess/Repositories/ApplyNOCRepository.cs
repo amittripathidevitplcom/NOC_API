@@ -407,6 +407,14 @@ namespace RJ_NOC_DataAccess.Repositories
             return dataset;
         }
 
+        public DataSet GetAHDegreeNOCDetailsNOCIID(int ApplyNOCID, int ParameterID)
+        {
+            string SqlQuery = $" exec USP_SaveAHDegreeNOCData @ActionType='GetNOCIssuedDetail',@ApplyNOCID={ApplyNOCID},@ApplyNocParameterID={ParameterID}";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetAHDegreeNOCDetailsNOCIID");
+            return dataset;
+        }
+
         public bool UpdateNOCPDFPath(List<DCENOCPDFPathDataModel> PdfPathList)
         {
             string PdfPathList_str = CommonHelper.GetDetailsTableQry(PdfPathList, "Temp_DCEPdfPathList");
@@ -602,6 +610,27 @@ namespace RJ_NOC_DataAccess.Repositories
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = "exec USP_SaveDCENOCData @NOCID='" + ApplyNOCID+ "',@EsignBy='" + UserId+ "',@ActionType='ForwardToEsign'";
             int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.ForwardToEsignDCE");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = $" exec USP_SaveAHDegreeNOCData @ActionType='Save',@ApplyNOCID='"+model.ApplyNOCID+ "',@ApplyNocParameterID='" + model.ParameterID+ "',@DepartmentID='" + model.DepartmentID + "',@NOCIssuedRemark='" + model.Remark + "',@CreatedBy='" + model.CreatedBy + "',@ApproveReject='" + model.ApproveReject + "'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.SaveDCENOCData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID)
+        {
+            string SqlQuery = $" exec USP_SaveAHDegreeNOCData @ActionType='UpdatePDFPath',@NOCFilePath='{PDFPath}',@ApplyNOCID='{ApplyNOCID}',@ApplyNocParameterID='{ParameterID}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateAHNOCPDFPath");
             if (Rows > 0)
                 return true;
             else

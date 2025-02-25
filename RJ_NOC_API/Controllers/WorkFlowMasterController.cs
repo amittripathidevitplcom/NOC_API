@@ -39,7 +39,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.WorkFlowMasterUtility.IfExists(request.WorkFlowMasterID, request.RoleID,request.DepartmentID,request.NOCTypeName);
+                IfExits = UtilityHelper.WorkFlowMasterUtility.IfExists(request.WorkFlowMasterID, request.RoleID,request.DepartmentID,request.NOCTypeID.ToString(),request.CollegeTypeID.ToString());
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.WorkFlowMasterUtility.SaveData(request));
