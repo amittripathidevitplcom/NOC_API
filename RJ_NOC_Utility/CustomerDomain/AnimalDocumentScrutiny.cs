@@ -151,6 +151,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure> DocumentScrutiny_DepartmentInfrastructure(int CollageID, int RoleID, int ApplyNOCID)
         {
             return UnitOfWork.AnimalDocumentScrutinyRepository.DocumentScrutiny_DepartmentInfrastructure(CollageID, RoleID, ApplyNOCID);
+        }      
+        public bool AHPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy)
+        {
+            return UnitOfWork.AnimalDocumentScrutinyRepository.AHPdfEsign( ApplyNOCID,ParameterID,CreatedBy);
         }
     }
 }

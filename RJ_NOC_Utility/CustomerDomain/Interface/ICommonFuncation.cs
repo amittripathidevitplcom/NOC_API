@@ -163,7 +163,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         bool SSOUpdateSubmit(int CollegeID, string SSOID);
         List<CommonDataModel_DataTable> GetSSOByCollegeIDWise(int CollegeID);
-        List<DataTable> HomePage_IncreaseDate(int DepartmentID);
+        List<DataTable> HomePage_IncreaseDate(int DepartmentID,string Type);
         List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request);
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
         List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
@@ -203,6 +203,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveMGOneFacility(List<MGOneFacilityDataModel> request);
 
         List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor);
+        bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request);
     }
 
 

@@ -47,5 +47,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<ApplyNocApplicationDetails_DataModel> GetDegreeApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request);
         List<AnimalDocumentScrutinyDataModel_DocumentScrutinyDepartmentInfrastructure> DocumentScrutiny_DepartmentInfrastructure(int CollageID, int RoleID, int ApplyNOCID);
+
+        bool AHPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy);
     }
 }

@@ -548,6 +548,21 @@ namespace RJ_NOC_DataAccess.Repositories
             List<ApplyNocApplicationDetails_DataModel> listdataModels = new List<ApplyNocApplicationDetails_DataModel>();
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
             listdataModels = JsonConvert.DeserializeObject<List<ApplyNocApplicationDetails_DataModel>>(JsonDataTable_Data);
+            if (dataSet.Tables.Count > 1 && dataSet.Tables[1].Rows.Count > 0)
+            {
+                List<NOCPdfFileDataModel> DraftNOCPdfFileDataModel = new List<NOCPdfFileDataModel>();
+                string JsonDataTable_PDFData = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
+                DraftNOCPdfFileDataModel = JsonConvert.DeserializeObject<List<NOCPdfFileDataModel>>(JsonDataTable_PDFData);
+                for (int i = 0; i < listdataModels.Count; i++)
+                {
+                    var Data = DraftNOCPdfFileDataModel.Where(w => w.ApplyNOCID == listdataModels[i].ApplyNOCID).ToList();
+                    if (Data != null && Data.Count > 0)
+                    {
+                        listdataModels[i].DraftNOCPdfFileDataModel = Data;
+                    }
+                }
+            }
+
             return listdataModels;
         }
 
@@ -605,5 +620,16 @@ namespace RJ_NOC_DataAccess.Repositories
             listdataModels.Add(dataModel);
             return listdataModels;
         }
+        public bool AHPdfEsign(int ApplyNOCID, int ParameterID, int CreatedBy)
+        {
+            string SqlQuery = " exec USP_SaveAHDegreeNOCData  ";
+            SqlQuery += "@ActionType='EsignPDF',@ApplyNOCID='" + ApplyNOCID + "',@ApplyNocParameterID='" + ParameterID + "',@EsignBy='" + CreatedBy + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "AnimalDocumentScrutiny.AHPdfEsign");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

@@ -96,6 +96,13 @@ namespace RJ_NOC_Model
         public string? ApplicationTypes { get; set; }
 
 
+        public bool? InspectionPaid { get; set; }
+        public bool? FDRPaid { get; set; }
+        public int? InspectionIntimation { get; set; }
+        public int? FDRIntimation { get; set; }
+        public string? FDRIntimationDate { get; set; }
+
+
 
         public List<NOCPdfFileDataModel>? DraftNOCPdfFileDataModel { get; set; }
     }

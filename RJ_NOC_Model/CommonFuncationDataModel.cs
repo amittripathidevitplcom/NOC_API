@@ -342,6 +342,12 @@ namespace RJ_NOC_Model
         public string? DepartmentName { get; set; }
         public List<MGOneFacilityDepartmentDataModel>? MGOneFacilityDepartmentList { get; set; }
     }
+
+    public class UpdateIntimationInspectionFDRDataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public string ActionType { get; set; }
+    }
     public class MGOneFacilityDepartmentDataModel
     {
         public int ID { get; set; }

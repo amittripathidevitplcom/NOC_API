@@ -289,6 +289,14 @@ namespace RJ_NOC_Model
         public string? ApplicationGeoLatitude { get; set; }
         public string? ApplicationGeoLongitude { get; set; }
 
+
+        public bool? InspectionPaid { get; set; }
+        public bool? FDRPaid { get; set; }
+        public int? InspectionIntimation { get; set; }
+        public int? FDRIntimation { get; set; }
+        public string? FDRIntimationDate { get; set; }
+        public bool? PayFDRSShowHide { get; set; }
+
     }
 
     public class ApplyNocApplicationParameterDataModel

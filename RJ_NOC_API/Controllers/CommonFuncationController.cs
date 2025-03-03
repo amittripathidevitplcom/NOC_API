@@ -3908,14 +3908,14 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-        [HttpGet("HomePage_IncreaseDate/{DepartmentID}")]
-        public async Task<OperationResult<List<DataTable>>> HomePage_IncreaseDate(int DepartmentID)
+        [HttpGet("HomePage_IncreaseDate/{DepartmentID}/{Type}")]
+        public async Task<OperationResult<List<DataTable>>> HomePage_IncreaseDate(int DepartmentID,string Type)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(0, "HomePage_IncreaseDate", 0, "CommonFuncation");
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.HomePage_IncreaseDate(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.HomePage_IncreaseDate(DepartmentID,Type));
                 if (result.Data.Count > 0)
                 {
 
@@ -5058,6 +5058,41 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+
+        [HttpPost("UpdateInspectionFDRIntimationAH")]
+        public async Task<OperationResult<bool>> UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.UpdateInspectionFDRIntimationAH(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.ApplyNOCID, "UpdateInspectionFDRIntimationAH", request.ApplyNOCID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.UpdateInspectionFDRIntimationAH", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
             }
             return result;
         }

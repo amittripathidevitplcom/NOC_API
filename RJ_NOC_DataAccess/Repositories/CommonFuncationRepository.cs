@@ -1641,9 +1641,9 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
         }
 
-        public List<DataTable> HomePage_IncreaseDate(int DepartmentID)
+        public List<DataTable> HomePage_IncreaseDate(int DepartmentID, string Type)
         {
-            string SqlQuery = "USP_GetHomePageData @DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = "USP_GetHomePageData @DepartmentID='" + DepartmentID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.HomePage_IncreaseDate");
 
@@ -2214,7 +2214,17 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-
+        public bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec UpdateInspectionFDRIntimation";
+            SqlQuery += " @ActionType='" + request.ActionType + "',@ApplyNOCID='" + request.ApplyNOCID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.UpdateInspectionFDRIntimationAH");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
 

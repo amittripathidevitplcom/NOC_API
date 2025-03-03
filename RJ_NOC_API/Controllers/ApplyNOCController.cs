@@ -2035,7 +2035,7 @@ namespace RJ_NOC_API.Controllers
                     System.IO.File.WriteAllBytes(filepath, result1.MainStream);
                     PdfPath = fileName;
 
-                    if (string.IsNullOrEmpty(PdfPath))
+                    if (!string.IsNullOrEmpty(PdfPath))
                     {
                         bool result2 = false;
                         result2 = UtilityHelper.ApplyNOCUtility.UpdateAHNOCPDFPath(PdfPath,request.ApplyNOCID,request.ParameterID);

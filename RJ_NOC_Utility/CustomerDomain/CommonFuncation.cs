@@ -574,9 +574,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetSSOByCollegeIDWise(CollegeID);
         }
 
-        public List<DataTable> HomePage_IncreaseDate(int DepartmentID)
+        public List<DataTable> HomePage_IncreaseDate(int DepartmentID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate(DepartmentID);
+            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate(DepartmentID,Type);
         }
         public List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
         {
@@ -717,6 +717,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
         {
             return UnitOfWork.CommonFuncationRepository.GetNOCFormat(DepartmentID,CollegeID,ParameterID,NOCFor);
+        }
+        public bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request)
+        {
+            return UnitOfWork.CommonFuncationRepository.UpdateInspectionFDRIntimationAH(request);
         }        
     }
 }
