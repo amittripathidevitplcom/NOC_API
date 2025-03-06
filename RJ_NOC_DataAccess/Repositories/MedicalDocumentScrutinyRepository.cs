@@ -494,5 +494,27 @@ namespace RJ_NOC_DataAccess.Repository
             listdataModels.Add(dataModels);
             return listdataModels;
         }
+
+        public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollegeID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_CourseDetails @CollegeID=" + CollegeID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.DocumentScrutiny_CourseDetails");
+
+            List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> listdataModels = new List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail>();
+            MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail dataModels = new MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail();
+
+            List<DataTable> CourseDetail = new List<DataTable>();
+            CourseDetail.Add(dataSet.Tables[0]);
+            dataModels.CourseDetails = CourseDetail;
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[1]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
     }
 }

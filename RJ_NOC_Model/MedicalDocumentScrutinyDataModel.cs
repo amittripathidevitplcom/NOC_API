@@ -64,6 +64,11 @@ namespace RJ_NOC_Model
         public List<FacilityDetailsDataModel> FacilityDetails { get; set; }
         public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
     }
+    public class MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail
+    {
+        public List<DataTable> CourseDetails { get; set; }
+        public List<DataTable> DocumentScrutinyFinalRemarkList { get; set; }
+    }
     public class MedicalDocumentScrutinyDataModel_DocumentRoomDetails
     {
         public List<RoomDetailsDataModel> RoomDetails { get; set; }

@@ -91,6 +91,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_CourtCase(CollageID, RoleID, ApplyNOCID);
         }    
+        public List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.DocumentScrutiny_CourseDetails(CollageID, RoleID, ApplyNOCID);
+        }    
         public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.GetApplyNOCApplicationList(request);

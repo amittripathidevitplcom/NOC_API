@@ -36,7 +36,7 @@ namespace RJ_NOC_DataAccess.Repositories
             string SqlQuery = " exec USP_SaveHostelDetail_IU  ";
             SqlQuery += "@HostelTypeID='"+request.HostelTypeID+ "',@HostelCategoryID='" + request.HostelCategoryID + "',@HostelDetailID = '"+request.HostelDetailID+"',@IsHostelCampus = '"+request.IsHostelCampus+ "',@IsHostel = '"+request.IsHostel+"',@HostelName = '" + request.HostelName+"',@AddressLine1 = '"+request.AddressLine1+"',@AddressLine2 = '"+request.AddressLine2+"',@IsRuralUrban = '"+request.IsRuralUrban+"',@DivisionId = '"+request.DivisionID+"',@DistrictID = '"+request.DistrictID+"',@TehsilID = '"+request.TehsilID+"',@PanchayatSamitiID = '"+request.PanchayatSamitiID+"',";
             SqlQuery += "@CityTownVillage='" + request.CityTownVillage + "',@Pincode='" + request.Pincode + "',@ContactPersonName='" + request.ContactPersonName + "',@ContactPersonNo='" + request.ContactPersonNo + "',";
-            SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',@Furnished='" + request.Furnished + "',@Toilet='" + request.Toilet + "',@Mess='" + request.Mess + "',@Hygiene='" + request.Hygiene + "',@Commonroom='" + request.Commonroom + "',@Visitor='" + request.Visitor + "',";
+            SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',@Furnished='" + request.Furnished + "',@Toilet='" + request.Toilet + "',@Mess='" + request.Mess + "',@Hygiene='" + request.Hygiene + "',@Commonroom='" + request.Commonroom + "',@Visitor='" + request.Visitor + "',@OwnerShhipRentDocument='" + request.OwnerShhipRentDocument + "',";
             SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "',@CityID='" + request.CityID + "',@BuiltUpArea='" + request.BuiltUpArea + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "HostelDetail.SaveData");
             if (Rows > 0)
@@ -89,6 +89,11 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.RentDocument = dataSet.Tables[0].Rows[0]["RentDocument"].ToString();
                     dataModels.RentDocumentPath = dataSet.Tables[0].Rows[0]["RentDocumentPath"].ToString();
                     dataModels.RentDocument_Dis_FileName = dataSet.Tables[0].Rows[0]["RentDocument_Dis_FileName"].ToString();
+
+                    dataModels.OwnerShhipRentDocument = dataSet.Tables[0].Rows[0]["OwnerShhipRentDocument"].ToString();
+                    dataModels.OwnerShhipRentDocumentPath = dataSet.Tables[0].Rows[0]["OwnerShhipRentDocumentPath"].ToString();
+                    dataModels.OwnerShhipRentDocument_Dis_FileName = dataSet.Tables[0].Rows[0]["OwnerShhipRentDocument_Dis_FileName"].ToString();
+
                     dataModels.DepartmentID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["DepartmentID"]);
                     dataModels.CollegeID = Convert.ToInt32(dataSet.Tables[0].Rows[0]["CollegeID"]);
 

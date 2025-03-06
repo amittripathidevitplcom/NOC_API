@@ -27,5 +27,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID);
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase> DocumentScrutiny_CourtCase(int CollageID, int RoleID, int ApplyNOCID);
         List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request);
+        List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID);
     }
 }

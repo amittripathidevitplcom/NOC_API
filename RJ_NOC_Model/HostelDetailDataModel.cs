@@ -67,6 +67,11 @@ namespace RJ_NOC_Model
         public string? BuiltUpArea { get; set; }
 
 
+
+        public string? OwnerShhipRentDocument { get; set; }
+        public string? OwnerShhipRentDocumentPath { get; set; }
+        public string? OwnerShhipRentDocument_Dis_FileName { get; set; }
+
     }
 
     public class HostelDetailsDataModel_Hostel
