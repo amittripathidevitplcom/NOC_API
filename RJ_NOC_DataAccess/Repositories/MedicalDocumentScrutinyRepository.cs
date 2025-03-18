@@ -516,5 +516,12 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
+        public DataSet GetMedicalGroupThreeInspectionReportData(int ApplyNOCID)
+        {
+            string SqlQuery = $" exec USP_GetMedicalGroupThreeInspectionReportData @ApplyNOCID={ApplyNOCID}";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetMedicalGroupThreeInspectionReportData");
+            return dataset;
+        }
     }
 }

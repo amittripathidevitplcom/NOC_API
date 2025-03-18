@@ -4,6 +4,7 @@ using System.Text;
 using RJ_NOC_Model;
 using RJ_NOC_Utility.CustomerDomain.Interface;
 using RJ_NOC_DataAccess.Interface;
+using System.Data;
 
 namespace RJ_NOC_Utility.CustomerDomain
 {
@@ -98,6 +99,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request)
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.GetApplyNOCApplicationList(request);
+        }
+        public DataSet GetMedicalGroupThreeInspectionReportData(int ApplyNOCID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.GetMedicalGroupThreeInspectionReportData(ApplyNOCID);
         }
 
     }

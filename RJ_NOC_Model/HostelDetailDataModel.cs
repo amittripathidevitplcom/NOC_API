@@ -72,6 +72,13 @@ namespace RJ_NOC_Model
         public string? OwnerShhipRentDocumentPath { get; set; }
         public string? OwnerShhipRentDocument_Dis_FileName { get; set; }
 
+        public string? BluePrintDocument { get; set; }
+        public string? BluePrintDocumentPath { get; set; }
+        public string? BluePrintDocument_Dis_FileName { get; set; }
+        public string? DistanceCertificateDocument { get; set; }
+        public string? DistanceCertificateDocumentPath { get; set; }
+        public string? DistanceCertificateDocument_Dis_FileName { get; set; }
+
     }
 
     public class HostelDetailsDataModel_Hostel

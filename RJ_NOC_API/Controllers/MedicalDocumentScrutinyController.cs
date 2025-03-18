@@ -20,6 +20,7 @@ using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using RJ_NOC_DataAccess.Common;
+using AspNetCore.Reporting;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -463,13 +464,13 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpGet("CheckDocumentScrutinyTabsData/{ApplyNOCID}/{RoleID}/{CollegeID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID,int RoleID, int CollegeID)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckDocumentScrutinyTabsData(int ApplyNOCID, int RoleID, int CollegeID)
         {
             //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "DocumentMaster");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID,RoleID, CollegeID));
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.CheckDocumentScrutinyTabsData(ApplyNOCID, RoleID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -683,6 +684,71 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpPost("GenerateInspectionReport/{CollegeID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateInspectionReport(int CollegeID, int RoleID, int ApplyNOCID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(ApplyNOCID, "GenerateInspectionReport", ApplyNOCID, "MedicalDocumentScrutinyController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                LocalReport localReport = null;
+                DataSet dataset = new DataSet();
+                dataset = UtilityHelper.MedicalDocumentScrutinyUtility.GetMedicalGroupThreeInspectionReportData(ApplyNOCID);
+
+                var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+                string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                string mimetype = "";
+                int extension = 1;
+                string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                ReportPath += "\\MedicalGroup3InspectionReport.rdlc";
+                localReport = new LocalReport(ReportPath);
+                localReport.AddDataSource("BasicInformations", dataset.Tables[0]);
+                localReport.AddDataSource("BasicInformationOfSociety", dataset.Tables[1]);
+
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                parameters.Add("test", "");
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                var result1 = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+
+                //return File(result.MainStream, "application/pdf");
+                System.IO.File.WriteAllBytes(filepath, result1.MainStream);
+
+
+
+                //string Path = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
+
+                //bool result1 = false;
+                //result1 = UtilityHelper.ApplyNOCUtility.UpdateNOCPDFPath(PdfPathList);
+                //if (result1)
+                //{
+                result.State = OperationState.Success;
+                result.SuccessMessage = "PDF Generate Successfully .!";
+                //}
+                //else
+                //{
+                //    result.State = OperationState.Warning;
+                //    result.SuccessMessage = "There was an error Generate PDF!";
+                //}
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.GenerateInspectionReport", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using RJ_NOC_Model;
 
@@ -28,5 +29,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase> DocumentScrutiny_CourtCase(int CollageID, int RoleID, int ApplyNOCID);
         List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request);
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID);
+        DataSet GetMedicalGroupThreeInspectionReportData(int ApplyNOCID);
     }
 }

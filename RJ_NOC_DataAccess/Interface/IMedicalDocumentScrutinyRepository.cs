@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RJ_NOC_Model;
 using System.Linq;
+using System.Data;
 
 
 namespace RJ_NOC_DataAccess.Interface
@@ -30,6 +31,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourtCase> DocumentScrutiny_CourtCase(int CollageID, int RoleID, int ApplyNOCID);
         List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request);
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID);
+        DataSet GetMedicalGroupThreeInspectionReportData(int ApplyNOCID);
     }
 
 }
