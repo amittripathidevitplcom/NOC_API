@@ -707,6 +707,9 @@ namespace RJ_NOC_API.Controllers
                 localReport = new LocalReport(ReportPath);
                 localReport.AddDataSource("BasicInformations", dataset.Tables[0]);
                 localReport.AddDataSource("BasicInformationOfSociety", dataset.Tables[1]);
+                localReport.AddDataSource("OwnershipDetails", dataset.Tables[2]);
+                localReport.AddDataSource("BuildupArea", dataset.Tables[3]);
+                localReport.AddDataSource("BuildupAreaGNM", dataset.Tables[4]);
 
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
