@@ -115,6 +115,13 @@ namespace RJ_NOC_Model
         public string? PrivateCollegeEstabCertificate { get; set; }
         public string? PrivateCollegeEstabCertificatePath { get; set; }
         public string? Dis_PrivateCollegeEstabCertificateName { get; set; }
+        //BTER
+        public int DTEAffiliationID { get; set; }
+        public int? StatusOfBuildingID { get; set; }
+        public int AffiliationTypeID { get; set; }
+        public string? AddressofCollegeasgiveninAICTEEOA { get; set; }
+        public int? AICTEEOAAdress { get; set; }
+        public string? AICTEEOADifferentAddress { get; set; }
 
     }
     public class ContactDetailsDataModel
@@ -126,6 +133,8 @@ namespace RJ_NOC_Model
         public string? DesignationName { get; set; }
         public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
+        public int? DTEAffiliationIDs { get; set; }
+        public string? PermanentAddress { get; set; }
     }
     public class NearestGovernmentHospitalsDataModel
     {

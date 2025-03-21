@@ -57,9 +57,10 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        //DepartmentID = '" + DepartmentID + "' and
         public bool IfExists(int ID, int DepartmentID, int CourseID)
         {
-            string SqlQuery = " select CourseID from M_SeatInformationMaster Where DepartmentID = '" + DepartmentID + "' and CourseID='" + CourseID + "'  and ID !='" + ID + "'  and DeleteStatus=0";
+            string SqlQuery = " select CourseID from M_SeatInformationMaster Where  CourseID='" + CourseID + "'  and ID !='" + ID + "'  and DeleteStatus=0";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SeatInformationMaster.IfExists");
             if (dataTable.Rows.Count > 0)

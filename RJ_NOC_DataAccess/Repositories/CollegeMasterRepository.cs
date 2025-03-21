@@ -121,6 +121,13 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@PrivateCollegeUniversityName='{0}',", request.PrivateCollegeUniversityName);
             sb.AppendFormat("@PrivateCollegeEstablishmentDate='{0}',", request.PrivateCollegeEstablishmentDate);
             sb.AppendFormat("@PrivateCollegeEstabCertificate='{0}',", request.PrivateCollegeEstabCertificate);
+            sb.AppendFormat("@DTEAffiliationID='{0}',", request.DTEAffiliationID);
+            sb.AppendFormat("@StatusOfBuildingID='{0}',", request.StatusOfBuildingID);
+            sb.AppendFormat("@AffiliationTypeID='{0}',", request.AffiliationTypeID);
+            sb.AppendFormat("@AddressofCollegeasgiveninAICTEEOA='{0}',", request.AddressofCollegeasgiveninAICTEEOA);
+            sb.AppendFormat("@AICTEEOAAdress='{0}',", request.AICTEEOAAdress);
+            sb.AppendFormat("@AICTEEOADifferentAddress='{0}',", request.AICTEEOADifferentAddress);
+
             // action
             sb.AppendFormat("@Action='{0}'", "SaveCollegeData");
 
