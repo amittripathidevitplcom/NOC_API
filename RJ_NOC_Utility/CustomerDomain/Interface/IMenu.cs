@@ -8,7 +8,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface IMenu
     {
         List<MenuDataModel_List> GetAllMenu();
-        List<MenuDataModel_List> GetUserWiseMenu(int UserID);
+        List<MenuDataModel_List> GetUserWiseMenu(int UserID,string SSOID);
         List<MenuDataModel> GetMenuIDWise(int AccountID);
         bool SaveData(MenuDataModel request);
         bool UpdateData(MenuDataModel request);

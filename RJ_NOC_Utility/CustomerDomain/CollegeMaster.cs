@@ -45,6 +45,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.ViewTotalCollegeDataByID(CollegeID);
         }
+        
         public List<CommonDataModel_DataTable> RevertedApplicationList(string LoginSSOID, int SessionYear)
         {
             return UnitOfWork.CollegeMasterRepository.RevertedApplicationList(LoginSSOID, SessionYear);
@@ -78,6 +79,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeMasterRepository.TotalCollegeDetailsByDepartment(request);
         }
+       
+        
         public List<CommonDataModel_DataTable> CollegesReport(DCECollegesReportSearchFilter request)
         {
             return UnitOfWork.CollegeMasterRepository.CollegesReport(request);
@@ -89,10 +92,38 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool IfExistsDefaulterCollegePenalty(int DepartmentID, int CollegeID, string SSOID)
         {
             return UnitOfWork.CollegeMasterRepository.IfExistsDefaulterCollegePenalty(DepartmentID,CollegeID,SSOID);
-        }      
-        public bool  CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID, int DivisionID, int DistrictID)
+        }
+        public bool CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID, int DivisionID, int DistrictID)
         {
             return UnitOfWork.CollegeMasterRepository.CompareDefaulterCollegeName(DepartmentID, CurrentCollegeName, SSOID, DivisionID, DistrictID);
+        }
+       
+        public bool IfExistAffiliationType(int DTEAffiliationID,int DepartmentID, string CurrentCollegeName, int AffiliationTypeID)
+        {
+            return UnitOfWork.CollegeMasterRepository.IfExistAffiliationType(DTEAffiliationID,DepartmentID, CurrentCollegeName, AffiliationTypeID);
+        }
+        public CollegeMasterDataModel GetDataAffiliation(int DTEAffiliationID)
+        {
+            return UnitOfWork.CollegeMasterRepository.GetDataAffiliation(DTEAffiliationID);
+        }
+        public List<CommonDataModel_FilterCollegesByBTER> FilterAffiliationCourseStatusBter(int DTEAffiliationID)
+        {
+            return UnitOfWork.CollegeMasterRepository.FilterAffiliationCourseStatusBter(DTEAffiliationID);
+        }
+        
+        public List<CommonDataModel_DataSet> ViewBTERTotalCollegeDataByID(int SelectedDteAffiliationRegId)
+        {
+            return UnitOfWork.CollegeMasterRepository.ViewBTERTotalCollegeDataByID(SelectedDteAffiliationRegId);
+        }      
+        
+        public List<CommonDataModel_DataTable> TotalBTERCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request, int SessionID, string ApplicationStatus)
+        {
+            return UnitOfWork.CollegeMasterRepository.TotalBTERCollegeDetailsByDepartment(request, SessionID, ApplicationStatus);
+        }
+        
+        public List<CommonDataModel_DataTable> GetGenerateorderList(string ApplicationStatus,string GenOrderNumber)
+        {
+            return UnitOfWork.CollegeMasterRepository.GetGenerateorderList(ApplicationStatus,GenOrderNumber);
         }
     }
 }

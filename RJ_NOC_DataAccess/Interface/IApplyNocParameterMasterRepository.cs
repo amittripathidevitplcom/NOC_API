@@ -28,5 +28,6 @@ namespace RJ_NOC_DataAccess.Interface
         DataTable ViewApplyNocFDRDetailsByCollegeID(int CollegeID,int SessionYear);
         DataTable GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
         bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request);
+        List<CommonDataModel_DataTable> GetApplyBTERPaymentHistoryApplicationID(int DTEAffiliationID, string PaymentFor);
     }
 }

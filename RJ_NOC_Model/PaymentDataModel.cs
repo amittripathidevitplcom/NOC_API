@@ -109,6 +109,7 @@ namespace RJ_NOC_Model
 
         /////
         public int ApplyNocApplicationID { get; set; }
+       
         public int DepartmentID { get; set; }
         public string RemitterName { get; set; }
         public string REGTINNO { get; set; }
@@ -117,7 +118,8 @@ namespace RJ_NOC_Model
         public string City { get; set; }
         public string Pincode { get; set; }
         public string? PaymentType { get; set; }
-
+        //BTER AFFILIATION
+        public int? DTEAffiliationID { get; set; }
     }
 
     public class TransactionStatusDataModel

@@ -241,4 +241,67 @@ namespace RJ_NOC_Model
         public string? PenaltyDocPath { get; set; }
 
     }
+
+    public class BTERDocumentScrutinyDataModel
+    {
+        public int DepartmentID { get; set; }
+        public int CollegeID{ get; set; }
+        public int UserID{ get; set; }
+        public int RoleID{ get; set; }
+        public int ActionID{ get; set; }
+        public string FinalRemark { get; set; }
+        public int ApplyAffiliationID { get; set; }
+        public int BTERAffiliationRegID { get; set; }
+        public List<NOCBTERDocumentScrutinyList_DataModel> NocDocumentScrutinyDetail { get; set; }
+        public List<LOABTERDocumentScrutinyList_DataModel> LOADocumentScrutinyDetail { get; set; }
+        public List<ApplicationformBTERDocumentScrutinyList_DataModel> ApplicationFormDocumentScrutinyDetail { get; set; }
+        public List<BTERPaymentformBTERDocumentScrutinyList_DataModel> BTERPaymentDocumentScrutinyDetail { get; set; }
+
+   }
+    public class NOCBTERDocumentScrutinyList_DataModel
+    {
+        public int DSBterAffiliationID { get; set; }
+        public int? DepartmentID{ get; set; }
+        public int? CollegeID{ get; set; }
+        public int? UserID{ get; set; }
+        public int? RoleID{ get; set; }      
+        public int? ApplyAffiliationID{ get; set; }
+        public string Action { get; set; }
+        public string? Remark { get; set; }
+
+    }
+    public class LOABTERDocumentScrutinyList_DataModel
+    {
+        public int DSBterAffiliationID { get; set; }
+        public int? DepartmentID{ get; set; }
+        public int? CollegeID{ get; set; }
+        public int? UserID{ get; set; }
+        public int? RoleID{ get; set; } 
+        public int? ApplyAffiliationID{ get; set; }
+        public string Action { get; set; }
+        public string? Remark { get; set; }
+    }
+    public class ApplicationformBTERDocumentScrutinyList_DataModel
+    {
+        public int DSBterAffiliationID { get; set; }
+        public int DepartmentID{ get; set; }
+        public int CollegeID{ get; set; }
+        public int UserID{ get; set; }
+        public int RoleID{ get; set; } 
+        public int ApplyAffiliationID{ get; set; }
+        public string Action { get; set; }
+        public string? Remark{ get; set; }
+}
+    public class BTERPaymentformBTERDocumentScrutinyList_DataModel
+    {
+        public int DSBterAffiliationID { get; set; }
+        public int DepartmentID{ get; set; }
+        public int CollegeID{ get; set; }
+        public int UserID{ get; set; }
+        public int RoleID{ get; set; } 
+        public int ApplyAffiliationID{ get; set; }
+        public string Action { get; set; }
+        public string? Remark { get; set; }
+        public string? PaymentID { get; set; }
+    }
 }

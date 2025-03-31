@@ -21,6 +21,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<ApplyNocFDRDetailsDataModel> GetApplyNocFDRDetails(int ApplyNocFDRID, int ApplyNocID);
         bool FinalSubmitApplyNocApplicationByApplicationID(int ApplyNocApplicationID, int ModifyBy);
         List<CommonDataModel_DataTable> GetApplyNocPaymentHistoryApplicationID(int ApplyNocApplicationID,string PaymentFor);
+        
         List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID);
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int ApplyNocApplicationID, int PaymentOfflineID, string ActionName);
         List<ApplyNocApplicationDataModel> GetApplyNocApplicationLists(int SelectedCollageID, int SelectedDepartmentID,int SessionYear);
@@ -28,5 +29,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<ApplyNOCCourseListDataModal> GetCourseSubjectByApplyNOCID(int ApplyNOCID,int ParameterID);
         bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request);
+        List<CommonDataModel_DataTable> GetApplyBTERPaymentHistoryApplicationID(int DTEAffiliationID, string PaymentFor);
     }
 }

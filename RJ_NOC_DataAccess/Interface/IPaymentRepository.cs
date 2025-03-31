@@ -9,7 +9,7 @@ namespace RJ_NOC_DataAccess.Interface
 {
     public interface IPaymentRepository
     {
-        PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID, PaymentGatewayDataModel Model);
+        PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID,string DTEAffiliationID, PaymentGatewayDataModel Model);
         PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel Model);
         bool SaveData(PaymentResponse request);
         bool CreatePaymentRequest(PaymentRequest request);
@@ -32,7 +32,8 @@ namespace RJ_NOC_DataAccess.Interface
         bool UpdateEmitraPaymentStatus(EmitraResponseParameters request);
         List<CommonDataModel_DataTable> GetEmitraTransactionDetails(string TransactionID);
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID,int SessionYear);
-        
+        List<ResponseParameters> GetBterPaymentListIDWise(string TransactionID);
+        List<ResponseParameters> GetBTERPreviewPaymentDetails(int AffiliationRegID, int SessionYear);
 
     }
 }

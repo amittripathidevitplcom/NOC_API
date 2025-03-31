@@ -18,9 +18,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MenuRepository.GetAllMenu();
         }
-        public List<MenuDataModel_List> GetUserWiseMenu(int UserID)
+        public List<MenuDataModel_List> GetUserWiseMenu(int UserID,string SSOID)
         {
-            return UnitOfWork.MenuRepository.GetUserWiseMenu(UserID);
+            return UnitOfWork.MenuRepository.GetUserWiseMenu(UserID, SSOID);
         }
         public List<MenuDataModel> GetMenuIDWise(int AccountID)
         {

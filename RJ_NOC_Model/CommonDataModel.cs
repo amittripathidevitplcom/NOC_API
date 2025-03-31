@@ -381,6 +381,7 @@ namespace RJ_NOC_Model
     public class CommonDataModel_DepartmentWiseStartDateEndDate
     {
         public int DepartmentID { get; set; }
+       
         public int ApplicationSession { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
@@ -409,7 +410,10 @@ namespace RJ_NOC_Model
         public DataTable? data { get; set; }
 
     }
-
+    public class CommonDataModel_Bter
+    {
+        public int? DTEAffiliationID { get; set; }
+    }
     public class CommonDataModel_ApplicationListFilter
     {
         public int? RoleID { get; set; }
@@ -418,6 +422,109 @@ namespace RJ_NOC_Model
         public int? SessionYear { get; set; }
         public string? Status { get; set; }
         public string? ActionName { get; set; }
+
+    }
+    public class CommonDataModel_FilterCollegesByBTER
+    {
+        public int DTEAffiliationID { get; set; }
+        public int CollegeID { get; set; }        
+        public int AffiliationTypeID { get; set; }
+        public string Name { get; set; }
+        public string CollegeNameEn { get; set; }
+        public string? CollegeNameHi { get; set; }
+
+    }
+    public class CommonDataModel_BterApplyAffiliation
+    {
+        public int? ApplyBterAffiliationID { get; set; }
+    }
+    public class CommonDataModel_RevertAffiliationApply
+    {
+        public int? DTEAffiliationID { get; set; }
+        public int? DepartmentID { get; set; }
+        public string? CollegeName { get; set; }
+        public int? CollegeStatusID { get; set; }
+        public string? CollegeStatus { get; set; }
+        public string? ManagementType { get; set; }
+        public string? NOCDocStatus { get; set; }
+        public string? LOADocStatus { get; set; }
+        public string? ApplicationDocStatus { get; set; }
+        public string? PaymentDocStatus { get; set; }        
+        public DataTable? data { get; set; }
+
+    }
+    public class CommonDataModel_BTEROrder
+    {
+        public string GenOrderNumber { get; set; }
+        public string DistrictName { get; set; }
+        public string CollegeName { get; set; }
+        public string LegalManagementType { get; set; }
+        public string CollegeEmail { get; set; }
+        public string CollegeStatus { get; set; }
+        public string MappingSSOID { get; set; }
+    }
+    public class CommonDataModel_BTEROrderList
+    {       
+        public string PdfFilePath { get; set; }       
+        public string GenOrderNumber { get; set; }
+    }
+
+    public class CAGetSignedXmlApiRequest
+    {
+        public string? ApplyNocApplicationID { get; set; }
+        public string? pdfFile1 { get; set; } //Base64 string of Pdf  File //M        
+        public string? signatureOnPageNumber { get; set; } //Page number where you want to eSign.“0” for all pages.M        
+        public string? xcord { get; set; } //X coordinate, Ex. “400” //M
+        public string? ycord { get; set; } //Y coordinate, Ex. “30” //M
+        public string? successFailureurl { get; set; } //URL of response         controller/page where response sent by the eSign ESP. //M
+        public string? TransactionID { get; set; } //Unique transaction id  start with Client code and underscore.For ex.“ABC_TEST_XYZ1_12345”
+        public string? designation { get; set; } //Designation of signing user. //M
+        public string? location { get; set; } //Location or posting  place of signing user. //M
+        public string? sigsize { get; set; } // Signature size, (small/medium/large) //M
+        public string? PDFFileName { get; set; } //PDFFIleName
+        public int? DepartmentID { get; set; } //DepartmentId        
+        public string? SSOdisplayName { get; set; }  //FOR USERNAME
+        public string? esignResponse { get; set; } //Send esignResponse Base64 in Response 
+        public string? eSignType { get; set; } //
+        public string? ResponseJson { get; set; } //Response Json
+        public string? RSDRequestUrl { get; set; }
+        public string? ESPRequestURL { get; set; }
+        public string? esignData { get; set; }
+        public string? RedirectJson { get; set; }
+        public string? IPAddress { get; set; }
+        public string? RequestType { get; set; }
+        public string? CreatedBy { get; set; }
+        public string? pdfBase64 { get; set; }
+        public string? RequestJson { get; set; } //RequestJson Json
+        public string? ResponseCode { get; set; } //RequestJson Json
+        public string? ResponseMessage { get; set; } //RequestJson Json
+
+        public string? esignResponseUrl { get; set; } //download url Json
+
+    }
+
+    public class CAAadharResponseForESPRedirect
+    {
+        public string? responseCode { get; set; } //Base64 string of Pdf  File //M "REA_001",
+        public string? responseMsg { get; set; } //Page number where you want to eSign.“0” for all pages.M
+        public string? signedXMLData { get; set; } //.base64 string of signed xml….
+        public string? txn { get; set; } //Transaction_Id_same_as_Prev. USED in                                         
+        public bool RequestStatus { get; set; }
+        public string? ESPRequestURL { get; set; }
+    }
+
+
+    public class CAGetSignedPDFAPIRequestResponse
+    {
+
+
+        public string? txn { get; set; } // Transaction id same as used in first API.
+        public string? username { get; set; } //Name_on_Aadhaar_Card                                             
+        public string? responseCode { get; set; } //Contains response code. Please     see Annexure C for more response codes. //REA_001 OTHER FAILED
+        public string? responseMsg { get; set; } //Contains Success or Error message.
+        public string? signedPDFUrl { get; set; } // Contains signed PDF file path
+        public bool RequestStatus { get; set; }
+
 
     }
 }

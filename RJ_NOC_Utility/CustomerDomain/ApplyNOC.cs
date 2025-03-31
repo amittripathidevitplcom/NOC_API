@@ -155,6 +155,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForByApplyNOCID(ApplyNOCID);
         }
+        
+       
         public bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request)
         {
             return UnitOfWork.ApplyNOCRepository.SaveDocumentScrutinyLOI(request);
@@ -200,6 +202,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID)
         {
             return UnitOfWork.ApplyNOCRepository.UpdateAHNOCPDFPath(PDFPath,ApplyNOCID, ParameterID);
+        }
+        public bool SaveBTERDocumentScrutiny(BTERDocumentScrutinyDataModel request)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveBTERDocumentScrutiny(request);
+        }
+        public List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder()
+        {
+            return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForAffiliationorder();
         }
     }
 }

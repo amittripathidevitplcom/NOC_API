@@ -44,6 +44,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetNOCIssuedReportListForAdmin(int UserID, string ActionName, int RoleID);
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID);
+       
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
         int CountTotalRevertDCE(int ApplyNOCID,int RoleID,int UserID);
         List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID);
@@ -54,6 +55,8 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         DataSet GetEssentialityDraftNOCDetailsByNOCIID(int ApplyNOCID);
         bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
         bool ForwardToEsignDCE(int ApplyNOCID,int UserId);
+        bool SaveBTERDocumentScrutiny(BTERDocumentScrutinyDataModel request);
+        List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder();
         bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID);
     }
 }

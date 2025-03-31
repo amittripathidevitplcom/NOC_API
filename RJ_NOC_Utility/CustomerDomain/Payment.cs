@@ -18,9 +18,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
         }
 
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID,PaymentGatewayDataModel Model)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID,string DTEAffiliationID, PaymentGatewayDataModel Model)
         {
-            return UnitOfWork.PaymentRepository.SendRequest(PRN,AMOUNT,PURPOSE,USERNAME,USERMOBILE,USEREMAIL, ApplyNocApplicationID,Model);
+            return UnitOfWork.PaymentRepository.SendRequest(PRN,AMOUNT,PURPOSE,USERNAME,USERMOBILE,USEREMAIL, ApplyNocApplicationID, DTEAffiliationID, Model);
         }
         public PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel Model)
         {
@@ -48,6 +48,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.GetPaymentListIDWise(TransactionID);
         }
+        
 
         public PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel model)
         {
@@ -58,6 +59,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.PaymentRepository.GetPreviewPaymentDetails(ApplyNocApplicationID, SessionYear);
         }
+        
         public List<CommonDataModel_DataTable> GetRPPTransactionList(TransactionSearchFilterModel Model)
         {
             return UnitOfWork.PaymentRepository.GetRPPTransactionList(Model);
@@ -65,6 +67,16 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID, int SessionYear)
         {
             return UnitOfWork.PaymentRepository.GetOfflinePaymentDetails(CollegeID, SessionYear);
+        }
+       
+        public List<ResponseParameters> GetBterPaymentListIDWise(string TransactionID)
+        {
+            return UnitOfWork.PaymentRepository.GetBterPaymentListIDWise(TransactionID);
+        }
+       
+        public List<ResponseParameters> GetBTERPreviewPaymentDetails(int AffiliationRegID, int SessionYear)
+        {
+            return UnitOfWork.PaymentRepository.GetBTERPreviewPaymentDetails(AffiliationRegID, SessionYear);
         }
 
         #region "Emitra Section"

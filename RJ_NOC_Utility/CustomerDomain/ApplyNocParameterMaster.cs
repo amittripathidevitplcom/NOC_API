@@ -790,6 +790,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyNocPaymentHistoryApplicationID(ApplyNocApplicationID, PaymentFor);
         }
+       
 
         public List<CommonDataModel_DataTable> GetApplicationPaymentHistoryApplicationID(int ApplyNocApplicationID)
         {
@@ -856,6 +857,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveApplyNocMinisterFile(ApplyNoc_MinisterFile request)
         {
             return UnitOfWork.ApplyNocParameterMasterRepository.SaveApplyNocMinisterFile(request);
+        }
+        
+        public List<CommonDataModel_DataTable> GetApplyBTERPaymentHistoryApplicationID(int DTEAffiliationID, string PaymentFor)
+        {
+            return UnitOfWork.ApplyNocParameterMasterRepository.GetApplyBTERPaymentHistoryApplicationID(DTEAffiliationID, PaymentFor);
         }
 
     }

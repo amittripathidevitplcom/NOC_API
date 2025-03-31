@@ -65,9 +65,31 @@ namespace RJ_NOC_API.Controllers
             string PRN = "TXN" + CommonHelper.GenerateTransactionNumber();
             try
             {
+                string PayReturnUrl = "";
+                string RedirectURL = "";
                 if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
-                    result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, Convert.ToDecimal(request.AMOUNT).ToString(), request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID.ToString(), data));
+                    string URLType = Request.GetDisplayUrl();
+                    //if (URLType.Contains("localhost"))
+                    //{
+                    //    PayReturnUrl = "http://localhost:62778/api/Payment/PaymentResponse";
+                    //    RedirectURL = "http://localhost:4200/bterpaymentsuccess/";
+
+
+                    //}
+                    //else if (URLType.Contains("172.22.33.75"))
+                    //{
+                    //    PayReturnUrl = "http://172.22.33.75/api/api/Payment/PaymentResponse";
+                    //    RedirectURL = "http://172.22.33.75/bterpaymentsuccess/";
+                    //}
+                    //else
+                    //{
+                    //    PayReturnUrl = "https://rajnoc.rajasthan.gov.in/api/api/Payment/PaymentResponse";
+                    //    RedirectURL = "https://rajnoc.rajasthan.gov.in/bterpaymentsuccess/";
+                    //}
+                    //data.SuccessURL = PayReturnUrl;
+                    //data.FailureURL= PayReturnUrl;
+                    result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.SendRequest(PRN, Convert.ToDecimal(request.AMOUNT).ToString(), request.PURPOSE, request.USERNAME, request.USERMOBILE, request.USEREMAIL, request.ApplyNocApplicationID.ToString(), request.DTEAffiliationID.ToString(), data));
                     if (result.Data != null)
                     {
                         result.Data.CreatedBy = request.CreatedBy;
@@ -179,7 +201,7 @@ namespace RJ_NOC_API.Controllers
 
             }
             return Redirect(RetrunUrL);
-            // return Redirect("http://localhost:4200/paymentsuccess");
+            //return Redirect("http://localhost:4200/bterpaymentsuccess/"+ result.Data.RESPONSEPARAMETERS.PRN);
 
             //return result;
         }
@@ -232,7 +254,8 @@ namespace RJ_NOC_API.Controllers
 
                 if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
-                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.VerificationURL + "?MERCHANTCODE=" + data.MerchantCode + "&&PRN=" + Model.PRN + "&&AMOUNT=" + Model.AMOUNT);
+                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.VerificationURL + "?MERCHANTCODE=" + data.MerchantCode + "&PRN=" + Model.PRN + "&AMOUNT=" + Model.AMOUNT);
+                   
                     webrequest.Method = "POST";
                     webrequest.ContentType = "application/x-www-form-urlencoded";
                     webrequest.ContentLength = 0;
@@ -773,7 +796,7 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
-        }
+        }         
 
 
         [HttpPost("EmitraPaymentResponse")] //IActionResult
@@ -1097,7 +1120,7 @@ namespace RJ_NOC_API.Controllers
                 //get payment details form database
                 DataTable dataTable = new DataTable();
                 dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(DepartmentID, PaymentType);
-                if (dataTable.Rows.Count>0)
+                if (dataTable.Rows.Count > 0)
                 {
                     string ReqURL = dataTable.Rows[0]["VerificationTransactionURL"].ToString();
                     //EGrass_AUIN_Verify_Data
@@ -1138,7 +1161,7 @@ namespace RJ_NOC_API.Controllers
                                 string keypath = Path.Combine(Directory.GetCurrentDirectory(), "PaymentKey", "rajnoc.key");
                                 string EncryptString = oEgrassFabEncrypt.Decrypt(result11111, keypath);
 
-                               
+
                                 eGrassPaymentDetails_Req_Res.Response_JsonENC = result11111;
                                 eGrassPaymentDetails_Req_Res.Response_Json = EncryptString;
 
@@ -1146,7 +1169,7 @@ namespace RJ_NOC_API.Controllers
 
                                 foreach (string kvp in EncryptString.Split('|'))
                                 {
-                                    
+
 
                                     string Key = kvp.Split('=')[0];
                                     string Value = kvp.Split('=')[1];
@@ -1225,6 +1248,69 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        
+            [HttpGet("GetBterPaymentListIDWise/{TransID}")]
+        public async Task<OperationResult<List<ResponseParameters>>> GetBterPaymentListIDWise(string TransID)
+        {
+            var result = new OperationResult<List<ResponseParameters>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetBterPaymentListIDWise(TransID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
+        [HttpGet("GetBTERPreviewPaymentDetails/{AffiliationRegID}/{SessionYear=0}")]
+        public async Task<OperationResult<List<ResponseParameters>>> GetBTERPreviewPaymentDetails(int AffiliationRegID, int SessionYear)
+        {
+            var result = new OperationResult<List<ResponseParameters>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetBTERPreviewPaymentDetails(AffiliationRegID, SessionYear));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetBTERPreviewPaymentDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
