@@ -5026,6 +5026,37 @@ namespace RJ_NOC_API.Controllers
             var result = lr.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
+        [HttpGet("GetNOCFormat/{DepartmentID}/{CollegeID}/{ParameterID}/{NOCFor}")]
+        public async Task<OperationResult<List<DataTable>>> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetNOCFormat(DepartmentID, CollegeID, ParameterID, NOCFor));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetNOCFormatList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("CheckCollegestatusIDWise/{DTEAffiliationID}")]
         public async Task<OperationResult<CommonDataModel_RegistrationDTEAffiliationApply>> CheckCollegestatusIDWise(int DTEAffiliationID)
         {

@@ -7,7 +7,6 @@ using RJ_NOC_DataAccess.Interface;
 using Azure.Core;
 using System.Data;
 using RJ_NOC_DataAccess.Common;
-
 namespace RJ_NOC_Utility.CustomerDomain
 {
     public class DTEAffilitionMaster : UtilityBase, IDTEAffilitionMaster

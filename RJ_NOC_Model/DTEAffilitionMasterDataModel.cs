@@ -313,17 +313,20 @@ namespace RJ_NOC_Model
             public string? UploadApplicationFormDocPath { get; set; }
             public string? UploadApplicationFormDoc_Dis_FileName { get; set; }
         }
-        public class BTERFeeMasterDataModel
-        {
-            public int FeeID { get; set; }
-            public int DepartmentID { get; set; }
-            public string? DepartmentName { get; set; }
-            public string FeeType { get; set; }
-            public decimal Amount { get; set; }
-            public int UserID { get; set; }
-            public bool ActiveStatus { get; set; }
-            public string? ActiveDeactive { get; set; }
-            public bool DeleteStatus { get; set; }
-        }
+
+
+
+    }
+    public class BTERFeeMasterDataModel
+    {
+        public int FeeID { get; set; }
+        public int DepartmentID { get; set; }
+        public string? DepartmentName { get; set; }
+        public string FeeType { get; set; }
+        public decimal Amount { get; set; }
+        public int UserID { get; set; }
+        public bool ActiveStatus { get; set; }
+        public string? ActiveDeactive { get; set; }
+        public bool DeleteStatus { get; set; }
     }
 }
