@@ -92,5 +92,26 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DTEAllifitionMasterRepository.Generateorder_SaveData(request);
         }
+        public List<CommonDataModel_DataTable> GetAllBTERFeeList()
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetAllBTERFeeList();
+        }
+        public List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetBTERFeeByID(FeeID);
+        }
+        public bool SaveDataBTERFee(BTERFeeMasterDataModel request)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.SaveDataBTERFee(request);
+        }
+        public bool DeleteDataBter(int FeeID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.DeleteDataBter(FeeID);
+        }
+
+        public bool IfExists(int FeeID, int DepartmentID, string FeeType)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.IfExists(FeeID, DepartmentID, FeeType);
+        }
     }
 }

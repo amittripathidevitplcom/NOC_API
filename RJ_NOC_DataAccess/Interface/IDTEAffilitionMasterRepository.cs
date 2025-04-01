@@ -30,6 +30,11 @@ namespace RJ_NOC_DataAccess.Interface
         bool RevertApplicationSaveData(ApplicationRevertOtherDetailsDataModel request, string ActionName);
         List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID,string ActionName);
         bool Generateorder_SaveData(Generateorderforbter request);
+        List<CommonDataModel_DataTable> GetAllBTERFeeList();
+        List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID);
+        bool SaveDataBTERFee(BTERFeeMasterDataModel request);
+        bool DeleteDataBter(int FeeID);
+        bool IfExists(int FeeID, int DepartmentID, string FeeType);
     }
 
 }

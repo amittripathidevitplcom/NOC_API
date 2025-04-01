@@ -211,5 +211,13 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForAffiliationorder();
         }
+        public bool SaveBTERDocumentScrutiny(BTERDocumentScrutinyDataModel request)
+        {
+            return UnitOfWork.ApplyNOCRepository.SaveBTERDocumentScrutiny(request);
+        }
+        public List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder()
+        {
+            return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForAffiliationorder();
+        }
     }
 }
