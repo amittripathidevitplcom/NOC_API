@@ -46,6 +46,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model);
         List<CommonDataModel_DataTable> GetAppliedParameterNOCForByApplyNOCID(int ApplyNOCID);
         List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForByApplyNOCID(int ApplyNOCID);
+        
         bool SaveDocumentScrutinyLOI(DocumentScrutinyDataModel request);
         int CountTotalRevertDCE(int ApplyNOCID, int RoleID, int UserID);
 
@@ -58,6 +59,8 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveDCEDraftNOCData(NOCIssuedRequestDataModel model);
 
         bool ForwardToEsignDCE(int ApplyNOCID, int UserId);
+        bool SaveBTERDocumentScrutiny(BTERDocumentScrutinyDataModel request);
+        List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder();
         DataSet GetAHDegreeNOCDetailsNOCIID(int ApplyNOCID, int ParameterID);
         bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID);
     }

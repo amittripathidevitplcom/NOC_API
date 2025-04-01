@@ -242,6 +242,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_CommonMasterDepartmentAndTypeWise> GetCommonMasterList_DepartmentAndTypeWise(int DepartmentID, string Type)
         {
+            
             string SqlQuery = " Exec USP_CommonMasterList_DepartmentAndTypeWise @DepartmentID='" + DepartmentID.ToString() + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetSchemeListByDepartment");
@@ -877,7 +878,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }
+        }        
 
         public List<CommonDataModel_DataTable> CheckTabsEntry_StatisticsEntry(int CollegID)
         {
@@ -1263,6 +1264,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+       
         public List<CommonDataModel_DataTable> GetPaymentMode()
         {
             string SqlQuery = " exec USP_GetPaymentMode";
@@ -1967,8 +1969,21 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<CommonDataModel_RegistrationDTEAffiliationApply>(JsonDataTable_Data.Replace("[", "").Replace("]", ""));
             return dataModels;
-        }
+        }        
+        
+        
+        public CommonDataModel_RegistrationDTEAffiliationApply CheckCollegestatusIDWise(int DTEAffiliationID)
+        {
+            string SqlQuery = "select * from M_CollegeMaster where DTEAffiliationID='" + DTEAffiliationID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.CheckCollegestatusIDWise");
 
+            CommonDataModel_RegistrationDTEAffiliationApply dataModels = new CommonDataModel_RegistrationDTEAffiliationApply();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<CommonDataModel_RegistrationDTEAffiliationApply>(JsonDataTable_Data.Replace("[", "").Replace("]", ""));
+            return dataModels;
+        }
+        
 
         public List<DataTable> GetMGOneDepartmentList()
         {
@@ -2133,6 +2148,8 @@ namespace RJ_NOC_DataAccess.Repository
             var ds  = _commonHelper.Fill_DataSet(SqlQuery, "Common.GetMGoneASSESSMENTREPORT");
             return ds;
         }
+        
+        
         //public List<MGoneASSESSMENTREPORT> GetMGoneASSESSMENTREPORT(int CollegeID)
         //{
         //    string SqlQuery = " exec USP_GetMGoneassessmentreport @CollegeID=" + CollegeID + "";
@@ -2190,7 +2207,7 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
-        }        
+        }
         public List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID)
         {
             string SqlQuery = " exec USP_GetWorkflowPermissionDepartmentRoleWise @DepartmentID=" + DepartmentID + ",@RoleID=" + RoleID + "";
@@ -2201,8 +2218,111 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }
+        }       
+        
+        
+        public List<CommonDataModel_DataTable> CheckTabsEntryAffiliation(int DTEAffiliationID)
+        {
+            string SqlQuery = " exec USP_CheckTabsEntryAffiliation @DTEAffiliationID='" + DTEAffiliationID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.CheckTabsEntryAffiliation");
 
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetBTERCollegeBasicDetails(int DTEAffiliationID)
+        {
+            string SqlQuery = " exec USP_GetBTERCollegeBasicDetails @DTEAffiliationID='" + DTEAffiliationID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetBTERCollegeBasicDetails");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetDownloadBTERPdfDetails(int DepartmentID, int AffiliationRegID)
+        {
+            string SqlQuery = " exec USP_GetDownloadPDfBTERDetails @DepartmentID='" + DepartmentID + "',@DTEAffiliationID='" + AffiliationRegID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetDownloadPdfDetails");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            if (dataTable.Rows.Count > 0)
+            {
+                dataModel.data.Rows[0]["MemberSignature2"] = _commonHelper.ConvertTobase64(dataModel.data.Rows[0]["MemberSignature2"].ToString());
+            }
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public bool BTERAffiliationFinalSubmit(string EnterInwordNo, string ApplicationDateofReceived, int SelectedDepartmentID, int SelectedDTEAffiliationID, string selectedApplicationNo, int SelectedCollageID,string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_BTERFinalSubmit";
+            SqlQuery += " @EnterInwordNo='" + EnterInwordNo + "',@ApplicationDateofReceived='" + ApplicationDateofReceived + "',@SelectedDepartmentID='" + SelectedDepartmentID + "',@SelectedDTEAffiliationID='" + SelectedDTEAffiliationID + "',@selectedApplicationNo='" + selectedApplicationNo + "',@SelectedCollageID='" + SelectedCollageID + "',@ActionName='"+ ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.BTERAffiliationFinalSubmit");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public CommonDataModel_RevertAffiliationApply GetRevert_SearchRecordIDWiseDetails(string SearchRecordID)
+        {
+            string SqlQuery = "exec USP_GETRevertdetailsforBTER @SearchRecordID='"+ SearchRecordID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetRevert_SearchRecordIDWiseDetails");
+
+            CommonDataModel_RevertAffiliationApply dataModels = new CommonDataModel_RevertAffiliationApply();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<CommonDataModel_RevertAffiliationApply>(JsonDataTable_Data.Replace("[", "").Replace("]", ""));
+            return dataModels;
+        }
+        public List<DataTable> GetBTERRevertApllicationRemark(int DepartmentID, int ApplicationID)
+        {
+            string SqlQuery = " exec USP_GetRevertApllicationRemark_BTER @DepartmentID ='" + DepartmentID + "',@ApplicationID='" + ApplicationID + "' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetBTERRevertApllicationRemark");
+
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+
+
+        }        
+        public DataSet BTEROrderGen(string GenOrderNumber)
+        {
+            string SqlQuery = " exec USP_GetBTEROrderList @GenOrderNumber='"+GenOrderNumber+"'";
+            var ds  = _commonHelper.Fill_DataSet(SqlQuery, "Common.BTEROrderGen");
+            return ds;
+        }
+        public List<CommonDataModel_BTEROrderList> UpdateGeneratedBTERPDF(string PDFPath, string GenOrderNumber)
+        {
+            List<CommonDataModel_BTEROrderList> dataModels = new List<CommonDataModel_BTEROrderList>();
+            string SqlQuery = " exec USP_UpdateBTEROrderPDF @PDFPath='" + PDFPath + "',@GenOrderNumber='" + GenOrderNumber + "'";
+            DataTable dt = new DataTable();
+            dt = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetMGOneFacilityDepartmentList");            
+            return dataModels;            
+        }
+        public List<DataTable> ChecSSOIDwiseLegalEntityDepartment(string SSOID)
+        {
+            string SqlQuery = "select ProcessDepartmentID As DepartmentID  from Trn_LegalEntity where SSOID='" + SSOID + "' and ActiveStatus=1 and DeleteStatus=0";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.ChecSSOIDwiseLegalEntityDepartment");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
         public List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
         {
             string SqlQuery = " exec USP_GetNOCFormat @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@ParameterID='" + ParameterID + "',@NOCFor='" + NOCFor + "'";

@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 {
     public interface IPayment
     {
-        PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID,PaymentGatewayDataModel model);
+        PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL,string ApplyNocApplicationID,string DTEAffiliationID,PaymentGatewayDataModel model);
         PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel model);
         bool SaveData(PaymentResponse request);
         bool CreatePaymentRequest(PaymentRequest request);
@@ -17,6 +17,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool UpdateRefundTransactionStatus(RefundTransactionDataModel request);
 
         List<ResponseParameters> GetPaymentListIDWise(string TransactionID);
+        
 
         //payment PaymentGatewayDataModel
         PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel Model);
@@ -32,5 +33,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DataTable> GetEmitraTransactionDetails(string TransactionID);
 
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID, int SessionYear);
+        List<ResponseParameters> GetBterPaymentListIDWise(string TransactionID);
+        List<ResponseParameters> GetBTERPreviewPaymentDetails(int AffiliationRegID, int SessionYear);
     }
 }

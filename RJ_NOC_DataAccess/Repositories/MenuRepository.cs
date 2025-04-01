@@ -40,10 +40,10 @@ namespace RJ_NOC_DataAccess.Repository
             return dataModels;
             
         }
-         public List<MenuDataModel_List> GetUserWiseMenu(int UserID)
+         public List<MenuDataModel_List> GetUserWiseMenu(int UserID,string SSOID)
         {
             
-            string SqlQuery = " exec Usp_MenuUserWise @UserID="+ UserID + "";
+            string SqlQuery = " exec Usp_MenuUserWise @UserID="+ UserID + ",@SSOID='"+ SSOID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery);
 

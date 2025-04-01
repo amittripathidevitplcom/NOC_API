@@ -88,6 +88,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_FacilitesMasterDepartmentAndTypeWise> GetFacilitesMinSize(int FacilitieID);
         List<CommonDataModel_DashBoard> GetDashboardDataSSOWise(string SSOID, int DepartmentID, int RoleID, int UserID, bool IsWeb, int SessionYear);
         List<CommonDataModel_DataTable> GetCollegeBasicDetails(int CollegID);
+        
         List<CommonDataModel_RoleListByLevel> GetRoleList();
         List<CommonDataModel_RoleListByLevel> GetRoleList_CreateUser();
 
@@ -185,8 +186,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_DTEAffiliationApply> GetDTEAffiliationApply(string SSOID);
         List<CommonDataModel_RegistrationDTEAffiliationApply> GetAffiliationRegistrationList(string SSOID);
         CommonDataModel_RegistrationDTEAffiliationApply GetDteAffiliation_SearchRecordIDWise(string SearchRecordID);
-
-
         List<DataTable> GetMGOneDepartmentList();
        
         List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID);
@@ -196,11 +195,23 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request);
         bool SaveMGOneClassRoomDetails(List<MGOneClassRoomDepartmentDataModel> request);
         List<DataTable> GetMGoneFacilityEach(int CollegeID);
+       
         DataSet GetMGoneASSESSMENTREPORT(int CollegeID);
         bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request);
         List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID);
         List<MGOneFacilityDataModel> GetMGOneFacilityList(int DepartmentID, int CollegeID);
         bool SaveMGOneFacility(List<MGOneFacilityDataModel> request);
+        CommonDataModel_RegistrationDTEAffiliationApply CheckCollegestatusIDWise(int DTEAffiliationID);
+        List<CommonDataModel_DataTable> CheckTabsEntryAffiliation(int DTEAffiliationID);         
+        List<CommonDataModel_DataTable> GetBTERCollegeBasicDetails(int DTEAffiliationID);
+        
+        List<CommonDataModel_DataTable> GetDownloadBTERPdfDetails(int DepartmentID, int AffiliationRegID);
+        bool BTERAffiliationFinalSubmit(string EnterInwordNo, string ApplicationDateofReceived, int SelectedDepartmentID, int SelectedDTEAffiliationID, string selectedApplicationNo, int SelectedCollageID,string ActionName);
+        CommonDataModel_RevertAffiliationApply GetRevert_SearchRecordIDWiseDetails(string SearchRecordID);
+        List<DataTable> GetBTERRevertApllicationRemark(int DepartmentID, int ApplicationID);
+        DataSet BTEROrderGen(string GenOrderNumber);
+        List<CommonDataModel_BTEROrderList> UpdateGeneratedBTERPDF(string fileName, string GenOrderNumber);
+        List<DataTable> ChecSSOIDwiseLegalEntityDepartment(string SSOID);
 
         List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor);
         bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request);

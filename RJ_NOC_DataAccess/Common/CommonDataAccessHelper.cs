@@ -421,5 +421,78 @@ namespace RJ_NOC_DataAccess.Common
             }
         }
 
+        public static bool CAeSign_Req_Res(CAGetSignedXmlApiRequest req_Res)
+        {
+            int Rows = 0;
+            try
+            {
+                string SqlQry = "exec USP_CAeSign_Req_Res_Req_Res_Save";
+                SqlQry += " @ApplyNocApplicationID='" + req_Res.ApplyNocApplicationID + "', ";
+                SqlQry += " @DepartmentID='" + req_Res.DepartmentID + "',";
+                SqlQry += " @TransactionID='" + req_Res.TransactionID + "',";
+                SqlQry += " @pdfFile1='" + req_Res.pdfFile1 + "',";
+                SqlQry += " @PDFFileName='" + req_Res.PDFFileName + "',";
+                SqlQry += " @SSOdisplayName='" + req_Res.SSOdisplayName + "',";
+                SqlQry += " @Designation='" + req_Res.designation + "', ";
+                SqlQry += " @esignResponseUrl='" + req_Res.esignResponseUrl + "',";
+                SqlQry += " @eSignType='" + req_Res.eSignType + "',";
+                SqlQry += " @ResponseJson='" + req_Res.ResponseJson + "',";
+                SqlQry += " @RSDRequestUrl='" + req_Res.RSDRequestUrl + "', ";
+                SqlQry += " @RedirectJson='" + req_Res.RedirectJson + "',";
+                SqlQry += " @esignData='" + req_Res.esignData + "',";
+                SqlQry += " @ESPRequestURL='" + req_Res.ESPRequestURL + "',";
+                SqlQry += " @IPAddress='" + req_Res.IPAddress + "',";
+                SqlQry += " @CreatedBy='" + req_Res.CreatedBy + "',";
+                SqlQry += " @successFailureurl='" + req_Res.successFailureurl + "',";
+                SqlQry += " @ResponseCode='" + req_Res.ResponseCode + "',";
+                SqlQry += " @ResponseMessage='" + req_Res.ResponseMessage + "',";
+                SqlQry += " @RequestType='" + req_Res.RequestType + "' ";
+
+
+                Rows = NonQuerrySys(SqlQry);
+                if (Rows > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Insert_ErrorLog("esignController.CAeSign_Req_Res", ex.ToString());
+                return false;
+            }
+
+        }
+
+
+        public static DataTable GetCAeSign_Req_Res(string TransactionID)
+        {
+            string SqlQuery = "exec USP_CAeSign_Req_Res_Req_Res_Save @TransactionID='" + TransactionID + "',@RequestType ='GetesignRSDURL'";
+            using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
+                    {
+                        using (DataTable dataTable = new DataTable())
+                        {
+                            sda.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CommonDataAccessHelper.Insert_ErrorLog("GetCAeSign_Req_Res", ex.ToString());
+                    throw new Exception(ex.ToString());
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+            }
+        }
+
     }
 }

@@ -130,6 +130,8 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+       
+        
 
 
         public List<ApplyNocParameterFeesDataModel> GetDCECourseSubjectFees(int ApplyNOCParameterID)
@@ -197,6 +199,17 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
+        }
+        public List<CommonDataModel_DataTable> GetApplyBTERPaymentHistoryApplicationID(int DTEAffiliationID, string PaymentFor)
+        {
+            string SqlQuery = $"exec USP_Trn_GetApplyBTERPaymentHistory @DTEAffiliationID={DTEAffiliationID}, @PaymentFor = '" + PaymentFor + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNocParameterMaster.GetApplyBTERPaymentHistoryApplicationID");
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
     }
 }

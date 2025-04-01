@@ -659,6 +659,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDteAffiliation_SearchRecordIDWise(SearchRecordID);
         }
+        
+        
 
         public List<DataTable> GetMGOneDepartmentList()
         {
@@ -713,6 +715,53 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool SaveMGOneFacility(List<MGOneFacilityDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneFacility(request);
+        }
+        public CommonDataModel_RegistrationDTEAffiliationApply CheckCollegestatusIDWise(int DTEAffiliationID)
+        {
+            return UnitOfWork.CommonFuncationRepository.CheckCollegestatusIDWise(DTEAffiliationID);
+        }
+
+        public List<CommonDataModel_DataTable> CheckTabsEntryAffiliation(int DTEAffiliationID)
+        {
+            return UnitOfWork.CommonFuncationRepository.CheckTabsEntryAffiliation(DTEAffiliationID);
+        }
+        
+        public List<CommonDataModel_DataTable> GetBTERCollegeBasicDetails(int DTEAffiliationID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetBTERCollegeBasicDetails(DTEAffiliationID);
+        }
+        
+       
+        public List<CommonDataModel_DataTable> GetDownloadBTERPdfDetails(int DepartmentID,int AffiliationRegID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetDownloadBTERPdfDetails(DepartmentID, AffiliationRegID);
+        }
+        public bool BTERAffiliationFinalSubmit(string EnterInwordNo, string ApplicationDateofReceived, int SelectedDepartmentID, int SelectedDTEAffiliationID, string selectedApplicationNo, int SelectedCollageID, string ActionName)
+        {
+            return UnitOfWork.CommonFuncationRepository.BTERAffiliationFinalSubmit(EnterInwordNo, ApplicationDateofReceived, SelectedDepartmentID, SelectedDTEAffiliationID, selectedApplicationNo, SelectedCollageID,ActionName);
+        }
+        public CommonDataModel_RevertAffiliationApply GetRevert_SearchRecordIDWiseDetails(string SearchRecordID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetRevert_SearchRecordIDWiseDetails(SearchRecordID);
+        }
+        public List<DataTable> GetBTERRevertApllicationRemark(int DepartmentID, int ApplicationID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetBTERRevertApllicationRemark(DepartmentID, ApplicationID);
+        }
+        
+        public DataSet BTEROrderGen(string GenOrderNumber)
+        {
+            return UnitOfWork.CommonFuncationRepository.BTEROrderGen(GenOrderNumber);
+        }
+        public List<CommonDataModel_BTEROrderList> UpdateGeneratedBTERPDF(string PDFPath, string GenOrderNumber)
+        {
+            return UnitOfWork.CommonFuncationRepository.UpdateGeneratedBTERPDF(PDFPath, GenOrderNumber);
+        }
+        public List<DataTable> ChecSSOIDwiseLegalEntityDepartment(string SSOID)
+        {
+            return UnitOfWork.CommonFuncationRepository.ChecSSOIDwiseLegalEntityDepartment(SSOID);
+        }
+        
         }      
         public List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
         {

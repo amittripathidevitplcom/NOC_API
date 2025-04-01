@@ -94,11 +94,11 @@ namespace RJ_NOC_Model
         public string? ICARDocument_Dis_FileName { get; set; }
 
         public string? AffiliationUniversityDoc { get; set; }
-        public string? AffiliationUniversityDocPath{ get; set; }
-        public string? AffiliationUniversityDoc_Dis_FileName{get;set;}
-        public string? UniversityApproveTeachingFacultyDoc{ get; set; }
-        public string? UniversityApproveTeachingFacultyDocPath{ get; set; }
-        public string? UniversityApproveTeachingFacultyDoc_Dis_FileName{ get; set; }
+        public string? AffiliationUniversityDocPath { get; set; }
+        public string? AffiliationUniversityDoc_Dis_FileName { get; set; }
+        public string? UniversityApproveTeachingFacultyDoc { get; set; }
+        public string? UniversityApproveTeachingFacultyDocPath { get; set; }
+        public string? UniversityApproveTeachingFacultyDoc_Dis_FileName { get; set; }
 
         //public string? AffiliationDocumentCertificate_Dis_FileName { get; set; }
         public string? IsAbbreviation { get; set; }
@@ -108,7 +108,7 @@ namespace RJ_NOC_Model
         //AH
         public string? FaxNo { get; set; }
         public string? LiveStockFarmAddress { get; set; }
-        public string? VeternaryClinicalAddress { get; set  ; }
+        public string? VeternaryClinicalAddress { get; set; }
 
         public string? PrivateCollegeUniversityName { get; set; }
         public string? PrivateCollegeEstablishmentDate { get; set; }
@@ -138,28 +138,28 @@ namespace RJ_NOC_Model
     }
     public class NearestGovernmentHospitalsDataModel
     {
-        public int NearestGovernmentHospitalsID { get; set; }
-        public int CollegeDetailsID { get; set; }//foreign key of M_CollegeMaster
-        public string HospitalName { get; set; }
-        public string HospitalRegNo { get; set; }
-        public string HospitalDocument { get; set; }
-        public string HospitalDocumentPath { get; set; }
-        public string HospitalDocument_Dis_FileName { get; set; }
-        public int HospitalDistance { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public int RuralUrban { get; set; }
+        public int? NearestGovernmentHospitalsID { get; set; }
+        public int? CollegeDetailsID { get; set; }//foreign key of M_CollegeMaster
+        public string? HospitalName { get; set; }
+        public string? HospitalRegNo { get; set; }
+        public string? HospitalDocument { get; set; }
+        public string? HospitalDocumentPath { get; set; }
+        public string? HospitalDocument_Dis_FileName { get; set; }
+        public int? HospitalDistance { get; set; }
+        public string? AddressLine1 { get; set; }
+        public string? AddressLine2 { get; set; }
+        public int? RuralUrban { get; set; }
         public string? RuralUrbanName { get; set; }
-        public int DivisionID { get; set; }
+        public int? DivisionID { get; set; }
         public string? DivisionName { get; set; }
-        public int DistrictID { get; set; }
+        public int? DistrictID { get; set; }
         public string? DistrictName { get; set; }
-        public int TehsilID { get; set; }
+        public int? TehsilID { get; set; }
         public string? TehsilName { get; set; }
-        public int PanchayatSamitiID { get; set; }
+        public int? PanchayatSamitiID { get; set; }
         public string? PanchayatSamitiName { get; set; }
-        public string CityTownVillage { get; set; }
-        public int Pincode { get; set; }
+        public string? CityTownVillage { get; set; }
+        public int? Pincode { get; set; }
         public int? CityID { get; set; }
         public string? CityName { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using iTextSharp.text.log;
+using Newtonsoft.Json;
 using RJ_NOC_DataAccess.Common;
 using RJ_NOC_DataAccess.Interface;
 using RJ_NOC_Model;
@@ -515,6 +516,8 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels.Add(dataModel);
             return dataModels;
         }
+        
+        
         public List<CommonDataModel_DataTable> GetApplicationPenalty(int ApplyNOCID)
         {
             string SqlQuery = " exec USP_GetApplicationPenalty @ApplyNOCID ='" + ApplyNOCID + "'";
@@ -614,6 +617,46 @@ namespace RJ_NOC_DataAccess.Repositories
                 return true;
             else
                 return false;
+        }      
+
+        public bool SaveBTERDocumentScrutiny(BTERDocumentScrutinyDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string NOCDocumentScrutiny_Detail_Str = request.NocDocumentScrutinyDetail.Count > 0 ? CommonHelper.GetDetailsTableQry(request.NocDocumentScrutinyDetail, "Temp_Trn_NOCDocumentScrutiny_Details") : "";
+            string LOADocumentScrutiny_Detail_Str = request.LOADocumentScrutinyDetail.Count > 0 ? CommonHelper.GetDetailsTableQry(request.LOADocumentScrutinyDetail, "Temp_Trn_LOADocumentScrutiny_Details") : "";
+            string ApplicationDocumentScrutiny_Detail_Str = request.ApplicationFormDocumentScrutinyDetail.Count > 0 ? CommonHelper.GetDetailsTableQry(request.ApplicationFormDocumentScrutinyDetail, "Temp_Trn_ApplicationDocumentScrutiny_Details") : "";
+            string PaymentDocumentScrutiny_Detail_Str = request.BTERPaymentDocumentScrutinyDetail.Count > 0 ? CommonHelper.GetDetailsTableQry(request.BTERPaymentDocumentScrutinyDetail, "Temp_Trn_PaymentDocumentScrutiny_Details") : "";
+            string SqlQuery = " exec USP_DocumentScrutiny_IUForBTER";
+            SqlQuery += " @BTERAffiliationRegID='" + request.BTERAffiliationRegID + "',";
+            SqlQuery += " @ApplyAffiliationID='" + request.ApplyAffiliationID + "',";
+            SqlQuery += " @FinalRemark=N'" + request.FinalRemark + "',";
+            SqlQuery += " @DepartmentID='" + request.DepartmentID + "',";
+            SqlQuery += " @CollegeID='" + request.CollegeID + "',";
+            SqlQuery += " @RoleID='" + request.RoleID + "',";
+            SqlQuery += " @UserID='" + request.UserID + "',";
+            SqlQuery += " @IPAddress='" + IPAddress + "',";
+            SqlQuery += " @ActionID='" + request.ActionID + "',";
+            SqlQuery += " @Temp_Trn_NOCDocumentScrutiny_Details='" + NOCDocumentScrutiny_Detail_Str + "',";
+            SqlQuery += " @Temp_Trn_LOADocumentScrutiny_Details='" + LOADocumentScrutiny_Detail_Str + "',";
+            SqlQuery += " @Temp_Trn_ApplicationDocumentScrutiny_Details='" + ApplicationDocumentScrutiny_Detail_Str + "',";
+            SqlQuery += " @Temp_Trn_PaymentDocumentScrutiny_Details='" + PaymentDocumentScrutiny_Detail_Str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "ApplyNOC.SaveBTERDocumentScrutiny");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder()
+        {
+            string SqlQuery = " exec USP_GetAppliedParameterAffiliationForBTEROrder";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "ApplyNOC.GetAppliedParameterEssentialityForAffiliationorder");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }
 
         public bool SaveAHDegreeNOCData(NOCIssuedForAHDegreeDataModel model)

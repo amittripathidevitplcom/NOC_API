@@ -27,6 +27,12 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> CollegesReport(DCECollegesReportSearchFilter request);
         bool IfExistsDefaulterCollege(int DepartmentID, int CollegeID, string SSOID);
         bool IfExistsDefaulterCollegePenalty(int DepartmentID, int CollegeID, string SSOID);
-        bool CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID,int DivisionID,int DistrictID);
+        bool CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID, int DivisionID, int DistrictID);
+        bool IfExistAffiliationType(int DTEAffiliationID, int DepartmentID, string CurrentCollegeName, int AffiliationTypeID);
+        CollegeMasterDataModel GetDataAffiliation(int DTEAffiliationID);
+        List<CommonDataModel_FilterCollegesByBTER> FilterAffiliationCourseStatusBter(int DTEAffiliationID);
+        List<CommonDataModel_DataSet> ViewBTERTotalCollegeDataByID(int SelectedDteAffiliationRegId);
+        List<CommonDataModel_DataTable> TotalBTERCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request, int SessionID,string ApplicationStatus);
+        List<CommonDataModel_DataTable> GetGenerateorderList(string ApplicationStatus, string GenOrderNumber);
     }
 }

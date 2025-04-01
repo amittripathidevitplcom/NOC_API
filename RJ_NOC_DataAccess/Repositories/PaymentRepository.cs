@@ -30,53 +30,85 @@ namespace RJ_NOC_DataAccess.Repositories
 
 
         #region "RPP PAYMENT SECTION"
-        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID, PaymentGatewayDataModel Model)
+        public PaymentRequest SendRequest(string PRN, string AMOUNT, string PURPOSE, string USERNAME, string USERMOBILE, string USEREMAIL, string ApplyNocApplicationID,string DTEAffiliationID, PaymentGatewayDataModel Model)
         {
             string REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             //string CHECKSUM = MD5HASHING(MERCHANTCODE + "|" + PRN + "|" + AMOUNT + "|" + CHECKSUMKEY);
             string CHECKSUM = MD5HASHING(Model.MerchantCode + "|" + PRN + "|" + AMOUNT + "|" + Model.CheckSumKey);
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-            
 
-            RequestParameters REQUESTPARAMS = new RequestParameters
+            if (PURPOSE== "BTER Payment")
             {
-                MERCHANTCODE = Model.MerchantCode, //MERCHANTCODE,
-                PRN = PRN,
-                REQTIMESTAMP = REQTIMESTAMP,
-                PURPOSE = PURPOSE,
-                AMOUNT = AMOUNT,
-                SUCCESSURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,
-                FAILUREURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //FAILUREURL,
-                CANCELURL = Model.CencelURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //CANCELURL,
-                CALLBACKURL = Model.CallBackURL ,
-                USERNAME = USERNAME,
-                USERMOBILE = USERMOBILE,
-                USEREMAIL = USEREMAIL,
-                UDF1 = ApplyNocApplicationID,
-                UDF2 = PURPOSE,
-                UDF3 = "PARAM3",
-                OFFICECODE = "",
-                REVENUEHEAD = "AMOUNT=" + AMOUNT.ToString(),
-                CHECKSUM = CHECKSUM
-            };
-
-
-
-            string REQUESTJSON = JsonConvert.SerializeObject(REQUESTPARAMS);
-            string ENCDATA = AESEncrypt(REQUESTJSON, Model.ENCRYPTIONKEY);
-            PaymentRequest PAYMENTREQUEST = new PaymentRequest
+                
+                RequestParameters REQUESTPARAMS = new RequestParameters
+                {
+                    MERCHANTCODE = Model.MerchantCode, //MERCHANTCODE,
+                    PRN = PRN,
+                    REQTIMESTAMP = REQTIMESTAMP,
+                    PURPOSE = PURPOSE,
+                    AMOUNT = AMOUNT,
+                    SUCCESSURL = Model.SuccessURL+ "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,
+                    FAILUREURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //FAILUREURL,
+                    CANCELURL = Model.CencelURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //CANCELURL,
+                    CALLBACKURL = Model.CallBackURL,
+                    USERNAME = USERNAME,
+                    USERMOBILE = USERMOBILE,
+                    USEREMAIL = USEREMAIL,
+                    UDF1 = DTEAffiliationID,
+                    UDF2 = PURPOSE,
+                    UDF3 = "PARAM3",
+                    OFFICECODE = "",
+                    REVENUEHEAD = "AMOUNT=" + AMOUNT.ToString(),
+                    CHECKSUM = CHECKSUM
+                };
+                string REQUESTJSON = JsonConvert.SerializeObject(REQUESTPARAMS);
+                string ENCDATA = AESEncrypt(REQUESTJSON, Model.ENCRYPTIONKEY);
+                PaymentRequest PAYMENTREQUEST = new PaymentRequest
+                {
+                    MERCHANTCODE = Model.MerchantCode,
+                    REQUESTJSON = REQUESTJSON,
+                    REQUESTPARAMETERS = REQUESTPARAMS,
+                    ENCDATA = ENCDATA,
+                    PaymentRequestURL = Model.PaymentRequestURL
+                };
+                return PAYMENTREQUEST;
+            }
+            else
             {
-                MERCHANTCODE = Model.MerchantCode,
-                REQUESTJSON = REQUESTJSON,
-                REQUESTPARAMETERS = REQUESTPARAMS,
-                ENCDATA = ENCDATA,
-                PaymentRequestURL = Model.PaymentRequestURL
-            };
-
-
-
-            return PAYMENTREQUEST;
+                RequestParameters REQUESTPARAMS = new RequestParameters
+                {
+                    MERCHANTCODE = Model.MerchantCode, //MERCHANTCODE,
+                    PRN = PRN,
+                    REQTIMESTAMP = REQTIMESTAMP,
+                    PURPOSE = PURPOSE,
+                    AMOUNT = AMOUNT,
+                    SUCCESSURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,
+                    FAILUREURL = Model.SuccessURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //FAILUREURL,
+                    CANCELURL = Model.CencelURL + "?DepartmentID=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(Model.DepartmentID)),// SUCCESSURL,, //CANCELURL,
+                    CALLBACKURL = Model.CallBackURL,
+                    USERNAME = USERNAME,
+                    USERMOBILE = USERMOBILE,
+                    USEREMAIL = USEREMAIL,
+                    UDF1 = ApplyNocApplicationID,
+                    UDF2 = PURPOSE,
+                    UDF3 = "PARAM3",
+                    OFFICECODE = "",
+                    REVENUEHEAD = "AMOUNT=" + AMOUNT.ToString(),
+                    CHECKSUM = CHECKSUM
+                };
+                string REQUESTJSON = JsonConvert.SerializeObject(REQUESTPARAMS);
+                string ENCDATA = AESEncrypt(REQUESTJSON, Model.ENCRYPTIONKEY);
+                PaymentRequest PAYMENTREQUEST = new PaymentRequest
+                {
+                    MERCHANTCODE = Model.MerchantCode,
+                    REQUESTJSON = REQUESTJSON,
+                    REQUESTPARAMETERS = REQUESTPARAMS,
+                    ENCDATA = ENCDATA,
+                    PaymentRequestURL = Model.PaymentRequestURL
+                };
+                return PAYMENTREQUEST;
+            }
         }
         private static readonly Encoding encoding = Encoding.UTF8;
         public PaymentResponse GetResponse(string STATUS, string ENCDATA, PaymentGatewayDataModel Model)
@@ -284,6 +316,7 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
             return dataModels;
         }
+        
 
         //gete payment gateway details
         public PaymentGatewayDataModel GetpaymentGatewayDetails(PaymentGatewayDataModel model)
@@ -319,6 +352,8 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
             return dataModels;
         }
+        
+        
 
         #region "Emitra Payment Section"
         public EmitraRequestDetails EmitraSendPaymentRequest(EmitraRequestDetails Model)
@@ -422,6 +457,29 @@ namespace RJ_NOC_DataAccess.Repositories
             CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
+            return dataModels;
+        }
+        
+        public List<ResponseParameters> GetBterPaymentListIDWise(string TransactionID)
+        {
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @PRNNO='" + TransactionID + "' ,@Key= 'ViewBTERRecord' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetBterPaymentListIDWise");
+
+            List<ResponseParameters> dataModels = new List<ResponseParameters>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public List<ResponseParameters> GetBTERPreviewPaymentDetails(int AffiliationRegID, int SessionYear)
+        {
+            string SqlQuery = " exec USP_PaymentTransaction_GetData @AffiliationRegID='" + AffiliationRegID + "'  ,@SessionYear='" + SessionYear + "' ,@Key= 'GetBTERRPPTransactionList' ";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "PaymentRepository.GetBTERPreviewPaymentDetails");
+
+            List<ResponseParameters> dataModels = new List<ResponseParameters>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
             return dataModels;
         }
     }

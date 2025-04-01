@@ -93,13 +93,13 @@ namespace RJ_NOC_API.Controllers
 
 
         // GET: api/Menu/5
-        [HttpGet("GetUserWiseMenu/{UserID}")]
-        public async Task<OperationResult<List<MenuDataModel_List>>> GetUserWiseMenu(int UserID)
+        [HttpGet("GetUserWiseMenu/{UserID}/{SSOID}")]
+        public async Task<OperationResult<List<MenuDataModel_List>>> GetUserWiseMenu(int UserID,string SSOID)
         {
             var result = new OperationResult<List<MenuDataModel_List>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.MenuUtility.GetUserWiseMenu(UserID));
+                result.Data = await Task.Run(() => UtilityHelper.MenuUtility.GetUserWiseMenu(UserID, SSOID));
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;

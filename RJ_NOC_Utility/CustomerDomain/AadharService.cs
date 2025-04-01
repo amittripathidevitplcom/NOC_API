@@ -699,6 +699,12 @@ namespace RJ_NOC_Utility.CustomerDomain
             return ret;
         }
 
+        public bool CAeSign_Req_Res(CAGetSignedXmlApiRequest req_Res)
+        {
+            return CommonDataAccessHelper.CAeSign_Req_Res(req_Res);
+        }
+
+
     }
 
 }

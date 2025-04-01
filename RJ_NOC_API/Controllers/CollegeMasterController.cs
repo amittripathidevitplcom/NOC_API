@@ -68,9 +68,23 @@ namespace RJ_NOC_API.Controllers
                     if (IfExistsDefaulterCollege == false)
                     {
                         bool CompareDefaulterCollegeName = false;
-                        CompareDefaulterCollegeName = UtilityHelper.CollegeMasterUtility.CompareDefaulterCollegeName(request.DepartmentID, request.CollegeNameEn, request.MappingSSOID,request.DivisionID,request.DistrictID);
+                        CompareDefaulterCollegeName = UtilityHelper.CollegeMasterUtility.CompareDefaulterCollegeName(request.DepartmentID, request.CollegeNameEn, request.MappingSSOID, request.DivisionID, request.DistrictID);
+
                         if (CompareDefaulterCollegeName == false)
                         {
+                            bool IfExistAffiliationType = false;
+                            if (request.DepartmentID == 12)
+                            {
+
+                                IfExistAffiliationType = UtilityHelper.CollegeMasterUtility.IfExistAffiliationType(request.DTEAffiliationID, request.DepartmentID, request.CollegeNameEn, request.AffiliationTypeID);
+
+                            }
+                            if (IfExistAffiliationType == false)
+                            {
+
+                           
+
+
                             bool IfExits = false;
                             IfExits = UtilityHelper.CollegeMasterUtility.IfExists(request.DepartmentID, request.CollegeID, request.MobileNumber, request.Email);
                             if (IfExits == false)
@@ -105,12 +119,18 @@ namespace RJ_NOC_API.Controllers
                                 result.ErrorMessage = "this mobile No - " + request.MobileNumber + " or Email - " + request.Email + " is Already Exist, It Can't Not Be Duplicate.!";
                             }
                         }
-                        else
-                        {
-                            result.State = OperationState.Warning;
-                            result.ErrorMessage = "your College Name is not match according to submit the college name in defaulter application";
+                            else
+                            {
+                                result.State = OperationState.Warning;
+                                result.ErrorMessage = "your Affiliation Type is not match according to submited so can't be changed";
+                            }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Warning;
+                        result.ErrorMessage = "your College Name is not match according to submit the college name in defaulter application";
 
-                        }
+                    }
                     }
                     else
                     {
@@ -548,6 +568,7 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        
 
         [HttpPost("CollegesReport")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> CollegesReport(DCECollegesReportSearchFilter request)
@@ -571,6 +592,164 @@ namespace RJ_NOC_API.Controllers
             catch (Exception ex)
             {
                 CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.CollegesReport", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetDataAffiliation/{DTEAffiliationID}")]
+        public async Task<OperationResult<CollegeMasterDataModel>> GetDataAffiliation(int DTEAffiliationID)
+        {
+            var result = new OperationResult<CollegeMasterDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.GetDataAffiliation(DTEAffiliationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.GetData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        } 
+        [HttpGet("FilterAffiliationCourseStatusBter/{DTEAffiliationID}")]
+        public async Task<OperationResult<List<CommonDataModel_FilterCollegesByBTER>>> FilterAffiliationCourseStatusBter(int DTEAffiliationID)
+        {            
+                var result = new OperationResult<List<CommonDataModel_FilterCollegesByBTER>>();
+               
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.FilterAffiliationCourseStatusBter(DTEAffiliationID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.GetData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("ViewBTERTotalCollegeDataByID/{SelectedDteAffiliationRegId}/{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataSet>>> ViewBTERTotalCollegeDataByID(int SelectedDteAffiliationRegId, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", SelectedDteAffiliationRegId, "CollegeMaster");
+            var result = new OperationResult<List<CommonDataModel_DataSet>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.ViewBTERTotalCollegeDataByID(SelectedDteAffiliationRegId));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.ViewBTERTotalCollegeDataByID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("TotalBTERCollegeDetailsByDepartment/{SessionID}/{ApplicationStatus}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> TotalBTERCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request,int SessionID,string ApplicationStatus)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.TotalBTERCollegeDetailsByDepartment(request, SessionID, ApplicationStatus));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.TotalCollegeDetailsByDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetGenerateorderList/{ApplicationStatus}/{GenOrderNumber}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetGenerateorderList(string ApplicationStatus, string GenOrderNumber)
+        {
+            //CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", SelectedDteAffiliationRegId, "CollegeMaster");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.GetGenerateorderList(ApplicationStatus,GenOrderNumber));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.GetGenerateorderList", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }

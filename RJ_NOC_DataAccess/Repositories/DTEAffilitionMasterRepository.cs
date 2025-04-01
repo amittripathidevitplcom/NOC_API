@@ -39,13 +39,15 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
-        }
+        }       
+        
         public bool DTEAffilitionCourseSaveData(DTEAffiliationCourseDataModel request)
         {
 
             string IPAddress = CommonHelper.GetVisitorIPAddress();
-            string SqlQuery = " exec USP_M_DTEAffilitionCourse @AffiliationCourseID='" + request.AffiliationCourseID + "',@DepartmentID='" + request.DepartmentID + "',@AffiliationCourseTypeID='" + request.AffiliationCourseTypeID + "',@CourseIntakeAsPerAICTELOA='" + request.CourseIntakeAsPerAICTELOA + "',@CourseID='" + request.CourseID + "',";
-            SqlQuery += "@AffiliationShiftID = '" + request.AffiliationShiftID + "',@AffiliationBranchID='" + request.AffiliationBranchID + "',@FYID = '" + request.FYID + "'";
+            string BTERAffiliationfeesDetailsList = CommonHelper.GetDetailsTableQry(request.BTERAffiliationfeesDetails, "Temp_BTERAffiliationfeesDetailsList");           
+            string SqlQuery = " exec USP_M_DTEAffilitionCourse @BTERCourseID='" + request.BTERCourseID + "',@CourseStatusId='" + request.CourseStatusId + "',@CourseTypeId='" + request.CourseTypeId + "',@CourseId='" + request.CourseId + "',@CourseIntakeAsPerAICTELOA='" + request.CourseIntakeAsPerAICTELOA + "',";
+              SqlQuery += "@ShiftID = '" + request.ShiftID + "',@Yearofstarting='" + request.Yearofstarting + "',@BterBranchTypeId = '" + request.BterBranchTypeId + "',@FirstYearRegularStudent='" +request.FirstYearRegularStudent + "',@FirstYearExStudent='" + request.FirstYearExStudent + "',@FirstYearTotal='" + request.FirstYearTotal+ "',@SecondYearRegularStudent='" + request.SecondYearRegularStudent + "',@SecondYearExStudent='" + request.SecondYearExStudent+ "',@SecondYearTotal='" + request.SecondYearTotal + "',@ThirdYearRegularStudent='" + request.ThirdYearRegularStudent + "',@ThirdYearExStudent='" + request.ThirdYearExStudent + "',@ThirdYearTotal='" + request.ThirdYearTotal + "',@GovtNOCAvailableforclosure='" + request.GovtNOCAvailableforclosure + "',@NOCNumber='" + request.NOCNumber + "',@NOCDate='" + request.NOCDate + "',@NOCClosingYearId='" + request.NOCClosingYearId + "',@NOCCUploadDocument='" + request.NOCCUploadDocument + "',@LegalEntityManagementType='" + request.LegalEntityManagementType + "',@DepartmentID='" + request.DepartmentID + "',@BTERRegID='" + request.BTERRegID + "',@RegAffiliationStatusId='" + request.RegAffiliationStatusId + "',@UserID='" + request.UserID + "',@BTERAffiliationfeesDetailsList='"+ BTERAffiliationfeesDetailsList + "' ";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.DTEAffilitionCourseSaveData");
             if (Rows > 0)
                 return true;
@@ -58,13 +60,24 @@ namespace RJ_NOC_DataAccess.Repository
 
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_M_DTEAffilitionOtherDetails @OtherDetailsID='" + request.OtherDetailsID + "',@DepartmentID='" + request.DepartmentID + "',@NocIssued='" + request.NocIssued + "',@NocNumber='" + request.NocNumber + "',@NocIssueDate='" + request.NocIssueDate + "',";
-            SqlQuery += "@UploadNocApproval = '" + request.UploadNocApproval + "',@AICTE_EOA_LOA='" + request.AICTE_EOA_LOA + "',@AICTELAO_No='" + request.AICTELAO_No + "',@EOA_LOA_Date='" + request.EOA_LOA_Date + "',@UploadLOAApproval='" + request.UploadLOAApproval + "',@UploadApplicationForm='" + request.UploadApplicationForm + "',@FYID = '" + request.FYID + "'";
+            SqlQuery += "@UploadNocApproval = '" + request.UploadNocApproval + "',@AICTE_EOA_LOA='" + request.AICTE_EOA_LOA + "',@AICTELAO_No='" + request.AICTELAO_No + "',@EOA_LOA_Date='" + request.EOA_LOA_Date + "',@UploadLOAApproval='" + request.UploadLOAApproval + "',@UploadApplicationForm='" + request.UploadApplicationForm + "',@FYID = '" + request.FYID + "',@UserID = '" + request.UserID + "',@BTERRegID = '" + request.BTERRegID + "',@RegAffiliationStatusId = '" + request.RegAffiliationStatusId + "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.DTEAffilitionOtherDetailsSaveData");
             if (Rows > 0)
                 return true;
             else
                 return false;
-        }     
+        }
+        
+        public bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId)
+        {
+            string SqlQuery = "exec USP_IfExistsBTERCourse @BTERRegID='" + BTERRegID + "' ,@BTERCourseID='" + BTERCourseID + "', @CourseTypeId='" + CourseTypeId + "',@CourseId='" + CourseId + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
         public List<DTEAffiliationAddCoursePreviewDataModel> GetDTEAffiliationCoursePreviewData(int DepatmentID)
         {
             string SqlQuery = "exec USP_GETDTEAffiliationCoursePreview @DepatmentID=" + DepatmentID;
@@ -76,9 +89,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<DTEAffiliationAddCoursePreviewDataModel>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<DTEAffiliationAddOtherDetailsPreviewDataModel> GetDTEAffiliationOtherDetailsPreviewData(int DepatmentID)
+        public List<DTEAffiliationAddOtherDetailsPreviewDataModel> GetDTEAffiliationOtherDetailsPreviewData(int BTERRegID)
         {
-            string SqlQuery = "exec USP_GETDTEAffiliationOtherDetailsPreview @DepatmentID=" + DepatmentID;
+            string SqlQuery = "exec USP_GETDTEAffiliationOtherDetailsPreview @BTERRegID=" + BTERRegID;
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetDTEAffiliationCoursePreviewData");
 
@@ -86,7 +99,9 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<DTEAffiliationAddOtherDetailsPreviewDataModel>>(JsonDataTable_Data);
             return dataModels;
-        }       
+        }
+       
+        
         public List<DTEAffiliationRegistrationDataModel> Edit_OnClick(int DTE_ARId)
         {
             string SqlQuery = "exec USP_GetRegistration_DTEAffiliation @DTE_ARId=" + DTE_ARId;
@@ -97,6 +112,149 @@ namespace RJ_NOC_DataAccess.Repository
             string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
             dataModels = JsonConvert.DeserializeObject<List<DTEAffiliationRegistrationDataModel>>(JsonDataTable_Data);
             return dataModels;
+        }
+
+        public List<DTEAffiliationCommonDataModel_DataTable> GetAllDTEAffiliationCourseList(int BTERRegID)
+        {
+            string SqlQuery = " exec USP_GetAffiliationCourseList @BTERRegID='" + BTERRegID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetAllDTEAffiliationCourseList");
+
+            List<DTEAffiliationCommonDataModel_DataTable> dataModels = new List<DTEAffiliationCommonDataModel_DataTable>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<DTEAffiliationCommonDataModel_DataTable>>(JsonDataTable_Data);
+            return dataModels;
+
+
+        }
+        public List<BTERCourseAffiliationDataModel> GetDTEAffiliationWiseCourseIDWise(int BTERCourseID, string LoginSSOID)
+        {
+            string SqlQuery = " exec USP_GetByIdAffiliationCourseList @BTERCourseID ='" + BTERCourseID + "',@LoginSSOID='" + LoginSSOID + "'";
+            DataSet dataTable = new DataSet();
+            dataTable = _commonHelper.Fill_DataSet(SqlQuery, "DTEAffilitionMaster.GetDTEAffiliationWiseCourseIDWise");
+
+            List<BTERCourseAffiliationDataModel> dataModels = new List<BTERCourseAffiliationDataModel>();
+            BTERCourseAffiliationDataModel dataModel = new BTERCourseAffiliationDataModel();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        
+        public bool DeleteData(int AffiliationCourseID)
+        {
+            string SqlQuery = " Update Trn_CourseMaster_DTEAffiliation set ActiveStatus=0 , DeleteStatus=1  WHERE BTERCourseID='" + AffiliationCourseID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.Delete");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<BTERAffiliationfeesdeposited> generateYears(int YearofstartingID)
+        {
+            string SqlQuery = "exec USP_GetAffiliationfeesdepositedYear @YearofstartingID=" + YearofstartingID;
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.generateYears");
+
+            List<BTERAffiliationfeesdeposited> dataModels = new List<BTERAffiliationfeesdeposited>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<BTERAffiliationfeesdeposited>>(JsonDataTable_Data);
+            return dataModels;
+        }
+       
+        public List<BTEROtherDetailsDataModel> GetOtherinformation(int BTERRegID)
+        {
+            string SqlQuery = "exec USP_GetOtherDetailsList @BTERRegID=" + BTERRegID;            
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetOtherinformation");
+
+            List<BTEROtherDetailsDataModel> dataModels = new List<BTEROtherDetailsDataModel>();
+            BTEROtherDetailsDataModel dataModel = new BTEROtherDetailsDataModel();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }       
+        
+        public List<BTERFeeDetailsDataModel> GetAllBTERAffiliationCourseFeeList(int BTERRegID)
+        {
+            //USP_GetBTERApplicationFeeCalculation            
+            string SqlQuery = "exec USP_GetBTERApplicationFeeCalculation_one @BTERRegID=" + BTERRegID;            
+            DataSet dataTable = new DataSet();
+            dataTable = _commonHelper.Fill_DataSet(SqlQuery, "DTEAffilitionMaster.GetAllBTERAffiliationCourseFeeList");
+            List<BTERFeeDetailsDataModel> dataModels = new List<BTERFeeDetailsDataModel>();
+            BTERFeeDetailsDataModel dataModel = new BTERFeeDetailsDataModel();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<BTERFeeDetailsDataModel> GetDeficiencyHistoryApplicationID(int BTERRegID,string ApplicationStatus)
+        {
+            //USP_GetBTERApplicationFeeCalculation            
+            string SqlQuery = "exec USP_BTERDocumentforDeficiencemarklist @BTERRegID='" + BTERRegID+"',@ApplicationStatus='"+ ApplicationStatus + "'";            
+            DataSet dataTable = new DataSet();
+            dataTable = _commonHelper.Fill_DataSet(SqlQuery, "DTEAffilitionMaster.GetDeficiencyHistoryApplicationID");
+            List<BTERFeeDetailsDataModel> dataModels = new List<BTERFeeDetailsDataModel>();
+            BTERFeeDetailsDataModel dataModel = new BTERFeeDetailsDataModel();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }        
+        public bool RevertnocSaveData(NOCRevertOtherDetailsDataModel request, string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_ResubmitBTERApplication @OtherDetailsID='" + request.OtherDetailsID + "',@DepartmentID='" + request.DepartmentID + "',@NocIssued='" + request.NocIssued + "',@NocNumber='" + request.NocNumber + "',@NocIssueDate='" + request.NocIssueDate + "',";
+            SqlQuery += "@UploadNocApproval = '" + request.UploadNocApproval + "',@FYID = '" + request.FYID + "',@UserID = '" + request.UserID + "',@BTERRegID = '" + request.BTERRegID + "',@RegAffiliationStatusId = '" + request.RegAffiliationStatusId + "',@Action='"+ ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.RevertnocSaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        } 
+        public bool RevertEOALOASaveData(EOALOARevertOtherDetailsDataModel request, string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_ResubmitBTERApplication @OtherDetailsID='" + request.OtherDetailsID + "',@DepartmentID='" + request.DepartmentID + "',@AICTE_EOA_LOA='" + request.AICTE_EOA_LOA + "',@AICTELAO_No='" + request.AICTELAO_No + "',@EOA_LOA_Date='" + request.EOA_LOA_Date + "',";
+            SqlQuery += "@UploadLOAApproval = '" + request.UploadLOAApproval + "',@FYID = '" + request.FYID + "',@UserID = '" + request.UserID + "',@BTERRegID = '" + request.BTERRegID + "',@RegAffiliationStatusId = '" + request.RegAffiliationStatusId + "',@Action='"+ ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.RevertEOALOASaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        
+        public bool RevertApplicationSaveData(ApplicationRevertOtherDetailsDataModel request, string ActionName)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_ResubmitBTERApplication @OtherDetailsID='" + request.OtherDetailsID + "',@DepartmentID='" + request.DepartmentID +"',";
+            SqlQuery += "@UploadApplicationForm = '" + request.UploadApplicationForm + "',@FYID = '" + request.FYID + "',@UserID = '" + request.UserID + "',@BTERRegID = '" + request.BTERRegID + "',@RegAffiliationStatusId = '" + request.RegAffiliationStatusId + "',@Action='"+ ActionName + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.ApplicationRevertOtherDetailsDataModel");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID, string ActionName)
+        {
+            string SqlQuery = "exec USP_BTERRegFinalSubmit @BTERRegID='"+ BTERRegID + "',@ActionName='"+ ActionName + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.ApplicationSubmit");
+
+            List<BTEROtherDetailsDataModel> dataModels = new List<BTEROtherDetailsDataModel>();
+            BTEROtherDetailsDataModel dataModel = new BTEROtherDetailsDataModel();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public bool Generateorder_SaveData(Generateorderforbter request)
+        {
+
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string BTERApprovedList = CommonHelper.GetDetailsTableQry(request.TotalBTERreceivedApplicationList, "Temp_BTERApprovedList");
+            string SqlQuery = " exec USP_BTERApprovedOrderList @BterApprovedOrderId='" + request.DTEAffiliationID + "',@SessionID='" + request.SessionID + "',@UserID='" + request.UserID + "',@RoleID='" + request.RoleID + "',@SessionName='" + request.SessionName + "',@BTERApprovedList='" + BTERApprovedList + "' ";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.Generateorder_SaveData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

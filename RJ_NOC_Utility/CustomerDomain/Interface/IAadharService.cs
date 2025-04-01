@@ -16,5 +16,6 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         string GetAadharByVID(CommonDataModel_AadharDataModel modal, IConfiguration _configuration);
 
         string eSignPDF(string PDFFileName, string OTPTransactionID, int DepartmentID, int ParamID, IConfiguration _configuration);
+        bool CAeSign_Req_Res(CAGetSignedXmlApiRequest req_Res);
     }
 }

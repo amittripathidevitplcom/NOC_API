@@ -2037,6 +2037,7 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+
         [HttpGet("CheckTabsEntry_StatisticsEntry/{CollegID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckTabsEntry_StatisticsEntry(int CollegID)
         {
@@ -5016,27 +5017,53 @@ namespace RJ_NOC_API.Controllers
             lr.AddDataSource("ASSESSMENT_Facility", dataset.Tables[1]);
             lr.AddDataSource("ASSESSMENT_FacilityDetailsforMuseum", dataset.Tables[2]);
             lr.AddDataSource("ASSESSMENT_DemonstrationRoomallthedepartment", dataset.Tables[3]);
-           // lr.AddDataSource("ASSESSMENT_departmentwiseinfrastructure", dataset.Tables[4]);
-            lr.AddDataSource("ASSESSMENT_ClinicalMaterialFacilities", dataset.Tables[4]);           
-            lr.AddDataSource("ASSESSMENT_DissectionHall", dataset.Tables[5]);           
-            lr.AddDataSource("ASSESSMENT_Skillslaboratory", dataset.Tables[6]);           
-            lr.AddDataSource("ASSESSMENT_Centralresearchlab", dataset.Tables[7]);           
-            lr.AddDataSource("ASSESSMENT_ClassRoomDetails", dataset.Tables[8]);           
+            // lr.AddDataSource("ASSESSMENT_departmentwiseinfrastructure", dataset.Tables[4]);
+            lr.AddDataSource("ASSESSMENT_ClinicalMaterialFacilities", dataset.Tables[4]);
+            lr.AddDataSource("ASSESSMENT_DissectionHall", dataset.Tables[5]);
+            lr.AddDataSource("ASSESSMENT_Skillslaboratory", dataset.Tables[6]);
+            lr.AddDataSource("ASSESSMENT_Centralresearchlab", dataset.Tables[7]);
+            lr.AddDataSource("ASSESSMENT_ClassRoomDetails", dataset.Tables[8]);
             var result = lr.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
-
-
-
-
-
-        [HttpGet("GetNOCFormat/{DepartmentID}/{CollegeID}/{ParameterID}/{NOCFor}")]
-        public async Task<OperationResult<List<DataTable>>> GetNOCFormat(int DepartmentID,int CollegeID,int ParameterID,string NOCFor)
+        [HttpGet("CheckCollegestatusIDWise/{DTEAffiliationID}")]
+        public async Task<OperationResult<CommonDataModel_RegistrationDTEAffiliationApply>> CheckCollegestatusIDWise(int DTEAffiliationID)
         {
-            var result = new OperationResult<List<DataTable>>();
+            var result = new OperationResult<CommonDataModel_RegistrationDTEAffiliationApply>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetNOCFormat(DepartmentID,CollegeID,ParameterID,NOCFor));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.CheckCollegestatusIDWise(DTEAffiliationID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.CheckCollegestatusIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("CheckTabsEntryAffiliation/{DTEAffiliationID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> CheckTabsEntryAffiliation(int DTEAffiliationID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.CheckTabsEntryAffiliation(DTEAffiliationID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -5051,7 +5078,38 @@ namespace RJ_NOC_API.Controllers
             }
             catch (Exception ex)
             {
-                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetNOCFormatList", ex.ToString());
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.CheckTabsEntryAffiliation", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }       
+         [HttpGet("GetBTERCollegeBasicDetails/{DTEAffiliationID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetBTERCollegeBasicDetails(int DTEAffiliationID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetBTERCollegeBasicDetails(DTEAffiliationID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetBTERCollegeBasicDetails", ex.ToString());
                 result.State = OperationState.Error;
                 result.ErrorMessage = ex.Message.ToString();
             }
@@ -5061,6 +5119,134 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetDownloadBTERPdfDetails/{DepartmentID}/{AffiliationRegID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetDownloadBTERPdfDetails(int DepartmentID, int AffiliationRegID)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetDownloadBTERPdfDetails(DepartmentID, AffiliationRegID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetDownloadPdfDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }       
+        [HttpPost("BTERAffiliationFinalSubmit/{EnterInwordNo}/{ApplicationDateofReceived}/{SelectedDepartmentID}/{SelectedDTEAffiliationID}/{selectedApplicationNo}/{SelectedCollageID}/{ActionName}")]
+        public async Task<OperationResult<bool>> BTERAffiliationFinalSubmit(string EnterInwordNo,string ApplicationDateofReceived,int SelectedDepartmentID,int SelectedDTEAffiliationID,string selectedApplicationNo,int SelectedCollageID,string ActionName)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.BTERAffiliationFinalSubmit(EnterInwordNo,ApplicationDateofReceived,SelectedDepartmentID,SelectedDTEAffiliationID,selectedApplicationNo,SelectedCollageID, ActionName));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "BTERAffiliationFinalSubmit", SelectedCollageID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = " Application Received successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.BTERAffiliationFinalSubmit", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetRevert_SearchRecordIDWiseDetails/{SearchRecordID}")]
+        public async Task<OperationResult<CommonDataModel_RevertAffiliationApply>> GetRevert_SearchRecordIDWiseDetails(string SearchRecordID)
+        {
+            var result = new OperationResult<CommonDataModel_RevertAffiliationApply>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetRevert_SearchRecordIDWiseDetails(SearchRecordID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetRevert_SearchRecordIDWiseDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetBTERRevertApllicationRemark/{DepartmentID}/{ApplicationID}")]
+        public async Task<OperationResult<List<DataTable>>> GetRevertApllicationRemark(int DepartmentID, int ApplicationID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetBTERRevertApllicationRemark(DepartmentID, ApplicationID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetBTERRevertApllicationRemark", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("BTEROrderGen/{GenOrderNumber}")]
+        public  IActionResult BTEROrderGen(string GenOrderNumber)
+        {
+            DataSet dataset = UtilityHelper.CommonFuncationUtility.BTEROrderGen(GenOrderNumber);
 
 
 
