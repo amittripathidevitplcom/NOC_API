@@ -520,8 +520,47 @@ namespace RJ_NOC_DataAccess.Repository
         {
             string SqlQuery = $" exec USP_GetMedicalGroupThreeInspectionReportData @ApplyNOCID={ApplyNOCID}";
             DataSet dataset = new DataSet();
-            dataset = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetMedicalGroupThreeInspectionReportData");
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.GetMedicalGroupThreeInspectionReportData");
             return dataset;
+        }
+
+        public DataSet GetGenerateRevertLetter(int ApplyNOCID)
+        {
+            string SqlQuery = $" exec USP_GetGenerateRevertLetter @ApplyNOCID={ApplyNOCID}";
+            DataSet dataset = new DataSet();
+            dataset = _commonHelper.Fill_DataSet(SqlQuery, "MedicalDocumentScrutiny.GetMedicalGroupThreeInspectionReportData");
+            return dataset;
+        }
+
+        public bool UpdateRevertLetterPath(string PDFPath, int ApplyNOCID)
+        {
+            string SqlQuery = $" exec USP_UpdateRevertLetterPath @ApplyNOCID='{ApplyNOCID}',@PDFPath='{PDFPath}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MedicalDocumentScrutiny.UpdateRevertLetterPath");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool InspectionReportSave(string PDFPath, int ApplyNOCID, int CreatedBy)
+        {
+            string SqlQuery = $" exec USP_InspectionReportSave @ApplyNOCID='{ApplyNOCID}',@PDFPath='{PDFPath}',@UserID='{CreatedBy}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MedicalDocumentScrutiny.InspectionReportSave");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool UploadInspectionReport(InspectionReportUpload_DataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+
+            string SqlQuery = $" exec USP_UploadInspectionReport @ApplyNOCID={request.ApplyNOCID},@UserID='{request.UserID}',@DocumentName='{request.DocumentName}'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "MedicalDocumentScrutiny.UploadInspectionReport");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

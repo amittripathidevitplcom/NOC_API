@@ -103,6 +103,11 @@ namespace RJ_NOC_Model
         public string? FDRIntimationDate { get; set; }
 
 
+        public string? InspectionReport { get; set; }
+        public string? InspectionReportPath { get; set; }
+        public string? UploadedInspectionReport { get; set; }
+        public string? UploadedInspectionReportPath { get; set; }
+
 
         public List<NOCPdfFileDataModel>? DraftNOCPdfFileDataModel { get; set; }
     }

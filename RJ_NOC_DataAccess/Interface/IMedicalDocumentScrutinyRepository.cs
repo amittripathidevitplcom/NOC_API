@@ -32,6 +32,10 @@ namespace RJ_NOC_DataAccess.Interface
         List<ApplyNocApplicationDetails_DataModel> GetApplyNOCApplicationList(CommonDataModel_ApplicationListFilter request);
         List<MedicalDocumentScrutinyDataModel_DocumentScrutinyCourseDetail> DocumentScrutiny_CourseDetails(int CollageID, int RoleID, int ApplyNOCID);
         DataSet GetMedicalGroupThreeInspectionReportData(int ApplyNOCID);
+        DataSet GetGenerateRevertLetter(int ApplyNOCID);
+        bool UpdateRevertLetterPath(string PDFPath, int ApplyNOCID);
+        bool InspectionReportSave(string PDFPath, int ApplyNOCID, int CreatedBy);
+        bool UploadInspectionReport(InspectionReportUpload_DataModel request);
     }
 
 }

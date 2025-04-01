@@ -104,6 +104,22 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.MedicalDocumentScrutinyRepository.GetMedicalGroupThreeInspectionReportData(ApplyNOCID);
         }
+        public DataSet GetGenerateRevertLetter(int ApplyNOCID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.GetGenerateRevertLetter(ApplyNOCID);
+        }
+        public bool UpdateRevertLetterPath(string PDFPath, int ApplyNOCID)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.UpdateRevertLetterPath(PDFPath, ApplyNOCID);
+        }
+        public bool InspectionReportSave(string PDFPath, int ApplyNOCID, int CreatedBy)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.InspectionReportSave(PDFPath, ApplyNOCID, CreatedBy);
+        }
+        public bool UploadInspectionReport(InspectionReportUpload_DataModel request)
+        {
+            return UnitOfWork.MedicalDocumentScrutinyRepository.UploadInspectionReport(request);
+        }
 
     }
 }

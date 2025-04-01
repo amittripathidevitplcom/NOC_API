@@ -685,9 +685,8 @@ namespace RJ_NOC_API.Controllers
         }
 
 
-
-        [HttpPost("GenerateInspectionReport/{CollegeID}/{RoleID}/{ApplyNOCID}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateInspectionReport(int CollegeID, int RoleID, int ApplyNOCID)
+        [HttpPost("GenerateInspectionReport/{CollegeID}/{RoleID}/{ApplyNOCID}/{CreatedBy}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateInspectionReport(int CollegeID, int RoleID, int ApplyNOCID, int CreatedBy)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(ApplyNOCID, "GenerateInspectionReport", ApplyNOCID, "MedicalDocumentScrutinyController");
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
@@ -705,38 +704,67 @@ namespace RJ_NOC_API.Controllers
 
                 ReportPath += "\\MedicalGroup3InspectionReport.rdlc";
                 localReport = new LocalReport(ReportPath);
+                for (int i = 0; i < dataset.Tables[0].Rows.Count; i++)
+                {
+                    dataset.Tables[0].Rows[i]["DetailstoVerify"] = dataset.Tables[0].Rows[i]["DetailstoVerify"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int j = 0; j < dataset.Tables[1].Rows.Count; j++)
+                {
+                    dataset.Tables[1].Rows[j]["DetailstoVerify"] = dataset.Tables[1].Rows[j]["DetailstoVerify"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int k = 0; k < dataset.Tables[2].Rows.Count; k++)
+                {
+                    dataset.Tables[2].Rows[k]["DetailstoVerify"] = dataset.Tables[2].Rows[k]["DetailstoVerify"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int l = 0; l < dataset.Tables[3].Rows.Count; l++)
+                {
+                    dataset.Tables[3].Rows[l]["RequiredSpace"] = dataset.Tables[3].Rows[l]["RequiredSpace"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int m = 0; m < dataset.Tables[4].Rows.Count; m++)
+                {
+                    dataset.Tables[4].Rows[m]["RequiredSpace"] = dataset.Tables[4].Rows[m]["RequiredSpace"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int n = 0; n < dataset.Tables[5].Rows.Count; n++)
+                {
+                    dataset.Tables[5].Rows[n]["DetailstoVerify"] = dataset.Tables[5].Rows[n]["DetailstoVerify"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int o = 0; o < dataset.Tables[7].Rows.Count; o++)
+                {
+                    dataset.Tables[7].Rows[o]["DetailstoVerify"] = dataset.Tables[7].Rows[o]["DetailstoVerify"].ToString().Replace("||", System.Environment.NewLine);
+                }
+                for (int p = 0; p < dataset.Tables[8].Rows.Count; p++)
+                {
+                    dataset.Tables[8].Rows[p]["DetailstoVerify"] = dataset.Tables[8].Rows[p]["DetailstoVerify"].ToString().Replace("||", System.Environment.NewLine);
+                }
                 localReport.AddDataSource("BasicInformations", dataset.Tables[0]);
                 localReport.AddDataSource("BasicInformationOfSociety", dataset.Tables[1]);
                 localReport.AddDataSource("OwnershipDetails", dataset.Tables[2]);
                 localReport.AddDataSource("BuildupArea", dataset.Tables[3]);
                 localReport.AddDataSource("BuildupAreaGNM", dataset.Tables[4]);
-
+                localReport.AddDataSource("LibraryRequirement", dataset.Tables[5]);
+                localReport.AddDataSource("HostelDetails", dataset.Tables[6]);
+                localReport.AddDataSource("OwnHospitalDetails", dataset.Tables[7]);
+                localReport.AddDataSource("AffiliatedHospitalDetails", dataset.Tables[8]);
+                localReport.AddDataSource("TransportFacilities", dataset.Tables[9]);
+                localReport.AddDataSource("BasicDetailsOfApplication", dataset.Tables[10]);
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
                 parameters.Add("test", "");
                 System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
                 var result1 = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
-
-                //return File(result.MainStream, "application/pdf");
                 System.IO.File.WriteAllBytes(filepath, result1.MainStream);
-
-
-
-                //string Path = GeneratePDFDCE(request.AppliedNOCFor[0].ApplyNOCID);
-
-                //bool result1 = false;
-                //result1 = UtilityHelper.ApplyNOCUtility.UpdateNOCPDFPath(PdfPathList);
-                //if (result1)
-                //{
-                result.State = OperationState.Success;
-                result.SuccessMessage = "PDF Generate Successfully .!";
-                //}
-                //else
-                //{
-                //    result.State = OperationState.Warning;
-                //    result.SuccessMessage = "There was an error Generate PDF!";
-                //}
+                bool result2 = false;
+                result2 = UtilityHelper.MedicalDocumentScrutinyUtility.InspectionReportSave(fileName, ApplyNOCID, CreatedBy);
+                if (result2)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "PDF Generate Successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
+                }
 
 
             }
@@ -749,6 +777,92 @@ namespace RJ_NOC_API.Controllers
             finally
             {
                 // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("GenerateRevertLetter/{CollegeID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GenerateRevertLetter(int CollegeID, int RoleID, int ApplyNOCID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(ApplyNOCID, "GenerateRevertLetter", ApplyNOCID, "MedicalDocumentScrutinyController");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                LocalReport localReport = null;
+                DataSet dataset = new DataSet();
+                dataset = UtilityHelper.MedicalDocumentScrutinyUtility.GetGenerateRevertLetter(ApplyNOCID);
+
+                var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+                string filepath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF/" + fileName);
+                string mimetype = "";
+                int extension = 1;
+                string ReportPath = (System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Reports"));
+
+                ReportPath += "\\RevertLetterforMGThree.rdlc";
+                localReport = new LocalReport(ReportPath);
+                localReport.AddDataSource("BasicInformationsofCollege", dataset.Tables[0]);
+
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+                parameters.Add("test", "");
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                var result1 = localReport.Execute(RenderType.Pdf, extension, parameters, mimetype);
+                System.IO.File.WriteAllBytes(filepath, result1.MainStream);
+                bool result2 = false;
+                result2 = UtilityHelper.MedicalDocumentScrutinyUtility.UpdateRevertLetterPath(fileName, ApplyNOCID);
+                if (result2)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "PDF Generate Successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "There was an error Generate PDF!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyController.GenerateRevertLetter", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+
+        [HttpPost("UploadInspectionReport")]
+        public async Task<OperationResult<bool>> UploadInspectionReport(InspectionReportUpload_DataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.MedicalDocumentScrutinyUtility.UploadInspectionReport(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "upload successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "error in upload Inspection Report.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("MedicalDocumentScrutinyUtility.UploadInspectionReport", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
             }
             return result;
         }

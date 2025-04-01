@@ -113,4 +113,11 @@ namespace RJ_NOC_Model
         public int? IsLOIIssued { get; set; }
 
     }
+
+    public class InspectionReportUpload_DataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public int UserID { get; set; }
+        public string DocumentName { get; set; }
+    }
 }
