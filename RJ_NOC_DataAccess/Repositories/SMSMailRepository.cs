@@ -48,7 +48,7 @@ namespace RJ_NOC_DataAccess.Repository
             if (dataTable.Rows.Count > 0)
             {
                 MessageBody = dataTable.Rows[0]["MessageBody"].ToString();
-                TempletID = dataTable.Rows[0]["TemplateID"].ToString(); ;
+                TempletID = dataTable.Rows[0]["TemplateID"].ToString(); 
             }
             if (MessageType == "OTP")
             {
@@ -67,6 +67,17 @@ namespace RJ_NOC_DataAccess.Repository
                 MessageBody = MessageBody.Replace("{#College/Institute#}", "College/Institute");
                 MessageBody = MessageBody.Replace("{#MobileAppLink#}", "https://rajnoc.rajasthan.gov.in/assets/MobileApp/RajNocMobileApp.rar");
                 MessageBody = MessageBody.Replace("{#WebLink#}", "https://rajnoc.rajasthan.gov.in/");
+                CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
+            }
+            if (MessageType == "Revert")
+            {
+                var ds = this.GetApplyNocApplicationByApplicationID(ID);
+                if (ds != null && ds.Tables.Count >= 1)
+                {
+                    MessageBody = MessageBody.Replace("{#appno#}", ds.Tables[0].Rows[0]["ApplicationNo"].ToString());
+                }
+
+                MessageBody = MessageBody.Replace("{#portal#}", "RAJNOC PORTAL");
                 CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
             }
             return ReturnOTP;

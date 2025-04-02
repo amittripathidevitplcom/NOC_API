@@ -166,6 +166,7 @@ namespace RJ_NOC_Model
         public string Remark { get; set; }
         public int? NoOfIssuedYear { get; set; }
         public bool? ChangeIntoTNOC { get; set; } = false;
+        public bool? ChangeIntoPNOC { get; set; } = false;
         public string? PdfFilePath { get; set; }
         public string? NOCFormat { get; set; }
     } 
