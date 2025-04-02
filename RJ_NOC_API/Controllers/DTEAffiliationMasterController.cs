@@ -320,38 +320,7 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("{BTERCourseID}/{LoginSSOID}/{UserID}")]
-        public async Task<OperationResult<List<BTERCourseAffiliationDataModel>>> GetDTEAffiliationWiseCourseIDWise(int BTERCourseID, string LoginSSOID, int UserID)
-        {
-            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", BTERCourseID, "CourseMaster");
-            var result = new OperationResult<List<BTERCourseAffiliationDataModel>>();
-            try
-            {
-                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetDTEAffiliationWiseCourseIDWise(BTERCourseID, LoginSSOID));
-                if (result.Data.Count > 0)
-                {
-
-                    result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
-                }
-                else
-                {
-                    result.State = OperationState.Warning;
-                    result.ErrorMessage = "No record found.!";
-                }
-            }
-            catch (Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMaster.GetDTEAffiliationWiseCourseIDWise", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            finally
-            {
-                // UnitOfWork.Dispose();
-            }
-            return result;
-        }
+        
         [HttpPost("Delete/{AffiliationCourseID}/{UserID}")]
         public async Task<OperationResult<bool>> DeleteData(int AffiliationCourseID, int UserID)
         {
@@ -755,6 +724,197 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("{UserID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllBTERFeeList(int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllBTERFeeList", 0, "BTERFeeMaster");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetAllBTERFeeList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.GetAllBTERFeeList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpGet("{BTERCourseID}/{LoginSSOID}/{UserID}")]
+        public async Task<OperationResult<List<BTERCourseAffiliationDataModel>>> GetDTEAffiliationWiseCourseIDWise(int BTERCourseID, string LoginSSOID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", BTERCourseID, "CourseMaster");
+            var result = new OperationResult<List<BTERCourseAffiliationDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetDTEAffiliationWiseCourseIDWise(BTERCourseID, LoginSSOID));
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMaster.GetDTEAffiliationWiseCourseIDWise", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }        
+       
+
+       
+       
+  
+        
+    
+    
+        [HttpGet("{FeeID}/{UserID}")]
+        public async Task<OperationResult<List<BTERFeeMasterDataModel>>> GetBTERFeeByID(int FeeID, int UserID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(UserID, "FetchData_IDWise", FeeID, "LOIFeeMaster");
+            var result = new OperationResult<List<BTERFeeMasterDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetBTERFeeByID(FeeID));
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.GetLOIFeeByID", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("BTERFeeSaveData")]
+        public async Task<OperationResult<bool>> SaveDataBTERFee(BTERFeeMasterDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                bool IfExits = false;
+                IfExits = UtilityHelper.DTEAffilitionMasterUtility.IfExists(request.FeeID, request.DepartmentID, request.FeeType);
+                if (IfExits == false)
+                {
+                    result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.SaveDataBTERFee(request));
+                    if (result.Data)
+                    {
+                        result.State = OperationState.Success;
+                        if (request.FeeID == 0)
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Save", request.FeeID, "BTERFeeMaster");
+                            result.SuccessMessage = "Saved successfully .!";
+                        }
+                        else
+                        {
+                            CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.FeeID, "BTERFeeMaster");
+                            result.SuccessMessage = "Updated successfully .!";
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        if (request.FeeID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = request.FeeType + " is Already Exist, It Can't Not Be Duplicate.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.SaveData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+        [HttpPost("BTERDeleteData/{FeeID}/{UserID}")]
+        public async Task<OperationResult<bool>> DeleteDataBter(int FeeID, int UserID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.DeleteDataBter(FeeID));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", FeeID, "BTERFeeMaster");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error deleting data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.DeleteData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
     }
 }

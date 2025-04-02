@@ -211,5 +211,6 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForAffiliationorder();
         }
+        
     }
 }

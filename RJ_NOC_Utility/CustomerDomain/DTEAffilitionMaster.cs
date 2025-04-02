@@ -7,7 +7,6 @@ using RJ_NOC_DataAccess.Interface;
 using Azure.Core;
 using System.Data;
 using RJ_NOC_DataAccess.Common;
-
 namespace RJ_NOC_Utility.CustomerDomain
 {
     public class DTEAffilitionMaster : UtilityBase, IDTEAffilitionMaster
@@ -91,6 +90,27 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool Generateorder_SaveData(Generateorderforbter request)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.Generateorder_SaveData(request);
+        }
+        public List<CommonDataModel_DataTable> GetAllBTERFeeList()
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetAllBTERFeeList();
+        }
+        public List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetBTERFeeByID(FeeID);
+        }
+        public bool SaveDataBTERFee(BTERFeeMasterDataModel request)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.SaveDataBTERFee(request);
+        }
+        public bool DeleteDataBter(int FeeID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.DeleteDataBter(FeeID);
+        }
+
+        public bool IfExists(int FeeID, int DepartmentID, string FeeType)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.IfExists(FeeID, DepartmentID, FeeType);
         }
     }
 }

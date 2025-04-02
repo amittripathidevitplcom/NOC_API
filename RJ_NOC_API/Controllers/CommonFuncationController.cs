@@ -5026,6 +5026,37 @@ namespace RJ_NOC_API.Controllers
             var result = lr.Execute(RenderType.Pdf, extension, parameters, mimetype);
             return File(result.MainStream, "application/pdf");
         }
+        [HttpGet("GetNOCFormat/{DepartmentID}/{CollegeID}/{ParameterID}/{NOCFor}")]
+        public async Task<OperationResult<List<DataTable>>> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetNOCFormat(DepartmentID, CollegeID, ParameterID, NOCFor));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetNOCFormatList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpGet("CheckCollegestatusIDWise/{DTEAffiliationID}")]
         public async Task<OperationResult<CommonDataModel_RegistrationDTEAffiliationApply>> CheckCollegestatusIDWise(int DTEAffiliationID)
         {
@@ -5248,9 +5279,86 @@ namespace RJ_NOC_API.Controllers
         {
             DataSet dataset = UtilityHelper.CommonFuncationUtility.BTEROrderGen(GenOrderNumber);
 
+            string mimetype = "";
+            int extension = 1;
 
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            var fileName = System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff") + ".pdf";
+            string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF");
 
+            // Ensure the directory exists
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
 
+            string filepath = Path.Combine(directoryPath, fileName);
+            string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
+
+            var reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Reports", "BTERAffiliationOrderGenPDF.rdlc");
+            LocalReport lr = new LocalReport(reportPath);
+            lr.AddDataSource("BTERAffiliationOrderList", dataset.Tables[0]);
+
+            var result = lr.Execute(RenderType.Pdf, extension, parameters, mimetype);
+
+            // Save the file to the specified path
+            System.IO.File.WriteAllBytes(filepath, result.MainStream);
+            var pdfPathListResult =  UpdateGeneratedBTERPDF(fileName, GenOrderNumber);
+            return File(System.IO.File.ReadAllBytes(filepath), "application/pdf", fileName);
+        }
+        [HttpGet("UpdateGeneratedBTERPDF")]
+        public async Task<OperationResult<List<CommonDataModel_BTEROrderList>>> UpdateGeneratedBTERPDF(string fileName, string GenOrderNumber)
+        {
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(GenOrderNumber))
+            {
+                throw new ArgumentException("fileName or GenOrderNumber is null or empty!");
+            }
+
+            // Proceed with logic
+            var result = new OperationResult<List<CommonDataModel_BTEROrderList>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.UpdateGeneratedBTERPDF(fileName, GenOrderNumber));
+                result.State = OperationState.Success;
+            }
+            catch (Exception ex)
+            {
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+        [HttpGet("ChecSSOIDwiseLegalEntityDepartment/{SSOID}")]
+        public async Task<OperationResult<List<DataTable>>> ChecSSOIDwiseLegalEntityDepartment(string SSOID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.ChecSSOIDwiseLegalEntityDepartment(SSOID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.ChecSSOIDwiseLegalEntityDepartment", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
         [HttpPost("UpdateInspectionFDRIntimationAH")]
         public async Task<OperationResult<bool>> UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request)
         {

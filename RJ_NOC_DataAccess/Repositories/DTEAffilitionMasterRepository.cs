@@ -256,5 +256,59 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+
+        public List<CommonDataModel_DataTable> GetAllBTERFeeList()
+        {
+            string SqlQuery = " exec USP_GetBTERFeeMasterData";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetAllBTERFeeList");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID)
+        {
+            string SqlQuery = " exec USP_GetBTERFeeMasterData @FeeID='" + FeeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetLOIFeeByID");
+
+            List<BTERFeeMasterDataModel> dataModels = new List<BTERFeeMasterDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<BTERFeeMasterDataModel>>(JsonDataTable_Data);
+            return dataModels;
+        }
+        public bool SaveDataBTERFee(BTERFeeMasterDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec BTERFeeMaster_AddUpdate";
+            SqlQuery += " @FeeID='" + request.FeeID + "',@DepartmentID='" + request.DepartmentID + "',@FeeType='" + request.FeeType + "',@Amount='" + request.Amount + "', @ActiveStatus='" + request.ActiveStatus + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.SaveDataBTERFee");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool DeleteDataBter(int FeeID)
+        {
+            string SqlQuery = " Update DTE_AffiliationApplyFees set ActiveStatus=0 , DeleteStatus=1  WHERE FeeID='" + FeeID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.DeleteDataBter");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool IfExists(int FeeID, int DepartmentID, string FeeType)
+        {
+            string SqlQuery = " select FeeType from DTE_AffiliationApplyFees Where Department = '" + DepartmentID + "' and FeeType='" + FeeType.Trim() + "'  and FeeID !='" + FeeID + "'  and DeleteStatus=0";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.IfExists");
+            if (dataTable.Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

@@ -576,7 +576,7 @@ namespace RJ_NOC_Utility.CustomerDomain
 
         public List<DataTable> HomePage_IncreaseDate(int DepartmentID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate(DepartmentID,Type);
+            return UnitOfWork.CommonFuncationRepository.HomePage_IncreaseDate(DepartmentID, Type);
         }
         public List<DataTable> GetOnlinePaymentDetailsByDepartment(PaymentDetailsDataModel_Filter request)
         {
@@ -659,8 +659,8 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetDteAffiliation_SearchRecordIDWise(SearchRecordID);
         }
-        
-        
+
+
 
         public List<DataTable> GetMGOneDepartmentList()
         {
@@ -695,15 +695,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetMGoneFacilityEach(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGoneFacilityEach(CollegeID);
-        } 
+        }
         public DataSet GetMGoneASSESSMENTREPORT(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGoneASSESSMENTREPORT(CollegeID);
-        }        
+        }
         public bool SaveMGoneFacilityEach(List<MGOneFacilityEachDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGoneFacilityEach(request);
-        }     
+        }
         public List<DataTable> GetWorkflowPermissions(int DepartmentID, int RoleID)
         {
             return UnitOfWork.CommonFuncationRepository.GetWorkflowPermissions(DepartmentID, RoleID);
@@ -725,20 +725,20 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.CheckTabsEntryAffiliation(DTEAffiliationID);
         }
-        
+
         public List<CommonDataModel_DataTable> GetBTERCollegeBasicDetails(int DTEAffiliationID)
         {
             return UnitOfWork.CommonFuncationRepository.GetBTERCollegeBasicDetails(DTEAffiliationID);
         }
-        
-       
-        public List<CommonDataModel_DataTable> GetDownloadBTERPdfDetails(int DepartmentID,int AffiliationRegID)
+
+
+        public List<CommonDataModel_DataTable> GetDownloadBTERPdfDetails(int DepartmentID, int AffiliationRegID)
         {
             return UnitOfWork.CommonFuncationRepository.GetDownloadBTERPdfDetails(DepartmentID, AffiliationRegID);
         }
         public bool BTERAffiliationFinalSubmit(string EnterInwordNo, string ApplicationDateofReceived, int SelectedDepartmentID, int SelectedDTEAffiliationID, string selectedApplicationNo, int SelectedCollageID, string ActionName)
         {
-            return UnitOfWork.CommonFuncationRepository.BTERAffiliationFinalSubmit(EnterInwordNo, ApplicationDateofReceived, SelectedDepartmentID, SelectedDTEAffiliationID, selectedApplicationNo, SelectedCollageID,ActionName);
+            return UnitOfWork.CommonFuncationRepository.BTERAffiliationFinalSubmit(EnterInwordNo, ApplicationDateofReceived, SelectedDepartmentID, SelectedDTEAffiliationID, selectedApplicationNo, SelectedCollageID, ActionName);
         }
         public CommonDataModel_RevertAffiliationApply GetRevert_SearchRecordIDWiseDetails(string SearchRecordID)
         {
@@ -748,7 +748,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetBTERRevertApllicationRemark(DepartmentID, ApplicationID);
         }
-        
+
         public DataSet BTEROrderGen(string GenOrderNumber)
         {
             return UnitOfWork.CommonFuncationRepository.BTEROrderGen(GenOrderNumber);
@@ -761,15 +761,17 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.ChecSSOIDwiseLegalEntityDepartment(SSOID);
         }
-        
-        }      
+
         public List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor)
         {
-            return UnitOfWork.CommonFuncationRepository.GetNOCFormat(DepartmentID,CollegeID,ParameterID,NOCFor);
+            return UnitOfWork.CommonFuncationRepository.GetNOCFormat(DepartmentID, CollegeID, ParameterID, NOCFor);
         }
         public bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request)
         {
             return UnitOfWork.CommonFuncationRepository.UpdateInspectionFDRIntimationAH(request);
-        }        
+        }
+
+
     }
 }
+
