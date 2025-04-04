@@ -25,6 +25,8 @@ namespace RJ_NOC_Model
         public int StreamID { get; set; }
         public int UniversityID { get; set; }
         public int NoofSubjectsForCombination { get; set; }
+        //bter
+        public string? ShortNameofCourse {  get; set; }
         public List<SubjectAddCourseMasterDataModel> CourseSubjects { get; set; }
     }
     public class SubjectAddCourseMasterDataModel
