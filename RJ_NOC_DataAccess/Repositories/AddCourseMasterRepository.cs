@@ -52,7 +52,7 @@ namespace RJ_NOC_DataAccess.Repository
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_USP_AddCourseMaster_AddUpdate";
             SqlQuery += " @CourseID='" + request.CourseID + "',@DepartmentID='" + request.DepartmentID + "',@CollegeLevel='" + request.CollegeLevel + "',@CourseLevelID='" + request.CourseLevelID + "',@CourseName='" + request.CourseName+ "',@Duration='" + request.Duration + "',@NoOfRooms='" + request.NoOfRooms + "',@CourseDurationType='" + request.CourseDurationType + "',";
-            SqlQuery += "@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "',@CourseSubject_str='" + CourseSubject_str + "',@UniversityID='" + request.UniversityID + "',@StreamID='" + request.StreamID + "',@NoofSubjectsForCombination='" + request.NoofSubjectsForCombination + "'";
+            SqlQuery += "@ActiveStatus='" + request.ActiveStatus+ "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "',@CourseSubject_str='" + CourseSubject_str + "',@UniversityID='" + request.UniversityID + "',@StreamID='" + request.StreamID + "',@NoofSubjectsForCombination='" + request.NoofSubjectsForCombination + "',@ShortNameofCourse='"+request.ShortNameofCourse+ "'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "AddCourseMasterService.SaveData");
             if (Rows > 0)
                 return true;
