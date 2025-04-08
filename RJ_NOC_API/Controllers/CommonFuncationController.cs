@@ -5298,6 +5298,7 @@ namespace RJ_NOC_API.Controllers
             var reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Reports", "BTERAffiliationOrderGenPDF.rdlc");
             LocalReport lr = new LocalReport(reportPath);
             lr.AddDataSource("BTERAffiliationOrderList", dataset.Tables[0]);
+            lr.AddDataSource("BTERAffiliationOrderListClosed", dataset.Tables[1]);
 
             var result = lr.Execute(RenderType.Pdf, extension, parameters, mimetype);
 
