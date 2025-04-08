@@ -14,9 +14,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CourseMaster(IRepositories unitOfWork) : base(unitOfWork)
         {
         }
-        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID, int CollegeID)
+        public List<CommonDataModel_DataTable> GetAllCourse(string LoginSSOID, int CollegeID, int ApplyNOCID)
         {
-            return UnitOfWork.CourseMasterRepository.GetAllCourse(LoginSSOID, CollegeID);
+            return UnitOfWork.CourseMasterRepository.GetAllCourse(LoginSSOID, CollegeID,ApplyNOCID);
         }
         public List<CommonDataModel_DataTable> GetAllCourseDTE(string LoginSSOID, int CollegeWiseCourseID, int CollegeID, int ApplyNOCID)
         {
