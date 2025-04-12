@@ -482,5 +482,30 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModels = JsonConvert.DeserializeObject<List<ResponseParameters>>(JsonDataTable_Data);
             return dataModels;
         }
+
+        public bool UpdateEmitraRecheckPaymentStatus(EmitraResponseParameters request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_InsertEmitraTransactions";
+            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@TransactionId='" + request.TRANSACTIONID + "',@PRN='" + request.PRN + "',@PaidAmount='" + request.PAIDAMOUNT + "',@TokenNo='" + request.RECEIPTNO + "',@StatusMsg='" + request.RESPONSEMESSAGE + "',@ResponseString='" + JsonConvert.SerializeObject(request) + "',@ReceiptNo='" + request.RECEIPTNO + "'," + "@RequestStatus='" + request.STATUS + "'," +
+                "@key='RecheckEmitraPaymentStatus'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.UpdateEmitraPaymentStatus");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+
+        public List<CAGetSignedPDFAPIRequestResponse> GetCAeSignTransactionDetails(string TransactionID)
+        {
+            string SqlQuery = "exec USP_CAeSign_Req_Res_Req_Res_Save @TransactionID='" + TransactionID + "',@RequestType ='GetCAeSignTransactionDetails'";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "ApplyNOC.GetCAeSignTransactionDetails");
+            List<CAGetSignedPDFAPIRequestResponse> listdataModels = new List<CAGetSignedPDFAPIRequestResponse>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[0]);
+            listdataModels = JsonConvert.DeserializeObject<List<CAGetSignedPDFAPIRequestResponse>>(JsonDataTable_Data);
+            return listdataModels;
+        }
     }
 }

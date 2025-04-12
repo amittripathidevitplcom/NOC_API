@@ -108,6 +108,15 @@ namespace RJ_NOC_Utility.CustomerDomain
 
 
 
+        public bool UpdateEmitraRecheckPaymentStatus(EmitraResponseParameters request)
+        {
+            return UnitOfWork.PaymentRepository.UpdateEmitraRecheckPaymentStatus(request);
+        }
+
+        public List<CAGetSignedPDFAPIRequestResponse> GetCAeSignTransactionDetails(string TransactionID)
+        {
+            return UnitOfWork.PaymentRepository.GetCAeSignTransactionDetails(TransactionID);
+        }
 
 
 

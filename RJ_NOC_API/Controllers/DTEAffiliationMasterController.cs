@@ -638,18 +638,18 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        [HttpGet("ApplicationSubmit/{BTERRegID}/{ActionName}")]
-        public async Task<OperationResult<List<BTEROtherDetailsDataModel>>> ApplicationSubmit(int BTERRegID,string ActionName)
+        [HttpGet("ApplicationSubmit/{BTERRegID}/{ActionName}/{AMOUNT}")]
+        public async Task<OperationResult<List<BTEROtherDetailsDataModel>>> ApplicationSubmit(int BTERRegID,string ActionName,decimal AMOUNT)
         {
             var result = new OperationResult<List<BTEROtherDetailsDataModel>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.ApplicationSubmit(BTERRegID, ActionName));
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.ApplicationSubmit(BTERRegID, ActionName, AMOUNT));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
                     result.State = OperationState.Success;
-                    result.SuccessMessage = "Data load successfully .!";
+                    result.SuccessMessage = "Application Submited successfully .!";
                 }
                 else
                 {

@@ -241,6 +241,9 @@ namespace RJ_NOC_Model
         public string? CollegeCode { get; set; }
         public string? FullAddress { get; set; }
         public string? Branchandintackname { get; set; }
+        public string? OrderNumberAndDate { get; set; }
+        public string? CourseStatusName { get; set; }
+        public int? CourseStatusId { get; set; }
         public string? ApplicationStatusLocation { get; set; }
 
 

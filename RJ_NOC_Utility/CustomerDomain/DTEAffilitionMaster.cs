@@ -83,9 +83,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DTEAllifitionMasterRepository.RevertApplicationSaveData(request,ActionName);
         }
-        public List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID,string ActionName)
+        public List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID,string ActionName, decimal AMOUNT)
         {
-            return UnitOfWork.DTEAllifitionMasterRepository.ApplicationSubmit(BTERRegID, ActionName);
+            return UnitOfWork.DTEAllifitionMasterRepository.ApplicationSubmit(BTERRegID, ActionName, AMOUNT);
         }
         public bool Generateorder_SaveData(Generateorderforbter request)
         {

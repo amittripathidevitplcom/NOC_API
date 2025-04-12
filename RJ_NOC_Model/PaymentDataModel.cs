@@ -206,6 +206,9 @@ namespace RJ_NOC_Model
 
         public string WebServiceURL { get; set; }
         public string SuccessFailedURL { get; set; }
+
+
+        public string VerifyURL { get; set; }
     }
 
     [Serializable()]
@@ -263,6 +266,10 @@ namespace RJ_NOC_Model
         public string UniquerequestId { get; set; }
 
         public string ResponseString { get; set; }
+
+
+
+
     }
 
     public class EmitraRequestDetails
@@ -287,6 +294,20 @@ namespace RJ_NOC_Model
         public string MERCHANTCODE { get; set; }
         public bool IsKiosk { get; set; }
         public bool IsSucccess { get; set; }
+
+        /////04/04/2025      
+        public int DepartmentID { get; set; }
+        public string? DistrictCode { get; set; }
+        public string? Adrees { get; set; }
+        public string? City { get; set; }
+        public string? Pincode { get; set; }
+        public string? PaymentType { get; set; }
+        public string? USEREMAIL { get; set; }
+        public string? CreatedBy { get; set; }
+
+        //FOR RECHECK
+        public string? PRN { get; set; }
+
 
 
     }
@@ -370,6 +391,31 @@ namespace RJ_NOC_Model
     {
         PaymentRequest = 1,
         RefundRequest = 2
+    }
+    public class PGRequestNew
+    {
+        public string MERCHANTCODE { get; set; }
+        public string PRN { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string AMOUNT { get; set; }
+        public string SUCCESSURL { get; set; }
+        public string FAILUREURL { get; set; }
+        public string USERNAME { get; set; }
+        public string USERMOBILE { get; set; }
+        public string USEREMAIL { get; set; }
+        public string UDF1 { get; set; }
+        public string UDF2 { get; set; }
+        public string SERVICEID { get; set; }
+        public string OFFICECODE { get; set; }
+        public string REVENUEHEAD { get; set; }
+        public string COMMTYPE { get; set; }
+        public string CHECKSUM { get; set; }
+        public string CHECKSUMKEY { get; set; }
+        public string CONSUMERKEY { get; set; }
+
+        public string LOOKUPID { get; set; }
+        public string ApplicationIdEnc { get; set; }
+        public string UniquerequestId { get; set; }
     }
 
     #endregion

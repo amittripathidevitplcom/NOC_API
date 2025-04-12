@@ -34,6 +34,8 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetOfflinePaymentDetails(int CollegeID,int SessionYear);
         List<ResponseParameters> GetBterPaymentListIDWise(string TransactionID);
         List<ResponseParameters> GetBTERPreviewPaymentDetails(int AffiliationRegID, int SessionYear);
+        bool UpdateEmitraRecheckPaymentStatus(EmitraResponseParameters request);
+        List<CAGetSignedPDFAPIRequestResponse> GetCAeSignTransactionDetails(string TransactionID);
 
     }
 }

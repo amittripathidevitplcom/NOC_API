@@ -466,11 +466,17 @@ namespace RJ_NOC_API.Controllers
             result.Data = new CAAadharResponseForESPRedirect();
             try
             {
+                // GET Esign Credentials
+
+                string RetrunUrL = "";
+                DataTable dt_esignCredentials = new DataTable();
+                dt_esignCredentials = CommonDataAccessHelper.GetCAeSignCredentials();
+                //end
                 string pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "SystemGeneratedPDF") + "/" + request.PDFFileName;
                 byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfPath);
                 request.pdfBase64 = Convert.ToBase64String(pdfBytes);
-                string CA_Requesturl = _configuration["AadharServiceDetails:CAeSignGetSignedXMLRSDUrl"].ToString();
-                string CA_ESPportal = _configuration["AadharServiceDetails:CAeSignRedirectESPportal"].ToString();
+                string CA_Requesturl = dt_esignCredentials.Rows[0]["CAeSignGetSignedXMLRSDUrl"].ToString(); //_configuration
+                string CA_ESPportal = dt_esignCredentials.Rows[0]["CAeSignRedirectESPportal"].ToString(); //_configuration
                 string URLType = Request.GetDisplayUrl();
 
                 if (URLType.Contains("localhost"))
@@ -486,12 +492,11 @@ namespace RJ_NOC_API.Controllers
                     request.successFailureurl = "https://rajnoc.rajasthan.gov.in/api/api/AadharService/CA_eSignPDFResponse/";
                 }
 
-                request.TransactionID = _configuration["AadharServiceDetails:CAClientCode"].ToString() + "_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff");
+                request.TransactionID = dt_esignCredentials.Rows[0]["CAClientCode"].ToString() + "_" + System.DateTime.Now.ToString("ddMMMyyyyhhmmssffffff");
                 request.RequestType = "esignRSDURL";
                 request.RSDRequestUrl = CA_Requesturl;
                 request.ESPRequestURL = CA_ESPportal;
-                //SAVE IN DATABASE GET DATA TO PUSH IN URL
-                //request.RequestJson = "{\"pdfFile1\":\"" + request.pdfBase64 + "\",\"signatureOnPageNumber\":\"" + request.signatureOnPageNumber + "\",\"clientCode\":\"" + _configuration["AadharServiceDetails:CAClientCode"].ToString() + "\",\"designation\": \"" + request.designation + "\",\"txn\": \"" + request.TransactionID + "\",\"responseUrl\":\"" + request.successFailureurl + "\" ,\"location\":\"" + request.location + "\",\"xcord\":\"" + request.xcord + "\",\"ycord\":\"" + request.ycord + "\",\"sigsize\":\"" + request.sigsize + "\"}";
+               
                 bool reqStatus = UtilityHelper.AadharServiceUtility.CAeSign_Req_Res(request);
                 if (reqStatus == true)
                 {
@@ -499,6 +504,7 @@ namespace RJ_NOC_API.Controllers
                     DataTable dt_RSDDATA = new DataTable();
                     dt_RSDDATA = CommonDataAccessHelper.GetCAeSign_Req_Res(request.TransactionID);
                     request.RequestJson = "{\"pdfFile1\":\"" + request.pdfBase64 + "\",\"signatureOnPageNumber\":\"" + dt_RSDDATA.Rows[0]["signatureOnPageNumber"].ToString() + "\",\"clientCode\":\"" + _configuration["AadharServiceDetails:CAClientCode"].ToString() + "\",\"designation\": \"" + dt_RSDDATA.Rows[0]["designation"].ToString() + "\",\"txn\": \"" + dt_RSDDATA.Rows[0]["TransactionID"].ToString() + "\",\"responseUrl\":\"" + dt_RSDDATA.Rows[0]["successFailureurl"].ToString() + "\" ,\"location\":\"" + dt_RSDDATA.Rows[0]["designation"].ToString() + "\",\"xcord\":\"" + dt_RSDDATA.Rows[0]["xcord"].ToString() + "\",\"ycord\":\"" + dt_RSDDATA.Rows[0]["ycord"].ToString() + "\",\"sigsize\":\"" + dt_RSDDATA.Rows[0]["sigsize"].ToString() + "\"}";
+                    request.RequestJson = "{\"pdfFile1\":\"" + request.pdfBase64 + "\",\"signatureOnPageNumber\":\"" + dt_RSDDATA.Rows[0]["signatureOnPageNumber"].ToString() + "\",\"clientCode\":\"" + dt_esignCredentials.Rows[0]["CAClientCode"].ToString().ToString() + "\",\"designation\": \"" + dt_RSDDATA.Rows[0]["designation"].ToString() + "\",\"txn\": \"" + dt_RSDDATA.Rows[0]["TransactionID"].ToString() + "\",\"responseUrl\":\"" + dt_RSDDATA.Rows[0]["successFailureurl"].ToString() + "\" ,\"location\":\"" + dt_RSDDATA.Rows[0]["location"].ToString() + "\",\"xcord\":\"" + dt_RSDDATA.Rows[0]["xcord"].ToString() + "\",\"ycord\":\"" + dt_RSDDATA.Rows[0]["ycord"].ToString() + "\",\"sigsize\":\"" + dt_RSDDATA.Rows[0]["sigsize"].ToString() + "\"}";
                     string res = string.Empty;
 
                     try
@@ -546,7 +552,7 @@ namespace RJ_NOC_API.Controllers
                         if (CAResponseData != null)
                         {
                             result.Data.responseMsg = CAResponseData.responseMsg;
-                            result.Data.ESPRequestURL = _configuration["AadharServiceDetails:CAeSignRedirectESPportal"].ToString();
+                            result.Data.ESPRequestURL = dt_esignCredentials.Rows[0]["CAeSignRedirectESPportal"].ToString().ToString();
                             result.Data.responseCode = CAResponseData.responseCode;
                             result.Data.signedXMLData = CAResponseData.signedXMLData;
                             result.Data.txn = CAResponseData.txn;
@@ -605,7 +611,13 @@ namespace RJ_NOC_API.Controllers
         public IActionResult CA_eSignPDFResponse(string DepartmentID = "0")
         //public async Task<OperationResult<CAGetSignedPDFAPIRequestResponse>>CA_eSignPDFResponse(string DepartmentID = "0")
         {
+            // GET Esign Credentials
+
             string RetrunUrL = "";
+            DataTable dt_esignCredentials = new DataTable();
+            dt_esignCredentials = CommonDataAccessHelper.GetCAeSignCredentials();
+            //end
+
             CAGetSignedXmlApiRequest request = new CAGetSignedXmlApiRequest();
             //Get Department ID
             DepartmentID = DepartmentID.Replace(' ', '+');
@@ -636,9 +648,9 @@ namespace RJ_NOC_API.Controllers
                         //GET DATA
                         DataTable dt_RSDDATA = new DataTable();
                         dt_RSDDATA = CommonDataAccessHelper.GetCAeSign_Req_Res(request.TransactionID);
-                        string CA_Requesturl = _configuration["AadharServiceDetails:CAeSignedPDFapiUrl"].ToString();
-                        string requestJson = "";
-                        requestJson = "{\"clientCode\":\"" + _configuration["AadharServiceDetails:CAClientCode"].ToString() + "\",\"username\":\"" + dt_RSDDATA.Rows[0]["SSOdisplayName"].ToString() + "\",\"txn\": \"" + request.TransactionID + "\",\"esignResponse\":\"" + request.esignResponse + "\"}";
+                        string CA_Requesturl = dt_esignCredentials.Rows[0]["CAeSignedPDFapiUrl"].ToString(); //_configuration
+                        string requestJson = "";                        
+                        requestJson = "{\"clientCode\":\"" + dt_esignCredentials.Rows[0]["CAClientCode"].ToString() + "\",\"username\":\"" + dt_RSDDATA.Rows[0]["SSOdisplayName"].ToString() + "\",\"txn\": \"" + request.TransactionID + "\",\"esignResponse\":\"" + request.esignResponse + "\"}";
                         string res = string.Empty;
                         StreamWriter requestWriter;
                         ServicePointManager.Expect100Continue = true;
@@ -733,8 +745,20 @@ namespace RJ_NOC_API.Controllers
                 result.Data.RequestStatus = false;
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.CA_eSignPDF_response", ex.ToString());
             }
-            //return result;
-            return Redirect("http://localhost:4200/paymentsuccess");
+           
+            string URLType = Request.GetDisplayUrl();
+            if (URLType.Contains("localhost"))
+            {
+                return Redirect("http://localhost:4200/esignsuccess/" + result.Data.txn);
+            }
+            else if (URLType.Contains("172.22.33.75"))
+            {
+                return Redirect("http://172.22.33.75:81/esignsuccess/" + result.Data.txn);
+            }
+            else
+            {
+                return Redirect("https://rajnoc.rajasthan.gov.in/esignsuccess/" + result.Data.txn);
+            }
         }
 
         [HttpPost("CA_eSignDownlaod")]
@@ -778,6 +802,41 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpGet("CA_eSignTransactionDetails/{TransID}")]
+        public async Task<OperationResult<List<CAGetSignedPDFAPIRequestResponse>>> GetCA_eSignTransactionDetails(string TransID)
+        {
+            var result = new OperationResult<List<CAGetSignedPDFAPIRequestResponse>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetCAeSignTransactionDetails(TransID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionDetails", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
 
     }

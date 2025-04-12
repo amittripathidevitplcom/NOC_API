@@ -524,6 +524,8 @@ namespace RJ_NOC_Model
         public string? responseMsg { get; set; } //Contains Success or Error message.
         public string? signedPDFUrl { get; set; } // Contains signed PDF file path
         public bool RequestStatus { get; set; }
+        public string? ApplyNocApplicationID { get; set; }
+        public string? eSignType { get; set; }
 
 
     }

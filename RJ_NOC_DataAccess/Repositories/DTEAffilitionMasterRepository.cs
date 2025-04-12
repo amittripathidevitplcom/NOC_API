@@ -232,9 +232,9 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
-        public List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID, string ActionName)
+        public List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID, string ActionName, decimal AMOUNT)
         {
-            string SqlQuery = "exec USP_BTERRegFinalSubmit @BTERRegID='"+ BTERRegID + "',@ActionName='"+ ActionName + "'";
+            string SqlQuery = "exec USP_BTERRegFinalSubmit @BTERRegID='"+ BTERRegID + "',@ActionName='"+ ActionName + "',@AMOUNT='"+ AMOUNT + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.ApplicationSubmit");
 
