@@ -172,7 +172,8 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-        }       
+        }
+               
         
         public List<BTERFeeDetailsDataModel> GetAllBTERAffiliationCourseFeeList(int BTERRegID)
         {
@@ -310,5 +311,53 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public bool SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string formattedStartDate = request.StartDate.ToString("yyyy-MM-dd HH:mm:ss");
+            string formattedEndDate = request.EndDate.ToString("yyyy-MM-dd HH:mm:ss");
+            string SqlQuery = " exec BTEROpenApplicationSessionMaster_AddUpdate";
+            SqlQuery += " @ID='" + request.ID + "',@DepartmentID='" + request.DepartmentID + "',@ApplicationSession='" + request.ApplicationSession + "',@StartDate='" + formattedStartDate + "',@EndDate='" + formattedEndDate + "', @ActiveStatus='" + request.ActiveStatus + "',@UserID='" + request.UserID + "',@IPAddress='" + IPAddress + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.SaveDataBTERApplicationOpenSession");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<BTERApplicationOpensessionDataModel> GetAllOpenSessionApplicationList()
+        {
+            string SqlQuery = "exec USP_BTERAllOpenSessionApplicationList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetAllOpenSessionApplicationList");
+
+            List<BTERApplicationOpensessionDataModel> dataModels = new List<BTERApplicationOpensessionDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<BTERApplicationOpensessionDataModel>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+        public List<BTERApplicationOpensessionDataModel> GetByIDOpenSessionApplicationList(int ID)
+        {
+            string SqlQuery = "exec USP_BTERAllOpenSessionApplicationList @ID='" + ID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetByIDOpenSessionApplicationList");
+
+            List<BTERApplicationOpensessionDataModel> dataModels = new List<BTERApplicationOpensessionDataModel>();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<List<BTERApplicationOpensessionDataModel>>(JsonDataTable_Data);
+            return dataModels;
+        }
+
+
+        public bool DeleteDataOpenSessionApplicationList(int ID)
+        {
+            string SqlQuery = " Update M_ApplicationMaster_DTEAffiliation set ActiveStatus=0 , DeleteStatus=1  WHERE ID='" + ID + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DTEAffilitionMaster.DeleteDataOpenSessionApplicationList");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }        
     }
 }

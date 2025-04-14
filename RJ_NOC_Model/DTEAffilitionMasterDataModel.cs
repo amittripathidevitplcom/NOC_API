@@ -246,79 +246,6 @@ namespace RJ_NOC_Model
         public int? CourseStatusId { get; set; }
         public string? ApplicationStatusLocation { get; set; }
 
-
-        public class BTERCourseAffiliationDataModel
-        {
-            public DataSet data { get; set; }
-        }
-        public class BterAffiliationCourseFeeDetails
-        {
-            public int? BTERCourseID { get; set; }
-            public string? BranchType { get; set; }
-            public string? CourseFee { get; set; }
-            public string? AffiliationFee { get; set; }
-            public string? AffiliationApplyFeesOneTime { get; set; }
-        }
-        public class BTEROtherDetailsDataModel
-        {
-            public DataTable data { get; set; }
-        }
-        public class BTERPaymentDataModel
-        {
-            public string? PaymentID { get; set; }
-            public int? ApplyBterAffiliationID { get; set; }
-        }
-        public class BTERFeeDetailsDataModel
-        {
-            public DataSet data { get; set; }
-        }
-        public class NOCRevertOtherDetailsDataModel
-        {
-            public int OtherDetailsID { get; set; }
-            public int? BTERRegID { get; set; }
-            public int? DepartmentID { get; set; }
-            public int? RegAffiliationStatusId { get; set; }
-            public int? UserID { get; set; }
-            public int? FYID { get; set; }
-            public string? NOCStatus { get; set; }
-            public int? NocIssued { get; set; }
-            public string? NocNumber { get; set; }
-            public string? NocIssueDate { get; set; }
-            public string? UploadNocApproval { get; set; }
-            public string? UploadNocApprovalDocPath { get; set; }
-            public string? UploadNocApprovalDoc_Dis_FileName { get; set; }
-        }
-        public class EOALOARevertOtherDetailsDataModel
-        {
-            public int OtherDetailsID { get; set; }
-            public int? BTERRegID { get; set; }
-            public int? DepartmentID { get; set; }
-            public int? RegAffiliationStatusId { get; set; }
-            public int? UserID { get; set; }
-            public int? FYID { get; set; }
-            public string? AICTEStatus { get; set; }
-            public int? AICTE_EOA_LOA { get; set; }
-            public string? AICTELAO_No { get; set; }
-            public string? EOA_LOA_Date { get; set; }
-            public string? UploadLOAApproval { get; set; }
-            public string? UploadLOAApprovalDocPath { get; set; }
-            public string? UploadLOAApproval_Dis_FileName { get; set; }
-        }
-        public class ApplicationRevertOtherDetailsDataModel
-        {
-            public int OtherDetailsID { get; set; }
-            public int? BTERRegID { get; set; }
-            public int? DepartmentID { get; set; }
-            public int? RegAffiliationStatusId { get; set; }
-            public int? UserID { get; set; }
-            public int? FYID { get; set; }
-            public string UploadApplicationForm { get; set; }
-            public string? UploadApplicationFormDocPath { get; set; }
-            public string? UploadApplicationFormDoc_Dis_FileName { get; set; }
-        }
-
-
-
     }
     public class BTERFeeMasterDataModel
     {
@@ -327,9 +254,22 @@ namespace RJ_NOC_Model
         public string? DepartmentName { get; set; }
         public string FeeType { get; set; }
         public decimal Amount { get; set; }
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public string? ActiveDeactive { get; set; }
         public bool DeleteStatus { get; set; }
+    }
+    public  class BTERApplicationOpensessionDataModel
+    {
+        public int ID { get; set; }
+        public int DepartmentID { get; set; }
+        public int ApplicationSession { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }        
+        public int? UserID { get; set; }
+        public bool ActiveStatus { get; set; }
+        public string? SessionName { get; set; }
+        public bool DeleteStatus { get; set; }
+
     }
 }

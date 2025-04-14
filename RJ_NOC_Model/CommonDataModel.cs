@@ -465,8 +465,10 @@ namespace RJ_NOC_Model
     }
     public class CommonDataModel_BTEROrderList
     {       
-        public string PdfFilePath { get; set; }       
+        public string PdfFilePath { get; set; }
         public string GenOrderNumber { get; set; }
+        public string esignResponseUrl { get; set; }
+        public int IsEsign { get; set; }
     }
 
     public class CAGetSignedXmlApiRequest

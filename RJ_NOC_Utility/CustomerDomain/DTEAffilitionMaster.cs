@@ -62,11 +62,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<BTEROtherDetailsDataModel> GetOtherinformation(int BTERRegID)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.GetOtherinformation(BTERRegID);
-        }        
+        }
         public List<BTERFeeDetailsDataModel> GetAllBTERAffiliationCourseFeeList(int BTERRegID)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.GetAllBTERAffiliationCourseFeeList(BTERRegID);
-        }
+        }       
         public List<BTERFeeDetailsDataModel> GetDeficiencyHistoryApplicationID(int BTERRegID,string ApplicationStatus)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.GetDeficiencyHistoryApplicationID(BTERRegID,ApplicationStatus);
@@ -111,6 +111,25 @@ namespace RJ_NOC_Utility.CustomerDomain
         public bool IfExists(int FeeID, int DepartmentID, string FeeType)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.IfExists(FeeID, DepartmentID, FeeType);
+        }
+        public bool SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.SaveDataBTERApplicationOpenSession(request);
+        }
+
+        public List<BTERApplicationOpensessionDataModel> GetAllOpenSessionApplicationList()
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetAllOpenSessionApplicationList();
+        }
+
+        public List<BTERApplicationOpensessionDataModel> GetByIDOpenSessionApplicationList(int ID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetByIDOpenSessionApplicationList(ID);
+        }
+        
+        public bool DeleteDataOpenSessionApplicationList(int ID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.DeleteDataOpenSessionApplicationList(ID);
         }
     }
 }

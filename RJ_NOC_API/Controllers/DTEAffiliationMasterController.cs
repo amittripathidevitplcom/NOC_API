@@ -788,15 +788,8 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
-        }        
-       
+        }     
 
-       
-       
-  
-        
-    
-    
         [HttpGet("{FeeID}/{UserID}")]
         public async Task<OperationResult<List<BTERFeeMasterDataModel>>> GetBTERFeeByID(int FeeID, int UserID)
         {
@@ -915,7 +908,155 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+        [HttpPost("SaveDataBTERApplicationOpenSession")]
+        public async Task<OperationResult<bool>> SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request)
+        {
+            var result = new OperationResult<bool>();
 
+            try
+            {
+                bool IfExits = false;
+                //IfExits = UtilityHelper.DTEAffilitionMasterUtility.IfExists(request.BTERRegID, request.BTERCourseID, request.CourseTypeId, request.CourseId);
+                if (IfExits == false)
+                {
+                    result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.SaveDataBTERApplicationOpenSession(request));
+                    if (result.Data)
+                    {
+                        result.State = OperationState.Success;
+                        if (request.ID == 0)
+                        {
+                            //CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Generateorder_SaveData", request.BTERCourseID, "DTEAffilitionMaster");
+                            result.SuccessMessage = "Save successfully.!";
+                        }
+                        else
+                        {
+                            //CommonDataAccessHelper.Insert_TrnUserLog(request.UserID, "Update", request.BTERCourseID, "DTEAffilitionMaster");
+                            result.SuccessMessage = "Updated successfully .!";
+                        }
+                    }
+                    else
+                    {
+                        result.State = OperationState.Error;
+                        if (request.ID == 0)
+                            result.ErrorMessage = "There was an error adding data.!";
+                        else
+                            result.ErrorMessage = "There was an error updating data.!";
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "is Already Exist, It Can't Not Be Duplicate.!";
+                }
+            }
+
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.SaveDataBTERApplicationOpenSession", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetAllOpenSessionApplicationList")]
+        public async Task<OperationResult<List<BTERApplicationOpensessionDataModel>>> GetAllOpenSessionApplicationList()
+        {
+            var result = new OperationResult<List<BTERApplicationOpensessionDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetAllOpenSessionApplicationList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data Load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMaster.GetAllOpenSessionApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetByIDOpenSessionApplicationList/{MID}")]
+        public async Task<OperationResult<List<BTERApplicationOpensessionDataModel>>> GetByIDOpenSessionApplicationList(int MID)
+        {
+            var result = new OperationResult<List<BTERApplicationOpensessionDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetByIDOpenSessionApplicationList(MID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data Load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMaster.GetByIDOpenSessionApplicationList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("DeleteDataOpenSessionApplicationList/{ID}/{UserID}")]
+        public async Task<OperationResult<bool>> DeleteDataOpenSessionApplicationList(int ID, int UserID)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.DeleteDataOpenSessionApplicationList(ID));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(UserID, "Delete", ID, "OpenSessionApplication");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Deleted successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error deleting data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.DeleteDataOpenSessionApplicationList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        
     }
 }
 

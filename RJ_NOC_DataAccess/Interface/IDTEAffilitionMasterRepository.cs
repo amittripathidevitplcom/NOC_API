@@ -35,6 +35,11 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveDataBTERFee(BTERFeeMasterDataModel request);
         bool DeleteDataBter(int FeeID);
         bool IfExists(int FeeID, int DepartmentID, string FeeType);
+        bool SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request);
+        List<BTERApplicationOpensessionDataModel> GetAllOpenSessionApplicationList();
+        List<BTERApplicationOpensessionDataModel> GetByIDOpenSessionApplicationList(int ID);
+        bool DeleteDataOpenSessionApplicationList(int ID);
+        
     }
 
 }

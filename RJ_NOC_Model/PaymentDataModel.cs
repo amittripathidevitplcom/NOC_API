@@ -209,6 +209,10 @@ namespace RJ_NOC_Model
 
 
         public string VerifyURL { get; set; }
+
+        public string? clientSecret { get; set; }
+        public string? cleintId { get; set; }
+
     }
 
     [Serializable()]
@@ -307,6 +311,7 @@ namespace RJ_NOC_Model
 
         //FOR RECHECK
         public string? PRN { get; set; }
+       
 
 
 
@@ -417,6 +422,75 @@ namespace RJ_NOC_Model
         public string ApplicationIdEnc { get; set; }
         public string UniquerequestId { get; set; }
     }
+    public class MobilaAppCancelMerchanttokenResponse
+    {
+        public int statusCode { get; set; }
 
+        public string? statusMessage { get; set; }
+
+        public DataToken? data { get; set; }
+    }
+
+    public class DataToken
+    {
+        public string? access_token { get; set; }
+
+        public string? token_type { get; set; }
+
+        public string? refresh_token { get; set; }
+
+        public int expires_in { get; set; }
+    }
+
+    public class MobilaAppCancelMerchanttokenRequest
+    {
+        public string? cleintId { get; set; }
+
+        public string? clientSecret { get; set; }
+    }
+
+    public class VerifywallettransactionsRequest
+    {
+        public string? MERCHANTCODE { get; set; }
+        public string? SERVICEID { get; set; }
+        public string? PRN { get; set; }
+        public string? AMOUNT { get; set; }
+        public string? CHECKSUM { get; set; }
+        public string? CHECKSUMKEY { get; set; }
+        public string? TRANSACTIONID { get; set; }
+    }
+
+    public class Data
+    {
+        public string MERCHANTCODE { get; set; }
+        public string SERVICEID { get; set; }
+        public string STATUS { get; set; }
+        public string PRN { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string AMOUNT { get; set; }
+        public string RECEIPTNO { get; set; }
+        public string TRANSACTIONID { get; set; }
+        public string PAIDAMOUNT { get; set; }
+        public string EMITRATIMESTAMP { get; set; }
+        public string PAYMENTMODE { get; set; }
+        public string PAYMENTMODEBID { get; set; }
+        public string RESPONSECODE { get; set; }
+        public string RESPONSEMESSAGE { get; set; }
+        public string CHECKSUM { get; set; }
+    }
+
+    public class VerifywallettransactionsResponse
+    {
+        public int statusCode { get; set; }
+        public bool success { get; set; }
+        public string message { get; set; }
+        public Data data { get; set; }
+        public VerifyError Error { get; set; }
+    }
+    public class VerifyError
+    {
+        public string code { get; set; }
+        public string reason { get; set; }
+    }
     #endregion
 }
