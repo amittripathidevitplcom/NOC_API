@@ -1080,6 +1080,39 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
+
+
+        [HttpPost("OpenApplication")]
+        public async Task<OperationResult<bool>> OpenApplication(OpenApplicationDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.OpenApplication(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Saved successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.OpenApplication", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
     }
 }
 

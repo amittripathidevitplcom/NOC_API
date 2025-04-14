@@ -165,6 +165,7 @@ namespace RJ_NOC_Utility.CustomerDomain
             sb.AppendFormat("@IPAddress='{0}',", IPAddress);
             sb.AppendFormat("@SSOID='{0}',", request.SSOID);
             sb.AppendFormat("@ExistingLetterofEOA='{0}',", request.ExistingLetterofEOA);
+            sb.AppendFormat("@IsApplied2022='{0}',", request.IsApplied2022);
             sb.AppendFormat("@DTE_ChangeInTheMinorityStatusoftheInstitution='{0}',", request.DTE_ChangeInTheMinorityStatusoftheInstitution);
 
 

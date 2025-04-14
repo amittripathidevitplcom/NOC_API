@@ -28,6 +28,7 @@ namespace RJ_NOC_Model
         public decimal LateFee { get; set; }
         public decimal TotalDefaulterCollegePenalty { get; set; }
         public string ExistingLetterofEOA { get; set; }
+        public bool? IsApplied2022 { get; set; }
 
         public string? DTE_ChangeInTheMinorityStatusoftheInstitution { get; set; }
         //public string DTE_ChangeInTheMinorityStatusoftheInstitution_Dis_FileName { get; set; }
@@ -220,6 +221,8 @@ namespace RJ_NOC_Model
         public int? PendingDays { get; set; }
         public string? OpeneLevel { get; set; }
         public string? CollegeLevel { get; set; }
+        public bool? IsOpenByAdmin { get; set; }
+        public bool? IsApplied2022 { get; set; }
         public List<ApplyNocApplicationParameterDataModel> ApplyNocApplicationParameterList { get; set; }
 
 

@@ -158,4 +158,13 @@ namespace RJ_NOC_Model
 
     }
 
+    public class OpenApplicationDataModel
+    {
+        public int ApplyNOCID { get; set; }
+        public int CreatedBy { get; set; }
+        public string Reason { get; set; }
+        public string UnlockDoc { get; set; }
+
     }
+
+}

@@ -151,6 +151,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<DataTable> GetUnlockApplication(int DepartmentID)
         {
             return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetUnlockApplication(DepartmentID);
+        }    
+        public bool OpenApplication(OpenApplicationDataModel request)
+        {
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.OpenApplication(request);
         }
 
     }

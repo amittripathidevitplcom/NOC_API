@@ -57,6 +57,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DepartmentOfCollegeDocumentScrutinyDataModel_FDRDetails> DocumentScrutiny_FDRDetail(int CollageID, int RoleID, int ApplyNOCID);
         List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> DocumentScrutiny_PaymentDetail(int CollageID, int RoleID, int ApplyNOCID);
+        bool OpenApplication(OpenApplicationDataModel request);
     }
 
 }

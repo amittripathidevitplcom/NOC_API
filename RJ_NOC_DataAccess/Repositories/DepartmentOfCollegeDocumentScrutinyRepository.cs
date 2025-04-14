@@ -713,5 +713,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
+
+
+        public bool OpenApplication(OpenApplicationDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_CreateHistoryOfAApplyNOCID";
+            SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',@CreatedBy='" + request.CreatedBy + "',@Reason='" + request.Reason + "',@UnlockDoc='" + request.UnlockDoc + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "DocumentScrutinyDCE.OpenApplication");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
