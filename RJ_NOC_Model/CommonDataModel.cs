@@ -465,8 +465,10 @@ namespace RJ_NOC_Model
     }
     public class CommonDataModel_BTEROrderList
     {       
-        public string PdfFilePath { get; set; }       
+        public string PdfFilePath { get; set; }
         public string GenOrderNumber { get; set; }
+        public string esignResponseUrl { get; set; }
+        public int IsEsign { get; set; }
     }
 
     public class CAGetSignedXmlApiRequest
@@ -524,6 +526,8 @@ namespace RJ_NOC_Model
         public string? responseMsg { get; set; } //Contains Success or Error message.
         public string? signedPDFUrl { get; set; } // Contains signed PDF file path
         public bool RequestStatus { get; set; }
+        public string? ApplyNocApplicationID { get; set; }
+        public string? eSignType { get; set; }
 
 
     }

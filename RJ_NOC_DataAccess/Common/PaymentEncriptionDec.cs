@@ -74,6 +74,85 @@ namespace RJ_NOC_DataAccess.Common
         #endregion
 
 
+        public static string CreateSHA256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
 
+
+
+        private static readonly Encoding encoding = Encoding.UTF8;
+        public static string AESEncrypt(string textToEncrypt, string encryptionKey)
+        {
+            try
+            {
+
+                RijndaelManaged aes = new RijndaelManaged();
+                aes.KeySize = 256;
+                aes.BlockSize = 128;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.Mode = CipherMode.CBC;
+                aes.Key = SHA256.Create().ComputeHash(encoding.GetBytes(encryptionKey));
+                aes.IV = MD5.Create().ComputeHash(encoding.GetBytes(encryptionKey));
+                ICryptoTransform AESEncrypt = aes.CreateEncryptor(aes.Key, aes.IV);
+                byte[] buffer = encoding.GetBytes(textToEncrypt);
+                return Convert.ToBase64String(AESEncrypt.TransformFinalBlock(buffer, 0, buffer.Length));
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error encrypting: " + e.Message);
+            }
+        }
+
+
+
+        public static string AESDecrypt(string textToDecrypt, string encryptionKey)
+        {
+            try
+            {
+                using (RijndaelManaged aes = new RijndaelManaged())
+                {
+                    aes.KeySize = 256;
+                    aes.BlockSize = 128;
+                    aes.Padding = PaddingMode.PKCS7;
+                    aes.Mode = CipherMode.CBC;
+                    aes.Key = SHA256.Create().ComputeHash(encoding.GetBytes(encryptionKey));
+                    aes.IV = MD5.Create().ComputeHash(encoding.GetBytes(encryptionKey));
+
+                    ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                    byte[] buffer = Convert.FromBase64String(textToDecrypt);
+                    return encoding.GetString(decryptor.TransformFinalBlock(buffer, 0, buffer.Length));
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error decrypting: " + e.Message);
+            }
+        }
+
+
+        public static string GenerateSha256HashNew(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
     }
 }

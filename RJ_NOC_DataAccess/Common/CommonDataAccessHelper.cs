@@ -494,5 +494,65 @@ namespace RJ_NOC_DataAccess.Common
             }
         }
 
+        public static DataTable GetCAeSignCredentials()
+        {
+            string SqlQuery = "exec USP_CAeSign_Req_Res_Req_Res_Save @RequestType ='GeteSignCredentials'";
+            using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
+                    {
+                        using (DataTable dataTable = new DataTable())
+                        {
+                            sda.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CommonDataAccessHelper.Insert_ErrorLog("GetCAeSignCredentials", ex.ToString());
+                    throw new Exception(ex.ToString());
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+            }
+        }
+
+        public static DataTable GetCAeSignTransactionDetails(string TransactionID)
+        {
+            string SqlQuery = "exec USP_CAeSign_Req_Res_Req_Res_Save @TransactionID='" + TransactionID + "',@RequestType ='GetCAeSignTransactionDetails'";
+            using (SqlConnection con = new SqlConnection(sqlConnectionStaringSys))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(SqlQuery, con))
+                    {
+                        using (DataTable dataTable = new DataTable())
+                        {
+                            sda.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CommonDataAccessHelper.Insert_ErrorLog("GetCAeSignTransactionDetails", ex.ToString());
+                    throw new Exception(ex.ToString());
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+            }
+        }
+
     }
 }

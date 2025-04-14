@@ -34,6 +34,10 @@ using java.util.zip;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Xml;
 using iTextSharp.tool.xml.html.head;
+using CrystalDecisions.ReportAppServer.DataDefModel;
+using static com.sun.tools.@internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+using javax.xml.crypto;
+using RestSharp;
 
 namespace RJ_NOC_API.Controllers
 {
@@ -255,7 +259,7 @@ namespace RJ_NOC_API.Controllers
                 if (!string.IsNullOrEmpty(data.MerchantCode))
                 {
                     HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(data.VerificationURL + "?MERCHANTCODE=" + data.MerchantCode + "&PRN=" + Model.PRN + "&AMOUNT=" + Model.AMOUNT);
-                   
+
                     webrequest.Method = "POST";
                     webrequest.ContentType = "application/x-www-form-urlencoded";
                     webrequest.ContentLength = 0;
@@ -345,7 +349,7 @@ namespace RJ_NOC_API.Controllers
                     //Save Data in database
                     PaymentRequest paymentRequest = new PaymentRequest();
                     //
-                    paymentRequest.REQUESTPARAMETERS = new RequestParameters();//assign memory
+                    paymentRequest.REQUESTPARAMETERS = new RJ_NOC_Model.RequestParameters();//assign memory
 
                     Model.SubOrderID = paymentRequest.REQUESTPARAMETERS.PRN;
                     paymentRequest.REQUESTJSON = JsonConvert.SerializeObject(Model);
@@ -683,20 +687,50 @@ namespace RJ_NOC_API.Controllers
                         data.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
                         //data.PRN = "NOC" + result.TransactionId;
                         Random rnd = new Random();
-                        data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+
+                        if (Model.PaymentType == "BTER Payment")
+                        {
+                            data.PRN = "BTER" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+                        }
+                        else
+                        {
+                            data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+                        }
+                        //data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
 
                         data.REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                         data.AMOUNT = Convert.ToString(Model.Amount);
-                        data.SUCCESSURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + Model.ServiceID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("NO");
-                        data.FAILUREURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + Model.ServiceID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("YES");
+
+                        string URLType = Request.GetDisplayUrl();
+                        if (URLType.Contains("localhost"))
+                        {
+                            EmitraServiceDetail.REDIRECTURL = "http://localhost:62778/api/Payment/EmitraPaymentResponse";
+
+                        }
+
+                        data.SUCCESSURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + EmitraServiceDetail.SERVICEID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("NO");
+                        data.FAILUREURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + EmitraServiceDetail.SERVICEID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("YES");
                         data.USERNAME = Model.UserName;
                         data.USERMOBILE = Model.MobileNo;
                         data.COMMTYPE = EmitraServiceDetail.COMMTYPE;
                         data.OFFICECODE = EmitraServiceDetail.OFFICECODE;
                         data.REVENUEHEAD = EmitraServiceDetail.REVENUEHEAD.Replace("##", Model.Amount.ToString());
                         data.SERVICEID = EmitraServiceDetail.SERVICEID;
-                        data.UDF1 = Model.RegistrationNo;
-                        data.UDF2 = Model.SsoID;
+                        //data.UDF1 = Model.RegistrationNo;
+                        //data.UDF2 = Model.SsoID;
+
+                        if (Model.PaymentType == "BTER Payment")
+                        {
+                            data.UDF1 = Model.ApplicationIdEnc;
+                            data.UDF2 = Model.PaymentType;
+
+                        }
+                        else
+                        {
+                            data.UDF1 = Model.RegistrationNo;
+                            data.UDF2 = Model.SsoID;
+                        }
+                        //data.USEREMAIL = "";
                         data.USEREMAIL = "";
                         data.CHECKSUM = PaymentEncriptionDec.CreateMD5(data.PRN + "|" + data.AMOUNT + "|" + EmitraServiceDetail.CHECKSUMKEY);
 
@@ -765,14 +799,13 @@ namespace RJ_NOC_API.Controllers
             return requestDetailsModel;
         }
 
-
         [HttpGet("GetPreviewPaymentDetails/{CollegeID}/{SessionYear=0}")]
         public async Task<OperationResult<List<ResponseParameters>>> GetPreviewPaymentDetails(int CollegeID, int SessionYear)
         {
             var result = new OperationResult<List<ResponseParameters>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(CollegeID,SessionYear));
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetPreviewPaymentDetails(CollegeID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -796,13 +829,14 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
             return result;
-        }         
+        }
 
 
         [HttpPost("EmitraPaymentResponse")] //IActionResult
         public async Task<IActionResult> EmitraPaymentResponse(string UniquerequestId = "", string ApplicationIdEnc = "", string ServiceID = "", string IsFailed = "")
         {
             var RetrunUrL = "";
+            string TransId = "";
             try
             {
 
@@ -834,12 +868,16 @@ namespace RJ_NOC_API.Controllers
                 EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient emitraencsev = new EmitraEmitraEncrytDecryptClient.EmitraEncrytDecryptSoapClient(endpointConfiguration, EmitraServiceDetail.WebServiceURL);
                 EmitraDecriptStringResponse response = await emitraencsev.EmitraDecriptStringAsync(EmitraServiceDetail.EncryptionKey, data);
                 var EmitraResponseData = JsonConvert.DeserializeObject<EmitraResponseParameters>(response.Body.EmitraDecriptStringResult);
-
+                TransId = EmitraResponseData.PRN;
                 if (EmitraResponseData != null)
                 {
                     EmitraResponseData.ApplicationIdEnc = PaymentEncriptionDec.EmitraDecrypt(ApplicationIdEnc);
                     EmitraResponseData.TRANSACTIONID = PaymentEncriptionDec.EmitraDecrypt(UniquerequestId);
                     //EmitraResponseData.ResponseString = JsonConvert.SerializeObject(response.Body.EmitraDecriptStringResult);
+                    if (EmitraResponseData.STATUS == "SUCCESS")
+                    {
+                        EmitraResponseData.STATUS = "PENDING";
+                    }
                     UtilityHelper.PaymentUtility.UpdateEmitraPaymentStatus(EmitraResponseData);
                 }
 
@@ -857,14 +895,22 @@ namespace RJ_NOC_API.Controllers
                 CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPaymentResponse", ex.ToString());
             }
 
+            string URLType = Request.GetDisplayUrl();
+            if (URLType.Contains("localhost"))
+            {
+                return Redirect("http://localhost:4200/paymentstatus/" + TransId);
+            }
+            else if (URLType.Contains("172.22.33.75"))
+            {
+                return Redirect("http://172.22.33.75:81/paymentstatus/" + TransId);
+            }
+            else
+            {
+                return Redirect("https://rajnoc.rajasthan.gov.in/paymentstatus/" + TransId);
+            }
             //return response;
-            return new RedirectResult(RetrunUrL);
+            //return new RedirectResult(RetrunUrL);
         }
-
-
-
-
-
         [HttpGet("GetEmitraTransactionDetails/{TransID}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetEmitraTransactionDetails(string TransID)
         {
@@ -912,7 +958,7 @@ namespace RJ_NOC_API.Controllers
                 EGrassPaymentDetails_Req_Res eGrassPaymentDetails_Req_Res = new EGrassPaymentDetails_Req_Res();
                 DataTable dataTable = new DataTable();
                 dataTable = CommonDataAccessHelper.GetEgrassDetails_DepartmentWise(request.DepartmentID, request.PaymentType);
-                if (dataTable != null && dataTable.Rows.Count>0)
+                if (dataTable != null && dataTable.Rows.Count > 0)
                 {
                     string PRN = DateTime.Now.ToString("yyyyMMddHHmmss");
                     string key = "N*($%^$#)il^%$OC";
@@ -1077,12 +1123,12 @@ namespace RJ_NOC_API.Controllers
         #endregion
 
         [HttpGet("GetOfflinePaymentDetails/{CollegeID}/{SessionYear=0}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetOfflinePaymentDetails(int CollegeID,int SessionYear=0)
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetOfflinePaymentDetails(int CollegeID, int SessionYear = 0)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetOfflinePaymentDetails(CollegeID,SessionYear));
+                result.Data = await Task.Run(() => UtilityHelper.PaymentUtility.GetOfflinePaymentDetails(CollegeID, SessionYear));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -1248,8 +1294,8 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        
-            [HttpGet("GetBterPaymentListIDWise/{TransID}")]
+
+        [HttpGet("GetBterPaymentListIDWise/{TransID}")]
         public async Task<OperationResult<List<ResponseParameters>>> GetBterPaymentListIDWise(string TransID)
         {
             var result = new OperationResult<List<ResponseParameters>>();
@@ -1312,5 +1358,464 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+        [HttpPost("GetEmitraTransactionStatus")]
+        public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatus(TransactionStatusDataModel data)
+        {
+            var result = new OperationResult<ResponseParameters>();
+            try
+            {
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                EmitraRequestDetails _EmitraRequestDetails = new EmitraRequestDetails();
+                var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(_EmitraRequestDetails);
+
+                if (!string.IsNullOrEmpty(EmitraServiceDetail.MERCHANTCODE))
+                {
+                    HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(EmitraServiceDetail.VerifyURL + "?MERCHANTCODE=" + EmitraServiceDetail.MERCHANTCODE + "&PRN=" + data.PRN + "&SERVICEID=" + EmitraServiceDetail.SERVICEID);
+
+                    webrequest.Method = "POST";
+                    webrequest.ContentType = "application/x-www-form-urlencoded";
+                    webrequest.ContentLength = 0;
+
+                    Stream stream = webrequest.GetRequestStream();
+                    stream.Close();
+                    string RESPONSEJSON;
+                    using (WebResponse response = webrequest.GetResponse())
+                    {
+                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            RESPONSEJSON = reader.ReadToEnd();
+                            var EmitraResponseData = JsonConvert.DeserializeObject<EmitraResponseParameters>(RESPONSEJSON);
+                            EmitraResponseData.ApplicationIdEnc = data.ApplyNocApplicationID;
+                            if (EmitraResponseData != null)
+                            {
+                                UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
+                            }
+                            result.State = 0;
+                            result.SuccessMessage = "Transaction Updated Successfully .!";
+                        }
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.Data = new ResponseParameters();
+                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetTransactionStatus", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("EmitraPaymentNew")]
+        public async Task<OperationResult<EmitraRequestDetails>> EmitraPaymentNew(EmitraRequestDetails Model)
+        {
+            var requestDetailsModel = new OperationResult<EmitraRequestDetails>();
+            try
+            {
+
+
+                var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
+
+                if (EmitraServiceDetail.REVENUEHEAD != null)
+                {
+
+                    EmitraTransactions objEmitra = new EmitraTransactions();
+                    objEmitra.key = "InsertDetails";
+                    objEmitra.ApplicationIdEnc = Model.ApplicationIdEnc;
+                    objEmitra.Amount = Model.Amount;
+                    var result = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
+
+                    if (result.TransactionId > 0)
+                    {
+                        PGRequestNew data = new PGRequestNew();
+                        data.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
+                        //data.PRN = "NOC" + result.TransactionId;
+                        Random rnd = new Random();
+
+                        if (Model.PaymentType == "BTER Payment")
+                        {
+                            data.PRN = "BTER" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+                        }
+                        else
+                        {
+                            data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+                        }
+                        //data.PRN = "NOC" + rnd.Next(100000, 999999) + rnd.Next(100000, 999999);
+
+                        data.REQTIMESTAMP = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                        data.AMOUNT = Convert.ToString(Model.Amount);
+
+                        string URLType = Request.GetDisplayUrl();
+                        if (URLType.Contains("localhost"))
+                        {
+                            EmitraServiceDetail.REDIRECTURL = "http://localhost:62778/api/Payment/EmitraPaymentResponseNew";
+
+                        }
+
+                        data.SUCCESSURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + EmitraServiceDetail.SERVICEID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("NO");
+                        data.FAILUREURL = EmitraServiceDetail.REDIRECTURL + "?UniquerequestId=" + PaymentEncriptionDec.EmitraEncrypt(Convert.ToString(result.TransactionId)) + "&ApplicationIdEnc=" + PaymentEncriptionDec.EmitraEncrypt(Model.ApplicationIdEnc) + "&ServiceID=" + EmitraServiceDetail.SERVICEID.ToString() + "&IsFailed=" + PaymentEncriptionDec.EmitraEncrypt("YES");
+                        data.USERNAME = Model.UserName;
+                        data.USERMOBILE = Model.MobileNo;
+                        data.USEREMAIL = Model.USEREMAIL;
+                        data.COMMTYPE = EmitraServiceDetail.COMMTYPE;
+                        data.OFFICECODE = EmitraServiceDetail.OFFICECODE;
+                        data.REVENUEHEAD = EmitraServiceDetail.REVENUEHEAD.Replace("##", Model.Amount.ToString());
+                        data.SERVICEID = EmitraServiceDetail.SERVICEID;
+                        data.LOOKUPID = "";
+                        data.CHECKSUMKEY = EmitraServiceDetail.CHECKSUMKEY;
+                        data.CONSUMERKEY = data.PRN + "-" + Model.ApplicationIdEnc;
+
+                        if (Model.PaymentType == "BTER Payment")
+                        {
+                            data.UDF1 = Model.ApplicationIdEnc;
+                            data.UDF2 = Model.PaymentType;
+
+                        }
+                        else
+                        {
+                            data.UDF1 = Model.RegistrationNo;
+                            data.UDF2 = Model.SsoID;
+                        }
+                        //data.USEREMAIL = "";
+
+                        string checksumRaw = data.MERCHANTCODE + data.SERVICEID + data.PRN + "ONLINE" +
+                                     data.REQTIMESTAMP + data.AMOUNT + data.SUCCESSURL +
+                                     data.FAILUREURL + data.USERNAME + data.USERMOBILE +
+                                     data.USEREMAIL + data.CONSUMERKEY + data.OFFICECODE +
+                                     data.REVENUEHEAD + data.UDF1 + data.UDF2 + data.LOOKUPID +
+                                      data.COMMTYPE + data.CHECKSUMKEY;
+
+                        // Generate base64 SHA256 checksum
+                        data.CHECKSUM = PaymentEncriptionDec.GenerateSha256HashNew(checksumRaw);
+
+                        // Prepare encryption string with correct URLs
+                        string dataStart = "PRN=" + data.PRN +
+                        "::CHANNEL=ONLINE" +
+                                           "::REQTIMESTAMP=" + data.REQTIMESTAMP +
+                                           "::AMOUNT=" + data.AMOUNT +
+                                           "::SUCCESSURL=" + data.SUCCESSURL +
+                                           "::FAILUREURL=" + data.FAILUREURL +
+                                           "::USERNAME=" + data.USERNAME +
+                                           "::USERMOBILE=" + data.USERMOBILE +
+                                           "::USEREMAIL=" + data.USEREMAIL +
+                                           "::CONSUMERKEY=" + data.CONSUMERKEY +
+                                           "::OFFICECODE=" + data.OFFICECODE +
+                                           "::REVENUEHEAD=" + data.REVENUEHEAD +
+                                           "::UDF1=" + data.UDF1 +
+                                           "::UDF2=" + data.UDF2 +
+                                           "::LOOKUPID=" + data.LOOKUPID +
+                                           "::COMMTYPE=" + data.COMMTYPE +
+                                           "::CHECKSUM=" + data.CHECKSUM;
+
+                        string ENC = PaymentEncriptionDec.AESEncrypt(dataStart, EmitraServiceDetail.EncryptionKey);
+                        if (data != null)
+                        {
+                            try
+                            {
+                                objEmitra.key = "UpdateDetails";
+                                objEmitra.RequestString = JsonConvert.SerializeObject(data);
+                                objEmitra.TransactionId = result.TransactionId;
+                                objEmitra.ServiceID = EmitraServiceDetail.SERVICEID;
+                                objEmitra.PRN = data.PRN;
+                                var UpdateStatus = UtilityHelper.PaymentUtility.CreateAddEmitraTransation(objEmitra);
+                            }
+                            catch (System.Exception ex)
+                            {
+                                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPaymentUpdateDetails", ex.ToString());
+                            }
+
+                        }
+
+                        Model.ENCDATA = ENC;
+                        Model.MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE;
+                        Model.PaymentRequestURL = EmitraServiceDetail.ServiceURL;
+                        Model.ServiceID = EmitraServiceDetail.SERVICEID;
+                        Model.IsSucccess = true;
+
+                        requestDetailsModel.Data = Model;
+                        requestDetailsModel.State = OperationState.Success;
+                        requestDetailsModel.SuccessMessage = "successfully .!";
+                    }
+                }
+                else
+                {
+                    requestDetailsModel.Data = Model;
+                    requestDetailsModel.State = OperationState.Error;
+                    requestDetailsModel.ErrorMessage = "Service Id Not Mapped";
+                }
+
+            }
+
+            catch (System.Exception ex)
+            {
+                requestDetailsModel.Data = Model;
+                requestDetailsModel.State = OperationState.Error;
+                requestDetailsModel.ErrorMessage = ex.Message.ToString();
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPayment", ex.ToString());
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+
+            return requestDetailsModel;
+        }
+        #region emitra Service For Recheck Transaction,Transaction cancel API LAST_TRANSACTION_DETAILS_BY_CONSUMER_KEY
+
+        [HttpPost("GetEmitraTransactionStatusNew")]
+        public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatusNew(TransactionStatusDataModel dataSTATUS)
+        {
+            var result = new OperationResult<ResponseParameters>();
+            try
+            {
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                EmitraRequestDetails _EmitraRequestDetails = new EmitraRequestDetails();
+                VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
+                var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(_EmitraRequestDetails);
+
+                if (!string.IsNullOrEmpty(EmitraServiceDetail.MERCHANTCODE))
+                {
+                    MobilaAppCancelMerchanttokenResponse _MobilaAppCancelMerchanttokenResponse = new MobilaAppCancelMerchanttokenResponse();
+                    var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
+                    {
+                        MaxTimeout = -1,
+                    };
+                    var client = new RestClient(options);
+                    var request = new RestRequest("/em/oauth/merchant/token", Method.Post);
+                    request.AddHeader("Content-Type", "application/json");
+                    request.AddHeader("Access-Control-Allow-Origin", "*");
+                    request.AddParameter("application/json", "{\"cleintId\":\"" + EmitraServiceDetail.cleintId + "\",\"clientSecret\":\"" + EmitraServiceDetail.clientSecret + "\"}", ParameterType.RequestBody);
+                    RestResponse response = client.Execute(request);
+                    if (response.StatusCode.ToString() == "OK")
+                    {
+                        _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
+                        if (_MobilaAppCancelMerchanttokenResponse.statusCode == 200 && _MobilaAppCancelMerchanttokenResponse.data != null)
+                        {
+                            var optionsSTATUS = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
+                            {
+                                MaxTimeout = -1,
+                            };
+                            var clientSTATUS = new RestClient(options);
+                            var requestSTATUS = new RestRequest("/aggregator/api/payment/commonVerify", Method.Post);
+                            requestSTATUS.AddHeader("X-Api-Name", "COMMON_VERIFY");
+                            requestSTATUS.AddHeader("Content-Type", "application/json");
+                            requestSTATUS.AddHeader("Authorization", "Bearer " + _MobilaAppCancelMerchanttokenResponse.data.access_token);
+                            requestSTATUS.AddHeader("Access-Control-Allow-Origin", "*");
+                            requestSTATUS.AddParameter("application/json", "{\"MERCHANTCODE\":\"" + EmitraServiceDetail.MERCHANTCODE + "\",\"SERVICEID\":\"" + EmitraServiceDetail.SERVICEID + "\",\"PRN\":\"" + dataSTATUS.PRN + "\",\"AMOUNT\":\"" + dataSTATUS.AMOUNT + "\"}", ParameterType.RequestBody);
+                            RestResponse responseSTATUS = client.Execute(requestSTATUS);
+                            if (responseSTATUS.StatusCode.ToString() == "OK")
+                            {
+                                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
+                                if (_VerifywallettransactionsResponse.statusCode == 200 && _VerifywallettransactionsResponse.data != null)
+                                {
+
+                                    EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters();
+                                    EmitraResponseData.ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID;
+                                    EmitraResponseData.TRANSACTIONID = _VerifywallettransactionsResponse.data.TRANSACTIONID;
+                                    EmitraResponseData.PAIDAMOUNT = _VerifywallettransactionsResponse.data.PAIDAMOUNT;
+                                    EmitraResponseData.RECEIPTNO = _VerifywallettransactionsResponse.data.RECEIPTNO;
+                                    EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.message;
+                                    EmitraResponseData.STATUS = _VerifywallettransactionsResponse.data.STATUS;
+                                    if (EmitraResponseData != null)
+                                    {
+                                        UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
+                                    }
+                                    result.State = 0;
+                                    result.SuccessMessage = "Transaction Updated Successfully .!";
+                                }
+                                else
+                                {
+                                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                                    result.State = OperationState.Error;
+                                    result.Data = new ResponseParameters();
+                                    result.ErrorMessage = _VerifywallettransactionsResponse.message;
+                                    return result;
+                                }
+                            }
+                            else
+                            {
+                                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                                result.State = OperationState.Error;
+                                result.Data = new ResponseParameters();
+                                result.ErrorMessage = _VerifywallettransactionsResponse.message;
+                                return result;
+
+                            }
+
+                        }
+                        else
+                        {
+                            result.State = OperationState.Error;
+                            result.Data = new ResponseParameters();
+                            result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
+                            return result;
+                        }
+
+                    }
+                    else
+                    {
+                        _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
+                        result.State = OperationState.Error;
+                        result.Data = new ResponseParameters();
+                        result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
+                        return result;
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.Data = new ResponseParameters();
+                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetEmitraTransactionStatusNew", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("OUTHTOKENAPI")]
+        public MobilaAppCancelMerchanttokenResponse OUTHTOKENAPI(MobilaAppCancelMerchanttokenRequest _MobilaAppCancelMerchanttokenRequest)
+        {
+            MobilaAppCancelMerchanttokenResponse _MobilaAppCancelMerchanttokenResponse = new MobilaAppCancelMerchanttokenResponse();
+            try
+            {
+
+                var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/em/oauth/merchant/token", Method.Post);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Access-Control-Allow-Origin", "*");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(_MobilaAppCancelMerchanttokenRequest), ParameterType.RequestBody);
+                RestResponse response = client.Execute(request);
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
+                    return _MobilaAppCancelMerchanttokenResponse;
+                }
+                else
+                {
+                    _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
+                    return _MobilaAppCancelMerchanttokenResponse;
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.outhTokeAPi", ex.ToString());
+                return _MobilaAppCancelMerchanttokenResponse;
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+        }
+        [HttpPost("COMMONVERIFYAPI")]
+        public VerifywallettransactionsResponse TRANSACTIONCOMMONVERIFYAPI(string? YOUR_BEARER_TOKEN_HERE, VerifywallettransactionsRequest _VerifywallettransactionsRequest)
+        {
+            VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
+            try
+            {
+
+                var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/aggregator/api/payment/commonVerify", Method.Post);
+                request.AddHeader("X-Api-Name", "COMMON_VERIFY");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization", "Bearer " + YOUR_BEARER_TOKEN_HERE);
+                request.AddHeader("Access-Control-Allow-Origin", "*");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(_VerifywallettransactionsRequest), ParameterType.RequestBody);
+                RestResponse response = client.Execute(request);
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                    return _VerifywallettransactionsResponse;
+                }
+                else
+                {
+                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                    return _VerifywallettransactionsResponse;
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.COMMONVERIFYAPI", ex.ToString());
+                return _VerifywallettransactionsResponse;
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+        }
+
+        [HttpPost("EMITRACANCELAPI")]
+        public VerifywallettransactionsResponse EMITRACANCELAPI(string? YOUR_BEARER_TOKEN_HERE, VerifywallettransactionsRequest _VerifywallettransactionsRequest)
+        {
+            VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
+            try
+            {
+                //Merchant code + Service ID + PRN + Checksum key
+                _VerifywallettransactionsRequest.CHECKSUM = _VerifywallettransactionsRequest.MERCHANTCODE + _VerifywallettransactionsRequest.SERVICEID + _VerifywallettransactionsRequest.TRANSACTIONID + _VerifywallettransactionsRequest.CHECKSUMKEY;
+                _VerifywallettransactionsRequest.CHECKSUM = PaymentEncriptionDec.GenerateSha256HashNew(_VerifywallettransactionsRequest.CHECKSUM);
+                var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/aggregator/api/payment/refund", Method.Post);
+                request.AddHeader("X-Api-Name", "PAYMENT_REFUND");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization", "Bearer " + YOUR_BEARER_TOKEN_HERE);
+                request.AddHeader("Access-Control-Allow-Origin", "*");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(_VerifywallettransactionsRequest), ParameterType.RequestBody);
+                RestResponse response = client.Execute(request);
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                    return _VerifywallettransactionsResponse;
+                }
+                else
+                {
+                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                    return _VerifywallettransactionsResponse;
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EMITRACANCELAPI", ex.ToString());
+                return _VerifywallettransactionsResponse;
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+        }
+
+        #endregion
+
+
     }
 }

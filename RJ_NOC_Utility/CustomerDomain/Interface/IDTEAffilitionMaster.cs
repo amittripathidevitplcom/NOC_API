@@ -25,7 +25,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool RevertnocSaveData(NOCRevertOtherDetailsDataModel request, string ActionName);
         bool RevertEOALOASaveData(EOALOARevertOtherDetailsDataModel request, string ActionName);
         bool RevertApplicationSaveData(ApplicationRevertOtherDetailsDataModel request, string ActionName);
-        List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID, string ActionName);
+        List<BTEROtherDetailsDataModel> ApplicationSubmit(int BTERRegID, string ActionName,decimal AMOUNT);
         bool Generateorder_SaveData(Generateorderforbter request);
 
         List<CommonDataModel_DataTable> GetAllBTERFeeList();
@@ -33,5 +33,10 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveDataBTERFee(BTERFeeMasterDataModel request);
         bool DeleteDataBter(int FeeID);
         bool IfExists(int FeeID, int DepartmentID, string FeeType);
+        bool SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request);
+        List<BTERApplicationOpensessionDataModel> GetAllOpenSessionApplicationList();
+        List<BTERApplicationOpensessionDataModel> GetByIDOpenSessionApplicationList(int ID);
+        bool DeleteDataOpenSessionApplicationList(int ID);
+       
     }
 }

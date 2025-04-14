@@ -206,6 +206,13 @@ namespace RJ_NOC_Model
 
         public string WebServiceURL { get; set; }
         public string SuccessFailedURL { get; set; }
+
+
+        public string VerifyURL { get; set; }
+
+        public string? clientSecret { get; set; }
+        public string? cleintId { get; set; }
+
     }
 
     [Serializable()]
@@ -263,6 +270,10 @@ namespace RJ_NOC_Model
         public string UniquerequestId { get; set; }
 
         public string ResponseString { get; set; }
+
+
+
+
     }
 
     public class EmitraRequestDetails
@@ -287,6 +298,21 @@ namespace RJ_NOC_Model
         public string MERCHANTCODE { get; set; }
         public bool IsKiosk { get; set; }
         public bool IsSucccess { get; set; }
+
+        /////04/04/2025      
+        public int DepartmentID { get; set; }
+        public string? DistrictCode { get; set; }
+        public string? Adrees { get; set; }
+        public string? City { get; set; }
+        public string? Pincode { get; set; }
+        public string? PaymentType { get; set; }
+        public string? USEREMAIL { get; set; }
+        public string? CreatedBy { get; set; }
+
+        //FOR RECHECK
+        public string? PRN { get; set; }
+       
+
 
 
     }
@@ -371,6 +397,100 @@ namespace RJ_NOC_Model
         PaymentRequest = 1,
         RefundRequest = 2
     }
+    public class PGRequestNew
+    {
+        public string MERCHANTCODE { get; set; }
+        public string PRN { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string AMOUNT { get; set; }
+        public string SUCCESSURL { get; set; }
+        public string FAILUREURL { get; set; }
+        public string USERNAME { get; set; }
+        public string USERMOBILE { get; set; }
+        public string USEREMAIL { get; set; }
+        public string UDF1 { get; set; }
+        public string UDF2 { get; set; }
+        public string SERVICEID { get; set; }
+        public string OFFICECODE { get; set; }
+        public string REVENUEHEAD { get; set; }
+        public string COMMTYPE { get; set; }
+        public string CHECKSUM { get; set; }
+        public string CHECKSUMKEY { get; set; }
+        public string CONSUMERKEY { get; set; }
 
+        public string LOOKUPID { get; set; }
+        public string ApplicationIdEnc { get; set; }
+        public string UniquerequestId { get; set; }
+    }
+    public class MobilaAppCancelMerchanttokenResponse
+    {
+        public int statusCode { get; set; }
+
+        public string? statusMessage { get; set; }
+
+        public DataToken? data { get; set; }
+    }
+
+    public class DataToken
+    {
+        public string? access_token { get; set; }
+
+        public string? token_type { get; set; }
+
+        public string? refresh_token { get; set; }
+
+        public int expires_in { get; set; }
+    }
+
+    public class MobilaAppCancelMerchanttokenRequest
+    {
+        public string? cleintId { get; set; }
+
+        public string? clientSecret { get; set; }
+    }
+
+    public class VerifywallettransactionsRequest
+    {
+        public string? MERCHANTCODE { get; set; }
+        public string? SERVICEID { get; set; }
+        public string? PRN { get; set; }
+        public string? AMOUNT { get; set; }
+        public string? CHECKSUM { get; set; }
+        public string? CHECKSUMKEY { get; set; }
+        public string? TRANSACTIONID { get; set; }
+    }
+
+    public class Data
+    {
+        public string MERCHANTCODE { get; set; }
+        public string SERVICEID { get; set; }
+        public string STATUS { get; set; }
+        public string PRN { get; set; }
+        public string REQTIMESTAMP { get; set; }
+        public string AMOUNT { get; set; }
+        public string RECEIPTNO { get; set; }
+        public string TRANSACTIONID { get; set; }
+        public string PAIDAMOUNT { get; set; }
+        public string EMITRATIMESTAMP { get; set; }
+        public string PAYMENTMODE { get; set; }
+        public string PAYMENTMODEBID { get; set; }
+        public string RESPONSECODE { get; set; }
+        public string RESPONSEMESSAGE { get; set; }
+        public string CHECKSUM { get; set; }
+    }
+
+    public class VerifywallettransactionsResponse
+    {
+        public int statusCode { get; set; }
+        public bool success { get; set; }
+        public string message { get; set; }
+        public Data data { get; set; }
+        public VerifyError Error { get; set; }
+    }
+    public class VerifyError
+    {
+        public string code { get; set; }
+        public string reason { get; set; }
+    }
     #endregion
 }

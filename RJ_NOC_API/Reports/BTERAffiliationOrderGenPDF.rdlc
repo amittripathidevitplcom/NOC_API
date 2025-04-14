@@ -268,7 +268,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>16.43938cm</Top>
+            <Top>15.99488cm</Top>
             <Left>21.52806cm</Left>
             <Height>0.62117cm</Height>
             <Width>6.66718cm</Width>
@@ -758,7 +758,7 @@
                           <rd:DefaultName>FullAddress</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -766,7 +766,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -918,7 +917,7 @@
             <Top>6.0325cm</Top>
             <Left>0.635cm</Left>
             <Height>4.375cm</Height>
-            <Width>27.55075cm</Width>
+            <Width>27.55076cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -1466,10 +1465,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>BTERAffiliationOrderListClosed</DataSetName>
-            <Top>11.95896cm</Top>
+            <Top>11.38746cm</Top>
             <Left>0.54791cm</Left>
             <Height>4.375cm</Height>
-            <Width>27.66959cm</Width>
+            <Width>27.66961cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -1521,9 +1520,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox49</rd:DefaultName>
-            <Top>10.50608cm</Top>
+            <Top>10.53783cm</Top>
             <Left>0.635cm</Left>
-            <Height>0.66146cm</Height>
+            <Height>0.69321cm</Height>
             <Width>27.5825cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
@@ -1656,14 +1655,14 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>17.68313cm</Height>
+        <Height>16.78355cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>29.59333cm</Width>
+      <Width>29.04346cm</Width>
       <Page>
         <PageHeight>22cm</PageHeight>
         <PageWidth>30cm</PageWidth>

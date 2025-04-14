@@ -196,7 +196,6 @@
     <Folder Include="bin\Debug\net7.0\zh-CHT\" />
     <Folder Include="bin\Debug\net7.0\zh-Hans\" />
     <Folder Include="bin\Debug\net7.0\zh-Hant\" />
-    <Folder Include="SystemGeneratedPDF\" />
   </ItemGroup>
 
   <ItemGroup>
