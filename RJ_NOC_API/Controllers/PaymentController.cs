@@ -1626,11 +1626,11 @@ namespace RJ_NOC_API.Controllers
                                 _EmitraResponseParameters.STATUS = "SUCCESS";
                             }
 
-                            if (_EmitraResponseParameters.RESPONSECODE.Contains("ERR"))
+                            else if (_EmitraResponseParameters.RESPONSECODE.Contains("ERR"))
                             {
                                 _EmitraResponseParameters.STATUS = "FAILED";
                             }
-                            else if (_EmitraResponseParameters.RESPONSECODE == "300")
+                            else if (_EmitraResponseParameters.RESPONSECODE == "300"|| _EmitraResponseParameters.RESPONSECODE =="400" )
                             {
                                 _EmitraResponseParameters.STATUS = "FAILED";
                             }
@@ -1699,14 +1699,13 @@ namespace RJ_NOC_API.Controllers
                             {
                                 MaxTimeout = -1,
                             };
-                            var clientSTATUS = new RestClient(options);
+                            var clientSTATUS = new RestClient(optionsSTATUS);
                             var requestSTATUS = new RestRequest("/aggregator/api/payment/commonVerify", Method.Post);
                             requestSTATUS.AddHeader("X-Api-Name", "COMMON_VERIFY");
                             requestSTATUS.AddHeader("Content-Type", "application/json");
-                            requestSTATUS.AddHeader("Authorization", "Bearer " + _MobilaAppCancelMerchanttokenResponse.data.access_token);
-                            requestSTATUS.AddHeader("Access-Control-Allow-Origin", "*");
+                            requestSTATUS.AddHeader("Authorization", "Bearer " + _MobilaAppCancelMerchanttokenResponse.data.access_token);  
                             requestSTATUS.AddParameter("application/json", "{\"MERCHANTCODE\":\"" + EmitraServiceDetail.MERCHANTCODE + "\",\"SERVICEID\":\"" + EmitraServiceDetail.SERVICEID + "\",\"PRN\":\"" + dataSTATUS.PRN + "\",\"AMOUNT\":\"" + dataSTATUS.AMOUNT + "\"}", ParameterType.RequestBody);
-                            RestResponse responseSTATUS = client.Execute(requestSTATUS);
+                            RestResponse responseSTATUS = clientSTATUS.Execute(requestSTATUS);
                             if (responseSTATUS.StatusCode.ToString() == "OK")
                             {
                                 _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
@@ -1729,7 +1728,7 @@ namespace RJ_NOC_API.Controllers
                                 }
                                 else
                                 {
-                                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
                                     result.State = OperationState.Error;
                                     result.Data = new ResponseParameters();
                                     result.ErrorMessage = _VerifywallettransactionsResponse.message;
@@ -1738,10 +1737,29 @@ namespace RJ_NOC_API.Controllers
                             }
                             else
                             {
-                                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(response.Content);
+                                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
                                 result.State = OperationState.Error;
                                 result.Data = new ResponseParameters();
+
                                 result.ErrorMessage = _VerifywallettransactionsResponse.message;
+
+                                EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters();
+                                EmitraResponseData.ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID;
+                                EmitraResponseData.TRANSACTIONID = "0";
+                                EmitraResponseData.PAIDAMOUNT = "0";
+                                EmitraResponseData.RECEIPTNO = "0";
+                                EmitraResponseData.PRN = dataSTATUS.PRN;
+                                if (_VerifywallettransactionsResponse.Error!=null)
+                                {
+                                    EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.Error.reason;
+                                }                               
+                                EmitraResponseData.STATUS = "FAILED";
+                                if (EmitraResponseData != null)
+                                {
+                                    UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
+                                }
+                                result.State = 0;
+                                result.SuccessMessage = "Transaction Updated Successfully .!";
                                 return result;
 
                             }
