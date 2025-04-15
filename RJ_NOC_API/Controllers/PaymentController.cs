@@ -1719,6 +1719,7 @@ namespace RJ_NOC_API.Controllers
                                     EmitraResponseData.RECEIPTNO = _VerifywallettransactionsResponse.data.RECEIPTNO;
                                     EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.message;
                                     EmitraResponseData.STATUS = _VerifywallettransactionsResponse.data.STATUS;
+                                    EmitraResponseData.PRN = _VerifywallettransactionsResponse.data.PRN;
                                     if (EmitraResponseData != null)
                                     {
                                         UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
@@ -1884,21 +1885,21 @@ namespace RJ_NOC_API.Controllers
         }
 
         [HttpPost("EMITRACANCELAPI")]
-        public VerifywallettransactionsResponse EMITRACANCELAPI(string? YOUR_BEARER_TOKEN_HERE, VerifywallettransactionsRequest _VerifywallettransactionsRequest)
+        public VerifywallettransactionsResponse EMITRACANCELAPI(string? YOUR_BEARER_TOKEN_HERE, CANCELwallettransactionsRequest _VerifywallettransactionsRequest)
         {
             VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
             try
             {
                 //Merchant code + Service ID + PRN + Checksum key
-                _VerifywallettransactionsRequest.CHECKSUM = _VerifywallettransactionsRequest.MERCHANTCODE + _VerifywallettransactionsRequest.SERVICEID + _VerifywallettransactionsRequest.TRANSACTIONID + _VerifywallettransactionsRequest.CHECKSUMKEY;
+                _VerifywallettransactionsRequest.CHECKSUM = _VerifywallettransactionsRequest.MERCHANTCODE + _VerifywallettransactionsRequest.SERVICEID + _VerifywallettransactionsRequest.PRN + _VerifywallettransactionsRequest.CHECKSUMKEY;
                 _VerifywallettransactionsRequest.CHECKSUM = PaymentEncriptionDec.GenerateSha256HashNew(_VerifywallettransactionsRequest.CHECKSUM);
                 var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
                 {
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/aggregator/api/payment/refund", Method.Post);
-                request.AddHeader("X-Api-Name", "PAYMENT_REFUND");
+                var request = new RestRequest("/aggregator/api/payment/refundByPrn", Method.Post);
+                request.AddHeader("X-Api-Name", "PAYMENT_REFUND_BY_PRN");
                 request.AddHeader("Content-Type", "application/json");
                 request.AddHeader("Authorization", "Bearer " + YOUR_BEARER_TOKEN_HERE);
                 request.AddHeader("Access-Control-Allow-Origin", "*");

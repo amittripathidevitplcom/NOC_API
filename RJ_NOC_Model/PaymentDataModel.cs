@@ -492,5 +492,16 @@ namespace RJ_NOC_Model
         public string code { get; set; }
         public string reason { get; set; }
     }
+
+    public class CANCELwallettransactionsRequest
+    {
+        public string? MERCHANTCODE { get; set; }
+        public string? SERVICEID { get; set; }
+        public string? PRN { get; set; }       
+        public string? CHECKSUMKEY { get; set; }
+        public string? CHECKSUM { get; set; }
+
+    }
+
     #endregion
 }
