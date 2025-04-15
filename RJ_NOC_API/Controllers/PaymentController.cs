@@ -1569,6 +1569,101 @@ namespace RJ_NOC_API.Controllers
 
             return requestDetailsModel;
         }
+
+        [HttpPost("EmitraPaymentResponseNew")]
+        public async Task<IActionResult> EmitraPaymentResponseNew(string UniquerequestId = "", string ApplicationIdEnc = "", string ServiceID = "", string IsFailed = "")
+        {
+            var RetrunUrL = "";
+            string TransId = "";
+
+            UniquerequestId = UniquerequestId.Replace(' ', '+');
+            UniquerequestId = UniquerequestId.Replace(' ', '+');
+            UniquerequestId = UniquerequestId.Replace(' ', '+');
+
+            ApplicationIdEnc = ApplicationIdEnc.Replace(' ', '+');
+            ApplicationIdEnc = ApplicationIdEnc.Replace(' ', '+');
+            ApplicationIdEnc = ApplicationIdEnc.Replace(' ', '+');
+
+            IsFailed = IsFailed.Replace(' ', '+');
+            IsFailed = IsFailed.Replace(' ', '+');
+            IsFailed = IsFailed.Replace(' ', '+');
+
+            ServiceID = ServiceID.Replace(' ', '+');
+            ServiceID = ServiceID.Replace(' ', '+');
+            ServiceID = ServiceID.Replace(' ', '+');
+
+            string MERCHANTCODE = this.Request.Form["MERCHANTCODE"];
+            string PRN = this.Request.Form["PRN"];
+            string STATUS = this.Request.Form["STATUS"];
+            string ENCDATA = this.Request.Form["ENCDATA"];
+
+            EmitraRequestDetails Model = new EmitraRequestDetails();
+            Model.ServiceID = this.Request.Form["SERVICEID"];
+            var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(Model);
+            if (!string.IsNullOrEmpty(ENCDATA))
+            {
+                try
+                {
+
+
+                    string DNC2 = PaymentEncriptionDec.AESDecrypt(ENCDATA, EmitraServiceDetail.EncryptionKey);
+
+                    var dict = DNC2.Split(new[] { "::" }, StringSplitOptions.None)
+                    .Select(part => part.Split(new[] { '=' }, 2))
+                    .ToDictionary(pair => pair[0], pair => pair.Length > 1 ? pair[1] : "");
+                    string json = JsonConvert.SerializeObject(dict);
+                    if (!string.IsNullOrEmpty(DNC2))
+                    {
+                        EmitraResponseParameters _EmitraResponseParameters = JsonConvert.DeserializeObject<EmitraResponseParameters>(json);
+
+                        TransId = _EmitraResponseParameters.PRN;
+                        if (_EmitraResponseParameters != null)
+                        {
+                            _EmitraResponseParameters.ApplicationIdEnc = PaymentEncriptionDec.EmitraDecrypt(ApplicationIdEnc);
+                            _EmitraResponseParameters.TRANSACTIONID = PaymentEncriptionDec.EmitraDecrypt(UniquerequestId);
+                            if (_EmitraResponseParameters.STATUS == "SUCCESS")
+                            {
+                                _EmitraResponseParameters.STATUS = "PENDING";
+                            }
+
+                            if (_EmitraResponseParameters.RESPONSECODE.Contains("ERR"))
+                            {
+                                _EmitraResponseParameters.STATUS = "FAILED";
+                            }
+                            else if (_EmitraResponseParameters.RESPONSECODE == "300")
+                            {
+                                _EmitraResponseParameters.STATUS = "FAILED";
+                            }
+                            else
+                            {
+                                _EmitraResponseParameters.STATUS = "PENDING";
+                            }
+
+                            UtilityHelper.PaymentUtility.UpdateEmitraPaymentStatus(_EmitraResponseParameters);
+                        }
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraPaymentResponse", ex.ToString());
+                }
+            }
+
+            string URLType = Request.GetDisplayUrl();
+            if (URLType.Contains("localhost"))
+            {
+                return Redirect("http://localhost:4200/bterpaymentsuccess/" + TransId);
+            }
+            else if (URLType.Contains("172.22.33.75"))
+            {
+                return Redirect("http://172.22.33.75:81/bterpaymentsuccess/" + TransId);
+            }
+            else
+            {
+                return Redirect("https://rajnoc.rajasthan.gov.in/bterpaymentsuccess/" + TransId);
+            }
+
+        }
         #region emitra Service For Recheck Transaction,Transaction cancel API LAST_TRANSACTION_DETAILS_BY_CONSUMER_KEY
 
         [HttpPost("GetEmitraTransactionStatusNew")]
