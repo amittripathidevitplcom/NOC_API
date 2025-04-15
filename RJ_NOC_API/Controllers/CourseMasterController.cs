@@ -31,7 +31,7 @@ namespace RJ_NOC_API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("GetAllCourse/{UserID}/{LoginSSOID}/{CollegeID}/{{ApplyNOCID}}")]
+        [HttpGet("GetAllCourse/{UserID}/{LoginSSOID}/{CollegeID}/{ApplyNOCID=0}")]
         public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetAllCourse(int UserID, string LoginSSOID,int CollegeID,int ApplyNOCID)
         {
             CommonDataAccessHelper.Insert_TrnUserLog(UserID, "GetAllData", 0, "CourseMaster");
