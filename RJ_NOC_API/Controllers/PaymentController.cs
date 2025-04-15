@@ -1623,7 +1623,7 @@ namespace RJ_NOC_API.Controllers
                             _EmitraResponseParameters.TRANSACTIONID = PaymentEncriptionDec.EmitraDecrypt(UniquerequestId);
                             if (_EmitraResponseParameters.STATUS == "SUCCESS")
                             {
-                                _EmitraResponseParameters.STATUS = "PENDING";
+                                _EmitraResponseParameters.STATUS = "SUCCESS";
                             }
 
                             if (_EmitraResponseParameters.RESPONSECODE.Contains("ERR"))
