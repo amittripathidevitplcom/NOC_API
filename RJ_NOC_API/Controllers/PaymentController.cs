@@ -1722,6 +1722,7 @@ namespace RJ_NOC_API.Controllers
                             var requestSTATUS = new RestRequest("/aggregator/api/payment/commonVerify", Method.Post);
                             requestSTATUS.AddHeader("X-Api-Name", "COMMON_VERIFY");
                             requestSTATUS.AddHeader("Content-Type", "application/json");
+                            requestSTATUS.AddHeader("Access-Control-Allow-Origin", "*");
                             requestSTATUS.AddHeader("Authorization", "Bearer " + _MobilaAppCancelMerchanttokenResponse.data.access_token);  
                             requestSTATUS.AddParameter("application/json", "{\"MERCHANTCODE\":\"" + EmitraServiceDetail.MERCHANTCODE + "\",\"SERVICEID\":\"" + EmitraServiceDetail.SERVICEID + "\",\"PRN\":\"" + dataSTATUS.PRN + "\",\"AMOUNT\":\"" + dataSTATUS.AMOUNT + "\"}", ParameterType.RequestBody);
                             RestResponse responseSTATUS = clientSTATUS.Execute(requestSTATUS);
