@@ -253,7 +253,7 @@ namespace RJ_NOC_API.Controllers
                 //get payment details form database
                 PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
                 dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
-                dataModel.DepartmentID = Model.DepartmentID;
+                dataModel.DepartmentID = Model.DepartmentID.Value;
                 var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
 
                 if (!string.IsNullOrEmpty(data.MerchantCode))
@@ -341,7 +341,7 @@ namespace RJ_NOC_API.Controllers
                 //get payment details form database
                 PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
                 dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
-                dataModel.DepartmentID = Model.DepartmentID;
+                dataModel.DepartmentID = Model.DepartmentID.Value;
                 var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
 
                 if (!string.IsNullOrEmpty(data.MerchantCode))
@@ -465,7 +465,7 @@ namespace RJ_NOC_API.Controllers
                 //get payment details form database
                 PaymentGatewayDataModel dataModel = new PaymentGatewayDataModel();
                 dataModel.PaymentGateway = (int)enmPaymentGatway.RPP;
-                dataModel.DepartmentID = Model.DepartmentID;
+                dataModel.DepartmentID = Model.DepartmentID.Value;
                 var data = UtilityHelper.PaymentUtility.GetpaymentGatewayDetails(dataModel);
 
                 if (!string.IsNullOrEmpty(data.MerchantCode))
