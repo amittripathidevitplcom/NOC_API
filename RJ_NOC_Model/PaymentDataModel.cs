@@ -124,14 +124,14 @@ namespace RJ_NOC_Model
 
     public class TransactionStatusDataModel
     {
-        public string ApplyNocApplicationID { get; set; }
-        public string AMOUNT { get; set; }
-        public string PRN { get; set; }
-        public int DepartmentID { get; set; }
+        public string? ApplyNocApplicationID { get; set; }
+        public string? AMOUNT { get; set; }
+        public string? PRN { get; set; }
+        public int? DepartmentID { get; set; }
         public string? RPPTXNID { get; set; }
         public string? SubOrderID { get; set; }
         public string? REFUNDID { get; set; }
-        public string SSOID { get; set; }
+        public string? SSOID { get; set; }
 
     }
     public class EGrassPaymentDetails_Req_Res

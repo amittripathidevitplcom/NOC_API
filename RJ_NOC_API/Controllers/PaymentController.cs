@@ -1666,13 +1666,32 @@ namespace RJ_NOC_API.Controllers
         }
         #region emitra Service For Recheck Transaction,Transaction cancel API LAST_TRANSACTION_DETAILS_BY_CONSUMER_KEY
 
-        [HttpPost("GetEmitraTransactionStatusNew")]
-        public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatusNew(TransactionStatusDataModel dataSTATUS)
+        [HttpPost("GetEmitraTransactionStatusNew1")]
+        public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatusNew1([FromBody] TransactionStatusDataModel dataSTATUS)
         {
             var result = new OperationResult<ResponseParameters>();
             try
             {
-                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraAggregatorTransactionStatusNew1", "start");
+            }
+            catch (System.Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetEmitraTransactionStatusNew", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            return result;
+        }
+
+        [HttpPost("GetEmitraTransactionStatusNew")]
+        public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatusNew([FromBody] TransactionStatusDataModel dataSTATUS)
+        {
+            var result = new OperationResult<ResponseParameters>();
+            try
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraAggregatorTransactionStatusNew", "start");
+
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
                 EmitraRequestDetails _EmitraRequestDetails = new EmitraRequestDetails();
                 VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
                 var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(_EmitraRequestDetails);
