@@ -1623,7 +1623,7 @@ namespace RJ_NOC_API.Controllers
                             _EmitraResponseParameters.TRANSACTIONID = PaymentEncriptionDec.EmitraDecrypt(UniquerequestId);
                             if (_EmitraResponseParameters.STATUS == "SUCCESS")
                             {
-                                _EmitraResponseParameters.STATUS = "SUCCESS";
+                                _EmitraResponseParameters.STATUS = "PENDING";
                             }
 
                             else if (_EmitraResponseParameters.RESPONSECODE.Contains("ERR"))
@@ -1720,6 +1720,12 @@ namespace RJ_NOC_API.Controllers
                                     EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.message;
                                     EmitraResponseData.STATUS = _VerifywallettransactionsResponse.data.STATUS;
                                     EmitraResponseData.PRN = _VerifywallettransactionsResponse.data.PRN;
+                                    EmitraResponseData.MERCHANTCODE = _VerifywallettransactionsResponse.data.MERCHANTCODE;
+                                    EmitraResponseData.SERVICEID = _VerifywallettransactionsResponse.data.SERVICEID;
+                                    EmitraResponseData.PAYMENTMODEBID = _VerifywallettransactionsResponse.data.PAYMENTMODEBID;
+                                    EmitraResponseData.RESPONSECODE = _VerifywallettransactionsResponse.data.RESPONSECODE;
+                                    EmitraResponseData.PAYMENTMODE = _VerifywallettransactionsResponse.data.PAYMENTMODE;
+                                    EmitraResponseData.AMOUNT = _VerifywallettransactionsResponse.data.AMOUNT;
                                     if (EmitraResponseData != null)
                                     {
                                         UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
