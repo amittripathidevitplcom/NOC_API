@@ -4707,8 +4707,101 @@ namespace RJ_NOC_API.Controllers
         }
 
 
+        [HttpPost("SaveApplyNOCDocument")]
+        public async Task<OperationResult<bool>> SaveApplyNOCDocument(ApplyNOCDocument_DataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveApplyNOCDocument(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.ApplyNOCID, "SaveApplyNOCDocument", request.ApplyNOCID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveApplyNOCDocument", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("SaveApplyNOCDocumentList")]
+        public async Task<OperationResult<bool>> SaveApplyNOCDocumentList(List<ApplyNOCDocument_DataModel> request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveApplyNOCDocumentList(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request[0].ApplyNOCID, "SaveApplyNOCDocumentList", request[0].ApplyNOCID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveApplyNOCDocumentList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
+        [HttpPost("GetApplyNOCDocumentList")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetApplyNOCDocumentList(ApplyNOCDocumentFilter_DataModel request)
+        {
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetApplyNOCDocumentList(request));
+                if (result.Data.Count>0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.ApplyNOCID, "GetApplyNOCDocumentList", request.ApplyNOCID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data fetch successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetApplyNOCDocumentList", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
         [HttpGet("GetMGOneClinicalLabDetails/{CollegeID}")]
         public async Task<OperationResult<List<MGOneClinicalLabDataModel>>> GetMGOneClinicalLabDetails(int CollegeID)
@@ -5390,6 +5483,8 @@ namespace RJ_NOC_API.Controllers
                 //UnitOfWork.Dispose();
             }
             return result;
-        }        
+        }
+
+
     }
 }

@@ -468,6 +468,18 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.GetPaymentMode();
         }
 
+        public bool SaveApplyNOCDocument(ApplyNOCDocument_DataModel request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveApplyNOCDocument(request);
+        }
+        public bool SaveApplyNOCDocumentList(List<ApplyNOCDocument_DataModel> request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveApplyNOCDocumentList(request);
+        } 
+        public List<CommonDataModel_DataTable> GetApplyNOCDocumentList(ApplyNOCDocumentFilter_DataModel request)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetApplyNOCDocumentList(request);
+        }
         public bool SaveExcelData(List<MemberDataModel> request, int StaticsFileID, int DeptId, int collegeID, int courseID, string FinYear, string FileName, string SSOID)
         {
             return UnitOfWork.CommonFuncationRepository.SaveExcelData(request, StaticsFileID, DeptId, collegeID, courseID, FinYear, FileName, SSOID);

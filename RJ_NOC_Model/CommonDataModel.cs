@@ -363,6 +363,24 @@ namespace RJ_NOC_Model
         public string? Deficiency { get; set; }
 
     }
+    public class ApplyNOCDocument_DataModel
+    {
+        public int DocumentID { get; set; }
+        public int ApplyNOCID { get; set; }
+        public string? DocumentType { get; set; }
+        public string? DocumentName { get; set; }
+        public string? DocumentName_DisName { get; set; }
+        public string? DocumentNamePath { get; set; }
+        public int CreatedBy { get; set; }
+        public int RoleID { get; set; }
+    } 
+    public class ApplyNOCDocumentFilter_DataModel
+    {
+        public int DocumentID { get; set; }
+        public int? ApplyNOCID { get; set; }
+        public string? DocumentType { get; set; }
+
+    }
     public class CommonDataModel_NOCFormatMaster
     {
         public int NOCFormatID { get; set; }
@@ -381,7 +399,7 @@ namespace RJ_NOC_Model
     public class CommonDataModel_DepartmentWiseStartDateEndDate
     {
         public int DepartmentID { get; set; }
-       
+
         public int ApplicationSession { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
@@ -427,7 +445,7 @@ namespace RJ_NOC_Model
     public class CommonDataModel_FilterCollegesByBTER
     {
         public int DTEAffiliationID { get; set; }
-        public int CollegeID { get; set; }        
+        public int CollegeID { get; set; }
         public int AffiliationTypeID { get; set; }
         public string Name { get; set; }
         public string CollegeNameEn { get; set; }
@@ -449,7 +467,7 @@ namespace RJ_NOC_Model
         public string? NOCDocStatus { get; set; }
         public string? LOADocStatus { get; set; }
         public string? ApplicationDocStatus { get; set; }
-        public string? PaymentDocStatus { get; set; }        
+        public string? PaymentDocStatus { get; set; }
         public DataTable? data { get; set; }
 
     }
@@ -464,7 +482,7 @@ namespace RJ_NOC_Model
         public string MappingSSOID { get; set; }
     }
     public class CommonDataModel_BTEROrderList
-    {       
+    {
         public string PdfFilePath { get; set; }
         public string GenOrderNumber { get; set; }
         public string esignResponseUrl { get; set; }

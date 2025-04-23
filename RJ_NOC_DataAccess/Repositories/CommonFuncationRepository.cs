@@ -905,6 +905,42 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public bool SaveApplyNOCDocument(ApplyNOCDocument_DataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveApplyNOCDocument";
+            SqlQuery += " @ApplyNOCID='" + request.ApplyNOCID + "',@DocumentType='" + request.DocumentType + "',@DocumentName='" + request.DocumentName + "',@CreatedBy='" + request.CreatedBy + "',@RoleID='" + request.RoleID + "',@ActionName='Single'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveApplyNOCDocument");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }        
+        public bool SaveApplyNOCDocumentList(List<ApplyNOCDocument_DataModel> request)
+        {
+            string DocumentList_str =  CommonHelper.GetDetailsTableQry(request, "Temp_ApplyNOCDocument");
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveApplyNOCDocument";
+            SqlQuery += " @ActionName='List', @DocumentList_str='"+ DocumentList_str + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonFunction.SaveApplyNOCDocument");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<CommonDataModel_DataTable> GetApplyNOCDocumentList(ApplyNOCDocumentFilter_DataModel request)
+        {
+            string SqlQuery = " exec USP_GetApplyNOCDocumentList @ApplyNOCID='" + request.ApplyNOCID + "',@DocumentType='" + request.DocumentType + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.CheckTabsEntry");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
         public bool LOIFinalSubmit(int CollegeID)
         {
             string IPAddress = CommonHelper.GetVisitorIPAddress();
