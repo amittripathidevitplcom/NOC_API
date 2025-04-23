@@ -336,7 +336,7 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> TotalCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request)
         {
-            string SqlQuery = "exec USP_TotalCollegeDetailsByDepartment @DepartmentID='" + request.DepartmentID + "', @UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@IsDefaulter='" + request.IsDefaulter + "'";
+            string SqlQuery = "exec USP_TotalCollegeDetailsByDepartment @DepartmentID='" + request.DepartmentID + "', @UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@IsDefaulter='" + request.IsDefaulter + "',@IsGeoTagging='" + request.IsGeoTagging + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.TotalCollegeDetailsByDepartment");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

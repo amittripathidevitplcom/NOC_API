@@ -180,6 +180,7 @@ namespace RJ_NOC_Model
         public int DistrictID { get; set; }
         public int? IsDefaulter { get; set; }
         public string CollegeName { get; set; }
+        public int? IsGeoTagging { get; set; }
     }
 
     public class DCECollegesReportSearchFilter
