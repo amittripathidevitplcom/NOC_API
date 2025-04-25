@@ -485,9 +485,12 @@ namespace RJ_NOC_DataAccess.Repositories
 
         public bool UpdateEmitraRecheckPaymentStatus(EmitraResponseParameters request)
         {
+            //,@ResponseString='" + JsonConvert.SerializeObject(request) + "'
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_InsertEmitraTransactions";
-            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@TransactionId='" + request.TRANSACTIONID + "',@PRN='" + request.PRN + "',@PaidAmount='" + request.PAIDAMOUNT + "',@TokenNo='" + request.TRANSACTIONID + "',@StatusMsg='" + request.RESPONSEMESSAGE + "',@ResponseString='" + JsonConvert.SerializeObject(request) + "',@ReceiptNo='" + request.RECEIPTNO + "'," + "@RequestStatus='" + request.STATUS + "'," +
+            SqlQuery += " @ApplicationIdEnc='" + request.ApplicationIdEnc + "',@TransactionId='" + request.TRANSACTIONID + "',@PRN='" + request.PRN + "'" +
+               
+                ",@PaidAmount='" + request.PAIDAMOUNT + "',@TokenNo='" + request.TRANSACTIONID + "',@StatusMsg='" + request.RESPONSEMESSAGE + "',@ResponseString='" + request.ResponseString + "',@ReceiptNo='" + request.RECEIPTNO + "'," + "@RequestStatus='" + request.STATUS + "'," +
                 "@key='RecheckEmitraPaymentStatus'";
             int Rows = _commonHelper.NonQuerry(SqlQuery, "PaymentRepository.UpdateEmitraPaymentStatus");
             if (Rows > 0)

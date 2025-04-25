@@ -29,14 +29,15 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool Generateorder_SaveData(Generateorderforbter request);
 
         List<CommonDataModel_DataTable> GetAllBTERFeeList();
-        List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID);
+        List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID);       
         bool SaveDataBTERFee(BTERFeeMasterDataModel request);
         bool DeleteDataBter(int FeeID);
         bool IfExists(int FeeID, int DepartmentID, string FeeType);
         bool SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request);
         List<BTERApplicationOpensessionDataModel> GetAllOpenSessionApplicationList();
         List<BTERApplicationOpensessionDataModel> GetByIDOpenSessionApplicationList(int ID);
-        bool DeleteDataOpenSessionApplicationList(int ID);
-       
+        bool DeleteDataOpenSessionApplicationList(int ID);      
+        List<BTERPaymentHistoryeMitraDataModel_List> GetPaymenthistoryList(BTERPaymentHistoryeMitraDataModel request, int DepartmentID);
+        List<BTERPaymentHistoryeMitraDataModel_List> GetAllCollegeList();
     }
 }

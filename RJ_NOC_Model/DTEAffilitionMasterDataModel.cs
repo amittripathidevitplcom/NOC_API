@@ -259,17 +259,41 @@ namespace RJ_NOC_Model
         public string? ActiveDeactive { get; set; }
         public bool DeleteStatus { get; set; }
     }
-    public  class BTERApplicationOpensessionDataModel
+    public class BTERApplicationOpensessionDataModel
     {
         public int ID { get; set; }
         public int DepartmentID { get; set; }
         public int ApplicationSession { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }        
+        public DateTime EndDate { get; set; }
         public int? UserID { get; set; }
         public bool ActiveStatus { get; set; }
         public string? SessionName { get; set; }
         public bool DeleteStatus { get; set; }
 
+    }
+    public class BTERPaymentHistoryeMitraDataModel
+    {
+        public int? DepartmentID { get; set; }
+        public string? CollegeCode { get; set; }
+        public string? CollegeName { get; set; }
+        public int? CollegeID { get; set; }
+        public string? MobileNumber { get; set; }
+        public string? DistrictName { get; set; }
+        public string? FullAddress { get; set; }
+        public string? SERVICEID { get; set; }
+        public string? TransctionStatus { get; set; }
+        public string? Receipt_Number { get; set; }
+        public string? TokenNo { get; set; }
+        public string? TransctionMSG { get; set; }
+        public string? PRNNO { get; set; }
+        public string? TransctionDate { get; set; }
+        public string? TransctionToDate { get; set; }
+        public int? Amount { get; set; }
+        public int? ApplyNocApplicationID { get; set; }
+    }
+    public class BTERPaymentHistoryeMitraDataModel_List
+    {
+        public DataTable data { get; set; }
     }
 }

@@ -358,6 +358,28 @@ namespace RJ_NOC_DataAccess.Repository
                 return true;
             else
                 return false;
-        }        
+        }
+        public List<BTERPaymentHistoryeMitraDataModel_List> GetPaymenthistoryList(BTERPaymentHistoryeMitraDataModel request, int DepartmentID)
+        {
+            string SqlQuery = "exec USP_GetBTER_PaymentHistoryeMitra @DepartmentID='" + request.DepartmentID + "', @CollegeID='" + request.CollegeID + "',@PRN='" + request.PRNNO + "',@TokenNo='" + request.TokenNo + "',@TransctionStatus='" + request.TransctionStatus + "',@TransctionDate='" + request.TransctionDate + "',@TransctionToDate='"+request.TransctionToDate+"'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetPaymenthistoryList");
+            List<BTERPaymentHistoryeMitraDataModel_List> dataModels = new List<BTERPaymentHistoryeMitraDataModel_List>();
+            BTERPaymentHistoryeMitraDataModel_List dataModel = new BTERPaymentHistoryeMitraDataModel_List();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }      
+        public List<BTERPaymentHistoryeMitraDataModel_List> GetAllCollegeList()
+        {
+            string SqlQuery = "exec USP_GetBTERCollegeList";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.GetAllCollegeList");
+            List<BTERPaymentHistoryeMitraDataModel_List> dataModels = new List<BTERPaymentHistoryeMitraDataModel_List>();
+            BTERPaymentHistoryeMitraDataModel_List dataModel = new BTERPaymentHistoryeMitraDataModel_List();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
     }
 }

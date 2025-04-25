@@ -98,7 +98,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         public List<BTERFeeMasterDataModel> GetBTERFeeByID(int FeeID)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.GetBTERFeeByID(FeeID);
-        }
+        }        
         public bool SaveDataBTERFee(BTERFeeMasterDataModel request)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.SaveDataBTERFee(request);
@@ -126,10 +126,18 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.DTEAllifitionMasterRepository.GetByIDOpenSessionApplicationList(ID);
         }
-        
         public bool DeleteDataOpenSessionApplicationList(int ID)
         {
             return UnitOfWork.DTEAllifitionMasterRepository.DeleteDataOpenSessionApplicationList(ID);
         }
+        public List<BTERPaymentHistoryeMitraDataModel_List> GetPaymenthistoryList(BTERPaymentHistoryeMitraDataModel request, int DepartmentID)
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetPaymenthistoryList(request, DepartmentID);
+        }
+        public List<BTERPaymentHistoryeMitraDataModel_List> GetAllCollegeList()
+        {
+            return UnitOfWork.DTEAllifitionMasterRepository.GetAllCollegeList();
+        }
+        
     }
 }

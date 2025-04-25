@@ -38,8 +38,9 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveDataBTERApplicationOpenSession(BTERApplicationOpensessionDataModel request);
         List<BTERApplicationOpensessionDataModel> GetAllOpenSessionApplicationList();
         List<BTERApplicationOpensessionDataModel> GetByIDOpenSessionApplicationList(int ID);
-        bool DeleteDataOpenSessionApplicationList(int ID);
-        
+        bool DeleteDataOpenSessionApplicationList(int ID);       
+        List<BTERPaymentHistoryeMitraDataModel_List> GetPaymenthistoryList(BTERPaymentHistoryeMitraDataModel request, int DepartmentID);
+        List<BTERPaymentHistoryeMitraDataModel_List> GetAllCollegeList();
     }
 
 }

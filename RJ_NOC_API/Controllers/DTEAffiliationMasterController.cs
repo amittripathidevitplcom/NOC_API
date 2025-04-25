@@ -1056,7 +1056,68 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-        
+        [HttpPost("GetPaymenthistoryList/{DepartmentID}")]
+        public async Task<OperationResult<List<BTERPaymentHistoryeMitraDataModel_List>>> TotalBTERCollegeDetailsByDepartment(BTERPaymentHistoryeMitraDataModel request, int DepartmentID)
+        {
+            var result = new OperationResult<List<BTERPaymentHistoryeMitraDataModel_List>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetPaymenthistoryList(request, DepartmentID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMasterController.GetPaymenthistoryList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetAllCollegeList")]
+        public async Task<OperationResult<List<BTERPaymentHistoryeMitraDataModel_List>>> GetAllCollegeList()
+        {
+            var result = new OperationResult<List<BTERPaymentHistoryeMitraDataModel_List>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.GetAllCollegeList());
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data Load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DTEAffilitionMaster.GetAllCollegeList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

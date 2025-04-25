@@ -1664,150 +1664,7 @@ namespace RJ_NOC_API.Controllers
             }
 
         }
-        #region emitra Service For Recheck Transaction,Transaction cancel API LAST_TRANSACTION_DETAILS_BY_CONSUMER_KEY
-
-        [HttpPost("GetEmitraTransactionStatusNew1")]
-        public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatusNew1([FromBody] TransactionStatusDataModel dataSTATUS)
-        {
-            var result = new OperationResult<ResponseParameters>();
-            try
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraAggregatorTransactionStatusNew1", "start1");
-                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
-                EmitraRequestDetails _EmitraRequestDetails = new EmitraRequestDetails();
-                VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
-                var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(_EmitraRequestDetails);
-
-                if (!string.IsNullOrEmpty(EmitraServiceDetail.MERCHANTCODE))
-                {
-                    MobilaAppCancelMerchanttokenResponse _MobilaAppCancelMerchanttokenResponse = new MobilaAppCancelMerchanttokenResponse();
-                    var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
-                    {
-                        MaxTimeout = -1,
-                    };
-                    var client = new RestClient(options);
-                    var request = new RestRequest("/em/oauth/merchant/token", Method.Post);
-                    request.AddHeader("Content-Type", "application/json");
-                    request.AddHeader("Access-Control-Allow-Origin", "*");
-                    request.AddParameter("application/json", "{\"cleintId\":\"" + EmitraServiceDetail.cleintId + "\",\"clientSecret\":\"" + EmitraServiceDetail.clientSecret + "\"}", ParameterType.RequestBody);
-                    RestResponse response = client.Execute(request);
-                    if (response.StatusCode.ToString() == "OK")
-                    {
-                        _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
-                        if (_MobilaAppCancelMerchanttokenResponse.statusCode == 200 && _MobilaAppCancelMerchanttokenResponse.data != null)
-                        {
-                            var optionsSTATUS = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
-                            {
-                                MaxTimeout = -1,
-                            };
-                            var clientSTATUS = new RestClient(optionsSTATUS);
-                            var requestSTATUS = new RestRequest("/aggregator/api/payment/commonVerify", Method.Post);
-                            requestSTATUS.AddHeader("X-Api-Name", "COMMON_VERIFY");
-                            requestSTATUS.AddHeader("Content-Type", "application/json");
-                            requestSTATUS.AddHeader("Access-Control-Allow-Origin", "*");
-                            requestSTATUS.AddHeader("Authorization", "Bearer " + _MobilaAppCancelMerchanttokenResponse.data.access_token);
-                            requestSTATUS.AddParameter("application/json", "{\"MERCHANTCODE\":\"" + EmitraServiceDetail.MERCHANTCODE + "\",\"SERVICEID\":\"" + EmitraServiceDetail.SERVICEID + "\",\"PRN\":\"" + dataSTATUS.PRN + "\",\"AMOUNT\":\"" + dataSTATUS.AMOUNT + "\"}", ParameterType.RequestBody);
-                            RestResponse responseSTATUS = clientSTATUS.Execute(requestSTATUS);
-                            if (responseSTATUS.StatusCode.ToString() == "OK")
-                            {
-                                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
-                                if (_VerifywallettransactionsResponse.statusCode == 200 && _VerifywallettransactionsResponse.data != null)
-                                {
-
-                                    EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters();
-                                    EmitraResponseData.ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID;
-                                    EmitraResponseData.TRANSACTIONID = _VerifywallettransactionsResponse.data.TRANSACTIONID;
-                                    EmitraResponseData.PAIDAMOUNT = _VerifywallettransactionsResponse.data.PAIDAMOUNT;
-                                    EmitraResponseData.RECEIPTNO = _VerifywallettransactionsResponse.data.RECEIPTNO;
-                                    EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.message;
-                                    EmitraResponseData.STATUS = _VerifywallettransactionsResponse.data.STATUS;
-                                    EmitraResponseData.PRN = _VerifywallettransactionsResponse.data.PRN;
-                                    EmitraResponseData.MERCHANTCODE = _VerifywallettransactionsResponse.data.MERCHANTCODE;
-                                    EmitraResponseData.SERVICEID = _VerifywallettransactionsResponse.data.SERVICEID;
-                                    EmitraResponseData.PAYMENTMODEBID = _VerifywallettransactionsResponse.data.PAYMENTMODEBID;
-                                    EmitraResponseData.RESPONSECODE = _VerifywallettransactionsResponse.data.RESPONSECODE;
-                                    EmitraResponseData.PAYMENTMODE = _VerifywallettransactionsResponse.data.PAYMENTMODE;
-                                    EmitraResponseData.AMOUNT = _VerifywallettransactionsResponse.data.AMOUNT;
-                                    if (EmitraResponseData != null)
-                                    {
-                                        UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
-                                    }
-                                    result.State = 0;
-                                    result.SuccessMessage = "Transaction Updated Successfully .!";
-                                }
-                                else
-                                {
-                                    _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
-                                    result.State = OperationState.Error;
-                                    result.Data = new ResponseParameters();
-                                    result.ErrorMessage = _VerifywallettransactionsResponse.message;
-                                    return result;
-                                }
-                            }
-                            else
-                            {
-                                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
-                                result.State = OperationState.Error;
-                                result.Data = new ResponseParameters();
-
-                                result.ErrorMessage = _VerifywallettransactionsResponse.message;
-
-                                EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters();
-                                EmitraResponseData.ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID;
-                                EmitraResponseData.TRANSACTIONID = "0";
-                                EmitraResponseData.PAIDAMOUNT = "0";
-                                EmitraResponseData.RECEIPTNO = "0";
-                                EmitraResponseData.PRN = dataSTATUS.PRN;
-                                if (_VerifywallettransactionsResponse.Error != null)
-                                {
-                                    EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.Error.reason;
-                                }
-                                EmitraResponseData.STATUS = "FAILED";
-                                if (EmitraResponseData != null)
-                                {
-                                    UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
-                                }
-                                result.State = 0;
-                                result.SuccessMessage = "Transaction Updated Successfully .!";
-                                return result;
-
-                            }
-
-                        }
-                        else
-                        {
-                            result.State = OperationState.Error;
-                            result.Data = new ResponseParameters();
-                            result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
-                            return result;
-                        }
-
-                    }
-                    else
-                    {
-                        _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
-                        result.State = OperationState.Error;
-                        result.Data = new ResponseParameters();
-                        result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
-                        return result;
-                    }
-                }
-                else
-                {
-                    result.State = OperationState.Error;
-                    result.Data = new ResponseParameters();
-                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
-                }
-
-            }
-            catch (System.Exception ex)
-            {
-                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetEmitraTransactionStatusNew1", ex.ToString());
-                result.State = OperationState.Error;
-                result.ErrorMessage = ex.Message.ToString();
-            }
-            return result;
-        }
+        #region emitra Service For Recheck Transaction,Transaction cancel API LAST_TRANSACTION_DETAILS_BY_CONSUMER_KEY        
 
         [HttpPost("GetEmitraTransactionStatusNew")]
         public async Task<OperationResult<ResponseParameters>> EmitraAggregatorTransactionStatusNew([FromBody] TransactionStatusDataModel dataSTATUS)
@@ -1823,118 +1680,8 @@ namespace RJ_NOC_API.Controllers
                 var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(_EmitraRequestDetails);
 
                 if (!string.IsNullOrEmpty(EmitraServiceDetail.MERCHANTCODE))
-                {
-                    
-                    //var options = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
-                    //{
-                    //    MaxTimeout = -1,
-                    //};
-                    //var client = new RestClient(options);
-                    //var request = new RestRequest("/em/oauth/merchant/token", Method.Post);
-                    //request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Access-Control-Allow-Origin", "*");
-                    //request.AddParameter("application/json", "{\"cleintId\":\"" + EmitraServiceDetail.cleintId + "\",\"clientSecret\":\"" + EmitraServiceDetail.clientSecret + "\"}", ParameterType.RequestBody);
-                    //RestResponse response = client.Execute(request);
-                    //if (response.StatusCode.ToString() == "OK")
-                    //{
-                    //    _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
-                    //    if (_MobilaAppCancelMerchanttokenResponse.statusCode == 200 && _MobilaAppCancelMerchanttokenResponse.data != null)
-                    //    {
-                    //        var optionsSTATUS = new RestClientOptions("https://emitraapp.rajasthan.gov.in")
-                    //        {
-                    //            MaxTimeout = -1,
-                    //        };
-                    //        var clientSTATUS = new RestClient(optionsSTATUS);
-                    //        var requestSTATUS = new RestRequest("/aggregator/api/payment/commonVerify", Method.Post);
-                    //        requestSTATUS.AddHeader("X-Api-Name", "COMMON_VERIFY");
-                    //        requestSTATUS.AddHeader("Content-Type", "application/json");
-                    //        requestSTATUS.AddHeader("Access-Control-Allow-Origin", "*");
-                    //        requestSTATUS.AddHeader("Authorization", "Bearer " + _MobilaAppCancelMerchanttokenResponse.data.access_token);  
-                    //        requestSTATUS.AddParameter("application/json", "{\"MERCHANTCODE\":\"" + EmitraServiceDetail.MERCHANTCODE + "\",\"SERVICEID\":\"" + EmitraServiceDetail.SERVICEID + "\",\"PRN\":\"" + dataSTATUS.PRN + "\",\"AMOUNT\":\"" + dataSTATUS.AMOUNT + "\"}", ParameterType.RequestBody);
-                    //        RestResponse responseSTATUS = clientSTATUS.Execute(requestSTATUS);
-                    //        if (responseSTATUS.StatusCode.ToString() == "OK")
-                    //        {
-                    //            _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
-                    //            if (_VerifywallettransactionsResponse.statusCode == 200 && _VerifywallettransactionsResponse.data != null)
-                    //            {
-
-                    //                EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters();
-                    //                EmitraResponseData.ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID;
-                    //                EmitraResponseData.TRANSACTIONID = _VerifywallettransactionsResponse.data.TRANSACTIONID;
-                    //                EmitraResponseData.PAIDAMOUNT = _VerifywallettransactionsResponse.data.PAIDAMOUNT;
-                    //                EmitraResponseData.RECEIPTNO = _VerifywallettransactionsResponse.data.RECEIPTNO;
-                    //                EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.message;
-                    //                EmitraResponseData.STATUS = _VerifywallettransactionsResponse.data.STATUS;
-                    //                EmitraResponseData.PRN = _VerifywallettransactionsResponse.data.PRN;
-                    //                EmitraResponseData.MERCHANTCODE = _VerifywallettransactionsResponse.data.MERCHANTCODE;
-                    //                EmitraResponseData.SERVICEID = _VerifywallettransactionsResponse.data.SERVICEID;
-                    //                EmitraResponseData.PAYMENTMODEBID = _VerifywallettransactionsResponse.data.PAYMENTMODEBID;
-                    //                EmitraResponseData.RESPONSECODE = _VerifywallettransactionsResponse.data.RESPONSECODE;
-                    //                EmitraResponseData.PAYMENTMODE = _VerifywallettransactionsResponse.data.PAYMENTMODE;
-                    //                EmitraResponseData.AMOUNT = _VerifywallettransactionsResponse.data.AMOUNT;
-                    //                if (EmitraResponseData != null)
-                    //                {
-                    //                    UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
-                    //                }
-                    //                result.State = 0;
-                    //                result.SuccessMessage = "Transaction Updated Successfully .!";
-                    //            }
-                    //            else
-                    //            {
-                    //                _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
-                    //                result.State = OperationState.Error;
-                    //                result.Data = new ResponseParameters();
-                    //                result.ErrorMessage = _VerifywallettransactionsResponse.message;
-                    //                return result;
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseSTATUS.Content);
-                    //            result.State = OperationState.Error;
-                    //            result.Data = new ResponseParameters();
-
-                    //            result.ErrorMessage = _VerifywallettransactionsResponse.message;
-
-                    //            EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters();
-                    //            EmitraResponseData.ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID;
-                    //            EmitraResponseData.TRANSACTIONID = "0";
-                    //            EmitraResponseData.PAIDAMOUNT = "0";
-                    //            EmitraResponseData.RECEIPTNO = "0";
-                    //            EmitraResponseData.PRN = dataSTATUS.PRN;
-                    //            if (_VerifywallettransactionsResponse.Error!=null)
-                    //            {
-                    //                EmitraResponseData.RESPONSEMESSAGE = _VerifywallettransactionsResponse.Error.reason;
-                    //            }                               
-                    //            EmitraResponseData.STATUS = "FAILED";
-                    //            if (EmitraResponseData != null)
-                    //            {
-                    //                UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
-                    //            }
-                    //            result.State = 0;
-                    //            result.SuccessMessage = "Transaction Updated Successfully .!";
-                    //            return result;
-
-                    //        }
-
-                    //    }
-                    //    else
-                    //    {
-                    //        result.State = OperationState.Error;
-                    //        result.Data = new ResponseParameters();
-                    //        result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
-                    //        return result;
-                    //    }
-
-                    //}
-                    //else
-                    //{
-                    //    _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(response.Content);
-                    //    result.State = OperationState.Error;
-                    //    result.Data = new ResponseParameters();
-                    //    result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
-                    //    return result;
-                    //}
+                {                
+                   
                     MobilaAppCancelMerchanttokenResponse _MobilaAppCancelMerchanttokenResponse = new MobilaAppCancelMerchanttokenResponse();
 
                     string url = "https://emitraapp.rajasthan.gov.in/em/oauth/merchant/token";
@@ -2009,7 +1756,7 @@ namespace RJ_NOC_API.Controllers
                                                 TRANSACTIONID = _VerifywallettransactionsResponse.data.TRANSACTIONID,
                                                 PAIDAMOUNT = _VerifywallettransactionsResponse.data.PAIDAMOUNT,
                                                 RECEIPTNO = _VerifywallettransactionsResponse.data.RECEIPTNO,
-                                                RESPONSEMESSAGE = _VerifywallettransactionsResponse.message,
+                                                RESPONSEMESSAGE = _VerifywallettransactionsResponse.data.RESPONSEMESSAGE,
                                                 STATUS = _VerifywallettransactionsResponse.data.STATUS,
                                                 PRN = _VerifywallettransactionsResponse.data.PRN,
                                                 MERCHANTCODE = _VerifywallettransactionsResponse.data.MERCHANTCODE,
@@ -2017,7 +1764,8 @@ namespace RJ_NOC_API.Controllers
                                                 PAYMENTMODEBID = _VerifywallettransactionsResponse.data.PAYMENTMODEBID,
                                                 RESPONSECODE = _VerifywallettransactionsResponse.data.RESPONSECODE,
                                                 PAYMENTMODE = _VerifywallettransactionsResponse.data.PAYMENTMODE,
-                                                AMOUNT = _VerifywallettransactionsResponse.data.AMOUNT
+                                                AMOUNT = _VerifywallettransactionsResponse.data.AMOUNT,
+                                                ResponseString= responseTextCheck
                                             };
 
                                             UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
@@ -2043,7 +1791,20 @@ namespace RJ_NOC_API.Controllers
                                         _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(errorText);
                                         result.State = OperationState.Error;
                                         result.Data = new ResponseParameters();
-                                        result.ErrorMessage = _VerifywallettransactionsResponse.message;
+                                        result.ErrorMessage = "User has pressed the cancel button or Incomplete Payment";
+                                        EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters
+                                        {
+                                            ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID,
+                                            TRANSACTIONID = "0",
+                                            PAIDAMOUNT = "0",
+                                            RECEIPTNO = "0",
+                                            RESPONSEMESSAGE ="Request could not processed",
+                                            STATUS ="FAILED",
+                                            PRN = dataSTATUS.PRN,                                           
+                                            ResponseString = errorText
+
+                                        };
+                                        UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
                                         return result;
                                     }
                                 }
