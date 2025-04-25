@@ -1508,7 +1508,7 @@ namespace RJ_NOC_DataAccess.Repository
                 "@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@Status='" + request.Status + "',@CollegeName='" + request.CollegeName + "'," +
                 "@SubDivisionID='" + request.SubDivisionID + "',@CollegeEmail='" + request.CollegeEmail + "',@NOCStatusID='" + request.NOCStatusID + "',@WorkFlowActionID='" + request.WorkFlowActionID + "'," +
                 "@CollegeTypeID='" + request.CollegeTypeID + "',@FromSubmitDate='" + request.FromSubmitDate + "',@ToSubmitDate='" + request.ToSubmitDate + "',@ApplicationID='" + request.ApplicationID + "'," +
-                "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "',@SessionYear='" + request.SessionYear + "'"
+                "@ApplicationStatusID='" + request.ApplicationStatusID + "',@ApplicationCurrentRole='" + request.ApplicationCurrentRole + "',@SessionYear='" + request.SessionYear + "',@Type='" + request.Type + "'"
 
                 ;
             DataTable dataTable = new DataTable();
@@ -1706,7 +1706,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request)
         {
-            string SqlQuery = "exec USP_TotalDraftEntryColleges @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@Type='" + request.Type + "',@CollegeID='" + request.CollegeID + "'";
+            string SqlQuery = "exec USP_TotalDraftEntryColleges @DepartmentID='" + request.DepartmentID + "',@UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@Type='" + request.Type + "',@CollegeID='" + request.CollegeID + "',@CollegeType='" + request.CollegeType + "',@SessionID='" + request.SessionID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetTotalDraftentryCollege");
 
@@ -1739,9 +1739,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID)
+        public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID,string Type)
         {
-            string SqlQuery = " exec USP_GetLegelEntityDepartmentWise @DepartmentID='" + DepartmentID + "'";
+            string SqlQuery = " exec USP_GetLegelEntityDepartmentWise @DepartmentID='" + DepartmentID + "',@Type='" + Type + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetLegelEntityDepartmentWise");
             List<DataTable> dataModels = new List<DataTable>();

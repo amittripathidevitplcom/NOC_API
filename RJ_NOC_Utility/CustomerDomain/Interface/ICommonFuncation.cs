@@ -172,7 +172,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> GetTotalDraftentryCollege(CommonDataModel_TotalDraftEntrySearchFilter request);
         List<DataTable> GetDeficiencyAction(int ApplyNOCID, int RoleID);
         List<DataTable> GetApplicationCountRoleWise(int DepartmentID,int SessionYear);
-        List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID);
+        List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID,string Type);
         bool ConvertBaseIntoImage();
         bool SaveNOCFormatMaster(CommonDataModel_NOCFormatMaster request);
         List<DataTable> GetNOCFormatList(int NOCFormatID);

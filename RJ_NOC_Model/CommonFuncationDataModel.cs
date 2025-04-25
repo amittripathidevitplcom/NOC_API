@@ -274,6 +274,7 @@ namespace RJ_NOC_Model
         public int ApplicationStatusID { get; set; }
         public int ApplicationCurrentRole { get; set; }
         public int? SessionYear { get; set; }
+        public string? Type { get; set; }
     }
     public class PaymentDetailsDataModel_Filter
     {
@@ -293,6 +294,8 @@ namespace RJ_NOC_Model
         public int? DistrictID { get; set; }
         public string? CollegeName { get; set; }
         public string? Type { get; set; }
+        public string? CollegeType { get; set; }
+        public int? SessionID { get; set; }
 
     }
     public class UnlockApplicationDataModel

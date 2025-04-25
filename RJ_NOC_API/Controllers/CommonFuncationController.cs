@@ -4072,13 +4072,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetLegelEntityDepartmentWise/{DepartmentID}")]
-        public async Task<OperationResult<List<DataTable>>> GetLegelEntityDepartmentWise(int DepartmentID)
+        [HttpGet("GetLegelEntityDepartmentWise/{DepartmentID}/{Type=NA}")]
+        public async Task<OperationResult<List<DataTable>>> GetLegelEntityDepartmentWise(int DepartmentID,string Type="NA")
         {
             var result = new OperationResult<List<DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetLegelEntityDepartmentWise(DepartmentID));
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetLegelEntityDepartmentWise(DepartmentID,Type));
                 if (result.Data.Count > 0)
                 {
                     CommonDataAccessHelper.Insert_TrnUserLog(0, "GetLegelEntityDepartmentWise", DepartmentID, "CommonFuncation");

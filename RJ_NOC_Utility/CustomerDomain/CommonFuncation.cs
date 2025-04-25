@@ -606,9 +606,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetApplicationCountRoleWise(DepartmentID, SessionYear);
         }
-        public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID)
+        public List<DataTable> GetLegelEntityDepartmentWise(int DepartmentID, string Type)
         {
-            return UnitOfWork.CommonFuncationRepository.GetLegelEntityDepartmentWise(DepartmentID);
+            return UnitOfWork.CommonFuncationRepository.GetLegelEntityDepartmentWise(DepartmentID,Type);
         }
         public bool ConvertBaseIntoImage()
         {
