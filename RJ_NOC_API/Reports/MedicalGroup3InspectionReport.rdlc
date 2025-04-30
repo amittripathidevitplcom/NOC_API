@@ -353,6 +353,22 @@
           <DataField>CommitteeMember</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LegalAddress">
+          <DataField>LegalAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LegalEntityName">
+          <DataField>LegalEntityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="JSName">
+          <DataField>JSName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IsMSC">
+          <DataField>IsMSC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="PrintDate">
           <DataField>PrintDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -360,8 +376,40 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DCENOC_Print</rd:DataSetName>
-        <rd:SchemaPath>D:\Deepak Project\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Deepak Project\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
         <rd:TableName>MGThreeBasicDetails</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="BuildupAreaMSC">
+      <Query>
+        <DataSourceName>DCENOC_Print</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Area">
+          <DataField>Area</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RequiredSpace">
+          <DataField>RequiredSpace</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Remarkafterinspection">
+          <DataField>Remarkafterinspection</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SrNoofEnclosure">
+          <DataField>SrNoofEnclosure</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DCENOC_Print</rd:DataSetName>
+        <rd:SchemaPath>C:\Deepak Project\API\RJ_NOC_API\ReportDataset\DCENOC_Print.xsd</rd:SchemaPath>
+        <rd:TableName>BuildupAreaMGThreeMSC</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -2446,7 +2494,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>16.92886cm</Top>
+            <Top>20.26261cm</Top>
             <Left>0.29146cm</Left>
             <Height>0.6cm</Height>
             <Width>19.73793cm</Width>
@@ -2777,7 +2825,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>LibraryRequirement</DataSetName>
-            <Top>6.94279in</Top>
+            <Top>8.25529in</Top>
             <Left>0.11475in</Left>
             <Height>0.5in</Height>
             <Width>7.77084in</Width>
@@ -2805,7 +2853,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>18.9616cm</Top>
+            <Top>22.29535cm</Top>
             <Left>0.3175cm</Left>
             <Height>0.6cm</Height>
             <Width>19.73793cm</Width>
@@ -2840,7 +2888,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>19.63215cm</Top>
+            <Top>22.9659cm</Top>
             <Left>0.3175cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.73793cm</Width>
@@ -3171,7 +3219,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>HostelDetails</DataSetName>
-            <Top>7.94111in</Top>
+            <Top>9.25361in</Top>
             <Left>0.11475in</Left>
             <Height>0.5in</Height>
             <Width>7.77084in</Width>
@@ -3199,7 +3247,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>21.51097cm</Top>
+            <Top>24.84472cm</Top>
             <Left>0.3175cm</Left>
             <Height>0.6cm</Height>
             <Width>19.73793cm</Width>
@@ -3231,7 +3279,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>22.18153cm</Top>
+            <Top>25.51528cm</Top>
             <Left>0.29146cm</Left>
             <Height>0.54708cm</Height>
             <Width>19.73793cm</Width>
@@ -3263,7 +3311,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>22.83445cm</Top>
+            <Top>26.1682cm</Top>
             <Left>0.3175cm</Left>
             <Height>0.67938cm</Height>
             <Width>19.73793cm</Width>
@@ -3594,7 +3642,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>OwnHospitalDetails</DataSetName>
-            <Top>9.28519in</Top>
+            <Top>10.59769in</Top>
             <Left>0.11475in</Left>
             <Height>0.5in</Height>
             <Width>7.77084in</Width>
@@ -3639,7 +3687,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>24.88966cm</Top>
+            <Top>28.22341cm</Top>
             <Left>0.3175cm</Left>
             <Height>1.44667cm</Height>
             <Width>19.73793cm</Width>
@@ -3970,7 +4018,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>AffiliatedHospitalDetails</DataSetName>
-            <Top>10.39641in</Top>
+            <Top>11.70891in</Top>
             <Left>0.125in</Left>
             <Height>0.5in</Height>
             <Width>7.77084in</Width>
@@ -3998,7 +4046,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>27.71216cm</Top>
+            <Top>31.04591cm</Top>
             <Left>0.31751cm</Left>
             <Height>0.6cm</Height>
             <Width>19.73793cm</Width>
@@ -4329,7 +4377,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>TransportFacilities</DataSetName>
-            <Top>11.14652in</Top>
+            <Top>12.45902in</Top>
             <Left>0.125in</Left>
             <Height>0.5in</Height>
             <Width>7.77084in</Width>
@@ -4358,7 +4406,7 @@ Teaching Block Should be separated for each Course/Programs</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>29.75855cm</Top>
+            <Top>33.0923cm</Top>
             <Left>0.29147cm</Left>
             <Height>0.70583cm</Height>
             <Width>19.73793cm</Width>
@@ -4403,6 +4451,413 @@ Teaching Block Should be separated for each Course/Programs</Value>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>(C) M.sc (Nursing) for 10-25 seats</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>16.9674cm</Top>
+            <Left>0.29146cm</Left>
+            <Height>0.49417cm</Height>
+            <Width>19.73793cm</Width>
+            <ZIndex>32</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(CountRows("BuildupAreaMSC") &lt;&gt; 0, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox30">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Minimum 2 additional classrooms and one classroom as per the number of electives.
+Note: Proportionately the rooms &amp; other facilities will increase/decrease according to the number of students admitted.</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>17.53212cm</Top>
+            <Left>0.29146cm</Left>
+            <Height>0.94396cm</Height>
+            <Width>19.73793cm</Width>
+            <ZIndex>33</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(CountRows("BuildupAreaMSC") &lt;&gt; 0, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix13">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.94271in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.94271in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.94271in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.94271in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.39583in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox70">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox34</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox71">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox36</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox72">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Remark after inspection</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox38</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox73">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sr. No. of Enclosure</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox40</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Criteria10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Area.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Criteria1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DetailstoVerify10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!RequiredSpace.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DetailstoVerify1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Remarkafterinspection10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Remarkafterinspection.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Remarkafterinspection1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SrNoofEnclosure10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SrNoofEnclosure.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SrNoofEnclosure1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details10" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>BuildupAreaMSC</DataSetName>
+            <Top>7.30183in</Top>
+            <Left>0.11475in</Left>
+            <Height>0.64583in</Height>
+            <Width>7.77084in</Width>
+            <ZIndex>34</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(CountRows("BuildupAreaMSC") &lt;&gt; 0, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
         </ReportItems>
         <Height>15.03478in</Height>
         <Style />

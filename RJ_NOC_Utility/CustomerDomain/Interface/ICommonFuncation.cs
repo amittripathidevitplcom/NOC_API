@@ -46,7 +46,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<CommonDataModel_ParliamentAreaDDL> GetParliamentAreaByDistrictId(int districtId);
         List<CommonDataModel_AssemblyAreaDDL> GetAssembelyAreaByDistrictId(int districtId);
         List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear();
-        List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation();
+        List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation(int DepartmentID);
         List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_OldNOC(int CollegeID);
         List<CommonDataModel_DocumentMasterDepartmentAndTypeWise> GetDocumentMasterList_DepartmentAndTypeWise(int DepartmentID, string Type);
         List<CommonDataModel_LandAreaMasterList_DepartmentWise> GetLandAreaMasterList_DepartmentWise(int DepartmentID);

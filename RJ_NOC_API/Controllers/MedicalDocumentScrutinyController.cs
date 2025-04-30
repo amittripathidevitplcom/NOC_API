@@ -747,6 +747,7 @@ namespace RJ_NOC_API.Controllers
                 localReport.AddDataSource("AffiliatedHospitalDetails", dataset.Tables[8]);
                 localReport.AddDataSource("TransportFacilities", dataset.Tables[9]);
                 localReport.AddDataSource("BasicDetailsOfApplication", dataset.Tables[10]);
+                //localReport.AddDataSource("BuildupAreaMSC", dataset.Tables[11]);
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 string imagePath = new Uri((System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Images") + @"\logo.png")).AbsoluteUri;
                 parameters.Add("test", "");

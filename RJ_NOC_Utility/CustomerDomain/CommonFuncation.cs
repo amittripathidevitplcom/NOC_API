@@ -156,9 +156,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear();
         }
-        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation(int DepartmentID)
         {
-            return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear_AcademicInformation();
+            return UnitOfWork.CommonFuncationRepository.GetAllFinancialYear_AcademicInformation(DepartmentID);
         }
         public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_OldNOC(int CollegeID)
         {

@@ -957,13 +957,13 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetAllFinancialYear_AcademicInformation")]
-        public async Task<OperationResult<List<CommonDataModel_FinancialYearDDL>>> GetAllFinancialYear_AcademicInformation()
+        [HttpGet("GetAllFinancialYear_AcademicInformation/{DepartmentID}")]
+        public async Task<OperationResult<List<CommonDataModel_FinancialYearDDL>>> GetAllFinancialYear_AcademicInformation(int DepartmentID)
         {
             var result = new OperationResult<List<CommonDataModel_FinancialYearDDL>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllFinancialYear_AcademicInformation());
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetAllFinancialYear_AcademicInformation(DepartmentID));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {

@@ -389,9 +389,9 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels = JsonConvert.DeserializeObject<List<CommonDataModel_FinancialYearDDL>>(JsonDataTable_Data);
             return dataModels;
         }
-        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation()
+        public List<CommonDataModel_FinancialYearDDL> GetAllFinancialYear_AcademicInformation(int DepartmentID)
         {
-            string SqlQuery = "exec USP_FinancialYearMaster_AcademicInformation ";
+            string SqlQuery = "exec USP_FinancialYearMaster_AcademicInformation @DepartmentID='"+ DepartmentID + "' ";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetAllFinancialYear_AcademicInformation");
 
