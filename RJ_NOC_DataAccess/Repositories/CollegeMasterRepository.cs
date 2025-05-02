@@ -467,7 +467,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public List<CommonDataModel_DataTable> TotalBTERCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request, int SessionID, string ApplicationStatus)
         {
-            string SqlQuery = "exec USP_TotalBTERCollegeDetailsByDepartment @DepartmentID='" + request.DepartmentID + "', @UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@IsDefaulter='" + request.IsDefaulter + "',@SessionID='"+ SessionID + "',@Action='"+ ApplicationStatus + "'";
+            string SqlQuery = "exec USP_TotalBTERCollegeDetailsByDepartment @DepartmentID='" + request.DepartmentID + "', @UniversityID='" + request.UniversityID + "',@DivisionID='" + request.DivisionID + "',@DistrictID='" + request.DistrictID + "',@CollegeName='" + request.CollegeName + "',@CollegeManagementType='" + request.CollegeManagementType + "',@CollegeRegistrationNo='" + request.CollegeRegistrationNo + "',@CollegeStatus='" + request.CollegeStatus + "',@SessionID='"+ SessionID + "',@Action='"+ ApplicationStatus + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.TotalBTERCollegeDetailsByDepartment");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

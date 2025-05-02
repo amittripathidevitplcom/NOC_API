@@ -182,6 +182,9 @@ namespace RJ_NOC_Model
         public string CollegeName { get; set; }
         public string? Type { get; set; }
         public int? IsGeoTagging { get; set; }
+        public int? CollegeManagementType { get; set; }
+        public string? CollegeRegistrationNo { get; set; }
+        public int? CollegeStatus { get; set; }
     }
 
     public class DCECollegesReportSearchFilter
