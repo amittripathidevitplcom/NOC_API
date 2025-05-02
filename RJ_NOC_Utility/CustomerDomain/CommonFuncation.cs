@@ -783,7 +783,10 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CommonFuncationRepository.UpdateInspectionFDRIntimationAH(request);
         }
 
-
+        public string SendMessage(string MobileNo, string MessageType, int ID)
+        {
+            return UnitOfWork.CommonFuncationRepository.SendMessage(MobileNo, MessageType, ID);
+        }
     }
 }
 

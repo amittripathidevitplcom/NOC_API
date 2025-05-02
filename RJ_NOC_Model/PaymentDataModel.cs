@@ -477,6 +477,7 @@ namespace RJ_NOC_Model
         public string RESPONSECODE { get; set; }
         public string RESPONSEMESSAGE { get; set; }
         public string CHECKSUM { get; set; }
+        public string ENCDATA { get; set; }
     }
 
     public class VerifywallettransactionsResponse

@@ -1791,7 +1791,7 @@ namespace RJ_NOC_API.Controllers
                                         _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(errorText);
                                         result.State = OperationState.Error;
                                         result.Data = new ResponseParameters();
-                                        result.ErrorMessage = "User has pressed the cancel button or Incomplete Payment";
+                                        result.ErrorMessage = result.ErrorMessage = _VerifywallettransactionsResponse?.Error?.reason ?? "Unknown Error"; //"User has pressed the cancel button or Incomplete Payment";
                                         EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters
                                         {
                                             ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID,
@@ -1976,6 +1976,203 @@ namespace RJ_NOC_API.Controllers
                 // UnitOfWork.Dispose();
             }
         }
+
+
+       
+        [HttpPost("GetEmitraTransactionStatusNewPayment")]
+        public async Task<OperationResult<EmitraResponseParameters>> GetEmitraTransactionStatusNewPayment([FromBody] TransactionStatusDataModel dataSTATUS)
+        {
+            var result = new OperationResult<EmitraResponseParameters>();
+            string json = "";
+
+            try
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.EmitraAggregatorTransactionStatusNew", "start");
+
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+
+                EmitraRequestDetails _EmitraRequestDetails = new EmitraRequestDetails();
+                VerifywallettransactionsResponse _VerifywallettransactionsResponse = new VerifywallettransactionsResponse();
+                var EmitraServiceDetail = UtilityHelper.PaymentUtility.GetEmitraServiceDetails(_EmitraRequestDetails);
+
+                if (!string.IsNullOrEmpty(EmitraServiceDetail.MERCHANTCODE))
+                {
+                    MobilaAppCancelMerchanttokenResponse _MobilaAppCancelMerchanttokenResponse = new MobilaAppCancelMerchanttokenResponse();
+
+                    string url = "https://emitraapp.rajasthan.gov.in/em/oauth/merchant/token";
+                    string requestBody = JsonConvert.SerializeObject(new
+                    {
+                        cleintId = EmitraServiceDetail.cleintId,
+                        clientSecret = EmitraServiceDetail.clientSecret
+                    });
+
+                    HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+                    webRequest.Method = "POST";
+                    webRequest.ContentType = "application/json";
+                    webRequest.Headers.Add("Access-Control-Allow-Origin", "*");
+                    webRequest.Timeout = 30000;
+
+                    using (var streamWriter = new StreamWriter(webRequest.GetRequestStream()))
+                    {
+                        streamWriter.Write(requestBody);
+                    }
+
+                    try
+                    {
+                        using (HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse())
+                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            string responseText = reader.ReadToEnd();
+                            _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(responseText);
+
+                            if (_MobilaAppCancelMerchanttokenResponse.statusCode == 200 && _MobilaAppCancelMerchanttokenResponse.data != null)
+                            {
+                                string statusUrl = "https://emitraapp.rajasthan.gov.in/aggregator/api/payment/status";
+                                string token = _MobilaAppCancelMerchanttokenResponse.data.access_token;
+
+                                string requestStatusBody = JsonConvert.SerializeObject(new
+                                {
+                                    MERCHANTCODE = EmitraServiceDetail.MERCHANTCODE,
+                                    SERVICEID = EmitraServiceDetail.SERVICEID,
+                                    PRN = dataSTATUS.PRN,
+                                    AMOUNT = dataSTATUS.AMOUNT
+                                });
+
+                                HttpWebRequest statusRequest = (HttpWebRequest)WebRequest.Create(statusUrl);
+                                statusRequest.Method = "POST";
+                                statusRequest.ContentType = "application/json";
+                                statusRequest.Headers.Add("Authorization", "Bearer " + token);
+                                statusRequest.Headers.Add("X-Api-Name", "PAYMENT_STATUS");
+                                statusRequest.Headers.Add("Access-Control-Allow-Origin", "*");
+                                statusRequest.Timeout = 30000;
+
+                                using (var streamWriter = new StreamWriter(statusRequest.GetRequestStream()))
+                                {
+                                    streamWriter.Write(requestStatusBody);
+                                }
+
+                                try
+                                {
+                                    using (HttpWebResponse statusResponse = (HttpWebResponse)statusRequest.GetResponse())
+                                    using (StreamReader readerCHeck = new StreamReader(statusResponse.GetResponseStream()))
+                                    {
+                                        string responseTextCheck = readerCHeck.ReadToEnd();
+                                        _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(responseTextCheck);
+
+                                        if (_VerifywallettransactionsResponse.statusCode == 200 && _VerifywallettransactionsResponse.data != null)
+                                        {
+                                            EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters
+                                            {
+                                                ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID,
+                                                TRANSACTIONID = _VerifywallettransactionsResponse.data.TRANSACTIONID,
+                                                PAIDAMOUNT = _VerifywallettransactionsResponse.data.PAIDAMOUNT,
+                                                RECEIPTNO = _VerifywallettransactionsResponse.data.RECEIPTNO,
+                                                RESPONSEMESSAGE = _VerifywallettransactionsResponse.data.RESPONSEMESSAGE,
+                                                STATUS = _VerifywallettransactionsResponse.data.STATUS,
+                                                PRN = _VerifywallettransactionsResponse.data.PRN,
+                                                MERCHANTCODE = _VerifywallettransactionsResponse.data.MERCHANTCODE,
+                                                SERVICEID = _VerifywallettransactionsResponse.data.SERVICEID,
+                                                PAYMENTMODEBID = _VerifywallettransactionsResponse.data.PAYMENTMODEBID,
+                                                RESPONSECODE = _VerifywallettransactionsResponse.data.RESPONSECODE,
+                                                PAYMENTMODE = _VerifywallettransactionsResponse.data.PAYMENTMODE,
+                                                AMOUNT = _VerifywallettransactionsResponse.data.AMOUNT,
+                                                ResponseString = responseTextCheck
+                                            };
+
+                                            string DNC2 = PaymentEncriptionDec.AESDecrypt(_VerifywallettransactionsResponse.data.ENCDATA, EmitraServiceDetail.EncryptionKey);
+                                            var dict = DNC2.Split(new[] { "::" }, StringSplitOptions.None)
+                                                          .Select(part => part.Split(new[] { '=' }, 2))
+                                                          .ToDictionary(pair => pair[0], pair => pair.Length > 1 ? pair[1] : "");
+
+                                            json = JsonConvert.SerializeObject(dict);
+                                            EmitraResponseData.ResponseString = json;
+
+                                            // Optional: Persist result
+                                            // UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
+
+                                            result.Data = EmitraResponseData;
+                                            result.State = 0;
+                                            result.SuccessMessage = "Transaction Updated Successfully .!";
+                                        }
+                                        else
+                                        {
+                                            result.State = OperationState.Error;
+                                            result.ErrorMessage = _VerifywallettransactionsResponse.message;
+                                            result.Data = null;
+                                            return result;
+                                        }
+                                    }
+                                }
+                                catch (WebException ex)
+                                {
+                                    using (var errorResponse = (HttpWebResponse)ex.Response)
+                                    using (var readerCHeck = new StreamReader(errorResponse.GetResponseStream()))
+                                    {
+                                        string errorText = readerCHeck.ReadToEnd();
+                                        _VerifywallettransactionsResponse = JsonConvert.DeserializeObject<VerifywallettransactionsResponse>(errorText);
+
+                                        EmitraResponseParameters EmitraResponseData = new EmitraResponseParameters
+                                        {
+                                            ApplicationIdEnc = dataSTATUS.ApplyNocApplicationID,
+                                            TRANSACTIONID = "0",
+                                            PAIDAMOUNT = "0",
+                                            RECEIPTNO = "0",
+                                            RESPONSEMESSAGE = errorText,
+                                            STATUS = "FAILED",
+                                            PRN = dataSTATUS.PRN,
+                                            ResponseString = errorText
+                                        };
+
+                                        //UtilityHelper.PaymentUtility.UpdateEmitraRecheckPaymentStatus(EmitraResponseData);
+
+                                        result.Data = EmitraResponseData;
+                                        result.State = OperationState.Error;
+                                        result.ErrorMessage = _VerifywallettransactionsResponse?.Error?.reason ?? "Unknown Error";
+                                        return result;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                result.State = OperationState.Error;
+                                result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
+                                result.Data = null;
+                                return result;
+                            }
+                        }
+                    }
+                    catch (WebException ex)
+                    {
+                        using (var errorResponse = (HttpWebResponse)ex.Response)
+                        using (var reader = new StreamReader(errorResponse.GetResponseStream()))
+                        {
+                            string errorText = reader.ReadToEnd();
+                            _MobilaAppCancelMerchanttokenResponse = JsonConvert.DeserializeObject<MobilaAppCancelMerchanttokenResponse>(errorText);
+
+                            result.State = OperationState.Error;
+                            result.ErrorMessage = _MobilaAppCancelMerchanttokenResponse.statusMessage;
+                            result.Data = null;
+                            return result;
+                        }
+                    }
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Payment Integrations Details Not Found.!";
+                    result.Data = null;
+                }
+            }
+            catch (WebException ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("PaymentController.GetEmitraTransactionStatusNew", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
 
         #endregion
 

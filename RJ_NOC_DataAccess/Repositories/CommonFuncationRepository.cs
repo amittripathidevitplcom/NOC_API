@@ -2381,6 +2381,58 @@ namespace RJ_NOC_DataAccess.Repository
             else
                 return false;
         }
+        public SMSConfigurationSetting GetConfigurationSetting()
+        {
+            string SqlQuery = "exec USP_GetSMSConfiguration";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SMSMail.GetConfigurationSetting");
+            SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
+            if (dataTable.Rows.Count > 0)
+            {
+                mSConfigurationSetting.ServiceName = dataTable.Rows[0]["ServiceName"].ToString();
+                mSConfigurationSetting.UniqueID = dataTable.Rows[0]["UniqueID"].ToString();
+                mSConfigurationSetting.SMSUrl = dataTable.Rows[0]["SMSUrl"].ToString();
+                mSConfigurationSetting.SMSUserName = dataTable.Rows[0]["SMSUserName"].ToString();
+                mSConfigurationSetting.SMSPassWord = dataTable.Rows[0]["SMSPassWord"].ToString();
+                mSConfigurationSetting.SmsClientID = dataTable.Rows[0]["SmsClientID"].ToString();
+            }
+            return mSConfigurationSetting;
+        }
+        public string SendMessage(string MobileNo, string MessageType, int ID)
+        {
+            string ReturnOTP = "";
+            string MessageBody = "";
+            string TempletID = "";
+            string SqlQuery = " exec USP_GetSMSTemplateByMessageType @MessageType='" + MessageType + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SMSMail.GetTemplateByKey");
+            SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
+            mSConfigurationSetting = this.GetConfigurationSetting();
+            List<SMSTemplateDataModel> dataModels = new List<SMSTemplateDataModel>();
+            if (dataTable.Rows.Count > 0)
+            {
+                MessageBody = dataTable.Rows[0]["MessageBody"].ToString();
+                TempletID = dataTable.Rows[0]["TemplateID"].ToString();
+            }
+            if (MessageType == "Revert")
+            {
+                var ds = this.GetApplyNocApplicationByApplicationID(ID);
+                if (ds != null && ds.Tables.Count >= 1)
+                {
+                    MessageBody = MessageBody.Replace("{#appno#}", ds.Tables[0].Rows[0]["ApplicationNo"].ToString());
+                }
+
+                MessageBody = MessageBody.Replace("{#portal#}", "RAJNOC PORTAL");
+                CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
+            }
+            return ReturnOTP;
+        }
+        public DataSet GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)
+        {
+            string SqlQuery = $"exec USP_GetRevertmsgatcollegelevel @ApplyNocApplicationID={ApplyNocApplicationID}";
+            var ds = _commonHelper.Fill_DataSet(SqlQuery, "CommonFunction.GetApplyNocApplicationList");
+            return ds;
+        }
     }
 }
 

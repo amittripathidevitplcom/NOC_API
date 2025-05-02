@@ -232,6 +232,7 @@ namespace RJ_NOC_DataAccess.Interface
 
         List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor);
         bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request);
+        string SendMessage(string MobileNo, string MessageType, int ID);
     }
 }
 
