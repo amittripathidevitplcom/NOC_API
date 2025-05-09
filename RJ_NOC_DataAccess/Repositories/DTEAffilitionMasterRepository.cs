@@ -68,9 +68,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
         
-        public bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId)
+        public bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId,int ShiftID)
         {
-            string SqlQuery = "exec USP_IfExistsBTERCourse @BTERRegID='" + BTERRegID + "' ,@BTERCourseID='" + BTERCourseID + "', @CourseTypeId='" + CourseTypeId + "',@CourseId='" + CourseId + "'";
+            string SqlQuery = "exec USP_IfExistsBTERCourse @BTERRegID='" + BTERRegID + "' ,@BTERCourseID='" + BTERCourseID + "', @CourseTypeId='" + CourseTypeId + "',@CourseId='" + CourseId + "',@ShiftID='"+ ShiftID + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DTEAffilitionMaster.IfExists");
             if (dataTable.Rows.Count > 0)

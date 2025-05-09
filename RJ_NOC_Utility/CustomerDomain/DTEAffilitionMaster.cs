@@ -23,9 +23,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.DTEAllifitionMasterRepository.DTEAffilitionCourseSaveData(request);
         }
         
-        public bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId)
+        public bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId, int ShiftID)
         {
-            return UnitOfWork.DTEAllifitionMasterRepository.IfExists(BTERRegID,BTERCourseID, CourseTypeId, CourseId);
+            return UnitOfWork.DTEAllifitionMasterRepository.IfExists(BTERRegID,BTERCourseID, CourseTypeId, CourseId, ShiftID);
         }
         public bool DTEAffilitionOtherDetailsSaveData(DTEAffiliationOtherDetailsDataModel request)
         {

@@ -127,7 +127,7 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@AddressofCollegeasgiveninAICTEEOA='{0}',", request.AddressofCollegeasgiveninAICTEEOA);
             sb.AppendFormat("@AICTEEOAAdress='{0}',", request.AICTEEOAAdress);
             sb.AppendFormat("@AICTEEOADifferentAddress='{0}',", request.AICTEEOADifferentAddress);
-
+            sb.AppendFormat("@IsCollegeCode='{0}',", request.IsBTERCollegeCode);
             // action
             sb.AppendFormat("@Action='{0}'", "SaveCollegeData");
 

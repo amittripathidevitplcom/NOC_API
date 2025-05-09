@@ -120,9 +120,9 @@ namespace RJ_NOC_Model
         public int? StatusOfBuildingID { get; set; }
         public int AffiliationTypeID { get; set; }
         public string? AddressofCollegeasgiveninAICTEEOA { get; set; }
-        public int? AICTEEOAAdress { get; set; }
+        public int? AICTEEOAAdress { get; set; }        
         public string? AICTEEOADifferentAddress { get; set; }
-
+        public int? IsBTERCollegeCode { get; set; }
     }
     public class ContactDetailsDataModel
     {

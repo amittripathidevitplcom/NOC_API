@@ -91,7 +91,7 @@ namespace RJ_NOC_API.Controllers
             try
             {
                 bool IfExits = false;
-                IfExits = UtilityHelper.DTEAffilitionMasterUtility.IfExists(request.BTERRegID,request.BTERCourseID,request.CourseTypeId, request.CourseId);
+                IfExits = UtilityHelper.DTEAffilitionMasterUtility.IfExists(request.BTERRegID,request.BTERCourseID,request.CourseTypeId, request.CourseId,request.ShiftID);
                 if (IfExits == false)
                 {
                     result.Data = await Task.Run(() => UtilityHelper.DTEAffilitionMasterUtility.DTEAffilitionCourseSaveData(request));

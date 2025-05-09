@@ -10,7 +10,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     {
         bool SaveData(DTEAffiliationRegistrationDataModel request);
         bool DTEAffilitionCourseSaveData(DTEAffiliationCourseDataModel request);
-        bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId);
+        bool IfExists(int BTERRegID, int BTERCourseID, int CourseTypeId, int CourseId,int ShiftID);
         bool DTEAffilitionOtherDetailsSaveData(DTEAffiliationOtherDetailsDataModel request);
         List<DTEAffiliationAddCoursePreviewDataModel> GetDTEAffiliationCoursePreviewData(int DepatmentID);
         List<DTEAffiliationAddOtherDetailsPreviewDataModel> GetDTEAffiliationOtherDetailsPreviewData(int BTERRegID);

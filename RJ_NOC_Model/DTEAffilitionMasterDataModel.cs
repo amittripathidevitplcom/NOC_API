@@ -29,7 +29,7 @@ namespace RJ_NOC_Model
         public int CourseTypeId { get; set; }
         public int CourseId { get; set; }
         public int? CourseIntakeAsPerAICTELOA { get; set; }
-        public int? ShiftID { get; set; }
+        public int ShiftID { get; set; }
         public int? Yearofstarting { get; set; }
         public int? BterBranchTypeId { get; set; }
         public int? FirstYearRegularStudent { get; set; }

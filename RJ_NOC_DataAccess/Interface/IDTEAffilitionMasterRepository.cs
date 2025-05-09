@@ -14,7 +14,7 @@ namespace RJ_NOC_DataAccess.Interface
        
         bool DTEAffilitionOtherDetailsSaveData(DTEAffiliationOtherDetailsDataModel request);
        
-        bool IfExists(int BTERRegID, int BTERCourseID,int CourseTypeId, int CourseId);
+        bool IfExists(int BTERRegID, int BTERCourseID,int CourseTypeId, int CourseId, int ShiftID);
         List<DTEAffiliationAddCoursePreviewDataModel> GetDTEAffiliationCoursePreviewData(int DepatmentID);
         List<DTEAffiliationAddOtherDetailsPreviewDataModel> GetDTEAffiliationOtherDetailsPreviewData(int BTERRegID);
         List<DTEAffiliationRegistrationDataModel> Edit_OnClick(int DTE_ARId);
