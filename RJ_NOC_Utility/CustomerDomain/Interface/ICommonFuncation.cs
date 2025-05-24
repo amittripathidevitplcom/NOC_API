@@ -219,6 +219,9 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         List<DataTable> GetNOCFormat(int DepartmentID, int CollegeID, int ParameterID, string NOCFor);
         bool UpdateInspectionFDRIntimationAH(UpdateIntimationInspectionFDRDataModel request);
         string SendMessage(string MobileNo, string MessageType, int ID);
+
+        List<LOIMGOneSMSForwardnextlevel_DataTable> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID);
+        string SendMessageMGOne(string MobileNo, string MessageType);
     }
 
 

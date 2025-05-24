@@ -2427,11 +2427,48 @@ namespace RJ_NOC_DataAccess.Repository
             }
             return ReturnOTP;
         }
+       
         public DataSet GetApplyNocApplicationByApplicationID(int ApplyNocApplicationID)
         {
             string SqlQuery = $"exec USP_GetRevertmsgatcollegelevel @ApplyNocApplicationID={ApplyNocApplicationID}";
             var ds = _commonHelper.Fill_DataSet(SqlQuery, "CommonFunction.GetApplyNocApplicationList");
             return ds;
+        }
+        public List<LOIMGOneSMSForwardnextlevel_DataTable> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID)
+        {
+            string SqlQuery = " exec USP_GetSMSForMGOneLoiApplicationForwardNextlevel @CollegeID='" + CollegID + "',@ActionName='" + ActionName + "',@NextUserID='" + NextUserID + "',@NextRoleID='" + NextRoleID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetMobileNumberSMSforwardnextlevel");
+
+            List<LOIMGOneSMSForwardnextlevel_DataTable> dataModels = new List<LOIMGOneSMSForwardnextlevel_DataTable>();
+            LOIMGOneSMSForwardnextlevel_DataTable dataModel = new LOIMGOneSMSForwardnextlevel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public string SendMessageMGOne(string MobileNo, string MessageType)
+        {
+            string ReturnOTP = "";
+            string MessageBody = "";
+            string TempletID = "";
+            string SqlQuery = " exec USP_GetSMSTemplateByMessageType @MessageType='" + MessageType + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "SMSMail.GetTemplateByKey");
+            SMSConfigurationSetting mSConfigurationSetting = new SMSConfigurationSetting();
+            mSConfigurationSetting = this.GetConfigurationSetting();
+            List<SMSTemplateDataModel> dataModels = new List<SMSTemplateDataModel>();
+            if (dataTable.Rows.Count > 0)
+            {
+                MessageBody = dataTable.Rows[0]["MessageBody"].ToString();
+                TempletID = dataTable.Rows[0]["TemplateID"].ToString();
+            }
+            if (MessageType == "MGForward")
+            {               
+
+                MessageBody = MessageBody.Replace("{#portal#}", "RAJNOC PORTAL");
+                CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
+            }
+            return ReturnOTP;
         }
     }
 }

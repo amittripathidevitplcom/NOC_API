@@ -549,4 +549,20 @@ namespace RJ_NOC_Model
 
 
     }
+    public class LOIMGOneSMSForwardnextlevel
+    {
+        public int? CollegeID { get; set; }
+        public string ActionName { get; set; }
+        public int? UserID { get; set; }
+        public int? NextUserID { get; set; }
+        public int? NextRoleID { get; set; }
+        public string? MobileNo { get; set; }
+        public string? Name { get; set; }
+        public string? SSOID { get; set; }
+    }
+    public class LOIMGOneSMSForwardnextlevel_DataTable
+    {
+        public DataTable data { get; set; }
+    }
+
 }

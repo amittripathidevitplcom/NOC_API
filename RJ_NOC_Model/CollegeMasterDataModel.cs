@@ -185,6 +185,7 @@ namespace RJ_NOC_Model
         public int? CollegeManagementType { get; set; }
         public string? CollegeRegistrationNo { get; set; }
         public int? CollegeStatus { get; set; }
+        public int? SessionID { get; set; }
     }
 
     public class DCECollegesReportSearchFilter

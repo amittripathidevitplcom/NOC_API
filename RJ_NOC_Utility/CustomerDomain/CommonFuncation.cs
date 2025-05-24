@@ -787,6 +787,15 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SendMessage(MobileNo, MessageType, ID);
         }
+
+        public List<LOIMGOneSMSForwardnextlevel_DataTable> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMobileNumberSMSforwardnextlevel(CollegID, ActionName, NextUserID, NextRoleID);
+        }
+        public string SendMessageMGOne(string MobileNo, string MessageType)
+        {
+            return UnitOfWork.CommonFuncationRepository.SendMessageMGOne(MobileNo, MessageType);
+        }
     }
 }
 

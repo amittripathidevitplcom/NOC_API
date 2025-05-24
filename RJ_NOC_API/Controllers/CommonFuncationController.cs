@@ -5516,7 +5516,69 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetMobileNumberSMSforwardnextlevel/{CollegID}/{ActionName}/{NextUserID}/{NextRoleID}")]
+        public async Task<OperationResult<List<LOIMGOneSMSForwardnextlevel_DataTable>>> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID)
+        {
+            var result = new OperationResult<List<LOIMGOneSMSForwardnextlevel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetMobileNumberSMSforwardnextlevel(CollegID, ActionName, NextUserID, NextRoleID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetMobileNumberSMSforwardnextlevel", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("SendMessageMGOne/{MobileNo}/{MessageType}")]
+        public async Task<OperationResult<string>> SendMessageMGOne(string MobileNo, string MessageType)
+        {
+            var result = new OperationResult<string>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SendMessageMGOne(MobileNo, MessageType));
 
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("SMSMailController.SendMessageMGOne", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }
