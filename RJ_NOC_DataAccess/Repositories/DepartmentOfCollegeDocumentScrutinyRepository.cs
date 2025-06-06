@@ -701,6 +701,30 @@ namespace RJ_NOC_DataAccess.Repository
 
             return listdataModels;
         }
+        public List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> DocumentScrutiny_OnlinePaymentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_DocumentScrutiny_OnlinePaymentDetails_DCE @CollageID=" + CollageID + ",@RoleID=" + RoleID + ",@ApplyNOCID=" + ApplyNOCID + "";
+            DataSet dataSet = new DataSet();
+            dataSet = _commonHelper.Fill_DataSet(SqlQuery, "DCEDocumentScrutiny.DocumentScrutiny_OnlinePaymentDetail");
+
+            List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails> listdataModels = new List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails>();
+            DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails dataModels = new DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails();
+
+            List<DataTable> PaymentDetailDataModel = new List<DataTable>();
+            PaymentDetailDataModel.Add(dataSet.Tables[0]);
+            dataModels.OnlinePaymentDetails = PaymentDetailDataModel;
+            List<DataTable> OfflinePaymentDetailDataModel = new List<DataTable>();
+            OfflinePaymentDetailDataModel.Add(dataSet.Tables[1]);
+            dataModels.OfflinePaymentDetails = OfflinePaymentDetailDataModel;
+
+            List<DataTable> dataModel = new List<DataTable>();
+            dataModel.Add(dataSet.Tables[2]);
+            dataModels.DocumentScrutinyFinalRemarkList = dataModel;
+
+            listdataModels.Add(dataModels);
+
+            return listdataModels;
+        }
         public List<DataTable> GetUnlockApplication(int DepartmentID)
         {
             string SqlQuery = " exec USP_GetUnlockApplicationData @DepartmentID ='" + DepartmentID + "'";

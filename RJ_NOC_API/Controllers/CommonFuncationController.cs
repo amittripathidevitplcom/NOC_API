@@ -4638,6 +4638,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetMGOneInfrastructureMedicalCollegeFacilitiesList/{DepartmentID}/{CollegeID}")]
+        public async Task<OperationResult<List<MGOneMedicalCollegeFacilitiesDataModel>>> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID)
+        {
+            var result = new OperationResult<List<MGOneMedicalCollegeFacilitiesDataModel>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetMGOneInfrastructureMedicalCollegeFacilitiesList(DepartmentID, CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetMGOneFacilityDepartmentList", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
 
 

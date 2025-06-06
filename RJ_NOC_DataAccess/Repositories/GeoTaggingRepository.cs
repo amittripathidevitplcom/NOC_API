@@ -100,7 +100,14 @@ namespace RJ_NOC_DataAccess.Repositories
             sb.AppendFormat("@TGC_Latitude='{0}',", request.TGC_Latitude);
             sb.AppendFormat("@TGC_Longitude='{0}',", request.TGC_Longitude);
             sb.AppendFormat("@Action='{0}'", request.Geo_Type);
-
+            sb.AppendFormat("@Image3='{0}',", request.Image3);
+            sb.AppendFormat("@Image4='{0}',", request.Image4);
+            sb.AppendFormat("@Image5='{0}',", request.Image5);
+            sb.AppendFormat("@Image6='{0}',", request.Image6);
+            sb.AppendFormat("@Image7='{0}',", request.Image7);
+            sb.AppendFormat("@Image8='{0}',", request.Image8);
+            sb.AppendFormat("@Image9='{0}',", request.Image9);
+            sb.AppendFormat("@Image10='{0}',", request.Image10);
             string SqlQuery = $" exec USP_APPApplicationCollege_Add  {sb.ToString()}";
 
             int Rows = _commonHelper.NonQuerry(SqlQuery, "GeoTagging.SaveData");
@@ -135,8 +142,6 @@ namespace RJ_NOC_DataAccess.Repositories
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
-
-
         }
 
         public bool SaveInspectionGeoTagging(InspectionGeoTaggingDataModel request)

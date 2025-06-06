@@ -235,6 +235,7 @@ namespace RJ_NOC_DataAccess.Interface
         string SendMessage(string MobileNo, string MessageType, int ID);
         List<LOIMGOneSMSForwardnextlevel_DataTable> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID);
         string SendMessageMGOne(string MobileNo, string MessageType);
+        List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID);
     }
 }
 

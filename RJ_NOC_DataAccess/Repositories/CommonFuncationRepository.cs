@@ -17,6 +17,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Drawing.Imaging;
+using iTextSharp.text.pdf.qrcode;
 
 namespace RJ_NOC_DataAccess.Repository
 {
@@ -2075,6 +2076,7 @@ namespace RJ_NOC_DataAccess.Repository
 
             return dataModels;
         }
+        
         public List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID)
 
         {
@@ -2463,12 +2465,60 @@ namespace RJ_NOC_DataAccess.Repository
                 TempletID = dataTable.Rows[0]["TemplateID"].ToString();
             }
             if (MessageType == "MGForward")
-            {               
+            {
 
                 MessageBody = MessageBody.Replace("{#portal#}", "RAJNOC PORTAL");
                 CommonHelper.SendSMS(mSConfigurationSetting, MobileNo, MessageBody, TempletID);
             }
             return ReturnOTP;
+        }
+        //List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID);
+        public List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID)
+        {
+            List<MGOneMedicalCollegeFacilitiesDataModel> dataModels = new List<MGOneMedicalCollegeFacilitiesDataModel>();
+            List<MGOneMedicalCollegeFacilitiesInfrastuctureDataModel> data = new List<MGOneMedicalCollegeFacilitiesInfrastuctureDataModel>();
+            string SqlQuery = "exec GetMGOneMedicalCollegeFacilities @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "'";
+            DataSet ds = new DataSet();
+            ds = _commonHelper.Fill_DataSet(SqlQuery, "CommonFuncation.GetMGOneInfrastructureMedicalCollegeFacilitiesList");
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 1)
+                {
+                    string JsonDataTable_Data = CommonHelper.ConvertDataTable(ds.Tables[0]);
+                    dataModels = JsonConvert.DeserializeObject<List<MGOneMedicalCollegeFacilitiesDataModel>>(JsonDataTable_Data);
+                    string JsonDataTable = CommonHelper.ConvertDataTable(ds.Tables[1]);
+                    data = JsonConvert.DeserializeObject<List<MGOneMedicalCollegeFacilitiesInfrastuctureDataModel>>(JsonDataTable);
+                    for (int i = 0; i < dataModels.Count; i++)
+                    {
+                        dataModels[i].MGOneInfrastructureMedicalCollegeFacilitiesList = data.Where(w => w.MGOneDepartmentID == dataModels[i].ID).Select(s => new MGOneMedicalCollegeFacilitiesInfrastuctureDataModel()
+                        {
+                            ID = s.ID,
+                            MGOneDepartmentID = s.MGOneDepartmentID,
+                            ControlType = s.ControlType,
+                            IsMandatory = s.IsMandatory,
+                            MinQty = s.MinQty,
+                            Name = s.Name,
+                            Unit = s.Unit,
+                            Value = s.Value == null ? "" : s.Value,
+                            CollegeID = s.CollegeID,
+                            ParentID = s.ParentID,
+                            ValuePath = s.ValuePath,
+                            Value_Dis_FileName = s.Value_Dis_FileName,
+                            Annexure = s.Annexure,
+                            IsHide = s.ParentID > 0 ? true : false,
+                            ContentOrder = s.ContentOrder,
+                            Code=s.Code,
+                            MinCapacity=s.MinCapacity,
+                            MinSize=s.MinSize,
+                            MinRequired=s.MinRequired,
+                        }
+                        ).OrderBy(o => o.ContentOrder).ToList();
+                    }
+
+                }
+            }
+
+            return dataModels;
         }
     }
 }

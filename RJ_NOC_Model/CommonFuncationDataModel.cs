@@ -466,10 +466,38 @@ namespace RJ_NOC_Model
         public int? Value { get; set; }
         public string? Unit { get; set; }
         public int? ActiveStatusId { get; set; }
-        public int? FYearId { get; set; }  
-        
+        public int? FYearId { get; set; }
+
 
     }
 
-
+    public class MGOneMedicalCollegeFacilitiesDataModel
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public string? FacilitiesName { get; set; }
+        public List<MGOneMedicalCollegeFacilitiesInfrastuctureDataModel>? MGOneInfrastructureMedicalCollegeFacilitiesList { get; set; }
+    }
+    public class MGOneMedicalCollegeFacilitiesInfrastuctureDataModel
+    {
+        public int ID { get; set; }
+        public int? CollegeID { get; set; }
+        public int? MGOneDepartmentID { get; set; }
+        public int? ParentID { get; set; }
+        public string? Name { get; set; }
+        public string? ControlType { get; set; }
+        public string? Unit { get; set; }
+        public string? Value { get; set; }
+        public int MinQty { get; set; }
+        public int? ContentOrder { get; set; }        
+        public string? Code { get; set; }
+        public int? MinCapacity { get; set; }
+        public int? MinSize { get; set; }
+        public int? MinRequired { get; set; }
+        public bool IsMandatory { get; set; }
+        public string? Value_Dis_FileName { get; set; }
+        public string? ValuePath { get; set; }
+        public string? Annexure { get; set; }
+        public bool? IsHide { get; set; }
+    }
 }

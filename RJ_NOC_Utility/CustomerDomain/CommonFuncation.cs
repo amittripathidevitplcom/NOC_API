@@ -724,6 +724,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneFacilityList(DepartmentID, CollegeID);
         }
+      
         public bool SaveMGOneFacility(List<MGOneFacilityDataModel> request)
         {
             return UnitOfWork.CommonFuncationRepository.SaveMGOneFacility(request);
@@ -795,6 +796,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         public string SendMessageMGOne(string MobileNo, string MessageType)
         {
             return UnitOfWork.CommonFuncationRepository.SendMessageMGOne(MobileNo, MessageType);
+        }        
+        public List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetMGOneInfrastructureMedicalCollegeFacilitiesList(DepartmentID, CollegeID);
         }
     }
 }

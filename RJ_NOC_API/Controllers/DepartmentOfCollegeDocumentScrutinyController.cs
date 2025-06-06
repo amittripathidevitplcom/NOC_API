@@ -1112,6 +1112,36 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost("DocumentScrutiny_OnlinePaymentDetail/{CollageID}/{RoleID}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails>>> DocumentScrutiny_OnlinePaymentDetail(int CollageID, int RoleID, int ApplyNOCID)
+        {
+            var result = new OperationResult<List<DepartmentOfCollegeDocumentScrutinyDataModel_PaymentDetails>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.DocumentScrutiny_OnlinePaymentDetail(CollageID, RoleID, ApplyNOCID));
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Login successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Please enter valid username or password.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.DocumentScrutiny_OnlinePaymentDetail", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }

@@ -193,6 +193,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
        
         List<MGOneClassRoomDepartmentDataModel> GetMGOneClassRoomDepartmentList(int DepartmentID, int CollegeID);
         List<MGOneDepartmentDataModel> GetMGOneFacilityDepartmentList(int DepartmentID, int CollegeID);
+        
         bool SaveMGOneDepartmentInfrastructure(MGOneDepartmentDataModel request);
         List<MGOneClinicalLabDataModel> GetMGOneClinicalLabDetails(int CollegeID);
         bool SaveMGOneClinicalLabDetails(List<MGOneClinicalLabDataModel> request);
@@ -222,6 +223,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
 
         List<LOIMGOneSMSForwardnextlevel_DataTable> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID);
         string SendMessageMGOne(string MobileNo, string MessageType);
+        List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID);
     }
 
 
