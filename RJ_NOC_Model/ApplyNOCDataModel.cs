@@ -142,6 +142,7 @@ namespace RJ_NOC_Model
         public int? DepartmentID { get; set; }
         public string? Status { get; set; }
         public bool? IsWeb { get; set; } = false;
+        public int? SessionID { get; set; }
     }
 
     public class GenerateNOC_DataModel
@@ -309,5 +310,11 @@ namespace RJ_NOC_Model
         public string Action { get; set; }
         public string? Remark { get; set; }
         public string? PaymentID { get; set; }
+    }
+    public class PresentCollegeStatusDataModel
+    {
+        public int CollegeID { get; set; }
+        public int PresentCollegeStatusID { get; set; }
+        public int DepartmentID { get; set; }
     }
 }

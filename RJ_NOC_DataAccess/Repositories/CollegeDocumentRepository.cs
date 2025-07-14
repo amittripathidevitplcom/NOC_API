@@ -40,6 +40,18 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+        public List<CommonDataModel_DataTable> GetListLOI(int DepartmentID, int CollegeID, string Type, int ApplyNOCID)
+        {
+            string SqlQuery = " exec USP_GetLOIDocument @DepartmentID='" + DepartmentID + "',@CollegeID='" + CollegeID + "',@DocumentType='" + Type + "',@ApplyNOCID='" + ApplyNOCID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeDocument.GetListLOI");
+
+            List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+            CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+            dataModel.data = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
         }     
         public List<CommonDataModel_DataTable> GetOtherDocumentByID(int OtherDocumentID)
         {

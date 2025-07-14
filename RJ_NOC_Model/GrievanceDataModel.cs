@@ -18,6 +18,10 @@ namespace RJ_NOC_Model
         public string AttachmentFile { get; set; }
         public string AttachmentFile_Dis_FileName { get; set; }
         public string AttachmentFilePath { get; set; }
+        public string AttachmentImage { get; set; }
+        public string GrievanceRemark { get; set; }
+        public string Action { get; set; }      
+
     }
 
 }

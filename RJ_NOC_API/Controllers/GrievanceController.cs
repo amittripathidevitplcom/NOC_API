@@ -201,6 +201,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("Get_GrievanceTrail/{GrievanceID}/{actionType}")]
+        public async Task<OperationResult<List<DataTable>>> Get_GrievanceTrail(int GrievanceID, string actionType)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(0, "Get_GrievanceTrail", 0, "Grievance");
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.GrievanceUtility.Get_GrievanceTrail(GrievanceID, actionType));
+                if (result.Data.Count > 0)
+                {
+
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.ErrorMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("GrievanceController.Get_GrievanceTrail", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
 
     }
 }

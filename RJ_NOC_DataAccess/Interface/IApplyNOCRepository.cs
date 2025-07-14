@@ -63,5 +63,7 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder();
         DataSet GetAHDegreeNOCDetailsNOCIID(int ApplyNOCID, int ParameterID);
         bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID);
+
+        bool UpdateCollegePresentCollegeStatusForL1(PresentCollegeStatusDataModel request);
     }
 }

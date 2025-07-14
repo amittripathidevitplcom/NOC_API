@@ -48,9 +48,9 @@ namespace RJ_NOC_DataAccess.Interface
         List<CommonDataModel_DataTable> GetClassWiseStaticReport(SearchFilterDataModel request);
         List<CommonDataModel_DataTable> GetSubjectWiseStaticReport(SearchFilterDataModel request);
 
-        List<ApplyNocApplicationDataModel> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request);
-
-        List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate);
+         List<ApplyNocApplicationDataModel> GetDCENOCReportData(DCENOCReportSearchFilterDataModel request);
+        List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate, int DepartmentID, int CollegeID);
+        //List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate);
 
         List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID);
         List<DataTable> GetUnlockApplication(int DepartmentID);

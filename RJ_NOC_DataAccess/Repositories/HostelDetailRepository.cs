@@ -31,13 +31,28 @@ namespace RJ_NOC_DataAccess.Repositories
         public bool SaveData(HostelDataModel request)
         {
             string ipAddress = CommonHelper.GetVisitorIPAddress();
+            string ResidentialQuartersDetails_Str = "";
             string HostelDetail_Str = request.HostelDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.HostelDetails, "Temp_HostelDetail_Hostel") : "";
+            if(request.DepartmentID==5 && request.HostelCategoryType== "Residents Doctors")
+            {
+                 ResidentialQuartersDetails_Str = request.ResidentialQuartersDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.ResidentialQuartersDetails, "Temp_ResidentialQuartersDetails") : "";
+            }
+            
             string IPAddress = CommonHelper.GetVisitorIPAddress();
             string SqlQuery = " exec USP_SaveHostelDetail_IU  ";
             SqlQuery += "@HostelTypeID='"+request.HostelTypeID+ "',@HostelCategoryID='" + request.HostelCategoryID + "',@HostelDetailID = '"+request.HostelDetailID+"',@IsHostelCampus = '"+request.IsHostelCampus+ "',@IsHostel = '"+request.IsHostel+"',@HostelName = '" + request.HostelName+"',@AddressLine1 = '"+request.AddressLine1+"',@AddressLine2 = '"+request.AddressLine2+"',@IsRuralUrban = '"+request.IsRuralUrban+"',@DivisionId = '"+request.DivisionID+"',@DistrictID = '"+request.DistrictID+"',@TehsilID = '"+request.TehsilID+"',@PanchayatSamitiID = '"+request.PanchayatSamitiID+"',";
             SqlQuery += "@CityTownVillage='" + request.CityTownVillage + "',@Pincode='" + request.Pincode + "',@ContactPersonName='" + request.ContactPersonName + "',@ContactPersonNo='" + request.ContactPersonNo + "',";
             SqlQuery += "@DistanceOfCollege='" + request.DistanceOfCollege + "',@HostelType='" + request.HostelType + "',@OwnerName='" + request.OwnerName + "',@OwnerContactNo='" + request.OwnerContactNo + "',@FromDate='" + request.FromDate + "',@ToDate='" + request.ToDate + "',@RentDocument='" + request.RentDocument + "',@DepartmentID='" + request.DepartmentID + "',@IPAddress ='" + ipAddress + "',@CollegeID='" + request.CollegeID + "',@Furnished='" + request.Furnished + "',@Toilet='" + request.Toilet + "',@Mess='" + request.Mess + "',@Hygiene='" + request.Hygiene + "',@Commonroom='" + request.Commonroom + "',@Visitor='" + request.Visitor + "',@OwnerShhipRentDocument='" + request.OwnerShhipRentDocument + "',@BluePrintDocument='" + request.BluePrintDocument + "',@DistanceCertificateDocument='" + request.DistanceCertificateDocument + "',";
-            SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "',@CityID='" + request.CityID + "',@BuiltUpArea='" + request.BuiltUpArea + "'";
+            SqlQuery += "@HostelDetail_Str='" + HostelDetail_Str + "',@CityID='" + request.CityID + "',@BuiltUpArea='" + request.BuiltUpArea + "',@UGStudents='" + request.UGStudents + "',@InternsStudents='" + request.InternsStudents + "',@ResidentsDoctors='" + request.ResidentsDoctors + "'";
+             if (request.DepartmentID == 5 && request.HostelCategoryType == "Residents Doctors")
+            {
+                SqlQuery += ",";
+            }
+            if (request.DepartmentID == 5 && request.HostelCategoryType == "Residents Doctors")
+            {
+                SqlQuery += "@ResidentialQuartersDetails_Str='" + ResidentialQuartersDetails_Str + "'";
+            }
+
             int Rows = _commonHelper.NonQuerry(SqlQuery, "HostelDetail.SaveData");
             if (Rows > 0)
                 return true;
@@ -118,11 +133,17 @@ namespace RJ_NOC_DataAccess.Repositories
                     dataModels.Hygiene = dataSet.Tables[0].Rows[0]["Hygiene"].ToString();
                     dataModels.Commonroom = dataSet.Tables[0].Rows[0]["Commonroom"].ToString();
                     dataModels.Visitor = dataSet.Tables[0].Rows[0]["Visitor"].ToString();
+                    dataModels.UGStudents = Convert.ToInt32(dataSet.Tables[0].Rows[0]["UGStudents"]);
+                    dataModels.InternsStudents = Convert.ToInt32(dataSet.Tables[0].Rows[0]["InternsStudents"]);
+                    dataModels.ResidentsDoctors = Convert.ToInt32(dataSet.Tables[0].Rows[0]["ResidentsDoctors"]);
 
                     string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataSet.Tables[1]);
                     List<HostelDetailsDataModel_Hostel> HostelDetailsDataModel_Hostel_Item = JsonConvert.DeserializeObject<List<HostelDetailsDataModel_Hostel>>(JsonDataTable_Data);
                     dataModels.HostelDetails = HostelDetailsDataModel_Hostel_Item;
+                    string JsonDataTable_Data1 = CommonHelper.ConvertDataTable(dataSet.Tables[2]);
+                    List<ResidentialQuartersDataModel_Hostel> ResidentialQuartersDataModel_Hostel_Item = JsonConvert.DeserializeObject<List<ResidentialQuartersDataModel_Hostel>>(JsonDataTable_Data1);
                     listdataModels.Add(dataModels);
+                    dataModels.ResidentialQuartersDetails = ResidentialQuartersDataModel_Hostel_Item;
                 }
             }
             return listdataModels;

@@ -18,6 +18,10 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CollegeDocumentRepository.GetAllData(DepartmentID, CollegeID, Type, ApplyNOCID);
         }
+        public List<CommonDataModel_DataTable> GetListLOI(int DepartmentID, int CollegeID, string Type, int ApplyNOCID)
+        {
+            return UnitOfWork.CollegeDocumentRepository.GetListLOI(DepartmentID, CollegeID, Type, ApplyNOCID);
+        }
         public List<CommonDataModel_DataTable> GetOtherDocumentByID(int OtherDocumentID)
         {
             return UnitOfWork.CollegeDocumentRepository.GetOtherDocumentByID(OtherDocumentID);

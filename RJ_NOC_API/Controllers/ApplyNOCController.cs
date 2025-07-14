@@ -2139,6 +2139,40 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+
+
+        [HttpPost("SaveCollegePresentCollegeStatusForL1")]
+        public async Task<OperationResult<bool>> UpdateCollegePresentCollegeStatusForL1(PresentCollegeStatusDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.ApplyNOCUtility.UpdateCollegePresentCollegeStatusForL1(request));
+                if (result.Data)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "save successfully .!";
+
+
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error to update  PresentCollegeStatusFor";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("ApplyNOCController.UpdateCollegePresentCollegeStatusForL1", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 
 }

@@ -211,6 +211,12 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.ApplyNOCRepository.GetAppliedParameterEssentialityForAffiliationorder();
         }
-        
+
+        public bool UpdateCollegePresentCollegeStatusForL1(PresentCollegeStatusDataModel request)
+        {
+            return UnitOfWork.ApplyNOCRepository.UpdateCollegePresentCollegeStatusForL1(request);
+        }
+
+
     }
 }

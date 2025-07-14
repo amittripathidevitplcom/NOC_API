@@ -140,9 +140,9 @@ namespace RJ_NOC_DataAccess.Repository
                 return false;
         }
 
-        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID, int SessionYear)
+        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID, int SessionYear, string QueryStringStatus)
         {
-            string SqlQuery = "exec USP_DraftApplicationList @LoginSSOID='" + LoginSSOID + "',@SessionYear='" + SessionYear + "'";
+            string SqlQuery = "exec USP_DraftApplicationList @LoginSSOID='" + LoginSSOID + "',@SessionYear='" + SessionYear + "',@QueryStringStatus='"+ QueryStringStatus + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CollegeMaster.DraftApplicationList");
 
@@ -410,7 +410,7 @@ namespace RJ_NOC_DataAccess.Repository
         }
         public CollegeMasterDataModel GetDataAffiliation(int DTEAffiliationID)
         {
-            string SqlQuery = $"exec USP_CollegeMaster @DTEAffiliationID={DTEAffiliationID},@Action='GetCollegeAffiliationById'";
+            string SqlQuery = $"exec USP_CollegeMaster @DTEAffiliationID='"+ DTEAffiliationID + "',@Action='GetCollegeAffiliationById'";
             var ds = _commonHelper.Fill_DataSet(SqlQuery, "CollegeMaster.GetCollegeById");
 
             CollegeMasterDataModel collegeMasterDataModel = new CollegeMasterDataModel();
@@ -437,6 +437,8 @@ namespace RJ_NOC_DataAccess.Repository
 
             return collegeMasterDataModel;
         }
+        
+        
         public List<CommonDataModel_FilterCollegesByBTER> FilterAffiliationCourseStatusBter(int DTEAffiliationID)
         {
             string SqlQuery = " exec USP_FilterCollegesByBTER @DTEAffiliationID = '" + DTEAffiliationID + "'";
@@ -476,7 +478,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(dataModel);
             return dataModels;
         }
-        
+
         public List<CommonDataModel_DataTable> GetGenerateorderList(string ApplicationStatus, string GenOrderNumber)
         {
             string SqlQuery = "exec USP_ViewBTEROrder @ApplicationStatus='" + ApplicationStatus + "',@GenOrderNumber='" + GenOrderNumber + "'";
@@ -487,6 +489,35 @@ namespace RJ_NOC_DataAccess.Repository
             dataModel.data = dataTable;
             dataModels.Add(dataModel);
             return dataModels;
+        }
+        public CollegeMasterDataModel GetBterCollegeData(int CollegeID)
+        {
+            string SqlQuery = $"exec USP_CollegeMaster @CollegeID={CollegeID},@Action='GetBterCollegeData'";
+            var ds = _commonHelper.Fill_DataSet(SqlQuery, "CollegeMaster.GetCollegeById");
+
+            CollegeMasterDataModel collegeMasterDataModel = new CollegeMasterDataModel();
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    collegeMasterDataModel = CommonHelper.ConvertDataTable<CollegeMasterDataModel>(ds.Tables[0]);
+                }
+                if (ds.Tables.Count > 1 && ds.Tables[0].Rows.Count > 0)
+                {
+                    collegeMasterDataModel.ContactDetailsList = CommonHelper.ConvertDataTable<List<ContactDetailsDataModel>>(ds.Tables[1]);
+                }
+                if (ds.Tables.Count > 2 && ds.Tables[0].Rows.Count > 0)
+                {
+                    collegeMasterDataModel.NearestGovernmentHospitalsList = CommonHelper.ConvertDataTable<List<NearestGovernmentHospitalsDataModel>>(ds.Tables[2]);
+                }
+                if (ds.Tables.Count > 3 && ds.Tables[0].Rows.Count > 0)
+                {
+                    collegeMasterDataModel.CollegeLevelDetails = CommonHelper.ConvertDataTable<List<CollegeLevelDetailsDataModel>>(ds.Tables[3]);
+                }
+            }
+
+            return collegeMasterDataModel;
         }
     }
 }

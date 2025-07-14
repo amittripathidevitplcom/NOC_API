@@ -5610,6 +5610,195 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpPost("SaveInfrastructuremedicalgrouponecollegeData")]
+        public async Task<OperationResult<bool>> SaveInfrastructuremedicalgrouponecollegeData(InfrastructureMedicalCollegeFacilitiesDataModel request)
+        {
+            var result = new OperationResult<bool>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.SaveInfrastructuremedicalgrouponecollegeData(request));
+                if (result.Data)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(request.CollegeID, "SaveInfrastructuremedicalgrouponecollegeData", request.CollegeID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Save successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "There was an error save data.!";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.SaveInfrastructuremedicalgrouponecollegeData", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpGet("GetInfrastructuremedicalgrouponecollege/{CollegeID}")]
+        public async Task<OperationResult<InfrastructureMedicalCollegeFacilitiesDataModel>> GetInfrastructuremedicalgrouponecollege(int CollegeID)
+        {
+            var result = new OperationResult<InfrastructureMedicalCollegeFacilitiesDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetInfrastructuremedicalgrouponecollege(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetInfrastructuremedicalgrouponecollege", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        //[HttpGet("GetGetInfrastructuremedicalgrouponeData/{CollegeID}")]
+        //public async Task<OperationResult<List<DataTable>>> GetGetInfrastructuremedicalgrouponeData(int CollegeID)
+        //{
+        //    var result = new OperationResult<List<DataTable>>();
+        //    try
+        //    {
+        //        result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetGetInfrastructuremedicalgrouponeData(CollegeID));
+        //        result.State = OperationState.Success;
+        //        if (result.Data.Count > 0)
+        //        {
+        //            result.State = OperationState.Success;
+        //            result.SuccessMessage = "Data load successfully .!";
+        //        }
+        //        else
+        //        {
+        //            result.State = OperationState.Warning;
+        //            result.SuccessMessage = "No record found.!";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetGetInfrastructuremedicalgrouponeData", ex.ToString());
+        //        result.State = OperationState.Error;
+        //        result.ErrorMessage = ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        // UnitOfWork.Dispose();
+        //    }
+        //    return result;
+        //}
+        [HttpGet("GetGetInfrastructuremedicalgrouponeData/{CollegeID}")]
+        public async Task<OperationResult<InfrastructureMedicalCollegeFacilitiesDataModel>> GetGetInfrastructuremedicalgrouponeData(int CollegeID)
+        {
+            var result = new OperationResult<InfrastructureMedicalCollegeFacilitiesDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetGetInfrastructuremedicalgrouponeData(CollegeID));
+                result.State = OperationState.Success;
+                if (result != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetGetInfrastructuremedicalgrouponeData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
+
+        [HttpGet("GetBTERDetailsIDWise/{CollegeID}")]
+        public async Task<OperationResult<List<DataTable>>> GetBTERDetailsIDWise(int CollegeID)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetBTERDetailsIDWise(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetMGoneFacilityEach", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
+        [HttpPost("GetTotalFinalDraftentryDepartmentFormat")]
+        public async Task<OperationResult<List<DataTable>>> GetTotalFinalDraftentryDepartmentFormat(CommonDataModel_TotalDraftEntrySearchFilter request)
+        {
+            var result = new OperationResult<List<DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CommonFuncationUtility.GetTotalFinalDraftentryDepartmentFormat(request));
+                if (result.Data.Count > 0)
+                {
+                    CommonDataAccessHelper.Insert_TrnUserLog(0, "GetTotalFinalDraftentryDepartmentFormat", request.DepartmentID, "CommonFuncation");
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Error;
+                    result.ErrorMessage = "Error in get data !";
+                }
+            }
+            catch (Exception e)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CommonFuncationController.GetTotalFinalDraftentryDepartmentFormat", e.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = e.Message.ToString();
+            }
+            finally
+            {
+                //UnitOfWork.Dispose();
+            }
+            return result;
+        }
+
 
     }
 }

@@ -167,6 +167,38 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
+        [HttpGet("GetListLOI/{DepartmentID}/{CollegeID}/{Type}/{ApplyNOCID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetListLOI(int DepartmentID, int CollegeID, string Type, int ApplyNOCID)
+        {
+            CommonDataAccessHelper.Insert_TrnUserLog(CollegeID, "GetListLOI", 0, "CollegeDocument");
+            var result = new OperationResult<List<CommonDataModel_DataTable>>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeDocumentUtility.GetListLOI(DepartmentID, CollegeID, Type, ApplyNOCID));
+                result.State = OperationState.Success;
+                if (result.Data.Count > 0)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeDocumentController.GetAllCourse", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

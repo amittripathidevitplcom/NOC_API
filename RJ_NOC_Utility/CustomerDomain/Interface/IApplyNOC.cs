@@ -58,5 +58,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool SaveBTERDocumentScrutiny(BTERDocumentScrutinyDataModel request);
         List<CommonDataModel_DataTable> GetAppliedParameterEssentialityForAffiliationorder();
         bool UpdateAHNOCPDFPath(string PDFPath, int ApplyNOCID, int ParameterID);
+
+        bool UpdateCollegePresentCollegeStatusForL1(PresentCollegeStatusDataModel request);
     }
 }

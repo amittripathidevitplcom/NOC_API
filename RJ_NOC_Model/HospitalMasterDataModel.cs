@@ -192,6 +192,40 @@ namespace RJ_NOC_Model
         public int? ICUGrandTotalBed { get; set; }
         public int? OTICUBed { get; set; }
         public int? CasualtyBeds { get; set; }
+        //Added 16-06-2025 Amit
+        public int?ICU { get; set; }
+        public int?HospitalBedDistributionTotal { get; set; }
+        public int?MajorOT { get; set; }
+        public int?MinorOT { get; set; }
+        public int?XRaystaticUnit500 { get; set; }
+        public int?MobileportableXRayUnit { get; set; }
+        public int?IITVFluoroscopy { get; set; }
+        public int?USGColour { get; set; }
+        public int?CTScan { get; set; }
+        public int? Biochemistry { get; set; }
+        public int? MicrobiologyPathology { get; set; }
+        public int? Haematology { get; set; }
+        public int? ClinicalPathology { get; set; }
+        public int?CSSD { get; set; }
+        public int?Laundry { get; set; }
+        public string? CCTVBiometricmachines { get; set; }
+        public string? Pharmacy { get; set; }
+        public string? HospitalInformationSystem { get; set; }
+        public string? IsCSSD { get; set; }
+        public string? CSSDPhoto { get; set; }
+        public string? Dis_CSSDPhoto{ get; set; }
+        public string? CSSDPhotoPath{ get; set; }
+        public string? IsLaundry{ get; set; }
+        public string? LaundryPhoto{ get; set; }
+        public string? Dis_LaundryPhoto{ get; set; }
+        public string? LaundryPhotoPath{ get; set; }
+        public string? PharmacyPhoto{ get; set; }
+        public string? Dis_PharmacyPhoto{ get; set; }
+        public string? PharmacyPhotoPath{ get; set; }
+        public string? CCTVBiometricPhoto{ get; set; }
+        public string? Dis_CCTVBiometricPhoto{ get; set; }
+        public string? CCTVBiometricPhotoPath { get; set; }
+
     }
     public class HospitalAreaValidation
     {

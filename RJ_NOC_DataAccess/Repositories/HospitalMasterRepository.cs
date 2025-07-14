@@ -171,8 +171,33 @@ namespace RJ_NOC_DataAccess.Repository
             sb.AppendFormat("@ICUGrandTotalBed='{0}',", request.ICUGrandTotalBed);
             sb.AppendFormat("@OTICUBed='{0}',", request.OTICUBed);
             sb.AppendFormat("@CasualtyBeds='{0}',", request.CasualtyBeds);
-
-            // action
+            //Added 16-06-2025 Amit
+            sb.AppendFormat("@ICU='{0}',", request.ICU);
+            sb.AppendFormat("@HospitalBedDistributionTotal='{0}',", request.HospitalBedDistributionTotal);
+            sb.AppendFormat("@MajorOT='{0}',", request.MajorOT);
+            sb.AppendFormat("@MinorOT='{0}',", request.MinorOT);
+            sb.AppendFormat("@XRaystaticUnit500='{0}',", request.XRaystaticUnit500);
+            sb.AppendFormat("@MobileportableXRayUnit='{0}',", request.MobileportableXRayUnit);
+            sb.AppendFormat("@IITVFluoroscopy='{0}',", request.IITVFluoroscopy);
+            sb.AppendFormat("@USGColour='{0}',", request.USGColour);
+            sb.AppendFormat("@CTScan='{0}',", request.CTScan);
+            sb.AppendFormat("@Biochemistry='{0}',", request.Biochemistry);
+            sb.AppendFormat("@MicrobiologyPathology='{0}',", request.MicrobiologyPathology);
+            sb.AppendFormat("@Haematology='{0}',", request.Haematology);
+            sb.AppendFormat("@ClinicalPathology='{0}',", request.ClinicalPathology);
+            sb.AppendFormat("@CSSD='{0}',", request.CSSD);
+            sb.AppendFormat("@Laundry='{0}',", request.Laundry);
+            sb.AppendFormat("@CCTVBiometricmachines='{0}',", request.CCTVBiometricmachines);
+            sb.AppendFormat("@Pharmacy='{0}',", request.Pharmacy);
+            sb.AppendFormat("@HospitalInformationSystem='{0}',", request.HospitalInformationSystem);
+            sb.AppendFormat("@IsCSSD='{0}',", request.IsCSSD);
+            sb.AppendFormat("@CSSDPhoto='{0}',", request.CSSDPhoto);
+            sb.AppendFormat("@IsLaundry='{0}',", request.IsLaundry);
+            sb.AppendFormat("@LaundryPhoto='{0}',", request.LaundryPhoto);
+            sb.AppendFormat("@PharmacyPhoto='{0}',", request.PharmacyPhoto);
+            sb.AppendFormat("@CCTVBiometricPhoto='{0}',", request.CCTVBiometricPhoto);           
+        
+        // action
             sb.AppendFormat("@Action='{0}'", "SaveHospitalData");
 
             string SqlQuery = $" exec USP_HospitalMaster  {sb.ToString()}";

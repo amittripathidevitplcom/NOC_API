@@ -9,7 +9,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
     public interface ICollegeMaster
     {
         bool SaveData(CollegeMasterDataModel request);
-        List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID,int SessionYear);
+        List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID,int SessionYear,string QueryStringStatus);
         List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID,int SessionYear);
         List<CommonDataModel_DataTable> CollegeDetails(string LoginSSOID, string Type, int SessionYear);
         CollegeMasterDataModel GetCollegeById(int collegeId);
@@ -32,6 +32,7 @@ namespace RJ_NOC_Utility.CustomerDomain.Interface
         bool CompareDefaulterCollegeName(int DepartmentID, string CurrentCollegeName, string SSOID, int DivisionID, int DistrictID);
         bool IfExistAffiliationType(int DTEAffiliationID,int DepartmentID, string CurrentCollegeName,int AffiliationTypeID);
         CollegeMasterDataModel GetDataAffiliation(int DTEAffiliationID);
+        CollegeMasterDataModel GetBterCollegeData(int CollegeID);
         List<CommonDataModel_FilterCollegesByBTER> FilterAffiliationCourseStatusBter(int DTEAffiliationID);
         List<CommonDataModel_DataSet> ViewBTERTotalCollegeDataByID(int SelectedDteAffiliationRegId);
         List<CommonDataModel_DataTable> TotalBTERCollegeDetailsByDepartment(TotalCollegeReportSearchFilter request, int SessionID,string ApplicationStatus);

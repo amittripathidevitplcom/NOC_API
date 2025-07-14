@@ -454,8 +454,8 @@ namespace RJ_NOC_Model
     }
     public class MGoneASSESSMENTREPORT
     {
-        public int? ID { get; set; }        
-        public int? CollegeID { get; set; }        
+        public int? ID { get; set; }
+        public int? CollegeID { get; set; }
         public string? Name { get; set; }
         public int? MinSize { get; set; }
         public int? MinCapacity { get; set; }
@@ -489,7 +489,7 @@ namespace RJ_NOC_Model
         public string? Unit { get; set; }
         public string? Value { get; set; }
         public int MinQty { get; set; }
-        public int? ContentOrder { get; set; }        
+        public int? ContentOrder { get; set; }
         public string? Code { get; set; }
         public int? MinCapacity { get; set; }
         public int? MinSize { get; set; }
@@ -500,4 +500,127 @@ namespace RJ_NOC_Model
         public string? Annexure { get; set; }
         public bool? IsHide { get; set; }
     }
+    public class InfrastructureMedicalCollegeFacilitiesDataModel
+    {
+        public int CollegeID { get; set; }
+        public int MedicalCollegeFID { get; set; }
+        public string? DemonstrationRoom { get; set; }
+        public string? Histology { get; set; }
+        public string? UploadPhotoHistology { get; set; }
+        public string? Dis_UploadPhotoHistology { get; set; }
+        public string? UploadPhotoHistologyPath { get; set; }
+        public string? ClinicalPhysiology { get; set; }
+        public string? UploadPhotoClinicalPhysiology { get; set; }
+        public string? Dis_UploadPhotoClinicalPhysiology { get; set; }
+        public string? UploadPhotoClinicalPhysiologyPath { get; set; }
+        public string? Biochemistry { get; set; }
+        public string? UploadPhotoBiochemistry { get; set; }
+        public string? Dis_UploadPhotoBiochemistry { get; set; }
+        public string? UploadPhotoBiochemistryPath { get; set; }
+        public string? HistopathologyCytopathology { get; set; }
+        public string? UploadPhotoHistopathologyCytopathology { get; set; }
+        public string? Dis_UploadPhotoHistopathologyCytopathology { get; set; }
+        public string? UploadPhotoHistopathologyCytopathologyPath { get; set; }
+        public string? ClinicalPathologyHaematolog { get; set; }
+        public string? UploadPhotoClinicalPathologyHaematolog { get; set; }
+        public string? Dis_UploadPhotoClinicalPathologyHaematolog { get; set; }
+        public string? UploadPhotoClinicalPathologyHaematologPath { get; set; }
+        public string? Microbiology { get; set; }
+        public string? UploadPhotoMicrobiology { get; set; }
+        public string? Dis_UploadPhotoMicrobiology { get; set; }
+        public string? UploadPhotoMicrobiologyPath { get; set; }
+        public string? ClinicalPharmacologyandComputerAssistedLearning { get; set; }
+        public string? UploadPhotoClinicalPharmacologyandComputerAssistedLearning { get; set; }
+        public string? Dis_ClinicalPharmacologyandComputerAssistedLearning { get; set; }
+        public string? ClinicalPharmacologyandComputerAssistedLearningPath { get; set; }
+        public string? Centralresearch { get; set; }
+        public string? CentralLibrary { get; set; }
+        public decimal? CentralLibraryArea { get; set; }
+        public int? CentralLibrarySeatingCapacity { get; set; }
+        public int? CentralLibraryBooks { get; set; }
+        public int? JournalsIndianForeign { get; set; }
+        public string? CentralLibraryPhoto { get; set; }
+        public string? Dis_CentralLibraryPhoto { get; set; }
+        public string? CentralLibrarybooksList { get; set; }
+        public string? CentralLibrarybooksListPath { get; set; }
+        public string? Dis_CentralLibrarybooksList { get; set; }
+        public string? JournalsIndianForeignList { get; set; }
+        public string? JournalsIndianForeignListPath { get; set; }
+        public string? Dis_JournalsIndianForeignList { get; set; }
+        public string? CentralLibraryPhotoPath { get; set; }
+        public string? RuralHealthTrainingCentre { get; set; }
+        public int? RuralHealth { get; set; }
+        public string? UrbanHealthTrainingCentre { get; set; }
+        public int? UrbanHealth { get; set; }
+        public string? PowerBackup { get; set; }
+        public int? PowerBackupCapacity { get; set; }
+        public string? PowerBackupPhoto { get; set; }
+        public string? Dis_PowerBackupPhoto { get; set; }
+        public string? PowerBackupPhotoPath { get; set; }
+        public string? SSOID { get; set; }
+        public List<LectureTheatreDetailsDataModel>? LectureTheatreDetails { get; set; }
+        public List<MuseumDetailsDataModel>? MuseumDetails { get; set; }
+        public List<DissectionHallDetailsDataModel>? DissectionHallDetails { get; set; }
+        public List<SkillLaboratoryDetailsDataModel>? SkillLaboratoryDetails { get; set; }
+
+    }
+    public class LectureTheatreDetailsDataModel
+    {
+        public int LectureTheatreID { get; set; }
+        public int? LectureTheatreCapacity { get; set; }
+        public decimal? LectureTheatreSize { get; set; }
+        public string? Dis_LectureTheatrePhotoName { get; set; }
+        public string? LectureTheatrePhoto { get; set; }
+        public string? LectureTheatrePhotoPath { get; set; }
+        public string? LectureTheatreType { get; set; }
+    }
+    public class MuseumDetailsDataModel
+    {
+        public int MuseumID { get; set; }
+        public int? MuseumCapacity { get; set; }
+        public decimal? MuseumSize { get; set; }
+        public string? Dis_MuseumPhotoName { get; set; }
+        public string? MuseumPhoto { get; set; }
+        public string? MuseumPhotoPath { get; set; }
+        public string? MuseumType { get; set; }
+    }
+    public class DissectionHallDetailsDataModel
+    {
+        public int DissectionID { get; set; }
+        public int? DissectionHallNumber { get; set; }
+        public int? DissectionHallCapacity { get; set; }
+        public decimal? DissectionHallsize { get; set; }
+        public string? DissectionHallPhoto { get; set; }
+        public string? Dis_DissectionHallPhoto { get; set; }
+        public string? DissectionHallPhotoPath { get; set; }
+    }
+    public class SkillLaboratoryDetailsDataModel
+    {
+        public int SkillLaboratoryID { get; set; }
+        public int? SkillLaboratoryNumber { get; set; }
+        public decimal? SkillLaboratorySize { get; set; }
+        public string? SkillLaboratoryPhoto { get; set; }
+        public string? Dis_SkillLaboratoryPhoto { get; set; }
+        public string? SkillLaboratoryPhotoPath { get; set; }
+    }
+
+    public class BTERCollegeDataModel
+    {
+        public int CollegeID { get; set; }
+        public int? CollegeStatusID { get; set; }
+        public int? CollegeTypeID { get; set; }
+        public int? CollegeLevelID { get; set; }
+        public int? CollegeMedium { get; set; }
+        public int? ManagementTypeID { get; set; }
+        public int? StatusOfBuildingID { get; set; }
+        public int? AffiliationTypeID { get; set; }       
+        public string? BTERBuildingStatusName { get; set; }
+        public string? AffiliationTypeName { get; set; }
+        public string? AffiliationManagementTypeName { get; set; }
+        public string? CollegeMediumName { get; set; }
+        public string? CollegeStatusName { get; set; }
+        public string? CollegeTypeName { get; set; }
+        public string? CollegeLevelName { get; set; }        
+    }
+
 }

@@ -15,7 +15,7 @@ namespace RJ_NOC_DataAccess.Interface
         bool SaveData(GrievanceDataModel request);       
         bool DeleteData(int GrievanceID);
         bool IfExists(int GrievanceID,int DepartmentID, string AnimalName);
-      
+        List<DataTable> Get_GrievanceTrail(int GrievanceID, string Action);
 
     }
 

@@ -919,13 +919,44 @@ namespace RJ_NOC_API.Controllers
             return result;
         }
 
-        [HttpGet("GetGrievanceReport/{FromDate}/{ToDate}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetGrievanceReport(string FromDate,string ToDate)
+        //[HttpGet("GetGrievanceReport/{FromDate}/{ToDate}")]
+        //public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetGrievanceReport(string FromDate,string ToDate)
+        //{
+        //    var result = new OperationResult<List<CommonDataModel_DataTable>>();
+        //    try
+        //    {
+        //        result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetGrievanceReport(FromDate, ToDate));
+        //        result.State = OperationState.Success;
+        //        if (result.Data != null)
+        //        {
+        //            result.State = OperationState.Success;
+        //            result.SuccessMessage = "Data load successfully .!";
+        //        }
+        //        else
+        //        {
+        //            result.State = OperationState.Warning;
+        //            result.SuccessMessage = "No record found.!";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        CommonDataAccessHelper.Insert_ErrorLog("DepartmentOfCollegeDocumentScrutiny.GetGrievanceReport", ex.ToString());
+        //        result.State = OperationState.Error;
+        //        result.ErrorMessage = ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        // UnitOfWork.Dispose();
+        //    }
+        //    return result;
+        //}
+        [HttpGet("GetGrievanceReport/{FromDate}/{ToDate}/{DepartmentID}/{CollegeID}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> GetGrievanceReport(string FromDate, string ToDate, int DepartmentID, int CollegeID)
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetGrievanceReport(FromDate, ToDate));
+                result.Data = await Task.Run(() => UtilityHelper.DepartmentOfCollegeScrutinyUtility.GetGrievanceReport(FromDate, ToDate, DepartmentID, CollegeID));
                 result.State = OperationState.Success;
                 if (result.Data != null)
                 {
@@ -950,7 +981,6 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
 
         [HttpGet("GetRevertApplicationRemarkByDepartment/{DepartmentID}/{ApplicationID}/{RoleID}")]
         public async Task<OperationResult<List<DataTable>>> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID,int RoleID)

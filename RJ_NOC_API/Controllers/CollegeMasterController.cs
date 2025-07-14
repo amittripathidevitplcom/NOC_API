@@ -153,14 +153,14 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
-        [HttpGet("DraftApplicationList/{LoginSSOID}/{SessionYear=0}")]
-        public async Task<OperationResult<List<CommonDataModel_DataTable>>> DraftApplicationList(string LoginSSOID,int SessionYear=0)
+       
+        [HttpGet("DraftApplicationList/{LoginSSOID}/{SessionYear=0}/{QueryStringStatus=''}")]
+        public async Task<OperationResult<List<CommonDataModel_DataTable>>> DraftApplicationList(string LoginSSOID,int SessionYear=0,string QueryStringStatus="")
         {
             var result = new OperationResult<List<CommonDataModel_DataTable>>();
             try
             {
-                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.DraftApplicationList(LoginSSOID, SessionYear));
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.DraftApplicationList(LoginSSOID, SessionYear, QueryStringStatus));
                 result.State = OperationState.Success;
                 if (result.Data.Count > 0)
                 {
@@ -759,7 +759,37 @@ namespace RJ_NOC_API.Controllers
             }
             return result;
         }
-
+        [HttpGet("GetBterCollegeData/{CollegeID}")]
+        public async Task<OperationResult<CollegeMasterDataModel>> GetBterCollegeData(int CollegeID)
+        {
+            var result = new OperationResult<CollegeMasterDataModel>();
+            try
+            {
+                result.Data = await Task.Run(() => UtilityHelper.CollegeMasterUtility.GetBterCollegeData(CollegeID));
+                result.State = OperationState.Success;
+                if (result.Data != null)
+                {
+                    result.State = OperationState.Success;
+                    result.SuccessMessage = "Data load successfully .!";
+                }
+                else
+                {
+                    result.State = OperationState.Warning;
+                    result.SuccessMessage = "No record found.!";
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonDataAccessHelper.Insert_ErrorLog("CollegeMasterController.GetData", ex.ToString());
+                result.State = OperationState.Error;
+                result.ErrorMessage = ex.Message.ToString();
+            }
+            finally
+            {
+                // UnitOfWork.Dispose();
+            }
+            return result;
+        }
     }
 }
 

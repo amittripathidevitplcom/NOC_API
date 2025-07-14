@@ -51,6 +51,7 @@ namespace RJ_NOC_Model
         public string? TehsilName { get; set; }
         public string? PanchyatSamitiName { get; set; }
         public List<HostelDetailsDataModel_Hostel> HostelDetails { get; set; }
+        public List<ResidentialQuartersDataModel_Hostel>? ResidentialQuartersDetails { get; set; }
 
         public string? Action { get; set; }
         public string? Remark { get; set; }
@@ -78,6 +79,10 @@ namespace RJ_NOC_Model
         public string? DistanceCertificateDocument { get; set; }
         public string? DistanceCertificateDocumentPath { get; set; }
         public string? DistanceCertificateDocument_Dis_FileName { get; set; }
+        //Added14-0525 for Department5
+        public int?UGStudents { get; set; }
+        public int?InternsStudents { get; set; }
+        public int?ResidentsDoctors { get; set; }
 
     }
 
@@ -85,6 +90,7 @@ namespace RJ_NOC_Model
     {
         public int HostelBlockDetailID { get; set; }
         public int CourseID { get; set; }
+        public int  CollegeWiseRoomID { get; set; }
         public int DepartmentID { get; set; }
         public int Width { get; set; }
         public int NoOf { get; set; }
@@ -94,5 +100,15 @@ namespace RJ_NOC_Model
         public string? ImageFilePath { get; set; }
         public string? Dis_FileName { get; set; }
         public string? CourseName { get; set; }
+        public string? HostelBlockName { get; set; } 
+    }
+    public class ResidentialQuartersDataModel_Hostel
+    {
+        public int ResidentialQuartersDetailID { get; set; }
+        public string? ResidentialQuarters { get; set; }
+        public int? AccommodationTypesID { get; set; }
+        public string? AccommodationName { get; set; }
+        public int? ResidentialNoofQuarters { get; set; }
+        public int? DepartmentID { get; set; }
     }
 }

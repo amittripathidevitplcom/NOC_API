@@ -132,9 +132,14 @@ namespace RJ_NOC_Utility.CustomerDomain
         }
 
 
-        public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)
+        //public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)
+        //{
+        //    return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetGrievanceReport(FromDate, ToDate);
+        //}
+        
+        public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate, int DepartmentID, int CollegeID)
         {
-            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetGrievanceReport(FromDate, ToDate);
+            return UnitOfWork.DepartmentOfCollegeDocumentScrutinyRepository.GetGrievanceReport(FromDate, ToDate, DepartmentID, CollegeID);
         }
         public List<DataTable> GetRevertApplicationRemarkByDepartment(int DepartmentID, int ApplicationID, int RoleID)
         {

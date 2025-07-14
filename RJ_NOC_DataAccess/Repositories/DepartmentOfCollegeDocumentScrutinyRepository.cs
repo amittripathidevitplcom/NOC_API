@@ -457,7 +457,8 @@ namespace RJ_NOC_DataAccess.Repository
 
         public List<CommonDataModel_DataTable> GetPhysicalVerificationAppliationList(GetPhysicalVerificationAppliationList request)
         {
-            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList @SSOID ='" + request.SSOID + "',@Status ='" + request.Status + "',@IsWeb ='" + request.IsWeb + "' ";
+            string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList @SSOID ='" + request.SSOID + "',@Status ='" + request.Status + "',@IsWeb ='" + request.IsWeb + "',@SessionYear ='" + request.SessionID + "'  ";
+
             //string SqlQuery = " exec USP_GetPhysicalVerificationAppliationList_Agri @SSOID ='" + request.SSOID + "',@DepartmentID ='" + request.DepartmentID + "',@UserID ='" + request.UserID + "',@RoleID ='" + request.RoleID + "',@Status ='" + request.Status + "'";
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetPhysicalVerificationAppliationList");
@@ -628,10 +629,22 @@ namespace RJ_NOC_DataAccess.Repository
             return listdataModels;
         }
 
-        public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)
+        //public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate)
+        //{
+        //    string SqlQuery = " exec USP_GrievanceReportData @FromDate ='" + FromDate + "',@ToDate ='" + ToDate + "'";
+
+        //    DataTable dataTable = new DataTable();
+        //    dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetGrievanceReport");
+        //    List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();
+        //    CommonDataModel_DataTable dataModel = new CommonDataModel_DataTable();
+        //    dataModel.data = dataTable;
+        //    dataModels.Add(dataModel);
+        //    return dataModels;
+        //}
+        public List<CommonDataModel_DataTable> GetGrievanceReport(string FromDate, string ToDate, int DepartmentID, int CollegeID)
         {
-            string SqlQuery = " exec USP_GrievanceReportData @FromDate ='" + FromDate + "',@ToDate ='" + ToDate + "'";
-           
+            string SqlQuery = " exec USP_GrievanceReportData @FromDate ='" + FromDate + "',@ToDate ='" + ToDate + "',@DepartmentID ='" + DepartmentID + "',@CollegeID ='" + CollegeID + "'";
+
             DataTable dataTable = new DataTable();
             dataTable = _commonHelper.Fill_DataTable(SqlQuery, "DepartmentOfCollegeDocumentScrutiny.GetGrievanceReport");
             List<CommonDataModel_DataTable> dataModels = new List<CommonDataModel_DataTable>();

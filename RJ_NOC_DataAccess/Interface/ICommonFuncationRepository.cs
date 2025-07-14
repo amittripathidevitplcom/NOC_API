@@ -236,6 +236,11 @@ namespace RJ_NOC_DataAccess.Interface
         List<LOIMGOneSMSForwardnextlevel_DataTable> GetMobileNumberSMSforwardnextlevel(string CollegID, string ActionName, int NextUserID, int NextRoleID);
         string SendMessageMGOne(string MobileNo, string MessageType);
         List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID);
+        bool SaveInfrastructuremedicalgrouponecollegeData(InfrastructureMedicalCollegeFacilitiesDataModel request);
+        InfrastructureMedicalCollegeFacilitiesDataModel GetInfrastructuremedicalgrouponecollege(int CollegeID);
+        InfrastructureMedicalCollegeFacilitiesDataModel GetGetInfrastructuremedicalgrouponeData(int CollegeID);
+        List<DataTable> GetBTERDetailsIDWise(int CollegeID);
+        List<DataTable> GetTotalFinalDraftentryDepartmentFormat(CommonDataModel_TotalDraftEntrySearchFilter request);
     }
 }
 

@@ -41,5 +41,9 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.GrievanceRepository.GetGrievance_AddedSSOIDWise(SSOID);
         }
+        public List<DataTable> Get_GrievanceTrail(int GrievanceID, string Action)
+        {
+            return UnitOfWork.GrievanceRepository.Get_GrievanceTrail(GrievanceID, Action);
+        }
     }
 }

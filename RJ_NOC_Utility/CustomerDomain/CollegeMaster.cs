@@ -17,9 +17,9 @@ namespace RJ_NOC_Utility.CustomerDomain
             return UnitOfWork.CollegeMasterRepository.SaveData(request);
         }
 
-        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID, int SessionYear)
+        public List<CommonDataModel_DataTable> DraftApplicationList(string LoginSSOID, int SessionYear, string QueryStringStatus)
         {
-            return UnitOfWork.CollegeMasterRepository.DraftApplicationList(LoginSSOID, SessionYear);
+            return UnitOfWork.CollegeMasterRepository.DraftApplicationList(LoginSSOID, SessionYear, QueryStringStatus);
         }
         public List<CommonDataModel_DataTable> StatisticsCollegeList(string LoginSSOID, int SessionYear)
         {
@@ -105,6 +105,11 @@ namespace RJ_NOC_Utility.CustomerDomain
         public CollegeMasterDataModel GetDataAffiliation(int DTEAffiliationID)
         {
             return UnitOfWork.CollegeMasterRepository.GetDataAffiliation(DTEAffiliationID);
+        }
+        
+        public CollegeMasterDataModel GetBterCollegeData(int CollegeID)
+        {
+            return UnitOfWork.CollegeMasterRepository.GetBterCollegeData(CollegeID);
         }
         public List<CommonDataModel_FilterCollegesByBTER> FilterAffiliationCourseStatusBter(int DTEAffiliationID)
         {

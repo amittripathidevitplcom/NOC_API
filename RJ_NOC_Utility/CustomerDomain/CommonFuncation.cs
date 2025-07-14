@@ -650,6 +650,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.SaveAHDepartmentInfrastructure(request);
         }
+        
         public List<CommonDataModel_DataSet> CheckAHStaff(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.CheckAHStaff(CollegeID);
@@ -708,6 +709,7 @@ namespace RJ_NOC_Utility.CustomerDomain
         {
             return UnitOfWork.CommonFuncationRepository.GetMGoneFacilityEach(CollegeID);
         }
+        
         public DataSet GetMGoneASSESSMENTREPORT(int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGoneASSESSMENTREPORT(CollegeID);
@@ -796,11 +798,34 @@ namespace RJ_NOC_Utility.CustomerDomain
         public string SendMessageMGOne(string MobileNo, string MessageType)
         {
             return UnitOfWork.CommonFuncationRepository.SendMessageMGOne(MobileNo, MessageType);
-        }        
+        }
         public List<MGOneMedicalCollegeFacilitiesDataModel> GetMGOneInfrastructureMedicalCollegeFacilitiesList(int DepartmentID, int CollegeID)
         {
             return UnitOfWork.CommonFuncationRepository.GetMGOneInfrastructureMedicalCollegeFacilitiesList(DepartmentID, CollegeID);
         }
+
+        public bool SaveInfrastructuremedicalgrouponecollegeData(InfrastructureMedicalCollegeFacilitiesDataModel request)
+        {
+            return UnitOfWork.CommonFuncationRepository.SaveInfrastructuremedicalgrouponecollegeData(request);
+        }
+        public InfrastructureMedicalCollegeFacilitiesDataModel GetInfrastructuremedicalgrouponecollege(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetInfrastructuremedicalgrouponecollege(CollegeID);
+        }
+        public InfrastructureMedicalCollegeFacilitiesDataModel GetGetInfrastructuremedicalgrouponeData(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetGetInfrastructuremedicalgrouponeData(CollegeID);
+        }
+
+        public List<DataTable> GetBTERDetailsIDWise(int CollegeID)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetBTERDetailsIDWise(CollegeID);
+        }
+        public List<DataTable> GetTotalFinalDraftentryDepartmentFormat(CommonDataModel_TotalDraftEntrySearchFilter request)
+        {
+            return UnitOfWork.CommonFuncationRepository.GetTotalFinalDraftentryDepartmentFormat(request);
+        }
+
     }
 }
 

@@ -679,5 +679,16 @@ namespace RJ_NOC_DataAccess.Repositories
             else
                 return false;
         }
+
+        public bool UpdateCollegePresentCollegeStatusForL1(PresentCollegeStatusDataModel request)
+        {
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = $" exec USP_CollegeMaster @Action='UpdateCollegePresentCollegeStatusForL1',@PresentCollegeStatusID='" + request.PresentCollegeStatusID + "',@CollegeID='" + request.CollegeID + "',@DepartmentID='" + request.DepartmentID + "'";
+            int Rows = _commonHelper.ExecuteScalar(SqlQuery, "ApplyNOC.UpdateCollegePresentCollegeStatusForL1");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }

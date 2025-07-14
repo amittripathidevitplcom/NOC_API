@@ -993,6 +993,7 @@ namespace RJ_NOC_DataAccess.Repository
             dataModels.Add(common);
             return dataModels;
         }
+        
 
         public List<CommonDataModel_RoleListByLevel> GetRoleListForApporval(int RoleID, int DepartmentID, string NOCType)
         {
@@ -2507,10 +2508,10 @@ namespace RJ_NOC_DataAccess.Repository
                             Annexure = s.Annexure,
                             IsHide = s.ParentID > 0 ? true : false,
                             ContentOrder = s.ContentOrder,
-                            Code=s.Code,
-                            MinCapacity=s.MinCapacity,
-                            MinSize=s.MinSize,
-                            MinRequired=s.MinRequired,
+                            Code = s.Code,
+                            MinCapacity = s.MinCapacity,
+                            MinSize = s.MinSize,
+                            MinRequired = s.MinRequired,
                         }
                         ).OrderBy(o => o.ContentOrder).ToList();
                     }
@@ -2518,6 +2519,88 @@ namespace RJ_NOC_DataAccess.Repository
                 }
             }
 
+            return dataModels;
+        }
+        //bool SaveInfrastructuremedicalgrouponecollegeData(InfrastructureMedicalCollegeFacilitiesDataModel request);
+        public bool SaveInfrastructuremedicalgrouponecollegeData(InfrastructureMedicalCollegeFacilitiesDataModel request)
+        {
+            string LectureTheatreDetails_Str = request.LectureTheatreDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.LectureTheatreDetails, "Temp_LectureTheatreDetails_MGONE") : "";
+            string MuseumDetails_Str = request.MuseumDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.MuseumDetails, "Temp_MuseumDetails_MGONE") : "";
+            string DissectionHallDetails_Str = request.DissectionHallDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.DissectionHallDetails, "Temp_DissectionHallDetails_MGONE") : "";
+            string SkillLaboratoryDetails_Str = request.SkillLaboratoryDetails.Count > 0 ? CommonHelper.GetDetailsTableQry(request.SkillLaboratoryDetails, "Temp_SkillLaboratoryDetails_MGONE") : "";
+            string IPAddress = CommonHelper.GetVisitorIPAddress();
+            string SqlQuery = " exec USP_SaveInfrastructuremedicalgrouponecollegeData_IU  ";
+            SqlQuery += "@MedicalCollegeFID='" + request.MedicalCollegeFID + "',@DemonstrationRoom='" + request.DemonstrationRoom + "',@CollegeID='" + request.CollegeID + "',@Histology='" + request.Histology + "',@ClinicalPhysiology='" + request.ClinicalPhysiology + "',@Biochemistry='" + request.Biochemistry + "',@HistopathologyCytopathology='" + request.HistopathologyCytopathology + "',@ClinicalPathologyHaematolog='" + request.ClinicalPathologyHaematolog + "',@Microbiology='" + request.Microbiology + "',@ClinicalPharmacologyandComputerAssistedLearning='" + request.ClinicalPharmacologyandComputerAssistedLearning + "',@Centralresearch='" + request.Centralresearch + "',@CentralLibrary='" + request.CentralLibrary + "',@CentralLibraryArea='" + request.CentralLibraryArea + "',@CentralLibrarySeatingCapacity='" + request.CentralLibrarySeatingCapacity + "',@CentralLibraryBooks='" + request.CentralLibraryBooks + "',@JournalsIndianForeign='" + request.JournalsIndianForeign + "',@CentralLibraryPhoto='" + request.CentralLibraryPhoto + "',@RuralHealthTrainingCentre='" + request.RuralHealthTrainingCentre + "',@RuralHealth='" + request.RuralHealth + "',@UrbanHealthTrainingCentre='" + request.UrbanHealthTrainingCentre + "',@UrbanHealth='" + request.UrbanHealth + "',@PowerBackup='" + request.PowerBackup + "',@PowerBackupCapacity='" + request.PowerBackupCapacity + "',@PowerBackupPhoto='" + request.PowerBackupPhoto + "',@LectureTheatreDetails_Str='" + LectureTheatreDetails_Str + "',@MuseumDetails_Str='" + MuseumDetails_Str + "',@DissectionHallDetails_Str='" + DissectionHallDetails_Str + "',@SkillLaboratoryDetails_Str='" + SkillLaboratoryDetails_Str + "',@UploadPhotoHistology='" + request.UploadPhotoHistology + "',@UploadPhotoClinicalPhysiology='" + request.UploadPhotoClinicalPhysiology + "',@UploadPhotoBiochemistry='" + request.UploadPhotoBiochemistry + "',@UploadPhotoHistopathologyCytopathology='" + request.UploadPhotoHistopathologyCytopathology + "',@UploadPhotoClinicalPathologyHaematolog='" + request.UploadPhotoClinicalPathologyHaematolog + "',@UploadPhotoMicrobiology='" + request.UploadPhotoMicrobiology + "',@UploadPhotoClinicalPharmacologyandComputerAssistedLearning='" + request.UploadPhotoClinicalPharmacologyandComputerAssistedLearning + "',@CentralLibrarybooksList='" + request.CentralLibrarybooksList + "',@JournalsIndianForeignList='" + request.JournalsIndianForeignList + "'";
+            int Rows = _commonHelper.NonQuerry(SqlQuery, "CommonHelper.SaveInfrastructuremedicalgrouponecollegeData");
+            if (Rows > 0)
+                return true;
+            else
+                return false;
+        }
+        public InfrastructureMedicalCollegeFacilitiesDataModel GetInfrastructuremedicalgrouponecollege(int CollegeID)
+        {
+            string SqlQuery = $"exec USP_GetInfrastructuremedicalgrouponecollege @CollegeID={CollegeID}";
+            var ds = _commonHelper.Fill_DataSet(SqlQuery, "CollegeMaster.GetCollegeById");
+
+            InfrastructureMedicalCollegeFacilitiesDataModel Infrastructuremedicalgrouponecollege = new InfrastructureMedicalCollegeFacilitiesDataModel();
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    Infrastructuremedicalgrouponecollege = CommonHelper.ConvertDataTable<InfrastructureMedicalCollegeFacilitiesDataModel>(ds.Tables[0]);
+                }
+                if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    Infrastructuremedicalgrouponecollege.LectureTheatreDetails = CommonHelper.ConvertDataTable<List<LectureTheatreDetailsDataModel>>(ds.Tables[1]);
+                }
+                if (ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+                {
+                    Infrastructuremedicalgrouponecollege.MuseumDetails = CommonHelper.ConvertDataTable<List<MuseumDetailsDataModel>>(ds.Tables[2]);
+                }
+                if (ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
+                {
+                    Infrastructuremedicalgrouponecollege.DissectionHallDetails = CommonHelper.ConvertDataTable<List<DissectionHallDetailsDataModel>>(ds.Tables[3]);
+                }
+                if (ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
+                {
+                    Infrastructuremedicalgrouponecollege.SkillLaboratoryDetails = CommonHelper.ConvertDataTable<List<SkillLaboratoryDetailsDataModel>>(ds.Tables[4]);
+                }
+            }
+
+            return Infrastructuremedicalgrouponecollege;
+        }
+        public InfrastructureMedicalCollegeFacilitiesDataModel GetGetInfrastructuremedicalgrouponeData(int CollegeID)
+        {
+            string SqlQuery = "select * from Trn_Infrastructuremedicalgrouponecollege where CollegeID='" + CollegeID + "' and ActiveStatus=1 and DeleteStatus=0";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "CommonFuncation.GetGetInfrastructuremedicalgrouponeData");
+
+            InfrastructureMedicalCollegeFacilitiesDataModel dataModels = new InfrastructureMedicalCollegeFacilitiesDataModel();
+            string JsonDataTable_Data = CommonHelper.ConvertDataTable(dataTable);
+            dataModels = JsonConvert.DeserializeObject<InfrastructureMedicalCollegeFacilitiesDataModel>(JsonDataTable_Data.Replace("[", "").Replace("]", ""));
+            return dataModels;
+        }
+        public List<DataTable> GetBTERDetailsIDWise(int CollegeID)
+        {
+            string SqlQuery = " exec USP_GetBTERCollegeData @CollegeID='" + CollegeID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetBTERDetailsIDWise");
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
+            return dataModels;
+        }
+        public List<DataTable> GetTotalFinalDraftentryDepartmentFormat(CommonDataModel_TotalDraftEntrySearchFilter request)
+        {
+            string SqlQuery = "exec USP_Trn_BEd_Departmental_FinalDraft_GetData @DepartmentID='" + request.DepartmentID + "'";
+            DataTable dataTable = new DataTable();
+            dataTable = _commonHelper.Fill_DataTable(SqlQuery, "Common.GetTotalDraftentryCollege");
+
+            List<DataTable> dataModels = new List<DataTable>();
+            DataTable dataModel = new DataTable();
+            dataModel = dataTable;
+            dataModels.Add(dataModel);
             return dataModels;
         }
     }
